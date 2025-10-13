@@ -408,6 +408,7 @@ item.tc:tcRailEmbedded45DegreeTurn10x22.name=10x22 Sleeperless 45 Degree Turn
 item.tc:tcRailEmbeddedSmallParallelCurve.name=2x8 Sleeperless S-Curve
 item.tc:tcRailEmbeddedMediumParallelCurve.name=3x12 Sleeperless S-Curve
 item.tc:tcRailEmbeddedLargeParallelCurve.name=4x16 Sleeperless S-Curve
+item.tc:tcRailEmbedded20x2SCurve.name=2x20 Sleeperless S-Curve
 
 item.tc:tcRailEmbeddedMediumSwitch.name=4x4 Sleeperless 90 Degrees Switch
 item.tc:tcRailEmbeddedLargeSwitch.name=6x6 Sleeperless 90 Degrees Switch

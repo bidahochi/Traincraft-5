@@ -24,10 +24,10 @@ public class ModelTwoWaysCrossingTCTrack extends ModelBase {
 
 	public ModelTwoWaysCrossingTCTrack()
 	{
-		modelTwoWaysCrossing = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_x.obj"));
-		modelDoubleDiamondCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_double_diamond_crossing.obj"));
-		modelDiagonalTwoWaysCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_diagonal_crossing.obj"));
-		modelFourWaysCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_universal_crossing.obj"));
+		modelTwoWaysCrossing = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/crossing/standard.obj"));
+		modelDoubleDiamondCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/crossing/double_diamond.obj"));
+		modelDiagonalTwoWaysCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/crossing/45-deg_standard.obj"));
+		modelFourWaysCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/crossing/double_diamond_plus.obj"));
 	}
 
 	private void render(String crossingVariant)

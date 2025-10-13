@@ -20,8 +20,8 @@ public class ModelSmallStraightTCTrack extends ModelBase {
 	private IModelCustom modelRoadCrossing;
 
 	public ModelSmallStraightTCTrack() {
-		modelSmallStraight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_normal.obj"));
-		modelRoadCrossing = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_roadcrossing.obj"));
+		modelSmallStraight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/straight/1x1.obj"));
+		modelRoadCrossing = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/straight/1x1_crossing.obj"));
 	}
 
 	private void render(String type)

@@ -14,7 +14,7 @@ import train.common.tile.TileTCRail;
 
 @SideOnly(Side.CLIENT)
 public class ModelLeftDiamondCrossing extends ModelBase{
-    private IModelCustom modelDiamondCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_diamond_crossing_l.obj"));
+    private IModelCustom modelDiamondCrossing = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/crossing/diamond_left.obj"));
 
 
     public void render()

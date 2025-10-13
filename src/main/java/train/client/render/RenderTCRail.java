@@ -24,10 +24,10 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 	public static final ModelRightSwitchTCTrack modelRightSwitchTurn = new ModelRightSwitchTCTrack();
 	public static final ModelLeftSwitchTCTrack modelLeftSwitchTurn = new ModelLeftSwitchTCTrack();
 	public static final ModelTwoWaysCrossingTCTrack modelTwoWaysCrossing = new ModelTwoWaysCrossingTCTrack();
-	public static final ModelSlopeTCTrack model1X3Slope = new ModelSlopeTCTrack("track_slope_1x3.obj", "track_slope_1x3_ballast.obj");
-	public static final ModelSlopeTCTrack modelSlope = new ModelSlopeTCTrack("track_slope.obj", "supports_wood.obj", "supports_ballast.obj");
-	public static final ModelSlopeTCTrack modelLargeSlope = new ModelSlopeTCTrack("track_slope_long.obj", "supports_wood_long.obj", "supports_ballast_long.obj");
-	public static final ModelSlopeTCTrack modelVeryLargeSlope = new ModelSlopeTCTrack("track_slope_verylong.obj", "supports_wood_verylong.obj", "supports_ballast_verylong.obj");
+	public static final ModelSlopeTCTrack model1X3Slope = new ModelSlopeTCTrack("track/slope/straight/1x3_rails.obj", "track/slope/straight/1x3_ballast.obj");
+	public static final ModelSlopeTCTrack modelSlope = new ModelSlopeTCTrack("track/slope/straight/1x6_rails.obj", "track/slope/straight/1x6_supports.obj", "track/slope/straight/1x6_ballast.obj");
+	public static final ModelSlopeTCTrack modelLargeSlope = new ModelSlopeTCTrack("track/slope/straight/1x12_rails.obj", "track/slope/straight/1x12_supports.obj", "track/slope/straight/1x12_ballast.obj");
+	public static final ModelSlopeTCTrack modelVeryLargeSlope = new ModelSlopeTCTrack("track/slope/straight/1x18_rails.obj", "track/slope/straight/1x18_supports.obj", "track/slope/straight/1x18_ballast.obj");
 	public static final ModelRightParallelCurveTCTrack modelRightParallelCurve = new ModelRightParallelCurveTCTrack();
 	public static final ModelLeftParallelCurveTCTrack modelLeftParallelCurve = new ModelLeftParallelCurveTCTrack();
 

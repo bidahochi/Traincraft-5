@@ -17,7 +17,7 @@ public class ModelMediumStraightTCTrack extends ModelBase {
 	private IModelCustom modelMediumStraight;
 
 	public ModelMediumStraightTCTrack() {
-		modelMediumStraight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_normal.obj"));
+		modelMediumStraight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/straight/1x1.obj"));
 	}
 
 	public void render() {

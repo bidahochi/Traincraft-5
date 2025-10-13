@@ -14,11 +14,10 @@ import train.common.tile.TileTCRail;
 public class ModelMediumDiagonalStraightTCTrack extends ModelBase {
 
     private IModelCustom modelMediumDiagonalStraight;
-    private IModelCustom modelEmbeddedMediumDiagonalStraight;
 
 
     public ModelMediumDiagonalStraightTCTrack() {
-        modelMediumDiagonalStraight = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_straight_diagonal_medium.obj"));
+        modelMediumDiagonalStraight = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/straight/1x3_diagonal.obj"));
 
     }
 

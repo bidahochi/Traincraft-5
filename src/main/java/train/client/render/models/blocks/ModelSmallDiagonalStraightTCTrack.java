@@ -19,7 +19,7 @@ public class ModelSmallDiagonalStraightTCTrack extends ModelBase
 
 
     public ModelSmallDiagonalStraightTCTrack() {
-        modelSmallDiagonalStraight = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_straight_diagonal.obj"));
+        modelSmallDiagonalStraight = AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/straight/1x1_diagonal.obj"));
     }
 
     public void render(String type) {

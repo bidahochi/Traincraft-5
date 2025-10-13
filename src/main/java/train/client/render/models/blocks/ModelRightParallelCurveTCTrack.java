@@ -22,10 +22,10 @@ public class ModelRightParallelCurveTCTrack extends ModelBase {
     private IModelCustom model20x2SCurveRight;
 
     public ModelRightParallelCurveTCTrack() {
-        modelSmallRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_curve_parallel_s.obj"));
-        modelMediumRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_curve_parallel_m.obj"));
-        modelLargeRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track_curve_parallel_l.obj"));
-        model20x2SCurveRight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "20x2_s_curve_right.obj"));
+        modelSmallRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/curve/s/2x8_right.obj"));
+        modelMediumRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/curve/s/3x12_right.obj"));
+        modelLargeRightParallelCurve = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/curve/s/4x16_right.obj"));
+        model20x2SCurveRight = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "track/curve/s/20x2_right.obj"));
     }
 
     public void renderSmall() {modelSmallRightParallelCurve.renderAll();}
