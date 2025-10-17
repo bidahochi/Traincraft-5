@@ -287,15 +287,10 @@ public class PathFindingHelper
      *
      * @param entityMinecart
      * @param worldObj
-     * @param isDerail
      * @return
      */
-    public boolean isOnRail(EntityMinecart entityMinecart, World worldObj, boolean isDerail)
+    public boolean isOnRail(EntityMinecart entityMinecart, World worldObj)
     {
-        if(isDerail)
-        {
-            return false;
-        }
         int i = MathHelper.floor_double(entityMinecart.posX);
         int j = MathHelper.floor_double(entityMinecart.posY);
         int k = MathHelper.floor_double(entityMinecart.posZ);

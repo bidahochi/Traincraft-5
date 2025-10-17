@@ -1277,7 +1277,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 					this.unLink();
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, (tileRail.getBlockMetadata()+1)%4);
 				}
-				else{
+				else {
 					int meta = tileRail.getBlockMetadata();
 					if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta))
 					{
