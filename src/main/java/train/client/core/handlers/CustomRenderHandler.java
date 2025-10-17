@@ -244,18 +244,6 @@ public class CustomRenderHandler
                 RenderTCRail.model1X3Slope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
             }
         }
-        else if (item.getTrackType().getLabel().contains("SLOPE_1X6_DIAG")) {
-            blockInfo();
-            RenderTCRail.model1x6DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
-        }
-        else if (item.getTrackType().getLabel().contains("SLOPE_1X12_DIAG")) {
-            blockInfo();
-            RenderTCRail.model1x12DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
-        }
-        else if (item.getTrackType().getLabel().contains("SLOPE_1X18_DIAG")) {
-            blockInfo();
-            RenderTCRail.model1x18DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
-        }
         else if (item.getTrackType().getLabel().contains("SLOPE_DYNAMIC"))
         {
             facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);

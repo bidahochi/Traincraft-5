@@ -18,7 +18,6 @@ public class ModelSlopeTCTrack extends ModelBase
     protected IModelCustom modelTrack;
     protected IModelCustom modelSlopeWood;
     protected IModelCustom modelSlopeBallast;
-    protected IModelCustom modelSlopeSlab;
     protected String[] ballastTexture = new String[2];
 
     public ModelSlopeTCTrack(String trackOBJ, String slopeBallastOBJ)
@@ -32,12 +31,6 @@ public class ModelSlopeTCTrack extends ModelBase
         modelTrack = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + trackOBJ));
         modelSlopeWood = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeWoodSupportOBJ));
         modelSlopeBallast = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeBallastOBJ));
-    }
-
-    public ModelSlopeTCTrack(String trackOBJ, String slopeBallastOBJ, boolean enableSlabs) {
-        modelTrack = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + trackOBJ));
-        modelSlopeBallast = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeBallastOBJ));
-        modelSlopeSlab = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "/track/slope/45-deg/ballast_slab.obj"));
     }
 
     protected void SetupDynamicBallastColour(int ballastColour)

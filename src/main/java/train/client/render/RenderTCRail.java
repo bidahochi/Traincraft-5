@@ -29,10 +29,10 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 	public static final ModelSlopeTCTrack modelSlope = new ModelSlopeTCTrack("track/slope/straight/1x6_rails.obj", "track/slope/straight/1x6_supports.obj", "track/slope/straight/1x6_ballast.obj");
 	public static final ModelSlopeTCTrack modelLargeSlope = new ModelSlopeTCTrack("track/slope/straight/1x12_rails.obj", "track/slope/straight/1x12_supports.obj", "track/slope/straight/1x12_ballast.obj");
 	public static final ModelSlopeTCTrack modelVeryLargeSlope = new ModelSlopeTCTrack("track/slope/straight/1x18_rails.obj", "track/slope/straight/1x18_supports.obj", "track/slope/straight/1x18_ballast.obj");
-	public static final ModelSlopeTCTrack model1x3DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x3_rails.obj","track/slope/45-deg/1x3_ballast.obj", true);
-	public static final ModelSlopeTCTrack model1x6DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x6_rails.obj","track/slope/45-deg/1x6_ballast.obj", true);
-	public static final ModelSlopeTCTrack model1x12DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x12_rails.obj","track/slope/45-deg/1x12_ballast.obj", true);
-	public static final ModelSlopeTCTrack model1x18DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x18_rails.obj","track/slope/45-deg/1x18_ballast.obj", true);
+	public static final ModelSlopeTCTrack model1x3DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x3_rails.obj","track/slope/45-deg/1x3_ballast.obj");
+	public static final ModelSlopeTCTrack model1x6DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x6_rails.obj","track/slope/45-deg/1x6_ballast.obj");
+	public static final ModelSlopeTCTrack model1x12DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x12_rails.obj","track/slope/45-deg/1x12_ballast.obj");
+	public static final ModelSlopeTCTrack model1x18DiagonalSlope = new ModelSlopeTCTrack("track/slope/45-deg/1x18_rails.obj","track/slope/45-deg/1x18_ballast.obj");
 
 	public static final ModelRightParallelCurveTCTrack modelRightParallelCurve = new ModelRightParallelCurveTCTrack();
 	public static final ModelLeftParallelCurveTCTrack modelLeftParallelCurve = new ModelLeftParallelCurveTCTrack();
