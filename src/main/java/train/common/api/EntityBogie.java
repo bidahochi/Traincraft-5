@@ -704,7 +704,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		double X_OFFSET = 0.5;
 		double Z_OFFSET = 1.5;
 		double delta = Math.hypot(Math.abs(cz - this.posZ),Math.abs(cx - this.posX));
-		double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + this.yOffset + 0.3);
+		double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + this.yOffset + 0.2);
 		Y_OFFSET = derailCheck(cx, Y_OFFSET, cz);
 
 		this.setPosition(this.posX, Y_OFFSET, this.posZ); //change our Y-offset before moving on the diagonal
@@ -880,12 +880,12 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 	private double derailCheck(double posX, double posY, double posZ, boolean alongZ) {
 		if (this.isDerail) {
-			for (int i = -2; i< 3;i++) {
-				int blockX = alongZ ? (int) Math.round(posX) : (int) Math.round(this.posX);
-				int blockZ = alongZ ? (int) Math.round(this.posZ) : (int) Math.round(posZ);
+			int blockX = alongZ ? (int) posX : (int) this.posX;
+			int blockZ = alongZ ? (int) this.posZ : (int) posZ;
 
-				if (worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
-						worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+			for (int i = -2; i< 3;i++) {
+				if (worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRail ||
+						worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRailGag) {
 					if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
 						posY += i + 1;
 						break;
@@ -899,11 +899,11 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 	private double derailCheck(double posX, double posY, double posZ) {
 		if (this.isDerail) {
 			for (int i = -2; i< 3;i++) {
-				int blockX = (int) Math.round(posX);
-				int blockZ = (int) Math.round(posZ);
+				int blockX = (int) posX;
+				int blockZ = (int) posZ;
 
-				if (worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
-						worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+				if (worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRail ||
+						worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRailGag) {
 					if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
 						posY += i + 1;
 						break;

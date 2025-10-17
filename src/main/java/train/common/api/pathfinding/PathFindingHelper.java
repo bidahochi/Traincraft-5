@@ -185,7 +185,7 @@ public class PathFindingHelper
         double X_OFFSET = 0.5;
         double Z_OFFSET = 1.5;
         double delta = Math.hypot(Math.abs(cz - abstractTrains.posZ),Math.abs(cx - abstractTrains.posX));
-        double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + abstractTrains.yOffset + 0.3);
+        double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + abstractTrains.yOffset + 0.2);
         Y_OFFSET = derailCheck(abstractTrains, cx, Y_OFFSET, cz);
 
         abstractTrains.setPosition(abstractTrains.posX, Y_OFFSET, abstractTrains.posZ); //change our Y-offset before moving on the diagonal
@@ -384,16 +384,16 @@ public class PathFindingHelper
     }
 
     private double derailCheck(EntityMinecart cart, double posX, double posY, double posZ) {
-        int blockX = (int) Math.round(posX);
-        int blockZ = (int) Math.round(posZ);
-        boolean isOnRail = cart.worldObj.getBlock(blockX, (int)cart.posY, blockZ) instanceof BlockTCRail;
+        int blockX = (int) posX;
+        int blockZ = (int) posZ;
+        boolean isOnRail = cart.worldObj.getBlock(blockX, (int)posY, blockZ) instanceof BlockTCRail;
         if (!isOnRail)
-            isOnRail = cart.worldObj.getBlock(blockX, (int)cart.posY, blockZ) instanceof BlockTCRailGag;
+            isOnRail = cart.worldObj.getBlock(blockX, (int)posY, blockZ) instanceof BlockTCRailGag;
         if (!isOnRail) {
             for (int i = -2; i < 3; i++) {
 
-                if (cart.worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
-                        cart.worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+                if (cart.worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRail ||
+                        cart.worldObj.getBlock(blockX, (int) posY + i, blockZ) instanceof BlockTCRailGag) {
                     posY += i + 1;
                     break;
                 }
