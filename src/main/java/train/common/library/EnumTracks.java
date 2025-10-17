@@ -1,11 +1,9 @@
 package train.common.library;
 
 import net.minecraft.entity.player.EntityPlayer;
-import train.common.enums.TrackResourceLocations;
 import train.common.items.BallastTypes;
 import train.common.items.RailVariants;
 import train.common.items.TCRailTypes;
-import train.common.tile.TileTCRail;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -147,6 +145,11 @@ public enum EnumTracks
     SLOPE_DYNAMIC("SLOPE_DYNAMIC", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRailSlopeDynamic, "1x6"),
     LARGE_SLOPE_DYNAMIC("LARGE_SLOPE_DYNAMIC", SLOPE,  NORMAL, DYNAMIC, ItemIDs.tcRailLargeSlopeDynamic, "1x12" ),
     VERY_LARGE_SLOPE_DYNAMIC("VERY_LARGE_SLOPE_DYNAMIC", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRailVeryLargeSlopeDynamic,"1x18"),
+
+    SLOPE_1X3_DIAGONAL("SLOPE_1X3_DIAG", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRail1X3SlopeDynamic, "1x3"),
+    SLOPE_1X6_DIAGONAL("SLOPE_1X6_DIAG", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRailSlopeDynamic, "1x6"),
+    SLOPE_1X12_DIAGONAL("SLOPE_1X12_DIAG", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRailLargeSlopeDynamic, "1x12"),
+    SLOPE_1X18_DIAGONAL("SLOPE_1X18_DIAG", SLOPE, NORMAL, DYNAMIC, ItemIDs.tcRailVeryLargeSlopeDynamic, "1x18"),
 
     SMALL_PARALLEL_CURVE("SMALL_PARALLEL_CURVE", PARALLEL, NORMAL, ItemIDs.tcRailSmallParallelCurve, "2x8"),
     SMALL_RIGHT_PARALLEL_CURVE("SMALL_RIGHT_PARALLEL_CURVE", PARALLEL, NORMAL, ItemIDs.tcRailSmallParallelCurve, ""),
@@ -425,7 +428,18 @@ public enum EnumTracks
 
             case SLOPE_1X3_DYNAMIC:
                 return new int[][]{ {0,0}, {1,0}, {2,0} };
-
+            case SLOPE_1X3_DIAGONAL:
+                return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2} };
+                //return new int[][] { {0,0}, {1,1}, {2,2} };
+            case SLOPE_1X6_DIAGONAL:
+                return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2}, {3,3}, {3,4}, {4,3}, {4,4}, {4,5}, {5,4}, {5,5}, {5,6}, {6,5} };
+            case SLOPE_1X12_DIAGONAL:
+                return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2}, {3,3}, {3,4}, {4,3}, {4,4}, {4,5}, {5,4}, {5,5}, {5,6}, {6,5},
+                        {6,6}, {6,7}, {7,6}, {7,7}, {7,8}, {8,7}, {8,8}, {8,9}, {9,8}, {9,9}, {9,10}, {10,9}, {10,10}, {10,11}, {11,10}, {11,11}, {11,12}, {12,11} };
+            case SLOPE_1X18_DIAGONAL:
+                return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2}, {3,3}, {3,4}, {4,3}, {4,4}, {4,5}, {5,4}, {5,5}, {5,6}, {6,5},
+                        {6,6}, {6,7}, {7,6}, {7,7}, {7,8}, {8,7}, {8,8}, {8,9}, {9,8}, {9,9}, {9,10}, {10,9}, {10,10}, {10,11}, {11,10}, {11,11}, {11,12}, {12,11},
+                        {12,12}, {12,13}, {13,12}, {13,13}, {13,14}, {14,13}, {14,14}, {14,15}, {15,14}, {15,15}, {15,16}, {16,15}, {16,16}, {16,17}, {17,16}, {17,17}, {17,18}, {18,17} };
             case SLOPE_BALLAST:
             case SLOPE_GRAVEL:
             case SLOPE_WOOD:

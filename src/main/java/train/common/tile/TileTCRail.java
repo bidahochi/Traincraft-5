@@ -262,9 +262,21 @@ public class TileTCRail extends TileEntity {
 		 * ETERNAL NOTE: checking if it's a slope before checking what kind of slope, in theory, should improve performance
 		 */
 		if(type.contains("SLOPE")) {
-			if (type == EnumTracks.SLOPE_1X3_DYNAMIC.getLabel())
+			if (type.equals(EnumTracks.SLOPE_1X3_DYNAMIC.getLabel()))
 			{
 				slopeAngle = 0.26;
+			}
+			else if (type.equals(EnumTracks.SLOPE_1X3_DIAGONAL.getLabel())) {
+				slopeAngle = 0.23; //5 decimals of precision for track length, 2 dec for angle
+			}
+			else if (type.equals(EnumTracks.SLOPE_1X6_DIAGONAL.getLabel())) {
+				slopeAngle = 0.12; //5 decimals of precision for track length, 2 dec for angle
+			}
+			else if (type.equals(EnumTracks.SLOPE_1X12_DIAGONAL.getLabel())) {
+				slopeAngle = 0.06; //5 decimals of precision for track length, 2 dec for angle
+			}
+			else if (type.equals(EnumTracks.SLOPE_1X18_DIAGONAL.getLabel())) {
+				slopeAngle = 0.04; //5 decimals of precision for track length, 2 dec for angle
 			}
 			else if (type.equals(EnumTracks.SLOPE_WOOD.getLabel())
 					|| type.equals(EnumTracks.SLOPE_GRAVEL.getLabel())

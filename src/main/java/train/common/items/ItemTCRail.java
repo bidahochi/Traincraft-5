@@ -378,7 +378,7 @@ public class ItemTCRail extends ItemPart {
 			{
 				case SMALL_DIAGONAL_STRAIGHT:
 				case EMBEDDED_SMALL_DIAGONAL_STRAIGHT:
-					if (!smallDiagonalStraight(player, world, x, y, z,  GetFacing(player, par10), tempType))
+					if (!smallDiagonalStraight(player, world, x, y, z,  getFacing(player, par10), tempType))
 					{
 						return false;
 					}
@@ -397,7 +397,7 @@ public class ItemTCRail extends ItemPart {
 				case EMBEDDED_LONG_DIAGONAL_STRAIGHT:
 				case VERY_LONG_DIAGONAL_STRAIGHT:
 				case EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT:
-					if (!diagonalStraight(player, world, x, y, z, GetFacing(player, par10), tempType))
+					if (!diagonalStraight(player, world, x, y, z, getFacing(player, par10), tempType))
 					{
 						return false;
 					}
@@ -1889,32 +1889,52 @@ public class ItemTCRail extends ItemPart {
 						int gagEnd = 0;
 						double slopeAngle = 0;
 						/**
-						 * Explanation: normally you would devide 100 by (gagEnd+1) but this seems to be
-						 * against TCs own brain. you need to devide 100 by (gagEnd+1)
+						 * Explanation: normally you would divide 100 by (gagEnd+1) but this seems to be
+						 * against TCs own brain. you need to divide 100 by (gagEnd+1)
 						 **/
-						if (type == EnumTracks.SLOPE_1X3_DYNAMIC)
+						if (tempType == EnumTracks.SLOPE_1X3_DYNAMIC)
 						{
 							gagEnd = 2;
 							slopeAngle = 0.26;
 						}
-						else if (type == EnumTracks.SLOPE_WOOD || type == EnumTracks.SLOPE_GRAVEL
-								|| type == EnumTracks.SLOPE_BALLAST || type == EnumTracks.SLOPE_SNOW_GRAVEL
-								|| type == EnumTracks.SLOPE_PEA_GRAVEL || type == EnumTracks.SLOPE_DYNAMIC
-								|| type == EnumTracks.EMBEDDED_SLOPE_DYNAMIC) {
+						else if (tempType == EnumTracks.SLOPE_1X3_DIAGONAL) {
+							gagEnd = 2;
+							slopeAngle = 0.23; //5 decimals of precision for track length, 2 dec for angle
+							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
+						}
+						else if (tempType == EnumTracks.SLOPE_1X6_DIAGONAL) {
+							gagEnd = 5;
+							slopeAngle = 0.12; //5 decimals of precision for track length, 2 dec for angle
+							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
+						}
+						else if (tempType == EnumTracks.SLOPE_1X12_DIAGONAL) {
+							gagEnd = 11;
+							slopeAngle = 0.06; //5 decimals of precision for track length, 2 dec for angle
+							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
+						}
+						else if (tempType == EnumTracks.SLOPE_1X18_DIAGONAL) {
+							gagEnd = 17;
+							slopeAngle = 0.04; //5 decimals of precision for track length, 2 dec for angle
+							return handleDiagonalSlopes(world, player, getFacing(player, par10), type, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
+						}
+						else if (tempType == EnumTracks.SLOPE_WOOD || tempType == EnumTracks.SLOPE_GRAVEL
+								|| tempType == EnumTracks.SLOPE_BALLAST || tempType == EnumTracks.SLOPE_SNOW_GRAVEL
+								|| tempType == EnumTracks.SLOPE_PEA_GRAVEL || tempType == EnumTracks.SLOPE_DYNAMIC
+								|| tempType == EnumTracks.EMBEDDED_SLOPE_DYNAMIC) {
 							gagEnd = 5;
 							slopeAngle = 0.13;
 						}
-						else if (type == EnumTracks.LARGE_SLOPE_WOOD || type == EnumTracks.LARGE_SLOPE_GRAVEL
-								|| type == EnumTracks.LARGE_SLOPE_BALLAST || type == EnumTracks.LARGE_SLOPE_SNOW_GRAVEL
-								|| type == EnumTracks.LARGE_SLOPE_PEA_GRAVEL || type == EnumTracks.LARGE_SLOPE_DYNAMIC
-								|| type == EnumTracks.EMBEDDED_LARGE_SLOPE_DYNAMIC) {
+						else if (tempType == EnumTracks.LARGE_SLOPE_WOOD || tempType == EnumTracks.LARGE_SLOPE_GRAVEL
+								|| tempType == EnumTracks.LARGE_SLOPE_BALLAST || tempType == EnumTracks.LARGE_SLOPE_SNOW_GRAVEL
+								|| tempType == EnumTracks.LARGE_SLOPE_PEA_GRAVEL || tempType == EnumTracks.LARGE_SLOPE_DYNAMIC
+								|| tempType == EnumTracks.EMBEDDED_LARGE_SLOPE_DYNAMIC) {
 							gagEnd = 11;
 							slopeAngle = 0.0666;
 						}
-						else if (type == EnumTracks.VERY_LARGE_SLOPE_WOOD || type == EnumTracks.VERY_LARGE_SLOPE_GRAVEL
-								|| type == EnumTracks.VERY_LARGE_SLOPE_BALLAST || type == EnumTracks.VERY_LARGE_SLOPE_SNOW_GRAVEL
-								|| type == EnumTracks.VERY_LARGE_SLOPE_PEA_GRAVEL || type == EnumTracks.VERY_LARGE_SLOPE_DYNAMIC
-								|| type == EnumTracks.EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC) {
+						else if (tempType == EnumTracks.VERY_LARGE_SLOPE_WOOD || tempType == EnumTracks.VERY_LARGE_SLOPE_GRAVEL
+								|| tempType == EnumTracks.VERY_LARGE_SLOPE_BALLAST || tempType == EnumTracks.VERY_LARGE_SLOPE_SNOW_GRAVEL
+								|| tempType == EnumTracks.VERY_LARGE_SLOPE_PEA_GRAVEL || tempType == EnumTracks.VERY_LARGE_SLOPE_DYNAMIC
+								|| tempType == EnumTracks.EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC) {
 							gagEnd = 17;
 							slopeAngle = 0.0444;
 						}
@@ -2431,7 +2451,72 @@ public class ItemTCRail extends ItemPart {
 		return false;
 	}
 
-	private int GetFacing(EntityPlayer player, float par10)
+	private boolean handleDiagonalSlopes(World world, EntityPlayer player, int facing, EnumTracks type, int gagEnd, double slopeAngle, int x, int y, int z, ItemStack itemstack) {
+		Item idDropped = this.type.getItem().item;
+		int[][] usedSpace = type.getUsedSpaceFromType(player);
+		//make sure space is usable
+        for (int[] ints : usedSpace) {
+            int offsetX = ints[0];
+            int offsetZ = ints[1];
+            if (facing == 4) offsetX *= -1;
+            if (facing == 6) offsetZ *= -1;
+            if (facing == 5) {
+                offsetX *= -1;
+                offsetZ *= -1;
+            }
+            if (!canPlaceTrack(player, world, x + offsetX, y + 1, z + offsetZ)) {
+                return false;
+            }
+        }
+		//place host track
+		placeTrack(world,x, y + 1, z, BlockIDs.tcRail.block, facing);
+		//update data of host
+		TileTCRail tcRail = (TileTCRail) world.getTileEntity(x, y + 1, z);
+		tcRail.setFacing(facing);
+		tcRail.setType(type.getLabel());
+		tcRail.idDrop = idDropped;
+		tcRail.slopeHeight = 1;
+		tcRail.slopeAngle = slopeAngle;
+		tcRail.slopeLength = gagEnd + 1;
+
+		Block block = world.getBlock(x, y, z);
+		int blockID = Block.getIdFromBlock(block);
+		tcRail.setBallastMaterial(blockID);
+		tcRail.ballastMetadata = world.getBlockMetadata(x, y, z);
+		//tcRail.enableSlabs = player.isSneaking();
+
+		for (int i = 1; i < usedSpace.length; i++) {
+			int[] ints = usedSpace[i];
+			int offsetX = ints[0];
+			int offsetZ = ints[1];
+			if (facing == 4) offsetX *= -1;
+			if (facing == 6) offsetZ *= -1;
+			if (facing == 5) {
+				offsetX *= -1;
+				offsetZ *= -1;
+			}
+			placeTrack(world, x + offsetX, y + 1, z + offsetZ, BlockIDs.tcRailGag.block, facing);
+			TileTCRailGag gag = ((TileTCRailGag)world.getTileEntity(x + offsetX, y + 1, z + offsetZ));
+			if (player != null && gag == null) {
+				player.addChatMessage(new ChatComponentText(
+						"There was a problem when placing the track. Possibly too many tracks around"));
+				return false;
+			}
+			gag.bbHeight = Math.max(0.125f, Math.min(1f, (float)Math.hypot(offsetX, offsetZ) / (gagEnd + 1)));
+			//old way: tileGag[i2 - 1].bbHeight = Math.max(0.125f, Math.min(1f, i2 / (float) gagEnd));. seems unnecessary
+			gag.originX = x;
+			gag.originY = y+1;
+			gag.originZ = z;
+			gag.type = type.getLabel();
+		}
+
+		if (player == null || !player.capabilities.isCreativeMode) {
+			--itemstack.stackSize;
+		}
+		return true;
+	}
+
+	private int getFacing(EntityPlayer player, float par10)
 	{
 		if (player != null)
 		{
@@ -2447,7 +2532,7 @@ public class ItemTCRail extends ItemPart {
 		{
 			tempType = type;
 
-			int facing = GetFacing(player, par10);
+			int facing = getFacing(player, par10);
 			if (TCRailTypes.RailTypes.STRAIGHT.equals(type.getRailType()))
 			{
 				if (facing == 6 || facing == 4 || facing == 7 || facing == 5)
@@ -2493,6 +2578,25 @@ public class ItemTCRail extends ItemPart {
 							break;
 						case EMBEDDED_TWO_WAYS_CROSSING:
 							tempType = EnumTracks.EMBEDDED_DIAGONAL_TWO_WAYS_CROSSING;
+							break;
+					}
+					return tempType;
+				}
+			}
+			else if (TCRailTypes.RailTypes.SLOPE.equals(type.getRailType())) {
+				if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+					switch (type) {
+						case SLOPE_1X3_DYNAMIC:
+							tempType = EnumTracks.SLOPE_1X3_DIAGONAL;
+							break;
+						case SLOPE_DYNAMIC:
+							tempType = EnumTracks.SLOPE_1X6_DIAGONAL;
+							break;
+						case LARGE_SLOPE_DYNAMIC:
+							tempType = EnumTracks.SLOPE_1X12_DIAGONAL;
+							break;
+						case VERY_LARGE_SLOPE_DYNAMIC:
+							tempType = EnumTracks.SLOPE_1X18_DIAGONAL;
 							break;
 					}
 					return tempType;

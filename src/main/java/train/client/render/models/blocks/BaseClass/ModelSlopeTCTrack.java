@@ -18,6 +18,7 @@ public class ModelSlopeTCTrack extends ModelBase
     protected IModelCustom modelTrack;
     protected IModelCustom modelSlopeWood;
     protected IModelCustom modelSlopeBallast;
+    protected IModelCustom modelSlopeSlab;
     protected String[] ballastTexture = new String[2];
 
     public ModelSlopeTCTrack(String trackOBJ, String slopeBallastOBJ)
@@ -31,6 +32,12 @@ public class ModelSlopeTCTrack extends ModelBase
         modelTrack = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + trackOBJ));
         modelSlopeWood = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeWoodSupportOBJ));
         modelSlopeBallast = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeBallastOBJ));
+    }
+
+    public ModelSlopeTCTrack(String trackOBJ, String slopeBallastOBJ, boolean enableSlabs) {
+        modelTrack = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + trackOBJ));
+        modelSlopeBallast = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + slopeBallastOBJ));
+        modelSlopeSlab = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "/track/slope/45-deg/ballast_slab.obj"));
     }
 
     protected void SetupDynamicBallastColour(int ballastColour)
@@ -78,7 +85,7 @@ public class ModelSlopeTCTrack extends ModelBase
             modelSlopeBallast.renderAll();
         }
     }
-
+    //TODO: add flag from tcRail for rendering slabs
     public void renderDynamic(TileTCRail tcRail, double x, double y, double z)
     {
         int facing = tcRail.getWorldObj().getBlockMetadata(tcRail.xCoord, tcRail.yCoord, tcRail.zCoord);
@@ -115,18 +122,33 @@ public class ModelSlopeTCTrack extends ModelBase
         GL11.glColor4f(r, g, b, a);
         // GL11.glScalef(0.5f, 0.5f, 0.5f);
 
-        if (facing == 3)
-        {
-            GL11.glRotatef(-90, 0, 1, 0);
+        switch (facing) {
+            case 0:
+                GL11.glRotatef(180,0,1,0);
+                break;
+            case 7:
+                GL11.glTranslatef(-0.5f, 0, -0.5f);
+                GL11.glRotatef(180,0,1,0);
+                break;
+            case 1:
+                GL11.glRotatef(90,0,1,0);
+                break;
+            case 4:
+                GL11.glTranslatef(0.5f, 0, -0.5f);
+                GL11.glRotatef(90,0,1,0);
+                break;
+            case 3:
+                GL11.glRotatef(-90, 0 , 1, 0);
+                break;
+            case 6:
+                GL11.glTranslatef(-0.5f, 0, 0.5f);
+                GL11.glRotatef(-90, 0 , 1, 0);
+                break;
+            case 5:
+                GL11.glTranslatef(0.5f,0,0.5f);
+                break;
         }
-        else if (facing == 1)
-        {
-            GL11.glRotatef(90, 0, 1, 0);
-        }
-        else if (facing == 0)
-        {
-            GL11.glRotatef(180, 0, 1, 0);
-        }
+
     }
 
     public void renderDynamic(RailVariants variants, int facing, double x, double y, double z, float r, float g, float b, float a, String ballastTexture, int colour)

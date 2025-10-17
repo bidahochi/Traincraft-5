@@ -193,7 +193,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		//		springX = limitForce(springX);
 		//		springZ = limitForce(springZ);
 		//
-		//		/* if (adj1) { ((AbstractTrains) cart1).motionX += springX; ((AbstractTrains) cart1).motionZ += springZ; }
+		//		/* if (adj1) { ((this) cart1).motionX += springX; ((this) cart1).motionZ += springZ; }
 		//		if (adj2) {
 		//		System.out.println(entityMainTrain.motionX + " " + entityMainTrain.motionZ);
 		//		System.out.println(Math.sqrt(entityMainTrain.motionX*entityMainTrain.motionX + entityMainTrain.motionZ*entityMainTrain.motionZ));
@@ -227,7 +227,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		//		this.motionX -= dampX;
 		//		this.motionZ -= dampZ;
 		/*
-		 * if (adj1) { ((AbstractTrains) cart1).motionX += dampX; ((AbstractTrains) cart1).motionZ += dampZ; }
+		 * if (adj1) { ((this) cart1).motionX += dampX; ((this) cart1).motionZ += dampZ; }
 		if (adj2) {
 		if (Math.abs(entityMainTrain.motionX) > 0.003 || Math.abs(entityMainTrain.motionZ) > 0.003) {
 			this.motionX -= dampX;
@@ -373,7 +373,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 	@Override
 	public void onUpdate(){
 		//super.onUpdate(); // XXX I'll just assume that this is not supposed to be there. Why would you run Vanilla update code, only to run your own code afterwards to do basically the same..?
-		
+
 		this.setCurrentCartSpeedCapOnRail(1.8F);
 		this.setMaxSpeedAirLateral(1.8F);
 
@@ -498,7 +498,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 					}
 					else if (TCRailTypes.isSlopeTrack(tileRail)) {
 
-						moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.getBlockMetadata());
+						moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.slopeLength, tileRail.getBlockMetadata());
 					}
 		        }
 			}
@@ -509,7 +509,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 		if (!this.worldObj.isRemote) {
 
-			if(this.entityMainTrain == null) {
+			if(this.entityMainTrain == null || this.entityMainTrain.isDead) {
 
 				this.setDead();
 				worldObj.removeEntity(this);
@@ -667,67 +667,90 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		}*/
 	}
 
-	private void moveOnTCSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, int meta) {
-
-		// posY = j + 2.5;
-		if (meta == 2 || meta == 0) {
-
-			if (meta == 2) {
-				cz += 1;
-			}
-
-			double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			double newPosY = Math.abs(j + (Math.tan(slopeAngle * Math.abs(cz - this.posZ))) + this.yOffset + 0.3);
-			if (this.isDerail) {
-				for (int i = -2; i< 3;i++) {
-					if (worldObj.getBlock((int) Math.round(cx), (int) Math.round(newPosY) + i, (int) Math.round(this.posZ)) instanceof BlockTCRail ||
-							worldObj.getBlock((int) Math.round(cx), (int) Math.round(newPosY) + i, (int) Math.round(this.posZ)) instanceof BlockTCRailGag) {
-						if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
-							newPosY += i + 1;
-							break;
-						}
-					}
-				}
-			}
-			this.setPosition(cx + 0.5D, newPosY, this.posZ);
-
-			this.boundingBox.offset(0, 0 , Math.copySign(norm, this.motionZ));
-			this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
-			this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
-			this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
-
-			this.motionX = 0.0D;
-			this.motionY = 0.0D;
-			this.motionZ = Math.copySign(norm, this.motionZ);
-		} else if (meta == 1 || meta == 3) {
-			if (meta == 1) {
-				cx += 1;
-			}
-
-			double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			double newPosY = (j + (Math.tan(slopeAngle * Math.abs(cx - this.posX))) + this.yOffset + 0.3);
-			if (this.isDerail) {
-				for (int i = -2; i< 3;i++) {
-					if (worldObj.getBlock((int) Math.round(this.posX), (int) Math.round(newPosY) + i, (int) Math.round(cz)) instanceof BlockTCRail ||
-							worldObj.getBlock((int) Math.round(this.posX), (int) Math.round(newPosY) + i, (int) Math.round(cz)) instanceof BlockTCRailGag) {
-						if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
-							newPosY += i + 1;
-							break;
-						}
-					}
-				}
-			}
-			this.setPosition(this.posX, newPosY, cz + 0.5D);
-
-			this.boundingBox.offset(Math.copySign(norm, this.motionX), 0 ,0);
-			this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
-			this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
-			this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
-
-			this.motionX = Math.copySign(norm, this.motionX);
-			this.motionY = 0.0D;
-			this.motionZ = 0.0D;
+	private void moveOnTCSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
+		if (meta > 3) {
+			moveOnTCDiagonalSlope(j, cx, cz, slopeAngle, slopeHeight, slopeLength, meta);
+			return;
 		}
+		boolean alongZ = meta == 0 || meta == 2;
+		double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+
+		if (meta == 2) cz += 1;
+		else if (meta == 1) cx += 1;
+
+		double delta = alongZ ? Math.abs(cz - this.posZ) : Math.abs(cx - this.posX);
+		double newPosY = Math.abs(j + (Math.tan(slopeAngle * delta)) + this.yOffset + 0.3);
+
+		newPosY = derailCheck(cx, newPosY, cz, alongZ);
+
+		if (alongZ) {
+			this.setPosition(cx + 0.5D, newPosY, this.posZ);
+			this.boundingBox.offset(0, 0 , Math.copySign(norm, this.motionZ));
+		} else {
+			this.setPosition(this.posX, newPosY, cz + 0.5D);
+			this.boundingBox.offset(Math.copySign(norm, this.motionX), 0 ,0);
+		}
+
+		this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
+		this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
+		this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
+
+		this.motionX = alongZ ? 0.0D : Math.copySign(norm, this.motionX);
+		this.motionY = 0;
+		this.motionZ = alongZ ? Math.copySign(norm, this.motionZ) : 0.0D;
+	}
+
+	private void moveOnTCDiagonalSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
+		double X_OFFSET = 0.5;
+		double Z_OFFSET = 1.5;
+		double delta = Math.hypot(Math.abs(cz - this.posZ),Math.abs(cx - this.posX));
+		double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + this.yOffset + 0.3);
+		Y_OFFSET = derailCheck(cx, Y_OFFSET, cz);
+
+		this.setPosition(this.posX, Y_OFFSET, this.posZ); //change our Y-offset before moving on the diagonal
+		double exitX = 0;
+		double exitZ = 0;
+		double directionX;
+		double directionZ;
+		double norm = Math.sqrt(this.entityMainTrain.motionX * this.entityMainTrain.motionX + this.entityMainTrain.motionZ * this.entityMainTrain.motionZ);
+		double distanceNorm;
+
+		switch (meta)
+		{
+			case 6:
+				exitX = (this.entityMainTrain.motionX > 0) ? cx + slopeLength + X_OFFSET : cx - X_OFFSET;
+				exitZ = (this.entityMainTrain.motionX > 0) ? cz - slopeLength + X_OFFSET : cz + Z_OFFSET;
+				break;
+			case 4:
+				exitX = (this.entityMainTrain.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength - X_OFFSET);
+				exitZ = (this.entityMainTrain.motionX > 0) ? cz - X_OFFSET : cz + (slopeLength + X_OFFSET);
+				break;
+			case 5:
+				exitX = (this.entityMainTrain.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength + X_OFFSET);
+				exitZ = (this.entityMainTrain.motionX > 0) ? cz + Z_OFFSET : cz - (slopeLength + X_OFFSET);
+				break;
+			case 7:
+				exitX = (this.entityMainTrain.motionX > 0) ? cx + (slopeLength + X_OFFSET) : cx - X_OFFSET;
+				exitZ = (this.entityMainTrain.motionX > 0) ? cz + (slopeLength + X_OFFSET) : cz - X_OFFSET;
+				break;
+		}
+
+		directionX = exitX - this.posX;
+		directionZ = exitZ - this.posZ;
+		distanceNorm = Math.sqrt(directionX * directionX + directionZ * directionZ);
+		this.motionX = (directionX / distanceNorm) * norm;
+		this.motionZ = (directionZ / distanceNorm) * norm;
+		this.boundingBox.offset(Math.copySign(this.motionX, this.entityMainTrain.motionX), 0, Math.copySign(this.motionZ, this.entityMainTrain.motionZ)); // keep the entity from reversing on itself by using the main entities motion for sign.
+
+		/*List boxes = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox);
+		for(Object b : boxes){
+			if(!(b instanceof BlockRailBase) && !(b instanceof BlockTCRail) && !(b instanceof BlockTCRailGag) && !(b instanceof BlockAir)){
+				return;
+			}
+		}*/
+		this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
+		this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
+		this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
 	}
 
 	private void moveOnNewTC90TurnRail(int j,double r, double cx, double cz){
@@ -853,6 +876,42 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 			this.motionZ = maxSpeed;
 		}
+	}
+
+	private double derailCheck(double posX, double posY, double posZ, boolean alongZ) {
+		if (this.isDerail) {
+			for (int i = -2; i< 3;i++) {
+				int blockX = alongZ ? (int) Math.round(posX) : (int) Math.round(this.posX);
+				int blockZ = alongZ ? (int) Math.round(this.posZ) : (int) Math.round(posZ);
+
+				if (worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
+						worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+					if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
+						posY += i + 1;
+						break;
+					}
+				}
+			}
+		}
+		return posY;
+	}
+
+	private double derailCheck(double posX, double posY, double posZ) {
+		if (this.isDerail) {
+			for (int i = -2; i< 3;i++) {
+				int blockX = (int) Math.round(posX);
+				int blockZ = (int) Math.round(posZ);
+
+				if (worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
+						worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+					if (Math.round(this.entityMainTrain.posY) == Math.round(this.posY)) {
+						posY += i + 1;
+						break;
+					}
+				}
+			}
+		}
+		return posY;
 	}
 
 	@Override

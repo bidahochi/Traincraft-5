@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import train.common.api.AbstractTrains;
+import train.common.api.EntityBogie;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
 import train.common.blocks.BlockTCRail;
@@ -85,11 +86,9 @@ public class PathFindingHelper
 
     public void moveOnTCDiagonal(EntityMinecart entityMinecart, int i, int j, int k, double cx, double cz, int meta, double length)
     {
-        double Y_OFFSET = 0.2;
         double X_OFFSET = 0.5;
         double Z_OFFSET = 1.5;
-        entityMinecart.posY = j + Y_OFFSET;
-
+        entityMinecart.setPosition(entityMinecart.posX, j + entityMinecart.yOffset + 0.2, entityMinecart.posZ);
         double exitX = 0;
         double exitZ = 0;
         double directionX;
@@ -122,7 +121,7 @@ public class PathFindingHelper
         distanceNorm = Math.sqrt(directionX * directionX + directionZ * directionZ);
         entityMinecart.motionX = (directionX / distanceNorm) * norm;
         entityMinecart.motionZ = (directionZ / distanceNorm) * norm;
-        entityMinecart.boundingBox.offset(Math.copySign(entityMinecart.motionX, entityMinecart.motionX), 0 , Math.copySign(entityMinecart.motionZ, entityMinecart.motionZ));
+        entityMinecart.boundingBox.offset(Math.copySign(entityMinecart.motionX, entityMinecart.motionX), 0, Math.copySign(entityMinecart.motionZ, entityMinecart.motionZ));
 
         List boxes = entityMinecart.worldObj.getCollidingBoundingBoxes(entityMinecart, entityMinecart.boundingBox);
         for(Object b : boxes){
@@ -135,8 +134,12 @@ public class PathFindingHelper
         entityMinecart.posZ = (entityMinecart.boundingBox.minZ + entityMinecart.boundingBox.maxZ) / 2.0D;
     }
 
-    public void moveOnTCSlope(EntityMinecart abstractTrains, int posY, double posX, double posZ, double slopeAngle, double slopeHeight, int meta)
+    public void moveOnTCSlope(EntityMinecart abstractTrains, int posY, double posX, double posZ, double slopeAngle, double slopeHeight, int meta, double length)
     {
+        if (meta > 3) {
+            moveOnTCDiagonalSlope(abstractTrains, posY, posX, posZ, slopeAngle, slopeHeight, meta, length);
+            return;
+        }
         if (meta == 2) {
             posZ ++;
         }
@@ -158,7 +161,7 @@ public class PathFindingHelper
         abstractTrains.posX = (abstractTrains.boundingBox.minX + abstractTrains.boundingBox.maxX) / 2.0D;
         abstractTrains.posY = abstractTrains.boundingBox.minY + (double) abstractTrains.yOffset - (double) abstractTrains.ySize;
         abstractTrains.posZ = (abstractTrains.boundingBox.minZ + abstractTrains.boundingBox.maxZ) / 2.0D;
-        normalizedSpeed = getSlopeAdjustedSpeed((AbstractTrains) abstractTrains, normalizedSpeed, slopeAngle);
+        normalizedSpeed = getSlopeAdjustedSpeed(abstractTrains, normalizedSpeed, slopeAngle);
 
         switch (meta)
         {
@@ -176,6 +179,59 @@ public class PathFindingHelper
                 abstractTrains.motionZ = 0.0D;
             }
         }
+    }
+
+    private void moveOnTCDiagonalSlope(EntityMinecart abstractTrains, int j, double cx, double cz, double slopeAngle, double slopeHeight, int meta, double slopeLength) {
+        double X_OFFSET = 0.5;
+        double Z_OFFSET = 1.5;
+        double delta = Math.hypot(Math.abs(cz - abstractTrains.posZ),Math.abs(cx - abstractTrains.posX));
+        double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + abstractTrains.yOffset + 0.3);
+        Y_OFFSET = derailCheck(abstractTrains, cx, Y_OFFSET, cz);
+
+        abstractTrains.setPosition(abstractTrains.posX, Y_OFFSET, abstractTrains.posZ); //change our Y-offset before moving on the diagonal
+        double exitX = 0;
+        double exitZ = 0;
+        double directionX;
+        double directionZ;
+        double norm = Math.sqrt(abstractTrains.motionX * abstractTrains.motionX + abstractTrains.motionZ * abstractTrains.motionZ);
+        double distanceNorm;
+
+        switch (meta)
+        {
+            case 6:
+                exitX = (abstractTrains.motionX > 0) ? cx + slopeLength + X_OFFSET : cx - X_OFFSET;
+                exitZ = (abstractTrains.motionX > 0) ? cz - slopeLength + X_OFFSET : cz + Z_OFFSET;
+                break;
+            case 4:
+                exitX = (abstractTrains.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength - X_OFFSET);
+                exitZ = (abstractTrains.motionX > 0) ? cz - X_OFFSET : cz + (slopeLength + X_OFFSET);
+                break;
+            case 5:
+                exitX = (abstractTrains.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength + X_OFFSET);
+                exitZ = (abstractTrains.motionX > 0) ? cz + Z_OFFSET : cz - (slopeLength + X_OFFSET);
+                break;
+            case 7:
+                exitX = (abstractTrains.motionX > 0) ? cx + (slopeLength + X_OFFSET) : cx - X_OFFSET;
+                exitZ = (abstractTrains.motionX > 0) ? cz + (slopeLength + X_OFFSET) : cz - X_OFFSET;
+                break;
+        }
+
+        directionX = exitX - abstractTrains.posX;
+        directionZ = exitZ - abstractTrains.posZ;
+        distanceNorm = Math.sqrt(directionX * directionX + directionZ * directionZ);
+        abstractTrains.motionX = (directionX / distanceNorm) * norm;
+        abstractTrains.motionZ = (directionZ / distanceNorm) * norm;
+        abstractTrains.boundingBox.offset(Math.copySign(abstractTrains.motionX, abstractTrains.motionX), 0, Math.copySign(abstractTrains.motionZ, abstractTrains.motionZ)); // keep the entity from reversing on itself by using the main entities motion for sign.
+
+		/*List boxes = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox);
+		for(Object b : boxes){
+			if(!(b instanceof BlockRailBase) && !(b instanceof BlockTCRail) && !(b instanceof BlockTCRailGag) && !(b instanceof BlockAir)){
+				return;
+			}
+		}*/
+        abstractTrains.posX = (abstractTrains.boundingBox.minX + abstractTrains.boundingBox.maxX) / 2.0D;
+        abstractTrains.posY = abstractTrains.boundingBox.minY + (double)abstractTrains.yOffset - (double)abstractTrains.ySize;
+        abstractTrains.posZ = (abstractTrains.boundingBox.minZ + abstractTrains.boundingBox.maxZ) / 2.0D;
     }
 
     public boolean shouldIgnoreSwitch(EntityMinecart entityMinecart, TileTCRail tile, int i, int j, int k, int meta) {
@@ -260,7 +316,8 @@ public class PathFindingHelper
         if (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block)
         {
             return true;
-        }/* this is test/in-dev anti-derailment code.
+        }
+        /* this is test/in-dev anti-derailment code.
 		Vec3f closest = null;
 		double dist = Double.MAX_VALUE;
 		for(int a = -1; a<2;a++) {
@@ -285,7 +342,7 @@ public class PathFindingHelper
         return false;
     }
 
-    public double getSlopeAdjustedSpeed(AbstractTrains abstractTrains, double normalizedSpeed, double slopeAngle)
+    public double getSlopeAdjustedSpeed(EntityMinecart abstractTrains, double normalizedSpeed, double slopeAngle)
     {
         /** Turning this off till later as this needs more tweaking
         if (abstractTrains instanceof Locomotive && !((Locomotive) abstractTrains).canBePulled) { //make this speedup only happen twice a second
@@ -325,4 +382,24 @@ public class PathFindingHelper
         }
         return abstractTrains.trainHandler.getTrains().size();
     }
+
+    private double derailCheck(EntityMinecart cart, double posX, double posY, double posZ) {
+        int blockX = (int) Math.round(posX);
+        int blockZ = (int) Math.round(posZ);
+        boolean isOnRail = cart.worldObj.getBlock(blockX, (int)cart.posY, blockZ) instanceof BlockTCRail;
+        if (!isOnRail)
+            isOnRail = cart.worldObj.getBlock(blockX, (int)cart.posY, blockZ) instanceof BlockTCRailGag;
+        if (!isOnRail) {
+            for (int i = -2; i < 3; i++) {
+
+                if (cart.worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRail ||
+                        cart.worldObj.getBlock(blockX, (int) Math.round(posY) + i, blockZ) instanceof BlockTCRailGag) {
+                    posY += i + 1;
+                    break;
+                }
+            }
+        }
+        return posY;
+    }
+
 }

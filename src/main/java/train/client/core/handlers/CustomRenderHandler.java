@@ -222,10 +222,28 @@ public class CustomRenderHandler
         {
             RenderTCRail.modelLargeSlope.render(item.getTrackType().getVariant(), item.getTrackType().getBallastType(), facing, 0, 0, 0, r, g, b, 0.5f);
         }
-        else if  (item.getTrackType().getLabel().contains("SLOPE_1X3_DYNAMIC"))
-        {
+        else if  (item.getTrackType().getLabel().contains("SLOPE_1X3_DYNAMIC")) {
+
+            facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);
             blockInfo();
-            RenderTCRail.model1X3Slope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+                RenderTCRail.model1x3DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            }
+            else {
+                RenderTCRail.model1X3Slope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            }
+        }
+        else if (item.getTrackType().getLabel().contains("SLOPE_1X6_DIAG")) {
+            blockInfo();
+            RenderTCRail.model1x6DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+        }
+        else if (item.getTrackType().getLabel().contains("SLOPE_1X12_DIAG")) {
+            blockInfo();
+            RenderTCRail.model1x12DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+        }
+        else if (item.getTrackType().getLabel().contains("SLOPE_1X18_DIAG")) {
+            blockInfo();
+            RenderTCRail.model1x18DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
         }
         else if (item.getTrackType().getLabel().contains("SLOPE_DYNAMIC"))
         {

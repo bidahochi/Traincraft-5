@@ -1304,7 +1304,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 
 			else if (TCRailTypes.isSlopeTrack(tile))
 			{
-				pathFindingHelper.moveOnTCSlope(this, floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata());
+				pathFindingHelper.moveOnTCSlope(this, floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata(), tile.slopeLength);
 				//moveOnTCSlope( floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata());
 			}
 			else if (TCRailTypes.isDiagonalTrack(tile))
@@ -1366,7 +1366,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 					}
 				}
 				else if (TCRailTypes.isSlopeTrack(tile)) {
-					moveOnTCSlope(floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata());
+					pathFindingHelper.moveOnTCSlope(this, floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata(), tile.slopeLength);
+					//moveOnTCSlope(floor_posY, tile.xCoord, tile.zCoord, tile.slopeAngle, tile.slopeHeight, tile.getBlockMetadata());
 				}
 				else if (TCRailTypes.isDiagonalTrack(tile))
 				{
