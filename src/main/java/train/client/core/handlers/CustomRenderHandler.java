@@ -206,8 +206,14 @@ public class CustomRenderHandler
         // Slopes
         else if (item.getTrackType().getLabel().contains("VERY_LARGE_SLOPE_DYNAMIC"))
         {
+            facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);
             blockInfo();
-            RenderTCRail.modelVeryLargeSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+                RenderTCRail.model1x18DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            }
+            else {
+                RenderTCRail.modelVeryLargeSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            }
         }
         else if (item.getTrackType().getLabel().contains("VERY_LARGE_SLOPE"))
         {
@@ -215,15 +221,20 @@ public class CustomRenderHandler
         }
         else if (item.getTrackType().getLabel().contains("LARGE_SLOPE_DYNAMIC"))
         {
+            facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);
             blockInfo();
-            RenderTCRail.modelLargeSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+                RenderTCRail.model1x12DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            }
+            else {
+                RenderTCRail.modelLargeSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            }
         }
         else if (item.getTrackType().getLabel().contains("LARGE_SLOPE"))
         {
             RenderTCRail.modelLargeSlope.render(item.getTrackType().getVariant(), item.getTrackType().getBallastType(), facing, 0, 0, 0, r, g, b, 0.5f);
         }
         else if  (item.getTrackType().getLabel().contains("SLOPE_1X3_DYNAMIC")) {
-
             facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);
             blockInfo();
             if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
@@ -247,8 +258,14 @@ public class CustomRenderHandler
         }
         else if (item.getTrackType().getLabel().contains("SLOPE_DYNAMIC"))
         {
+            facing = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double((player.rotationYaw * 8.0F / 360.0F + 0.5D)) & 7);
             blockInfo();
-            RenderTCRail.modelSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+                RenderTCRail.model1x6DiagonalSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, 0.5f, ballastMaterial, blockColour);
+            }
+            else {
+                RenderTCRail.modelSlope.renderDynamic(item.getTrackType().getVariant(), facing, 0, 0, 0, r, g, b, a, ballastMaterial, blockColour);
+            }
         }
         else if (item.getTrackType().getLabel().contains("SLOPE"))
         {

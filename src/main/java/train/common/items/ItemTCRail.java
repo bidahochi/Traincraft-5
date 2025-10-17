@@ -1915,7 +1915,7 @@ public class ItemTCRail extends ItemPart {
 						else if (tempType == EnumTracks.SLOPE_1X18_DIAGONAL) {
 							gagEnd = 17;
 							slopeAngle = 0.04; //5 decimals of precision for track length, 2 dec for angle
-							return handleDiagonalSlopes(world, player, getFacing(player, par10), type, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
+							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
 						}
 						else if (tempType == EnumTracks.SLOPE_WOOD || tempType == EnumTracks.SLOPE_GRAVEL
 								|| tempType == EnumTracks.SLOPE_BALLAST || tempType == EnumTracks.SLOPE_SNOW_GRAVEL
