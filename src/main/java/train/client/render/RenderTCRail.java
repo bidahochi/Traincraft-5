@@ -298,24 +298,29 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 						modelLeftParallelCurve.render("large", railTile, x, y, z);
 						break;
 					}
+					case EMBEDDED_SLOPE_1X3_DYNAMIC:
 					case SLOPE_1X3_DYNAMIC:
 					{
 						model1X3Slope.renderDynamic(railTile, x, y, z);
 						break;
 					}
-					case SLOPE_1X3_DIAGONAL: {
+					case EMBEDDED_SLOPE_1X3_DYNAMIC_DIAGONAL:
+					case SLOPE_1X3_DYNAMIC_DIAGONAL: {
 						model1x3DiagonalSlope.renderDynamic(railTile, x, y, z);
 						break;
 					}
-					case SLOPE_1X6_DIAGONAL: {
+					case EMBEDDED_SLOPE_1X6_DYNAMIC_DIAGONAL:
+					case SLOPE_1X6_DYNAMIC_DIAGONAL: {
 						model1x6DiagonalSlope.renderDynamic(railTile, x, y, z);
 						break;
 					}
-					case SLOPE_1X12_DIAGONAL: {
+					case EMBEDDED_SLOPE_1X12_DYNAMIC_DIAGONAL:
+					case SLOPE_1X12_DYNAMIC_DIAGONAL: {
 						model1x12DiagonalSlope.renderDynamic(railTile, x, y, z);
 						break;
 					}
-					case SLOPE_1X18_DIAGONAL: {
+					case EMBEDDED_SLOPE_1X18_DYNAMIC_DIAGONAL:
+					case SLOPE_1X18_DYNAMIC_DIAGONAL: {
 						model1x18DiagonalSlope.renderDynamic(railTile, x, y, z);
 						break;
 					}

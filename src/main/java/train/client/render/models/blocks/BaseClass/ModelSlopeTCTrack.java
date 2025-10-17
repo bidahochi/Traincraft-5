@@ -78,7 +78,7 @@ public class ModelSlopeTCTrack extends ModelBase
             modelSlopeBallast.renderAll();
         }
     }
-    //TODO: add flag from tcRail for rendering slabs
+
     public void renderDynamic(TileTCRail tcRail, double x, double y, double z)
     {
         int facing = tcRail.getWorldObj().getBlockMetadata(tcRail.xCoord, tcRail.yCoord, tcRail.zCoord);

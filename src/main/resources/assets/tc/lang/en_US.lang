@@ -423,6 +423,7 @@ item.tc:tcRailEmbeddedDiamondCrossing.name=Sleeperless X Crossing
 item.tc:tcRailEmbeddedDoubleDiamondCrossing.name=Sleeperless Double X Crossing
 item.tc:tcRailEmbeddedFourWaysCrossing.name=Sleeperless X-Plus Crossing
 
+item.tc:tcRailEmbedded1x3SlopeDynamic.name=1x3 Sleeperless Slope Track (Dynamic)
 item.tc:tcRailEmbeddedSlopeDynamic.name=1x6 Sleeperless Slope Track (Dynamic)
 item.tc:tcRailEmbeddedLargeSlopeDynamic.name=1x12 Sleeperless Large Slope Track (Dynamic)
 item.tc:tcRailEmbeddedVeryLargeSlopeDynamic.name=1x18 Sleeperless Very Large Slope Track (Dynamic)

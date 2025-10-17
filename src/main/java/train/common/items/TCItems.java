@@ -191,6 +191,7 @@ public class TCItems {
 		ItemIDs.tcRailEmbedded45DegreeTurn10x22.item = new ItemTCRail(EnumTracks.EMBEDDED_DIAGONAL_TURN_10X22);
 
 		/* Embedded Slopes*/
+		ItemIDs.tcRailEmbedded1x3SlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC);
 		ItemIDs.tcRailEmbeddedSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_SLOPE_DYNAMIC);
 		ItemIDs.tcRailEmbeddedLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_LARGE_SLOPE_DYNAMIC);
 		ItemIDs.tcRailEmbeddedVeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC);

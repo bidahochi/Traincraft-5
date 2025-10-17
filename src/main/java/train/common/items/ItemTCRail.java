@@ -1892,27 +1892,27 @@ public class ItemTCRail extends ItemPart {
 						 * Explanation: normally you would divide 100 by (gagEnd+1) but this seems to be
 						 * against TCs own brain. you need to divide 100 by (gagEnd+1)
 						 **/
-						if (tempType == EnumTracks.SLOPE_1X3_DYNAMIC)
+						if (tempType == EnumTracks.SLOPE_1X3_DYNAMIC || tempType == EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC)
 						{
 							gagEnd = 2;
 							slopeAngle = 0.26;
 						}
-						else if (tempType == EnumTracks.SLOPE_1X3_DIAGONAL) {
+						else if (tempType == EnumTracks.SLOPE_1X3_DYNAMIC_DIAGONAL || tempType == EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC_DIAGONAL) {
 							gagEnd = 2;
 							slopeAngle = 0.23; //5 decimals of precision for track length, 2 dec for angle
 							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
 						}
-						else if (tempType == EnumTracks.SLOPE_1X6_DIAGONAL) {
+						else if (tempType == EnumTracks.SLOPE_1X6_DYNAMIC_DIAGONAL || tempType == EnumTracks.EMBEDDED_SLOPE_1X6_DYNAMIC_DIAGONAL) {
 							gagEnd = 5;
 							slopeAngle = 0.12; //5 decimals of precision for track length, 2 dec for angle
 							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
 						}
-						else if (tempType == EnumTracks.SLOPE_1X12_DIAGONAL) {
+						else if (tempType == EnumTracks.SLOPE_1X12_DYNAMIC_DIAGONAL || tempType == EnumTracks.EMBEDDED_SLOPE_1X12_DYNAMIC_DIAGONAL) {
 							gagEnd = 11;
 							slopeAngle = 0.06; //5 decimals of precision for track length, 2 dec for angle
 							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
 						}
-						else if (tempType == EnumTracks.SLOPE_1X18_DIAGONAL) {
+						else if (tempType == EnumTracks.SLOPE_1X18_DYNAMIC_DIAGONAL || tempType == EnumTracks.EMBEDDED_SLOPE_1X18_DYNAMIC_DIAGONAL) {
 							gagEnd = 17;
 							slopeAngle = 0.04; //5 decimals of precision for track length, 2 dec for angle
 							return handleDiagonalSlopes(world, player, getFacing(player, par10), tempType, gagEnd, slopeAngle, x, y, z, itemstack); //break out bc we use a different placement method for diagonals
@@ -2587,16 +2587,28 @@ public class ItemTCRail extends ItemPart {
 				if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
 					switch (type) {
 						case SLOPE_1X3_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X3_DIAGONAL;
+							tempType = EnumTracks.SLOPE_1X3_DYNAMIC_DIAGONAL;
+							break;
+						case EMBEDDED_SLOPE_1X3_DYNAMIC:
+							tempType = EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC_DIAGONAL;
 							break;
 						case SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X6_DIAGONAL;
+							tempType = EnumTracks.SLOPE_1X6_DYNAMIC_DIAGONAL;
+							break;
+						case EMBEDDED_SLOPE_DYNAMIC:
+							tempType = EnumTracks.EMBEDDED_SLOPE_1X6_DYNAMIC_DIAGONAL;
 							break;
 						case LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X12_DIAGONAL;
+							tempType = EnumTracks.SLOPE_1X12_DYNAMIC_DIAGONAL;
+							break;
+						case EMBEDDED_LARGE_SLOPE_DYNAMIC:
+							tempType = EnumTracks.EMBEDDED_SLOPE_1X12_DYNAMIC_DIAGONAL;
 							break;
 						case VERY_LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X18_DIAGONAL;
+							tempType = EnumTracks.SLOPE_1X18_DYNAMIC_DIAGONAL;
+							break;
+						case EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC:
+							tempType = EnumTracks.EMBEDDED_SLOPE_1X18_DYNAMIC_DIAGONAL;
 							break;
 					}
 					return tempType;

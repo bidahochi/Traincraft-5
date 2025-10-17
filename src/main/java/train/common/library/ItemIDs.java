@@ -415,6 +415,7 @@ public enum ItemIDs {
 	tcRailEmbeddedFourWaysCrossing("ItemtcRailEmbedded", "track_xplus_crossing_e",5),
 
 	//slopes
+	tcRailEmbedded1x3SlopeDynamic("ItemTCRail", "item_rail_embedded_slope_dynamic", 5),
 	tcRailEmbeddedSlopeDynamic("ItemTCRail", "item_rail_embedded_slope_dynamic", 5),
 	tcRailEmbeddedLargeSlopeDynamic("ItemTCRail", "item_rail_embedded_slope_dynamic", 5),
 	tcRailEmbeddedVeryLargeSlopeDynamic("ItemTCRail", "item_rail_embedded_slope_dynamic", 5),
