@@ -11,8 +11,15 @@ import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoSteamU57 extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return null;
+	}
+
 	public EntityLocoSteamU57(World world) {
 		super(world, 5000/*Change here to EnumTrains..getTankCapacity()*/, LiquidManager.WATER_FILTER);
 		initLocoSteam();

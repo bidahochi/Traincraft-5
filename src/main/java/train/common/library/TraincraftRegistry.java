@@ -2,8 +2,8 @@ package train.common.library;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
-import train.client.render.RenderEnum;
 import train.common.api.AbstractTrains;
+import train.common.library.sounds.TrainSoundRecord;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -23,6 +23,13 @@ public class TraincraftRegistry
 
     private Map<Class<?>, ITrainRenderRecord> trainRenderRecords = new HashMap<>();
     private List<TrainSoundRecord> trainSoundRecords = new ArrayList<>();
+
+    public void RegisterRollingStock(Item item, ITrainRecord trainRecord, ITrainRenderRecord trainRenderRecord)
+    {
+        trainRecordsByItem.put(item, trainRecord);
+        trainRecords.add(trainRecord);
+        trainRenderRecords.put(trainRenderRecord.getEntityClass(), trainRenderRecord);
+    }
 
     public AbstractTrains getEntityWithItem(Item item, World world, double x, double y, double z)
     {
@@ -88,17 +95,6 @@ public class TraincraftRegistry
             }
         }
 
-        return null;
-    }
-
-    public TrainSoundRecord getTrainSoundRecord(Class<?> entityClass) {
-        if (entityClass == null) return null;
-
-        for (TrainSoundRecord record : trainSoundRecords) {
-            if (entityClass.equals(record.getEntityClass())) {
-                return record;
-            }
-        }
         return null;
     }
 

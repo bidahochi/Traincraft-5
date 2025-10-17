@@ -10,9 +10,16 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoElectricNewHighSpeed extends ElectricTrain {
 	EntityPlayer playerEntity;
+
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return null;
+	}
 
 	public EntityLocoElectricNewHighSpeed(World world) {
 		super(world);

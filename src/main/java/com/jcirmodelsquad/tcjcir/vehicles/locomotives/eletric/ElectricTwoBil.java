@@ -9,11 +9,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class ElectricTwoBil extends ElectricTrain {
     //public TiltingHandler tiltingHandler = new TiltingHandler(7);
-
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.ElectricTwoBil;
+    }
     public ElectricTwoBil(World world) {
         super(world);
 

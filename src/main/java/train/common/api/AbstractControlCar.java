@@ -21,6 +21,7 @@ import train.common.core.network.PacketKeyPress;
 import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
 import train.common.library.Info;
+import train.common.library.sounds.SoundRecord;
 
 import java.util.List;
 
@@ -69,6 +70,8 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         super(world);
         
     }
+
+    public abstract SoundRecord getSoundRecord();
 
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
@@ -190,13 +193,14 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         }
     }
 
-    public void soundHorn() {
-        for (EnumSounds sounds : EnumSounds.values()) {
-            if (sounds.getEntityClass() != null && sounds.getEntityClass().equals(this.getClass()) && whistleDelay == 0) {
-                worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getHornString(), sounds.getHornVolume(), 1.0F);
-                whistleDelay = 65;
-            }
+    public void soundHorn()
+    {
+
+        if (whistleDelay == 0) {
+            worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + getSoundRecord().getHornString(), getSoundRecord().getHornVolume(), 1.0F);
+            whistleDelay = 65;
         }
+
         List entities = worldObj.getEntitiesWithinAABB(EntityAnimal.class, AxisAlignedBB.getBoundingBox(
                 this.posX-20,this.posY-5,this.posZ-20,
                 this.posX+20,this.posY+5,this.posZ+20));

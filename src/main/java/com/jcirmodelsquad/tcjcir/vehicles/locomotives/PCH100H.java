@@ -15,13 +15,20 @@ import train.common.api.EntityBogie;
 import train.common.api.EntityRollingStock;
 import train.common.api.HydrogenTrain;
 import train.common.core.util.TraincraftUtil;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 import java.util.ArrayList;
 
 public class PCH100H extends HydrogenTrain{
 
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.PCH100H;
+    }
     public AutoTrain2Handler autoTrainHandler;
     public PCH100H(World world) {
         super(world, EnumTrains.PCH100H.getTankCapacity(), 1000);

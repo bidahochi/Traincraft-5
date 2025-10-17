@@ -11,10 +11,17 @@ import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
 import train.common.library.EnumHeritageTrainsLegacy;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoSteamBR80_DB extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.locoSteamBR80_DB;
+	}
 	public EntityLocoSteamBR80_DB(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamBR80.getTankCapacity(), LiquidManager.WATER_FILTER);
 		initLocoSteam();

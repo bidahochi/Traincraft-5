@@ -10,9 +10,17 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
 import train.common.core.util.TraincraftUtil;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoElectricCD151 extends ElectricTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.locoDieselCD151;
+	}
+
 	public EntityLocoElectricCD151(World world) {
 		super(world);
 	}

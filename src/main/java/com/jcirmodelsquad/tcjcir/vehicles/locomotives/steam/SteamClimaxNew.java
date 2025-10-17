@@ -10,10 +10,17 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class SteamClimaxNew extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.SteamClimaxNew;
+	}
 	public SteamClimaxNew(World world) {
 		super(world, EnumTrains.Climax2.getTankCapacity(), LiquidManager.WATER_FILTER);
 		initLocoSteam();

@@ -11,11 +11,18 @@ import train.common.Traincraft;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 
 public class DieselCF7round3 extends DieselTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.DieselCF7round3;
+    }
     public DieselCF7round3(World world) {
         super(world, EnumTrains.CF7round3.getTankCapacity(), LiquidManager.dieselFilter());
         initLoco();
@@ -89,17 +96,6 @@ public class DieselCF7round3 extends DieselTrain {
             riddenByEntity.setPosition(bogieX1, pitch, bogieZ1 +0.0);
         }
     }
-
-
-
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-
-        }
-    }
-
     @Override
     public void onUpdate() {
         checkInvent(locoInvent[0]);

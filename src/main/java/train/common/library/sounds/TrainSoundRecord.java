@@ -1,4 +1,4 @@
-package train.common.library;
+package train.common.library.sounds;
 
 public interface TrainSoundRecord
 {

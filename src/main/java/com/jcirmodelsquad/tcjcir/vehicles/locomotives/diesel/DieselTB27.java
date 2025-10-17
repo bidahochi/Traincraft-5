@@ -10,17 +10,25 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class DieselTB27 extends DieselTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.DieselTB27;
+    }
     public DieselTB27(World world) {
         super(world, EnumTrains.TB27.getTankCapacity(), LiquidManager.dieselFilter());
         initLoco();
         InsertTexture(0, "Demonstrator");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Avanste Northeastern");
-        InsertTexture(3, "SPR");
+        InsertTexture(3, "SPR", LockoutGroup.SPR);
 
     }
     public DieselTB27(World world, double d, double d1, double d2){
@@ -80,12 +88,7 @@ public class DieselTB27 extends DieselTrain {
     }
 
 
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-        }
-    }
+
 
     @Override
     public void onUpdate() {

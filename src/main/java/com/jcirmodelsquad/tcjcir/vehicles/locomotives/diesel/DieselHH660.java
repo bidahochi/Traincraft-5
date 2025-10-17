@@ -10,10 +10,18 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class DieselHH660 extends DieselTrain {
+
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.DieselHH600;
+    }
     public DieselHH660(World world) {
         super(world, EnumTrains.HH660.getTankCapacity(), LiquidManager.dieselFilter());
         initLoco();
@@ -82,12 +90,7 @@ public class DieselHH660 extends DieselTrain {
 
     
 
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-        }
-    }
+    
 
     @Override
     public void onUpdate() {

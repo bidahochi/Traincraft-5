@@ -9,9 +9,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class ElectricEP1A extends ElectricTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.ElectricEP1A;
+    }
     public ElectricEP1A(World world) {
         super(world);
     }

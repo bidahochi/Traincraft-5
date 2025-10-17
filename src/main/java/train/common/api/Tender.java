@@ -1,5 +1,6 @@
 package train.common.api;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -7,10 +8,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
+import train.common.Traincraft;
 import train.common.api.LiquidManager.StandardTank;
 import train.common.entity.rollingStock.EntityBUnitDD35;
 import train.common.entity.rollingStock.EntityBUnitEMDF3;
 import train.common.entity.rollingStock.EntityBUnitEMDF7;
+import train.common.library.GuiIDs;
 
 public abstract class Tender extends Freight implements IFluidHandler {
 
@@ -46,6 +49,25 @@ public abstract class Tender extends Freight implements IFluidHandler {
 		dataWatcher.addObject(4, 0);
 		this.dataWatcher.addObject(23, 0);
 	}
+
+	@Override
+	public final boolean interactFirst(EntityPlayer entityplayer) {
+		playerEntity = entityplayer;
+		if ((super.interactFirst(entityplayer))) {
+			return false;
+		}
+		if (!this.worldObj.isRemote) {
+			entityplayer.openGui(Traincraft.instance, GuiIDs.TENDER, worldObj, this.getEntityId(), -1, (int) this.posZ);
+		}
+		return true;
+	}
+
+	@Override
+	public final void setDead() {
+		super.setDead();
+		isDead = true;
+	}
+
 	@Override
 	public abstract int getSizeInventory();
 	@Override

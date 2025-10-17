@@ -10,10 +10,17 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class SteamNP_L9 extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.SteamNP_L9;
+	}
 	public SteamNP_L9(World world) {
 		super(world, EnumTrains.NP_L9.getTankCapacity(), LiquidManager.WATER_FILTER);
 		initLocoSteam();

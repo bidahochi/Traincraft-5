@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.AbstractControlCar;
 import train.common.library.EnumTrains;
+import train.common.library.sounds.SoundRecord;
 
 public class S1BL extends AbstractControlCar
 {
@@ -31,6 +32,12 @@ public class S1BL extends AbstractControlCar
         prevPosX = d;
         prevPosY = d1;
         prevPosZ = d2;
+    }
+
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return null;
     }
 
 

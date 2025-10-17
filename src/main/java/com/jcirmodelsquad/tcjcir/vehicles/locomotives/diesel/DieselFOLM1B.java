@@ -12,10 +12,17 @@ import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumHeritageTrainsLegacy;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class DieselFOLM1B extends DieselTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.DieselFOLM1B;
+    }
     public DieselFOLM1B(World world) {
         super(world, EnumHeritageTrainsLegacy.locoDieselFOL_M1.getTankCapacity(), LiquidManager.dieselFilter());
         initLoco();
@@ -44,23 +51,13 @@ public class DieselFOLM1B extends DieselTrain {
 
 
 
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-        }
-    }
+
 
     @Override
     public void onUpdate() {
         checkInvent(locoInvent[0]);
         super.onUpdate();
     }
-
-
-
-    
-
     @Override
     public String getInventoryName() {
         return "FOL-M1B";

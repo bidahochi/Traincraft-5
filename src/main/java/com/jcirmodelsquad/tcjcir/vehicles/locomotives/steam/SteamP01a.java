@@ -11,10 +11,18 @@ import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
 import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class SteamP01a extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.SteamF01;
+	}
+
 	public SteamP01a(World world) {
 		super(world, EnumTrains.P01a.getTankCapacity(), LiquidManager.WATER_FILTER);
 		initLocoSteam();

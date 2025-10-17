@@ -51,6 +51,8 @@ import train.common.items.ItemWirelessTransmitter;
 import train.common.library.BetterEnumSounds;
 import train.common.library.EnumSounds;
 import train.common.library.Info;
+import train.common.library.sounds.SoundRecord;
+import train.common.library.sounds.TrainSoundRecord;
 import train.common.mtc.network.*;
 
 import java.util.*;
@@ -68,6 +70,8 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     {
         return inventorySize;
     }
+
+    public abstract SoundRecord getSoundRecord();
 
     public int numCargoSlots;
     public int numCargoSlots1;
@@ -154,7 +158,8 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     private String locoState = "";
 
 
-    public Locomotive(World world) {
+    public Locomotive(World world)
+    {
         super(world);
         setFuelConsumption(0);
         inventorySize = numCargoSlots + numCargoSlots2 + numCargoSlots1;
@@ -691,38 +696,36 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     }
 
     public void soundBell3() {
-        for (EnumSounds sounds : EnumSounds.values()) {
-            if (sounds.getEntityClass() != null && !sounds.getHornString().equals("") && sounds.getEntityClass().equals(this.getClass()) && !sounds.getBellString().equals("")) {
+        if (!getSoundRecord().getHornString().equals("") && !getSoundRecord().getBellString().equals(""))
+        {
 
-                worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getBellString(), 1f, 1F);
-                bellCount = sounds.getBellLength();//default 15 for bronze bell
-                //System.out.println(bellCount);
+            worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + getSoundRecord().getBellString(), 1f, 1F);
+            bellCount = getSoundRecord().getBellLength();//default 15 for bronze bell
+            //System.out.println(bellCount);
 
-            }
         }
     }
 
     public void soundHorn()
     {
-        for (EnumSounds sounds : EnumSounds.values())
+        SoundRecord trainSoundRecord = getSoundRecord();
+
+        if (!trainSoundRecord.getHornString().equals("") && whistleDelay == 0)
         {
-            if (sounds.getEntityClass() != null && !sounds.getHornString().equals("") && sounds.getEntityClass().equals(this.getClass()) && whistleDelay == 0)
+            if (trainSoundRecord.getHorns() != null)
             {
-                if (sounds.getHorns() != null)
+                if (trainSoundRecord.getHorns().length <= this.acceptedColors.indexOf(this.getColor()))
                 {
-                    if (sounds.getHorns().length <= this.acceptedColors.indexOf(this.getColor()))
-                    {
-                        worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + "oh_no_shits", sounds.getHornVolume(), 1.0F);
-                    }
-                    else
-                    {
-                        System.out.println(sounds.getHorns()[this.acceptedColors.indexOf(this.getColor())]);
-                        worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getHorns()[this.acceptedColors.indexOf(this.getColor())], sounds.getHornVolume(), 1.0F);
-                    }
+                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + "oh_no_shits", trainSoundRecord.getHornVolume(), 1.0F);
                 }
-                worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getHornString(), sounds.getHornVolume(), 1.0F);
-                whistleDelay = 65;
+                else
+                {
+                    System.out.println(trainSoundRecord.getHorns()[this.acceptedColors.indexOf(this.getColor())]);
+                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + trainSoundRecord.getHorns()[this.acceptedColors.indexOf(this.getColor())], trainSoundRecord.getHornVolume(), 1.0F);
+                }
             }
+            worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + trainSoundRecord.getHornString(), trainSoundRecord.getHornVolume(), 1.0F);
+            whistleDelay = 65;
         }
         List entities = worldObj.getEntitiesWithinAABB(EntityAnimal.class, AxisAlignedBB.getBoundingBox(
                 this.posX - 20, this.posY - 5, this.posZ - 20,
@@ -1023,50 +1026,44 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
 
                 }
 
-            } else {
+            }
+            else
+            {
                     //Use the old sound system.
-
-
-                EnumSounds[] values = EnumSounds.values();
-                for (EnumSounds sounds : values) {
-                    if (sounds.getEntityClass() != null && !sounds.getHornString().isEmpty() && sounds.getEntityClass().equals(this.getClass()) && whistleDelay == 0) {
+                    SoundRecord soundRecord = getSoundRecord();
+                    if (!soundRecord.getHornString().isEmpty() && whistleDelay == 0) {
                         if (getFuel() > 0 && this.isLocoTurnedOn()) {
                             if (speed > -0.001D && speed < 0.01D && soundPosition == 0) {
-                                worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getIdleString(), sounds.getIdleVolume(), 1F);
-                                soundPosition = sounds.getIdleSoundLength();//soundPosition is probably where IN the sound it is currently playing, eg 1 sec int osoudn file
+                                worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + soundRecord.getIdleString(), soundRecord.getIdleVolume(), 1F);
+                                soundPosition = soundRecord.getIdleSoundLength();//soundPosition is probably where IN the sound it is currently playing, eg 1 sec int osoudn file
                             }
-                            if (sounds.getSoundChangeWithSpeed() && !sounds.getHornString().isEmpty() && sounds.getEntityClass().equals(this.getClass()) && whistleDelay == 0 && !sounds.getBellString().isEmpty()) {
+                            if (soundRecord.getSoundChangeWithSpeed() && !soundRecord.getHornString().isEmpty() && whistleDelay == 0 && !soundRecord.getBellString().isEmpty()) {
                                 if (speed > 0.01D && speed < 0.06D && soundPosition == 0) {
-                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getRunString(), sounds.getRunVolume(), 0.1F);
-                                    soundPosition = sounds.getRunSoundLength();
+                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + soundRecord.getRunString(), soundRecord.getRunVolume(), 0.1F);
+                                    soundPosition = soundRecord.getRunSoundLength();
                                 } else if (speed > 0.06D && speed < 0.2D && soundPosition == 0) {
-                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getRunString(), sounds.getRunVolume(), 0.4F);
-                                    soundPosition = sounds.getRunSoundLength() / 2;
+                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + soundRecord.getRunString(), soundRecord.getRunVolume(), 0.4F);
+                                    soundPosition = soundRecord.getRunSoundLength() / 2;
                                 } else if (speed > 0.2D && soundPosition == 0) {
-                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getRunString(), sounds.getRunVolume(), 0.5F);
-                                    soundPosition = sounds.getRunSoundLength() / 3;
+                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + soundRecord.getRunString(), soundRecord.getRunVolume(), 0.5F);
+                                    soundPosition = soundRecord.getRunSoundLength() / 3;
                                 }
                             } else {
                                 if (speed > 0.01D && soundPosition == 0) {
-                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + sounds.getRunString(), sounds.getRunVolume(), 1F);
-                                    soundPosition = sounds.getRunSoundLength();
+                                    worldObj.playSoundAtEntity(this, Info.resourceLocation + ":" + soundRecord.getRunString(), soundRecord.getRunVolume(), 1F);
+                                    soundPosition = soundRecord.getRunSoundLength();
                                 }
                             }
                             if (soundPosition > 0) {
                                 soundPosition--;
                             }
                         }
-
-                        break;
                     }
-
-                }
                 }
             }
 
-
-        for (EnumSounds sounds : EnumSounds.values()) {
-            if (sounds.getEntityClass() != null && !sounds.getHornString().isEmpty() && sounds.getEntityClass().equals(this.getClass()) && !sounds.getBellString().equals("")) {
+        SoundRecord soundRecord = getSoundRecord();
+            if (!soundRecord.getHornString().isEmpty() && !soundRecord.getBellString().equals("")) {
                 if (bellPressed) {
 
                     if (bellCount == 0) {
@@ -1079,9 +1076,8 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
                 } else {
                     bellCount = 0;
                 }
-                break;
+
             }
-        }
 
         /*
         * for (EnumSounds sounds : EnumSounds.values()) {

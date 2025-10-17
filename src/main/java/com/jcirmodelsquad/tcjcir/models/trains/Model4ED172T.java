@@ -1500,8 +1500,17 @@ public class Model4ED172T extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.87, 0, 0);
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1126){
-			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/golftruck_Black.png"));
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/golftruck2_Black.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslated(-1.43, -0.00, 0);
+			theG.render(entity, f, f1, f2, f3, f4, f5);
+
+			GL11.glTranslated(2.87, 0, 0);
+			theG.render(entity, f, f1, f2, f3, f4, f5);
+			GL11.glPopMatrix();
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/golftruck2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.43, -0.00, 0);
 			theG.render(entity, f, f1, f2, f3, f4, f5);

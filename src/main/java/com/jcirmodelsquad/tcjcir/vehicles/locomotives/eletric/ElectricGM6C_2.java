@@ -16,9 +16,16 @@ import train.common.api.ElectricTrain;
 import train.common.entity.CargoManager;
 import train.common.entity.CargoSpecification;
 import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class ElectricGM6C_2 extends ElectricTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.ElectricGM6C_2;
+    }
     public ElectricGM6C_2(World world) {
         super(world);
         InsertTexture(0, "EMDX Demo");

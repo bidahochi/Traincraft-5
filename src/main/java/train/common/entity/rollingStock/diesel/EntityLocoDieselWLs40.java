@@ -12,10 +12,18 @@ import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumHeritageTrainsLegacy;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoDieselWLs40 extends DieselTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.locoDieselWLs40;
+	}
+
 	public EntityLocoDieselWLs40(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoDieselWLs40.getTankCapacity(), LiquidManager.dieselFilter());
 		initLoco();
@@ -40,15 +48,6 @@ public class EntityLocoDieselWLs40 extends DieselTrain {
 	@Override
 	public void updateRiderPosition() {
 		TraincraftUtil.updateRider(this, 0, 0.5f);
-	}
-
-	
-
-	@Override
-	public void pressKey(int i) {
-		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		}
 	}
 
 	@Override

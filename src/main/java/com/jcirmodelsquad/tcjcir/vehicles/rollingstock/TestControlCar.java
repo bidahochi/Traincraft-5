@@ -6,10 +6,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.AbstractControlCar;
 import train.common.api.IPassenger;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
+import train.common.library.sounds.SoundRecord;
 
 public class TestControlCar extends AbstractControlCar {
 
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.TestControlCar;
+	}
 	public TestControlCar(World world) {
 		super(world);
 	}

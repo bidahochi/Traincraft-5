@@ -1,5 +1,6 @@
 package train.common.api;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -10,10 +11,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import train.common.Traincraft;
 import train.common.api.LiquidManager.StandardTank;
 import train.common.entity.rollingStock.EntityBUnitDD35;
 import train.common.entity.rollingStock.EntityBUnitEMDF3;
 import train.common.entity.rollingStock.EntityBUnitEMDF7;
+import train.common.library.GuiIDs;
 
 public abstract class DieselTrain extends Locomotive implements IFluidHandler {
 
@@ -70,6 +73,13 @@ public abstract class DieselTrain extends Locomotive implements IFluidHandler {
 					//System.out.println(this.getTrainName());
 				}//oopsi fuckin poopsi
 			}
+		}
+	}
+
+	@Override
+	public final void pressKey(int i) {
+		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
+			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 		}
 	}
 

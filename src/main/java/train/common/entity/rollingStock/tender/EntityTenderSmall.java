@@ -89,17 +89,7 @@ public class EntityTenderSmall extends Tender implements IInventory {
 		return freightInventorySize;
 	}
 
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!this.worldObj.isRemote) {
-			entityplayer.openGui(Traincraft.instance, GuiIDs.TENDER, worldObj, this.getEntityId(), -1, (int) this.posZ);
-		}
-		return true;
-	}
+	
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 0.8F;

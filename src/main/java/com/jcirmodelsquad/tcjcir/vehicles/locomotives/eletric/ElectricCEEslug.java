@@ -10,9 +10,18 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
 import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
-public class ElectricCEEslug extends ElectricTrain {
+public class ElectricCEEslug extends ElectricTrain
+{
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.ElectricCEESlug;
+    }
+
     public ElectricCEEslug(World world) {
         super(world);
         InsertTexture(0, "NEP SUB-4");

@@ -12,8 +12,10 @@ import train.common.api.DieselTrain;
 import train.common.api.ElectricTrain;
 import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoElectricBP4 extends ElectricTrain {
 	public EntityLocoElectricBP4(World world) {
@@ -23,6 +25,12 @@ public class EntityLocoElectricBP4 extends ElectricTrain {
 		InsertTexture(2, "FURRX (Former OWO)");
 		InsertTexture(3, "FURRX");
 		InsertTexture(4, "eat at clydes upriver diner or i will personally murder you");
+	}
+
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return EnumSounds.locoElectricBP4;
 	}
 
 	public EntityLocoElectricBP4(World world, double d, double d1, double d2) {

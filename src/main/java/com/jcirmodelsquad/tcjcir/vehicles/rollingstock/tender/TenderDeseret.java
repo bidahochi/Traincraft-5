@@ -40,11 +40,7 @@ public class TenderDeseret extends Tender implements IInventory {
         prevPosZ = d2;
     }
 
-    @Override
-    public void setDead() {
-        super.setDead();
-        isDead = true;
-    }
+    
 
     @Override
     public void onUpdate() {
@@ -90,18 +86,6 @@ public class TenderDeseret extends Tender implements IInventory {
     @Override
     public int getSizeInventory() {
         return freightInventorySize;
-    }
-
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!this.worldObj.isRemote) {
-            entityplayer.openGui(Traincraft.instance, GuiIDs.TENDER, worldObj, this.getEntityId(), -1, (int) this.posZ);
-        }
-        return true;
     }
 
     @Override

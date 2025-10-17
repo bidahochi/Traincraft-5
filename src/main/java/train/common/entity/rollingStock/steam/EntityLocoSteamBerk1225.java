@@ -14,8 +14,15 @@ import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumHeritageTrainsLegacy;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class EntityLocoSteamBerk1225 extends SteamTrain {
+	@Override
+	public SoundRecord getSoundRecord()
+	{
+		return null;
+	}
+
 	public EntityLocoSteamBerk1225(World world) {
 		super(world, EnumHeritageTrainsLegacy.locosteamBerk1225.getTankCapacity(), LiquidManager.WATER_FILTER);
 		initLocoSteam();

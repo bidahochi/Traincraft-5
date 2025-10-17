@@ -10,9 +10,16 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.ElectricTrain;
 import train.common.enums.LockoutGroup;
+import train.common.library.EnumSounds;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 public class ElectricClass74 extends ElectricTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.ElectricClass74;
+    }
     public ElectricClass74(World world) {
         super(world);
         InsertTexture(0, "BR");

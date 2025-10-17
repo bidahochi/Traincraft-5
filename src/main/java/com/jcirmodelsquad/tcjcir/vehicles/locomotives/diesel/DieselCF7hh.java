@@ -10,11 +10,18 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.sounds.SoundRecord;
 
 
 public class DieselCF7hh extends DieselTrain {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.DieselCF7HH;
+    }
     public DieselCF7hh(World world) {
         super(world, EnumTrains.CF7hh.getTankCapacity(), LiquidManager.dieselFilter());
         initLoco();
@@ -73,17 +80,6 @@ public class DieselCF7hh extends DieselTrain {
         }
         if (pitchRads > -1.01 && pitchRads < 1.01) {
             riddenByEntity.setPosition(bogieX1, pitch, bogieZ1 +0.0);
-        }
-    }
-
-
-
-
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-
         }
     }
 

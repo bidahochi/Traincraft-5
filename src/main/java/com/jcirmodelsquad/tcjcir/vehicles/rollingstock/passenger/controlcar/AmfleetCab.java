@@ -8,10 +8,17 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import train.common.api.AbstractControlCar;
+import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
+import train.common.library.sounds.SoundRecord;
 
 public class AmfleetCab extends AbstractControlCar
 {
+    @Override
+    public SoundRecord getSoundRecord()
+    {
+        return EnumSounds.AmfleetCab;
+    }
     public AmfleetCab(World world) {
         super(world);
         InsertTexture(0, "AMTK (Phase 3)");
