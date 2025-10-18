@@ -181,7 +181,7 @@ public class PathFindingHelper
         }
     }
 
-    private void moveOnTCDiagonalSlope(EntityMinecart abstractTrains, int j, double cx, double cz, double slopeAngle, double slopeHeight, int meta, double slopeLength) {
+    public void moveOnTCDiagonalSlope(EntityMinecart abstractTrains, int j, double cx, double cz, double slopeAngle, double slopeHeight, int meta, double slopeLength) {
         double X_OFFSET = 0.5;
         double Z_OFFSET = 1.5;
         double delta = Math.hypot(Math.abs(cz - abstractTrains.posZ),Math.abs(cx - abstractTrains.posX));
@@ -223,10 +223,11 @@ public class PathFindingHelper
         abstractTrains.motionZ = (directionZ / distanceNorm) * norm;
         abstractTrains.boundingBox.offset(Math.copySign(abstractTrains.motionX, abstractTrains.motionX), 0, Math.copySign(abstractTrains.motionZ, abstractTrains.motionZ)); // keep the entity from reversing on itself by using the main entities motion for sign.
 
-		/*List boxes = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox);
+        //not sure what this is supposed to do. It works without it so...
+		/*List boxes = abstractTrains.worldObj.getCollidingBoundingBoxes(abstractTrains, abstractTrains.boundingBox);
 		for(Object b : boxes){
 			if(!(b instanceof BlockRailBase) && !(b instanceof BlockTCRail) && !(b instanceof BlockTCRailGag) && !(b instanceof BlockAir)){
-				return;
+                return;
 			}
 		}*/
         abstractTrains.posX = (abstractTrains.boundingBox.minX + abstractTrains.boundingBox.maxX) / 2.0D;

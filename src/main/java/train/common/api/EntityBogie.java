@@ -671,7 +671,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 	private void moveOnTCSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
 		if (meta > 3) {
-			moveOnTCDiagonalSlope(j, cx, cz, slopeAngle, slopeHeight, slopeLength, meta);
+			pathFindingHelper.moveOnTCDiagonalSlope(this, j, cx, cz, slopeAngle, slopeHeight, meta, slopeLength);
 			return;
 		}
 		boolean alongZ = meta == 0 || meta == 2;
@@ -700,59 +700,6 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		this.motionX = alongZ ? 0.0D : Math.copySign(norm, this.motionX);
 		this.motionY = 0;
 		this.motionZ = alongZ ? Math.copySign(norm, this.motionZ) : 0.0D;
-	}
-
-	private void moveOnTCDiagonalSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
-		double X_OFFSET = 0.5;
-		double Z_OFFSET = 1.5;
-		double delta = Math.hypot(Math.abs(cz - this.posZ),Math.abs(cx - this.posX));
-		double Y_OFFSET = Math.abs(j + (Math.tan(slopeAngle) * delta) + this.yOffset + 0.2);
-		Y_OFFSET = derailCheck(cx, Y_OFFSET, cz);
-
-		this.setPosition(this.posX, Y_OFFSET, this.posZ); //change our Y-offset before moving on the diagonal
-		double exitX = 0;
-		double exitZ = 0;
-		double directionX;
-		double directionZ;
-		double norm = Math.sqrt(this.entityMainTrain.motionX * this.entityMainTrain.motionX + this.entityMainTrain.motionZ * this.entityMainTrain.motionZ);
-		double distanceNorm;
-
-		switch (meta)
-		{
-			case 6:
-				exitX = (this.entityMainTrain.motionX > 0) ? cx + slopeLength + X_OFFSET : cx - X_OFFSET;
-				exitZ = (this.entityMainTrain.motionX > 0) ? cz - slopeLength + X_OFFSET : cz + Z_OFFSET;
-				break;
-			case 4:
-				exitX = (this.entityMainTrain.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength - X_OFFSET);
-				exitZ = (this.entityMainTrain.motionX > 0) ? cz - X_OFFSET : cz + (slopeLength + X_OFFSET);
-				break;
-			case 5:
-				exitX = (this.entityMainTrain.motionX > 0) ? cx + Z_OFFSET : cx - (slopeLength + X_OFFSET);
-				exitZ = (this.entityMainTrain.motionX > 0) ? cz + Z_OFFSET : cz - (slopeLength + X_OFFSET);
-				break;
-			case 7:
-				exitX = (this.entityMainTrain.motionX > 0) ? cx + (slopeLength + X_OFFSET) : cx - X_OFFSET;
-				exitZ = (this.entityMainTrain.motionX > 0) ? cz + (slopeLength + X_OFFSET) : cz - X_OFFSET;
-				break;
-		}
-
-		directionX = exitX - this.posX;
-		directionZ = exitZ - this.posZ;
-		distanceNorm = Math.sqrt(directionX * directionX + directionZ * directionZ);
-		this.motionX = (directionX / distanceNorm) * norm;
-		this.motionZ = (directionZ / distanceNorm) * norm;
-		this.boundingBox.offset(Math.copySign(this.motionX, this.entityMainTrain.motionX), 0, Math.copySign(this.motionZ, this.entityMainTrain.motionZ)); // keep the entity from reversing on itself by using the main entities motion for sign.
-
-		/*List boxes = this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox);
-		for(Object b : boxes){
-			if(!(b instanceof BlockRailBase) && !(b instanceof BlockTCRail) && !(b instanceof BlockTCRailGag) && !(b instanceof BlockAir)){
-				return;
-			}
-		}*/
-		this.posX = (this.boundingBox.minX + this.boundingBox.maxX) / 2.0D;
-		this.posY = this.boundingBox.minY + (double)this.yOffset - (double)this.ySize;
-		this.posZ = (this.boundingBox.minZ + this.boundingBox.maxZ) / 2.0D;
 	}
 
 	private void moveOnNewTC90TurnRail(int j,double r, double cx, double cz){
