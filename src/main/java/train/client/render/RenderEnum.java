@@ -18,6 +18,7 @@ import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.passenger.funny.*;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tanker.*;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.*;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.workcart.*;
+import net.minecraft.util.ResourceLocation;
 import tmt.ModelBase;
 import train.client.render.models.*;
 import train.common.api.AbstractTrains;
@@ -32,10 +33,12 @@ import train.common.entity.rollingStock.steam.*;
 import train.common.entity.rollingStock.tanker.*;
 import train.common.entity.rollingStock.tender.*;
 import train.common.entity.rollingStock.workcart.*;
+import train.common.library.ITrainRenderRecord;
+import train.common.library.Info;
 
 import java.util.ArrayList;
 
-public enum RenderEnum
+public enum RenderEnum implements ITrainRenderRecord
 {
 	fallback(ERatedForEveryone.class, new ModelThisErrorIsERatedForEveryone(), "Skin_Plane_ThisErrorIsERatedForEveryone", false, new float[] { 0.0F, -0.47F, 0.0F }, null, new float[] { 5F, 5F, 5F }, "", 0, null, "", null, 0, false),
 
@@ -2492,5 +2495,24 @@ public enum RenderEnum
 
 	public int getExplosionFXIterations() {
 		return explosionFXIterations;
+	}
+
+	public ResourceLocation getTextureFile(String colorAsString)
+	{
+		if (this.getIsMultiTextured())
+		{
+			if (this.isInsideFolder())
+			{
+				return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + this.getTexture() + "/" + this.getTexture() + colorAsString + ".png");
+			}
+			else
+			{
+				return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + this.getTexture() + colorAsString + ".png");
+			}
+		}
+		else
+		{
+			return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + this.getTexture() + ".png");
+		}
 	}
 }

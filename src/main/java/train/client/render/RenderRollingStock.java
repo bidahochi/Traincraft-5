@@ -15,6 +15,7 @@ import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
 import train.common.entity.rollingStock.EntityTracksBuilder;
+import train.common.library.ITrainRenderRecord;
 import train.common.library.Info;
 import train.common.overlaytexture.OverlayTextureManager;
 
@@ -221,7 +222,7 @@ public class RenderRollingStock extends Render {
 			GL11.glRotatef(angle, 1.0F, 0.0F, 0.0F);
 		}
 
-		RenderEnum renders = cart.getRenderSpec();
+		ITrainRenderRecord renders = cart.getRenderSpec();
 		try {
 			Method theTransMethod = renders.getModel().getClass().getDeclaredMethod("getTrans");
 			float[] theTrans = (float[]) theTransMethod.invoke(renders.getModel());
@@ -262,7 +263,7 @@ public class RenderRollingStock extends Render {
 
 		}
 		if (!cart.acceptsOverlayTextures() || cart.getOverlayTextureContainer().getType() == OverlayTextureManager.Type.NONE) {
-			Tessellator.bindTexture(getResourceFile(renders, cart));
+			Tessellator.bindTexture(renders.getTextureFile(cart.getColorAsString()));
 		} else {
 			if (cart.getOverlayTextureContainer().markedForUpdate) {
 				cart.getOverlayTextureContainer().renderTexture();
@@ -311,24 +312,6 @@ public class RenderRollingStock extends Render {
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
-	}
-
-	private static ResourceLocation getResourceFile(RenderEnum renderEnumEntry, EntityRollingStock cart) {
-		if (renderEnumEntry.getIsMultiTextured())
-		{
-			if (renderEnumEntry.isInsideFolder())
-			{
-				return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + renderEnumEntry.getTexture() + "/" + renderEnumEntry.getTexture() + cart.getColorAsString() + ".png");
-			}
-			else
-			{
-				return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + renderEnumEntry.getTexture() + cart.getColorAsString() + ".png");
-			}
-		}
-		else
-		{
-			return new ResourceLocation(Info.resourceLocation, Info.trainsPrefix + renderEnumEntry.getTexture() + ".png");
-		}
 	}
 
 	private static void renderSmokeFX(EntityRollingStock cart, float yaw, float pitch, String smokeType, ArrayList<double[]> smokeFX, int smokeIterations, float time, boolean hasSmokeOnSlopes) {
@@ -434,8 +417,10 @@ public class RenderRollingStock extends Render {
 
 	public static ResourceLocation getTexture(Entity entity)
 	{
-		RenderEnum renderEnumEntry = ((AbstractTrains) entity).getRenderSpec();
-		return getResourceFile(renderEnumEntry, (EntityRollingStock) entity);
+		EntityRollingStock entityStock = (EntityRollingStock) entity;
+		ITrainRenderRecord renderEnumEntry = entityStock.getRenderSpec();
+
+		return renderEnumEntry.getTextureFile(entityStock.getColorAsString());
 
 	}
 

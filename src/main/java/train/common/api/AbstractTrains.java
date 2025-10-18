@@ -41,6 +41,7 @@ import train.common.items.ItemChunkLoaderActivator;
 import train.common.items.ItemRollingStock;
 import train.common.items.ItemWrench;
 import train.common.library.ITrainRecord;
+import train.common.library.ITrainRenderRecord;
 import train.common.overlaytexture.OverlayTextureManager;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
@@ -81,7 +82,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	 * A reference to EnumTrains containing all spec for this specific train
 	 */
 	protected ITrainRecord trainSpec;
-	private RenderEnum renderSpec;
+	private ITrainRenderRecord renderSpec;
 	/**
 	 * The name of the train based on the item name
 	 */
@@ -249,19 +250,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	{
 		if (worldObj.isRemote)
 		{
-			for (RenderEnum render : train.client.render.RenderEnum.values())
-			{
-				if (render.getEntityClass().equals(this.getClass())) {
-					renderSpec = render;
-					break;
-				}
-			}
-
-			if (renderSpec == null)
-			{
-				renderSpec = RenderEnum.fallback;
-				Traincraft.tcLog.log(Level.ERROR, "ERROR RENDER ENUM IS MISSING FOR " + this.getClass().getName());
-			}
+			renderSpec = Traincraft.traincraftRegistry.getTrainRenderRecord(this.getClass());
 		}
 	}
 
@@ -1132,7 +1121,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 		this.cargoManager = cargoManager;
 	}
 
-	public RenderEnum getRenderSpec()
+	public ITrainRenderRecord getRenderSpec()
 	{
 		if (renderSpec == null)
 		{

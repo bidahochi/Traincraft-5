@@ -2,6 +2,9 @@ package train.common.library;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.Level;
+import train.client.render.RenderEnum;
+import train.common.Traincraft;
 import train.common.api.AbstractTrains;
 import train.common.library.sounds.TrainSoundRecord;
 
@@ -22,7 +25,6 @@ public class TraincraftRegistry
     private Map<Item, ITrainRecord> trainRecordsByItem = new HashMap<>();
 
     private Map<Class<?>, ITrainRenderRecord> trainRenderRecords = new HashMap<>();
-    private List<TrainSoundRecord> trainSoundRecords = new ArrayList<>();
 
     public void RegisterRollingStock(Item item, ITrainRecord trainRecord, ITrainRenderRecord trainRenderRecord)
     {
@@ -96,6 +98,25 @@ public class TraincraftRegistry
         }
 
         return null;
+    }
+
+    public ITrainRenderRecord getTrainRenderRecord(Class<?> entityClass)
+    {
+        for (RenderEnum render : train.client.render.RenderEnum.values())
+        {
+            if (render.getEntityClass().equals(entityClass))
+            {
+                return render;
+            }
+        }
+
+        if (trainRenderRecords.containsKey(entityClass))
+        {
+            return trainRenderRecords.get(entityClass);
+        }
+
+        Traincraft.tcLog.log(Level.ERROR, "ERROR RENDER ENUM IS MISSING FOR " + entityClass.getName());
+        return RenderEnum.fallback;
     }
 
     public AbstractTrains getEntity(Class entityClass, World world)
