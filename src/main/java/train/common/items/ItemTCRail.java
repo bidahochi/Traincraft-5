@@ -295,16 +295,23 @@ public class ItemTCRail extends ItemPart {
 		y = getPlacementHeight(world, x, y, z);
 
 		ItemTCRail item = (ItemTCRail) itemStack.getItem();
-		int facing0 = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		int facing0 = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double(((player.rotationYaw) * 8.0F / 360.0F + 0.5D)) & 7);
 		Vector2f dir0 = ItemTCRail.getDirectionVector(facing0);
 
 		float yaw = MathHelper.wrapAngleTo180_float(player.rotationYaw);
 		boolean isLeftTurn = item.getTrackOrientation( facing0, yaw ).equals("left");
 		int facing1 = isLeftTurn ? (facing0 + 4 - 1)%4 : (facing0 + 1)%4;
 		Vector2f dir1 = getDirectionVector( facing1 );
-
-		int[][] trackPositions = type.getUsedSpaceFromType(player);
-
+		int[][] trackPositions;
+		tempType = null;
+		if (type.getRailType() == TCRailTypes.RailTypes.DIAGONAL || type.getRailType() == TCRailTypes.RailTypes.STRAIGHT) {
+			tempType = getPlacementDirection(player, world, facing0, 0);
+			trackPositions = tempType.getUsedSpaceFromType(player);
+		}
+		else {
+			trackPositions = type.getUsedSpaceFromType(player);
+		}
+		
 		if ( trackPositions != null )
 		{
 
@@ -2528,511 +2535,508 @@ public class ItemTCRail extends ItemPart {
 
 	private EnumTracks getPlacementDirection(EntityPlayer player, World world, int l, float par10)
 	{
-		if (!world.isRemote)
+		tempType = type;
+
+		int facing = getFacing(player, par10);
+		if (TCRailTypes.RailTypes.STRAIGHT.equals(type.getRailType()))
 		{
-			tempType = type;
-
-			int facing = getFacing(player, par10);
-			if (TCRailTypes.RailTypes.STRAIGHT.equals(type.getRailType()))
+			if (facing == 6 || facing == 4 || facing == 7 || facing == 5)
 			{
-				if (facing == 6 || facing == 4 || facing == 7 || facing == 5)
+				switch (type)
 				{
-					switch (type)
-					{
-						case SMALL_STRAIGHT:
-							tempType = EnumTracks.SMALL_DIAGONAL_STRAIGHT;
-							break;
-						case MEDIUM_STRAIGHT:
-							tempType = EnumTracks.MEDIUM_DIAGONAL_STRAIGHT;
-							break;
-						case LONG_STRAIGHT:
-							tempType = EnumTracks.LONG_DIAGONAL_STRAIGHT;
-							break;
-						case VERY_LONG_STRAIGHT:
-							tempType = EnumTracks.VERY_LONG_DIAGONAL_STRAIGHT;
-							break;
-						case EMBEDDED_SMALL_STRAIGHT:
-							tempType = EnumTracks.EMBEDDED_SMALL_DIAGONAL_STRAIGHT;
-							break;
-						case EMBEDDED_MEDIUM_STRAIGHT:
-							tempType = EnumTracks.EMBEDDED_MEDIUM_DIAGONAL_STRAIGHT;
-							break;
-						case EMBEDDED_LONG_STRAIGHT:
-							tempType = EnumTracks.EMBEDDED_LONG_DIAGONAL_STRAIGHT;
-							break;
-						case EMBEDDED_VERY_LONG_STRAIGHT:
-							tempType = EnumTracks.EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT;
-							break;
-					}
-					return tempType;
+					case SMALL_STRAIGHT:
+						tempType = EnumTracks.SMALL_DIAGONAL_STRAIGHT;
+						break;
+					case MEDIUM_STRAIGHT:
+						tempType = EnumTracks.MEDIUM_DIAGONAL_STRAIGHT;
+						break;
+					case LONG_STRAIGHT:
+						tempType = EnumTracks.LONG_DIAGONAL_STRAIGHT;
+						break;
+					case VERY_LONG_STRAIGHT:
+						tempType = EnumTracks.VERY_LONG_DIAGONAL_STRAIGHT;
+						break;
+					case EMBEDDED_SMALL_STRAIGHT:
+						tempType = EnumTracks.EMBEDDED_SMALL_DIAGONAL_STRAIGHT;
+						break;
+					case EMBEDDED_MEDIUM_STRAIGHT:
+						tempType = EnumTracks.EMBEDDED_MEDIUM_DIAGONAL_STRAIGHT;
+						break;
+					case EMBEDDED_LONG_STRAIGHT:
+						tempType = EnumTracks.EMBEDDED_LONG_DIAGONAL_STRAIGHT;
+						break;
+					case EMBEDDED_VERY_LONG_STRAIGHT:
+						tempType = EnumTracks.EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT;
+						break;
 				}
+				return tempType;
 			}
-			else if (TCRailTypes.RailTypes.CROSSING.equals(type.getRailType()))
+		}
+		else if (TCRailTypes.RailTypes.CROSSING.equals(type.getRailType()))
+		{
+			if (facing == 6 || facing == 4 || facing == 7 || facing == 5)
 			{
-				if (facing == 6 || facing == 4 || facing == 7 || facing == 5)
+				switch (type)
 				{
-					switch (type)
-					{
-						case TWO_WAYS_CROSSING:
-							tempType = EnumTracks.DIAGONAL_TWO_WAYS_CROSSING;
-							break;
-						case EMBEDDED_TWO_WAYS_CROSSING:
-							tempType = EnumTracks.EMBEDDED_DIAGONAL_TWO_WAYS_CROSSING;
-							break;
-					}
-					return tempType;
+					case TWO_WAYS_CROSSING:
+						tempType = EnumTracks.DIAGONAL_TWO_WAYS_CROSSING;
+						break;
+					case EMBEDDED_TWO_WAYS_CROSSING:
+						tempType = EnumTracks.EMBEDDED_DIAGONAL_TWO_WAYS_CROSSING;
+						break;
 				}
+				return tempType;
 			}
-			else if (TCRailTypes.RailTypes.SLOPE.equals(type.getRailType())) {
-				if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
-					switch (type) {
-						case SLOPE_1X3_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X3_DYNAMIC_DIAGONAL;
-							break;
-						case EMBEDDED_SLOPE_1X3_DYNAMIC:
-							tempType = EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC_DIAGONAL;
-							break;
-						case SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X6_DYNAMIC_DIAGONAL;
-							break;
-						case EMBEDDED_SLOPE_DYNAMIC:
-							tempType = EnumTracks.EMBEDDED_SLOPE_1X6_DYNAMIC_DIAGONAL;
-							break;
-						case LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X12_DYNAMIC_DIAGONAL;
-							break;
-						case EMBEDDED_LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.EMBEDDED_SLOPE_1X12_DYNAMIC_DIAGONAL;
-							break;
-						case VERY_LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.SLOPE_1X18_DYNAMIC_DIAGONAL;
-							break;
-						case EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC:
-							tempType = EnumTracks.EMBEDDED_SLOPE_1X18_DYNAMIC_DIAGONAL;
-							break;
-					}
-					return tempType;
+		}
+		else if (TCRailTypes.RailTypes.SLOPE.equals(type.getRailType())) {
+			if (facing == 4 || facing == 5 || facing == 6 || facing == 7) {
+				switch (type) {
+					case SLOPE_1X3_DYNAMIC:
+						tempType = EnumTracks.SLOPE_1X3_DYNAMIC_DIAGONAL;
+						break;
+					case EMBEDDED_SLOPE_1X3_DYNAMIC:
+						tempType = EnumTracks.EMBEDDED_SLOPE_1X3_DYNAMIC_DIAGONAL;
+						break;
+					case SLOPE_DYNAMIC:
+						tempType = EnumTracks.SLOPE_1X6_DYNAMIC_DIAGONAL;
+						break;
+					case EMBEDDED_SLOPE_DYNAMIC:
+						tempType = EnumTracks.EMBEDDED_SLOPE_1X6_DYNAMIC_DIAGONAL;
+						break;
+					case LARGE_SLOPE_DYNAMIC:
+						tempType = EnumTracks.SLOPE_1X12_DYNAMIC_DIAGONAL;
+						break;
+					case EMBEDDED_LARGE_SLOPE_DYNAMIC:
+						tempType = EnumTracks.EMBEDDED_SLOPE_1X12_DYNAMIC_DIAGONAL;
+						break;
+					case VERY_LARGE_SLOPE_DYNAMIC:
+						tempType = EnumTracks.SLOPE_1X18_DYNAMIC_DIAGONAL;
+						break;
+					case EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC:
+						tempType = EnumTracks.EMBEDDED_SLOPE_1X18_DYNAMIC_DIAGONAL;
+						break;
 				}
+				return tempType;
 			}
+		}
 
-			/** Determines if track is left or right*/
-			float yaw = MathHelper.wrapAngleTo180_float(player!=null?player.rotationYaw:par10);
+		/** Determines if track is left or right*/
+		float yaw = MathHelper.wrapAngleTo180_float(player!=null?player.rotationYaw:par10);
 
-			if (type == EnumTracks.TURN_1X1) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.RIGHT_TURN_1X1;
+		if (type == EnumTracks.TURN_1X1) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.RIGHT_TURN_1X1;
 
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LEFT_TURN_1X1;
-				}
 			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LEFT_TURN_1X1;
+			}
+		}
 
-			if (type == EnumTracks.MEDIUM_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_TURN;
+		if (type == EnumTracks.MEDIUM_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_TURN;
 
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_TURN;
-				}
 			}
-			if (type == EnumTracks.LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_TURN;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_TURN;
 			}
-			if (type == EnumTracks.VERY_LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.VERY_LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.VERY_LARGE_LEFT_TURN;
-				}
+		}
+		if (type == EnumTracks.LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_TURN;
 			}
-			if (type == EnumTracks.SUPER_LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.SUPER_LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.SUPER_LARGE_LEFT_TURN;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_TURN;
 			}
-			if (type == EnumTracks.TURN_29X29) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.RIGHT_TURN_29X29;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LEFT_TURN_29X29;
+		}
+		if (type == EnumTracks.VERY_LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.VERY_LARGE_RIGHT_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.VERY_LARGE_LEFT_TURN;
+			}
+		}
+		if (type == EnumTracks.SUPER_LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.SUPER_LARGE_RIGHT_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.SUPER_LARGE_LEFT_TURN;
+			}
+		}
+		if (type == EnumTracks.TURN_29X29) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.RIGHT_TURN_29X29;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LEFT_TURN_29X29;
 
-				}
 			}
-			if (type == EnumTracks.TURN_32X32) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.RIGHT_TURN_32X32;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LEFT_TURN_32X32;
+		}
+		if (type == EnumTracks.TURN_32X32) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.RIGHT_TURN_32X32;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LEFT_TURN_32X32;
 
-				}
 			}
-			if (type == EnumTracks.MEDIUM_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.MEDIUM_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.VERY_LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.VERY_LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.VERY_LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.VERY_LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.VERY_LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.VERY_LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.SUPER_LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.SUPER_LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.SUPER_LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.SUPER_LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.SUPER_LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.SUPER_LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.SMALL_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.SMALL_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.SMALL_LEFT_PARALLEL_CURVE;
-				}
+		}
+		if (type == EnumTracks.SMALL_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.SMALL_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.MEDIUM_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_PARALLEL_CURVE;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.SMALL_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.LARGE_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_PARALLEL_CURVE;
-				}
+		}
+		if (type == EnumTracks.MEDIUM_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.S_CURVE_20x2) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.S_CURVE_20x2_RIGHT;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.S_CURVE_20x2_LEFT;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.MEDIUM_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_SWITCH;
-				}
+		}
+		if (type == EnumTracks.LARGE_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.LARGE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_SWITCH;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.VERY_LARGE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.VERY_LARGE_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.VERY_LARGE_LEFT_SWITCH;
-				}
+		}
+		if (type == EnumTracks.S_CURVE_20x2) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.S_CURVE_20x2_RIGHT;
 			}
-			if (type == EnumTracks.MEDIUM_PARALLEL_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_PARALLEL_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH;
-				}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.S_CURVE_20x2_LEFT;
 			}
-			if (type == EnumTracks.LARGE_PARALLEL_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_PARALLEL_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_PARALLEL_SWITCH;
-				}
+		}
+		if (type == EnumTracks.MEDIUM_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_SWITCH;
 			}
-			if (type == EnumTracks.MEDIUM_45DEGREE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.MEDIUM_RIGHT_45DEGREE_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.MEDIUM_LEFT_45DEGREE_SWITCH;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_SWITCH;
 			}
-			if (type == EnumTracks.LARGE_45DEGREE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.LARGE_RIGHT_45DEGREE_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LARGE_LEFT_45DEGREE_SWITCH;
-				}
+		}
+		if (type == EnumTracks.LARGE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_SWITCH;
 			}
-			if (type == EnumTracks.DIAGONAL_TURN_9X20) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.DIAGONAL_RIGHT_TURN_9X20;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.DIAGONAL_LEFT_TURN_9X20;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_SWITCH;
 			}
-			if (type == EnumTracks.DIAGONAL_TURN_10X22) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.DIAGONAL_RIGHT_TURN_10X22;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.DIAGONAL_LEFT_TURN_10X22;
-				}
+		}
+		if (type == EnumTracks.VERY_LARGE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.VERY_LARGE_RIGHT_SWITCH;
 			}
-			if (type == EnumTracks.EMBEDDED_TURN_1X1) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_RIGHT_TURN_1X1;
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.VERY_LARGE_LEFT_SWITCH;
+			}
+		}
+		if (type == EnumTracks.MEDIUM_PARALLEL_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_PARALLEL_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH;
+			}
+		}
+		if (type == EnumTracks.LARGE_PARALLEL_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_PARALLEL_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_PARALLEL_SWITCH;
+			}
+		}
+		if (type == EnumTracks.MEDIUM_45DEGREE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.MEDIUM_RIGHT_45DEGREE_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.MEDIUM_LEFT_45DEGREE_SWITCH;
+			}
+		}
+		if (type == EnumTracks.LARGE_45DEGREE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.LARGE_RIGHT_45DEGREE_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LARGE_LEFT_45DEGREE_SWITCH;
+			}
+		}
+		if (type == EnumTracks.DIAGONAL_TURN_9X20) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.DIAGONAL_RIGHT_TURN_9X20;
+			}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.DIAGONAL_LEFT_TURN_9X20;
+			}
+		}
+		if (type == EnumTracks.DIAGONAL_TURN_10X22) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.DIAGONAL_RIGHT_TURN_10X22;
+			}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.DIAGONAL_LEFT_TURN_10X22;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_TURN_1X1) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_RIGHT_TURN_1X1;
 
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LEFT_TURN_1X1;
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_TURN;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LEFT_TURN_1X1;
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_TURN;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_TURN;
 			}
-			if (type == EnumTracks.EMBEDDED_VERY_LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_TURN;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_TURN;
 			}
-			if (type == EnumTracks.EMBEDDED_SUPER_LARGE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_SUPER_LARGE_RIGHT_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_SUPER_LARGE_LEFT_TURN;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_TURN;
 			}
-			if (type == EnumTracks.EMBEDDED_TURN_29X29) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_RIGHT_TURN_29X29;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LEFT_TURN_29X29;
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_TURN;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_VERY_LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_TURN;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_SUPER_LARGE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_SUPER_LARGE_RIGHT_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_SUPER_LARGE_LEFT_TURN;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_TURN_29X29) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_RIGHT_TURN_29X29;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LEFT_TURN_29X29;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_TURN_32X32) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_RIGHT_TURN_32X32;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LEFT_TURN_32X32;
+		}
+		if (type == EnumTracks.EMBEDDED_TURN_32X32) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_RIGHT_TURN_32X32;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LEFT_TURN_32X32;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_VERY_LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.EMBEDDED_VERY_LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_SUPER_LARGE_45DEGREE_TURN) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_SUPER_LARGE_RIGHT_45DEGREE_TURN;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_SUPER_LARGE_LEFT_45DEGREE_TURN;
+		}
+		if (type == EnumTracks.EMBEDDED_SUPER_LARGE_45DEGREE_TURN) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_SUPER_LARGE_RIGHT_45DEGREE_TURN;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_SUPER_LARGE_LEFT_45DEGREE_TURN;
 
-				}
 			}
-			if (type == EnumTracks.EMBEDDED_DIAGONAL_TURN_9X20) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_DIAGONAL_RIGHT_TURN_9X20;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_DIAGONAL_LEFT_TURN_9X20;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_DIAGONAL_TURN_9X20) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_DIAGONAL_RIGHT_TURN_9X20;
 			}
-			if (type == EnumTracks.EMBEDDED_DIAGONAL_TURN_10X22) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_DIAGONAL_RIGHT_TURN_10X22;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_DIAGONAL_LEFT_TURN_10X22;
-				}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_DIAGONAL_LEFT_TURN_9X20;
 			}
-			if (type == EnumTracks.EMBEDDED_SMALL_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_SMALL_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_SMALL_LEFT_PARALLEL_CURVE;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_DIAGONAL_TURN_10X22) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_DIAGONAL_RIGHT_TURN_10X22;
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_PARALLEL_CURVE;
-				}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_DIAGONAL_LEFT_TURN_10X22;
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_PARALLEL_CURVE) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_PARALLEL_CURVE;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_PARALLEL_CURVE;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_SMALL_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_SMALL_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_S_CURVE_20x2) {
-				if (getTrackOrientation(l,yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_S_CURVE_20x2_RIGHT;
-				}
-				if (getTrackOrientation(l,yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_S_CURVE_20x2_LEFT;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_SMALL_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_SWITCH;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_SWITCH;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_VERY_LARGE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_SWITCH;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_PARALLEL_CURVE) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_PARALLEL_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_PARALLEL_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_PARALLEL_SWITCH;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_PARALLEL_CURVE;
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_PARALLEL_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_PARALLEL_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_PARALLEL_SWITCH;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_S_CURVE_20x2) {
+			if (getTrackOrientation(l,yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_S_CURVE_20x2_RIGHT;
 			}
-			if (type == EnumTracks.EMBEDDED_MEDIUM_45DEGREE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_45DEGREE_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_45DEGREE_SWITCH;
-				}
+			if (getTrackOrientation(l,yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_S_CURVE_20x2_LEFT;
 			}
-			if (type == EnumTracks.EMBEDDED_LARGE_45DEGREE_SWITCH) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_45DEGREE_SWITCH;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LARGE_LEFT_45DEGREE_SWITCH;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_SWITCH;
 			}
-			if (type == EnumTracks.DIAMOND_CROSSING) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.RIGHT_DIAMOND_CROSSING;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.LEFT_DIAMOND_CROSSING;
-				}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_SWITCH;
 			}
-			if (type == EnumTracks.EMBEDDED_DIAMOND_CROSSING) {
-				if (getTrackOrientation(l, yaw).equals("right")) {
-					tempType = EnumTracks.EMBEDDED_RIGHT_DIAMOND_CROSSING;
-				}
-				if (getTrackOrientation(l, yaw).equals("left")) {
-					tempType = EnumTracks.EMBEDDED_LEFT_DIAMOND_CROSSING;
-				}
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_SWITCH;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_VERY_LARGE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_VERY_LARGE_LEFT_SWITCH;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_PARALLEL_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_PARALLEL_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_PARALLEL_SWITCH;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_PARALLEL_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_PARALLEL_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_PARALLEL_SWITCH;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_MEDIUM_45DEGREE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_RIGHT_45DEGREE_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_MEDIUM_LEFT_45DEGREE_SWITCH;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_LARGE_45DEGREE_SWITCH) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_RIGHT_45DEGREE_SWITCH;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LARGE_LEFT_45DEGREE_SWITCH;
+			}
+		}
+		if (type == EnumTracks.DIAMOND_CROSSING) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.RIGHT_DIAMOND_CROSSING;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.LEFT_DIAMOND_CROSSING;
+			}
+		}
+		if (type == EnumTracks.EMBEDDED_DIAMOND_CROSSING) {
+			if (getTrackOrientation(l, yaw).equals("right")) {
+				tempType = EnumTracks.EMBEDDED_RIGHT_DIAMOND_CROSSING;
+			}
+			if (getTrackOrientation(l, yaw).equals("left")) {
+				tempType = EnumTracks.EMBEDDED_LEFT_DIAMOND_CROSSING;
 			}
 		}
 

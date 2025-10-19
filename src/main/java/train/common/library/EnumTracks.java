@@ -408,16 +408,29 @@ public enum EnumTracks
 
             case SMALL_DIAGONAL_STRAIGHT:
             case EMBEDDED_SMALL_DIAGONAL_STRAIGHT:
+                if (player.isSneaking()) {
+                    return new int[][]{ {0,0} };
+                }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}};
 
             case MEDIUM_DIAGONAL_STRAIGHT:
             case EMBEDDED_MEDIUM_DIAGONAL_STRAIGHT:
+                if (player.isSneaking()) {
+                    return new int[][]{ {0,0}, {1,0}, {0,1}, {1,1}, {2,1}, {1,2}, {2,2} };
+                }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}};
             case LONG_DIAGONAL_STRAIGHT:
             case EMBEDDED_LONG_DIAGONAL_STRAIGHT:
+                if (player.isSneaking()) {
+                    return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}};
+                }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}, {6, 5}, {5, 6}};
             case VERY_LONG_DIAGONAL_STRAIGHT:
             case EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT:
+                if (player.isSneaking()) {
+                    return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}, {6, 5}, {5, 6},
+                            {6, 6}, {6, 7}, {7, 6}, {7, 7}, {8, 7}, {7, 8}, {8, 8}, {9, 8}, {8, 9}, {9, 9}, {10, 9}, {9, 10}, {10, 10}, {11, 10}, {10, 11}, {11, 11}};
+                }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}, {6, 5}, {5, 6},
                         {6, 6}, {6, 7}, {7, 6}, {7, 7}, {8, 7}, {7, 8}, {8, 8}, {9, 8}, {8, 9}, {9, 9}, {10, 9}, {9, 10}, {10, 10}, {11, 10}, {10, 11}, {11, 11}, {12, 11}, {11, 12}};
             case MEDIUM_STRAIGHT:
