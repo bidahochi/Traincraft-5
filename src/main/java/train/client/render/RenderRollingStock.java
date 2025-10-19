@@ -296,25 +296,25 @@ public class RenderRollingStock extends Render {
 			}
 
 			if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
-				renderSmokeFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, renders.getSmokeType(), smokePosition, renders.getSmokeIterations(), time, renders.hasSmokeOnSlopes());
+				renderSmokeFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, renders.getSmokeType(), smokePosition, renders.getSmokeIterations(), time);
 			}
 			else {
-				renderSmokeFX(cart, (yaw), pitch, renders.getSmokeType(), smokePosition, renders.getSmokeIterations(), time, renders.hasSmokeOnSlopes());
+				renderSmokeFX(cart, (yaw), pitch, renders.getSmokeType(), smokePosition, renders.getSmokeIterations(), time);
 			}
 		}
 		if (renders.hasExplosion()) {
 			if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
-				renderExplosionFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, renders.getExplosionType(), renders.getExplosionFX(), renders.getExplosionFXIterations(), renders.hasSmokeOnSlopes());
+				renderExplosionFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, renders.getExplosionType(), renders.getExplosionFX(), renders.getExplosionFXIterations());
 			}
 			else {
-				renderExplosionFX(cart, yaw, pitch, renders.getExplosionType(), renders.getExplosionFX(), renders.getExplosionFXIterations(), renders.hasSmokeOnSlopes());
+				renderExplosionFX(cart, yaw, pitch, renders.getExplosionType(), renders.getExplosionFX(), renders.getExplosionFXIterations());
 			}
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 	}
 
-	private static void renderSmokeFX(EntityRollingStock cart, float yaw, float pitch, String smokeType, ArrayList<double[]> smokeFX, int smokeIterations, float time, boolean hasSmokeOnSlopes) {
+	private static void renderSmokeFX(EntityRollingStock cart, float yaw, float pitch, String smokeType, ArrayList<double[]> smokeFX, int smokeIterations, float time) {
 		if(cart instanceof Locomotive && !((Locomotive)cart).isLocoTurnedOn()){return;}
 		if(Math.abs(pitch)>30)return;
 		//if (pitch != 0 && !hasSmokeOnSlopes) { return; }
@@ -364,7 +364,7 @@ public class RenderRollingStock extends Render {
 	}
 
 
-	private static void renderExplosionFX(EntityRollingStock cart, float yaw, float pitch, String explosionType, ArrayList<double[]> explosionFX, int explosionFXIterations, boolean hasSmokeOnSlopes) {
+	private static void renderExplosionFX(EntityRollingStock cart, float yaw, float pitch, String explosionType, ArrayList<double[]> explosionFX, int explosionFXIterations) {
 		if(cart instanceof Locomotive && !((Locomotive)cart).isLocoTurnedOn())return;
 		float yawMod = yaw % 360;
 		double pitchRads = Math.toDegrees(pitch);

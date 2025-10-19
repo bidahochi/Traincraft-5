@@ -1,5 +1,6 @@
 package train.common.library;
 
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
@@ -26,11 +27,24 @@ public class TraincraftRegistry
 
     private Map<Class<?>, ITrainRenderRecord> trainRenderRecords = new HashMap<>();
 
-    public void RegisterRollingStock(Item item, ITrainRecord trainRecord, ITrainRenderRecord trainRenderRecord)
+    /**
+     * DO NOT TOUCH THIS
+     */
+    public static int trainID = 32;
+    /**
+     *
+     * @param item train item record
+     * @param trainRecord train record
+     * @param trainRenderRecord render record
+     * @param mod Instance of mod
+     */
+    public void RegisterRollingStock(Item item, ITrainRecord trainRecord, ITrainRenderRecord trainRenderRecord, Object mod)
     {
         trainRecordsByItem.put(item, trainRecord);
         trainRecords.add(trainRecord);
         trainRenderRecords.put(trainRenderRecord.getEntityClass(), trainRenderRecord);
+
+        EntityRegistry.registerModEntity(trainRecord.getEntityClass(), trainRecord.getInternalName(), trainID, mod, 512, 1, true);
     }
 
     public AbstractTrains getEntityWithItem(Item item, World world, double x, double y, double z)

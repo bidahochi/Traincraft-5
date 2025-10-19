@@ -69,7 +69,7 @@ public enum EnumTrains implements ITrainRecord
 	PMNandN1("PMNandN1", SteamPMNandN1.class, ItemIDs.minecartPMNandN1.item,"steam", 3000, 113, 0, 80, 100, 200, 0.65, 0.6, 6000, TraincraftUtil.getBytesFromColors(new String[] {"LightGrey", "Yellow", "Grey", "Orange", "White"}), 12, -3.6 ),
 
 	Alco0_6_0T("Alco0-6-0T", SteamAlco0_6_0T.class, ItemIDs.minecartAlco0_6_0T.item, "steam", 360,50,0,50,160,120,0.7,0.8,8000, TraincraftUtil.getBytesFromColors(new String[] {"Black", "Green", "Purple"}),15,-1.2),
-	Brank("Brank2-6-2T", SteamBrank.class, ItemIDs.minecartBrank.item, "steam", 360,50,0,50,160,120,0.7,0.8,8000, TraincraftUtil.getBytesFromColors(new String[] {"Green"}),15,-1.0),
+	Brank("Brank2-6-2T", SteamBrank.class, ItemIDs.minecartBrank.item, "steam", 360,50,0,50,160,120,0.7,0.8,8000, TraincraftUtil.getBytesFromColors(new String[] {"Green"}),17,-1.0),
 	Lima2_8_0("Lima2-8-0", SteamLima2_8_0.class, ItemIDs.minecartLima2_8_0.item, "steam", 1250,65,0,90,130,160,0.7,0.75,3000, TraincraftUtil.getBytesFromColors(new String[] {"Black", "Green", "Lime", "Grey", "Yellow", "Red"}),16,-1.65),
 	TenderLima2_8_0("TenderLima2_8_0", TenderLima2_8_0.class, ItemIDs.minecartTenderLima2_8_0.item,"tender",0,0,3,0,0,0,0,0,26000, TraincraftUtil.getBytesFromColors(new String[] {"Black", "Green", "Yellow", "Red"}),18,0,(new String[] {"Water capacity: 26000mb."})),
 
@@ -187,7 +187,7 @@ public enum EnumTrains implements ITrainRecord
 	U30C("U30C", DieselU30C.class, ItemIDs.minecartU30C.item, "diesel", 3000, 113, 0, 20, 0, 200, 0.7, 0.88, 21000, TraincraftUtil.getBytesFromColors(new String[] {"Green", "LightGrey", "Cyan", "Grey", "Skin17", "Skin18", "Lime", "Orange", "Skin19", "Skin20", "Yellow", "Skin21", "Skin22", "Skin23", "Skin24" }), 12, -3.3),
 	SF30C("SF30C", DieselSF30C.class, ItemIDs.minecartSF30C.item, "diesel", 3000, 121, 0, 20, 0, 200, 0.7, 0.8, 21000, TraincraftUtil.getBytesFromColors(new String[] {"Yellow", "Red"}), 12, -4.3),
 	U36C("U36C", DieselU36C.class, ItemIDs.minecartU36C.item, "diesel", 3600, 113, 0, 20, 0, 200, 0.75, 0.84, 21000, TraincraftUtil.getBytesFromColors(new String[] {"Grey", "Blue", "Red", "Yellow", "Orange", "Cyan"}), 12, -3.75),
-	U50("U50", DieselU50.class, ItemIDs.minecartU50.item, "diesel", 5000, 110, 0, 10, 0, 200, 0.8, 0.85, 15000, TraincraftUtil.getBytesFromColors(new String[]{"Yellow", "Red", "LightGrey","LightGrey", "Skin16", "Skin17", "Black", "Skin18"}), 10, -4.35),
+	U50("U50", DieselU50.class, ItemIDs.minecartU50.item, "diesel", 5000, 110, 0, 10, 0, 200, 0.8, 0.85, 15000, TraincraftUtil.getBytesFromColors(new String[]{"Yellow", "Red", "LightGrey", "Skin16", "Skin17", "Black", "Skin18"}), 10, -4.35),
 	U56("U56", DieselU56.class, ItemIDs.minecartU56.item, "diesel", 5600, 110, 0, 10, 0, 200, 0.8, 0.85, 15000, TraincraftUtil.getBytesFromColors(new String[]{"Cyan", "Skin16"}), 10, -4.35),
 
 	SB18R("SB18R", DieselSB18R.class, ItemIDs.minecartSB18R.item, "diesel", 1800, 113, 0, 30, 0, 200, 0.7, 0.88, 10000, TraincraftUtil.getBytesFromColors(new String[] {"LightGrey", "Grey", "Green", "Skin17", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26"}), 16, -2.6),
@@ -226,7 +226,7 @@ public enum EnumTrains implements ITrainRecord
 	P42("P42", DieselP42.class, ItemIDs.minecartP42.item, "diesel", 4250, 177, 0, 30, 0, 175, 0.93, 0.84, 15000, TraincraftUtil.getBytesFromColors(new String[] {"Black", "Cyan", "Skin16", "Blue"}), 10, -3.5),
 
 	//CEE (pre GE)
-	CEE4ED172T("4ED172T", Diesel4ED172T.class, ItemIDs.minecart4ED172T.item, "diesel", 1725, 95, 0, 25, 0, 200, 0.74, 0.91, 16000, TraincraftUtil.getBytesFromColors(new String[] {"Pink", "Cyan", "Orange", "Black", "LightGrey", "Skin16", "Skin17", "Green", "Grey"}), 14, -2.85),
+	CEE4ED172T("4ED172T", Diesel4ED172T.class, ItemIDs.minecart4ED172T.item, "diesel", 1725, 95, 0, 25, 0, 200, 0.74, 0.91, 16000, TraincraftUtil.getBytesFromColors(new String[] {"Pink", "Cyan", "Orange", "Black", "LightGrey", "Skin16", "Skin17", "Green", "Grey", "Skin18", "Skin19", "Skin20"}), 14, -2.85),
 	CEE4ED172T_E("4ED172T_E", Diesel4ED172T_E.class, ItemIDs.minecart4ED172T_E.item, "diesel", 1500, 95, 0, 50, 0, 175, 0.8, 0.91, 16000, TraincraftUtil.getBytesFromColors(new String[] {"Purple", "LightGrey", "Orange"}), 14, -2.85),
 	CEE4ED172T_G("4ED172T_G", Diesel4ED172T_G.class, ItemIDs.minecart4ED172T_G.item, "diesel", 1800, 95, 0, 25, 0, 210, 0.68, 0.91, 16000, TraincraftUtil.getBytesFromColors(new String[] {"Lime", "LightGrey"}), 14, -2.85),
 	CEE4ED172T_C("4ED172T_C", Diesel4ED172T_C.class, ItemIDs.minecart4ED172T_C.item, "diesel", 1200, 95, 0, 30, 0, 125, 0.7, 0.89, 16000, TraincraftUtil.getBytesFromColors(new String[] {"Yellow", "LightGrey", "Purple"}), 14, -2.85),
@@ -543,7 +543,7 @@ public enum EnumTrains implements ITrainRecord
 
 	//or as i like to call it the cabussy//
 	WVcaboose("WVcaboose",WVcaboose.class, ItemIDs.minecartWVcaboose.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"Red", "Green", "Lime", "Cyan", "White", "Purple", "Skin16"}), 16, 0, null),
-	HBC1C("HBC1C", HBC1Cboose.class, ItemIDs.minecartHBC1Ccaboose.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"Red", "Purple", "Magenta", "Skin18"}), 16, 0, null),
+	HBC1C("HBC1C", HBC1Cboose.class, ItemIDs.minecartHBC1Ccaboose.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"Red", "Purple", "Magenta", "Skin18", "Skin19"}), 16, 0, null),
 	HBC1B("HBC1B", HBC1Bboose.class, ItemIDs.minecartHBC1Bcaboose.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"Red", "Blue", "Pink", "Purple", "Green", "Skin17", "Skin18"}), 16, 0, null),
 	DRGWCaboose("DRGWCaboose", DRGWboose.class, ItemIDs.minecartDRGWCaboose.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"LightGrey", "Grey", "Brown", "Green", "Lime", "Yellow", "Cyan", "Black", "White", "Magenta", "Red", "Orange", "Pink", "Skin16", "Purple"}), 16, 0, null),
 	ICC_Bobber("ICC_Bobber", com.jcirmodelsquad.tcjcir.vehicles.rollingstock.workcart.ICC_Bobber.class, ItemIDs.minecartICC_Bobber.item, "caboose", 2, TraincraftUtil.getBytesFromColors(new String[] {"Orange", "Red", "Green", "Blue"}), 16, 0, null),

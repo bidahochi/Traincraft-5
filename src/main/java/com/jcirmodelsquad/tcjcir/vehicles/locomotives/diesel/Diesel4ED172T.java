@@ -34,9 +34,9 @@ public class Diesel4ED172T extends DieselTrain {
         InsertTexture(6, "Southfield");
         InsertTexture(7, "NP (Lowey Green)");
         InsertTexture(8, "UP");
-        InsertTexture(9, "");
-        InsertTexture(10, "");
-        InsertTexture(11, "");
+        InsertTexture(9, "CCRL");
+        InsertTexture(10, "NSE");
+        InsertTexture(11, "SER");
         InsertTexture(12, "");
     }
     public Diesel4ED172T(World world, double d, double d1, double d2){

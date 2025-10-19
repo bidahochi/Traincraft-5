@@ -10,6 +10,7 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 
+import com.jcirmodelsquad.tcjcir.models.Modelhh6600_deets_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBluntTruck;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -966,11 +967,27 @@ public class ModelHH660 extends ModelConverter //Same as Filename
 	}
 
 	ModelBluntTruck theTrucks = new ModelBluntTruck();
+	Modelhh6600_deets_crl theDeets = new Modelhh6600_deets_crl();
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity ,f5);
+
+		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==18 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==17){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/hh660_deets_ccrl.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.0F ,-0.25F,0F);
+			theDeets.render(entity,f,f1,f2,f3,f4,f5);
+			GL11.glPopMatrix();
+
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==21){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/hh660_deets_ser.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.0F ,-0.25F,0F);
+			theDeets.render(entity,f,f1,f2,f3,f4,f5);
+			GL11.glPopMatrix();
+		}
 
 		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1453){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blunttruck_Green.png"));
@@ -988,6 +1005,4 @@ public class ModelHH660 extends ModelConverter //Same as Filename
 		theTrucks.render(entity,f,f1,f2,f3,f4,f5);
 		GL11.glPopMatrix();
 	}
-
-	public ModelRendererTurbo alcos2Model[];
 }

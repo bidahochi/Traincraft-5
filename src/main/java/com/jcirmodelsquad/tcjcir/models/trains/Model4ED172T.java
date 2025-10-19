@@ -10,6 +10,8 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 
+import com.jcirmodelsquad.tcjcir.models.Model4ed_172_deets_crl;
+import com.jcirmodelsquad.tcjcir.models.trucks.ModelBM750;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.Modelgolftruck;
 import net.minecraft.entity.Entity;
@@ -1476,6 +1478,8 @@ public class Model4ED172T extends ModelConverter //Same as Filename
 	}
 	ModelTypeBnew theB = new ModelTypeBnew();
 	Modelgolftruck theG = new Modelgolftruck();
+	ModelBM750 theThirdRail = new ModelBM750();
+	Model4ed_172_deets_crl theDeets = new Model4ed_172_deets_crl();
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -1500,6 +1504,32 @@ public class Model4ED172T extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.87, 0, 0);
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/bm750_dc_3rd_rail.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslated(-1.43, -0.00, 0);
+			theThirdRail.render(entity, f, f1, f2, f3, f4, f5);
+
+			GL11.glTranslated(2.87, 0, 0);
+			theThirdRail.render(entity, f, f1, f2, f3, f4, f5);
+			GL11.glPopMatrix();
+			if (((AbstractTrains) entity).getColor() == 18) {
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/4ed_deets_ccrl.png"));
+				GL11.glPushMatrix();
+				theDeets.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}else if (((AbstractTrains) entity).getColor() == 19){
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/4ed_deets_nse.png"));
+				GL11.glPushMatrix();
+				theDeets.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}else if (((AbstractTrains) entity).getColor() == 20){
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/4ed_deets_ser.png"));
+				GL11.glPushMatrix();
+				theDeets.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}
+
 		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/golftruck2_Black.png"));
 			GL11.glPushMatrix();

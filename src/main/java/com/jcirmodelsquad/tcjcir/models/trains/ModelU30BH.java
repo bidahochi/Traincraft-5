@@ -9,6 +9,7 @@
 
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
+import com.jcirmodelsquad.tcjcir.models.Modelu30bh_details_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBlombergBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelFB2_new;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
@@ -1372,6 +1373,7 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 	ModelFB2_new theTrucks2 = new ModelFB2_new();
 	ModelBlombergBnew theTrucks3 = new ModelBlombergBnew();
 	ModelTypeBnew theTrucks4 = new ModelTypeBnew();
+	Modelu30bh_details_crl crldeets = new Modelu30bh_details_crl();
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
@@ -1413,6 +1415,21 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
+			GL11.glPopMatrix();
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18 ||
+				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19){
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslated(-1.54, 0.0, 0);
+			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
+			GL11.glTranslated(3.07, 0, 0);
+			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
+			GL11.glPopMatrix();
+
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/U30BH_/u30bh_details_crl.png"));
+			GL11.glPushMatrix();
+			GL11.glTranslated(0, 0, 0);
+			crldeets.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));

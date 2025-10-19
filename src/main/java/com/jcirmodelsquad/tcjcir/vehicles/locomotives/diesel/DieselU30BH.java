@@ -28,9 +28,9 @@ public class DieselU30BH extends DieselTrain {
         InsertTexture(0, "Northern Cascades Transit Authority (NOCTA)", LockoutGroup.BIDA);
         InsertTexture(1, "Blandsville Area Rapid Transporation (BlART)");
         InsertTexture(2, "Steampunk Rail", LockoutGroup.SPR);
-        InsertTexture(3, "CRL");
-        InsertTexture(4, "CRL (70s)");
-        InsertTexture(5, "CRL (80s-90s)");
+        InsertTexture(3, "CRL (70s-80s)");
+        InsertTexture(4, "CRL (80s-2006)");
+        InsertTexture(5, "CRL (2006-onwards)");
     }
     public DieselU30BH(World world, double d, double d1, double d2){
         this(world);

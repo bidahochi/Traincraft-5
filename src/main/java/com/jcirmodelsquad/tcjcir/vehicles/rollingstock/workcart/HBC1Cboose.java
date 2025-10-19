@@ -13,6 +13,7 @@ public class HBC1Cboose extends AbstractWorkCart
         InsertTexture(1, "Steampunk Rail", LockoutGroup.SPR);
         InsertTexture(2, "Great Lakes & Northern Territories"); // Great Lakes & Nice Tiddies
         InsertTexture(3, "CRL");
+        InsertTexture(4, "CRL (MOW)");
     }
 
     public HBC1Cboose(World world, double posX, double posY, double posZ)

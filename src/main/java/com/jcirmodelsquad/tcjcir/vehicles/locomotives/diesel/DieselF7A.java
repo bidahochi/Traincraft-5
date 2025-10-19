@@ -49,7 +49,7 @@ public class DieselF7A extends DieselTrain {
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
         double pitchRads = this.anglePitchClient * Math.PI / 180.0D;
-        double distance = 2.25; //how far forward/backwards on the entity you ride; forward > 0; backwards < 0;
+        double distance = 2.4; //how far forward/backwards on the entity you ride; forward > 0; backwards < 0;
         double distanceLR = -0.35; //how far left/right on the entity you ride; left > 0; right < 0;
         double yOffset = 0.19;
         float rotationCos1 = (float) Math.cos(Math.toRadians(this.renderYaw + 90));

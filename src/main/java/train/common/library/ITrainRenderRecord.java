@@ -15,8 +15,6 @@ public interface ITrainRenderRecord
 
     boolean hasSmoke();
 
-    boolean hasSmokeOnSlopes();
-
     String getSmokeType();
 
     ArrayList<double[]> getSmokeFX();
@@ -33,6 +31,11 @@ public interface ITrainRenderRecord
 
     float[] getScale();
 
+    /**
+     * Get Resource Location
+     * @param colorString color as string
+     * @return the resource location
+     */
     ResourceLocation getTextureFile(String colorString);
 
     int getSmokeIterations();

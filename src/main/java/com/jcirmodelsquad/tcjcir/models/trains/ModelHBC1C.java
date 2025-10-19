@@ -10,6 +10,7 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 
+import com.jcirmodelsquad.tcjcir.models.Modelhbc1c_deets_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelCabooseTruck2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -1256,6 +1257,8 @@ public class ModelHBC1C extends ModelConverter //Same as Filename
 		bodyModel[297].setRotationPoint(-27.25F, -13.7F, -11F);
 	}
 	ModelCabooseTruck2 theTrucks2 = new ModelCabooseTruck2();
+	Modelhbc1c_deets_crl theBuffer = new Modelhbc1c_deets_crl();
+
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
@@ -1285,6 +1288,13 @@ public class ModelHBC1C extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
+
+			if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18231 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19){
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/hbc1c_deets_crl.png"));
+				GL11.glPushMatrix();
+				theBuffer.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}
 		}
 	}
 }
