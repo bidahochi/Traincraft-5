@@ -303,7 +303,6 @@ public class ItemTCRail extends ItemPart {
 		int facing1 = isLeftTurn ? (facing0 + 4 - 1)%4 : (facing0 + 1)%4;
 		Vector2f dir1 = getDirectionVector( facing1 );
 		int[][] trackPositions;
-		tempType = null;
 		if (type.getRailType() == TCRailTypes.RailTypes.DIAGONAL || type.getRailType() == TCRailTypes.RailTypes.STRAIGHT) {
 			tempType = getPlacementDirection(player, world, facing0, 0);
 			trackPositions = tempType.getUsedSpaceFromType(player);
