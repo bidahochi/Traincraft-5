@@ -19,6 +19,7 @@ import train.common.api.EntityRollingStock;
 import train.common.core.handlers.ConfigHandler;
 import train.common.core.network.PacketPaintbrushColor;
 import train.common.library.*;
+import train.common.library.register.ITrainRecord;
 
 import java.awt.*;
 import java.util.Collections;

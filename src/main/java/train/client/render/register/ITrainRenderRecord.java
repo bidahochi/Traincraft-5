@@ -1,4 +1,4 @@
-package train.common.library;
+package train.client.render.register;
 
 import net.minecraft.util.ResourceLocation;
 import tmt.ModelBase;
@@ -8,10 +8,13 @@ import java.util.ArrayList;
 
 public interface ITrainRenderRecord
 {
+    String GetModID();
 
     Class<? extends AbstractTrains> getEntityClass();
 
     ModelBase getModel();
+
+    String getTexturePrefix();
 
     boolean hasSmoke();
 
@@ -41,4 +44,6 @@ public interface ITrainRenderRecord
     int getSmokeIterations();
 
     int getExplosionFXIterations();
+
+
 }

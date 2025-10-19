@@ -11,12 +11,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
 import tmt.Tessellator;
-import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
 import train.common.entity.rollingStock.EntityTracksBuilder;
-import train.common.library.ITrainRenderRecord;
-import train.common.library.Info;
+import train.client.render.register.ITrainRenderRecord;
 import train.common.overlaytexture.OverlayTextureManager;
 
 import java.lang.reflect.InvocationTargetException;

@@ -33,7 +33,7 @@ import train.common.entity.rollingStock.steam.*;
 import train.common.entity.rollingStock.tanker.*;
 import train.common.entity.rollingStock.tender.*;
 import train.common.entity.rollingStock.workcart.*;
-import train.common.library.ITrainRenderRecord;
+import train.client.render.register.ITrainRenderRecord;
 import train.common.library.Info;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public enum RenderEnum implements ITrainRenderRecord
 	fallback(ERatedForEveryone.class, new ModelThisErrorIsERatedForEveryone(), "Skin_Plane_ThisErrorIsERatedForEveryone", false, new float[] { 0.0F, -0.47F, 0.0F }, null, new float[] { 5F, 5F, 5F }, "", 0, null, "", null, 0, false),
 
 	/** Passengers */
-	passengerCartBlue(EntityPassengerBlue.class, new ModelPassenger6(), "passenger", true, new float[] { 0.0F, -0.47F, 0.0F }, null, null, "", 0, null, "", null, 0, false),
+	//passengerCartBlue(EntityPassengerBlue.class, new ModelPassenger6(), "passenger", true, new float[] { 0.0F, -0.47F, 0.0F }, null, null, "", 0, null, "", null, 0, false),
 	passengerCartBlackSmall(EntityPassenger2.class, new ModelPassenger2(), "passenger3", false, new float[] { 0.0F, -0.32F, -0.1F }, null, null, "", 0, null, "", null, 0, false),
 	passengerLongGreen(EntityPassenger5.class, new ModelPassenger5(), "passenger5_", true, new float[] { 0.0F, -0.40F, 0.0F }, null, null, "", 0, null, "", null, 0, false),
 	passengerShortGreen(EntityPassenger7.class, new ModelPassenger7(), "passenger7", false, new float[] { 0.0F, -0.44F, 0.0F }, new float[] { 0F, 90F, 0F }, null, "", 0, null, "", null, 0, false),
@@ -2430,6 +2430,12 @@ public enum RenderEnum implements ITrainRenderRecord
 		return model;
 	}
 
+	@Override
+	public String getTexturePrefix()
+	{
+		return texture;
+	}
+
 	public boolean getIsMultiTextured() {
 		return multiTexture;
 	}
@@ -2489,6 +2495,12 @@ public enum RenderEnum implements ITrainRenderRecord
 
 	public int getExplosionFXIterations() {
 		return explosionFXIterations;
+	}
+
+	@Override
+	public String GetModID()
+	{
+		return Info.resourceLocation;
 	}
 
 	public ResourceLocation getTextureFile(String colorAsString)

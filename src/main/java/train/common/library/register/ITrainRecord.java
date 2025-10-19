@@ -1,8 +1,9 @@
-package train.common.library;
+package train.common.library.register;
 
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import train.common.api.AbstractTrains;
+import train.common.library.EnumTrainType;
 
 public interface ITrainRecord
 {

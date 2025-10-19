@@ -57,6 +57,7 @@ import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
 import train.common.items.*;
 import train.common.library.*;
+import train.common.library.register.ITrainRecord;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 
@@ -2562,23 +2563,14 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 	}
 
 	@Override
-	public List<ItemStack> getItemsDropped() {
+	public List<ItemStack> getItemsDropped()
+	{
 		List<ItemStack> items = new ArrayList<ItemStack>();
-		for (EnumTrains trains : EnumTrains.values()) {
-			if (trains.getEntityClass().equals(this.getClass())) {
-				items.add(ItemRollingStock.setPersistentData(new ItemStack(trains.getItem()), this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote));
-				return items;
-			}
-		}
 
-		for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-			if (trains.getEntityClass().equals(this.getClass())) {
-				items.add(ItemRollingStock.setPersistentData(new ItemStack(trains.getItem()), this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote));
-				return items;
-			}
-		}
+		ITrainRecord record = Traincraft.traincraftRegistry.getTrainRecord(getClass());
+		items.add(ItemRollingStock.setPersistentData(new ItemStack(record.getItem()), this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote));
 
-		return null;
+		return items;
 	}
 
 	@SideOnly(Side.CLIENT)

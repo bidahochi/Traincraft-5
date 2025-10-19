@@ -1,8 +1,6 @@
 package train.common.library;
 
 import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import train.common.api.AbstractTrains;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.*;
 import train.common.entity.rollingStock.diesel.*;
@@ -14,15 +12,14 @@ import train.common.entity.rollingStock.steam.*;
 import train.common.entity.rollingStock.tanker.*;
 import train.common.entity.rollingStock.tender.*;
 import train.common.entity.rollingStock.workcart.*;
-
-import java.lang.reflect.InvocationTargetException;
+import train.common.library.register.ITrainRecord;
 
 public enum EnumHeritageTrainsLegacy implements ITrainRecord
 {
     /**
      * Passengers
      */
-    passengerCartBlue("Passenger Blue",EntityPassengerBlue .class, ItemIDs.minecartPassengerBlue.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0,TraincraftUtil.getBytesFromColors(new String[]{"Blue", "Red", "Green", "White", "Black", "Cyan", "Orange", "Grey", "LightGrey", "LightBlue"}), 18, 0),
+    //passengerCartBlue("Passenger Blue",EntityPassengerBlue .class, ItemIDs.minecartPassengerBlue.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0,TraincraftUtil.getBytesFromColors(new String[]{"Blue", "Red", "Green", "White", "Black", "Cyan", "Orange", "Grey", "LightGrey", "LightBlue"}), 18, 0),
     passengerCartBlackSmall("Passenger Small Black",EntityPassenger2 .class, ItemIDs.minecartPassenger2.item, "passenger", 0, 0, 0.5, 0, 0, 0, 0, 0, 0, null, 18, 0),
     passengerLongGreen("Passenger Green Long",EntityPassenger5 .class, ItemIDs.minecartPassenger5.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0,TraincraftUtil.getBytesFromColors(new String[]{"Green", "Yellow"}), 18, 0),
     passengerShortGreen("Passenger Short Green",EntityPassenger7 .class, ItemIDs.minecartPassenger7.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0, null, 18, 0),

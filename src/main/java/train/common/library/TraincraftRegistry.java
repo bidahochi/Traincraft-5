@@ -1,13 +1,16 @@
 package train.common.library;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 import train.client.render.RenderEnum;
 import train.common.Traincraft;
 import train.common.api.AbstractTrains;
-import train.common.library.sounds.TrainSoundRecord;
+import train.common.library.register.ITrainRecord;
+import train.client.render.register.ITrainRenderRecord;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -35,16 +38,29 @@ public class TraincraftRegistry
      *
      * @param item train item record
      * @param trainRecord train record
-     * @param trainRenderRecord render record
      * @param mod Instance of mod
      */
-    public void RegisterRollingStock(Item item, ITrainRecord trainRecord, ITrainRenderRecord trainRenderRecord, Object mod)
+    public void RegisterRollingStockEntity(Item item, ITrainRecord trainRecord, Object mod)
     {
         trainRecordsByItem.put(item, trainRecord);
         trainRecords.add(trainRecord);
-        trainRenderRecords.put(trainRenderRecord.getEntityClass(), trainRenderRecord);
+        EntityRegistry.registerModEntity(trainRecord.getEntityClass(), trainRecord.getInternalName(), trainID++, mod, 512, 1, true);
+    }
 
-        EntityRegistry.registerModEntity(trainRecord.getEntityClass(), trainRecord.getInternalName(), trainID, mod, 512, 1, true);
+    /**
+     * DO NOT CALL THIS FROM THE SERVER SIDE
+     * @param trainRenderRecord
+     */
+    public void RegisterRollingStockModel(ITrainRenderRecord trainRenderRecord)
+    {
+        if (trainRenderRecords.containsKey(trainRenderRecord.getEntityClass()) == false)
+        {
+            trainRenderRecords.put(trainRenderRecord.getEntityClass(), trainRenderRecord);
+        }
+        else
+        {
+            Traincraft.tcLog.fatal("ERROR: YOU HAVE ATTEMPTED TO INSERT A DUPLICATE RENDER RECORD " + trainRenderRecord.getEntityClass().getName());
+        }
     }
 
     public AbstractTrains getEntityWithItem(Item item, World world, double x, double y, double z)
@@ -60,7 +76,7 @@ public class TraincraftRegistry
 
     public ITrainRecord getCurrentTrain(Item item)
     {
-        if(item==null)
+        if(item== null)
         {
             return null;
         }

@@ -13,11 +13,8 @@ import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tanker.*;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.*;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.workcart.*;
 import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import train.common.api.AbstractTrains;
 import train.common.core.util.TraincraftUtil;
-
-import java.lang.reflect.InvocationTargetException;
+import train.common.library.register.ITrainRecord;
 
 public enum EnumTrains implements ITrainRecord
 {

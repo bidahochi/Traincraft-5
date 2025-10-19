@@ -24,6 +24,7 @@ import train.common.core.handlers.ConfigHandler;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
 import train.common.library.*;
+import train.common.library.register.ITrainRecord;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 
@@ -178,100 +179,43 @@ public class ItemRollingStock extends ItemMinecart implements IMinecart, IMineca
         return EnumRarity.rare;
     }
 
-    public String getTrainType() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getTrainType();
-            }
-        }
+    public String getTrainType()
+    {
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getTrainType();
-            }
-        }
-
-        return "";
+        return trainRecord.getTrainType();
     }
 
-    public double getMass() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMass();
-            }
-        }
+    public double getMass()
+    {
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMass();
-            }
-        }
-
-        return 0;
+        return trainRecord.getMass();
     }
 
     public int getMaxSpeed() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMaxSpeed();
-            }
-        }
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMaxSpeed();
-            }
-        }
-
-        return 0;
+        return trainRecord.getMaxSpeed();
     }
 
     public int getMHP() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMHP();
-            }
-        }
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getMHP();
-            }
-        }
-
-        return 0;
+        return trainRecord.getMHP();
     }
 
-    public String[] getAdditionnalInfo() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getAdditionnalTooltip();
-            }
-        }
+    public String[] getAdditionnalInfo()
+    {
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getAdditionnalTooltip();
-            }
-        }
-
-        return null;
+        return trainRecord.getAdditionnalTooltip();
     }
 
     public int getCargoCapacity() {
-        for (EnumTrains trains : EnumTrains.values()) {
-            if (trains.getItem() == this) {
-                return trains.getCargoCapacity();
-            }
-        }
+        ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()) {
-            if (trains.getItem() == this) {
-                return trains.getCargoCapacity();
-            }
-        }
-
-        return 0;
+        return trainRecord.getCargoCapacity();
     }
 
     public String getTrainName() {
@@ -769,13 +713,10 @@ public class ItemRollingStock extends ItemMinecart implements IMinecart, IMineca
 
 		ItemStack stack = oldStack;
 
-        if (train != null) {
-            for (EnumTrains trains : EnumTrains.values()) {
-                if (trains.getEntityClass().equals(train.getClass())) {
-                    stack = (new ItemStack(trains.getItem()));
-                    break;
-                }
-            }
+        if (train != null)
+        {
+            ITrainRecord trainRecord = Traincraft.traincraftRegistry.getTrainRecord(train.getClass());
+            stack = (new ItemStack(trainRecord.getItem()));
         }
         if (stack != null) {
             NBTTagCompound tag = stack.getTagCompound();
