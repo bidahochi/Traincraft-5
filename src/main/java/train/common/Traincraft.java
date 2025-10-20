@@ -233,7 +233,7 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 		RecipeHandler.initBlockRecipes();
 		RecipeHandler.initItemRecipes();
 		RecipeHandler.initSmeltingRecipes();
-		AssemblyTableRecipes.recipes();
+		new AssemblyTableRecipes().recipes();
 
 		/* Register the liquids */
 		tcLog.info("Initializing fluids..");

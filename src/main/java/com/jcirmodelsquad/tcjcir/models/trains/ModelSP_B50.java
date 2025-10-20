@@ -175,7 +175,7 @@ public class ModelSP_B50 extends ModelConverter //Same as Filename
 		bodyModel[133] = new ModelRendererTurbo(this, 334, 3, textureX, textureY); // Box 276
 		bodyModel[134] = new ModelRendererTurbo(this, 113, 13, textureX, textureY); // Box 277
 		bodyModel[135] = new ModelRendererTurbo(this, 114, 24, textureX, textureY); // Box 278
-		bodyModel[136] = new ModelRendererTurbo(this, 80, 104, textureX, textureY); // Box cull door catchers
+		bodyModel[136] = new ModelRendererTurbo(this, 80, 104, textureX, textureY, "cull"); // Box cull door catchers
 		bodyModel[137] = new ModelRendererTurbo(this, 428, 79, textureX, textureY, "cull"); // Box cull destboards
 		bodyModel[138] = new ModelRendererTurbo(this, 417, 79, textureX, textureY, "cull"); // Box cull destboards
 		bodyModel[139] = new ModelRendererTurbo(this, 81, 93, textureX, textureY, "cull"); // Box cull door rollers

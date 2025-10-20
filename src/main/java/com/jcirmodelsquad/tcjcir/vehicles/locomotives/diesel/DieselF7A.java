@@ -27,7 +27,7 @@ public class DieselF7A extends DieselTrain {
         initLoco();
         //when the benis sus
         InsertTexture(0, "PC (Ex NYC)");
-        InsertTexture(1, "ouggghhhhh");
+        InsertTexture(1, "Mesa Desert");
     }
     public DieselF7A(World world, double d, double d1, double d2){
         this(world);

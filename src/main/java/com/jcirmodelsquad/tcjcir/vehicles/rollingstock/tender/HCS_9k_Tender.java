@@ -12,6 +12,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.Tender;
+import train.common.enums.LockoutGroup;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
 
@@ -22,6 +23,12 @@ public class HCS_9k_Tender extends Tender implements IInventory {
     public HCS_9k_Tender(World world) {
         super(world, FluidRegistry.WATER, 0, EnumTrains.HCS_9k_Tender.getTankCapacity(), LiquidManager.WATER_FILTER);
         initFreightTender();
+        InsertTexture(0, "Blank");
+        InsertTexture(1, "SPMW");
+        InsertTexture(2, "Southern Pacific (Lines Lettering)");
+        InsertTexture(3, "Southern Pacific");
+        InsertTexture(4, "Herber Valley 618");
+        InsertTexture(5, "Union Pacific (Late)");
     }
 
     public void initFreightTender() {

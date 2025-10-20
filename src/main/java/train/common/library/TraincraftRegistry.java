@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import train.client.render.RenderEnum;
 import train.common.Traincraft;
 import train.common.api.AbstractTrains;
+import train.common.core.managers.TierRecipeManager;
 import train.common.library.register.ITrainRecord;
 import train.client.render.register.ITrainRenderRecord;
 
