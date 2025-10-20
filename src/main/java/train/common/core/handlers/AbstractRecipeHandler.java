@@ -40,8 +40,8 @@ public abstract class AbstractRecipeHandler
     public List<ItemStack> coal = new ArrayList<ItemStack>()
     {
         {
-            coal.add(new ItemStack(Items.coal));
-            coal.addAll(OreDictionary.getOres("coal"));
+            add(new ItemStack(Items.coal));
+            addAll(OreDictionary.getOres("coal"));
         }
     };
 
