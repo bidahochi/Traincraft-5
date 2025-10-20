@@ -31,79 +31,20 @@ import train.common.tile.TileTCRailGag;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static train.common.library.TypeOfRollingStock.HERITAGE;
+public abstract class ItemAbstractRollingStock extends ItemMinecart implements IMinecart, IMinecartItem {
 
-public class ItemRollingStock extends ItemMinecart implements IMinecart, IMinecartItem {
+    protected String iconName = "";
+    protected String trainName;
+    protected String trainCreator;
+    protected String trainNote = "";
+    protected int trainColor = -1;
 
-    private String iconName = "";
-    private String trainName;
-    private String trainCreator;
-    private String trainNote = "";
-    private int trainColor = -1;
-
-    public ItemRollingStock(String iconName, TypeOfRollingStock typeOfRollingStock) {
+    public ItemAbstractRollingStock(String iconName) {
         super(1);
         this.iconName = iconName;
         maxStackSize = 1;
         trainName = this.getUnlocalizedName();
-
-        if  (!this.iconName.equals("asteri"))
-        {
-            if (typeOfRollingStock == null)
-            {
-                typeOfRollingStock = TypeOfRollingStock.EMPTY;
-            }
-
-            if (typeOfRollingStock == HERITAGE)
-            {
-                setCreativeTab(Traincraft.tcHeritageTab);
-                return;
-            }
-
-            if (ConfigHandler.ENABLE_BAP_SPLIT_TABS)
-            {
-                switch(typeOfRollingStock)
-                {
-                    case STEAM:
-                        setCreativeTab(Traincraft.tcSteamTab);
-                        break;
-                    case DIESEL:
-                        setCreativeTab(Traincraft.tcDieselTab);
-                        break;
-                    case ELECTRIC:
-                        setCreativeTab(Traincraft.tcElectricTab);
-                        break;
-                    case PASSENGER:
-                        setCreativeTab(Traincraft.tcPassengerTab);
-                        break;
-                    case FREIGHT:
-                        setCreativeTab(Traincraft.tcFreightTab);
-                        break;
-                    case BOOSE:
-                        setCreativeTab(Traincraft.tcBooseTab);
-                        break;
-                    default:
-                        setCreativeTab(Traincraft.tcTab);
-                        break;
-                }
-            }
-            else
-            {
-                setCreativeTab(Traincraft.tcDieselTab);
-            }
-        }
     }
-
-	public ItemRollingStock(String iconName) {
-		super(1);
-		this.iconName = iconName;
-		maxStackSize = 1;
-		trainName = this.getUnlocalizedName();
-
-		if  (!this.iconName.equals("asteri")) {
-            setCreativeTab(Traincraft.tcTab);
-		}
-	}
 
     public int setNewUniqueID(ItemStack stack, EntityPlayer player, int numberOfTrains) {
         NBTTagCompound var3 = stack.getTagCompound();
@@ -661,7 +602,7 @@ public class ItemRollingStock extends ItemMinecart implements IMinecart, IMineca
                 // RotationYaw: "
                 // + rollingStock.rotationYaw);
 
-                rollingStock.trainType = ((ItemRollingStock) itemstack.getItem()).getTrainType();
+                rollingStock.trainType = ((ItemAbstractRollingStock) itemstack.getItem()).getTrainType();
                 rollingStock.trainName = (itemstack.getItem()).getItemStackDisplayName(itemstack);
 
                 if (player != null) {
@@ -691,9 +632,9 @@ public class ItemRollingStock extends ItemMinecart implements IMinecart, IMineca
                     }
                 }
                 if (player != null)
-                    rollingStock.setInformation(((ItemRollingStock) itemstack.getItem()).getTrainType(), player.getDisplayName(), trainCreator, (itemstack.getItem()).getItemStackDisplayName(itemstack), uniID);
+                    rollingStock.setInformation(((ItemAbstractRollingStock) itemstack.getItem()).getTrainType(), player.getDisplayName(), trainCreator, (itemstack.getItem()).getItemStackDisplayName(itemstack), uniID);
                 if (player == null)
-                    rollingStock.setInformation(((ItemRollingStock) itemstack.getItem()).getTrainType(), "", trainCreator, (itemstack.getItem()).getItemStackDisplayName(itemstack), uniID);
+                    rollingStock.setInformation(((ItemAbstractRollingStock) itemstack.getItem()).getTrainType(), "", trainCreator, (itemstack.getItem()).getItemStackDisplayName(itemstack), uniID);
 
                 if (ConfigHandler.SHOW_POSSIBLE_COLORS && rollingStock.acceptedColors != null && rollingStock.acceptedColors.size() > 0)
                 {
@@ -767,6 +708,8 @@ public class ItemRollingStock extends ItemMinecart implements IMinecart, IMineca
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        this.itemIcon = iconRegister.registerIcon(Info.modID.toLowerCase() + ":trains/" + this.iconName);
+        this.itemIcon = iconRegister.registerIcon(GetTexturePath());
     }
+
+    public abstract String GetTexturePath();
 }

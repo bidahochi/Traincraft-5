@@ -9,7 +9,7 @@
 
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
-import com.jcirmodelsquad.tcjcir.models.Modelb30_booster_bits;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Modelb30_booster_bits;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBlombergBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelFB2_new;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
@@ -21,7 +21,6 @@ import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
 import train.client.renderhelper.ModelRenderHelper;
 import train.common.api.AbstractTrains;
-import train.common.api.Locomotive;
 import train.common.library.Info;
 
 public class ModelB23 extends ModelConverter //Same as Filename

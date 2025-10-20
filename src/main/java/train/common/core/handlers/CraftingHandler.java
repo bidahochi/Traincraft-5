@@ -11,7 +11,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import net.minecraft.item.Item;
-import train.common.items.ItemRollingStock;
+import train.common.items.ItemAbstractRollingStock;
 import train.common.library.AchievementIDs;
 
 public class CraftingHandler
@@ -25,10 +25,10 @@ public class CraftingHandler
 		  Item[] items = ach.getItems();
 		  if (items != null) for (Item item: items) if (item == event.crafting.getItem()) event.player.addStat(ach.achievement, 1);
       }
-		if ((event.crafting.getItem() instanceof ItemRollingStock)) {
+		if ((event.crafting.getItem() instanceof ItemAbstractRollingStock)) {
 			if (!event.player.worldObj.isRemote) {
         if (FMLCommonHandler.instance().getMinecraftServerInstance() != null) {
-					ItemRollingStock stock = (ItemRollingStock) event.crafting.getItem();
+					ItemAbstractRollingStock stock = (ItemAbstractRollingStock) event.crafting.getItem();
           //TraincraftSaveHandler.createFile(FMLCommonHandler.instance().getMinecraftServerInstance());
           //int readID = TraincraftSaveHandler.readInt(FMLCommonHandler.instance().getMinecraftServerInstance(), "numberOfTrains:");
           //int newID = stock.setNewUniqueID(event.crafting, event.player, readID);

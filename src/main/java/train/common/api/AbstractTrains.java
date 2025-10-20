@@ -35,7 +35,7 @@ import train.common.core.handlers.TrainHandler;
 import train.common.entity.CargoManager;
 import train.common.entity.TrustedPlayer;
 import train.common.items.ItemChunkLoaderActivator;
-import train.common.items.ItemRollingStock;
+import train.common.items.ItemAbstractRollingStock;
 import train.common.items.ItemWrench;
 import train.common.library.register.ITrainRecord;
 import train.client.render.register.ITrainRenderRecord;
@@ -467,7 +467,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	/**
 	 * set the color of the rollingstock
 	 *
-	 * @see ItemRollingStock
+	 * @see ItemAbstractRollingStock
 	 * @param color
 	 */
 	/*public void setColor(int color) {
@@ -842,8 +842,8 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 		{
 			itemdropped=true;
 			for (ItemStack item : getItemsDropped()) {
-				if (item.getItem() instanceof ItemRollingStock){
-					ItemStack stack = ItemRollingStock.setPersistentData(item,this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote);
+				if (item.getItem() instanceof ItemAbstractRollingStock){
+					ItemStack stack = ItemAbstractRollingStock.setPersistentData(item,this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote);
 					exportTrustedListToNBT(stack != null ? stack.getTagCompound() : null);
 					if (cargoManager!= null && cargoManager.getSelectedCargo() != 0 && stack != null)
 					{

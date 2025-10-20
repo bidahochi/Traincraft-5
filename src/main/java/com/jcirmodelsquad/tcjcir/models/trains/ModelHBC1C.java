@@ -10,9 +10,8 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 
-import com.jcirmodelsquad.tcjcir.models.Modelhbc1c_deets_crl;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Modelhbc1c_deets_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelCabooseTruck2;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;

@@ -7,7 +7,7 @@
 // Created on: 16.05.2025 - 10:55:24
 // Last changed on: 16.05.2025 - 10:55:24
 
-package com.jcirmodelsquad.tcjcir.models; //Path where the model is located
+package com.jcirmodelsquad.tcjcir.models.detailkits; //Path where the model is located
 
 
 import net.minecraft.entity.Entity;

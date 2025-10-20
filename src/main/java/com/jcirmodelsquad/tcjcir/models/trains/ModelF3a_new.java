@@ -28,7 +28,7 @@ public class ModelF3a_new extends ModelConverter //Same as Filename
 
 	public ModelF3a_new() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[527];
+		bodyModel = new ModelRendererTurbo[532];
 
 		initbodyModel_1();
 		initbodyModel_2();
@@ -2143,6 +2143,11 @@ public class ModelF3a_new extends ModelConverter //Same as Filename
 		bodyModel[524] = new ModelRendererTurbo(this, 122, 207, textureX, textureY, "cull"); // Box 524 cull ditchlight mount
 		bodyModel[525] = new ModelRendererTurbo(this, 40, 78, textureX, textureY); // Box 184 o2 generator
 		bodyModel[526] = new ModelRendererTurbo(this, 475, 52, textureX, textureY); // Box 501 cull pipe cooler MILW thing WHY DID THE MOVE THIS HERE
+		bodyModel[527] = new ModelRendererTurbo(this, 73, 121, textureX, textureY); // Box 768 stripe part cull
+		bodyModel[528] = new ModelRendererTurbo(this, 76, 117, textureX, textureY); // Box 768 stripe part cull
+		bodyModel[529] = new ModelRendererTurbo(this, 76, 114, textureX, textureY); // Box 768 stripe part cull
+		bodyModel[530] = new ModelRendererTurbo(this, 76, 108, textureX, textureY); // Box 768 stripe part cull
+		bodyModel[531] = new ModelRendererTurbo(this, 76, 102, textureX, textureY); // Box 768 stripe part cull
 
 		bodyModel[500].addShapeBox(0F, 0F, 0F, 1, 2, 1, 0F,0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F); // Box 500 BAR beacon
 		bodyModel[500].setRotationPoint(-19F, -18.61F, 9.5F);
@@ -2225,6 +2230,21 @@ public class ModelF3a_new extends ModelConverter //Same as Filename
 
 		bodyModel[526].addShapeBox(0F, 0F, 0F, 8, 2, 10, 0F,0F, -0.5F, 0F, -4F, -0.5F, 0F, -4F, -0.5F, -5F, 0F, -0.5F, -5F, 0.5F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, -5F, 0.5F, 0F, -5F); // Box 501 cull pipe cooler MILW thing WHY DID THE MOVE THIS HERE
 		bodyModel[526].setRotationPoint(-14F, -20.75F, -3F);
+
+		bodyModel[527].addShapeBox(0F, 0F, 0F, 1, 6, 4, 0F,0.5F, 0.01F, -6F, 0F, 0.01F, -6F, 0F, 0.01F, 6F, 0.5F, 0.01F, 6F, 0F, -4.88F, -1.5F, 0F, -4.51F, 0F, 0F, -4.51F, 12F, 0F, -4.88F, 10.5F); // Box 768 stripe part cull
+		bodyModel[527].setRotationPoint(-24.25F, -14.5F, -8F);
+
+		bodyModel[528].addShapeBox(0F, 0F, 0F, 1, 2, 1, 0F,0F, -1.12F, -1.5F, -1F, -1.12F, -1.5F, -1F, -1.12F, 13.5F, 0F, -1.12F, 13.5F, 0F, -0.21F, 0F, 0F, -0.51F, 0F, 0F, -0.51F, 15F, 0F, -0.21F, 15F); // Box 768 stripe part cull
+		bodyModel[528].setRotationPoint(-24.25F, -14.5F, -8F);
+
+		bodyModel[529].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, -0.29F, -1F, 0F, 0.01F, -1F, 0F, 0.01F, 16F, 0F, -0.29F, 16F, -0.33F, -0.25F, 0.01F, -0.67F, -0.25F, 0.01F, -0.67F, -0.25F, 17.01F, -0.33F, -0.25F, 17.01F); // Box 768 stripe part cull
+		bodyModel[529].setRotationPoint(-24.25F, -13F, -9F);
+
+		bodyModel[530].addShapeBox(0F, 0F, 0F, 1, 4, 1, 0F,-0.33F, 0F, -1.99F, 0F, 0.76F, -3F, 0F, 0.76F, 18F, -0.33F, 0F, 19.01F, -0.98F, -2.63F, 0F, 0.98F, -2.69F, 0F, 0.98F, -2.69F, 21F, -0.98F, -2.63F, 21F); // Box 768 stripe part cull
+		bodyModel[530].setRotationPoint(-24.25F, -12.25F, -11F);
+
+		bodyModel[531].addShapeBox(0F, 0F, 0F, 1, 4, 1, 0F,0F, 0.76F, -3F, -1F, 0.76F, -3F, -1F, 0.76F, 18F, 0F, 0.76F, 19F, -0.98F, -2.69F, 0F, 0.95F, -2.75F, 0F, 0.95F, -2.75F, 21F, -0.98F, -2.69F, 21F); // Box 768 stripe part cull
+		bodyModel[531].setRotationPoint(-23.25F, -12.25F, -11F);
 	}
 
 	ModelBlombergBnew theTrucc = new ModelBlombergBnew();

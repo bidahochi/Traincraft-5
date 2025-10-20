@@ -7,7 +7,7 @@
 // Created on: 06.10.2023 - 21:28:08
 // Last changed on: 06.10.2023 - 21:28:08
 
-package com.jcirmodelsquad.tcjcir.models; //Path where the model is located
+package com.jcirmodelsquad.tcjcir.models.detailkits; //Path where the model is located
 
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;

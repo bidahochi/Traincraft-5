@@ -9,7 +9,7 @@
 
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
-import com.jcirmodelsquad.tcjcir.models.Modelclass74_deets;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Modelclass74_deets;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

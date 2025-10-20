@@ -10,7 +10,7 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 
-import com.jcirmodelsquad.tcjcir.models.Model4ed_172_deets_crl;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Model4ed_172_deets_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBM750;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.Modelgolftruck;
@@ -23,8 +23,6 @@ import tmt.Tessellator;
 import train.client.renderhelper.ModelRenderHelper;
 import train.common.api.AbstractTrains;
 import train.common.library.Info;
-
-import java.util.ArrayList;
 
 public class Model4ED172T extends ModelConverter //Same as Filename
 {

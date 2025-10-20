@@ -17,8 +17,8 @@ import train.client.core.handlers.RecipeBookHandler;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
 import train.common.inventory.TrainCraftingManager;
+import train.common.items.ItemAbstractRollingStock;
 import train.common.items.ItemRecipeBook;
-import train.common.items.ItemRollingStock;
 import train.common.library.BlockIDs;
 import train.common.library.Info;
 import train.common.library.ItemIDs;
@@ -689,7 +689,7 @@ public class GuiRecipeBook extends GuiScreen {
 		if (output != null && side.equals("right"))
 			renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, output, var5 + 432, var6 + 177);
 		String name = "";
-		if (output != null && output.getItem() instanceof ItemRollingStock)
+		if (output != null && output.getItem() instanceof ItemAbstractRollingStock)
 			name = output.getDisplayName();
 		if (side.equals("left")) {
 			this.fontRendererObj.drawString("Tier: " + tier, var5 - var9 + this.bookImageWidth - 56, var6 + 40, 0);

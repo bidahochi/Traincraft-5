@@ -16,7 +16,6 @@ import mods.railcraft.api.carts.CartTools;
 import mods.railcraft.api.carts.ILinkableCart;
 import mods.railcraft.api.tracks.RailTools;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
@@ -24,7 +23,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -46,8 +44,6 @@ import train.client.core.handlers.SoundUpdaterRollingStock;
 import train.common.Traincraft;
 import train.common.adminbook.ServerLogger;
 import train.common.api.pathfinding.PathFindingHelper;
-import train.common.blocks.BlockTCRail;
-import train.common.blocks.BlockTCRailGag;
 import train.common.core.HandleOverheating;
 import train.common.core.handlers.*;
 import train.common.core.network.PacketParkingBrake;
@@ -61,8 +57,6 @@ import train.common.library.register.ITrainRecord;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -2568,7 +2562,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 		List<ItemStack> items = new ArrayList<ItemStack>();
 
 		ITrainRecord record = Traincraft.traincraftRegistry.getTrainRecord(getClass());
-		items.add(ItemRollingStock.setPersistentData(new ItemStack(record.getItem()), this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote));
+		items.add(ItemAbstractRollingStock.setPersistentData(new ItemStack(record.getItem()), this,this.getUniqueTrainID(),trainCreator, trainOwner, getColor(), trainNote));
 
 		return items;
 	}

@@ -9,7 +9,7 @@
 
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
-import com.jcirmodelsquad.tcjcir.models.ModelRTR;
+import com.jcirmodelsquad.tcjcir.models.detailkits.ModelRTR;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBlombergBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
 import net.minecraft.entity.Entity;

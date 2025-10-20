@@ -9,7 +9,7 @@
 
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
-import com.jcirmodelsquad.tcjcir.models.Modelu30bh_details_crl;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Modelu30bh_details_crl;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBlombergBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelFB2_new;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;

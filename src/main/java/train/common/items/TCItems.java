@@ -30,7 +30,7 @@ public class TCItems {
 				}
 				else if (items.className.equals("ItemRollingStock"))
 				{
-					items.item = new ItemRollingStock(items.iconName, items.TypeOfRollingStock);
+					items.item = new ItemTCRollingStock(items.iconName, items.TypeOfRollingStock);
 				}
 				else if (items.className.equals("ItemRotativeDigger")) {
 					items.item = new ItemRotativeDigger();
