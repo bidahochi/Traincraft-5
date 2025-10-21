@@ -68,33 +68,14 @@ public class EntityLocoDieselKof_DB extends DieselTrain {
 	public String getInventoryName() {
 		return "Kof";
 	}
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!worldObj.isRemote) {
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			entityplayer.mountEntity(this);
-		}
-		return true;
-	}
+	
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (0.6F);
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
+	
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

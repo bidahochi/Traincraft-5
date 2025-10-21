@@ -2253,7 +2253,14 @@ public class ModelF3a_new extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 356 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16) {
+		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 356
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 10) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, -0.025, 0);

@@ -102,20 +102,7 @@ public class PCH130Commute2 extends ElectricTrain implements IAT2Compatible {
     }
 
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
+    
 
 
     @Override
@@ -135,15 +122,9 @@ public class PCH130Commute2 extends ElectricTrain implements IAT2Compatible {
         return 1F;
     }
 
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+    
 
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
-    }
+    
 
     @Override
     public void setLocoTurnedOnFromPacket(boolean set) {

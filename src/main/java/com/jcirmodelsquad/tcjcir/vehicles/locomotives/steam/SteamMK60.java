@@ -95,12 +95,7 @@ public class SteamMK60 extends SteamTrain {
 
 
 
-	@Override
-	public void pressKey(int i) {
-		if (i == 7 && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		}
-	}
+	
 
 	@Override
 	public void onUpdate() {
@@ -113,21 +108,7 @@ public class SteamMK60 extends SteamTrain {
 
 	
 
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		super.readEntityFromNBT(nbttagcompound);
-
-		fuelTrain = nbttagcompound.getShort("fuelTrain");
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		locoInvent = new ItemStack[getSizeInventory()];
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			int j = nbttagcompound1.getByte("Slot") & 0xff;
-			if (j >= 0 && j < locoInvent.length) {
-				locoInvent[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-	}
+	
 
 	
 
@@ -136,33 +117,12 @@ public class SteamMK60 extends SteamTrain {
 		return "WP MK60-71 2-8-2";
 	}
 
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!worldObj.isRemote) {
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			entityplayer.mountEntity(this);
-		}
-		return true;
-	}
+	
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 1.7F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

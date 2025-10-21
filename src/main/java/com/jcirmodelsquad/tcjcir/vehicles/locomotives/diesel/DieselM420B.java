@@ -107,28 +107,9 @@ public class DieselM420B extends DieselTrain {
         return "MLW M420B";
     }
 
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
+    
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+
+    
 
 }

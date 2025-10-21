@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.Constants;
 import train.common.Traincraft;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
@@ -26,7 +27,7 @@ public class Diesel4ED172T_C extends DieselTrain {
         initLoco();
         InsertTexture(0, "PAMC (Late)");
         InsertTexture(1, "Blandsville & Blankerston");
-        InsertTexture(2, "SPR");
+        InsertTexture(2, "SPR", LockoutGroup.SPR);
     }
     public Diesel4ED172T_C(World world, double d, double d1, double d2){
         this(world);
@@ -106,28 +107,9 @@ public class Diesel4ED172T_C extends DieselTrain {
         return "CEE 4ED-172T (CAT Repower)";
     }
 
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+
+
+
 
 }

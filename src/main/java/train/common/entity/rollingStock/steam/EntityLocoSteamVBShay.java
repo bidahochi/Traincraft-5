@@ -54,12 +54,7 @@ public class EntityLocoSteamVBShay extends SteamTrain {
 
 	
 
-	@Override
-	public void pressKey(int i) {
-		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		}
-	}
+	
 
 	@Override
 	public void onUpdate() {
@@ -69,29 +64,12 @@ public class EntityLocoSteamVBShay extends SteamTrain {
 		}
 		checkInvent(locoInvent[0], locoInvent[1], this);
 	}
-
-	
-
-	
-	@Override
+@Override
 	public String getInventoryName() {
 		return "Vertical Boiler Shay";
 	}
 
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!worldObj.isRemote) {
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			entityplayer.mountEntity(this);
-		}
-		return true;
-	}
+	
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {

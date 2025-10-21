@@ -106,26 +106,7 @@ public class DieselSD70ACe_H extends DieselTrain {
     public String getInventoryName() {
         return "EMD SD70ACe";
     }
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+
+
+
 }

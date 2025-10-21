@@ -178,15 +178,9 @@ public class PCH100H extends HydrogenTrain{
         return "PCH-100H";
     }
 
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
-    }
+    
 
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+
 
     @Override
     public int refuelingSlurpAmount() {

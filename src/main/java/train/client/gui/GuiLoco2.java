@@ -47,13 +47,13 @@ public class GuiLoco2 extends GuiContainer {
 		//region ParkingBrake
 		if (!loco.getParkingBrakeFromPacket())
 		{
-			if (loco instanceof SteamTrain) {
+			if (loco instanceof SteamTrain) { // steam locomotive brake off
 				textureX = 41;
 				textureY = 13;
 				textureSizeX = 40;
 				textureSizeY = 13;
 			}
-			else {
+			else { // diesel and electric locomotive brake off
 				textureX = 126;
 				textureY = 13;
 				textureSizeX = 43;
@@ -65,13 +65,13 @@ public class GuiLoco2 extends GuiContainer {
 		}
 		else
 		{
-			if (loco instanceof SteamTrain) {
+			if (loco instanceof SteamTrain) { // steam locomotive brake on
 				textureX = 0;
 				textureY = 13;
 				textureSizeX = 40;
 				textureSizeY = 13;
 			}
-			else {
+			else { // diesel and electric locomotive brake on
 				textureX = 82;
 				textureY = 13;
 				textureSizeX = 43;
@@ -163,7 +163,7 @@ public class GuiLoco2 extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
-		switch (guibutton.id)
+		switch (guibutton.id) //uses first button function parameter of above button declarations
 		{
 			case 2:
 				if ((!loco.parkingBrake) && loco.getSpeed() < 10) {
@@ -366,7 +366,7 @@ public class GuiLoco2 extends GuiContainer {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float par3){
+	public void drawScreen(int mouseX, int mouseY, float par3){ //determines and renders the water level for steam locomotives and fuel level for diesel locomotives
 		super.drawScreen(mouseX, mouseY,par3);
 		if(loco instanceof SteamTrain){
 			int j = (width - xSize) / 2;
@@ -422,7 +422,7 @@ public class GuiLoco2 extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int t, int g) {
+	protected void drawGuiContainerBackgroundLayer(float f, int t, int g) { //renders locomotive inventory GUI background and fluids and locomotive performance information
 		String i = Info.guiPrefix + "gui_loco.png";
 
 		if (loco instanceof ElectricTrain) {

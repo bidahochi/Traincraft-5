@@ -20,6 +20,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -193,6 +194,21 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
       /*  if (!serverUUID.equals("")) {
             attemptConnection(serverUUID);
         }*/
+    }
+
+    @Override
+    public boolean interactFirst(EntityPlayer entityplayer) {
+        playerEntity = entityplayer;
+        if ((super.interactFirst(entityplayer))) {
+            return false;
+        }
+        if (!worldObj.isRemote) {
+            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
+                return true;
+            }
+            entityplayer.mountEntity(this);
+        }
+        return true;
     }
 
     public static boolean isBetween(double x, double min, double max) {
@@ -575,6 +591,16 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         }
     }
 
+
+    @Override
+    public boolean canBeAdjusted(EntityMinecart cart) {
+        return canBeAdjusted;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        return true;
+    }
 
     /**
      * Returns true if this entity should push and be pushed by other entities

@@ -43,12 +43,7 @@ public class EntityLocoElectricNewHighSpeed extends ElectricTrain {
 
 	
 
-	@Override
-	public void pressKey(int i) {
-		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		}
-	}
+	
 
 	
 
@@ -59,32 +54,13 @@ public class EntityLocoElectricNewHighSpeed extends ElectricTrain {
 		return "High Speed";
 	}
 
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!worldObj.isRemote) {
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			entityplayer.mountEntity(this);
-		}
-		return true;
-	}
+	
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 2.75F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
+	
 }

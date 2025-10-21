@@ -28,6 +28,31 @@ public class DieselF7A extends DieselTrain {
         //when the benis sus
         InsertTexture(0, "PC (Ex NYC)");
         InsertTexture(1, "Mesa Desert");
+        InsertTexture(2, "DRGW (Black with yellow stripes)");
+        InsertTexture(3, "DRGW (4 stripe)");
+        InsertTexture(4, "DRGW (4 stripe, late)");
+        InsertTexture(5, "DRGW (1 stripe)");
+        InsertTexture(6, "Amtrak (Ex NP)");
+        InsertTexture(7, "Amtrak (Ex NP)");
+        InsertTexture(8, "ATSF (Bluebonnet)");
+        InsertTexture(9, "ATSF (As Delivered)");
+        InsertTexture(10, "ATSF (Early)");
+        InsertTexture(11, "ATSF (Rebuilt)");
+        InsertTexture(12, "ATSF (Yellowbonnet 1)");
+        InsertTexture(13, "ATSF (Yellowbonnet 2)");
+        InsertTexture(14, "MMID 100");
+        InsertTexture(15, "MMID 101");
+        InsertTexture(16, "NYC (Early)");
+        InsertTexture(17, "NYC (Black)");
+        InsertTexture(18, "EMD Demonstrator");
+        InsertTexture(19, "WM (Speed Lettering)");
+        InsertTexture(20, "WM (Circus");
+        InsertTexture(21, "WM (Fireball)");
+        InsertTexture(22, "CB&Q (With coupler cover)");
+        InsertTexture(23, "CB&Q");
+        InsertTexture(24, "CB&Q (Late, with coupler cover)");
+        InsertTexture(25, "CB&Q (Late)");
+        InsertTexture(26, "MILW (Grey scheme)");
     }
     public DieselF7A(World world, double d, double d1, double d2){
         this(world);
@@ -102,28 +127,9 @@ public class DieselF7A extends DieselTrain {
         return "EMD F7a";
     }
 
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
+    
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+
+    
 
 }

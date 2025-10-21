@@ -28,6 +28,25 @@ public class DieselF7B extends DieselTrain {
         //when the benis sus
         InsertTexture(0, "PC (Ex NYC)");
         InsertTexture(1, "Mesa Desert");
+        InsertTexture(2, "DRGW (Black with yellow stripes)");
+        InsertTexture(3, "DRGW (4 stripe)");
+        InsertTexture(4, "DRGW (4 stripe, late)");
+        InsertTexture(5, "DRGW (1 stripe)");
+        InsertTexture(6, "Amtrak (Ex GN)");
+        InsertTexture(7, "Amtrak (Ex NP)");
+        InsertTexture(8, "Amtrak (Ex SP)");
+        InsertTexture(9, "ATSF (Bluebonnet)");
+        InsertTexture(10, "ATSF (As Delivered)");
+        InsertTexture(11, "ATSF (Early)");
+        InsertTexture(12, "ATSF (Rebuilt)");
+        InsertTexture(13, "ATSF (Yellowbonnet)");
+        InsertTexture(14, "Norfolk Southern");
+        InsertTexture(15, "EMD Demonstrator");
+        InsertTexture(16, "WM (Speed Lettering)");
+        InsertTexture(17, "WM (Circus");
+        InsertTexture(18, "CB&Q");
+        InsertTexture(19, "CB&Q (Late)");
+        InsertTexture(20, "MILW (Grey scheme)");
     }
     public DieselF7B(World world, double d, double d1, double d2){
         this(world);
@@ -102,28 +121,9 @@ public class DieselF7B extends DieselTrain {
         return "EMD F7b";
     }
 
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
-    }
+    
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            entityplayer.mountEntity(this);
-        }
-        return true;
-    }
-    @Override
-    public boolean canBeAdjusted(EntityMinecart cart) {
-        return canBeAdjusted;
-    }
+    
+    
 
 }

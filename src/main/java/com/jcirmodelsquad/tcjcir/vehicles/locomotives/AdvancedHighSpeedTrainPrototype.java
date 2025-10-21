@@ -68,66 +68,18 @@ public class AdvancedHighSpeedTrainPrototype extends ElectricTrain {
 			riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
 		}
 	}
-
-
-
-	@Override
-	public void pressKey(int i) {
-		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-		}
-	}
-
-	
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		super.readEntityFromNBT(nbttagcompound);
-
-		fuelTrain = nbttagcompound.getShort("fuelTrain");
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		locoInvent = new ItemStack[getSizeInventory()];
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			int j = nbttagcompound1.getByte("Slot") & 0xff;
-			if (j >= 0 && j < locoInvent.length) {
-				locoInvent[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-	}
-
-	
 	@Override
 	public String getInventoryName() {
 		return "Advanced High Speed Train (Prototype)";
 	}
 
-	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
-		playerEntity = entityplayer;
-		if ((super.interactFirst(entityplayer))) {
-			return false;
-		}
-		if (!worldObj.isRemote) {
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			entityplayer.mountEntity(this);
-		}
-		return true;
-	}
+	
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 0.56F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
+	
 }

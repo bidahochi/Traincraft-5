@@ -2,6 +2,7 @@ package train.common.api;
 
 import cofh.api.energy.IEnergyContainerItem;
 import cofh.api.energy.IEnergyHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -10,6 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import train.common.Traincraft;
+import train.common.library.GuiIDs;
 
 public abstract class ElectricTrain extends Locomotive {
 
@@ -33,6 +36,14 @@ public abstract class ElectricTrain extends Locomotive {
 		Ignite = false;
 		timeSinceIgnited = 0;
 	}
+
+	@Override
+	public void pressKey(int i) {
+		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
+			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+		}
+	}
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();

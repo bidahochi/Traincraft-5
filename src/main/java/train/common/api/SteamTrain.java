@@ -1,6 +1,8 @@
 package train.common.api;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -9,8 +11,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
+import train.common.Traincraft;
 import train.common.api.LiquidManager.StandardTank;
 import train.common.core.handlers.FuelHandler;
+import train.common.library.GuiIDs;
 
 import java.util.List;
 
@@ -67,6 +71,13 @@ public abstract class SteamTrain extends Locomotive implements IFluidHandler {
 	}
 
 	@Override
+	public void pressKey(int i) {
+		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
+			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+		}
+	}
+
+	@Override
 	public void onUpdate() {
 		super.onUpdate();
 		/**
@@ -103,6 +114,7 @@ public abstract class SteamTrain extends Locomotive implements IFluidHandler {
 	public int getWater() {
 		return (this.dataWatcher.getWatchableObjectInt(23));
 	}
+
 
 	/**
 	 * used by the GUI

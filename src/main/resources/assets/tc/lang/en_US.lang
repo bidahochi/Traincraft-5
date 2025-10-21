@@ -931,8 +931,8 @@ entity.tc.TenderLima2_8_0.name=Lima 2-8-0 Tender
 
 item.tc:minecartF3A.name=EMD F3a
 item.tc:minecartF3B.name=EMD F3b
-item.tc:minecartF7A.name=EMD F7A
-item.tc:minecartF7B.name=EMD F7B
+item.tc:minecartF7A.name=EMD F7a
+item.tc:minecartF7B.name=EMD F7b
 item.tc:minecartF9A.name=EMD F9a
 item.tc:minecartF9B.name=EMD F9b
 item.tc:minecartFP7A.name=EMD FP7A
