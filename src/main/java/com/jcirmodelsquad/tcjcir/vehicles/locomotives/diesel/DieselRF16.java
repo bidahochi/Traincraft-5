@@ -24,7 +24,7 @@ public class DieselRF16 extends DieselTrain {
     }
     public DieselRF16(World world) {
         super(world, EnumTrains.RF16.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Pennsylvania (1 Stipe)");
         InsertTexture(1, "Delaware & Hudson");
         InsertTexture(2, "Michigan Northern");
@@ -49,10 +49,7 @@ public class DieselRF16 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselRF16 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

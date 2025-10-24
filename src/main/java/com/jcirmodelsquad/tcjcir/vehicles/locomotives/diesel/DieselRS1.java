@@ -24,7 +24,7 @@ public class DieselRS1 extends DieselTrain {
     }
     public DieselRS1(World world) {
         super(world, EnumTrains.RS1.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "she ann on my arbor till i bankruptcy");
         InsertTexture(1, "she wabash on my lake till i ann arbor");
         InsertTexture(2, "Tidewater Southern");
@@ -49,10 +49,7 @@ public class DieselRS1 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselRS1 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

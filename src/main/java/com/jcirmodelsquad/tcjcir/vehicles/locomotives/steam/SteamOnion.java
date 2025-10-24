@@ -23,14 +23,11 @@ public class SteamOnion extends SteamTrain {
 	}
 	public SteamOnion(World world) {
 		super(world, EnumTrains.Onion.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(4, "MISSINGNO BUTTSECKS RAILROAD NUMBER 1");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamOnion(World world, double d, double d1, double d2) {
 		this(world);
@@ -86,19 +83,6 @@ public class SteamOnion extends SteamTrain {
 			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 		}
 	}
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
 
 	
 	@Override

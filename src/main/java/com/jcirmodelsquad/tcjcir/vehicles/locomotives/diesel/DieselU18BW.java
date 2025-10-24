@@ -23,7 +23,7 @@ public class DieselU18BW extends DieselTrain {
     }
     public DieselU18BW(World world) {
         super(world, EnumTrains.U18BW.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "CEE Demonstrator");
         InsertTexture(1, "CEE Leaser");
         InsertTexture(2, "Western Pacific");
@@ -42,10 +42,7 @@ public class DieselU18BW extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselU18BW extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

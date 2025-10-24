@@ -24,7 +24,7 @@ public class DieselM420 extends DieselTrain {
     }
     public DieselM420(World world) {
         super(world, EnumTrains.M420.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "BCOL (Zig Zag)");
         InsertTexture(1, "COW (Moo)");
         InsertTexture(2, "FNCC (KIT-L, Non Canon)", LockoutGroup.FNCC);
@@ -42,10 +42,7 @@ public class DieselM420 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselM420 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

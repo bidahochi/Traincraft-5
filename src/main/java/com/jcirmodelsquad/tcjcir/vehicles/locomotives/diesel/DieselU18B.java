@@ -24,7 +24,7 @@ public class DieselU18B extends DieselTrain {
     }
     public DieselU18B(World world) {
         super(world, EnumTrains.U18B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "MEC 405");
         InsertTexture(1, "MEC 402");
         InsertTexture(2, "PW 1801 (As Delivered)");
@@ -61,10 +61,7 @@ public class DieselU18B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -104,11 +101,7 @@ public class DieselU18B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

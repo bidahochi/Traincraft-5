@@ -39,6 +39,8 @@ public abstract class SteamTrain extends Locomotive implements IFluidHandler {
 
 	public SteamTrain(World world, int capacity, FluidStack filter) {
 		this(capacity, world, filter);
+		fuelTrain = 0;
+		locoInvent = new ItemStack[inventorySize];
 	}
 
 	private SteamTrain(int capacity, World world, FluidStack filter) {
@@ -104,6 +106,8 @@ public abstract class SteamTrain extends Locomotive implements IFluidHandler {
 		if (rand.nextInt(100) == 0 && getWater() > 0 && getIsFuelled()) {
 			drain(ForgeDirection.UNKNOWN, getWaterConsumption() / 5, true);
 		}
+
+		checkInvent(locoInvent[0], locoInvent[1], this);
 	}
 
 	/**

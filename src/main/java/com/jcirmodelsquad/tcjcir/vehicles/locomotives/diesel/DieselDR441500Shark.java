@@ -24,7 +24,7 @@ public class DieselDR441500Shark extends DieselTrain {
     }
     public DieselDR441500Shark(World world) {
         super(world, EnumTrains.DR441500Shark.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Demonstrator");
         InsertTexture(1, "Elgin, Joliet & Eastern");
         InsertTexture(2, "Baltimore & Ohio");
@@ -43,10 +43,7 @@ public class DieselDR441500Shark extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselDR441500Shark extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

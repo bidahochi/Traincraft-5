@@ -24,7 +24,7 @@ public class DieselP32 extends DieselTrain {
     }
     public DieselP32(World world) {
         super(world, EnumTrains.P32.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Metro North");
         InsertTexture(1, "Metro North (New Haven)");
         InsertTexture(2, "Amtrak (Empire Service)");
@@ -40,10 +40,7 @@ public class DieselP32 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -83,11 +80,7 @@ public class DieselP32 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

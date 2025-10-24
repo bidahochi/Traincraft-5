@@ -33,8 +33,11 @@ public abstract class DieselTrain extends Locomotive implements IFluidHandler {
 		this(capacity, world, filter, null);
 	}
 
-	public DieselTrain(World world, int capacity, FluidStack[] multiFilter) {
+	public DieselTrain(World world, int capacity, FluidStack[] multiFilter)
+	{
 		this(capacity, world, null, multiFilter);
+		fuelTrain = 0;
+		locoInvent = new ItemStack[inventorySize];
 	}
 
 	private DieselTrain(int capacity, World world, FluidStack filter, FluidStack[] multiFilter) {
@@ -58,9 +61,10 @@ public abstract class DieselTrain extends Locomotive implements IFluidHandler {
 	}
 
 
-
 	@Override
-	public void onUpdate() {
+	public void onUpdate()
+	{
+		checkInvent(locoInvent[0]);
 		super.onUpdate();
 		if (!worldObj.isRemote) {
 			if (theTank.getFluidAmount() != Integer.parseInt(this.dataWatcher.getWatchableObjectString(23).split("-_-")[1])) {

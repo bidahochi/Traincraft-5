@@ -24,7 +24,7 @@ public class DieselM640W extends DieselTrain {
     }
     public DieselM640W(World world) {
         super(world, EnumTrains.M640W.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "COW");
         InsertTexture(1, "COW (Special)");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -42,10 +42,7 @@ public class DieselM640W extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselM640W extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -24,7 +24,7 @@ public class DieselP40 extends DieselTrain {
     }
     public DieselP40(World world) {
         super(world, EnumTrains.geGenesis.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "Amtrak Phase III");
         InsertTexture(1, "Amtrak Phase V");
@@ -40,10 +40,7 @@ public class DieselP40 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -83,11 +80,7 @@ public class DieselP40 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

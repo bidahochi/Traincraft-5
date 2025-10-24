@@ -24,7 +24,6 @@ public class DieselWorkdayHyrail extends DieselTrain {
     }
     public DieselWorkdayHyrail(World world) {
         super(world, EnumTrains.WorkdayHyrail.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
         InsertTexture(0, "Generic");
         InsertTexture(1, "CSXT");
         InsertTexture(2, "FNCC MOW", LockoutGroup.FNCC);
@@ -42,11 +41,6 @@ public class DieselWorkdayHyrail extends DieselTrain {
         prevPosX = d;
         prevPosY = d1;
         prevPosZ = d2;
-    }
-
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
     }
 
     @Override
@@ -90,14 +84,6 @@ public class DieselWorkdayHyrail extends DieselTrain {
     }
 
     @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
-
-
-
-    @Override
     public float getOptimalDistance(EntityMinecart cart) { return 0.6F;
     }
 
@@ -106,11 +92,6 @@ public class DieselWorkdayHyrail extends DieselTrain {
     @Override
     public String getInventoryName() {
         return "1980 Pine Workday Hi-rail Truck";
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
-        return false;
     }
 
 

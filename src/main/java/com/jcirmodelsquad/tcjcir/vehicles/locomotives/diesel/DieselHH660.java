@@ -24,7 +24,7 @@ public class DieselHH660 extends DieselTrain {
     }
     public DieselHH660(World world) {
         super(world, EnumTrains.HH660.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "RE 601");
         InsertTexture(1, "RE 606");
         InsertTexture(2, "ATSF (Zebra)");
@@ -49,10 +49,7 @@ public class DieselHH660 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselHH660 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

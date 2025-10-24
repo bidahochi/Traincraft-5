@@ -23,7 +23,7 @@ public class DieselRSD15 extends DieselTrain {
     }
     public DieselRSD15(World world) {
         super(world, EnumTrains.RSD15.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(2, "Blandsville & Blankerston");
         InsertTexture(3, "FURRX (EX CSWR)");
     }
@@ -38,10 +38,7 @@ public class DieselRSD15 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselRSD15 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

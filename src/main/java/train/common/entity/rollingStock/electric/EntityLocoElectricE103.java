@@ -42,12 +42,6 @@ public class EntityLocoElectricE103 extends ElectricTrain {
 	}
 
 	
-
-	
-
-	
-
-	
 	@Override
 	public String getInventoryName() {
 		return "E103";

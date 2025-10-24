@@ -24,7 +24,7 @@ public class DieselB30 extends DieselTrain {
     }
     public DieselB30(World world) {
         super(world, EnumTrains.B30.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CNCR 5550", LockoutGroup.CNRC);
         InsertTexture(1, "CNCR 5552", LockoutGroup.CNRC);
         InsertTexture(2, "CNCR 5553-5555", LockoutGroup.CNRC);
@@ -46,10 +46,7 @@ public class DieselB30 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -93,11 +90,7 @@ public class DieselB30 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

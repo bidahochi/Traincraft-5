@@ -69,12 +69,6 @@ public class ElectricKawasakiLRV extends ElectricTrain {
 	}
 
 
-
-	
-
-	
-
-	
 	@Override
 	public String getInventoryName() {
 		return "Kawasaki LRV";

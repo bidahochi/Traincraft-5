@@ -24,7 +24,7 @@ public class DieselU56 extends DieselTrain {
     }
     public DieselU56(World world) {
         super(world, EnumTrains.U56.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "FNCC (KIT-L)", LockoutGroup.FNCC);
         InsertTexture(1, "FMSR", LockoutGroup.FMSR);
     }
@@ -39,10 +39,7 @@ public class DieselU56 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -87,11 +84,7 @@ public class DieselU56 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

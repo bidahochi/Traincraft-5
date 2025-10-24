@@ -23,7 +23,7 @@ public class DieselE9B extends DieselTrain {
     }
     public DieselE9B(World world) {
         super(world, EnumTrains.E9B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the benis sus
         InsertTexture(0, "AMTK (Ph 1)");
         InsertTexture(1, "AMTK (Ph 2)");
@@ -39,10 +39,7 @@ public class DieselE9B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselE9B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

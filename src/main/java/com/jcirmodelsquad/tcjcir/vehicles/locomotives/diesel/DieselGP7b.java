@@ -23,7 +23,7 @@ public class DieselGP7b extends DieselTrain {
     }
     public DieselGP7b(World world) {
         super(world, EnumTrains.GP7b.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "ATSF");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Avanste Northeastern");
@@ -39,10 +39,7 @@ public class DieselGP7b extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -81,11 +78,7 @@ public class DieselGP7b extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

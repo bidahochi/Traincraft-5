@@ -25,7 +25,7 @@ public class DieselSW1500 extends DieselTrain {
     }
     public DieselSW1500(World world) {
         super(world, EnumTrains.SW1500.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Denver SUCK MY FUCKIN BALLS cock sucker island (stupid) mofo Volkswagon 1083 deez nuts express");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Southern Pacific");
@@ -67,10 +67,7 @@ public class DieselSW1500 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -115,11 +112,7 @@ public class DieselSW1500 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

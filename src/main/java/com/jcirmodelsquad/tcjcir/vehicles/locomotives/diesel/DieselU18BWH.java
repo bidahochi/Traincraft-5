@@ -23,7 +23,7 @@ public class DieselU18BWH extends DieselTrain {
     }
     public DieselU18BWH(World world) {
         super(world, EnumTrains.U18BWH.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Amtrak (PH1)");
         InsertTexture(1, "Amtrak (Low Clearance NEC Edition)");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -40,10 +40,7 @@ public class DieselU18BWH extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -88,11 +85,7 @@ public class DieselU18BWH extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

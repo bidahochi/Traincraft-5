@@ -24,13 +24,10 @@ public class EntityLocoSteam040VB extends SteamTrain {
 	}
 	public EntityLocoSteam040VB(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteam040VB.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteam040VB(World world, double d, double d1, double d2) {
 		this(world);
@@ -55,16 +52,6 @@ public class EntityLocoSteam040VB extends SteamTrain {
 	
 
 	@Override
-	public void onUpdate() {
-		checkInvent(locoInvent[0], locoInvent[1], this);
-		super.onUpdate();
-	}
-
-	
-
-	
-
-	@Override
 	public String getInventoryName() {
 		return "0-4-0 Vertical Boiler";
 	}
@@ -76,13 +63,5 @@ public class EntityLocoSteam040VB extends SteamTrain {
 		return 0.75F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

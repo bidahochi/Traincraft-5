@@ -42,12 +42,6 @@ public class EntityLocoElectricMinetrain extends ElectricTrain {
 
 	
 
-	
-
-	
-
-	
-
 	@Override
 	public String getInventoryName() {
 		return "Cart hauler";

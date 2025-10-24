@@ -24,7 +24,7 @@ public class DieselM636R extends DieselTrain {
     }
     public DieselM636R(World world) {
         super(world, EnumTrains.M636R.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CN (Noodle)");
         InsertTexture(1, "CN (Stripes)");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -41,10 +41,7 @@ public class DieselM636R extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -89,11 +86,7 @@ public class DieselM636R extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

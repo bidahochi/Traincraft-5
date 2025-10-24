@@ -25,7 +25,7 @@ public class DieselDash839C extends DieselTrain {
     }
     public DieselDash839C(World world) {
         super(world, EnumTrains.Dash839C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Conrail");
         InsertTexture(1, "CSXT (YN2)");
         InsertTexture(2, "CSXT (YN3)");
@@ -50,10 +50,7 @@ public class DieselDash839C extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -95,11 +92,7 @@ public class DieselDash839C extends DieselTrain {
     }
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.35F;

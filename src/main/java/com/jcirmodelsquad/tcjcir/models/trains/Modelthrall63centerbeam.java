@@ -1051,12 +1051,12 @@ public class Modelthrall63centerbeam extends ModelConverter //Same as Filename
 	//ModelWrappedWoodDeluxe1 wood1 = new ModelWrappedWoodDeluxe1();
 	//ModelWrappedWoodDeluxe5 wood5 = new ModelWrappedWoodDeluxe5();
 
-	List<String> planks = Arrays.asList(new String[]{
+	/*List<String> planks = Arrays.asList(new String[]{
 			"tile.wood.oak","tile.wood.spruce",
 			"tile.wood.birch","tile.wood.jungle",
 			"tile.wood.acacia","tile.wood.big_oak",
 			"tile.widePlank3_", "tile.widePlank2_",
-			"tile.widePlank_", "tile.logs3.redwoodWood"});
+			"tile.widePlank_", "tile.logs3.redwoodWood"});*/
 
 
 	@Override

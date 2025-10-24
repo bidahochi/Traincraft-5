@@ -24,7 +24,7 @@ public class DieselDash940C extends DieselTrain {
     }
     public DieselDash940C(World world) {
         super(world, EnumTrains.Dash940C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Avanste Northeastern");
     }
     public DieselDash940C(World world, double d, double d1, double d2){
@@ -37,10 +37,7 @@ public class DieselDash940C extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -82,11 +79,7 @@ public class DieselDash940C extends DieselTrain {
     }
 
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.3F;

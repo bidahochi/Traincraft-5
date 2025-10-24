@@ -24,7 +24,7 @@ public class SteamAlco2102 extends SteamTrain {
 	}
 	public SteamAlco2102(World world) {
 		super(world, EnumTrains.Alco2102.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Blandsville Forest Products, Inc");
 		InsertTexture(1, "Sugar Pine Lumber");
 		InsertTexture(2, "Consolidated Builders Inc");
@@ -33,10 +33,7 @@ public class SteamAlco2102 extends SteamTrain {
 		InsertTexture(5, "Washaska Resources", LockoutGroup.BIDA);
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamAlco2102(World world, double d, double d1, double d2) {
 		this(world);
@@ -89,26 +86,7 @@ public class SteamAlco2102 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "Alco 2-10-2ST";
 	}

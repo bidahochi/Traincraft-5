@@ -23,7 +23,7 @@ public class SteamBuckingBull extends SteamTrain {
     }
     public SteamBuckingBull(World world) {
         super(world, EnumTrains.WCPBuckingBull.getTankCapacity(), LiquidManager.WATER_FILTER);
-        initLocoSteam();
+        
     }
 
     public void initLocoSteam() {

@@ -23,7 +23,7 @@ public class DieselU50 extends DieselTrain {
     }
     public DieselU50(World world) {
         super(world, EnumTrains.U50.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Union Pacific");
         InsertTexture(1, "Southern Pacific");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -43,10 +43,7 @@ public class DieselU50 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselU50 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

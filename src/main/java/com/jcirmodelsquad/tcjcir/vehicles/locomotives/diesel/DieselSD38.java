@@ -24,7 +24,7 @@ public class DieselSD38 extends DieselTrain {
     }
     public DieselSD38(World world) {
         super(world, EnumTrains.SD38.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the
         InsertTexture(0, "Yankee(with no brim)town Dock Corporation");
         InsertTexture(1, "McCloud River Railroad");
@@ -51,10 +51,7 @@ public class DieselSD38 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselSD38 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

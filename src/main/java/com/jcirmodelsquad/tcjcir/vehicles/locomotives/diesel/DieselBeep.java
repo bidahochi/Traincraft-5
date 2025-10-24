@@ -23,7 +23,7 @@ public class DieselBeep extends DieselTrain {
     }
     public DieselBeep(World world) {
         super(world, EnumTrains.Beep.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
     }
     public DieselBeep(World world, double d, double d1, double d2) {
         this(world);
@@ -36,10 +36,7 @@ public class DieselBeep extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselBeep extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

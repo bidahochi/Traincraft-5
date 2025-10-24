@@ -26,13 +26,10 @@ public class EntityLocoSteamHallClass extends SteamTrain {
 
 	public EntityLocoSteamHallClass(World world) {
 		super(world, EnumHeritageTrainsLegacy.locosteamHallClass.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamHallClass(World world, double d, double d1, double d2) {
 		this(world);
@@ -54,19 +51,6 @@ public class EntityLocoSteamHallClass extends SteamTrain {
 		*/
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.325F, posZ);
 	}
-
-	
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
 @Override
 	public String getInventoryName() {
 		return "Hall Class";
@@ -80,9 +64,5 @@ public class EntityLocoSteamHallClass extends SteamTrain {
 	}
 
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) { return canBeAdjusted; }
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) { return true; }
+	
 }

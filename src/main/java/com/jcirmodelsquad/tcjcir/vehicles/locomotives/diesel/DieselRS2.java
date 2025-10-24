@@ -23,7 +23,7 @@ public class DieselRS2 extends DieselTrain {
     }
     public DieselRS2(World world) {
         super(world, EnumTrains.RS2.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Deleware & Hudson");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "sans fey undertail rayroad");
@@ -31,6 +31,8 @@ public class DieselRS2 extends DieselTrain {
         InsertTexture(4, "Lehigh & New England (late)");
         InsertTexture(5, "Nautilus");
         InsertTexture(6, "AGW");
+        InsertTexture(7, "WM (Fireball)");
+        InsertTexture(8, "WM (Speed Lettering)");
 
     }
     public DieselRS2(World world, double d, double d1, double d2){
@@ -44,10 +46,7 @@ public class DieselRS2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +91,7 @@ public class DieselRS2 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

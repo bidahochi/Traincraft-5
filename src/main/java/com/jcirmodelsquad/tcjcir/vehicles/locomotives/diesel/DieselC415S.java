@@ -23,7 +23,7 @@ public class DieselC415S extends DieselTrain {
     }
     public DieselC415S(World world) {
         super(world, EnumTrains.C415S.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Burlington Northern");
         InsertTexture(1, "Spokane, Portland & Seattle");
         InsertTexture(2, "GRN");
@@ -42,10 +42,7 @@ public class DieselC415S extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselC415S extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

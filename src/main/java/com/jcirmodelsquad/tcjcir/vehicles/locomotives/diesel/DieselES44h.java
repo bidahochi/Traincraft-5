@@ -24,7 +24,7 @@ public class DieselES44h extends DieselTrain {
     }
     public DieselES44h(World world) {
         super(world, EnumTrains.ES44h.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "NS 8025 (Monongahela)");
         InsertTexture(1, "NS 8098 (Conrail)");
         InsertTexture(2, "NS 8099 (Southern)");
@@ -74,10 +74,7 @@ public class DieselES44h extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -122,11 +119,7 @@ public class DieselES44h extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

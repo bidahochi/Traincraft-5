@@ -23,7 +23,7 @@ public class DieselGP38dash9W extends DieselTrain {
     }
     public DieselGP38dash9W(World world) {
         super(world, EnumTrains.GP38dash9W.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
 
     }
     public DieselGP38dash9W(World world, double d, double d1, double d2){
@@ -37,10 +37,7 @@ public class DieselGP38dash9W extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -79,11 +76,7 @@ public class DieselGP38dash9W extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

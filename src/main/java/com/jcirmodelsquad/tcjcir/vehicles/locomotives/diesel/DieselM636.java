@@ -24,7 +24,7 @@ public class DieselM636 extends DieselTrain {
     }
     public DieselM636(World world) {
         super(world, EnumTrains.M636.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "FCP (Small Words)");
         InsertTexture(1, "FCP (Big Letters)");
         InsertTexture(2, "FCP (but its BLUe)");
@@ -43,10 +43,7 @@ public class DieselM636 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselM636 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

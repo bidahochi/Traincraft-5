@@ -24,7 +24,7 @@ public class DieselAC4400CW extends DieselTrain {
     }
     public DieselAC4400CW(World world) {
         super(world, EnumTrains.AC4400CW.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CSXT (YN2)");
         InsertTexture(1, "Nomansi and Eastern Pacific");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -39,10 +39,7 @@ public class DieselAC4400CW extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -84,11 +81,7 @@ public class DieselAC4400CW extends DieselTrain {
     }
     
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.3F;

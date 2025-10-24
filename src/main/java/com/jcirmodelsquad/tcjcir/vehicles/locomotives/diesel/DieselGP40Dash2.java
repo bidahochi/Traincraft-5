@@ -24,7 +24,7 @@ public class DieselGP40Dash2 extends DieselTrain {
     }
     public DieselGP40Dash2(World world) {
         super(world, EnumTrains.GP40Dash2.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Florida East Coast");
         InsertTexture(1, "Paradox Rail");
         InsertTexture(2, "Western Pacific");
@@ -69,10 +69,7 @@ public class DieselGP40Dash2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -117,11 +114,7 @@ public class DieselGP40Dash2 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

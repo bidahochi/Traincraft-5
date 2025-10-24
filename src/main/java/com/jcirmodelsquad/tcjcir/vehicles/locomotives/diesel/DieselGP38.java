@@ -24,7 +24,7 @@ public class DieselGP38 extends DieselTrain {
     }
     public DieselGP38(World world) {
         super(world, EnumTrains.GP38.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Fox Union Rail Resources (FURRX)");
         InsertTexture(1, "FNCC (GP38ac, Kit-L)", LockoutGroup.FNCC);
         InsertTexture(2, "Blandsville & Blankerston");
@@ -61,10 +61,7 @@ public class DieselGP38 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -109,11 +106,7 @@ public class DieselGP38 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

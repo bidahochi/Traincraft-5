@@ -24,7 +24,7 @@ public class DieselSF30B extends DieselTrain {
     }
     public DieselSF30B(World world) {
         super(world, EnumTrains.SF30B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Blandsville & Blankerston");
         InsertTexture(1, "MKM Leasing");
         InsertTexture(2, "CNRC 1000 & 1001 (Ex MKM)", LockoutGroup.CNRC);
@@ -46,10 +46,7 @@ public class DieselSF30B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselSF30B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

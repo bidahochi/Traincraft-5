@@ -25,16 +25,13 @@ public class SteamP01a extends SteamTrain {
 
 	public SteamP01a(World world) {
 		super(world, EnumTrains.P01a.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "WRX 10", LockoutGroup.BIDA);
 		InsertTexture(1, "WRX 12", LockoutGroup.BIDA);
 		InsertTexture(2, "CDC&S 7");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamP01a(World world, double d, double d1, double d2) {
 		this(world);
@@ -87,26 +84,7 @@ public class SteamP01a extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "P01a 2-6-2 Prairie";
 	}

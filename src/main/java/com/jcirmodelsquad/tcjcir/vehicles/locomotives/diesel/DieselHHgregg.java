@@ -23,7 +23,7 @@ public class DieselHHgregg extends DieselTrain {
     }
     public DieselHHgregg(World world) {
         super(world, EnumTrains.HHgregg.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
     }
     public DieselHHgregg(World world, double d, double d1, double d2) {
         this(world);
@@ -36,10 +36,7 @@ public class DieselHHgregg extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -79,11 +76,7 @@ public class DieselHHgregg extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

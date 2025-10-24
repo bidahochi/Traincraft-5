@@ -24,13 +24,10 @@ public class EntityLocoSteamCherepanov extends SteamTrain {
 	}
 	public EntityLocoSteamCherepanov(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamCherepanov.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamCherepanov(World world, double d, double d1, double d2) {
 		this(world);
@@ -68,14 +65,6 @@ public class EntityLocoSteamCherepanov extends SteamTrain {
 		return 0.5F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 
 }

@@ -24,7 +24,7 @@ public class DieselSD70ACe_H extends DieselTrain {
     }
     public DieselSD70ACe_H(World world) {
         super(world, EnumTrains.SD70ACe_H.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "hey louis");
         InsertTexture(1, "NS 1065 (Savannah & Atlanta)");
         InsertTexture(2, "NS 1066 (New York Central)");
@@ -47,10 +47,7 @@ public class DieselSD70ACe_H extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -92,11 +89,7 @@ public class DieselSD70ACe_H extends DieselTrain {
     }
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.45F;

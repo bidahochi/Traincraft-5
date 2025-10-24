@@ -24,7 +24,7 @@ public class DieselU25B extends DieselTrain {
     }
     public DieselU25B(World world) {
         super(world, EnumTrains.U25B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "New Haven");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "FNCC (KIT-L)", LockoutGroup.FNCC);
@@ -51,10 +51,7 @@ public class DieselU25B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselU25B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

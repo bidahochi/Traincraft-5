@@ -24,7 +24,7 @@ public class DieselU30BH extends DieselTrain {
     }
     public DieselU30BH(World world) {
         super(world, EnumTrains.U30BH.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Northern Cascades Transit Authority (NOCTA)", LockoutGroup.BIDA);
         InsertTexture(1, "Blandsville Area Rapid Transporation (BlART)");
         InsertTexture(2, "Steampunk Rail", LockoutGroup.SPR);
@@ -43,10 +43,7 @@ public class DieselU30BH extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselU30BH extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

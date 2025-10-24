@@ -24,7 +24,7 @@ public class DieselSD40R extends DieselTrain {
     }
     public DieselSD40R(World world) {
         super(world, EnumTrains.SD40R.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "Southern Pacific (Early)");
         InsertTexture(1, "Southern Pacific (Late)");
@@ -42,10 +42,7 @@ public class DieselSD40R extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselSD40R extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

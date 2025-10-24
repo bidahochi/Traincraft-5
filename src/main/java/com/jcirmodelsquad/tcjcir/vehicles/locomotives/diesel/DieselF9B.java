@@ -24,7 +24,7 @@ public class DieselF9B extends DieselTrain {
     }
     public DieselF9B(World world) {
         super(world, EnumTrains.F9B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Blandsville & Blankerstoner");
         InsertTexture(1, "FMSR", LockoutGroup.FMSR);
         InsertTexture(2, "DRGW (4 stripe)");
@@ -42,10 +42,7 @@ public class DieselF9B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselF9B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

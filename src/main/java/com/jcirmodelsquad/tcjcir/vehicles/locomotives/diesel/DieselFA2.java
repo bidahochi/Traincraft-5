@@ -24,7 +24,7 @@ public class DieselFA2 extends DieselTrain {
     }
     public DieselFA2(World world) {
         super(world, EnumTrains.FA1.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "New York Central (Lightning)");
         InsertTexture(1, "Chicago Northwestern");
         InsertTexture(2, "Wabash");
@@ -36,6 +36,8 @@ public class DieselFA2 extends DieselTrain {
         InsertTexture(8, "Canadian National (Old)");
         InsertTexture(9, "Canadian National (Stripes)");
         InsertTexture(10, "Galesburg Clinton & Midland (FPA-2)");
+        InsertTexture(11, "WM (Speed Lettering)");
+        InsertTexture(12, "WM (Circus)");
     }
     public DieselFA2(World world, double d, double d1, double d2){
         this(world);
@@ -48,10 +50,7 @@ public class DieselFA2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +90,7 @@ public class DieselFA2 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

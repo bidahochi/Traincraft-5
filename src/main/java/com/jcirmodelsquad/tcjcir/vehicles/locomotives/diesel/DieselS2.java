@@ -23,7 +23,7 @@ public class DieselS2 extends DieselTrain {
     }
     public DieselS2(World world) {
         super(world, EnumTrains.S2.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Penn Central");
         InsertTexture(2, "Great Northern");
         InsertTexture(3, "The Milwaukee Road");
@@ -48,10 +48,7 @@ public class DieselS2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselS2 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

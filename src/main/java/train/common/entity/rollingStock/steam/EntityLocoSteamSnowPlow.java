@@ -33,13 +33,10 @@ public class EntityLocoSteamSnowPlow extends SteamTrain {
 
 	public EntityLocoSteamSnowPlow(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamSnowPlow.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamSnowPlow(World world, double d, double d1, double d2) {
 		this(world);
@@ -84,13 +81,7 @@ public class EntityLocoSteamSnowPlow extends SteamTrain {
 		if (pitchRads > -1.01 && pitchRads < 1.01) {
 			riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
 		}
-	}
-
-	
-
-	
-
-	private static final double[][]	blockpos	= { { 4, 0, 1 }, { 4, 0, -1 }, { 4, 0, 0 }};
+	}private static final double[][]	blockpos	= { { 4, 0, 1 }, { 4, 0, -1 }, { 4, 0, 0 }};
 	private double[] point1;
 	private FakePlayer fakePlayer = null;
 	private int rotation =0;
@@ -186,13 +177,7 @@ public class EntityLocoSteamSnowPlow extends SteamTrain {
 			xyz[2] = (offset[0] * sin) + (offset[2] * cos);
 		}
 		return xyz;
-	}
-
-	
-
-	
-
-	@Override
+	}@Override
 	public String getInventoryName() {
 		return "Steam Snow Plow";
 	}
@@ -203,13 +188,5 @@ public class EntityLocoSteamSnowPlow extends SteamTrain {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (0.7F);
 	}
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

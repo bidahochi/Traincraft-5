@@ -651,11 +651,13 @@ public class ModelStampedeRack extends ModelConverter //Same as Filename
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));
 		}
-		GL11.glScalef(1,1,1f);
+		GL11.glPushMatrix();
+		//GL11.glScalef(1,1,1f);
 		GL11.glTranslated(-2.5,0.0,-0.0);
 		bogie.render(entity,f,f1,f2,f3,f4,f5);
 
 		GL11.glTranslated(5.0,-0.0,0.00);
 		bogie.render(entity,f,f1,f2,f3,f4,f5);
+		GL11.glPopMatrix();
 	}
 }

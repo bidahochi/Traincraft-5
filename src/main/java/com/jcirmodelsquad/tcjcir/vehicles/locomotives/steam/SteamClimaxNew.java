@@ -23,13 +23,10 @@ public class SteamClimaxNew extends SteamTrain {
 	}
 	public SteamClimaxNew(World world) {
 		super(world, EnumTrains.Climax2.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamClimaxNew(World world, double d, double d1, double d2) {
 		this(world);
@@ -48,26 +45,7 @@ public class SteamClimaxNew extends SteamTrain {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset()+0.25F, posZ);// default
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "2 Truck Climax";
 	}

@@ -24,7 +24,7 @@ public class DieselB23_wrx extends DieselTrain {
     }
     public DieselB23_wrx(World world) {
         super(world, EnumTrains.B23_wrx.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "WRXR Washaskan Woods RR", LockoutGroup.BIDA);
         InsertTexture(1, "WRXR Washaskan Woods RR (Extended DB)", LockoutGroup.BIDA);
     }
@@ -39,10 +39,7 @@ public class DieselB23_wrx extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -86,11 +83,7 @@ public class DieselB23_wrx extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

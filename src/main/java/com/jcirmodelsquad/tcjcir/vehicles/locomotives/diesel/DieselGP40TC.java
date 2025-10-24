@@ -23,7 +23,7 @@ public class DieselGP40TC extends DieselTrain {
     }
     public DieselGP40TC(World world) {
         super(world, EnumTrains.GP40TC.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "GO Transit");
         InsertTexture(1, "Amtrak");
     }
@@ -38,10 +38,7 @@ public class DieselGP40TC extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselGP40TC extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

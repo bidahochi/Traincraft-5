@@ -23,7 +23,7 @@ public class DieselHighrailTruck extends DieselTrain {
     }
     public DieselHighrailTruck(World world) {
         super(world, EnumTrains.HighrailTruck.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //apparently, the reason "world" was red was cus it needed the tank capacity thingg from something else, so iDk reER
     }
     public DieselHighrailTruck(World world, double d, double d1, double d2){
@@ -37,10 +37,7 @@ public class DieselHighrailTruck extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselHighrailTruck extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

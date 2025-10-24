@@ -25,7 +25,7 @@ public class DieselFAFDL extends DieselTrain {
     }
     public DieselFAFDL(World world) {
         super(world, EnumTrains.FAFDL.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "FMSR", LockoutGroup.FMSR);
         InsertTexture(1, "Blandsville & Blankerston (Early FAFDL)");
         InsertTexture(2, "Blandsville & Blankerston (Late FAFDL)");
@@ -42,10 +42,7 @@ public class DieselFAFDL extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselFAFDL extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -25,7 +25,7 @@ public class DieselS12 extends DieselTrain {
     }
     public DieselS12(World world) {
         super(world, EnumTrains.S12.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Amador Central Railroad");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Latrans Range Railroad", LockoutGroup.LRR);
@@ -47,10 +47,7 @@ public class DieselS12 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -95,11 +92,7 @@ public class DieselS12 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

@@ -25,13 +25,10 @@ public class EntityLocoSteamAdler extends SteamTrain {
 	}
 	public EntityLocoSteamAdler(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamAdler.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 	
 	public EntityLocoSteamAdler(World world, double d, double d1, double d2) {
 		this(world);
@@ -64,23 +61,7 @@ public class EntityLocoSteamAdler extends SteamTrain {
 			pitch-=pitchRads*0.3;
 		}
 		riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
-	}
-
-	
-
-	
-
-	@Override
-	public void onUpdate() {
-		checkInvent(locoInvent[0], locoInvent[1], this);
-		super.onUpdate();
-	}
-
-	
-
-	
-
-	@Override
+	}@Override
 	public String getInventoryName() {
 		return "Adler";
 	}
@@ -92,13 +73,5 @@ public class EntityLocoSteamAdler extends SteamTrain {
 		return 0.5F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

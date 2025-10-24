@@ -24,7 +24,7 @@ public class DieselF9A extends DieselTrain {
     }
     public DieselF9A(World world) {
         super(world, EnumTrains.F9A.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "BN 814");
         InsertTexture(1, "FMSR", LockoutGroup.FMSR);
         InsertTexture(2, "EMD Demonstrator");
@@ -44,10 +44,7 @@ public class DieselF9A extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselF9A extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

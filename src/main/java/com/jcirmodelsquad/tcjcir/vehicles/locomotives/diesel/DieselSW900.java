@@ -24,7 +24,7 @@ public class DieselSW900 extends DieselTrain {
     }
     public DieselSW900(World world) {
         super(world, EnumTrains.SW900.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Electric Fuels Corporation");
         InsertTexture(1, "Conrail Shared Assets");
         InsertTexture(2, "Avanste Northeastern");
@@ -49,10 +49,7 @@ public class DieselSW900 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselSW900 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

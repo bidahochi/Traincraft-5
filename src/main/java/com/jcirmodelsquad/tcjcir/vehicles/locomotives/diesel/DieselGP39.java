@@ -23,7 +23,7 @@ public class DieselGP39 extends DieselTrain {
     }
     public DieselGP39(World world) {
         super(world, EnumTrains.GP39.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Atlanta & St Andrews Bay");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "CSXT (YN2)");
@@ -42,10 +42,7 @@ public class DieselGP39 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselGP39 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -25,7 +25,7 @@ public class EntityLocoSteamForneyRed extends SteamTrain {
 	}
 	public EntityLocoSteamForneyRed(World world) {
 		super(world,  EnumHeritageTrainsLegacy.locoSteamForney.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
 	public void initLocoSteam() {

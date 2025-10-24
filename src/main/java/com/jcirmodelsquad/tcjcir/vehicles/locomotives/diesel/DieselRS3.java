@@ -23,7 +23,7 @@ public class DieselRS3 extends DieselTrain {
     }
     public DieselRS3(World world) {
         super(world, EnumTrains.RS3.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Boston & Maine (Simp)");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Denver & Rio Grande Western (Early)");
@@ -32,6 +32,10 @@ public class DieselRS3 extends DieselTrain {
         InsertTexture(5, "CCRL");
         InsertTexture(6, "SER");
         InsertTexture(7, "NSE");
+        InsertTexture(8, "WM (Fireball)");
+        InsertTexture(9, "WM (Fireball Hammerhead)");
+        InsertTexture(10, "WM (Speed Lettering)");
+        InsertTexture(11, "WM (Speed Lettering Hammerhead)");
     }
     public DieselRS3(World world, double d, double d1, double d2){
         this(world);
@@ -44,10 +48,7 @@ public class DieselRS3 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +93,7 @@ public class DieselRS3 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

@@ -23,7 +23,7 @@ public class DieselNRE3gs21b extends DieselTrain {
     }
     public DieselNRE3gs21b(World world) {
         super(world, EnumTrains.NRE3gs21b.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Union Pacific");
         InsertTexture(1, "BNSF");
         InsertTexture(2, "FURRX");
@@ -42,10 +42,7 @@ public class DieselNRE3gs21b extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselNRE3gs21b extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

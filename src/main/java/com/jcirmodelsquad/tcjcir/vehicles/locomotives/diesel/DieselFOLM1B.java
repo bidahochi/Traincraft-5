@@ -25,13 +25,10 @@ public class DieselFOLM1B extends DieselTrain {
     }
     public DieselFOLM1B(World world) {
         super(world, EnumHeritageTrainsLegacy.locoDieselFOL_M1.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     public DieselFOLM1B(World world, double d, double d1, double d2) {
         this(world);
@@ -53,11 +50,7 @@ public class DieselFOLM1B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
     @Override
     public String getInventoryName() {
         return "FOL-M1B";

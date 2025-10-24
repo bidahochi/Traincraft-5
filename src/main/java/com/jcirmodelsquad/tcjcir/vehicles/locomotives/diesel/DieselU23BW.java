@@ -23,7 +23,7 @@ public class DieselU23BW extends DieselTrain {
     }
     public DieselU23BW(World world) {
         super(world, EnumTrains.U23BW.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Blandsville & Blankerston");
         InsertTexture(1, "CSXT (Yn2, Protolance)");
     }
@@ -38,10 +38,7 @@ public class DieselU23BW extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -86,11 +83,7 @@ public class DieselU23BW extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

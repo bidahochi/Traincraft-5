@@ -24,7 +24,7 @@ public class DieselSD60 extends DieselTrain {
     }
     public DieselSD60(World world) {
         super(world, EnumTrains.SD60.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Oakway Lease");
         InsertTexture(1, "Oakway Lease");
         InsertTexture(2, "CN (Ex Oakway i think?)");
@@ -53,10 +53,7 @@ public class DieselSD60 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -101,11 +98,7 @@ public class DieselSD60 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

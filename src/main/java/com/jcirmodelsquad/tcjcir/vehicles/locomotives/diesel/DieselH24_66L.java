@@ -23,7 +23,7 @@ public class DieselH24_66L extends DieselTrain {
     }
     public DieselH24_66L(World world) {
         super(world, EnumTrains.H24_66L.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Wabash");
         InsertTexture(1, "Southern");
     }
@@ -38,10 +38,7 @@ public class DieselH24_66L extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselH24_66L extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

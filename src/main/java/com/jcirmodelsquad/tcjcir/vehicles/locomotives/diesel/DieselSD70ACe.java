@@ -24,7 +24,7 @@ public class DieselSD70ACe extends DieselTrain {
     }
     public DieselSD70ACe(World world) {
         super(world, EnumTrains.SD70ACe.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Blandsville & Blankerston");
         InsertTexture(1, "FURRX Lease");
         InsertTexture(2, "CSXT Thundercab");
@@ -54,10 +54,7 @@ public class DieselSD70ACe extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -99,11 +96,7 @@ public class DieselSD70ACe extends DieselTrain {
     }
     
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.45F;

@@ -24,7 +24,7 @@ public class DieselES44 extends DieselTrain {
     }
     public DieselES44(World world) {
         super(world, EnumTrains.ES44.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //i think i need a scooby doo tie-fighter now
         InsertTexture(0, "Evolution Series Demonstrator");
         InsertTexture(1, "BNSF (H2)");
@@ -57,10 +57,7 @@ public class DieselES44 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -105,11 +102,7 @@ public class DieselES44 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

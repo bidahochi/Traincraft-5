@@ -23,7 +23,7 @@ public class DieselSW8 extends DieselTrain {
     }
     public DieselSW8(World world) {
         super(world, EnumTrains.SW8.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "DRIR 553");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "NYC");
@@ -42,10 +42,7 @@ public class DieselSW8 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselSW8 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

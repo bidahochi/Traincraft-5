@@ -70,12 +70,6 @@ public class EntityLocoElectricHighSpeedZeroED extends ElectricTrain {
 	}
 
 	
-
-	
-
-	
-
-	
 	@Override
 	public String getInventoryName() {
 		return "High Speed";

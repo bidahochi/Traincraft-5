@@ -24,13 +24,10 @@ public class EntityLocoSteamGS4 extends SteamTrain {
 	}
 	public EntityLocoSteamGS4(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamGS4.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 	public EntityLocoSteamGS4(World world, double d, double d1, double d2) {
 		this(world);
 		setPosition(d, d1 + yOffset, d2);
@@ -46,19 +43,6 @@ public class EntityLocoSteamGS4 extends SteamTrain {
 	public void updateRiderPosition() {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.5F, posZ);
 	}
-
-	
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
 @Override
 	public String getInventoryName() {
 		return "Daylight";
@@ -70,13 +54,5 @@ public class EntityLocoSteamGS4 extends SteamTrain {
 		return 0.62F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

@@ -24,7 +24,7 @@ public class DieselB23S7 extends DieselTrain {
     }
     public DieselB23S7(World world) {
         super(world, EnumTrains.B23S7.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "GECX 2000");
         InsertTexture(1, "GECX 2002");
         InsertTexture(2, "Monongahela");
@@ -46,10 +46,7 @@ public class DieselB23S7 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselB23S7 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

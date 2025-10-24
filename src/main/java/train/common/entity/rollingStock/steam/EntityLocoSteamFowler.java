@@ -26,13 +26,10 @@ public class EntityLocoSteamFowler extends SteamTrain {
 
 	public EntityLocoSteamFowler(World world) {
 		super(world, EnumHeritageTrainsLegacy.locosteamKingClass.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamFowler(World world, double d, double d1, double d2) {
 		this(world);
@@ -50,19 +47,6 @@ public class EntityLocoSteamFowler extends SteamTrain {
 	public void updateRiderPosition() {
 		TraincraftUtil.updateRider(this, -0.25, 0.25);
 	}
-
-	
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
 @Override
 	public String getInventoryName() {
 		return "Fowler 4F";
@@ -76,9 +60,5 @@ public class EntityLocoSteamFowler extends SteamTrain {
 	}
 
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) { return canBeAdjusted; }
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) { return true; }
+	
 }

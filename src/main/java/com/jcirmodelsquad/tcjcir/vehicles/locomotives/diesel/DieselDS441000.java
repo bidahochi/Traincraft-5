@@ -24,7 +24,7 @@ public class DieselDS441000 extends DieselTrain {
     }
     public DieselDS441000(World world) {
         super(world, EnumTrains.DS441000.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Chicago & Northwestern (Early)");
         InsertTexture(1, "Chicago & Northwestern (Late)");
         InsertTexture(2, "New York Central (Early)");
@@ -42,10 +42,7 @@ public class DieselDS441000 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselDS441000 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

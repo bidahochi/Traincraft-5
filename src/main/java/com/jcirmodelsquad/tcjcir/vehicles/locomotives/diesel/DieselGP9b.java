@@ -23,7 +23,7 @@ public class DieselGP9b extends DieselTrain {
     }
     public DieselGP9b(World world) {
         super(world, EnumTrains.GP9b.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Union Pacific");
         InsertTexture(1, "Penn Central");
         InsertTexture(2, "Penn Central");
@@ -39,10 +39,7 @@ public class DieselGP9b extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -81,11 +78,7 @@ public class DieselGP9b extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

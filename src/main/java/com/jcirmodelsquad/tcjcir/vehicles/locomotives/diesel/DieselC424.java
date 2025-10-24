@@ -24,7 +24,7 @@ public class DieselC424 extends DieselTrain {
     }
     public DieselC424(World world) {
         super(world, EnumTrains.C424.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Spokane, Portland & Seattle");
         InsertTexture(1, "Morristown & Erie");
         InsertTexture(2, "Western New York & Pennsylvania");
@@ -51,10 +51,7 @@ public class DieselC424 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -99,11 +96,7 @@ public class DieselC424 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

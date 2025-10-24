@@ -25,7 +25,7 @@ public class DieselSD39 extends DieselTrain {
     }
     public DieselSD39(World world) {
         super(world, EnumTrains.SD39.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "BNSF");
         InsertTexture(1, "Blandsville & Blankerston");
@@ -48,10 +48,7 @@ public class DieselSD39 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselSD39 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

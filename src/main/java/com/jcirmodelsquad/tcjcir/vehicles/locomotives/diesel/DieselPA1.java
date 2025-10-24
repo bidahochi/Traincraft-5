@@ -24,7 +24,7 @@ public class DieselPA1 extends DieselTrain {
     }
     public DieselPA1(World world) {
         super(world, EnumTrains.AlcoPA1.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the benis sus
     }
     public DieselPA1(World world, double d, double d1, double d2){
@@ -38,10 +38,7 @@ public class DieselPA1 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -81,11 +78,7 @@ public class DieselPA1 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

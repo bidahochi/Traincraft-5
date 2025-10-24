@@ -1406,7 +1406,13 @@ public class ModelF7b extends ModelConverter //Same as Filename
 		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 356
 				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 126
 				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 22
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 23
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 24
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 25
+				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.16, -0.025, 0);

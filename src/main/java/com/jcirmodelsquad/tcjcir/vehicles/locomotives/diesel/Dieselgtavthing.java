@@ -23,7 +23,7 @@ public class Dieselgtavthing extends DieselTrain {
     }
     public Dieselgtavthing(World world) {
         super(world, EnumTrains.gtavthing.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
 
     }
     public Dieselgtavthing(World world, double d, double d1, double d2){
@@ -37,10 +37,7 @@ public class Dieselgtavthing extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class Dieselgtavthing extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -24,7 +24,7 @@ public class DieselMP15DCW9 extends DieselTrain {
     }
     public DieselMP15DCW9(World world) {
         super(world, EnumTrains.MP15DCW9.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, ""); // buttsecks poopyhead dead rayroad boner ;)
         InsertTexture(1, "WFR but AWESOME");
         InsertTexture(2, "SST but AWESOMER");
@@ -41,10 +41,7 @@ public class DieselMP15DCW9 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselMP15DCW9 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

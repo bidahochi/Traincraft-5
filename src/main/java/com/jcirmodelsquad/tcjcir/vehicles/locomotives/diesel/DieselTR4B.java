@@ -24,7 +24,7 @@ public class DieselTR4B extends DieselTrain {
     }
     public DieselTR4B(World world) {
         super(world, EnumTrains.TR4B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Belt Railroad of Chicago");
         InsertTexture(1, "Milwaukee Road");
         InsertTexture(2, "Chesapeake & Ohio");
@@ -43,10 +43,7 @@ public class DieselTR4B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
 
@@ -92,11 +89,7 @@ public class DieselTR4B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

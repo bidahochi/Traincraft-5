@@ -24,7 +24,7 @@ public class DieselCF7round extends DieselTrain {
     }
     public DieselCF7round(World world) {
         super(world, EnumTrains.CF7round.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "ATSF (Pinstripe)");
         InsertTexture(1, "ATSF (2568)");
         InsertTexture(2, "ATSF (2640)");
@@ -51,10 +51,7 @@ public class DieselCF7round extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -100,11 +97,7 @@ public class DieselCF7round extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

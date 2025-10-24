@@ -24,7 +24,7 @@ public class DieselSB23R extends DieselTrain {
     }
     public DieselSB23R(World world) {
         super(world, EnumTrains.SB23R.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "BMC (Plant Switcher)");
         //InsertTexture(1, "Western Pacific (Early)");
         //InsertTexture(2, "Western Pacific (Late)");
@@ -46,10 +46,7 @@ public class DieselSB23R extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -93,11 +90,7 @@ public class DieselSB23R extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -24,7 +24,7 @@ public class DieselSD40dash3 extends DieselTrain {
     }
     public DieselSD40dash3(World world) {
         super(world, EnumTrains.SD40dash3.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "CSXT (RCO Equipped)");
         InsertTexture(1, "CSXT");
@@ -41,10 +41,7 @@ public class DieselSD40dash3 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -89,11 +86,7 @@ public class DieselSD40dash3 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

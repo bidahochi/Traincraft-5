@@ -821,6 +821,7 @@ public enum ItemIDs {
 
 	minecartIngotPig("ItemRollingStock", "pigiron", FREIGHT, 3),
 	minecartSteelSlabFlat("ItemRollingStock", "steelflat", FREIGHT, 3),
+	minecartEvansCoilCar("ItemRollingStock", "evans_coil_car_icon", FREIGHT, 5),
 
 	//pAssenger//
 	minecartPCH120Commute("ItemRollingStock", "pch120", PASSENGER, 4),
@@ -942,6 +943,10 @@ public enum ItemIDs {
 	minecartPSFNCCBaggage_Dinette("ItemRollingStock", "PSFNCCBaggage_Dinette", PASSENGER, 3),
 
 	minecartNYCPrewar56SeatCoach("ItemRollingStock", "NYCPrewar56SeatCoach", PASSENGER, 3),
+
+	minecartMILWPrewarBaggage("ItemRollingStock", "MILWPrewarBaggage", PASSENGER, 3),
+	minecartMILW1935Baggage_Dinette("ItemRollingStock", "MILW1935Baggage_Dinette", PASSENGER, 3),
+	minecartMILW1935Tap_Dinette("ItemRollingStock", "MILW1935Tap_Dinette", PASSENGER, 3),
 
 	minecartAmfleet("ItemRollingStock", "Amfleet", PASSENGER, 3),
 	minecartAmfleet2("ItemRollingStock", "Amfleet2", PASSENGER, 3),

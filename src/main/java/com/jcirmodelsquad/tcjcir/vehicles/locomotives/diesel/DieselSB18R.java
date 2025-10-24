@@ -24,7 +24,7 @@ public class DieselSB18R extends DieselTrain {
     }
     public DieselSB18R(World world) {
         super(world, EnumTrains.SB18R.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "CEE Factory Blank (Phase 1)");
         InsertTexture(1, "CEE Factory Blank (Phase 2)");
         InsertTexture(2, "Western Pacific (Early)");
@@ -48,10 +48,7 @@ public class DieselSB18R extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselSB18R extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

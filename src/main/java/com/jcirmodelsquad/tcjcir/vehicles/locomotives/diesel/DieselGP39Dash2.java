@@ -23,7 +23,7 @@ public class DieselGP39Dash2 extends DieselTrain {
     }
     public DieselGP39Dash2(World world) {
         super(world, EnumTrains.GP39Dash2.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "MKT");
         InsertTexture(1, "FURRX (Ex CSWR)");
         InsertTexture(2, "Nomansi & Eastern Pacific");
@@ -42,10 +42,7 @@ public class DieselGP39Dash2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselGP39Dash2 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

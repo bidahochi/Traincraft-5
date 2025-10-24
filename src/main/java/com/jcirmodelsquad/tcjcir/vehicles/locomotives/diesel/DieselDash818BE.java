@@ -24,7 +24,7 @@ public class DieselDash818BE extends DieselTrain {
     }
     public DieselDash818BE(World world) {
         super(world, EnumTrains.Dash818BE.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "FNCC (Kit-L)", LockoutGroup.FNCC);
 
     }
@@ -39,10 +39,7 @@ public class DieselDash818BE extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -87,11 +84,7 @@ public class DieselDash818BE extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

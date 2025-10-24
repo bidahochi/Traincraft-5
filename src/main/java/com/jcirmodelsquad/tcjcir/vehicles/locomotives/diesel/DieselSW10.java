@@ -24,7 +24,7 @@ public class DieselSW10 extends DieselTrain {
     }
     public DieselSW10(World world) {
         super(world, EnumTrains.SW10.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "UP");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "North Fox (KIT-L)", LockoutGroup.FNCC);
@@ -46,10 +46,7 @@ public class DieselSW10 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselSW10 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -23,7 +23,7 @@ public class DieselDash840B extends DieselTrain {
     }
     public DieselDash840B(World world) {
         super(world, EnumTrains.Dash840B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CSXT (YN2)");
         InsertTexture(1, "CSXT (YN3)");
         InsertTexture(2, "ATSF (Freightbonnet)");
@@ -47,10 +47,7 @@ public class DieselDash840B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -95,11 +92,7 @@ public class DieselDash840B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -24,7 +24,7 @@ public class DieselU30C extends DieselTrain {
     }
     public DieselU30C(World world) {
         super(world, EnumTrains.U30C.getTankCapacity(), LiquidManager.dieselFilter());//its like magic guys trust me
-        initLoco();
+
         InsertTexture(0, "Burlington Northern 5344");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "FNCC (KIT-L)", LockoutGroup.FNCC);
@@ -52,10 +52,7 @@ public class DieselU30C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -100,11 +97,7 @@ public class DieselU30C extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

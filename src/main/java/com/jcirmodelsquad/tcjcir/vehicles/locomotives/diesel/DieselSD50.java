@@ -25,7 +25,7 @@ public class DieselSD50 extends DieselTrain {
     }
     public DieselSD50(World world) {
         super(world, EnumTrains.SD50.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CSX (YN1)");
         InsertTexture(1, "CSX (YN2)");
         InsertTexture(2, "CSX (YN3)");
@@ -50,10 +50,7 @@ public class DieselSD50 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -98,11 +95,7 @@ public class DieselSD50 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

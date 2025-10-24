@@ -23,7 +23,7 @@ public class DieselC425 extends DieselTrain {
     }
     public DieselC425(World world) {
         super(world, EnumTrains.C425.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Penn Central");
         InsertTexture(1, "Chicago Northwestern");
         InsertTexture(2, "Spokane, Portland & Seattle");
@@ -40,10 +40,7 @@ public class DieselC425 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -88,11 +85,7 @@ public class DieselC425 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

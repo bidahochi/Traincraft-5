@@ -23,7 +23,7 @@ public class DieselE8B extends DieselTrain {
     }
     public DieselE8B(World world) {
         super(world, EnumTrains.E8B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the benis sus
     }
     public DieselE8B(World world, double d, double d1, double d2){
@@ -37,10 +37,7 @@ public class DieselE8B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -80,11 +77,7 @@ public class DieselE8B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -13,6 +13,7 @@ import train.common.api.SteamTrain;
 import train.common.library.GuiIDs;
 import train.common.library.sounds.SoundRecord;
 
+@Deprecated
 public class EntityLocoSteamU57 extends SteamTrain {
 	@Override
 	public SoundRecord getSoundRecord()
@@ -22,13 +23,10 @@ public class EntityLocoSteamU57 extends SteamTrain {
 
 	public EntityLocoSteamU57(World world) {
 		super(world, 5000/*Change here to EnumTrains..getTankCapacity()*/, LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamU57(World world, double d, double d1, double d2) {
 		this(world);
@@ -50,14 +48,7 @@ public class EntityLocoSteamU57 extends SteamTrain {
 
 	
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
+	
 @Override
 	public String getInventoryName() {
 		return "USSR 0-5-0";
@@ -70,13 +61,5 @@ public class EntityLocoSteamU57 extends SteamTrain {
 		return 0.39F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

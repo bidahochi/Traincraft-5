@@ -24,7 +24,7 @@ public class DieselM640 extends DieselTrain {
     }
     public DieselM640(World world) {
         super(world, EnumTrains.M640.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "CPRail 4744");
         InsertTexture(1, "CPRail 4744 (AC Convertible)");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -44,10 +44,7 @@ public class DieselM640 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselM640 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

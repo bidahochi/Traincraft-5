@@ -24,7 +24,7 @@ public class DieselCF7angle extends DieselTrain {
     }
     public DieselCF7angle(World world) {
         super(world, EnumTrains.CF7angle.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "ATSF 2444");
         InsertTexture(1, "ATSF 2546");
         InsertTexture(2, "Washington Central Railroad");
@@ -76,10 +76,7 @@ public class DieselCF7angle extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -121,11 +118,7 @@ public class DieselCF7angle extends DieselTrain {
         }
     }
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.2F;

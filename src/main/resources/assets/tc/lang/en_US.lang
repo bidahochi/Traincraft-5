@@ -1614,10 +1614,12 @@ entity.tc.40ftHuskyStackWellcar.name=Gunderson 40' Husky Stack Wellcar
 
 item.tc:minecartIngotPig.name=Molten Ingot "Pig"
 item.tc:minecartSteelSlabFlat.name=15' Steel Slab Flat
+item.tc:minecartEvansCoilCar.name=Evans Coil Car
 
 
 entity.tc.IngotPig.name=Molten Ingot Pig
 entity.tc.SteelSlabFlat.name=15' Steel Slab Flat
+entity.tc.EvansCoilCar.name=Evans Coil Car
 
 --------------------------------------------------------
 
@@ -1748,6 +1750,10 @@ item.tc:minecartPSFNCCBaggage_Dinette.name=Pullman Standard FNCC Baggage-Dinette
 
 item.tc:minecartNYCPrewar56SeatCoach.name=NYC Prewar 56 Seat Coach
 
+item.tc:minecartMILWPrewarBaggage.name=Milwaukee Road Prewar Baggage
+item.tc:minecartMILW1935Baggage_Dinette.name=Milwaukee Road 1935 Baggage-Dinette
+item.tc:minecartMILW1935Tap_Dinette.name=Milwaukee Road 1935 Tap-Dinette
+
 entity.tc.Freight PS 85 Baggage.name=Pullman Standard 85' Baggage
 entity.tc.PS 5-6-5 Sleeper.name=Pullman Standard 10-6 Sleeper (Center Bedroom)
 entity.tc.PS 5-6-5 Sleeper DRGW Edition.name=Pullman Standard DRGW 6-5-5 Sleeper
@@ -1860,6 +1866,10 @@ entity.tc.PRECO Pendulum Coach.name=Pacific Railway Equipment Company Pendulum C
 entity.tc.PS FNCC Baggage-Dinette.name=Pullman Standard FNCC Baggage-Dinette
 
 entity.tc.NYC Prewar 56 Seat Coach.name=NYC Prewar 56 Seat Coach
+
+entity.tc.MILW Prewar Baggage.name=Milwaukee Road Prewar Baggage
+entity.tc.MILW 1935 Baggage-Dinette.name=Milwaukee Road 1935 Baggage-Dinette
+entity.tc.MILW 1935 Tap-Dinette.name=Milwaukee Road 1935 Tap-Dinette
 
 item.tc:minecartAmfleet.name=Amfleet 1 Coach
 item.tc:minecartAmfleet2.name=Amfleet 2 Coach

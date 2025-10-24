@@ -25,7 +25,7 @@ public class DieselCF7round3 extends DieselTrain {
     }
     public DieselCF7round3(World world) {
         super(world, EnumTrains.CF7round3.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Carbondale & Pine Valley", LockoutGroup.CPV);
         InsertTexture(1, "FNCC (KIT-L, Ex ATSF, Dual Canon)", LockoutGroup.FNCC);
         InsertTexture(2, "FNCC (KIT-L, Ex ATSF, Dual Canon)", LockoutGroup.FNCC);
@@ -52,10 +52,7 @@ public class DieselCF7round3 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -96,11 +93,7 @@ public class DieselCF7round3 extends DieselTrain {
             riddenByEntity.setPosition(bogieX1, pitch, bogieZ1 +0.0);
         }
     }
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

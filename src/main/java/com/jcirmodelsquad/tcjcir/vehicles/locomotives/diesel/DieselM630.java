@@ -25,7 +25,7 @@ public class DieselM630 extends DieselTrain {
     }
     public DieselM630(World world) {
         super(world, EnumTrains.M630.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Pacific Great Eastern");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "FNCC (KIT-L)", LockoutGroup.FNCC);
@@ -44,10 +44,7 @@ public class DieselM630 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselM630 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

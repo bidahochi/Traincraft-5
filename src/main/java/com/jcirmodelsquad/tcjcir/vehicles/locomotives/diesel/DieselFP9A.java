@@ -24,7 +24,7 @@ public class DieselFP9A extends DieselTrain {
     }
     public DieselFP9A(World world) {
         super(world, EnumTrains.FP9A.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the benis sus
     }
     public DieselFP9A(World world, double d, double d1, double d2){
@@ -38,10 +38,7 @@ public class DieselFP9A extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -86,11 +83,7 @@ public class DieselFP9A extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

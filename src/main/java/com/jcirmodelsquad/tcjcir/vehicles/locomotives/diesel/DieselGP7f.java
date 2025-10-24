@@ -24,7 +24,7 @@ public class DieselGP7f extends DieselTrain {
     }
     public DieselGP7f(World world) {
         super(world, EnumTrains.GP7f.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "ARR 1803");
         InsertTexture(1, "ARR 1807");
         InsertTexture(2, "ARR 1802");
@@ -43,10 +43,7 @@ public class DieselGP7f extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselGP7f extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

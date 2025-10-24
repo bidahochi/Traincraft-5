@@ -23,7 +23,7 @@ public class SteamLima2_8_0 extends SteamTrain {
 	}
 	public SteamLima2_8_0(World world) {
 		super(world, EnumTrains.Lima2_8_0.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Generic");
 		InsertTexture(1, "CDCS 20");
 		InsertTexture(2, "CDCS 21");
@@ -32,10 +32,7 @@ public class SteamLima2_8_0 extends SteamTrain {
 		InsertTexture(5, "CRIP");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamLima2_8_0(World world, double d, double d1, double d2) {
 		this(world);
@@ -88,26 +85,7 @@ public class SteamLima2_8_0 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "Lima 2-8-0";
 	}

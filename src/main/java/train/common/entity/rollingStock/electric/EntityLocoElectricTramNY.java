@@ -67,12 +67,6 @@ public class EntityLocoElectricTramNY extends ElectricTrain {
 			riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
 		}
 	}
-
-	
-
-	
-
-	
 	@Override
 	public String getInventoryName() {
 		return "Kawasaki PA4";

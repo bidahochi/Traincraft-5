@@ -24,7 +24,7 @@ public class DieselGP7 extends DieselTrain {
     }
     public DieselGP7(World world) {
         super(world, EnumTrains.GP7.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Avanste Northeastern (Late)");
         InsertTexture(1, "Burlington Northern (Ex CBQ)");
         InsertTexture(2, "Butte, Anaconda & Pacific (Early)");
@@ -36,45 +36,49 @@ public class DieselGP7 extends DieselTrain {
         InsertTexture(8, "West Creek Pacific");
         InsertTexture(9, "Carbondale & Pine Valley", LockoutGroup.CPV);
         InsertTexture(10, "Carbondale & Pine Valley (CSWR Buyout)", LockoutGroup.CPV);
-        InsertTexture(11, "waltuh white gp7");
-        InsertTexture(12, "Deadwood & La Mesa (Early)");
-        InsertTexture(13, "Deadwood & La Mesa (Late)");
-        InsertTexture(14, "Blandsville & Blankerston");
-        InsertTexture(15, "Amtrak MOW");
-        InsertTexture(16, "Seaboard Coast Line");
-        InsertTexture(17, "Denver & Rio Grande Western (Early)");
-        InsertTexture(18, "Denver & Rio Grande Western (Early 2?)");
-        InsertTexture(19, "Denver & Rio Grande Western (Late Small Logo)");
-        InsertTexture(20, "Denver & Rio Grande Western (Late Big Logo)");
-        InsertTexture(21, "US Army");
-        InsertTexture(22, "Great Northern (Emp Builder)");
-        InsertTexture(23, "Great Northern (EB Simp)");
-        InsertTexture(24, "Great Northern (BSB)");
-        InsertTexture(25, "Washaska & Old Fox RR Co 21");
-        InsertTexture(26, "Washaska & Old Fox RR Co 26");
-        InsertTexture(27, "New York Central (Early)");
-        InsertTexture(28, "New York Central (Lightning Bolt)");
-        InsertTexture(29, "New York Central (Late)");
-        InsertTexture(30, "New York Central (Grey Lighting Bolt)");
-        InsertTexture(31, "FNCC (KIT-L)", LockoutGroup.FNCC);
-        InsertTexture(32, "ATSF (Pinstripe)");
-        InsertTexture(33, "ATSF (Zebrastripe)");
-        InsertTexture(34, "MKT");
-        InsertTexture(35, "Penn Central");
-        InsertTexture(36, "Northern Pacific");
+        InsertTexture(11, "Carbondale & Pine Valley 11", LockoutGroup.CPV);
+        InsertTexture(12, "waltuh white gp7");
+        InsertTexture(13, "Deadwood & La Mesa (Early)");
+        InsertTexture(14, "Deadwood & La Mesa (Late)");
+        InsertTexture(15, "Blandsville & Blankerston");
+        InsertTexture(16, "Amtrak MOW");
+        InsertTexture(17, "Seaboard Coast Line");
+        InsertTexture(18, "Denver & Rio Grande Western (Early)");
+        InsertTexture(19, "Denver & Rio Grande Western (Early 2?)");
+        InsertTexture(10, "Denver & Rio Grande Western (Late Small Logo)");
+        InsertTexture(21, "Denver & Rio Grande Western (Late Big Logo)");
+        InsertTexture(22, "US Army");
+        InsertTexture(23, "Great Northern (Emp Builder)");
+        InsertTexture(24, "Great Northern (EB Simp)");
+        InsertTexture(25, "Great Northern (BSB)");
+        InsertTexture(26, "Washaska & Old Fox RR Co 21");
+        InsertTexture(27, "Washaska & Old Fox RR Co 26");
+        InsertTexture(28, "New York Central (Early)");
+        InsertTexture(29, "New York Central (Lightning Bolt)");
+        InsertTexture(30, "New York Central (Late)");
+        InsertTexture(31, "New York Central (Grey Lighting Bolt)");
+        InsertTexture(32, "FNCC (KIT-L)", LockoutGroup.FNCC);
+        InsertTexture(33, "ATSF (Pinstripe)");
+        InsertTexture(34, "ATSF (Zebrastripe)");
+        InsertTexture(35, "MKT");
+        InsertTexture(36, "Penn Central");
         InsertTexture(37, "Northern Pacific");
-        InsertTexture(38, "Cotton Belt/ Southern Pacific");
+        InsertTexture(38, "Northern Pacific");
         InsertTexture(39, "Cotton Belt/ Southern Pacific");
-        InsertTexture(40, "Southern Pacific");
-        InsertTexture(41, "Western Pacific");
-        InsertTexture(42, "Deadwood & Northern");
-        InsertTexture(43, "CNW 1518");
-        InsertTexture(44, "Great Lakes & Northern Territories (Ex FNCC)");
-        InsertTexture(45, "Monongahela");
-        InsertTexture(46, "WCP (stupid bozo chop)");
-        InsertTexture(47, "CDCS");
-        InsertTexture(48, "JRN");
-        InsertTexture(49, "GCCR");
+        InsertTexture(40, "Cotton Belt/ Southern Pacific");
+        InsertTexture(41, "Southern Pacific");
+        InsertTexture(42, "Western Pacific");
+        InsertTexture(43, "Deadwood & Northern");
+        InsertTexture(44, "CNW 1518");
+        InsertTexture(45, "Great Lakes & Northern Territories (Ex FNCC)");
+        InsertTexture(46, "Monongahela");
+        InsertTexture(47, "WCP (stupid bozo chop)");
+        InsertTexture(48, "CDCS");
+        InsertTexture(49, "JRN");
+        InsertTexture(50, "GCCR");
+        InsertTexture(51, "WM (As Delivered)");
+        InsertTexture(52, "WM (Chop Nose)");
+        InsertTexture(53, "WM (Chop Nose Circus Scheme)");
     }
     public DieselGP7(World world, double d, double d1, double d2){
         this(world);
@@ -87,10 +91,7 @@ public class DieselGP7 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -135,11 +136,7 @@ public class DieselGP7 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

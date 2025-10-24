@@ -24,7 +24,7 @@ public class DieselU23B extends DieselTrain {
     }
     public DieselU23B(World world) {
         super(world, EnumTrains.U23B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Union Pacific");
         InsertTexture(1, "Fox Union Rail Resources (FURRX)");
         InsertTexture(2, "Conrail");
@@ -70,10 +70,7 @@ public class DieselU23B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -118,11 +115,7 @@ public class DieselU23B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

@@ -32,7 +32,6 @@ public class DieselGP49 extends DieselTrain {
     }
     public DieselGP49(World world) {
         super(world, EnumTrains.GP49.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
         InsertTexture(0, "Alaska Railroad");
         InsertTexture(1, "Fox Union Rail Resources (FURRX)");
         InsertTexture(2, "Great Lakes & Northern Testicles");
@@ -46,11 +45,6 @@ public class DieselGP49 extends DieselTrain {
         prevPosX = d;
         prevPosY = d1;
         prevPosZ = d2;
-    }
-
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
     }
 
     @Override
@@ -108,7 +102,7 @@ public class DieselGP49 extends DieselTrain {
         if (worldObj.isRemote || bogieLoco==null) {
             return;
         }
-        checkInvent(locoInvent[0]);//, locoInvent[1], this
+
         if (fakePlayer == null){
             fakePlayer = new FakePlayer(worldObj);
         }

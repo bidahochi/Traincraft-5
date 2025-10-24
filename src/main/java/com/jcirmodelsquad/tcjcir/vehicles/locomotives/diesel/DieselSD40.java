@@ -25,7 +25,7 @@ public class DieselSD40 extends DieselTrain {
     }
     public DieselSD40(World world) {
         super(world, EnumTrains.SD40.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the
         InsertTexture(0, "ATSF (Pinstripe)");
         InsertTexture(1, "Blandsville & Blankerston");
@@ -41,6 +41,8 @@ public class DieselSD40 extends DieselTrain {
         InsertTexture(11, "Seaboard System");
         InsertTexture(12, "Honex Lines (HNXR)", LockoutGroup.BIDA);
         InsertTexture(13, "Chessie System");
+        InsertTexture(14, "WM (Speed Lettering)");
+        InsertTexture(15, "WM (Circus)");
     }
     public DieselSD40(World world, double d, double d1, double d2){
         this(world);
@@ -53,10 +55,7 @@ public class DieselSD40 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -96,11 +95,7 @@ public class DieselSD40 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

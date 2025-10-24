@@ -23,7 +23,7 @@ public class DieselU23C extends DieselTrain {
     }
     public DieselU23C(World world) {
         super(world, EnumTrains.U23C.getTankCapacity(), LiquidManager.dieselFilter());//its like magic guys trust me
-        initLoco();
+
         InsertTexture(0, "Consolidate DeeZ NUTS");
         InsertTexture(1, "Nautilus");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -44,10 +44,7 @@ public class DieselU23C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselU23C extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

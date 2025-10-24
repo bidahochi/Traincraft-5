@@ -23,7 +23,7 @@ public class DieselDash840C extends DieselTrain {
     }
     public DieselDash840C(World world) {
         super(world, EnumTrains.Dash840C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Union Pacific (ITS A SPECTRUM ITS OKAY)");
         InsertTexture(1, "CSXT (Grey Ghost)");
         InsertTexture(2, "CSXT (YN2)");
@@ -48,10 +48,7 @@ public class DieselDash840C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselDash840C extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

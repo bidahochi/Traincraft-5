@@ -23,7 +23,7 @@ public class DieselF40PH extends DieselTrain {
     }
     public DieselF40PH(World world) {
         super(world, EnumTrains.F40PH.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Amtrak (Phase III)");
         InsertTexture(1, "Amtrak (Phase IV)");
         InsertTexture(2, "Amtrak (Phase II)");
@@ -42,10 +42,7 @@ public class DieselF40PH extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselF40PH extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

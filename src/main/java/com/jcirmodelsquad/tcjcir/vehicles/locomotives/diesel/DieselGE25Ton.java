@@ -23,7 +23,7 @@ public class DieselGE25Ton extends DieselTrain {
 	}
 	public DieselGE25Ton(World world) {
 		super(world, EnumTrains.GE25Ton.getTankCapacity(), LiquidManager.dieselFilter());
-		initLoco();
+
 		InsertTexture(0, "NPS (Golden Spike National Park)");
 		InsertTexture(1, "PW (Shop Switcher)");
 		InsertTexture(2, "Duke Power Company");
@@ -86,20 +86,7 @@ public class DieselGE25Ton extends DieselTrain {
 
 	
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0]);
-	}
 
-	
-
-	
-
-	
 
 	@Override
 	public String getInventoryName() {

@@ -23,7 +23,7 @@ public class DieselH24_66C extends DieselTrain {
     }
     public DieselH24_66C(World world) {
         super(world, EnumTrains.H24_66C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Canadian Pacific");
         InsertTexture(1, "Canadian Pacific (Demonstrator)");
         InsertTexture(2, "Canadian Pacific (Twin Steam Generators)");
@@ -39,10 +39,7 @@ public class DieselH24_66C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -81,11 +78,7 @@ public class DieselH24_66C extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -23,16 +23,13 @@ public class SteamAlco0_6_0T extends SteamTrain {
 	}
 	public SteamAlco0_6_0T(World world) {
 		super(world, EnumTrains.Alco0_6_0T.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Generic");
 		InsertTexture(1, "CDCS");
 		InsertTexture(2, "SPR");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamAlco0_6_0T(World world, double d, double d1, double d2) {
 		this(world);
@@ -84,19 +81,6 @@ public class SteamAlco0_6_0T extends SteamTrain {
 			riddenByEntity.setPosition(bogieX1, pitch, bogieZ1 +0.0);
 		}
 	}
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
 
 	
 

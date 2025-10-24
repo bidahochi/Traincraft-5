@@ -23,7 +23,7 @@ public class DieselVO1000 extends DieselTrain {
     }
     public DieselVO1000(World world) {
         super(world, EnumTrains.VO1000.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Spokane Portland & Seattle");
         InsertTexture(1, "LC&BC 9");
         InsertTexture(2, "ATSF (Pinstripe)");
@@ -42,10 +42,7 @@ public class DieselVO1000 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -86,11 +83,7 @@ public class DieselVO1000 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     @Override
     public String getInventoryName() {

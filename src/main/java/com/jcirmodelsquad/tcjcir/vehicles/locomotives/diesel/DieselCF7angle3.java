@@ -25,7 +25,7 @@ public class DieselCF7angle3 extends DieselTrain {
     }
     public DieselCF7angle3(World world) {
         super(world, EnumTrains.CF7angle3.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "ANE");
         InsertTexture(1, "FNCC (CEE Rebuilt)", LockoutGroup.FNCC);
         InsertTexture(2, "FNCC (Ex CEE Ne WP)", LockoutGroup.FNCC);
@@ -77,10 +77,7 @@ public class DieselCF7angle3 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -122,11 +119,7 @@ public class DieselCF7angle3 extends DieselTrain {
         }
     }
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

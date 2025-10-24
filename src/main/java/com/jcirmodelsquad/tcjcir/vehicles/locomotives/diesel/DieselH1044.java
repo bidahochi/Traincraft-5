@@ -24,7 +24,7 @@ public class DieselH1044 extends DieselTrain {
     }
     public DieselH1044(World world) {
         super(world, EnumTrains.H1044.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Hallet Dock Company");
         InsertTexture(1, "Union Pacific");
         InsertTexture(2, "Denver & Rio Grande");
@@ -50,10 +50,7 @@ public class DieselH1044 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -99,11 +96,7 @@ public class DieselH1044 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     @Override
     public String getInventoryName() {

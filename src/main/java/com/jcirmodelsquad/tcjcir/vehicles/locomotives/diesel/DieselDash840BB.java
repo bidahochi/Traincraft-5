@@ -24,7 +24,7 @@ public class DieselDash840BB extends DieselTrain {
     }
     public DieselDash840BB(World world) {
         super(world, EnumTrains.Dash840BB.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "ATSF");
         InsertTexture(1, "North Fox (Early)", LockoutGroup.FNCC);
     }
@@ -39,10 +39,7 @@ public class DieselDash840BB extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselDash840BB extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -24,7 +24,7 @@ public class Diesel4ED172T extends DieselTrain {
     }
     public Diesel4ED172T(World world) {
         super(world, EnumTrains.CEE4ED172T.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "CEE 1950s Demo units");
         InsertTexture(1, "FMSR Late (FNCC Early)", LockoutGroup.FMSR);
         InsertTexture(2, "DLMR");
@@ -50,10 +50,7 @@ public class Diesel4ED172T extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -98,11 +95,7 @@ public class Diesel4ED172T extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

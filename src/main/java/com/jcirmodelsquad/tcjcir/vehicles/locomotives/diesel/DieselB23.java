@@ -24,7 +24,7 @@ public class DieselB23 extends DieselTrain {
     }
     public DieselB23(World world) {
         super(world, EnumTrains.B23.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Franklin Industrial Minerals (FIMX Early)");
         InsertTexture(1, "Southern Pacific (Early)");
         InsertTexture(2, "Southern Pacific (Late)");
@@ -69,10 +69,7 @@ public class DieselB23 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -116,11 +113,7 @@ public class DieselB23 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

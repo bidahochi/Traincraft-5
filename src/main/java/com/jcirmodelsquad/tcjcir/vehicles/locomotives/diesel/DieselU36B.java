@@ -23,7 +23,7 @@ public class DieselU36B extends DieselTrain {
     }
     public DieselU36B(World world) {
         super(world, EnumTrains.U36B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "auto-train Corp");
         InsertTexture(1, "Transkentucky Transportation Ind");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -48,10 +48,7 @@ public class DieselU36B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselU36B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

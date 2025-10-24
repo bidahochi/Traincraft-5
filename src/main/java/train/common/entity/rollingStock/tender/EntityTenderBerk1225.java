@@ -15,19 +15,14 @@ import train.common.api.Tender;
 import train.common.library.EnumHeritageTrainsLegacy;
 import train.common.library.GuiIDs;
 
-public class EntityTenderBerk1225 extends Tender implements IInventory {
-	public int freightInventorySize;
+public class EntityTenderBerk1225 extends Tender  {
+	
 	public EntityTenderBerk1225(World world) {
 		super(world, FluidRegistry.WATER, 0, EnumHeritageTrainsLegacy.Model225Tender.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initFreightTender();
+		
 	}
 
-	public void initFreightTender() {
-		freightInventorySize = 16;
-
-		tenderItems = new ItemStack[freightInventorySize];
-		this.setDefaultMass(0.2);
-	}
+	
 
 	public EntityTenderBerk1225(World world, double d, double d1, double d2) {
 		this(world);
@@ -41,62 +36,13 @@ public class EntityTenderBerk1225 extends Tender implements IInventory {
 	}
 
 	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		checkInvent(tenderItems[0], this);
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-		super.writeEntityToNBT(nbttagcompound);
-
-		NBTTagList nbttaglist = new NBTTagList();
-		for (int i = 0; i < tenderItems.length; i++) {
-			if (tenderItems[i] != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				tenderItems[i].writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
-		}
-		nbttagcompound.setTag("Items", nbttaglist);
-	}
-
-	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		super.readEntityFromNBT(nbttagcompound);
-
-		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-		tenderItems = new ItemStack[getSizeInventory()];
-		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-			int j = nbttagcompound1.getByte("Slot") & 0xff;
-			if (j >= 0 && j < tenderItems.length) {
-				tenderItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-			}
-		}
-	}
 	@Override
 	public String getInventoryName() {
 		return "Berkshire 1225 Tender";
-	}
-
-	@Override
-	public int getSizeInventory() {
-		return freightInventorySize;
-	}
-
-	
-
-	@Override
+	}@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 2.875F;
 	}
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

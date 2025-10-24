@@ -24,17 +24,14 @@ public class SteamClimaxB extends SteamTrain {
 	}
 	public SteamClimaxB(World world) {
 		super(world, EnumTrains.ClimaxB.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Hillcrest Lumber Co #9");
 		InsertTexture(1, "Washaska Resources #6", LockoutGroup.BIDA);
 		InsertTexture(2, "Washaska Resources #7", LockoutGroup.BIDA);
 		InsertTexture(3, "Clarks Milling & Lumber Co");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamClimaxB(World world, double d, double d1, double d2) {
 		this(world);
@@ -87,26 +84,7 @@ public class SteamClimaxB extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "50 Ton Class B Climax";
 	}

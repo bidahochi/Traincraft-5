@@ -24,7 +24,7 @@ public class DieselU18Balt extends DieselTrain {
     }
     public DieselU18Balt(World world) {
         super(world, EnumTrains.U18Balt.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
 
         InsertTexture(0, "PW (Late Orange & Brown)");
         InsertTexture(1, "FNCC (KIT-L)", LockoutGroup.FNCC);
@@ -57,10 +57,7 @@ public class DieselU18Balt extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -105,11 +102,7 @@ public class DieselU18Balt extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

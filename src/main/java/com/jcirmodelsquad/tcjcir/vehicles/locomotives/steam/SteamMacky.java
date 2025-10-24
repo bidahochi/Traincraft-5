@@ -23,7 +23,7 @@ public class SteamMacky extends SteamTrain {
     }
     public SteamMacky(World world) {
         super(world, EnumTrains.WCPMacky.getTankCapacity(), LiquidManager.WATER_FILTER);
-        initLocoSteam();
+        
     }
 
     public void initLocoSteam() {

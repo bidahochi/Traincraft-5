@@ -23,7 +23,7 @@ public class DieselF45 extends DieselTrain {
     }
     public DieselF45(World world) {
         super(world, EnumTrains.F45.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "Great Northern");
         InsertTexture(1, "Burlington Northern");
@@ -42,10 +42,7 @@ public class DieselF45 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselF45 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

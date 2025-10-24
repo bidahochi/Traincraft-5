@@ -1,11 +1,14 @@
 package train.common.api;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 import train.common.Traincraft;
@@ -15,7 +18,8 @@ import train.common.entity.rollingStock.EntityBUnitEMDF3;
 import train.common.entity.rollingStock.EntityBUnitEMDF7;
 import train.common.library.GuiIDs;
 
-public abstract class Tender extends Freight implements IFluidHandler {
+public abstract class Tender extends Freight implements IFluidHandler, IInventory
+{
 
 	public ItemStack tenderItems[];
 	private int maxTank;
@@ -34,8 +38,11 @@ public abstract class Tender extends Freight implements IFluidHandler {
 		this(new FluidStack(fluid, quantity), capacity, world, null);
 	}
 
-	public Tender(World world, Fluid fluid, int quantity, int capacity, FluidStack filter) {
+	public Tender(World world, Fluid fluid, int quantity, int capacity, FluidStack filter)
+	{
 		this(new FluidStack(fluid, quantity), capacity, world, filter);
+		freightInventorySize = 16;
+		tenderItems = new ItemStack[freightInventorySize];
 	}
 
 	private Tender(FluidStack fluid, int capacity, World world, FluidStack filter) {
@@ -68,32 +75,70 @@ public abstract class Tender extends Freight implements IFluidHandler {
 		isDead = true;
 	}
 
+	public int freightInventorySize;
+
+	
+
 	@Override
-	public abstract int getSizeInventory();
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return true;
+	}
+
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		super.writeEntityToNBT(nbttagcompound);
 		this.theTank.writeToNBT(nbttagcompound);
+
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < tenderItems.length; i++) {
+			if (tenderItems[i] != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				tenderItems[i].writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbttagcompound.setTag("Items", nbttaglist);
 	}
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		super.readEntityFromNBT(nbttagcompound);
 		this.theTank.readFromNBT(nbttagcompound);
+
+		NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+		tenderItems = new ItemStack[getSizeInventory()];
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
+			int j = nbttagcompound1.getByte("Slot") & 0xff;
+			if (j >= 0 && j < tenderItems.length) {
+				tenderItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
 	}
 
 	@Override
-	public void onUpdate() {
+	public final int getSizeInventory() {
+		return freightInventorySize;
+	}
+
+	@Override
+	public void onUpdate()
+	{
 		super.onUpdate();
-		if (worldObj.isRemote)
-			return;
-		if (theTank != null && theTank.getFluid() != null) {
-			this.dataWatcher.updateObject(23, theTank.getFluid().amount);
-			this.dataWatcher.updateObject(4, theTank.getFluid().getFluidID());
+		if (worldObj.isRemote == false)
+		{
+
+			if (theTank != null && theTank.getFluid() != null) {
+				this.dataWatcher.updateObject(23, theTank.getFluid().amount);
+				this.dataWatcher.updateObject(4, theTank.getFluid().getFluidID());
+			}
+			else if (theTank != null && theTank.getFluid() == null) {
+				this.dataWatcher.updateObject(23, 0);
+				this.dataWatcher.updateObject(4, 0);
+			}
 		}
-		else if (theTank != null && theTank.getFluid() == null) {
-			this.dataWatcher.updateObject(23, 0);
-			this.dataWatcher.updateObject(4, 0);
-		}
+
+		checkInvent(tenderItems[0], this);
 	}
 	/**
 	 * handle mass depending on items and liquid

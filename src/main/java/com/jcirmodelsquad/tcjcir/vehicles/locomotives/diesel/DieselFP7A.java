@@ -24,7 +24,7 @@ public class DieselFP7A extends DieselTrain {
     }
     public DieselFP7A(World world) {
         super(world, EnumTrains.FP7A.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the benis sus
         InsertTexture(0, "Readding a fucking book");
         InsertTexture(1, "Blandsville & Blankerston");
@@ -45,10 +45,7 @@ public class DieselFP7A extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -93,11 +90,7 @@ public class DieselFP7A extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

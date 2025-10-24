@@ -24,7 +24,7 @@ public class DieselC855a extends DieselTrain {
     }
     public DieselC855a(World world) {
         super(world, EnumTrains.C855a.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Union Pacific");
         InsertTexture(1, "FNCC (KIT-L)", LockoutGroup.FNCC);
         InsertTexture(2, "Great Lakes & Northern Territories");
@@ -40,10 +40,7 @@ public class DieselC855a extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselC855a extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

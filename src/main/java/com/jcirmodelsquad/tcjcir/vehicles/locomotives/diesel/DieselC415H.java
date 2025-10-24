@@ -24,7 +24,7 @@ public class DieselC415H extends DieselTrain {
     }
     public DieselC415H(World world) {
         super(world, EnumTrains.C415H.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Port of Tillamook Bay 701 (BRJ 701 Early)");
         InsertTexture(1, "Port of Tillamook Bay 702 (BRJ 702 Early)");
         InsertTexture(2, "Latrans Range Railroad", LockoutGroup.LRR);
@@ -43,10 +43,7 @@ public class DieselC415H extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselC415H extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

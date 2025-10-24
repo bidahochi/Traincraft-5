@@ -23,13 +23,10 @@ public class DieselGP13 extends DieselTrain {
     }
     public DieselGP13(World world) {
         super(world, EnumTrains.GP13.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     public DieselGP13(World world, double d, double d1, double d2) {
         this(world);
@@ -81,14 +78,8 @@ public class DieselGP13 extends DieselTrain {
 
 
 
+      
     @Override
-    public void onUpdate() {
-        super.onUpdate();
-        if (worldObj.isRemote) {
-            return;
-        }
-        checkInvent(locoInvent[0]);
-    }    @Override
     public String getInventoryName() {
         return "EMD GP13";
     }

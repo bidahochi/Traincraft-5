@@ -23,7 +23,7 @@ public class DieselRSFDL extends DieselTrain {
     }
     public DieselRSFDL(World world) {
         super(world, EnumTrains.RSFDL.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "not FNCC");
         InsertTexture(1, "peenor lol");
 
@@ -39,10 +39,7 @@ public class DieselRSFDL extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -87,11 +84,7 @@ public class DieselRSFDL extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

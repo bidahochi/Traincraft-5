@@ -23,7 +23,7 @@ public class SteamPMNandN1 extends SteamTrain {
 	}
 	public SteamPMNandN1(World world) {
 		super(world, EnumTrains.PMNandN1.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Pere Marquette N Class");
 		InsertTexture(1, "C&O N Class");
 		InsertTexture(2, "Pere Marquette N-1 Class");
@@ -31,10 +31,7 @@ public class SteamPMNandN1 extends SteamTrain {
 		InsertTexture(4, "Polar Express");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamPMNandN1(World world, double d, double d1, double d2) {
 		this(world);
@@ -87,26 +84,7 @@ public class SteamPMNandN1 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "Pere Marquette N and N-1";
 	}

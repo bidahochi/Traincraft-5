@@ -25,7 +25,7 @@ public class DieselSW1600 extends DieselTrain {
     }
     public DieselSW1600(World world) {
         super(world, EnumTrains.SW1600.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "FNCC (KIT-L)", LockoutGroup.FNCC);
     }
     public DieselSW1600(World world, double d, double d1, double d2){
@@ -39,10 +39,7 @@ public class DieselSW1600 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -87,11 +84,7 @@ public class DieselSW1600 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

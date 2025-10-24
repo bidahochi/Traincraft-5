@@ -25,13 +25,10 @@ public class EntityLocoSteamBerk1225 extends SteamTrain {
 
 	public EntityLocoSteamBerk1225(World world) {
 		super(world, EnumHeritageTrainsLegacy.locosteamBerk1225.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamBerk1225(World world, double d, double d1, double d2) {
 		this(world);
@@ -53,14 +50,7 @@ public class EntityLocoSteamBerk1225 extends SteamTrain {
 
 	
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
+	
 @Override
 	public String getInventoryName() {
 		return "Berkshire 1225";
@@ -74,9 +64,5 @@ public class EntityLocoSteamBerk1225 extends SteamTrain {
 	}
 
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) { return canBeAdjusted; }
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) { return true; }
+	
 }

@@ -24,7 +24,7 @@ public class DieselSD45dash2B extends DieselTrain {
     }
     public DieselSD45dash2B(World world) {
         super(world, EnumTrains.SD45dash2B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the
         InsertTexture(0, "ATSF (Pinstripe)");
         InsertTexture(1, "ATSF (Freightbonnet)");
@@ -42,10 +42,7 @@ public class DieselSD45dash2B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -85,11 +82,7 @@ public class DieselSD45dash2B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

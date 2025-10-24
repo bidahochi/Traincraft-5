@@ -23,7 +23,7 @@ public class DieselBoxcab23Ton extends DieselTrain {
     }
     public DieselBoxcab23Ton(World world) {
         super(world, EnumTrains.Boxcab23Ton.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //i think i need a scooby doo tie-fighter now
 
     }
@@ -39,10 +39,7 @@ public class DieselBoxcab23Ton extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselBoxcab23Ton extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -24,7 +24,7 @@ public class DieselSW9 extends DieselTrain {
     }
     public DieselSW9(World world) {
         super(world, EnumTrains.SW9.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Western Pacific (As delivered)");
         InsertTexture(1, "Western Pacific");
         InsertTexture(2, "Western Pacific (Late)");
@@ -43,10 +43,7 @@ public class DieselSW9 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselSW9 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -23,14 +23,11 @@ public class SteamBrank extends SteamTrain {
 	}
 	public SteamBrank(World world) {
 		super(world, EnumTrains.Brank.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "pregnant man railroad company");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamBrank(World world, double d, double d1, double d2) {
 		this(world);
@@ -83,26 +80,7 @@ public class SteamBrank extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "2-6-2T Branch Tank \"Brank\"";
 	}

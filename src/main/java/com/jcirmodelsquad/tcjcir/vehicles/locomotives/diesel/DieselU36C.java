@@ -24,7 +24,7 @@ public class DieselU36C extends DieselTrain {
     }
     public DieselU36C(World world) {
         super(world, EnumTrains.U36C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Erie Lackawana");
         InsertTexture(1, "ATSF (Pinstripe)");
         InsertTexture(2, "ATSF (Kodachrome)");
@@ -43,10 +43,7 @@ public class DieselU36C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -86,11 +83,7 @@ public class DieselU36C extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

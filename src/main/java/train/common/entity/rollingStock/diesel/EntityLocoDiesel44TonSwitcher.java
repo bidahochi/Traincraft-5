@@ -77,13 +77,7 @@ public class EntityLocoDiesel44TonSwitcher extends DieselTrain
 		if (pitchRads > -1.01 && pitchRads < 1.01) {
 			riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
 		}
-	}
-
-	
-
-	
-
-	@Override
+	}@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (worldObj.isRemote) {

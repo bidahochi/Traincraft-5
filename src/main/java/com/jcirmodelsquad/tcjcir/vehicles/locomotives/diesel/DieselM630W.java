@@ -24,7 +24,7 @@ public class DieselM630W extends DieselTrain {
     }
     public DieselM630W(World world) {
         super(world, EnumTrains.M630W.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Blandsville & Blankerston");
         InsertTexture(1, "North Fox & Yukon Route (FNCC, KIT-L, Big Canon)");
         InsertTexture(2, "BCRail");
@@ -41,10 +41,7 @@ public class DieselM630W extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -89,11 +86,7 @@ public class DieselM630W extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

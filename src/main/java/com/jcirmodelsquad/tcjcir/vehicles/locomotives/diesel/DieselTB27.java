@@ -24,7 +24,7 @@ public class DieselTB27 extends DieselTrain {
     }
     public DieselTB27(World world) {
         super(world, EnumTrains.TB27.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Demonstrator");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Avanste Northeastern");
@@ -42,10 +42,7 @@ public class DieselTB27 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselTB27 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

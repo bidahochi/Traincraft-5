@@ -24,13 +24,10 @@ public class EntityLocoSteamEr_Ussr extends SteamTrain {
 	}
 	public EntityLocoSteamEr_Ussr(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamEr_USSR.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public EntityLocoSteamEr_Ussr(World world, double d, double d1, double d2) {
 		this(world);
@@ -46,26 +43,7 @@ public class EntityLocoSteamEr_Ussr extends SteamTrain {
 	@Override
 	public void updateRiderPosition() {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.5F, posZ);
-	}
-
-	
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	@Override
+	}@Override
 	public String getInventoryName() {
 		return "USSR 0-5-0";
 	}
@@ -77,13 +55,5 @@ public class EntityLocoSteamEr_Ussr extends SteamTrain {
 		return 0.53F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

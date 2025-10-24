@@ -23,7 +23,7 @@ public class DieselU18BB extends DieselTrain {
     }
     public DieselU18BB(World world) {
         super(world, EnumTrains.U18BB.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(10, "");
         InsertTexture(0, "West Creek Pacific");
         InsertTexture(1, "Gaesburg Clinton & Midland");
@@ -39,10 +39,7 @@ public class DieselU18BB extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselU18BB extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

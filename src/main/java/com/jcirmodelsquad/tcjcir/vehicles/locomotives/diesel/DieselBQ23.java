@@ -23,7 +23,7 @@ public class DieselBQ23 extends DieselTrain {
     }
     public DieselBQ23(World world) {
         super(world, EnumTrains.BQ23.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Family Lines (As Delivered)");
         InsertTexture(1, "Providence & Worcester");
         InsertTexture(2, "Blandsville & Blankerston");
@@ -44,10 +44,7 @@ public class DieselBQ23 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -91,11 +88,7 @@ public class DieselBQ23 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

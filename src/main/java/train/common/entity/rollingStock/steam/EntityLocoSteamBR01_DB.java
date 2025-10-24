@@ -25,13 +25,10 @@ public class EntityLocoSteamBR01_DB extends SteamTrain {
 	}
 	public EntityLocoSteamBR01_DB(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamBR01_DB.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 	public EntityLocoSteamBR01_DB(World world, double d, double d1, double d2) {
 		this(world);
 		setPosition(d, d1 + (double) yOffset, d2);
@@ -52,14 +49,7 @@ public class EntityLocoSteamBR01_DB extends SteamTrain {
 
 	
 
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
+	
 @Override
 	public String getInventoryName() {
 		return "BR01";
@@ -71,13 +61,5 @@ public class EntityLocoSteamBR01_DB extends SteamTrain {
 		return 0.4F;
 	}
 
-	@Override
-	public boolean canBeAdjusted(EntityMinecart cart) {
-		return canBeAdjusted;
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
+	
 }

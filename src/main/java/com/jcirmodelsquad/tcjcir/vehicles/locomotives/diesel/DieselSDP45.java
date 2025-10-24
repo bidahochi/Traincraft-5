@@ -25,7 +25,7 @@ public class DieselSDP45 extends DieselTrain {
     }
     public DieselSDP45(World world) {
         super(world, EnumTrains.SDP45.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the
         InsertTexture(0, "Southern Pacific");
         InsertTexture(1, "Blandsville & Blankerston");
@@ -47,10 +47,7 @@ public class DieselSDP45 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -90,11 +87,7 @@ public class DieselSDP45 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

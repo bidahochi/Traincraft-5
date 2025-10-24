@@ -23,7 +23,7 @@ public class DieselSB18B extends DieselTrain {
     }
     public DieselSB18B(World world) {
         super(world, EnumTrains.SB18B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "CEE Factory Blank (Phase 1)");
         InsertTexture(1, "TTLC (Alaskan Moss)");
         InsertTexture(2, "TTLC (Coronado Moss)");
@@ -41,10 +41,7 @@ public class DieselSB18B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselSB18B extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

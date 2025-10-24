@@ -24,7 +24,7 @@ public class DieselSF30C extends DieselTrain {
     }
     public DieselSF30C(World world) {
         super(world, EnumTrains.SF30C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "ATSF (Freightbonnet)");
         InsertTexture(1, "ATSF (Kodachrome)");
     }
@@ -39,10 +39,7 @@ public class DieselSF30C extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -82,11 +79,7 @@ public class DieselSF30C extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

@@ -24,7 +24,7 @@ public class DieselDash839B extends DieselTrain {
     }
     public DieselDash839B(World world) {
         super(world, EnumTrains.Dash839B.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Southern Pacific");
         InsertTexture(1, "LMX (1990s)");
         InsertTexture(2, "Western Pacific (Early)");
@@ -47,10 +47,7 @@ public class DieselDash839B extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -95,11 +92,7 @@ public class DieselDash839B extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

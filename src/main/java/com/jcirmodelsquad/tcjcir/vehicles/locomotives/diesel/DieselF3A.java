@@ -24,7 +24,7 @@ public class DieselF3A extends DieselTrain {
     }
     public DieselF3A(World world) {
         super(world, EnumTrains.F3A.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Phase 2 Early");
         InsertTexture(1, "FMSR", LockoutGroup.FMSR);
         InsertTexture(2, "DES", LockoutGroup.DES);
@@ -67,10 +67,7 @@ public class DieselF3A extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -114,11 +111,7 @@ public class DieselF3A extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 0.91F;

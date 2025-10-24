@@ -16,13 +16,13 @@ import train.common.enums.LockoutGroup;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
 
-public class Tender10k extends Tender implements IInventory {
-    public int freightInventorySize;
-    public int numFreightSlots;
+public class Tender10k extends Tender  {
+    
+    
 
     public Tender10k(World world) {
         super(world, FluidRegistry.WATER, 0, EnumTrains.Tender10k.getTankCapacity(), LiquidManager.WATER_FILTER);
-        initFreightTender();
+       
         InsertTexture(0, "Blank");
         InsertTexture(1, "Spoof");
         InsertTexture(2, "WP");
@@ -37,10 +37,7 @@ public class Tender10k extends Tender implements IInventory {
 
     }
 
-    public void initFreightTender() {
-        freightInventorySize = 16;
-        tenderItems = new ItemStack[freightInventorySize];
-    }
+    
 
     public Tender10k(World world, double d, double d1, double d2) {
         this(world);
@@ -55,51 +52,17 @@ public class Tender10k extends Tender implements IInventory {
 
     
 
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
-        checkInvent(tenderItems[0], this);
-    }
+    
 
-    @Override
-    protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-        super.writeEntityToNBT(nbttagcompound);
+    
 
-        NBTTagList nbttaglist = new NBTTagList();
-        for (int i = 0; i < tenderItems.length; i++) {
-            if (tenderItems[i] != null) {
-                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-                nbttagcompound1.setByte("Slot", (byte) i);
-                tenderItems[i].writeToNBT(nbttagcompound1);
-                nbttaglist.appendTag(nbttagcompound1);
-            }
-        }
-        nbttagcompound.setTag("Items", nbttaglist);
-    }
-
-    @Override
-    protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-        super.readEntityFromNBT(nbttagcompound);
-
-        NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_COMPOUND);
-        tenderItems = new ItemStack[getSizeInventory()];
-        for (int i = 0; i < nbttaglist.tagCount(); i++) {
-            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
-            int j = nbttagcompound1.getByte("Slot") & 0xff;
-            if (j >= 0 && j < tenderItems.length) {
-                tenderItems[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
-            }
-        }
-    }
+    
     @Override
     public String getInventoryName() {
         return "WP 10,000 Gal Tender";
     }
 
-    @Override
-    public int getSizeInventory() {
-        return freightInventorySize;
-    }
+    
 
     
 
@@ -113,8 +76,5 @@ public class Tender10k extends Tender implements IInventory {
         return 1.8F;
     }
 
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
-    }
+    
 }

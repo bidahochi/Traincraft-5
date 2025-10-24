@@ -23,7 +23,7 @@ public class Diesel4ED172T_E extends DieselTrain {
     }
     public Diesel4ED172T_E(World world) {
         super(world, EnumTrains.CEE4ED172T_E.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "GLNT");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "AA");
@@ -39,10 +39,7 @@ public class Diesel4ED172T_E extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -87,11 +84,7 @@ public class Diesel4ED172T_E extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

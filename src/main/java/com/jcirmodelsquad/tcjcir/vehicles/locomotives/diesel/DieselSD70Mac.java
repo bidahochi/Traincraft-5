@@ -24,7 +24,7 @@ public class DieselSD70Mac extends DieselTrain {
     }
     public DieselSD70Mac(World world) {
         super(world, EnumTrains.SD70Mac.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "EMD Demo");
         InsertTexture(1, "Alaska Railroad");
         InsertTexture(2, "CSXT (Yn2)");
@@ -54,10 +54,7 @@ public class DieselSD70Mac extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselSD70Mac extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

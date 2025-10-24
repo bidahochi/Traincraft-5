@@ -25,7 +25,7 @@ public class DieselSW1000 extends DieselTrain {
     }
     public DieselSW1000(World world) {
         super(world, EnumTrains.SW1000.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Burlington Northern");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Carbondale & Pine Valley", LockoutGroup.CPV);
@@ -48,10 +48,7 @@ public class DieselSW1000 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -96,11 +93,7 @@ public class DieselSW1000 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

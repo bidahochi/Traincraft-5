@@ -23,7 +23,7 @@ public class DieselDash832BWH extends DieselTrain {
     }
     public DieselDash832BWH(World world) {
         super(world, EnumTrains.Dash832BWH.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Amtrak (PH 3)");
         InsertTexture(1, "Amtrak (PH 4)");
         InsertTexture(2, "Amtrak (PH 5)");
@@ -46,10 +46,7 @@ public class DieselDash832BWH extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -94,11 +91,7 @@ public class DieselDash832BWH extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -23,7 +23,7 @@ public class DieselGP18 extends DieselTrain {
     }
     public DieselGP18(World world) {
         super(world, EnumTrains.GP18.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "NP");
         InsertTexture(1, "BN 1996");
         InsertTexture(2, "T&P");
@@ -49,10 +49,7 @@ public class DieselGP18 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -97,11 +94,7 @@ public class DieselGP18 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

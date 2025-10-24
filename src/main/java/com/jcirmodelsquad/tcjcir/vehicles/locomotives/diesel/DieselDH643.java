@@ -24,7 +24,7 @@ public class DieselDH643 extends DieselTrain {
     }
     public DieselDH643(World world) {
         super(world, EnumTrains.DH643.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Latrans Range Railroad", LockoutGroup.LRR);
     }
     public DieselDH643(World world, double d, double d1, double d2){
@@ -38,10 +38,7 @@ public class DieselDH643 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -86,11 +83,7 @@ public class DieselDH643 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

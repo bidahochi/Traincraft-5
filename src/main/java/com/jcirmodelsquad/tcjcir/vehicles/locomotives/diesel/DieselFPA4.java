@@ -24,7 +24,7 @@ public class DieselFPA4 extends DieselTrain {
     }
     public DieselFPA4(World world) {
         super(world, EnumTrains.FPA4.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "VIA Rail");
         InsertTexture(1, "VIA Rail");
         InsertTexture(2, "Canadian National (Old)");
@@ -49,10 +49,7 @@ public class DieselFPA4 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselFPA4 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

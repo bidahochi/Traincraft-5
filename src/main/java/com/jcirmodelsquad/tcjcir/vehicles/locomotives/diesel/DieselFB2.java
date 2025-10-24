@@ -24,7 +24,7 @@ public class DieselFB2 extends DieselTrain {
     }
     public DieselFB2(World world) {
         super(world, EnumTrains.FB1.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "New York Central (Lightning)");
         InsertTexture(1, "Chicago Northwestern");
         InsertTexture(2, "ALCO Demonstrator");
@@ -45,10 +45,7 @@ public class DieselFB2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -88,11 +85,7 @@ public class DieselFB2 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

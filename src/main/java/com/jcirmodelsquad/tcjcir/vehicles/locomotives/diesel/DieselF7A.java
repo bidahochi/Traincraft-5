@@ -24,7 +24,7 @@ public class DieselF7A extends DieselTrain {
     }
     public DieselF7A(World world) {
         super(world, EnumTrains.F7A.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the benis sus
         InsertTexture(0, "PC (Ex NYC)");
         InsertTexture(1, "Mesa Desert");
@@ -65,10 +65,7 @@ public class DieselF7A extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -112,11 +109,7 @@ public class DieselF7A extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 0.91F;

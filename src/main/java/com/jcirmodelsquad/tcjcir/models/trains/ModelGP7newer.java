@@ -10,6 +10,7 @@
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
 
 import com.jcirmodelsquad.tcjcir.models.detailkits.Modelane_slab_antenna;
+import com.jcirmodelsquad.tcjcir.models.detailkits.Modelgp7_deets_wm;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelBlombergBnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeAnew;
 import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
@@ -2612,6 +2613,7 @@ public class ModelGP7newer extends ModelConverter //Same as Filename
 	ModelTypeBnew theB = new ModelTypeBnew();
 	ModelTypeAnew theA = new ModelTypeAnew();
 	Modelane_slab_antenna aneOnSomeShitFr = new Modelane_slab_antenna();
+	Modelgp7_deets_wm wmdeets = new Modelgp7_deets_wm();
 
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -2660,7 +2662,7 @@ public class ModelGP7newer extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.74, 0, 0);//rear
 			theBlombi.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5){
+		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 25){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_DarkerGrey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.37, -0.0, 0);//front & rear
@@ -2678,6 +2680,18 @@ public class ModelGP7newer extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.74, 0, 0);//rear
 			theBlombi.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
+
+			if (((AbstractTrains) entity).getColor() == 54){
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/wm_chop_details_black.png"));
+				GL11.glPushMatrix();
+				wmdeets.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}else if (((AbstractTrains) entity).getColor() == 55){
+				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/wm_chop_details_circus.png"));
+				GL11.glPushMatrix();
+				wmdeets.render(entity, f, f1, f2, f3, f4, f5);
+				GL11.glPopMatrix();
+			}
 		}
 	}
 }

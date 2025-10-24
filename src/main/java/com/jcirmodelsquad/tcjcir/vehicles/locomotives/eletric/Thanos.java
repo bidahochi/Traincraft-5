@@ -41,16 +41,6 @@ public class Thanos extends ElectricTrain {
         riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.10F, posZ);
     }
 
-    
-
-    @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
-        }
-    }
-
-
 
 
 

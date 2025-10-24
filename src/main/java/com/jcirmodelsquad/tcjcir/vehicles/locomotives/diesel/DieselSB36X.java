@@ -23,7 +23,7 @@ public class DieselSB36X extends DieselTrain {
     }
     public DieselSB36X(World world) {
         super(world, EnumTrains.SB36X.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "TTLC (Black Forest Blue)");
         InsertTexture(1, "TTLC (Forest Blue)");
         InsertTexture(2, "TTLC (Forest Blue 2)");
@@ -48,10 +48,7 @@ public class DieselSB36X extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -95,11 +92,7 @@ public class DieselSB36X extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

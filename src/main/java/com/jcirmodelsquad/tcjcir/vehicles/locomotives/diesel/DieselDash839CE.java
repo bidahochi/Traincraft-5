@@ -25,7 +25,7 @@ public class DieselDash839CE extends DieselTrain {
     }
     public DieselDash839CE(World world) {
         super(world, EnumTrains.Dash839CE.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "North Fox (KIT-L)", LockoutGroup.FNCC);
         InsertTexture(1, "North Fox (KIT-80)", LockoutGroup.FNCC);
         InsertTexture(2, "North Fox 475 (KIT-80 OLS Unit)", LockoutGroup.FNCC);
@@ -42,10 +42,7 @@ public class DieselDash839CE extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -87,11 +84,7 @@ public class DieselDash839CE extends DieselTrain {
     }
     
     
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.35F;

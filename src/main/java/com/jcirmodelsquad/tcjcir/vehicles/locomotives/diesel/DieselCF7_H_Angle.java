@@ -25,7 +25,7 @@ public class DieselCF7_H_Angle extends DieselTrain {
 
     public DieselCF7_H_Angle(World world) {
         super(world, EnumTrains.CF7angle.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //InsertTexture(0, "Denver SUCK MY FUCKIN BALLS cock sucker island (stupid) mofo Volkswagon 1083 deez nuts express");
 
     }
@@ -40,10 +40,7 @@ public class DieselCF7_H_Angle extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -88,11 +85,7 @@ public class DieselCF7_H_Angle extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

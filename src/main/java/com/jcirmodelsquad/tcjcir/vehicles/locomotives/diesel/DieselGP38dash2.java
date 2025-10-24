@@ -23,7 +23,7 @@ public class DieselGP38dash2 extends DieselTrain {
     }
     public DieselGP38dash2(World world) {
         super(world, EnumTrains.GP38Dash2.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Butte, Anaconda & Pacific");
         InsertTexture(1, "MKT (Stripes)");
         InsertTexture(2, "MKT (Solids)");
@@ -57,10 +57,7 @@ public class DieselGP38dash2 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -105,11 +102,7 @@ public class DieselGP38dash2 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

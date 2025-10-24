@@ -47,13 +47,7 @@ public class EntityLocoDieselV60_DB extends DieselTrain {
 	@Override
 	public void updateRiderPosition() {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.45F, posZ);
-	}
-
-	
-
-	
-
-	@Override
+	}@Override
 	public void onUpdate() {
 		super.onUpdate();
 		if (worldObj.isRemote) {

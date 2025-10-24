@@ -23,7 +23,7 @@ public class SteamSkook extends SteamTrain {
     }
     public SteamSkook(World world) {
         super(world, EnumTrains.Skook.getTankCapacity(), LiquidManager.WATER_FILTER);
-        initLocoSteam();
+        
     }
 
     public void initLocoSteam() {

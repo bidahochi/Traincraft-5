@@ -25,7 +25,7 @@ public class DieselSDP40 extends DieselTrain {
     }
     public DieselSDP40(World world) {
         super(world, EnumTrains.SDP40.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         //when the
         InsertTexture(0, "Burlington Northern");
         InsertTexture(1, "NEP");
@@ -49,10 +49,7 @@ public class DieselSDP40 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -92,11 +89,7 @@ public class DieselSDP40 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

@@ -23,13 +23,10 @@ public class SteamShay3Truck extends SteamTrain {
 	}
 	public SteamShay3Truck(World world) {
 		super(world, EnumTrains.Shay3Truck.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamShay3Truck(World world, double d, double d1, double d2) {
 		this(world);
@@ -48,26 +45,7 @@ public class SteamShay3Truck extends SteamTrain {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset()+0.0F, posZ);// default
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "Class 3-PC-13 3-Truck Shay";
 	}

@@ -25,7 +25,7 @@ public class DieselSD9 extends DieselTrain {
     }
     public DieselSD9(World world) {
         super(world, EnumTrains.SD9.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         //when the
         InsertTexture(0, "SP (1980s)");
         InsertTexture(1, "SP (Trashcan gaming)");
@@ -53,10 +53,7 @@ public class DieselSD9 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -101,11 +98,7 @@ public class DieselSD9 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

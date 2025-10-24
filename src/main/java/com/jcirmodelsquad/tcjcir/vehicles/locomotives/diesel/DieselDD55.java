@@ -24,7 +24,7 @@ public class DieselDD55 extends DieselTrain {
     }
     public DieselDD55(World world) {
         super(world, EnumTrains.DD55.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "West Creek Pacific");
         InsertTexture(1, "Steampunk Rail", LockoutGroup.SPR);
         InsertTexture(2, "LA Switcher Company Primer");
@@ -43,10 +43,7 @@ public class DieselDD55 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselDD55 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

@@ -24,7 +24,7 @@ public class DieselSW1200 extends DieselTrain {
     }
     public DieselSW1200(World world) {
         super(world, EnumTrains.SW1200.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Illinois Terminal");
         InsertTexture(1, "Burlington Northern");
         InsertTexture(2, "Denver & Rio Grande Western");
@@ -51,10 +51,7 @@ public class DieselSW1200 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
 
@@ -100,11 +97,7 @@ public class DieselSW1200 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

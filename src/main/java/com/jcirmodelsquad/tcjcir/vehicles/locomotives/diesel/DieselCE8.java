@@ -25,7 +25,7 @@ public class DieselCE8 extends DieselTrain {
     }
     public DieselCE8(World world) {
         super(world, EnumTrains.CE8.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "FNCC 99 (KIT-L)", LockoutGroup.FNCC);
         InsertTexture(1, "Nomansi Sugar Cane Corperation");
         InsertTexture(2, "Blandsville & Blankerston (No Dynamics)");
@@ -43,10 +43,7 @@ public class DieselCE8 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselCE8 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

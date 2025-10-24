@@ -23,14 +23,11 @@ public class SteamF01 extends SteamTrain {
 	}
 	public SteamF01(World world) {
 		super(world, EnumTrains.F01.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "CDC&S 4");
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamF01(World world, double d, double d1, double d2) {
 		this(world);
@@ -78,26 +75,7 @@ public class SteamF01 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "F-01 Class 2-4-4 Forney";
 	}

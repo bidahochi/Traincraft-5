@@ -24,7 +24,7 @@ public class DieselGP40 extends DieselTrain {
     }
     public DieselGP40(World world) {
         super(world, EnumTrains.GP40.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Wisconsin Central (FrankenForty)");
         InsertTexture(1, "Wisconsin Central");
         InsertTexture(2, "Seaboard System");
@@ -69,10 +69,7 @@ public class DieselGP40 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -117,11 +114,7 @@ public class DieselGP40 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
 
 

@@ -23,7 +23,7 @@ public class DieselGP38H3 extends DieselTrain {
     }
     public DieselGP38H3(World world) {
         super(world, EnumTrains.GP38H3.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Amtrak");
         InsertTexture(1, "Unexpected Cubed in the Bagging Area");
 
@@ -39,10 +39,7 @@ public class DieselGP38H3 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -81,11 +78,7 @@ public class DieselGP38H3 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

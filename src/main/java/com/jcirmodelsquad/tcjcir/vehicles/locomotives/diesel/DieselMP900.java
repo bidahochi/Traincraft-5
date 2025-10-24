@@ -24,7 +24,7 @@ public class DieselMP900 extends DieselTrain {
     }
     public DieselMP900(World world) {
         super(world, EnumTrains.MP900.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "Masaou Demo");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Washaska Resources #906");
@@ -41,10 +41,7 @@ public class DieselMP900 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -89,11 +86,7 @@ public class DieselMP900 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

@@ -23,13 +23,10 @@ public class SteamNP_L9 extends SteamTrain {
 	}
 	public SteamNP_L9(World world) {
 		super(world, EnumTrains.NP_L9.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamNP_L9(World world, double d, double d1, double d2) {
 		this(world);
@@ -82,26 +79,7 @@ public class SteamNP_L9 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "NP L9 Class 0-6-0";
 	}

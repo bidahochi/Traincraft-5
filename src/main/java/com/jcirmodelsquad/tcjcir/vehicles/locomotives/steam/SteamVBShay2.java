@@ -24,13 +24,10 @@ public class SteamVBShay2 extends SteamTrain {
 
 	public SteamVBShay2(World world) {
 		super(world, EnumTrains.VBShay.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamVBShay2(World world, double d, double d1, double d2) {
 		this(world);
@@ -49,26 +46,7 @@ public class SteamVBShay2 extends SteamTrain {
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset()+0.4F, posZ);// default
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "2 Truck Vertical Boiler Shay";
 	}

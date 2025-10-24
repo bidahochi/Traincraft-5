@@ -23,7 +23,7 @@ public class DieselH16_66 extends DieselTrain {
     }
     public DieselH16_66(World world) {
         super(world, EnumTrains.H24_66.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "TVA");
         InsertTexture(1, "Chicago Northwestern (Stripes)");
         InsertTexture(2, "Chicago Northwestern (No Stripes)");
@@ -49,10 +49,7 @@ public class DieselH16_66 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -91,11 +88,7 @@ public class DieselH16_66 extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

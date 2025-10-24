@@ -24,7 +24,7 @@ public class DieselU23BU extends DieselTrain {
     }
     public DieselU23BU(World world) {
         super(world, EnumTrains.U23BU.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "FNCC (1st Order)", LockoutGroup.FNCC);//type b
         InsertTexture(1, "FNCC (2nd Order)", LockoutGroup.FNCC);//fb2
         InsertTexture(2, "FNCC (3rd Order)", LockoutGroup.FNCC);//type b
@@ -50,10 +50,7 @@ public class DieselU23BU extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -98,11 +95,7 @@ public class DieselU23BU extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

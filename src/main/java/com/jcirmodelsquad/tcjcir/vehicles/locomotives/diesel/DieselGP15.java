@@ -24,7 +24,7 @@ public class DieselGP15 extends DieselTrain {
 	}
 	public DieselGP15(World world) {
 		super(world, EnumTrains.GP15.getTankCapacity(), LiquidManager.dieselFilter());
-		initLoco();
+		
 		InsertTexture(0, "UPY");
 		InsertTexture(1, "FURRX"); // (old nasty ass texture if i see this in game somewhjer i will kill you)
 		InsertTexture(2, "Lisha & Watson", LockoutGroup.LW);
@@ -90,19 +90,6 @@ public class DieselGP15 extends DieselTrain {
 	}
 
 
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0]);
-	}
-
-	
 
 	
 

@@ -24,7 +24,7 @@ public class DieselGP30 extends DieselTrain {
     }
     public DieselGP30(World world) {
         super(world, EnumTrains.GP30.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "ICG");
         InsertTexture(1, "ACL");
         InsertTexture(2, "CSX (YN1)");
@@ -61,10 +61,7 @@ public class DieselGP30 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
 
     @Override
     public void updateRiderPosition() {
@@ -109,11 +106,7 @@ public class DieselGP30 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
     
 

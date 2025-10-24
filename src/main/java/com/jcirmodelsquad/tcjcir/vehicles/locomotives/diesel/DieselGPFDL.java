@@ -24,7 +24,7 @@ public class DieselGPFDL extends DieselTrain {
     }
     public DieselGPFDL(World world) {
         super(world, EnumTrains.GPFDL.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "North Fox (KIT-L, Non Canon)", LockoutGroup.FNCC);
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "Sacramento Northern (Ex FNCC 6&7)");
@@ -41,10 +41,7 @@ public class DieselGPFDL extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -83,11 +80,7 @@ public class DieselGPFDL extends DieselTrain {
 
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+
 
     
 

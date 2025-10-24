@@ -24,7 +24,7 @@ public class DieselDash841C extends DieselTrain {
     }
     public DieselDash841C(World world) {
         super(world, EnumTrains.Dash841C.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+        
         InsertTexture(0, "Canadian National");
         InsertTexture(1, "Blandsville & Blankerston");
         InsertTexture(2, "CSLX");
@@ -44,10 +44,7 @@ public class DieselDash841C extends DieselTrain {
         prevPosY = d1;
         prevPosZ = d2;
     }
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+    
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -89,11 +86,7 @@ public class DieselDash841C extends DieselTrain {
     }
 
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
     
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.34F;

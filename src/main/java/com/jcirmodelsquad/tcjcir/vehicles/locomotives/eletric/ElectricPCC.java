@@ -75,12 +75,6 @@ public class ElectricPCC extends ElectricTrain {
 	}
 
 
-
-	
-
-	
-
-	
 	@Override
 	public String getInventoryName() {
 		return "PCC Streetcar";

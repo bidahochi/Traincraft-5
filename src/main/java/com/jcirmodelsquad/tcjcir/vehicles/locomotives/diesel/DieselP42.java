@@ -24,7 +24,7 @@ public class DieselP42 extends DieselTrain {
     }
     public DieselP42(World world) {
         super(world, EnumTrains.P42.getTankCapacity(), LiquidManager.dieselFilter());
-        initLoco();
+
         InsertTexture(0, "New Jersey Transit");
         InsertTexture(1, "VIA Rail");
         InsertTexture(2, "VIA Rail");
@@ -41,10 +41,7 @@ public class DieselP42 extends DieselTrain {
         prevPosZ = d2;
     }
 
-    public void initLoco() {
-        fuelTrain = 0;
-        locoInvent = new ItemStack[inventorySize];
-    }
+
 
     @Override
     public void updateRiderPosition() {
@@ -84,11 +81,7 @@ public class DieselP42 extends DieselTrain {
 
     
 
-    @Override
-    public void onUpdate() {
-        checkInvent(locoInvent[0]);
-        super.onUpdate();
-    }
+    
 
 
 

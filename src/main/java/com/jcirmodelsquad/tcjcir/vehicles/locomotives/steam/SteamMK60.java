@@ -24,7 +24,7 @@ public class SteamMK60 extends SteamTrain {
 	}
 	public SteamMK60(World world) {
 		super(world, EnumTrains.MK60.getTankCapacity(), LiquidManager.WATER_FILTER);
-		initLocoSteam();
+		
 		InsertTexture(0, "Blank");
 		InsertTexture(1, "Spoof Texture");
 		InsertTexture(2, "WP 320-326");
@@ -37,10 +37,7 @@ public class SteamMK60 extends SteamTrain {
 		InsertTexture(9, "FMSR 575-579", LockoutGroup.FMSR);
 	}
 
-	public void initLocoSteam() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
+	
 
 	public SteamMK60(World world, double d, double d1, double d2) {
 		this(world);
@@ -93,26 +90,7 @@ public class SteamMK60 extends SteamTrain {
 		}
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0], locoInvent[1], this);
-	}
-
-	
-
-	
-
-	
-
-	@Override
+@Override
 	public String getInventoryName() {
 		return "WP MK60-71 2-8-2";
 	}
