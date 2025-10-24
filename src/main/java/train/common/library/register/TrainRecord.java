@@ -80,7 +80,7 @@ public class TrainRecord implements ITrainRecord
      */
     public TrainRecord(String internalName, Class entityClass, Item item, EnumTrainType enumTrainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition)
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition)
     {
         this(internalName, entityClass, item, enumTrainType, mass, colors, guiRenderScale, cargoCapacity);
         this.maxSpeed = maxSpeed;
@@ -94,7 +94,7 @@ public class TrainRecord implements ITrainRecord
 
     public TrainRecord(String internalName, Class entityClass, Item item, String trainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition)
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition)
     {
         this(internalName, entityClass, item, trainType, mass, colors, guiRenderScale, cargoCapacity);
         this.maxSpeed = maxSpeed;
@@ -108,7 +108,7 @@ public class TrainRecord implements ITrainRecord
 
     public TrainRecord(String internalName, Class entityClass, Item item, EnumTrainType enumTrainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity)
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity)
     {
         this(internalName, entityClass, item, enumTrainType, mass, colors, guiRenderScale, cargoCapacity, brakeRate, maxSpeed, MHP, fuelConsumption, heatingTime, accelerationRate, bogieLocoPosition);
         this.tankCapacity = tankCapacity;
@@ -116,7 +116,7 @@ public class TrainRecord implements ITrainRecord
 
     public TrainRecord(String internalName, Class entityClass, Item item, String trainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity)
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity)
     {
         this(internalName, entityClass, item, trainType, mass, colors, guiRenderScale, cargoCapacity, brakeRate, maxSpeed, MHP, fuelConsumption, heatingTime, accelerationRate, bogieLocoPosition);
         this.tankCapacity = tankCapacity;
@@ -144,7 +144,7 @@ public class TrainRecord implements ITrainRecord
      */
     public TrainRecord(String internalName, Class entityClass, Item item, EnumTrainType enumTrainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity,
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity,
                        int waterConsumption)
     {
         this(internalName, entityClass, item, enumTrainType, mass, colors, guiRenderScale, cargoCapacity, brakeRate, maxSpeed, MHP, fuelConsumption, heatingTime, accelerationRate, bogieLocoPosition, tankCapacity);
@@ -153,7 +153,7 @@ public class TrainRecord implements ITrainRecord
 
     public TrainRecord(String internalName, Class entityClass, Item item, String trainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity,
-                       int brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity,
+                       double brakeRate, int maxSpeed, int MHP, int fuelConsumption, int heatingTime, double accelerationRate, double bogieLocoPosition, int tankCapacity,
                        int waterConsumption)
     {
         this(internalName, entityClass, item, trainType, mass, colors, guiRenderScale, cargoCapacity, brakeRate, maxSpeed, MHP, fuelConsumption, heatingTime, accelerationRate, bogieLocoPosition, tankCapacity);
