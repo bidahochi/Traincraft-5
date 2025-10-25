@@ -150,7 +150,7 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
     {
         ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
 
-        return trainRecord.getAdditionnalTooltip();
+        return trainRecord.getAdditionalTooltip();
     }
 
     public int getCargoCapacity() {

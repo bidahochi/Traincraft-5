@@ -451,7 +451,7 @@ public enum EnumHeritageTrainsLegacy implements ITrainRecord
         return this.guiRenderScale;
     }
 
-    public String[] getAdditionnalTooltip(){
+    public String[] getAdditionalTooltip(){
         return this.additionnalTooltip;
     }
 

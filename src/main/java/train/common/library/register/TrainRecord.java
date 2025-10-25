@@ -160,6 +160,12 @@ public class TrainRecord implements ITrainRecord
         this.waterConsumption = waterConsumption;
     }
 
+    /**
+     * Used for segmented implementation
+     * @param internalName
+     */
+    public TrainRecord(String internalName) { this.internalName = internalName; }
+
     private final String internalName;
     private Class entityClass;
     private Item item;
@@ -176,91 +182,63 @@ public class TrainRecord implements ITrainRecord
     private int[] colors;
     private int guiRenderScale;
     private double bogieLocoPosition;
-    private String[] additionnalTooltip;
+    private String[] additionalTooltip;
     private int cargoCapacity;
 
-    public String getInternalName(){
-        return this.internalName;
-    }
+    public String getInternalName() { return this.internalName; }
 
-    public Item getItem(){
-        return this.item;
-    }
+    public Item getItem() { return this.item; }
+    public TrainRecord setItem(Item item) { this.item = item; return this; }
 
-    public String getTrainType(){
-        return trainType;
-    }
+    public String getTrainType() { return trainType; }
+    public TrainRecord setTrainType(String type) { this.trainType = type; return this; }
+    public TrainRecord setTrainType(EnumTrainType type) { this.trainType = type.TrainType; return this; }
 
-    public int getMHP(){
-        return this.MHP;
-    }
+    public int getMHP() { return this.MHP; }
+    public TrainRecord setMHP(int mhp) { this.MHP = mhp; return this; }
 
-    public int getMaxSpeed(){
-        return this.maxSpeed;
-    }
+    public int getMaxSpeed() { return this.maxSpeed; }
+    public TrainRecord setMaxSpeed(int speed) { this.maxSpeed = speed; return this; }
 
-    public double getMass(){
-        return this.mass;
-    }
+    public double getMass() { return this.mass; }
+    public TrainRecord setMass(double mass) { this.mass = mass; return this; }
 
-    public int getFuelConsumption(){
-        return this.fuelConsumption;
-    }
+    public int getFuelConsumption() { return this.fuelConsumption; }
+    public TrainRecord setFuelConsumption(int consumption) { this.fuelConsumption = consumption; return this; }
 
-    public int getWaterConsumption(){
-        return this.waterConsumption;
-    }
+    public int getWaterConsumption() { return this.waterConsumption; }
+    public TrainRecord setWaterConsumption(int consumption) {this.waterConsumption = consumption; return this; }
 
-    public int getHeatingTime(){
-        return this.heatingTime;
-    }
+    public int getHeatingTime() { return this.heatingTime; }
+    public TrainRecord setHeatingTime (int heatingTime) { this.heatingTime = heatingTime; return this; }
 
-    public double getAccelerationRate(){
-        return this.accelerationRate;
-    }
+    public double getAccelerationRate() { return this.accelerationRate; }
+    public TrainRecord setAccelerationRate(double rate) { this.accelerationRate = rate; return this; }
 
-    public double getBrakeRate(){
-        return this.brakeRate;
-    }
+    public double getBrakeRate() { return this.brakeRate; }
+    public TrainRecord setBrakeRate(double rate) { this.brakeRate = rate; return this; }
 
-    public int getTankCapacity(){
-        return this.tankCapacity;
-    }
+    public int getTankCapacity() { return this.tankCapacity; }
+    public TrainRecord setTankCapacity(int capacity) { this.tankCapacity = capacity; return this; }
 
-    public int[] getColors(){
-        return this.colors;
-    }
+    public int[] getColors() { return this.colors; }
+    public TrainRecord setColors(String[] colors) { this.colors = TraincraftUtil.getBytesFromColors(colors); return this; }
 
-    public double getBogieLocoPosition(){
-        return this.bogieLocoPosition;
-    }
+    public double getBogieLocoPosition() { return this.bogieLocoPosition; }
+    public TrainRecord setBogieLocoPosition(double offset) { this.bogieLocoPosition = offset; return this; }
 
+    public Class getEntityClass() { return this.entityClass; }
+    public TrainRecord setEntityClass(Class entity) { this.entityClass = entity; return this; }
 
-    public Class getEntityClass() {
-        return this.entityClass;
-    }
+    public int getGuiRenderScale() { return this.guiRenderScale; }
+    public TrainRecord setGuiRenderScale(int scale) { this.guiRenderScale = scale; return this; }
 
-    public int getGuiRenderScale(){
-        return this.guiRenderScale;
-    }
+    public String[] getAdditionalTooltip() { return this.additionalTooltip; }
+    public TrainRecord SetAdditionalTooltip(String[] additionalTooltip) { this.additionalTooltip = additionalTooltip; return this; }
 
-    public String[] getAdditionnalTooltip(){
-        return this.additionnalTooltip;
-    }
-
-    public void SetAdditionnalTooltip(String[] additionnalTooltip)
-    {
-        this.additionnalTooltip = additionnalTooltip;
-    }
-
-
-    public int getCargoCapacity(){
-        return cargoCapacity;
-    }
+    public int getCargoCapacity() { return cargoCapacity; }
+    public TrainRecord setCargoCapacity(int capacity) { this.cargoCapacity = capacity; return this; }
 
     @Override
-    public String name()
-    {
-        return this.entityClass.getName();
-    }
+    public String name() { return this.entityClass.getName(); }
 }

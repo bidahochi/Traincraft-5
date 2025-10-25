@@ -822,7 +822,7 @@ public enum EnumTrains implements ITrainRecord
 		return this.guiRenderScale;
 	}
 
-	public String[] getAdditionnalTooltip(){
+	public String[] getAdditionalTooltip(){
 		return this.additionnalTooltip;
 	}
 
