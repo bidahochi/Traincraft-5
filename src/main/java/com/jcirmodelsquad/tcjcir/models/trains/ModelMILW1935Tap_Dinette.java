@@ -1889,10 +1889,10 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 		bodyModel[443].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,-0.125F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.125F, 0F, 0F, -0.125F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, -0.125F, 0.25F, 0F); // Box 455 glow
 		bodyModel[443].setRotationPoint(-13F, -13.25F, 9.5F);
 
-		bodyModel[444].addShapeBox(0F, 0F, 0F, 25, 2, 0, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F); // Box 38
+		bodyModel[444].addShapeBox(0F, 0F, 0F, 25, 2, 0, 0F,0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F); // Box 38
 		bodyModel[444].setRotationPoint(-13F, -11F, -10.25F);
 
-		bodyModel[445].addShapeBox(0F, 0F, 0F, 25, 2, 0, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F); // Box 38
+		bodyModel[445].addShapeBox(0F, 0F, 0F, 25, 2, 0, 0F,0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F); // Box 38
 		bodyModel[445].setRotationPoint(-13F, -11F, 10.25F);
 
 		bodyModel[446].addShapeBox(0F, 0F, 0F, 48, 1, 0, 0F,0F, 0F, 0F, -24F, 0F, 0F, -24F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, -24F, -0.5F, 0F, -24F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 38
@@ -2224,7 +2224,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 		bodyModel[661] = new ModelRendererTurbo(this, 79, 446, textureX, textureY); // Box 249
 		bodyModel[662] = new ModelRendererTurbo(this, 85, 435, textureX, textureY); // Box 38
 		bodyModel[663] = new ModelRendererTurbo(this, 99, 269, textureX, textureY); // Box 38
-		bodyModel[664] = new ModelRendererTurbo(this, 34, 457, textureX, textureY); // Box 128
+		bodyModel[664] = new ModelRendererTurbo(this, 34, 457, textureX, textureY, "glow"); // Box 128 glow
 		bodyModel[665] = new ModelRendererTurbo(this, 81, 473, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[666] = new ModelRendererTurbo(this, 72, 467, textureX, textureY); // Folding sink 2 part R
 		bodyModel[667] = new ModelRendererTurbo(this, 72, 472, textureX, textureY); // Box 128
@@ -2812,7 +2812,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 		bodyModel[663].addBox(0F, 0F, 0F, 0, 7, 15, 0F); // Box 38
 		bodyModel[663].setRotationPoint(32F, -11F, -5F);
 
-		bodyModel[664].addShapeBox(0F, 0F, 0F, 17, 0, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 128
+		bodyModel[664].addShapeBox(0F, 0F, 0F, 17, 0, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 128 glow
 		bodyModel[664].setRotationPoint(27F, -17.99F, 2F);
 
 		bodyModel[665].addShapeBox(0F, 0F, 0F, 6, 8, 1, 0F,-0.01F, 0F, 0F, -3F, 0F, 0F, -3F, 0F, -0.5F, -0.01F, 0F, -0.5F, -0.01F, -4F, 0F, -3F, -4F, 0F, -3F, -4F, -0.5F, -0.01F, -4F, -0.5F); // Box 38 cull
@@ -3127,7 +3127,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/MILW_1935_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-2.31, 0, 0);
+			GL11.glTranslated(-2.31, -0.03, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12341){
@@ -3141,7 +3141,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/MILW_1935_truck_UP_grey.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-2.31, 0, 0);
+			GL11.glTranslated(-2.31, -0.03, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==5
@@ -3157,7 +3157,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/MILW_1935_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-2.31, 0, 0);
+			GL11.glTranslated(-2.31, -0.03, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		} else {
@@ -3171,7 +3171,7 @@ public class ModelMILW1935Tap_Dinette extends ModelConverter //Same as Filename
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/MILW_1935_truck_brown.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-2.31, 0, 0);
+			GL11.glTranslated(-2.31, -0.03, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		}

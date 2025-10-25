@@ -59,6 +59,9 @@ public class MillGondola extends AbstractStandardFreightCar
         InsertTexture(9, "PRD (DEMOMAN GRAFFITI)");
         InsertTexture(10, "DJJX / Generic Black");
         InsertTexture(11, "Generic Green");
+        InsertTexture(12, "CSX");
+        InsertTexture(13, "CSX MoW (Orange)");
+        InsertTexture(14, "CSX MoW (Yellow)");
     }
 
     @Override

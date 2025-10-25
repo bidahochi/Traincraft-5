@@ -1753,6 +1753,10 @@ item.tc:minecartNYCPrewar56SeatCoach.name=NYC Prewar 56 Seat Coach
 item.tc:minecartMILWPrewarBaggage.name=Milwaukee Road Prewar Baggage
 item.tc:minecartMILW1935Baggage_Dinette.name=Milwaukee Road 1935 Baggage-Dinette
 item.tc:minecartMILW1935Tap_Dinette.name=Milwaukee Road 1935 Tap-Dinette
+item.tc:minecartMILW1935_48SeatCoach.name=Milwaukee Road 1935 48 Seat Coach
+item.tc:minecartMILW1935_22SeatParlor.name=Milwaukee Road 1935 22 Seat Parlor
+item.tc:minecartMILW1935_21SeatParlor_Observation.name=Milwaukee Road 1935 21 Seat Parlor Observation
+item.tc:minecartMILW1935_44SeatCoach_Observation.name=Milwaukee Road 1935 44 Seat Coach Observation
 
 entity.tc.Freight PS 85 Baggage.name=Pullman Standard 85' Baggage
 entity.tc.PS 5-6-5 Sleeper.name=Pullman Standard 10-6 Sleeper (Center Bedroom)
@@ -1870,6 +1874,10 @@ entity.tc.NYC Prewar 56 Seat Coach.name=NYC Prewar 56 Seat Coach
 entity.tc.MILW Prewar Baggage.name=Milwaukee Road Prewar Baggage
 entity.tc.MILW 1935 Baggage-Dinette.name=Milwaukee Road 1935 Baggage-Dinette
 entity.tc.MILW 1935 Tap-Dinette.name=Milwaukee Road 1935 Tap-Dinette
+entity.tc.MILW 1935 48 Seat Coach.name=Milwaukee Road 1935 48 Seat Coach
+entity.tc.MILW 1935 22 Seat Parlor.name=Milwaukee Road 1935 22 Seat Parlor
+entity.tc.MILW 1935 21 Seat Parlor Observation.name=Milwaukee Road 1935 21 Seat Parlor Observation
+entity.tc.MILW 1935 44 Seat Coach Observation.name=Milwaukee Road 1935 44 Seat Coach Observation
 
 item.tc:minecartAmfleet.name=Amfleet 1 Coach
 item.tc:minecartAmfleet2.name=Amfleet 2 Coach

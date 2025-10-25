@@ -227,7 +227,35 @@ public class TraincraftUtil{
             return 54;
         } else if (c.equals("Skin55")) {
             return 55;
-        }else if(c.equals("Full")){
+        } else if (c.equals("Skin56")) {
+            return 56;
+        } else if (c.equals("Skin57")) {
+            return 57;
+        } else if (c.equals("Skin58")) {
+            return 58;
+        } else if (c.equals("Skin59")) {
+            return 59;
+        } else if (c.equals("Skin60")) {
+            return 60;
+        } else if (c.equals("Skin61")) {
+            return 61;
+        } else if (c.equals("Skin62")) {
+            return 62;
+        } else if (c.equals("Skin63")) {
+            return 63;
+        } else if (c.equals("Skin64")) {
+            return 64;
+        } else if (c.equals("Skin65")) {
+            return 65;
+        } else if (c.equals("Skin66")) {
+            return 66;
+        } else if (c.equals("Skin67")) {
+            return 67;
+        } else if (c.equals("Skin68")) {
+            return 68;
+        } else if (c.equals("Skin69")) {
+            return 69;
+        } else if(c.equals("Full")){
             return 101;
         } else if (c.equals("Empty")){
             return 100;

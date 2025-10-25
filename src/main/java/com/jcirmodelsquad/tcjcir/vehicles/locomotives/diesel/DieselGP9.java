@@ -78,6 +78,7 @@ public class DieselGP9 extends DieselTrain {
         InsertTexture(48, "WM (As Delivered)");
         InsertTexture(49, "WM (Chop Nose)");
         InsertTexture(50, "WM (Chop Nose Circus Scheme)");
+        InsertTexture(51, "Chessie System");
     }
     public DieselGP9(World world, double d, double d1, double d2){
         this(world);
