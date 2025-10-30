@@ -30,10 +30,10 @@ public class Tender10k extends Tender  {
         InsertTexture(4, "WPMW");
         InsertTexture(5, "DLMR Herald Logo");
         InsertTexture(6, "DLMR Text Logo");
-        InsertTexture(7, "FMSR 561", LockoutGroup.BIDA);
-        InsertTexture(8, "FMSR 570", LockoutGroup.BIDA);
-        InsertTexture(9, "FMSR 574", LockoutGroup.BIDA);
-        InsertTexture(10, "FMSR 577", LockoutGroup.BIDA);
+        InsertTexture(7, "FMSR 561", LockoutGroup.FMSR);
+        InsertTexture(8, "FMSR 570", LockoutGroup.FMSR);
+        InsertTexture(9, "FMSR 574", LockoutGroup.FMSR);
+        InsertTexture(10, "FMSR 577", LockoutGroup.FMSR);
 
     }
 

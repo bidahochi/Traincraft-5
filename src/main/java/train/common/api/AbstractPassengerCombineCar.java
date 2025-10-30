@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import train.common.entity.CargoManager;
+import train.common.items.ItemPadlock;
+import train.common.library.ItemIDs;
 
 public abstract class AbstractPassengerCombineCar extends AbstractStandardFreightCar implements IPassenger
 {
@@ -63,7 +65,8 @@ public abstract class AbstractPassengerCombineCar extends AbstractStandardFreigh
                 return true;
             }
 
-            if (worldObj.isRemote == false && entityplayer.isSneaking() == false)
+            if (worldObj.isRemote == false && entityplayer.isSneaking() == false
+                    && (itemstack == null || ((itemstack.getItem() == ItemIDs.padlock.item) == false && (itemstack.getItem() == ItemIDs.stake.item) == false)))
             {
                 entityplayer.mountEntity(this);
             }

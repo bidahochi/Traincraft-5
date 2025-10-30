@@ -176,7 +176,7 @@ public class ModelHCS_c57 extends ModelConverter //Same as Filename
 		bodyModel[136] = new ModelRendererTurbo(this, 421, 228, textureX, textureY); // Box 387
 		bodyModel[137] = new ModelRendererTurbo(this, 432, 230, textureX, textureY); // Box 386
 		bodyModel[138] = new ModelRendererTurbo(this, 388, 212, textureX, textureY); // Box boiler button
-		bodyModel[139] = new ModelRendererTurbo(this, 18, 38, textureX, textureY); // Box fncc frontals
+		bodyModel[139] = new ModelRendererTurbo(this, 18, 38, textureX, textureY, "cull"); // Box fncc frontals
 		bodyModel[140] = new ModelRendererTurbo(this, 24, 40, textureX, textureY); // Box fncc frontals
 		bodyModel[141] = new ModelRendererTurbo(this, 39, 38, textureX, textureY); // Box fncc frontals glow
 		bodyModel[142] = new ModelRendererTurbo(this, 30, 37, textureX, textureY); // Box fncc frontals glow

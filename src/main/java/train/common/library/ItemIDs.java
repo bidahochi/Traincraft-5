@@ -464,6 +464,7 @@ public enum ItemIDs {
 	minecartTenderDeseret("ItemRollingStock", "deseret_tender_icon", STEAM, 2),
 	minecartHCS_c57("ItemRollingStock", "SP_C9_icono", STEAM, 32),
 	minecartHCS_9k_Tender("ItemRollingStock", "HCS_9k_Tender_icon", STEAM, 16),
+	minecartHotTubTender("ItemRollingStock", "hottubtender", STEAM, 3),
 
 	minecartLocoC11("ItemRollingStock", "train_C11", STEAM, 5),
 	minecartOnion("ItemRollingStock", "Onion", STEAM, 10),
@@ -1004,6 +1005,11 @@ public enum ItemIDs {
 	minecartClass74("ItemRollingStock", "Class_74_icon", ELECTRIC, 6),
 	minecartTwoBil("ItemRollingStock", "2-bil_icon", PASSENGER, 3),
 	minecartTwoBilTail("ItemRollingStock", "2-bil_tail_icon", PASSENGER, 3),
+	minecartFourCor("ItemRollingStock", "4-cor_icon", PASSENGER, 3),
+	minecartFourCorTrailerComposite("ItemRollingStock", "4-cor_trailer_composite_icon", PASSENGER, 3),
+	minecartFourCorTrailerSecond("ItemRollingStock", "4-cor_trailer_second_icon", PASSENGER, 3),
+	minecartFourBuf("ItemRollingStock", "4-buf_icon", PASSENGER, 3),
+	minecartFourCorTail("ItemRollingStock", "4-cor_tail_icon", PASSENGER, 3),
 
 	//undecided stuff//
 	//minecartBaldwinMineLoco("ItemRollingStock", "baldwinmineloco", 1),

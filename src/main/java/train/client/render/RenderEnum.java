@@ -703,12 +703,6 @@ public enum RenderEnum implements ITrainRenderRecord
 			add(new double[]{-0.3D, -0.4D, 0.2D});
 		}
 	}, "", null, 0, false),
-	/*GP9old( DieselGP9old.class,  new ModelGP9(), "gp9old_", true,new float[] {-1.5F, -0.05F, 0F},  new float[] { 0F, 180F, 180F }, null, "smoke", 5,  new ArrayList<double[]>() {
-		{
-			add(new double[]{0.45D, 1.35D, 0.0D});
-			add(new double[]{1.25D, 1.35D, 0.0D});
-		}
-	}, "", null, 0, false),*/
 
 
 	/**STEAM**/
@@ -851,8 +845,8 @@ public enum RenderEnum implements ITrainRenderRecord
 			add(new double[] { 3.3D, 1.60D, 0.0D });//stack
 		}
 	}, 2, true),
-	Tender10k(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.Tender10k.class, new ModelTender10k(), "wp_10k_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
-	TenderDeseret(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.TenderDeseret.class, new ModelTenderDeseret(), "wp_deserettender_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
+	Tender10k(Tender10k.class, new ModelTender10k(), "wp_10k_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
+	TenderDeseret(TenderDeseret.class, new ModelTenderDeseret(), "wp_deserettender_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
 	PMNstender(TenderPMNstender.class, new ModelPMNstender(), "pm_n_tender_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
 	PMNandN1(SteamPMNandN1.class, new ModelPMNandN1(), "pm_n_locomotive_", true, new float[]{-2F, 0.155F, 0F}, new float[] { 0, 180, 180 }, null, "largesmoke", 3, new ArrayList<double[]>() {
 		{
@@ -875,7 +869,8 @@ public enum RenderEnum implements ITrainRenderRecord
 			add(new double[] { 2.5D, 1.50D, 0.0D });//stack
 		}
 	}, 2, true),
-	HCS_9k_Tender(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.HCS_9k_Tender.class, new ModelHCS_9k_tender(), "hcs_9kgal_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
+	HCS_9k_Tender(HCS_9k_Tender.class, new ModelHCS_9k_tender(), "hcs_9kgal_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
+	HotTubTender(HotTubTender.class, new ModelHotTubTender(), "hottub_tender_", true, new float[] {-0F, 0.155F, 0F},  new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
 
 	locoC11(SteamC11.class, new ModelC11(), "locoC11", false, new float[] {  -1.5F, 0.15F, 0.0F }, new float[] { 0, 180, 180 }, null, "largesmoke", 5, new ArrayList<double[]>() {
 		{
@@ -916,7 +911,7 @@ public enum RenderEnum implements ITrainRenderRecord
 			add(new double[] {2.2D, -0.2D, 0.75D});//pistons
 		}
 	}, 2, true),
-	Tender460(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.Tender460.class, new ModelTender460(), "4-6-0_tender_", true, new float[] {0.15F, 0.155F, 0F}, new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
+	Tender460(Tender460.class, new ModelTender460(), "4-6-0_tender_", true, new float[] {0.15F, 0.155F, 0F}, new float[] { 0F, 0F, 180F }, null, "", 0, null, "", null, 0, false),
 
 	PELoco(SteamPELoco.class, new ModelPE_Loco(), "PELoco", false, new float[] {  -1.5F, 0.15F, 0.0F }, new float[] { 0, 180, 180 }, null, "largesmoke", 3, new ArrayList<double[]>() {
 		{
@@ -956,7 +951,7 @@ public enum RenderEnum implements ITrainRenderRecord
 			add(new double[] {1.8D, -0.2D, 0.75D});//pistons
 		}
 	}, 2, true),
-	TenderLima2_8_0(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tender.TenderLima2_8_0.class, new ModelTenderLima2_8_0(), "Lima_Tender2_8_0_", true, new float[] {-1.1F, 0.155F, 0F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
+	TenderLima2_8_0(TenderLima2_8_0.class, new ModelTenderLima2_8_0(), "Lima_Tender2_8_0_", true, new float[] {-1.1F, 0.155F, 0F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
 
 	/**EMD**/
 	F3A( DieselF3A.class,  new ModelF3a_new(), "f3a_", true,new float[] {-1.3F, 0.145F, 0F},  new float[] { 0F, 180F, 180F },  null, "smoke", 3,  new ArrayList<double[]>() {
@@ -2341,8 +2336,13 @@ public enum RenderEnum implements ITrainRenderRecord
 	PCC(ElectricPCC.class, new ModelPCC(), "Pcc_", true, new float[]{-1.5F, 0.155F, 0F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
 
 	Class74(ElectricClass74.class, new Modelclass74(), "Class_74_", true, new float[]{-1.0F, 0.15F, 0.00F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
-	TwoBil(ElectricTwoBil.class, new ModelTwoBilEngine(), "2-bil_", true, new float[]{-1.7F, 0.17F, 0F}, new float[]{0F, 180F, 180F}, null, "", 0, null, "", null, 0, false),
+	TwoBil(ElectricTwoBil.class, new ModelTwoBilEngine(), "2-bil_", true, new float[]{-1.65F, 0.17F, 0F}, new float[]{0F, 180F, 180F}, null, "", 0, null, "", null, 0, false),
 	TwoBilTail(PassengerTwoBilTail.class, new ModelTwoBilTail(), "2-bil_", true, new float[]{0.02F, 0.17F, 0F}, new float[]{0F, 0F, 180F}, null, "", 0, null, "", null, 0, false),
+	FourCor(ElectricFourCor.class, new ModelFourCorEngine(), "4-cor_", true, new float[]{-1.8F, 0.17F, 0F}, new float[]{0F, 180F, 180F}, null, "", 0, null, "", null, 0, false),
+	FourCorTrailerComposite(PassengerFourCorTrailerComposite.class, new ModelFourCorTrailerComposite(), "4-cor_trailer_", true, new float[]{0.02F, 0.17F, 0F}, new float[]{0F, 0F, 180F}, null, "", 0, null, "", null, 0, false),
+	FourCorTrailerSecond(PassengerFourCorTrailerSecond.class, new ModelFourCorTrailerSecond(), "4-cor_trailer_", true, new float[]{0.02F, 0.17F, 0F}, new float[]{0F, 0F, 180F}, null, "", 0, null, "", null, 0, false),
+	FourBuf(PassengerFourBuf.class, new ModelFourBuf(), "4-buf_", true, new float[]{0.02F, 0.17F, 0F}, new float[]{0F, 0F, 180F}, null, "", 0, null, "", null, 0, false),
+	FourCorTail(PassengerFourCorTail.class, new ModelFourCorTail(), "4-cor_", true, new float[]{0.02F, 0.17F, 0F}, new float[]{0F, 0F, 180F}, null, "", 0, null, "", null, 0, false),
 
 
 	WorkdayHyrail( DieselWorkdayHyrail.class,  new ModelWorkdayHyrail(), "workday_hyrail_", true,new float[] {-1.0F, 0.155F, 0.00F},  new float[] { 0F, 180F, 180F }, null, "smoke", 1,  new ArrayList<double[]>() {

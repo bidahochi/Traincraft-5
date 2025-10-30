@@ -291,6 +291,11 @@ public class LockoutPermissionsUtil
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 gson.toJson(jsonObject, fileWriter);
                 fileWriter.close();
+
+                if (uuid != "SYSTEM" && uuid.isEmpty() == false)
+                {
+                    Traincraft.lockoutPermissionsUtil.AddUserToGroup("", uuid, groupName.toUpperCase());
+                }
             }
         }
         catch (Exception e)

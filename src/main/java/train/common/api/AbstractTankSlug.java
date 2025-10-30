@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.*;
 import train.common.Traincraft;
 import train.common.library.EnumTrains;
 import train.common.library.GuiIDs;
+import train.common.library.register.ITrainRecord;
 
 public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandler, INoFuelTransferEntity, IRollingStockLightControls
 {
@@ -27,12 +28,12 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
     public byte ditchLightMode = 1;
 
 
-    public AbstractTankSlug(World world, EnumTrains enumTrains)
+    public AbstractTankSlug(World world, ITrainRecord trainRecord)
     {
-        super(world, enumTrains.getTankCapacity());
+        super(world, trainRecord.getTankCapacity());
 
         initFreightWater();
-        this.theTank = LiquidManager.getInstance().new FilteredTank(enumTrains.getTankCapacity(), LiquidManager.dieselFilter());
+        this.theTank = LiquidManager.getInstance().new FilteredTank(trainRecord.getTankCapacity(), LiquidManager.dieselFilter());
         dataWatcher.addObject(28, lightingDetailsJSON());
     }
 

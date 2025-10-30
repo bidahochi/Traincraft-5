@@ -188,16 +188,21 @@ public class RenderRollingStock extends Render {
 		if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
 			GL11.glRotatef((float) -cart.anglePitchClient, 0.0F, 0.0F, 1.0F);
 		}
-		else {
-			if(renderYVect != null){
+		else
+		{
+			if(renderYVect != null)
+			{
 				pitch = (float)cart.anglePitchClient/60;
-				if(cart.rotationYawClientReal>-5 && cart.rotationYawClientReal<5){
+				if(cart.rotationYawClientReal>-5 && cart.rotationYawClientReal<5)
+				{
 					pitch=-pitch;
 				}
-				if(!cart.isClientInReverse && (cart.rotationYawClientReal>85 && cart.rotationYawClientReal<95 )){
+				if(!cart.isClientInReverse && (cart.rotationYawClientReal>85 && cart.rotationYawClientReal<95 ))
+				{
 					pitch=-pitch;
 				}
-				if(cart.isClientInReverse && (cart.rotationYawClientReal<-265 && cart.rotationYawClientReal>-275 )){
+				if(cart.isClientInReverse && (cart.rotationYawClientReal<-265 && cart.rotationYawClientReal>-275 ))
+				{
 					pitch=-pitch;
 				}
 				GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
@@ -221,59 +226,46 @@ public class RenderRollingStock extends Render {
 		}
 
 		ITrainRenderRecord renders = cart.getRenderSpec();
-		try {
-			Method theTransMethod = renders.getModel().getClass().getDeclaredMethod("getTrans");
-			float[] theTrans = (float[]) theTransMethod.invoke(renders.getModel());
-			if (theTrans != null) {
-				GL11.glTranslatef(theTrans[0], theTrans[1], theTrans[2]);
-			}
 
-		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			if (renders.getTrans() != null) {
-				GL11.glTranslatef(renders.getTrans()[0], renders.getTrans()[1], renders.getTrans()[2]);
-			}
+		if (renders.getTrans() != null)
+		{
+			GL11.glTranslatef(renders.getTrans()[0], renders.getTrans()[1], renders.getTrans()[2]);
 		}
-		try {
-			Method theTransMethod = renders.getModel().getClass().getDeclaredMethod("getRotate");
-			float[] theRotate = (float[]) theTransMethod.invoke(renders.getModel());
-			if (theRotate != null) {
-				GL11.glRotatef(theRotate[0], 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(theRotate[1], 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(theRotate[2], 0.0F, 0.0F, 1.0F);
-			}
-		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			if (renders.getRotate() != null) {
-				GL11.glRotatef(renders.getRotate()[0], 1.0F, 0.0F, 0.0F);
-				GL11.glRotatef(renders.getRotate()[1], 0.0F, 1.0F, 0.0F);
-				GL11.glRotatef(renders.getRotate()[2], 0.0F, 0.0F, 1.0F);
-			}
-		}
-		try {
-			Method theScaleMethod = renders.getModel().getClass().getDeclaredMethod("getScale");
-			float[] theRotate = (float[]) theScaleMethod.invoke(renders.getModel());
-			if (theRotate != null) {
-				GL11.glScalef(theRotate[0], theRotate[1], theRotate[2]);
-			}
-		} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-			if (renders.getScale() != null) {
-				GL11.glScalef(renders.getScale()[0], renders.getScale()[1], renders.getScale()[2]);
-			}
 
+		if (renders.getRotate() != null)
+		{
+			GL11.glRotatef(renders.getRotate()[0], 1.0F, 0.0F, 0.0F);
+			GL11.glRotatef(renders.getRotate()[1], 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(renders.getRotate()[2], 0.0F, 0.0F, 1.0F);
 		}
-		if (!cart.acceptsOverlayTextures() || cart.getOverlayTextureContainer().getType() == OverlayTextureManager.Type.NONE) {
+
+
+		if (renders.getScale() != null)
+		{
+			GL11.glScalef(renders.getScale()[0], renders.getScale()[1], renders.getScale()[2]);
+		}
+
+		if (!cart.acceptsOverlayTextures() || cart.getOverlayTextureContainer().getType() == OverlayTextureManager.Type.NONE)
+		{
 			Tessellator.bindTexture(renders.getTextureFile(cart.getColorAsString()));
-		} else {
-			if (cart.getOverlayTextureContainer().markedForUpdate) {
+		}
+		else
+		{
+			if (cart.getOverlayTextureContainer().markedForUpdate)
+			{
 				cart.getOverlayTextureContainer().renderTexture();
 			}
 			Tessellator.bindTexture(cart.getOverlayTextureContainer().getOverlaidTextureResource());
 		}
 		int skyLight = cart.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
-		if (!renderModeGUI) {
+		if (!renderModeGUI)
+		{
 			GL11.glEnable(GL11.GL_LIGHTING);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, skyLight % 65536,
 					skyLight / 65536f);
-		} else {
+		}
+		else
+		{
 			if (renderGUIFullBright)
 				GL11.glDisable(GL11.GL_LIGHTING);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f,
@@ -281,17 +273,9 @@ public class RenderRollingStock extends Render {
 		}
 
 		renders.getModel().render(cart, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-		if (renders.hasSmoke()) {
-			ArrayList<double[]> smokePosition = new ArrayList<>();
-			try {
-				Method theScaleMethod = renders.getModel().getClass().getDeclaredMethod("getSmokePosition");
-				ArrayList<double[]> thePos = (ArrayList<double[]>) theScaleMethod.invoke(renders.getModel());
-				if (thePos != null) {
-					smokePosition = thePos;
-				}
-			} catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-				smokePosition = renders.getSmokeFX();
-			}
+		if (renders.hasSmoke())
+		{
+			ArrayList<double[]> smokePosition = renders.getSmokeFX();
 
 			if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
 				renderSmokeFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, renders.getSmokeType(), smokePosition, renders.getSmokeIterations(), time);

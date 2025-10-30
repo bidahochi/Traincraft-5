@@ -24,6 +24,6 @@ public class PassengerTwoBilTail extends AbstractPassengerCar {
     @Override
     public float getOptimalLinkingDistance()
     {
-        return 2.77F;
+        return 2.69F;
     }
 }

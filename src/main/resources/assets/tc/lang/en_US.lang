@@ -865,6 +865,7 @@ item.tc:minecartPMNandN1.name=Pere Marquette N and N-1
 
 item.tc:minecartHCS_c57.name=SP-UP C57 2-8-0
 item.tc:minecartHCS_9k_Tender.name=SP-UP 9,000 Gal Tender
+item.tc:minecartHotTubTender.name=FMSR "Hot Tub" Tender
 
 item.tc:minecartLocoC11.name=JNR C11
 item.tc:minecartOnion.name=Onion
@@ -911,6 +912,7 @@ entity.tc.PMNandN1.name=Pere Marquette N and N-1
 
 entity.tc.HCS_c57.name=SP-UP C57 2-8-0
 entity.tc.HCS_9k_Tender.name=SP-UP 9,000 Gal Tender
+entity.tc.HotTubTender.name=FMSR "Hot Tub" Tender
 
 entity.tc.Loco Steam C11.name=JNR C11
 entity.tc.Onion.name=Onion
@@ -1929,7 +1931,7 @@ item.tc:minecartW_A55_Combine.name=SEC W-A55 Combine
 
 entity.tc.SEC W-A11.name=SEC W-A11
 entity.tc.SEC W-A55.name=SEC W-A55
-entity.tc.SEC W-A55.name=SEC W-A55 Combine
+entity.tc.SEC W-A55 Combine.name=SEC W-A55 Combine
 --------------------------------------------------------
 
 item.tc:minecartBigMeme.name=Leslie A425 Trailer
@@ -1972,9 +1974,20 @@ item.tc:minecartClass74.name=Class 74
 entity.tc.Class74.name=Class 74
 
 item.tc:minecartTwoBil.name=2-Bil Engine
-entity.tc.TwoBil.name=2-Bil Engine
 item.tc:minecartTwoBilTail.name=2-Bil Tail
+item.tc:minecartFourCor.name=4-Cor Engine
+item.tc:minecartFourCorTrailerComposite.name=4-Cor Trailer Composite
+item.tc:minecartFourCorTrailerSecond.name=4-Cor Trailer Second
+item.tc:minecartFourBuf.name=4-Buf
+item.tc:minecartFourCorTail.name=4-Cor Tail
+
+entity.tc.TwoBil.name=2-Bil Engine
 entity.tc.TwoBilTail.name=2-Bil Tail
+entity.tc.FourCor.name=4-Cor Engine
+entity.tc.FourCorTrailerComposite.name=4-Cor Trailer Composite
+entity.tc.FourCorTrailerSecond.name=4-Cor Trailer Second
+entity.tc.FourBuf.name=4-Buf
+entity.tc.FourCorTail.name=4-Cor Tail
 
 
 item.tc:minecartWorkdayHyrail.name=1980 Pine Workday Hi-rail Truck
