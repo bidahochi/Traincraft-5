@@ -240,7 +240,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			entityMainTrain.motionZ = 0;
 		}
 		}*/
-		if(!pathFindingHelper.isOnRail(this, worldObj) && (this.entityMainTrain.motionX != 0 || this.entityMainTrain.motionZ != 0)){
+		if(!pathFindingHelper.isOnRail(this, worldObj)){
 			//this.setPosition(prevX, this.posY, prevZ);
 			this.isDerail = true;
 		} else if (isDerail) {

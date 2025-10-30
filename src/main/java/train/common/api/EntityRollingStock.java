@@ -1254,21 +1254,21 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 					if (!bogieLoco.isOnRail()) {
 						derailSpeed = 0;
 					}
-				}
+				}/*
 				if(derailSpeed == 0){
 					this.unLink();
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, (tileRail.getBlockMetadata()+1)%4);
 				}
-				else {
-					int meta = tileRail.getBlockMetadata();
-					if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta))
-					{
-						pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, meta);
-					} else {
-						if (ItemTCRail.isTCTurnTrack(tileRail))
-							moveOnTC90TurnRail(floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
-					}
+				else {*/
+				int meta = tileRail.getBlockMetadata();
+				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta))
+				{
+					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, meta);
+				} else {
+					if (ItemTCRail.isTCTurnTrack(tileRail))
+						moveOnTC90TurnRail(floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
 				}
+				//}
 			}
 			else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
 			{
@@ -1276,7 +1276,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 			}
 			else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
 			{
-				if (bogieLoco != null) {
+				/*if (bogieLoco != null) {
 					if (!bogieLoco.isOnRail()) {
 						derailSpeed = 0;
 					}
@@ -1284,16 +1284,16 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				if (derailSpeed == 0) {
 					this.unLink();
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+				} else {*/
+
+				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
+
+					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 				} else {
-
-					if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
-
-						pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
-					} else {
-						if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
-							moveOnNewTC90TurnRail( floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
-					}
+					if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
+						moveOnNewTC90TurnRail( floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
 				}
+				//}
 			}
 
 			else if (TCRailTypes.isSlopeTrack(tileRail))
