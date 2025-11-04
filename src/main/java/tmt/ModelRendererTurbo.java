@@ -266,9 +266,9 @@ public class ModelRendererTurbo {
         TexturedVertex tv5 = new TexturedVertex(v5[0], v5[1], v5[2], 0.0F, 8.0F);
         TexturedVertex tv6 = new TexturedVertex(v6[0], v6[1], v6[2], 8.0F, 8.0F);
         TexturedVertex tv7 = new TexturedVertex(v7[0], v7[1], v7[2], 8.0F, 0.0F);
-        //if(w % 1 != 0) w = w < 1 ? 1 : (int)w + (w % 1 > 0.5f ? 1 : 0);
-        //if(h % 1 != 0) h = h < 1 ? 1 : (int)h + (h % 1 > 0.5f ? 1 : 0);
-        //if(d % 1 != 0) d = d < 1 ? 1 : (int)d + (d % 1 > 0.5f ? 1 : 0);
+        if(w % 1 != 0) w = w < 1 ? (w < 0.5 ? 0 : 1) : (int)w + (w % 1 >= 0.5f ? 1 : 0);
+        if(h % 1 != 0) h = h < 1 ? (h < 0.5 ? 0 : 1) : (int)h + (h % 1 >= 0.5f ? 1 : 0);
+        if(d % 1 != 0) d = d < 1 ? (d < 0.5 ? 0 : 1) : (int)d + (d % 1 >= 0.5f ? 1 : 0);
         if(sides == null){
             poly[0] = addPolygonReturn(new TexturedVertex[] { tv5, tv1, tv2, tv6 }, textureOffsetX + d + w, textureOffsetY + d, textureOffsetX + d + w + d, textureOffsetY + d + h);
             poly[1] = addPolygonReturn(new TexturedVertex[] { tv0, tv4, tv7, tv3 }, textureOffsetX + 0, textureOffsetY + d, textureOffsetX + d, textureOffsetY + d + h);
@@ -278,11 +278,11 @@ public class ModelRendererTurbo {
             poly[5] = addPolygonReturn(new TexturedVertex[] { tv4, tv5, tv6, tv7 }, textureOffsetX + d + w + d, textureOffsetY + d, textureOffsetX + d + w + d + w, textureOffsetY + d + h);
         }
         else{
-        	float yp = sides[2] && sides[3] ? 0 : d;
-        	float x0 = sides[1] ? 0 : d;
-        	float x1 = sides[2] ? 0 : w;
-        	float x2 = sides[4] ? 0 : w;
-        	float x3 = sides[0] ? 0 : d;
+            float yp = sides[2] && sides[3] ? 0 : d;
+            float x0 = sides[1] ? 0 : d;
+            float x1 = sides[2] ? 0 : w;
+            float x2 = sides[4] ? 0 : w;
+            float x3 = sides[0] ? 0 : d;
             if(sides.length > 0 && !sides[0]) poly[0] = addPolygonReturn(new TexturedVertex[] { tv5, tv1, tv2, tv6 }, textureOffsetX + x0 + x2, textureOffsetY + yp, textureOffsetX + x0 + x2 + d, textureOffsetY + yp + h);
             if(sides.length > 1 && !sides[1]) poly[1] = addPolygonReturn(new TexturedVertex[] { tv0, tv4, tv7, tv3 }, textureOffsetX + 0, textureOffsetY + yp, textureOffsetX + d, textureOffsetY + yp + h);
             if(sides.length > 2 && !sides[2]) poly[2] = addPolygonReturn(new TexturedVertex[] { tv5, tv4, tv0, tv1 }, textureOffsetX + x0, textureOffsetY + 0, textureOffsetX + x0 + w, textureOffsetY + d);
@@ -292,22 +292,22 @@ public class ModelRendererTurbo {
         }
         if(mirror ^ flip){
             for(int l = 0; l < poly.length; l++){
-            	poly[l].flipFace();
+                poly[l].flipFace();
             }
         }
         if(sides != null){
-        	int polis = 0, processed = 0;
-        	for(int i = 0; i < poly.length; i++) if(poly[i] != null) polis++;
+            int polis = 0, processed = 0;
+            for(int i = 0; i < poly.length; i++) if(poly[i] != null) polis++;
             TexturedPolygon[] polygons = new TexturedPolygon[polis];
-        	for(int i = 0; i < poly.length; i++){
-        		if(poly[i] != null){
-        			polygons[processed] = poly[i];
-        			processed++;
-        		}
-        	}
-        	poly = polygons;
+            for(int i = 0; i < poly.length; i++){
+                if(poly[i] != null){
+                    polygons[processed] = poly[i];
+                    processed++;
+                }
+            }
+            poly = polygons;
         }
-        return copyTo(null, poly);
+        return copyTo(poly);
     }
 
     /**
@@ -1588,7 +1588,18 @@ public class ModelRendererTurbo {
         faces.addAll(Arrays.asList(poly));
         return this;
     }
-    
+
+
+    public ModelRendererTurbo copyTo(TexturedPolygon... poly){
+        faces.addAll(Arrays.asList(poly));
+        return this;
+    }
+
+    public ModelRendererTurbo copyTo(ArrayList<tmt.TexturedPolygon> poly) {
+        faces.addAll(poly);
+        return this;
+    }
+
     /**
      * Sets the current texture group, which is used to switch the
      * textures on a per-model base. Do note that any model that is
@@ -1845,6 +1856,15 @@ public class ModelRendererTurbo {
 		float[][] v  = {{x  - x0, y  - y0, z  - z0}, {f4 + x1, y  - y1, z  - z1},{f4 + x5, f5 + y5, z  - z5}, {x  - x4, f5 + y4, z  - z4}, {x  - x3, y  - y3, f6 + z3}, {f4 + x2, y  - y2, f6 + z2},{f4 + x6, f5 + y6, f6 + z6}, {x  - x7, f5 + y7, f6 + z7}};
 		return addRectShape(v[0], v[1], v[2], v[3], v[4], v[5], v[6], v[7], w, h, d);
 	}
+
+    public ModelRendererTurbo addShapeBox(float x, float y, float z, float w, float h, float d, float scale, float x0, float y0, float z0, float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3, float x4, float y4, float z4, float x5, float y5, float z5, float x6, float y6, float z6, float x7, float y7, float z7, boolean[] sides){
+        float xw = x + w, yh = y + h, zd = z + d; x -= scale; y -= scale; z -= scale; xw += scale; yh += scale; zd += scale;
+        if(mirror){ float fl = xw; xw = x; x = fl; }
+        float[] v0 = {x  - x0, y  - y0, z  - z0}, v1 = {xw + x1, y  - y1, z  - z1}, v2 = {xw + x5, yh + y5, z  - z5};
+        float[] v3 = {x  - x4, yh + y4, z  - z4}, v4 = {x  - x3, y  - y3, zd + z3}, v5 = {xw + x2, y  - y2, zd + z2};
+        float[] v6 = {xw + x6, yh + y6, zd + z6}, v7 = {x  - x7, yh + y7, zd + z7};
+        return addRectShape(v0, v1, v2, v3, v4, v5, v6, v7, w, h, d, sides);
+    }
 	
 	public final ModelRendererTurbo setOldRotationOrder(boolean bool){
 		this.rotorder = bool;
