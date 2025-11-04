@@ -1664,7 +1664,13 @@ public class ModelRendererTurbo {
     }
 
 
-    
+    /**
+     * Instances a new FMT BoxBuilder
+     */
+    public BoxBuilder newBoxBuilder(){
+        return new BoxBuilder(this);
+    }
+
     public void render(){
     	render(0.0625F, rotorder);
     }
