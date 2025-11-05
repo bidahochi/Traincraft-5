@@ -1100,7 +1100,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
             }
 
         SoundRecord soundRecord = getSoundRecord();
-            if (!soundRecord.getHornString().isEmpty() && !soundRecord.getBellString().equals("")) {
+            if (soundRecord != null && !soundRecord.getHornString().isEmpty() && !soundRecord.getBellString().equals("")) {
                 if (bellPressed) {
 
                     if (bellCount == 0) {
