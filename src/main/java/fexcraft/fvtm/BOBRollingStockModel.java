@@ -92,16 +92,16 @@ public class BOBRollingStockModel extends FVTMFormatBase {
         model.render(entity, f, f1, f2, f3, f4, f5);
         for (int i = 0; i < details.size(); i++) {
             GL11.glPushMatrix();
-            if (detailTextures.size() >= i && detailTextures.get(i) != null) {
+            if (detailTextures.size() > i && detailTextures.get(i) != null) {
                 Tessellator.bindTexture(detailTextures.get(i));
             }
-            if (detailScales.size() >= i && detailScales.get(i) != null) {
+            if (detailScales.size() > i && detailScales.get(i) != null) {
                 GL11.glScalef(detailScales.get(i).xCoord, detailScales.get(i).yCoord, detailScales.get(i).zCoord);
             }
-            if (detailPositions.size() >= i && detailPositions.get(i) != null) {
+            if (detailPositions.size() > i && detailPositions.get(i) != null) {
                 GL11.glTranslatef(detailPositions.get(i).xCoord, detailPositions.get(i).yCoord, detailPositions.get(i).zCoord);
             }
-            if (detailRotations.size() >= i && detailRotations.get(i) != null) {
+            if (detailRotations.size() > i && detailRotations.get(i) != null) {
                 GL11.glRotatef(detailRotations.get(i).xCoord, 1, 0 ,0);
                 GL11.glRotatef(detailRotations.get(i).yCoord, 0, 1 ,0);
                 GL11.glRotatef(detailRotations.get(i).zCoord, 0, 0 ,1);
