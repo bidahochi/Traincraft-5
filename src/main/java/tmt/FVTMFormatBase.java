@@ -12,7 +12,8 @@ import java.util.ArrayList;
  */
 public class FVTMFormatBase extends ModelBase {
 	
-	protected int textureX, textureY;
+	public int textureX, textureY;
+	public String name;
 	public ArrayList<TurboList> groups = new ArrayList<TurboList>();
 
 	public void addToCreators(String author){

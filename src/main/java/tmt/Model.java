@@ -3,6 +3,8 @@ package tmt;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 
+import java.util.ArrayList;
+
 /**
 * Replaces the old `ModelBase` in this package.
 * @Author Ferdinand Calo' (FEX___96)
@@ -71,7 +73,7 @@ public abstract class Model<T> extends net.minecraft.client.model.ModelBase {
 	
 	public abstract void rotateAll(float x, float y, float z);
 	
-	protected final void fixRotation(ModelRendererTurbo[] model, boolean... bools){
+	public final void fixRotation(ModelRendererTurbo[] model, boolean... bools){
 		if(bools.length >= 1 && bools[0]){
 			for(ModelRendererTurbo mod : model){
 				mod.rotateAngleX = -mod.rotateAngleX;
@@ -85,6 +87,26 @@ public abstract class Model<T> extends net.minecraft.client.model.ModelBase {
 		if(bools.length >= 3 && bools[2]){
 			for(ModelRendererTurbo mod : model){
 				mod.rotateAngleZ = -mod.rotateAngleZ;
+			}
+		}
+	}
+
+	public final void fixRotation(FVTMFormatBase.TurboList[] list, boolean... bools) {
+		for(ArrayList<ModelRendererTurbo> model : list) {
+			if (bools.length >= 1 && bools[0]) {
+				for (ModelRendererTurbo mod : model) {
+					mod.rotateAngleX = -mod.rotateAngleX;
+				}
+			}
+			if (bools.length >= 2 && bools[1]) {
+				for (ModelRendererTurbo mod : model) {
+					mod.rotateAngleY = -mod.rotateAngleY;
+				}
+			}
+			if (bools.length >= 3 && bools[2]) {
+				for (ModelRendererTurbo mod : model) {
+					mod.rotateAngleZ = -mod.rotateAngleZ;
+				}
 			}
 		}
 	}
