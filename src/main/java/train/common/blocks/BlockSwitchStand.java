@@ -109,29 +109,31 @@ public abstract class BlockSwitchStand extends BlockLever {
 		return texture;
 	}
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-		TileSwitchStand switchStand = ((TileSwitchStand) world.getTileEntity(x, y, z));
-		if (!world.isRemote) { // Server side.
-			if (!((player.isSneaking()) && (player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() instanceof ItemPadlock)
-					&&  ((player.getDisplayName().equalsIgnoreCase(switchStand.getOwner())) || (player.canCommandSenderUseCommand(2, ""))))) {
-				if (!switchStand.isLocked() || player.getDisplayName().equalsIgnoreCase(switchStand.getOwner()) || TrustedPlayer.isPlayerTrusted(player.getDisplayName(), switchStand.getTrustedList()))
-					super.onBlockActivated(world, x, y, z, player, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
-				else {
-					player.addChatMessage(new ChatComponentText("This switch stand is locked by " + switchStand.getOwner() + "!"));
-					return false;
-				}
-			} else if (player.canCommandSenderUseCommand(2, "") && player.inventory.getCurrentItem() != null &&
-					player.inventory.getCurrentItem().getItem() instanceof ItemPadlock) {
-				player.addChatMessage(new ChatComponentText("Force activating switch stand owned by " + switchStand.getOwner() + " using operator permission."));
-				super.onBlockActivated(world, x, y, z, player, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
-			}
-		} else { // Client side.
-			if ((player.isSneaking()) && (player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() instanceof ItemPadlock)
-					&&  ((player.getDisplayName().equalsIgnoreCase(switchStand.getOwner())) || (player.canCommandSenderUseCommand(2, "")))) {
-				player.openGui(Traincraft.instance, GuiIDs.LOCK_MENU_SWITCHES, world, x, y, z);
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        TileSwitchStand switchStand = ((TileSwitchStand) world.getTileEntity(x, y, z));
+        if (!world.isRemote) { // Server side.
+            if (player == null) { // For activation without a player...
+                super.onBlockActivated(world, x, y, z, null, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+            } else if (!((player.isSneaking()) && (player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() instanceof ItemPadlock)
+                    &&  ((player.getDisplayName().equalsIgnoreCase(switchStand.getOwner())) || (player.canCommandSenderUseCommand(2, ""))))) {
+                if (!switchStand.isLocked() || player.getDisplayName().equalsIgnoreCase(switchStand.getOwner()) || TrustedPlayer.isPlayerTrusted(player.getDisplayName(), switchStand.getTrustedList()))
+                    super.onBlockActivated(world, x, y, z, player, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+                else {
+                    player.addChatMessage(new ChatComponentText("This switch stand is locked by " + switchStand.getOwner() + "!"));
+                    return false;
+                }
+            } else if (player.canCommandSenderUseCommand(2, "") && player.inventory.getCurrentItem() != null &&
+                    player.inventory.getCurrentItem().getItem() instanceof ItemPadlock) {
+                player.addChatMessage(new ChatComponentText("Force activating switch stand owned by " + switchStand.getOwner() + " using operator permission."));
+                super.onBlockActivated(world, x, y, z, player, p_149727_6_, p_149727_7_, p_149727_8_, p_149727_9_);
+            }
+        } else { // Client side.
+            if ((player.isSneaking()) && (player.inventory.getCurrentItem() != null) && (player.inventory.getCurrentItem().getItem() instanceof ItemPadlock)
+                    &&  ((player.getDisplayName().equalsIgnoreCase(switchStand.getOwner())) || (player.canCommandSenderUseCommand(2, "")))) {
+                player.openGui(Traincraft.instance, GuiIDs.LOCK_MENU_SWITCHES, world, x, y, z);
+            }
+        }
+        return true;
+    }
 }
