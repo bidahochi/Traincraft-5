@@ -361,7 +361,7 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
             {
                 if (isPlacementWithSkinValid == false)
                 {
-                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Lockout:" + EnumChatFormatting.GRAY + " Unable to place no public domain skins available."));
+                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Lockout:" + EnumChatFormatting.GRAY + " Unable to place, no public domain skins available."));
                     rollingStock.setDead();
                     return rollingStock;
                 }
