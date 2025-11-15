@@ -237,7 +237,7 @@ public class PathFindingHelper
         abstractTrains.posZ = (abstractTrains.boundingBox.minZ + abstractTrains.boundingBox.maxZ) / 2.0D;
     }
 
-    public void moveOnTCCurve(EntityMinecart entity, int i, int j, int k, double r, double cx, double cz)
+    public void moveOnTCCurve(EntityMinecart entity, int j, double r, double cx, double cz)
     {
         //checkIfPathIsCorrect(entity);
         entity.posY = j + 0.2;

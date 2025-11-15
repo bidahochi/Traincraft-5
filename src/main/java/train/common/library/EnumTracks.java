@@ -714,6 +714,7 @@ public enum EnumTracks
         switch (itemIDs)
         {
             case tcRailMediumSwitch:
+                return 2;
             case tcRailEmbeddedMediumSwitch:
             case tcRailMedium45DegreeSwitch:
             case tcRailEmbeddedMedium45DegreeSwitch:

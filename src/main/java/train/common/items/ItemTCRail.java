@@ -41,6 +41,7 @@ public class ItemTCRail extends ItemPart {
 				|| (tile.getType().equals(EnumTracks.LARGE_RIGHT_SWITCH.getLabel()) && tile.getSwitchState())
 				|| (tile.getType().equals(EnumTracks.MEDIUM_RIGHT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
 				|| (tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
+				|| (tile.getType().equals(EnumTracks.LARGE_LEFT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
 
 				|| tile.getType().equals(EnumTracks.MEDIUM_RIGHT_TURN.getLabel())
 				|| tile.getType().equals(EnumTracks.LARGE_RIGHT_TURN.getLabel())
@@ -50,6 +51,12 @@ public class ItemTCRail extends ItemPart {
 				|| tile.getType().equals(EnumTracks.MEDIUM_LEFT_TURN.getLabel())
 				|| tile.getType().equals(EnumTracks.SUPER_LARGE_LEFT_TURN.getLabel())
 				|| tile.getType().equals(EnumTracks.SUPER_LARGE_RIGHT_TURN.getLabel())
+				|| tile.getType().equals(EnumTracks.LEFT_TURN_29X29.getLabel())
+				|| tile.getType().equals(EnumTracks.RIGHT_TURN_29X29.getLabel())
+				|| tile.getType().equals(EnumTracks.LEFT_TURN_32X32.getLabel())
+				|| tile.getType().equals(EnumTracks.RIGHT_TURN_32X32.getLabel())
+				|| tile.getType().equals(EnumTracks.LEFT_TURN_1X1.getLabel())
+				|| tile.getType().equals(EnumTracks.RIGHT_TURN_1X1.getLabel())
 
 				|| tile.getType().equals(EnumTracks.SMALL_RIGHT_PARALLEL_CURVE.getLabel())
 				|| tile.getType().equals(EnumTracks.SMALL_LEFT_PARALLEL_CURVE.getLabel())
@@ -57,6 +64,8 @@ public class ItemTCRail extends ItemPart {
 				|| tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_CURVE.getLabel())
 				|| tile.getType().equals(EnumTracks.LARGE_RIGHT_PARALLEL_CURVE.getLabel())
 				|| tile.getType().equals(EnumTracks.LARGE_LEFT_PARALLEL_CURVE.getLabel())
+				|| tile.getType().equals(EnumTracks.S_CURVE_20x2_LEFT.getLabel())
+				|| tile.getType().equals(EnumTracks.S_CURVE_20x2_RIGHT.getLabel())
 
 				|| tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_RIGHT_TURN.getLabel())
 				|| tile.getType().equals(EnumTracks.EMBEDDED_LARGE_RIGHT_TURN.getLabel())

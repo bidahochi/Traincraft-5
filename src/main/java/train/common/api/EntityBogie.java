@@ -366,33 +366,27 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 					//applyDragAndPushForces();
 					limitSpeedOnTCRail();
 
-					if (ItemTCRail.isTCTurnTrack(tileRail))
+					if (ItemTCRail.isTCTurnTrack(tileRail) || TCRailTypes.isTurnTrack(tileRail))
 					{
 						int meta = tileRail.getBlockMetadata();
 						if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, i, j, k, meta)) {
 							pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 						} else {
-							if (ItemTCRail.isTCTurnTrack(tileRail)) moveOnTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+							pathFindingHelper.moveOnTCCurve(this, j, tileRail.r, tileRail.cx, tileRail.cz);
 						}
-
-						// shouldIgnoreSwitch(tileRail, i, j, k, meta);
-						// if (ItemTCRail.isTCTurnTrack(tileRail)) moveOnTC90TurnRail(i, j, k,
-						// tileRail.r, tileRail.cx, tileRail.cy, tileRail.cz, tileRail.getType(), meta);
 					}
 					else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
 					{
 						pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 						//moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 					}
-					else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
+					else if ((TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
 					{
 						if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
 							pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 						}
 						else {
-							if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState())) {
-								pathFindingHelper.moveOnTCCurve(this, i, j, k, tileRail.r, tileRail.cx, tileRail.cz);
-							}
+							pathFindingHelper.moveOnTCCurve(this, j, tileRail.r, tileRail.cx, tileRail.cz);
 						}
 					}
 					else if (TCRailTypes.isCrossingTrack(tileRail))
@@ -609,50 +603,6 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		this.motionX = alongZ ? 0.0D : Math.copySign(norm, this.motionX);
 		this.motionY = 0;
 		this.motionZ = alongZ ? Math.copySign(norm, this.motionZ) : 0.0D;
-	}
-
-	private void moveOnTC90TurnRail(int j,double r, double cx, double cz){
-		posY = j + 0.2;
-		double cpx = posX - cx;
-		double cpz = posZ - cz;
-		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
-
-		double vnorm = Math.sqrt(motionX * motionX + motionZ * motionZ);
-
-		double norm_cpx = cpx / cp_norm;//u
-		double norm_cpz = cpz / cp_norm;//v
-
-		double vx2 = -norm_cpz * vnorm;//-v
-		double vz2 = norm_cpx * vnorm;//u
-
-		double px2 = posX + motionX;
-		double pz2 = posZ + motionZ;
-
-		double px2_cx = px2 - cx;
-		double pz2_cz = pz2 - cz;
-
-		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
-
-		double px2_cx_norm = px2_cx / p2_c_norm;
-		double pz2_cz_norm = pz2_cz / p2_c_norm;
-
-		double px3 = cx + (px2_cx_norm * r);
-		double pz3 = cz + (pz2_cz_norm * r);
-
-		double signX = px3 - posX;
-		double signZ = pz3 - posZ;
-
-		vx2 = Math.copySign(vx2, signX);
-		vz2 = Math.copySign(vz2, signZ);
-
-		double p_corr_x = cx + ((cpx / cp_norm) * r);
-		double p_corr_z = cz + ((cpz / cp_norm) * r);
-
-		setPosition(p_corr_x, posY + yOffset, p_corr_z);
-
-		moveEntity(vx2, 0.0D, vz2);
-		motionX = vx2;
-		motionZ = vz2;
 	}
 
 	private void limitSpeedOnTCRail() {

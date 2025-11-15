@@ -1251,12 +1251,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				return;
 			}
 
-			if (ItemTCRail.isTCTurnTrack(tileRail)) {
+			if (ItemTCRail.isTCTurnTrack(tileRail) || TCRailTypes.isTurnTrack(tileRail)) {
 				int meta = tileRail.getBlockMetadata();
 				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, meta);
 				} else {
-					pathFindingHelper.moveOnTCCurve(this, floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
+					pathFindingHelper.moveOnTCCurve(this, floor_posY, tileRail.r, tileRail.cx, tileRail.cz);
 				}
 			}
 			else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
@@ -1268,7 +1268,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 				} else {
-					pathFindingHelper.moveOnTCCurve(this, floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
+					pathFindingHelper.moveOnTCCurve(this, floor_posY, tileRail.r, tileRail.cx, tileRail.cz);
 				}
 			}
 
@@ -1331,35 +1331,6 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				break;
 			}
 		}
-	}
-
-	protected void moveOnTC90TurnRail(int i, int j, int k, double r, double cx, double cz) {
-		//System.out.println("curve");
-		posY = j + 0.2;
-		double cpx = posX - cx;
-		double cpz = posZ - cz;
-		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
-
-		double vnorm = Math.sqrt(motionX * motionX + motionZ * motionZ);
-
-		double vx2 = -(cpz / cp_norm) * vnorm;//-v
-		double vz2 = (cpx / cp_norm) * vnorm;//u
-
-		double px2_cx = (posX + motionX * 2) - cx;
-		double pz2_cz = (posZ + motionZ * 2) - cz;
-
-		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
-
-		vx2 = Math.copySign(vx2, (cx + ((px2_cx / p2_c_norm) * r)) - posX);
-		vz2 = Math.copySign(vz2, (cz + ((pz2_cz / p2_c_norm) * r)) - posZ);
-
-		setPosition(cx + ((cpx / cp_norm) * r), posY + yOffset, cz + ((cpz / cp_norm) * r));
-
-		moveEntity(vx2, 0.0D, vz2);
-
-		motionX = vx2;
-		motionZ = vz2;
-
 	}
 
 	protected void moveOnTCTwoWaysCrossing(int i, int j, int k, double cx, double cy, double cz, int meta) {
