@@ -878,9 +878,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 			needsBogieUpdate = false;
 		}
 		if (!needsBogieUpdate) {
-				if (bogieLoco != null) {
-					bogieLoco.updateDistance();
-				}
+			if (bogieLoco != null) {
+				bogieLoco.updateDistance();
+			}
 		}
 
 		//if (isRailBlockAt(worldObj, floor_posX, floor_posY - 1, floor_posZ)
@@ -932,7 +932,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 					MathHelper.sqrt_double(((bogieLoco.posX - posX) * (bogieLoco.posX - posX)) +
 							((bogieLoco.posZ - posZ) * (bogieLoco.posZ - posZ))));//1.043749988079071
 			serverRealPitch = anglePitch +(float)
-							((bogieLoco.posZ - posZ) * (bogieLoco.posZ - posZ));//1.043749988079071
+					((bogieLoco.posZ - posZ) * (bogieLoco.posZ - posZ));//1.043749988079071
 		}
 		else {
 			float rotation = rotationYaw;
@@ -1251,24 +1251,33 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				return;
 			}
 
-			if (ItemTCRail.isTCTurnTrack(tileRail) || TCRailTypes.isTurnTrack(tileRail)) {
+
+			if (ItemTCRail.isTCTurnTrack(tileRail))
+			{
+				if(bogieLoco != null) {
+					if (!bogieLoco.isOnRail()) {
+						derailSpeed = 0;
+					}
+				}
 				int meta = tileRail.getBlockMetadata();
-				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
+				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta))
+				{
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, meta);
 				} else {
-					pathFindingHelper.moveOnTCCurve(this, floor_posY, tileRail.r, tileRail.cx, tileRail.cz);
+						moveOnTC90TurnRail(floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
 				}
 			}
 			else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
 			{
 				pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 			}
-			else if (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState())
+			else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
 			{
 				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
+
 					pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 				} else {
-					pathFindingHelper.moveOnTCCurve(this, floor_posY, tileRail.r, tileRail.cx, tileRail.cz);
+					moveOnNewTC90TurnRail( floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
 				}
 			}
 
@@ -1331,6 +1340,80 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart 
 				break;
 			}
 		}
+	}
+
+	public void moveOnNewTC90TurnRail(int i, int j, int k, double r, double cx, double cz)
+	{
+		this.posY = j + 0.2;
+		double cpx = this.posX - cx;
+		double cpz = this.posZ - cz;
+
+		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
+		double vnorm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+
+		double norm_cpx = cpx / cp_norm; //u
+		double norm_cpz = cpz / cp_norm; //v
+
+		double vx2 = -norm_cpz * vnorm;//-v
+		double vz2 = norm_cpx * vnorm;//u
+
+		double px2 = this.posX + this.motionX;
+		double pz2 = this.posZ + this.motionZ;
+
+		double px2_cx = px2 - cx;
+		double pz2_cz = pz2 - cz;
+
+		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
+
+		double px2_cx_norm = px2_cx / p2_c_norm;
+		double pz2_cz_norm = pz2_cz / p2_c_norm;
+
+		double px3 = cx + (px2_cx_norm * r);
+		double pz3 = cz + (pz2_cz_norm * r);
+
+		double signX = px3 - this.posX;
+		double signZ = pz3 - this.posZ;
+
+		vx2 = Math.copySign(vx2, signX);
+		vz2 = Math.copySign(vz2, signZ);
+
+		double p_corr_x = cx + ((cpx / cp_norm) * r);
+		double p_corr_z = cz + ((cpz / cp_norm) * r);
+
+		this.setPosition(p_corr_x, this.posY + this.yOffset, p_corr_z);
+		this.moveEntity(vx2, 0.0D, vz2);
+
+		motionX = vx2;
+		motionZ = vz2;
+	}
+
+	protected void moveOnTC90TurnRail(int i, int j, int k, double r, double cx, double cz) {
+		//System.out.println("curve");
+		posY = j + 0.2;
+		double cpx = posX - cx;
+		double cpz = posZ - cz;
+		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
+
+		double vnorm = Math.sqrt(motionX * motionX + motionZ * motionZ);
+
+		double vx2 = -(cpz / cp_norm) * vnorm;//-v
+		double vz2 = (cpx / cp_norm) * vnorm;//u
+
+		double px2_cx = (posX + motionX * 2) - cx;
+		double pz2_cz = (posZ + motionZ * 2) - cz;
+
+		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
+
+		vx2 = Math.copySign(vx2, (cx + ((px2_cx / p2_c_norm) * r)) - posX);
+		vz2 = Math.copySign(vz2, (cz + ((pz2_cz / p2_c_norm) * r)) - posZ);
+
+		setPosition(cx + ((cpx / cp_norm) * r), posY + yOffset, cz + ((cpz / cp_norm) * r));
+
+		moveEntity(vx2, 0.0D, vz2);
+
+		motionX = vx2;
+		motionZ = vz2;
+
 	}
 
 	protected void moveOnTCTwoWaysCrossing(int i, int j, int k, double cx, double cy, double cz, int meta) {

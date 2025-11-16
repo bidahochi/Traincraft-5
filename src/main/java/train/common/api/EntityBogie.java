@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import mods.railcraft.api.carts.IMinecart;
 import mods.railcraft.api.carts.IRoutableCart;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecart;
@@ -24,6 +25,7 @@ import train.common.blocks.BlockTCRailGag;
 import train.common.items.ItemTCRail;
 import train.common.items.TCRailTypes;
 import train.common.library.BlockIDs;
+import train.common.library.EnumTracks;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 
@@ -284,132 +286,134 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 	 */
 	@Override
 	public void onUpdate(){
+		//super.onUpdate(); // XXX I'll just assume that this is not supposed to be there. Why would you run Vanilla update code, only to run your own code afterwards to do basically the same..?
 
 		this.setCurrentCartSpeedCapOnRail(1.8F);
 		this.setMaxSpeedAirLateral(1.8F);
 
 		//if (!this.worldObj.isRemote || true) {
-			
-			this.prevPosX = this.posX;
-			this.prevPosY = this.posY;
-			this.prevPosZ = this.posZ;
 
-			int i = MathHelper.floor_double(this.posX);
-			int j = MathHelper.floor_double(this.posY);
-			int k = MathHelper.floor_double(this.posZ);
-			Block block = this.worldObj.getBlock(i, j - 1, k);
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
 
-			if (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
-				j--;
-			} else {
-				Block block2 = this.worldObj.getBlock(i, j + 1, k);
-				if(BlockRailBase.func_150051_a(block2) || block2 == BlockIDs.tcRail.block || block2 == BlockIDs.tcRailGag.block){
-					j++;
-				}
-				block = this.worldObj.getBlock(i, j, k);
+		int i = MathHelper.floor_double(this.posX);
+		int j = MathHelper.floor_double(this.posY);
+		int k = MathHelper.floor_double(this.posZ);
+		Block block = this.worldObj.getBlock(i, j - 1, k);
+
+		if (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
+			j--;
+		} else {
+			Block block2 = this.worldObj.getBlock(i, j + 1, k);
+			if(BlockRailBase.func_150051_a(block2) || block2 == BlockIDs.tcRail.block || block2 == BlockIDs.tcRailGag.block){
+				j++;
 			}
+			block = this.worldObj.getBlock(i, j, k);
+		}
 
-			if (BlockRailBase.func_150051_a(block)) {
-				super.onUpdate();
+		if (BlockRailBase.func_150051_a(block)) {
+			super.onUpdate();
 			if (!worldObj.isRemote) {
 				this.setPosition(this.posX, this.posY + yOffset - 0.3d, this.posZ);
 				// System.out.println("Server Y: " + this.posY);
 			}
-			} else {
-		        if (this.worldObj.isRemote)
-		        {
-		            if (this.turnProgress > 0)
-		            {
-		                double d6 = this.posX + (this.minecartX - this.posX) / this.turnProgress;
-		                double d7 = this.posY + (this.minecartY - this.posY) / this.turnProgress;
-		                double d1 = this.posZ + (this.minecartZ - this.posZ) / this.turnProgress;
-		                double d3 = MathHelper.wrapAngleTo180_double(this.minecartYaw - this.rotationYaw);
-		                this.rotationYaw = (float)(this.rotationYaw + d3 / this.turnProgress);
-		                this.rotationPitch = (float)(this.rotationPitch + (this.minecartPitch - this.rotationPitch) / this.turnProgress);
-		                --this.turnProgress;
-		                this.setPosition(d6, d7, d1);
-		                this.setRotation(this.rotationYaw, this.rotationPitch);
-		            }
-		            else
-		            {
-		                this.setPosition(this.posX, this.posY, this.posZ);
-		                this.setRotation(this.rotationYaw, this.rotationPitch);
-		            }
-		        }
-		        else
+		} else {
+			if (this.worldObj.isRemote)
+			{
+				if (this.turnProgress > 0)
 				{
-		        	TileEntity tileEntity = this.worldObj.getTileEntity(i, j, k);
-		        	TileTCRail tileRail;
+					double d6 = this.posX + (this.minecartX - this.posX) / this.turnProgress;
+					double d7 = this.posY + (this.minecartY - this.posY) / this.turnProgress;
+					double d1 = this.posZ + (this.minecartZ - this.posZ) / this.turnProgress;
+					double d3 = MathHelper.wrapAngleTo180_double(this.minecartYaw - this.rotationYaw);
+					this.rotationYaw = (float)(this.rotationYaw + d3 / this.turnProgress);
+					this.rotationPitch = (float)(this.rotationPitch + (this.minecartPitch - this.rotationPitch) / this.turnProgress);
+					--this.turnProgress;
+					this.setPosition(d6, d7, d1);
+					this.setRotation(this.rotationYaw, this.rotationPitch);
+				}
+				else
+				{
+					this.setPosition(this.posX, this.posY, this.posZ);
+					this.setRotation(this.rotationYaw, this.rotationPitch);
+				}
+			}
+			else
+			{
+				TileEntity tileEntity = this.worldObj.getTileEntity(i, j, k);
+				TileTCRail tileRail;
 
-					if (block == BlockIDs.tcRailGag.block) {
+				if (block == BlockIDs.tcRailGag.block) {
 
-						if (tileEntity instanceof TileTCRailGag) {
+					if (tileEntity instanceof TileTCRailGag) {
 
-							TileTCRailGag tileGag = (TileTCRailGag) tileEntity;
-							tileEntity = this.worldObj.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
-						}
-						else {
-
-							return;
-						}
-					}
-
-					if (tileEntity instanceof TileTCRail) {
-
-						tileRail = (TileTCRail) tileEntity;
+						TileTCRailGag tileGag = (TileTCRailGag) tileEntity;
+						tileEntity = this.worldObj.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
 					}
 					else {
-						super.onUpdate();
+
 						return;
 					}
+				}
 
-					//applyDragAndPushForces();
-					limitSpeedOnTCRail();
+				if (tileEntity instanceof TileTCRail) {
 
-					if (ItemTCRail.isTCTurnTrack(tileRail) || TCRailTypes.isTurnTrack(tileRail))
-					{
-						int meta = tileRail.getBlockMetadata();
-						if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, i, j, k, meta)) {
-							pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
-						} else {
-							pathFindingHelper.moveOnTCCurve(this, j, tileRail.r, tileRail.cx, tileRail.cz);
-						}
-					}
-					else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
-					{
+					tileRail = (TileTCRail) tileEntity;
+				}
+				else {
+					super.onUpdate();
+					return;
+				}
+
+				//applyDragAndPushForces();
+				limitSpeedOnTCRail();
+
+				if (ItemTCRail.isTCTurnTrack(tileRail))
+				{
+					int meta = tileRail.getBlockMetadata();
+					if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, i, j, k, meta)) {
 						pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
-						//moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+					} else {
+						moveOnTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
 					}
-					else if ((TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
-					{
-						if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
-							pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
-						}
-						else {
-							pathFindingHelper.moveOnTCCurve(this, j, tileRail.r, tileRail.cx, tileRail.cz);
-						}
-					}
-					else if (TCRailTypes.isCrossingTrack(tileRail))
-					{
-						moveOnTCTwoWaysCrossing();
-					}
-					else if (TCRailTypes.isDiagonalCrossingTrack(tileRail))
-					{
-						moveOnTCDiamondCrossing(i, j, k, tileRail.xCoord,  tileRail.zCoord);
-					}
-					else if (TCRailTypes.isDiagonalTrack(tileRail))
-					{
-						pathFindingHelper.moveOnTCDiagonal(this,i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
-					}
-					else if (TCRailTypes.isSlopeTrack(tileRail)) {
 
-						moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.slopeLength, tileRail.getBlockMetadata());
+				}
+				else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
+				{
+					pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+					//moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+				}
+				else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
+				{
+					if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
+						pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 					}
-		        }
+					else {
+						moveOnNewTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+					}
+				}
+				else if (TCRailTypes.isCrossingTrack(tileRail))
+				{
+					moveOnTCTwoWaysCrossing();
+				}
+				else if (TCRailTypes.isDiagonalCrossingTrack(tileRail))
+				{
+					moveOnTCDiamondCrossing(i, j, k, tileRail.xCoord,  tileRail.zCoord);
+				}
+				else if (TCRailTypes.isDiagonalTrack(tileRail))
+				{
+					pathFindingHelper.moveOnTCDiagonal(this,i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
+				}
+				else if (TCRailTypes.isSlopeTrack(tileRail)) {
+
+					moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.slopeLength, tileRail.getBlockMetadata());
+				}
 			}
+		}
 
-			this.func_145775_I();
-			this.rotationPitch = 0.0F;
+		this.func_145775_I();
+		this.rotationPitch = 0.0F;
 		//}
 
 		if (!this.worldObj.isRemote) {
@@ -603,6 +607,96 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		this.motionX = alongZ ? 0.0D : Math.copySign(norm, this.motionX);
 		this.motionY = 0;
 		this.motionZ = alongZ ? Math.copySign(norm, this.motionZ) : 0.0D;
+	}
+
+	private void moveOnNewTC90TurnRail(int j,double r, double cx, double cz){
+
+		posY = j + 0.2;
+		double cpx = posX - cx;
+		double cpz = posZ - cz;
+		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
+
+		double vnorm = Math.sqrt(motionX * motionX + motionZ * motionZ);
+
+		double norm_cpx = cpx / cp_norm; //u
+		double norm_cpz = cpz / cp_norm; //v
+
+		double vx2 = -norm_cpz * vnorm;//-v
+		double vz2 = norm_cpx * vnorm;//u
+
+		double px2 = posX + motionX;
+		double pz2 = posZ + motionZ;
+
+		double px2_cx = px2 - cx;
+		double pz2_cz = pz2 - cz;
+
+		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
+
+		double px2_cx_norm = px2_cx / p2_c_norm;
+		double pz2_cz_norm = pz2_cz / p2_c_norm;
+
+		double px3 = cx + (px2_cx_norm * r);
+		double pz3 = cz + (pz2_cz_norm * r);
+
+		double signX = px3 - posX;
+		double signZ = pz3 - posZ;
+
+		vx2 = Math.copySign(vx2, signX);
+		vz2 = Math.copySign(vz2, signZ);
+
+		double p_corr_x = cx + ((cpx / cp_norm) * r);
+		double p_corr_z = cz + ((cpz / cp_norm) * r);
+
+
+		setPosition(p_corr_x, posY + yOffset, p_corr_z);
+		moveEntity(vx2, 0.0D, vz2);
+		motionX = vx2;
+		motionZ = vz2;
+
+	}
+
+	private void moveOnTC90TurnRail(int j,double r, double cx, double cz){
+		posY = j + 0.2;
+		double cpx = posX - cx;
+		double cpz = posZ - cz;
+		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
+
+		double vnorm = Math.sqrt(motionX * motionX + motionZ * motionZ);
+
+		double norm_cpx = cpx / cp_norm;//u
+		double norm_cpz = cpz / cp_norm;//v
+
+		double vx2 = -norm_cpz * vnorm;//-v
+		double vz2 = norm_cpx * vnorm;//u
+
+		double px2 = posX + motionX;
+		double pz2 = posZ + motionZ;
+
+		double px2_cx = px2 - cx;
+		double pz2_cz = pz2 - cz;
+
+		double p2_c_norm = Math.sqrt((px2_cx * px2_cx) + (pz2_cz * pz2_cz));
+
+		double px2_cx_norm = px2_cx / p2_c_norm;
+		double pz2_cz_norm = pz2_cz / p2_c_norm;
+
+		double px3 = cx + (px2_cx_norm * r);
+		double pz3 = cz + (pz2_cz_norm * r);
+
+		double signX = px3 - posX;
+		double signZ = pz3 - posZ;
+
+		vx2 = Math.copySign(vx2, signX);
+		vz2 = Math.copySign(vz2, signZ);
+
+		double p_corr_x = cx + ((cpx / cp_norm) * r);
+		double p_corr_z = cz + ((cpz / cp_norm) * r);
+
+		setPosition(p_corr_x, posY + yOffset, p_corr_z);
+
+		moveEntity(vx2, 0.0D, vz2);
+		motionX = vx2;
+		motionZ = vz2;
 	}
 
 	private void limitSpeedOnTCRail() {
