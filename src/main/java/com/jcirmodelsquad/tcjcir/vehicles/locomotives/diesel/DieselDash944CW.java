@@ -40,7 +40,7 @@ public class DieselDash944CW extends DieselTrain {
         InsertTexture(11, "CSLX (EX CSWR)");
         InsertTexture(12, "ATSF");
         InsertTexture(13, "ATSF (BNSF Patch)");
-        InsertTexture(14, "Plainsview");
+        InsertTexture(14, "Plainview");
         InsertTexture(15, "Galesburg Clinton & Midland", train.common.enums.LockoutGroup.GCM); 
     }
         
