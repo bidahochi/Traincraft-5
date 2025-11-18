@@ -13,6 +13,7 @@ import train.common.core.network.AdminBook.PacketAdminBookClient;
 import train.common.core.network.AdminBook.PacketAdminBookToggleChunkLoading;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ public class GUIAdminBook extends GuiScreen {
     private int guiTop;
     private int page=0;
     private List<ItemStack> items = new ArrayList<ItemStack>();
+    private String searchQuery = "";
+    private int searchIndex = 0;
 
     public GUIAdminBook(String csv){
         //if its the xml enable train page mode.
@@ -50,15 +53,23 @@ public class GUIAdminBook extends GuiScreen {
     public void actionPerformed(GuiButton button) {
 
         switch (button.id){
-            case -1:{
+            case -2: { // Search query button, used to clear query.
+                searchQuery = "";
+                searchIndex = 0;
+                page = 0;
+                buttonList = new ArrayList();
+                initGui();
+                break;
+            }
+            case -1:{ // Clone inventory button.
                 Traincraft.keyChannel.sendToServer(new PacketAdminBookClient( "0:"+list[0].substring(1), Minecraft.getMinecraft().thePlayer.getEntityId()));//tell server to drop items
                 break;
             }
-            case 0:{
+            case 0:{ // Delete entry button.
                 Traincraft.keyChannel.sendToServer(new PacketAdminBookClient( "1:"+list[0].substring(1), Minecraft.getMinecraft().thePlayer.getEntityId()));//tell server to drop items
                 break;
             }
-            case 1:{
+            case 1:{ // Back button.
                 if (!isTrainPage){
                     page--;
                     buttonList = new ArrayList();
@@ -69,7 +80,7 @@ public class GUIAdminBook extends GuiScreen {
 
                 break;
             }
-            case 2:{
+            case 2:{ // Next page button.
                 page++;
                 buttonList = new ArrayList();
                 initGui();
@@ -109,6 +120,8 @@ public class GUIAdminBook extends GuiScreen {
 
         this.guiLeft = (this.width - 176) / 2;
         this.guiTop = (this.height - 166) / 2;
+        GuiButton button;
+        boolean drawingPlayerList = true;
 
         if(!isTrainPage)
         {
@@ -116,15 +129,27 @@ public class GUIAdminBook extends GuiScreen {
             //only show 6 entries per page
             for (int i = 6 * page; i < 6+(6*page) && i<list.length; i++)
             {
-                this.buttonList.add(new GuiButton(i+3, guiLeft-80, guiTop+20 +(index*18), 140, 20,
-                        list[i].equals("")?"Back":
-                                list[i].contains("_")?
-                                list[i].substring(list[i].indexOf("~")+1,list[i].lastIndexOf("_")).replace("minecart",""):
-                list[i]));
-                if (list[i].lastIndexOf("_")>0 && list[i].indexOf(".txt")>0) {
+                button = new GuiButton(i+3, guiLeft-80, guiTop+20 +(index*18), 140, 20, "");
+                if (list[i].isEmpty()) {
+                    button.displayString = "back";
+                } else {
+                    if (list[i].contains("_")) {
+                        button.displayString = list[i].substring(list[i].indexOf("~")+1,list[i].lastIndexOf("_"));
+                    } else {
+                        button.displayString = list[i];
+                    }
+                }
+                if (list[i].lastIndexOf("_")>0 && list[i].indexOf(".txt")>0) { // Add cart entity UUIDs.
                     this.buttonList.add(new GuiButton(i + 3, guiLeft + 70, guiTop + 20 + (index * 18), 220, 20,
                             list[i].substring(list[i].lastIndexOf("_")+1, list[i].indexOf(".txt"))));
+                    drawingPlayerList = false;
                 }
+                if (drawingPlayerList) {
+                    if ((!searchQuery.equals("")) && (list[i].startsWith(searchQuery.toLowerCase()))) {
+                        button.packedFGColour = 7855479;
+                    }
+                }
+                this.buttonList.add(button);
                 index++;
             }
 
@@ -136,6 +161,11 @@ public class GUIAdminBook extends GuiScreen {
             if (page>0)
             {
                 this.buttonList.add(new GuiButton(1, guiLeft+10, guiTop+140 , 70, 20, "back"));
+            }
+            if (drawingPlayerList) {
+                GuiButton searchButton = new GuiButton(-2, guiLeft + 80, guiTop + 20, 70, 20, fontRendererObj.trimStringToWidth(searchQuery, 68));
+                searchButton.packedFGColour = 16777215; // 12320768;
+                this.buttonList.add(searchButton);
             }
         }
         else
@@ -246,5 +276,37 @@ public class GUIAdminBook extends GuiScreen {
         GL11.glPopMatrix();
     }
 
+    @Override
+    public void keyTyped(char eventChar, int eventKey) {
+        if (!isTrainPage) {
+            if (eventKey == 1) { // If "ESC", exit from the GUI.
+                if (searchQuery.isEmpty()) { // If search query is empty, exit.
+                    this.mc.displayGuiScreen(null);
+                    this.mc.setIngameFocus();
+                } else { // If there is a search query, clear it.
+                    page = 0;
+                    searchQuery = "";
+                    searchIndex = 0;
+                }
+            } else if (eventChar != '\u0000') { // If character is not a modifier key...
+                if (eventChar == '\b') { // If character is backspace...
+                    searchQuery = searchQuery.substring(0, Math.max(0, searchQuery.length() - 1));
+                    if (searchQuery.isEmpty()) {
+                        searchIndex = 0;
+                    }
+                }
+                else { // If character is not a backspace...
+                    searchQuery += Character.toString(eventChar);
+                }
+                searchIndex = Arrays.binarySearch(list, searchQuery.toLowerCase());
+                if (searchIndex < 0) {
+                    searchIndex = Math.abs(searchIndex) - 1;
+                }
+                page = searchIndex / 6;
+            }
+            buttonList = new ArrayList();
+            initGui();
+        }
+    }
 
 }
