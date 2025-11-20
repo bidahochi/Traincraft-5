@@ -86,7 +86,7 @@ public class SideTabRecipes extends SideTab {
 			}
 
 			if (item != null) {
-				fontRenderer.drawString(StatCollector.translateToLocal(item.getUnlocalizedName()), x - 93, y + 78, headerColour);
+                fontRenderer.drawString(StatCollector.translateToLocal(item.getUnlocalizedName() + ".name"), x - 93, y + 78, headerColour);
 				gui.currentKnownItem = item;
 			}
 			else {

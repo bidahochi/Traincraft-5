@@ -209,16 +209,17 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
         int meta = par3World.getBlockMetadata(par4, par5, par6);
-        TileEntity tileentity = par3World.getTileEntity(par4, par5, par6);
-        //System.out.println(meta);
+        TileEntity tileEntity = par3World.getTileEntity(par4, par5, par6);
         if (par3World.isRemote)
-        {
             return false;
+        TileTCRail tile = null;
+        if (tileEntity instanceof TileTCRail) {
+            tile = (TileTCRail) tileEntity;
+        } else if (tileEntity instanceof TileTCRailGag) {
+            TileTCRailGag tileGag = (TileTCRailGag) tileEntity;
+            tile = (TileTCRail) par3World.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
         }
-
-
-        if (tileentity != null && tileentity instanceof TileTCRail) {
-            TileTCRail tile = (TileTCRail) tileentity;
+        if (tile != null) {
             if (tile.getType().equals(EnumTracks.MEDIUM_STRAIGHT.getLabel())
                     || tile.getType().equals(EnumTracks.SMALL_STRAIGHT.getLabel())
                     || tile.getType().equals(EnumTracks.SMALL_ROAD_CROSSING.getLabel())
@@ -239,38 +240,13 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
                     || tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_DIAGONAL_STRAIGHT.getLabel())
                     || tile.getType().equals(EnumTracks.EMBEDDED_LONG_DIAGONAL_STRAIGHT.getLabel())
                     || tile.getType().equals(EnumTracks.EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT.getLabel())
-            )
-            {
-                this.placeCart(par2EntityPlayer, par1ItemStack, par3World, par4, par5, par6);
-                return true;
-            }
-            par2EntityPlayer.addChatMessage(new ChatComponentText("Place me on a straight piece of track!"));
-            return false;
-        } else if (tileentity != null && tileentity instanceof TileTCRailGag) {
-            TileTCRailGag tileGag = (TileTCRailGag) tileentity;
-            TileTCRail tile = (TileTCRail) par3World.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
-            if (tile != null
-                    && tile.getType().equals(EnumTracks.MEDIUM_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.LONG_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.VERY_LONG_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_LONG_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_VERY_LONG_STRAIGHT.getLabel())
-
-
-                        || tile.getType().equals(EnumTracks.MEDIUM_DIAGONAL_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.LONG_DIAGONAL_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.VERY_LONG_DIAGONAL_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_DIAGONAL_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_LONG_DIAGONAL_STRAIGHT.getLabel())
-                        || tile.getType().equals(EnumTracks.EMBEDDED_VERY_LONG_DIAGONAL_STRAIGHT.getLabel())
             ) {
-
                 this.placeCart(par2EntityPlayer, par1ItemStack, par3World, par4, par5, par6);
                 return true;
+            } else {
+                par2EntityPlayer.addChatMessage(new ChatComponentText("Place me on a straight piece of track!"));
+                return false;
             }
-            par2EntityPlayer.addChatMessage(new ChatComponentText("Place me on a straight piece of track !"));
-            return false;
         } else if (TraincraftUtil.isRailBlockAt(par3World, par4, par5, par6) && (meta < 2 || meta > 5)) {
             this.placeCart(par2EntityPlayer, par1ItemStack, par3World, par4, par5, par6);
             return true;

@@ -78,16 +78,12 @@ public class TraincraftRegistry
 
     public HashMap<Item, ITrainRecord> getAllTrains()
     {
-        HashMap<Item, ITrainRecord> trainRecords  = new HashMap<>();
 
+        HashMap<Item, ITrainRecord> trainRecords = new HashMap<>(trainRecordsByItem);
 
         for (EnumTrains trains : EnumTrains.values()) {
             trainRecords.put(trains.getItem(), trains);
-        }
-
-        for (Map.Entry<Item, ITrainRecord> trainRecord : trainRecordsByItem.entrySet())
-        {
-            trainRecords.put(trainRecord.getKey(), trainRecord.getValue());
+            trainRecordsByItem.put(trains.getItem(), trains);
         }
 
         for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values())
@@ -200,7 +196,7 @@ public class TraincraftRegistry
         {
             if(world.isRemote)
             {
-                entityClass.getConstructor(World.class).newInstance(world);
+                return (AbstractTrains) entityClass.getConstructor(World.class).newInstance(world);
             }
             else
             {

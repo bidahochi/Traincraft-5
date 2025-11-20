@@ -111,8 +111,6 @@ public class GuiCrafterTier extends GuiTraincraft {
 			}
 			if(currentRenderTabY==END_Y){
 				GL11.glPushMatrix();
-				GL11.glColor3f(1, 1, 1);
-				GL11.glTranslatef(guiLeft-70, this.guiTop+170, 100);
 				RenderRollingStock.setRenderModeGUI(true);
 				GL11.glColor4f(1, 1, 1, 1);
 				GL11.glTranslatef(guiLeft-70, this.guiTop+170, 350);
@@ -128,7 +126,6 @@ public class GuiCrafterTier extends GuiTraincraft {
 					if(ticksInGui % 400 == 0)color++;
 					if(color>train.getColors().length-1)color=0;
 					if(renderEntity!=null)((AbstractTrains)renderEntity).setColor((train.getColors()[color]));
-					//if(renderEntity!=null)renderEntity.setColor((train.getColors()[color]));
 				}
 				float scale = train.getGuiRenderScale();
 				GL11.glScalef(-scale, scale, scale);
@@ -136,7 +133,7 @@ public class GuiCrafterTier extends GuiTraincraft {
 				GL11.glRotatef(roll, 1, 0, 0);
 				GL11.glRotatef(yaw, 0, 1, 0);
 				if(renderEntity!=null)RenderManager.instance.renderEntityWithPosYaw(renderEntity, 0, 0, 0, 0, 0);
-				RenderHelper.disableStandardItemLighting();
+                RenderHelper.disableStandardItemLighting();
 				RenderRollingStock.setRenderModeGUI(false);
 				GL11.glPopMatrix();
 				yaw += 0.5F;
@@ -157,7 +154,7 @@ public class GuiCrafterTier extends GuiTraincraft {
 		}
 		
 		if (isShow) {
-			if (tier1.knownRecipes().size() != 0) {
+			if (!tier1.knownRecipes().isEmpty()) {
 				drawOverlays(recipeSize, recipes);
 			}
 		}
