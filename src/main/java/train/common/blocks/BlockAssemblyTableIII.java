@@ -53,7 +53,7 @@ public class BlockAssemblyTableIII extends BlockContainer {
 			return false;
 		}
 		if (!world.isRemote) {
-			if (te != null && te instanceof TileCrafterTierIII) {
+			if (te instanceof TileCrafterTierIII) {
 				player.openGui(Traincraft.instance, GuiIDs.CRAFTER_TIER_III, world, i, j, k);
 			}
 		}
@@ -90,29 +90,31 @@ public class BlockAssemblyTableIII extends BlockContainer {
 		TileCrafterTierIII tileentitytierIII = (TileCrafterTierIII) world.getTileEntity(i, j, k);
 		if (tileentitytierIII != null) {
 			label0: for (int l = 0; l < tileentitytierIII.getSizeInventory(); l++) {
-				ItemStack itemstack = tileentitytierIII.getStackInSlot(l);
-				if (itemstack == null) {
-					continue;
-				}
-				float f = distilRand.nextFloat() * 0.8F + 0.1F;
-				float f1 = distilRand.nextFloat() * 0.8F + 0.1F;
-				float f2 = distilRand.nextFloat() * 0.8F + 0.1F;
-				do {
-					if (itemstack.stackSize <= 0) {
-						continue label0;
-					}
-					int i1 = distilRand.nextInt(21) + 10;
-					if (i1 > itemstack.stackSize) {
-						i1 = itemstack.stackSize;
-					}
-					itemstack.stackSize -= i1;
-					EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, itemstack.splitStack(i1));
-					float f3 = 0.05F;
-					entityitem.motionX = (float) distilRand.nextGaussian() * f3;
-					entityitem.motionY = (float) distilRand.nextGaussian() * f3 + 0.2F;
-					entityitem.motionZ = (float) distilRand.nextGaussian() * f3;
-					world.spawnEntityInWorld(entityitem);
-				} while (true);
+                if (l < 10 || l > 17) { // Don't drop the items in the output slots! (They haven't been crafted yet!)
+                    ItemStack itemstack = tileentitytierIII.getStackInSlot(l);
+                    if (itemstack == null) {
+                        continue;
+                    }
+                    float f = distilRand.nextFloat() * 0.8F + 0.1F;
+                    float f1 = distilRand.nextFloat() * 0.8F + 0.1F;
+                    float f2 = distilRand.nextFloat() * 0.8F + 0.1F;
+                    do {
+                        if (itemstack.stackSize <= 0) {
+                            continue label0;
+                        }
+                        int i1 = distilRand.nextInt(21) + 10;
+                        if (i1 > itemstack.stackSize) {
+                            i1 = itemstack.stackSize;
+                        }
+                        itemstack.stackSize -= i1;
+                        EntityItem entityitem = new EntityItem(world, (float) i + f, (float) j + f1, (float) k + f2, itemstack.splitStack(i1));
+                        float f3 = 0.05F;
+                        entityitem.motionX = (float) distilRand.nextGaussian() * f3;
+                        entityitem.motionY = (float) distilRand.nextGaussian() * f3 + 0.2F;
+                        entityitem.motionZ = (float) distilRand.nextGaussian() * f3;
+                        world.spawnEntityInWorld(entityitem);
+                    } while (true);
+                }
 			}
 		}
 		super.breakBlock(world, i, j, k, par5, par6);
