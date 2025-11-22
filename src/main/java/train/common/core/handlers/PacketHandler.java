@@ -44,6 +44,7 @@ public class PacketHandler {
 		Traincraft.lockChannel = NetworkRegistry.INSTANCE.newSimpleChannel("lock");
 		Traincraft.builderChannel = NetworkRegistry.INSTANCE.newSimpleChannel("builder");
 		Traincraft.paintbrushColorChannel = NetworkRegistry.INSTANCE.newSimpleChannel("paintbrushColor");
+        Traincraft.overlayTextureChannel = NetworkRegistry.INSTANCE.newSimpleChannel("overlayTexture");
 		Traincraft.switchStandLockChannel = NetworkRegistry.INSTANCE.newSimpleChannel("switchStandLock");
 		Traincraft.cargoSelectionChannel = NetworkRegistry.INSTANCE.newSimpleChannel("cargoSelection");
 		Traincraft.interchangeChannel = NetworkRegistry.INSTANCE.newSimpleChannel("reportChannel");
@@ -88,6 +89,8 @@ public class PacketHandler {
 				PacketTrackBuilderFollow.class, 9, Side.SERVER);
 		Traincraft.paintbrushColorChannel.registerMessage(PacketPaintbrushColor.Handler.class, PacketPaintbrushColor.class, 11, Side.SERVER);
 		Traincraft.paintbrushColorChannel.registerMessage(PacketPaintBrushClientSideUpdate.Handler.class, PacketPaintBrushClientSideUpdate.class, 27, Side.CLIENT);
+        Traincraft.overlayTextureChannel.registerMessage(PacketTextureOverlayConfig.Handler.class, PacketTextureOverlayConfig.class, 14, Side.CLIENT);
+        Traincraft.overlayTextureChannel.registerMessage(PacketTextureOverlayConfig.Handler.class, PacketTextureOverlayConfig.class, 15, Side.SERVER);
 		Traincraft.ignitionChannel.registerMessage(PacketDropFire.Handler.class, PacketDropFire.class, 28, Side.SERVER);
 
 		Traincraft.switchStandLockChannel.registerMessage(PacketUpdateSwitchStand.Handler.class,

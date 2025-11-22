@@ -18,8 +18,10 @@ import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
 import train.common.core.handlers.ConfigHandler;
 import train.common.core.network.PacketPaintbrushColor;
+import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.library.*;
 import train.common.library.register.ITrainRecord;
+import train.common.overlaytexture.OverlayTextureManager;
 
 import java.awt.*;
 import java.util.Collections;
@@ -63,6 +65,9 @@ public class GuiPaintbrushMenu extends GuiScreen {
     private GuiButtonPaintbrushMenu textureSix;
     private GuiButtonPaintbrushMenu textureSeven;
     private GuiButtonPaintbrushMenu textureEight;
+    private GuiButtonPaintbrushOverlayController overlayControllerNone;
+    private GuiButtonPaintbrushOverlayController overlayControllerDynamic;
+    private GuiButtonPaintbrushOverlayController overlayControllerFixed;
     private GuiButtonPaintbrushMenu closeMenuButton;
     private GuiButtonPaintbrushMenu playPauseButton;
     private GuiButtonPaintbrushMenu lightControlButton;
@@ -125,6 +130,9 @@ public class GuiPaintbrushMenu extends GuiScreen {
         this.buttonList.add(this.textureSix = new GuiButtonPaintbrushMenu(8, GUI_ANCHOR_X + 104, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
         this.buttonList.add(this.textureSeven = new GuiButtonPaintbrushMenu(9, GUI_ANCHOR_X + 198, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
         this.buttonList.add(this.textureEight = new GuiButtonPaintbrushMenu(10, GUI_ANCHOR_X + 292, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
+        this.buttonList.add(this.overlayControllerNone = new GuiButtonPaintbrushOverlayController(11, GUI_ANCHOR_X + 121, GUI_ANCHOR_Y + 202, 29, 29, GuiButtonPaintbrushOverlayController.Type.NONE));
+        this.buttonList.add(this.overlayControllerDynamic = new GuiButtonPaintbrushOverlayController(12, GUI_ANCHOR_X + 179, GUI_ANCHOR_Y + 202, 56, 29, GuiButtonPaintbrushOverlayController.Type.DYNAMIC));
+        this.buttonList.add(this.overlayControllerFixed = new GuiButtonPaintbrushOverlayController(13, GUI_ANCHOR_X + 264, GUI_ANCHOR_Y + 202, 29, 29, GuiButtonPaintbrushOverlayController.Type.FIXED));
         this.buttonList.add(this.closeMenuButton = new GuiButtonPaintbrushMenu(14, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + 10, 22, 22, GuiButtonPaintbrushMenu.Type.CLOSE));
         this.buttonList.add(this.playPauseButton = new GuiButtonPaintbrushMenu(15, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 29, 22, 22, GuiButtonPaintbrushMenu.Type.PLAY));
         this.buttonList.add(this.lightControlButton = new GuiButtonPaintbrushMenu(16, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 77, 22, 22, GuiButtonPaintbrushMenu.Type.LIGHTSOFF));
@@ -171,6 +179,44 @@ public class GuiPaintbrushMenu extends GuiScreen {
         if (acceptsCargo) {
             this.loadCargoButton.setType(GuiButtonPaintbrushCargoController.Type.LOAD, GuiButtonPaintbrushCargoController.Texture.UNSELECTED);
         }
+
+        // Overlay Texture Buttons
+        if (rollingStock.acceptsOverlayTextures()) {
+            this.overlayControllerNone.visible = rollingStock.acceptsOverlayTextures();
+            this.overlayControllerNone.showButton = rollingStock.acceptsOverlayTextures();
+            this.overlayControllerDynamic.visible = true;
+            this.overlayControllerDynamic.showButton = true;
+            this.overlayControllerFixed.visible = true;
+            this.overlayControllerFixed.showButton = true;
+            OverlayTextureManager.Type acceptedType = rollingStock.getOverlayTextureContainer().getAcceptedType();
+            OverlayTextureManager.Type type = rollingStock.getOverlayTextureContainer().getType();
+            if (type == OverlayTextureManager.Type.NONE)
+                this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
+            else
+                this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
+            if (acceptedType == OverlayTextureManager.Type.DYNAMIC || acceptedType == OverlayTextureManager.Type.BOTH) {
+                if (type == OverlayTextureManager.Type.DYNAMIC)
+                    this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
+                else {
+                    this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
+                }
+            }
+            if (acceptedType == OverlayTextureManager.Type.FIXED || acceptedType == OverlayTextureManager.Type.BOTH) {
+                if (type == OverlayTextureManager.Type.FIXED)
+                    this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
+                else {
+                    this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
+                }
+            }
+        } else {
+            this.overlayControllerNone.visible = false;
+            this.overlayControllerNone.showButton = false;
+            this.overlayControllerDynamic.visible = false;
+            this.overlayControllerDynamic.showButton = false;
+            this.overlayControllerFixed.visible = false;
+            this.overlayControllerFixed.showButton = false;
+        }
+
     }
 
     ResourceLocation rightMenuTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_menu_right.png");
@@ -184,6 +230,14 @@ public class GuiPaintbrushMenu extends GuiScreen {
         this.drawTexturedModalRect(GUI_ANCHOR_MID_X, GUI_ANCHOR_Y, 0, 0, MENU_TEXTURE_WIDTH, MENU_TEXTURE_HEIGHT);
         mc.renderEngine.bindTexture(leftMenuTexture);
         this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y, 0, 0, MENU_TEXTURE_WIDTH, MENU_TEXTURE_HEIGHT);
+
+        // Draw overlay controller buttons if overlay is allowed.
+        if (rollingStock.acceptsOverlayTextures()) {
+            mc.renderEngine.bindTexture(overlayBarTexture);
+            this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 2, 0, 0, 206, 38);
+            this.drawTexturedModalRect(GUI_ANCHOR_MID_X, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 2, 0, 38, 206, 38);
+        }
+
         // Draw cargo controller bar if cargo controller is enabled...
         if (rollingStock.getCargoManager() != null) {
             mc.renderEngine.bindTexture(leftMenuTexture);
@@ -290,6 +344,13 @@ public class GuiPaintbrushMenu extends GuiScreen {
                 else
                     drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Show Models.name")), mouseX, mouseY, fontRendererObj);
             }
+        }  else if (mouseY > overlayControllerDynamic.yPosition) { // If mouse is somewhere on the overlay controller bar...
+            if (overlayControllerNone.getHoveringStatus())
+                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.None.name")), mouseX, mouseY, fontRendererObj);
+            else if (overlayControllerDynamic.getHoveringStatus())
+                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Dynamic Overlay.name")), mouseX, mouseY, fontRendererObj);
+            else if (overlayControllerFixed.getHoveringStatus())
+                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Fixed Overlay.name")), mouseX, mouseY, fontRendererObj);
         } else if (mouseX < GUI_ANCHOR_X + 10) { // If mouse is somewhere on the cargo controller bar...
             if (loadCargoButton.getHoveringStatus())
                 drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Load Cargo.name")), mouseX, mouseY, fontRendererObj);
@@ -342,8 +403,27 @@ public class GuiPaintbrushMenu extends GuiScreen {
                 case 10: // Color selection button.
                     int newColor = fakeTrain.getColors()[(currentPage * RESULTS_PER_PAGE) + (clickedButton.id - 3)];
                     Traincraft.paintbrushColorChannel.sendToServer(new PacketPaintbrushColor(newColor, rollingStock.getEntityId()));
-                    //rollingStock.setColor(newColor);
-
+                    if (rollingStock.acceptsOverlayTextures())
+                        rollingStock.getOverlayTextureContainer().setTypeAndMarkForUpdate(rollingStock.getOverlayTextureContainer().getType());
+                    break;
+                case 11: // Clear overlay button.
+                    if (rollingStock.acceptsOverlayTextures() && rollingStock.getOverlayTextureContainer().getType() != OverlayTextureManager.Type.NONE) {
+                        rollingStock.getOverlayTextureContainer().getOverlayConfigTag().setInteger("type", OverlayTextureManager.Type.NONE.ordinal());
+                        Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.NONE, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
+                        this.mc.thePlayer.closeScreen();
+                    }
+                    break;
+                case 12: // Open dynamic overlay menu button.
+                    if (rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.DYNAMIC || rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.BOTH) {
+                        this.mc.thePlayer.closeScreen();
+                        editingPlayer.openGui(Traincraft.instance, GuiIDs.DYNAMIC_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
+                    }
+                    break;
+                case 13: // Open fixed overlay menu button.
+                    if (rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.FIXED || rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.BOTH) {
+                        this.mc.thePlayer.closeScreen();
+                        editingPlayer.openGui(Traincraft.instance, GuiIDs.FIXED_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
+                    }
                     break;
                 case 14:
                     this.mc.thePlayer.closeScreen();

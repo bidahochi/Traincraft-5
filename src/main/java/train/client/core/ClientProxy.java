@@ -302,6 +302,10 @@ public class ClientProxy extends CommonProxy
 			return te != null && te instanceof TileBook ? new GuiRecipeBook2(player, player.getCurrentEquippedItem()) : new GuiRecipeBook2(player, player.getCurrentEquippedItem());*/
 		case (GuiIDs.PAINTBRUSH):
 			return entity1 != null ? new GuiPaintbrushMenu(player, (EntityRollingStock) entity1) : null;
+        case (GuiIDs.FIXED_OVERLAY):
+            return entity1 != null ? new GuiFixedOverlay(player, (EntityRollingStock) entity1) : null;
+        case (GuiIDs.DYNAMIC_OVERLAY):
+            return entity1 != null ? new GuiDynamicOverlay(player, (EntityRollingStock) entity1) : null;
 		case (GuiIDs.LOCK_MENU):
 			if (entity != null) { // If player is riding the entity (locomotives).
 				return new GuiLockMenu(player, (EntityRollingStock) entity);
