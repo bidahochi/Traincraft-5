@@ -23,7 +23,6 @@ import java.io.IOException;
  */
 @SideOnly(Side.CLIENT)
 public class GuiFixedOverlay extends GuiAbstractPaintbrush {
-    private BufferedImage subTextureRenderImage;
     private ResourceLocation subTextureRenderImageLocation;
 
     /**
@@ -123,7 +122,7 @@ public class GuiFixedOverlay extends GuiAbstractPaintbrush {
         int offsetY = currentPage * RESULTS_PER_PAGE * subTextureHeight;
         try {
             BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, Info.fixedOverlayTexturePrefix + rollingStock.getOverlayTextureContainer().getSpecificationFixed().getOverlaySheetFilePath())).getInputStream());
-            subTextureRenderImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
+            BufferedImage subTextureRenderImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
             for (int i = 0; i < optionsOnCurrentPage; i++) {
                 subTextureRenderImage.getGraphics().drawImage(overlaySheet.getSubimage(0, offsetY, subTextureWidth, subTextureHeight), 0, i * subTextureHeight, subTextureWidth, subTextureHeight, null);
                 offsetY += subTextureHeight;

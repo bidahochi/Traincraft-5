@@ -98,8 +98,9 @@ public class OverlayTextureManager {
      * <p>Add a new fixed overlay to a specific model.</p>
      * <p>Can only be called once per model.</p>
      */
-    public void initSpecificationFixed(OTSpecificationFixed fixedSpecification) {
+    public OTSpecificationFixed initSpecificationFixed(OTSpecificationFixed fixedSpecification) {
         specificationFixed = fixedSpecification;
+        return fixedSpecification;
     }
 
     /**
@@ -107,8 +108,9 @@ public class OverlayTextureManager {
      * <p>Add a new dynamic overlay to a specific model.</p>
      * <p>Can be called multiple times for multiple dynamic overlays.</p>
      */
-    public void initSpecificationDynamic(OTSpecificationDynamic newDynamicSpecification) {
+    public OTSpecificationDynamic initSpecificationDynamic(OTSpecificationDynamic newDynamicSpecification) {
         specificationDynamicList.add(newDynamicSpecification);
+        return newDynamicSpecification;
     }
 
     public ResourceLocation getOverlaidTextureResource() {
@@ -182,4 +184,28 @@ public class OverlayTextureManager {
         }
     }
 
+    public Type textureHasOverlayTypes(int textureIndex) {
+        boolean dynamicAccepted = false;
+        boolean fixedAccepted = false;
+        if (acceptedType == Type.DYNAMIC || acceptedType == Type.BOTH) {
+            // Ensure dynamic types are accepted if any of the dynamic specifications support this texture.
+            for (OTSpecificationDynamic specificationDynamic : specificationDynamicList) {
+                if (specificationDynamic.canBeAppliedTo(textureIndex)) {
+                    dynamicAccepted = true;
+                    break;
+                }
+            }
+        }
+        if (acceptedType == Type.FIXED || acceptedType == Type.BOTH)
+            fixedAccepted = specificationFixed.canBeAppliedTo(textureIndex);
+
+        if (dynamicAccepted && fixedAccepted)
+            return Type.BOTH;
+        else if (dynamicAccepted)
+            return Type.DYNAMIC;
+        else if (fixedAccepted)
+            return Type.FIXED;
+        else
+            return Type.NONE;
+    }
 }

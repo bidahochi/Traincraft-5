@@ -106,10 +106,16 @@ public class GuiDynamicOverlay extends GuiScreen {
      */
     private int mouseY;
     final private ArrayList<OTSpecificationDynamic> specificationDynamicList;
+    final private ArrayList<OTSpecificationDynamic> prunedSpecificationDynamicList;
+    final private ArrayList<Integer> prunedSpecificationDynamicIndexList;
     /**
-     * <p>Number of the overlay currently being displayed and set.</p>
+     * <p>Number of the overlay currently being displayed and set with respect to only the available overlays for this model.</p>
      */
     private int dynamicOverlayNumber;
+    /**
+     * <p>Number of the overlay currently being displayed and set with respect to all available overlays for this model.</p>
+     */
+    private int correctedDynamicOverlayNumber;
     private GuiTextFieldDynamicOverlay overlayTextBox;
     private GuiTextFieldDynamicOverlay colorCodeTextBox;
     private int ticksExisted = 0;
@@ -122,7 +128,20 @@ public class GuiDynamicOverlay extends GuiScreen {
         this.editingPlayer = editingPlayer;
         this.rollingStock = rollingStock;
         specificationDynamicList = rollingStock.getOverlayTextureContainer().getSpecificationDynamicList();
+        // Prune the list to only those dynamic textures allowed by this texture.
+        // Store their respective indices in a parallel ArrayList.
+        prunedSpecificationDynamicList = new ArrayList<>();
+        prunedSpecificationDynamicIndexList = new ArrayList<>();
+        for (int i = 0; i < specificationDynamicList.size(); i++) {
+            if (specificationDynamicList.get(i).canBeAppliedTo(rollingStock.acceptedColors.indexOf(rollingStock.getColor()))) {
+                prunedSpecificationDynamicList.add(specificationDynamicList.get(i));
+                prunedSpecificationDynamicIndexList.add(i);
+            }
+        }
+
+        // Ensure the dynamic overlay displayed is the first overlay allowed to be displayed after considering restrictions.
         dynamicOverlayNumber = 0;
+        correctedDynamicOverlayNumber = prunedSpecificationDynamicIndexList.get(0);
     }
 
     /**
@@ -160,7 +179,7 @@ public class GuiDynamicOverlay extends GuiScreen {
         this.colorCodeTextBox.setCanLoseFocus(true);
         this.colorCodeTextBox.setEnableBackgroundDrawing(false);
 
-        overlayTextBox.setText(specificationDynamicList.get(dynamicOverlayNumber).getDisplayText());
+        overlayTextBox.setText(specificationDynamicList.get(correctedDynamicOverlayNumber).getDisplayText());
 
         this.updateButtons();
     }
@@ -176,10 +195,10 @@ public class GuiDynamicOverlay extends GuiScreen {
         this.cancelButton.showButton = true;
         this.submitButton.visible = true;
         this.submitButton.showButton = true;
-        this.previousOverlayButton.showButton = specificationDynamicList.size() > 1;
-        this.previousOverlayButton.visible = specificationDynamicList.size() > 1;
-        this.nextOverlayButton.showButton = specificationDynamicList.size() > 1;
-        this.nextOverlayButton.visible = specificationDynamicList.size() > 1;
+        this.previousOverlayButton.showButton = prunedSpecificationDynamicList.size() > 1;
+        this.previousOverlayButton.visible = prunedSpecificationDynamicList.size() > 1;
+        this.nextOverlayButton.showButton = prunedSpecificationDynamicList.size() > 1;
+        this.nextOverlayButton.visible = prunedSpecificationDynamicList.size() > 1;
 
         // Control the textures of the foreground and background buttons.
         if (colorSelectionType == ColorSelectionType.BACKGROUND) {
@@ -199,7 +218,7 @@ public class GuiDynamicOverlay extends GuiScreen {
         }
 
         // Update next and previous buttons for moving between dynamic overlays.
-        if (dynamicOverlayNumber < specificationDynamicList.size() - 1) {
+        if (dynamicOverlayNumber < prunedSpecificationDynamicList.size() - 1) {
             nextOverlayButton.setType(GuiButtonDynamicOverlay.Type.SELECTIONARROWRIGHT, GuiButtonDynamicOverlay.Texture.INACTIVE);
         } else {
             nextOverlayButton.setType(GuiButtonDynamicOverlay.Type.SELECTIONARROWRIGHT, GuiButtonDynamicOverlay.Texture.UNAVAILABLE);
@@ -264,7 +283,8 @@ public class GuiDynamicOverlay extends GuiScreen {
         super.drawScreen(par1, par2, par3);
 
         // Draw text after and *above* the rest of the GUI elements.
-        this.fontRendererObj.drawString(specificationDynamicList.get(dynamicOverlayNumber).getOverlayName(), (int) (GUI_ANCHOR_X + (MENU_TEXTURE_WIDTH * 0.5) - (fontRendererObj.getStringWidth(specificationDynamicList.get(dynamicOverlayNumber).getOverlayName()) * 0.5)), GUI_ANCHOR_Y + 14, 0);
+        OTSpecificationDynamic specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+        this.fontRendererObj.drawString(specificationDynamic.getOverlayName(), (int) (GUI_ANCHOR_X + (MENU_TEXTURE_WIDTH * 0.5) - (fontRendererObj.getStringWidth(specificationDynamic.getOverlayName()) * 0.5)), GUI_ANCHOR_Y + 14, 0);
 
         // Draw Hovering Tooltips
         if (mouseX > backgroundButton.xPosition && mouseX < backgroundButton.xPosition + backgroundButton.width && mouseY > backgroundButton.yPosition && mouseY < backgroundButton.yPosition + backgroundButton.height)
@@ -315,34 +335,41 @@ public class GuiDynamicOverlay extends GuiScreen {
                     break;
                 case 4: // Submit Button
                     if (!overlayTextBox.getText().isEmpty()) {
-                        specificationDynamicList.get(dynamicOverlayNumber).setDisplayText(overlayTextBox.getText());
-                        specificationDynamicList.get(dynamicOverlayNumber).setForegroundColor(foregroundColor);
-                        specificationDynamicList.get(dynamicOverlayNumber).setBackgroundColor(backgroundColor);
+                        OTSpecificationDynamic specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+                        specificationDynamic.setDisplayText(overlayTextBox.getText());
+                        specificationDynamic.setForegroundColor(foregroundColor);
+                        specificationDynamic.setBackgroundColor(backgroundColor);
                         Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.DYNAMIC, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
                         this.mc.thePlayer.closeScreen();
                     }
                     break;
                 case 6: // Previous Overlay
                     if (dynamicOverlayNumber > 0) {
-                        specificationDynamicList.get(dynamicOverlayNumber).setDisplayText(overlayTextBox.getText());
-                        specificationDynamicList.get(dynamicOverlayNumber).setBackgroundColor(backgroundColor);
-                        specificationDynamicList.get(dynamicOverlayNumber).setForegroundColor(foregroundColor);
+                        OTSpecificationDynamic specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+                        specificationDynamic.setDisplayText(overlayTextBox.getText());
+                        specificationDynamic.setBackgroundColor(backgroundColor);
+                        specificationDynamic.setForegroundColor(foregroundColor);
                         dynamicOverlayNumber--;
-                        overlayTextBox.setText(specificationDynamicList.get(dynamicOverlayNumber).getDisplayText());
-                        backgroundColor = specificationDynamicList.get(dynamicOverlayNumber).getBackgroundColor();
-                        foregroundColor = specificationDynamicList.get(dynamicOverlayNumber).getForegroundColor();
+                        correctedDynamicOverlayNumber = prunedSpecificationDynamicIndexList.get(dynamicOverlayNumber);
+                        specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+                        overlayTextBox.setText(specificationDynamic.getDisplayText());
+                        backgroundColor = specificationDynamic.getBackgroundColor();
+                        foregroundColor = specificationDynamic.getForegroundColor();
                         updateButtons();
                     }
                     break;
                 case 7: // Next Overlay
-                    if (dynamicOverlayNumber < specificationDynamicList.size() - 1) {
-                        specificationDynamicList.get(dynamicOverlayNumber).setDisplayText(overlayTextBox.getText());
-                        specificationDynamicList.get(dynamicOverlayNumber).setBackgroundColor(backgroundColor);
-                        specificationDynamicList.get(dynamicOverlayNumber).setForegroundColor(foregroundColor);
+                    if (dynamicOverlayNumber < prunedSpecificationDynamicList.size() - 1) {
+                        OTSpecificationDynamic specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+                        specificationDynamic.setDisplayText(overlayTextBox.getText());
+                        specificationDynamic.setBackgroundColor(backgroundColor);
+                        specificationDynamic.setForegroundColor(foregroundColor);
                         dynamicOverlayNumber++;
-                        overlayTextBox.setText(specificationDynamicList.get(dynamicOverlayNumber).getDisplayText());
-                        backgroundColor = specificationDynamicList.get(dynamicOverlayNumber).getBackgroundColor();
-                        foregroundColor = specificationDynamicList.get(dynamicOverlayNumber).getForegroundColor();
+                        correctedDynamicOverlayNumber = prunedSpecificationDynamicIndexList.get(dynamicOverlayNumber);
+                        specificationDynamic = specificationDynamicList.get(correctedDynamicOverlayNumber);
+                        overlayTextBox.setText(specificationDynamic.getDisplayText());
+                        backgroundColor = specificationDynamic.getBackgroundColor();
+                        foregroundColor = specificationDynamic.getForegroundColor();
                         updateButtons();
                     }
                     break;

@@ -1,5 +1,6 @@
 package train.common.core.network;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
@@ -11,13 +12,12 @@ import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
 import train.common.core.network.lockout.PacketPaintBrushClientSideUpdate;
 import train.common.utils.lockout.ILockoutGroup;
-import train.common.utils.lockout.LockoutPermissionsUtil;
 
 public class PacketPaintbrushColor implements IMessage {
 
     int paintbrushColor;
     int	entityID;
-    public PacketPaintbrushColor() {}
+    public PacketPaintbrushColor() {} // DO NOT REMOVE THE BLANK CONSTRUCTOR. Forge will get EXTREMELY angry.
     public PacketPaintbrushColor(int paintbrushColor, int trainEntity) {
         this.paintbrushColor = paintbrushColor;
         this.entityID = trainEntity;
@@ -45,7 +45,8 @@ public class PacketPaintbrushColor implements IMessage {
                 {
 
                     ((EntityRollingStock) rollingStockEntity).setColor(message.paintbrushColor);
-                    Traincraft.paintbrushColorChannel.sendToAll(new PacketPaintBrushClientSideUpdate(message.paintbrushColor, rollingStockEntity.getEntityId()));
+                    // Send message to all players within 16 chunks of the rolling stock entity.
+                    Traincraft.paintbrushColorChannel.sendToAllAround(new PacketPaintBrushClientSideUpdate(message.paintbrushColor, rollingStockEntity.getEntityId()), new NetworkRegistry.TargetPoint(rollingStockEntity.dimension, rollingStockEntity.posX, rollingStockEntity.posY, rollingStockEntity.posZ, 16D));
                 }
                 else
                 {

@@ -102,6 +102,11 @@ paintbrushmenu.Show Models.name=Show Models
 paintbrushmenu.Load Cargo.name=Load Cargo
 paintbrushmenu.No Cargo.name=No Cargo
 
+dynamicoverlaymenu.Background Color.name=Background Color
+dynamicoverlaymenu.Foreground Color.name=Foreground Color
+dynamicoverlaymenu.Submit.name=Submit
+dynamicoverlaymenu.Back.name=Back
+
 lockmenu.Unlock.name=Unlock
 lockmenu.Lock.name=Lock
 

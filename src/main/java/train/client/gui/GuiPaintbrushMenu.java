@@ -188,20 +188,22 @@ public class GuiPaintbrushMenu extends GuiScreen {
             this.overlayControllerDynamic.showButton = true;
             this.overlayControllerFixed.visible = true;
             this.overlayControllerFixed.showButton = true;
-            OverlayTextureManager.Type acceptedType = rollingStock.getOverlayTextureContainer().getAcceptedType();
+            this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.UNAVAILABLE);
+            this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.UNAVAILABLE);
             OverlayTextureManager.Type type = rollingStock.getOverlayTextureContainer().getType();
+            OverlayTextureManager.Type validTypesForTexture = rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.acceptedColors.indexOf(rollingStock.getColor()));
             if (type == OverlayTextureManager.Type.NONE)
                 this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
             else
                 this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
-            if (acceptedType == OverlayTextureManager.Type.DYNAMIC || acceptedType == OverlayTextureManager.Type.BOTH) {
+            if (validTypesForTexture == OverlayTextureManager.Type.DYNAMIC || validTypesForTexture == OverlayTextureManager.Type.BOTH) {
                 if (type == OverlayTextureManager.Type.DYNAMIC)
                     this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
                 else {
                     this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
                 }
             }
-            if (acceptedType == OverlayTextureManager.Type.FIXED || acceptedType == OverlayTextureManager.Type.BOTH) {
+            if (validTypesForTexture == OverlayTextureManager.Type.FIXED || validTypesForTexture == OverlayTextureManager.Type.BOTH) {
                 if (type == OverlayTextureManager.Type.FIXED)
                     this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
                 else {
@@ -231,7 +233,7 @@ public class GuiPaintbrushMenu extends GuiScreen {
         mc.renderEngine.bindTexture(leftMenuTexture);
         this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y, 0, 0, MENU_TEXTURE_WIDTH, MENU_TEXTURE_HEIGHT);
 
-        // Draw overlay controller buttons if overlay is allowed.
+        // Draw overlay controller buttons if overlay is allowed at all and on this specific texture.
         if (rollingStock.acceptsOverlayTextures()) {
             mc.renderEngine.bindTexture(overlayBarTexture);
             this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 2, 0, 0, 206, 38);
@@ -405,13 +407,19 @@ public class GuiPaintbrushMenu extends GuiScreen {
                     Traincraft.paintbrushColorChannel.sendToServer(new PacketPaintbrushColor(newColor, rollingStock.getEntityId()));
                     if (rollingStock.acceptsOverlayTextures())
                         rollingStock.getOverlayTextureContainer().setTypeAndMarkForUpdate(rollingStock.getOverlayTextureContainer().getType());
+                    /* We must update the color locally in addition to sending the packet —
+                    *  even though the packet, once received and redistributed by the server, will force an update,
+                    * we need an update immediately for menu feedback. */
+                    rollingStock.setColor(newColor);
+                    // Check if the new texture can have an overlay. If not, remove it.
+                    OverlayTextureManager.Type validTypesForTexture = rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.acceptedColors.indexOf(rollingStock.getColor()));
+                    if (validTypesForTexture != rollingStock.getOverlayTextureContainer().getType() & validTypesForTexture != OverlayTextureManager.Type.BOTH)
+                        clearOverlay();
+                    updateButtons();
                     break;
                 case 11: // Clear overlay button.
-                    if (rollingStock.acceptsOverlayTextures() && rollingStock.getOverlayTextureContainer().getType() != OverlayTextureManager.Type.NONE) {
-                        rollingStock.getOverlayTextureContainer().getOverlayConfigTag().setInteger("type", OverlayTextureManager.Type.NONE.ordinal());
-                        Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.NONE, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
-                        this.mc.thePlayer.closeScreen();
-                    }
+                    clearOverlay();
+                    updateButtons();
                     break;
                 case 12: // Open dynamic overlay menu button.
                     if (rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.DYNAMIC || rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.BOTH) {
@@ -441,6 +449,17 @@ public class GuiPaintbrushMenu extends GuiScreen {
                     editingPlayer.openGui(Traincraft.instance, GuiIDs.CARGO_MENU, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
                     break;
             }
+        }
+    }
+
+    /**
+     * @author 02skaplan
+     */
+    private void clearOverlay() {
+        if (rollingStock.acceptsOverlayTextures() && rollingStock.getOverlayTextureContainer().getType() != OverlayTextureManager.Type.NONE) {
+            rollingStock.getOverlayTextureContainer().setTypeAndMarkForUpdate(OverlayTextureManager.Type.NONE); // This is redundant because the packet will force this to update, but we need it for instant feedback in the menu.
+            rollingStock.getOverlayTextureContainer().getOverlayConfigTag().setInteger("type", OverlayTextureManager.Type.NONE.ordinal());
+            Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.NONE, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
         }
     }
 
