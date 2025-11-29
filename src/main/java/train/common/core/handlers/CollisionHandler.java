@@ -67,9 +67,11 @@ public class CollisionHandler {
 
 			for (Object aListRide : listRide) {
 				entity = (Entity) aListRide;
-
 				if (!(entity instanceof EntityLasersLines) && !entity.noClip) {
-
+					double distance = Math.sqrt(((entity.posX - entityOne.posX) * (entity.posX - entityOne.posX)) + ((entity.posZ - entityOne.posZ) * (entity.posZ - entityOne.posZ)));
+					if (distance > 2) {
+						continue;
+					}
 					if (entity != entity.riddenByEntity && (entity instanceof EntityLiving) && (!entity.getClass().getName().equals("EntityLittleMaid")) && (unAutorizedMob(entity, entityOne))) {
 
 						applyCollisionLiving(entity, entityOne);
@@ -93,6 +95,10 @@ public class CollisionHandler {
 
 			for (Object aListRide : listRide) {
 				entity = (Entity) aListRide;
+				double distance = Math.sqrt(((entity.posX - entityOne.posX) * (entity.posX - entityOne.posX)) + ((entity.posZ - entityOne.posZ) * (entity.posZ - entityOne.posZ)));
+				if (distance > 2) {
+					continue;
+				}
 				if (!(entity instanceof EntityLasersLines) && !entity.noClip && !(entity instanceof EntityLiving) && !(entityOne instanceof EntityLiving)) {
 
 					if (entity != entity.riddenByEntity && entity.canBePushed() && (entityOne instanceof AbstractTrains) && (entity instanceof AbstractTrains) && !((AbstractTrains) entityOne).isAttached) {
