@@ -44,50 +44,54 @@ public class BEOModelLoader {
         }
     }
 
-    public static FVTMFormatBase loadModel(String loc) throws Exception {
-        FVTMFormatBase model = new FVTMFormatBase();
-        InputStream stream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(loc)).getInputStream();
-        //copy stream to exclude zip errors
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int read;
-        while((read = stream.read(buffer)) != -1) out.write(buffer, 0, read);
-        stream = new ByteArrayInputStream(out.toByteArray());
-        //
-        int f0 = stream.read(), f1 = stream.read(), f2 = stream.read(), format = stream.read();
-        if(f0 != 6 || f1 != 2 || f2 != 15 || format < 0) return model;
-        int r;
-        while((r = stream.read()) > -1){
-            switch(r){
-                case NAME:{
-                    model.name = readString(stream);
-                    break;
+    public static FVTMFormatBase loadModel(String loc) {
+        try {
+            FVTMFormatBase model = new FVTMFormatBase();
+            InputStream stream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(loc)).getInputStream();
+            //copy stream to exclude zip errors
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = stream.read(buffer)) != -1) out.write(buffer, 0, read);
+            stream = new ByteArrayInputStream(out.toByteArray());
+            //
+            int f0 = stream.read(), f1 = stream.read(), f2 = stream.read(), format = stream.read();
+            if (f0 != 6 || f1 != 2 || f2 != 15 || format < 0) return model;
+            int r;
+            while ((r = stream.read()) > -1) {
+                switch (r) {
+                    case NAME: {
+                        model.name = readString(stream);
+                        break;
+                    }
+                    case AUTHOR: {
+                        model.addToCreators(readString(stream));
+                        break;
+                    }
+                    case TEXSIZE: {
+                        int[] in = readIntegers(stream, 2);
+                        model.textureWidth = model.textureX = in[0];
+                        model.textureHeight = model.textureY = in[1];
+                        break;
+                    }
+                    case GROUP: {
+                        FVTMFormatBase.TurboList group = new FVTMFormatBase.TurboList(readString(stream));
+                        readPolygons(stream, group, model.textureX, model.textureY);
+                        model.groups.add(group);
+                        break;
+                    }
+                    default:
+                        break;
                 }
-                case AUTHOR:{
-                    model.addToCreators(readString(stream));
-                    break;
-                }
-                case TEXSIZE:{
-                    int[] in = readIntegers(stream, 2);
-                    model.textureWidth = model.textureX = in[0];
-                    model.textureHeight = model.textureY = in[1];
-                    break;
-                }
-                case GROUP:{
-                    FVTMFormatBase.TurboList group = new FVTMFormatBase.TurboList(readString(stream));
-                    readPolygons(stream, group, model.textureX, model.textureY);
-                    model.groups.add(group);
-                    break;
-                }
-                default:
-                    break;
             }
+            //
+            stream.close();
+            vecs.clear();
+            uvs.clear();
+            return model;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        //
-        stream.close();
-        vecs.clear();
-        uvs.clear();
-        return model;
     }
 
     private static byte[] read(InputStream stream) throws IOException{
