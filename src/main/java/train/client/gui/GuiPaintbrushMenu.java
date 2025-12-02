@@ -422,13 +422,13 @@ public class GuiPaintbrushMenu extends GuiScreen {
                     updateButtons();
                     break;
                 case 12: // Open dynamic overlay menu button.
-                    if (rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.DYNAMIC || rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.BOTH) {
+                    if (rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.DYNAMIC || rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.BOTH) {
                         this.mc.thePlayer.closeScreen();
                         editingPlayer.openGui(Traincraft.instance, GuiIDs.DYNAMIC_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
                     }
                     break;
                 case 13: // Open fixed overlay menu button.
-                    if (rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.FIXED || rollingStock.getOverlayTextureContainer().getAcceptedType() == OverlayTextureManager.Type.BOTH) {
+                    if (rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.FIXED || rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.BOTH) {
                         this.mc.thePlayer.closeScreen();
                         editingPlayer.openGui(Traincraft.instance, GuiIDs.FIXED_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
                     }
