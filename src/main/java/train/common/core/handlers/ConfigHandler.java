@@ -50,6 +50,7 @@ public class ConfigHandler {
 	public static boolean CREATIVE_DROP_ROLLINGSTOCK;
 	public static boolean ENABLE_DSS_WEBUI;
 	public static boolean ENGINEERGAMING;
+    public static int MAX_TRUSTEES_ON_PADLOCK;
 
 	public static void changeFirstLoad(){
 		Configuration cf = new Configuration(new File(Traincraft.configDirectory, Info.modName + ".cfg"));
@@ -100,6 +101,7 @@ public class ConfigHandler {
 			ENABLE_BAP_SPLIT_TABS = cf.get(CATEGORY_GENERAL, "ENABLE_BAP_SPLIT_TABS", true).getBoolean(true);
 			CREATIVE_DROP_ROLLINGSTOCK = cf.get(CATEGORY_GENERAL, "CREATIVE_DROP_ROLLINGSTOCK", true).getBoolean(true);
 			ENGINEERGAMING = cf.get(CATEGORY_GENERAL, "ENGINEERGAMING", false).getBoolean(false);
+            MAX_TRUSTEES_ON_PADLOCK = cf.get(CATEGORY_GENERAL, "MAX_TRUSTEES_ON_PADLOCK", false, "Defaults to hiding models in the paintbrush menu. Potentially useful on lower-spec machines.").getInt(30);
 		} catch (Exception e) {
 			Traincraft.tcLog.fatal("Traincraft had a problem loading its configuration\n" + e);
 		} finally {

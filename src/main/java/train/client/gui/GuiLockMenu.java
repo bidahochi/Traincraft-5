@@ -37,6 +37,6 @@ public class GuiLockMenu extends GuiLockMenuAbstract {
 
     @Override
     public void sendUpdatePacket(boolean propagate) {
-        Traincraft.lockChannel.sendToServer(new PacketSetTrainLockedToClient(rollingStock.locked, exportTrustedPlayers(), rollingStock.getEntityId(), propagate));
+        Traincraft.lockChannel.sendToServer(new PacketSetTrainLockedToClient(rollingStock.locked, currentTrustees, rollingStock.getEntityId(), propagate));
     }
 }
