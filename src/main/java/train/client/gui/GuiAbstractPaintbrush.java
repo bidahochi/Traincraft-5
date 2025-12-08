@@ -52,7 +52,7 @@ public abstract class GuiAbstractPaintbrush extends GuiScreen {
     private GuiButtonPaintbrushMenu textureEight;
     private GuiButtonPaintbrushMenu closeMenuButton;
     protected int optionsOnCurrentPage;
-    protected final int totalOptions;
+    protected int totalOptions;
     protected int currentPage;
     protected Integer selectedOption;
 
@@ -68,11 +68,6 @@ public abstract class GuiAbstractPaintbrush extends GuiScreen {
     public GuiAbstractPaintbrush(EntityPlayer editingPlayer, EntityRollingStock rollingStock) {
         this.editingPlayer = editingPlayer;
         this.rollingStock = rollingStock;
-        totalOptions = getTotalOptions();
-        selectedOption = getSelectedOption();
-        currentPage = (selectedOption - 1) / RESULTS_PER_PAGE;
-        optionsOnCurrentPage = Math.min(RESULTS_PER_PAGE, totalOptions - currentPage * RESULTS_PER_PAGE);
-        hasNextPage = optionsOnCurrentPage + RESULTS_PER_PAGE * currentPage < totalOptions;
     }
 
     /**
@@ -80,6 +75,11 @@ public abstract class GuiAbstractPaintbrush extends GuiScreen {
      */
     @Override
     public void initGui() {
+        totalOptions = getTotalOptions();
+        selectedOption = getSelectedOption();
+        currentPage = (selectedOption - 1) / RESULTS_PER_PAGE;
+        optionsOnCurrentPage = Math.min(RESULTS_PER_PAGE, totalOptions - currentPage * RESULTS_PER_PAGE);
+        hasNextPage = optionsOnCurrentPage + RESULTS_PER_PAGE * currentPage < totalOptions;
         GUI_ANCHOR_MID_X = (this.width) / 2;
         GUI_ANCHOR_Y = (this.height) / 2 - (MENU_TEXTURE_HEIGHT / 2);
         GUI_ANCHOR_X = GUI_ANCHOR_MID_X - MENU_TEXTURE_WIDTH;
@@ -101,6 +101,7 @@ public abstract class GuiAbstractPaintbrush extends GuiScreen {
     }
 
     protected void updateButtons() {
+        selectedOption = getSelectedOption();
         this.arrowUp.visible = (currentPage != 0);
         this.arrowUp.showButton = (currentPage != 0);
         this.arrowDown.visible = hasNextPage;

@@ -258,17 +258,16 @@ public class RenderRollingStock extends Render {
 			GL11.glScalef(renders.getScale()[0], renders.getScale()[1], renders.getScale()[2]);
 		}
 
-		if (!cart.acceptsOverlayTextures() || cart.getOverlayTextureContainer().getType() == OverlayTextureManager.Type.NONE)
+		if (!cart.acceptsOverlayTextures() || !cart.getOverlayTextureContainer().hasActiveOverlays())
 		{
 			Tessellator.bindTexture(getTexture(cart));
 		}
 		else
 		{
 			if (cart.getOverlayTextureContainer().markedForUpdate)
-			{
 				cart.getOverlayTextureContainer().renderTexture();
-			}
-			Tessellator.bindTexture(cart.getOverlayTextureContainer().getOverlaidTextureResource());
+            else
+			    Tessellator.bindTexture(cart.getOverlayTextureContainer().getOverlaidTextureResource());
 		}
 		int skyLight = cart.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		if (!renderModeGUI)

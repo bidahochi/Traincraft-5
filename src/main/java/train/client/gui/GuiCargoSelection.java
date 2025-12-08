@@ -52,7 +52,7 @@ public class GuiCargoSelection extends GuiAbstractPaintbrush {
             renderEntities[i] = Traincraft.traincraftRegistry.getEntity(fakeTrain.getEntityClass(), Minecraft.getMinecraft().theWorld);
         /* Need to re-run these even after calling super because cargo uses selectedOption for current page
          and super() uses selectedOption - 1. */
-        currentPage = selectedOption / RESULTS_PER_PAGE;
+        currentPage = getSelectedOption() / RESULTS_PER_PAGE;
         hasNextPage = optionsOnCurrentPage + RESULTS_PER_PAGE * currentPage < totalOptions;
         optionsOnCurrentPage = Math.min(RESULTS_PER_PAGE, totalOptions - currentPage * RESULTS_PER_PAGE);
     }

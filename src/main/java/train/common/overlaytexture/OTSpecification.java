@@ -2,6 +2,7 @@ package train.common.overlaytexture;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,23 +20,38 @@ public abstract class OTSpecification {
         WHITELIST
     }
 
-    @SideOnly(Side.CLIENT)
-    protected BufferedImage overlayImage;
-    protected Restriction restriction;
-    protected Set<Integer> restrictedTextures;
-    private final Point[] drawingPointsList;
-    protected OTSpecification(Point[] drawingPointsList) {
+    protected OTSpecification(Point[] drawingPointsList, String overlayName) {
         this.drawingPointsList = drawingPointsList;
+        this.overlayName = overlayName;
         restriction = null;
         restrictedTextures = null;
     }
-    public Point[] getDrawingPointsList() {
-        return drawingPointsList;
-    }
+
+    @SideOnly(Side.CLIENT)
+    protected BufferedImage overlayImage;
     @SideOnly(Side.CLIENT)
     public BufferedImage getOverlayImage() { return overlayImage; }
     @SideOnly(Side.CLIENT)
     abstract void renderOverlay();
+
+    protected Restriction restriction;
+    protected Set<Integer> restrictedTextures;
+    private final Point[] drawingPointsList;
+    private boolean isActive;
+    private final String overlayName;
+    public boolean isActive() { return isActive; }
+    public void setActive(boolean active) { this.isActive = active; }
+    public Point[] getDrawingPointsList() {
+        return drawingPointsList;
+    }
+    public String getOverlayName() {
+        return overlayName;
+    }
+
+
+    public abstract void getOverlayConfigTag(NBTTagCompound nbtTag);
+    public abstract void importFromConfigTag(NBTTagCompound nbtTag);
+    public abstract OverlayTextureManager.Type getType();
 
     /**
      * @author 02skaplan

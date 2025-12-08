@@ -52,6 +52,9 @@ import train.common.library.GuiIDs;
 import train.common.library.Info;
 import train.common.mtc.render.RenderMTCBlock;
 import train.common.mtc.tile.TileTransmitterSpeed;
+import train.common.overlaytexture.OTSpecificationDynamic;
+import train.common.overlaytexture.OTSpecificationFixed;
+import train.common.overlaytexture.OverlayTextureManager;
 import train.common.tile.*;
 import train.common.tile.tileStopper.TileAmericanStopper;
 import train.common.tile.tileStopper.TileGenericStopper;
@@ -334,9 +337,11 @@ public class ClientProxy extends CommonProxy
 		case (GuiIDs.PAINTBRUSH):
 			return entity1 != null ? new GuiPaintbrushMenu(player, (EntityRollingStock) entity1) : null;
         case (GuiIDs.FIXED_OVERLAY):
-            return entity1 != null ? new GuiFixedOverlay(player, (EntityRollingStock) entity1) : null;
+            return entity1 != null ? new GuiFixedOverlay(player, (EntityRollingStock) entity1, ((OTSpecificationFixed) ((EntityRollingStock) entity1).getOverlayTextureContainer().getAllOverlays().get(z))) : null;
         case (GuiIDs.DYNAMIC_OVERLAY):
-            return entity1 != null ? new GuiDynamicOverlay(player, (EntityRollingStock) entity1) : null;
+            return entity1 != null ? new GuiDynamicOverlay(player, (EntityRollingStock) entity1, ((OTSpecificationDynamic) ((EntityRollingStock) entity1).getOverlayTextureContainer().getAllOverlays().get(z))) : null;
+        case (GuiIDs.OVERLAY_MENU):
+            return entity1 != null ? new GuiOverlayMenu(player, (EntityRollingStock) entity1) : null;
 		case (GuiIDs.LOCK_MENU):
 			if (entity != null) { // If player is riding the entity (locomotives).
 				return new GuiLockMenu(player, (EntityRollingStock) entity);

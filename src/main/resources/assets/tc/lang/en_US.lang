@@ -118,10 +118,12 @@ paintbrushmenu.Dynamic Overlay.name=Custom Text Tool
 paintbrushmenu.None.name=No Custom Text or Appliqué
 paintbrushmenu.Lights On.name=Lights On
 paintbrushmenu.Lights Off.name=Lights Off
+paintbrushmenu.Customize.name=Customize
 paintbrushmenu.Hide Models.name=Hide Models
 paintbrushmenu.Show Models.name=Show Models
 paintbrushmenu.Load Cargo.name=Load Cargo
 paintbrushmenu.No Cargo.name=No Cargo
+overlaymenu.Overlays.name=Overlays
 
 dynamicoverlaymenu.Background Color.name=Background Color
 dynamicoverlaymenu.Foreground Color.name=Foreground Color

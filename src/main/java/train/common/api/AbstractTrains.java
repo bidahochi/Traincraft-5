@@ -670,7 +670,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 			dataWatcher.updateObject(11, uniqueID);
 			dataWatcher.updateObject(31, trainNote);
 
-			if (trainCreator != null && trainCreator.length() > 0){ dataWatcher.updateObject(13, trainCreator);}
+			if (trainCreator != null && !trainCreator.isEmpty()){ dataWatcher.updateObject(13, trainCreator);}
 		}
 	}
 
@@ -680,10 +680,9 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	 * to call this from the constructor of the AbstractTrain-derived entity class.</p>
 	 * <p>After calling, it is recommended to use getOverlayTextureContainer to initialze the fixed, dynamic, or both
 	 * fixed and dynamic overlays with their respective settings.</p>
-	 * @param acceptedType Whether the overlay manager will allow fixed, dynamic, or both fixed and dynamic overlays.
 	 */
-	public void initOverlayTextures(OverlayTextureManager.Type acceptedType) {
-		overlayTextureContainer = new OverlayTextureManager(acceptedType, this);
+	public void initOverlayTextures() {
+		overlayTextureContainer = new OverlayTextureManager(this);
 		acceptsOverlayTextures = true;
 	}
 
@@ -803,7 +802,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 
 	public void dropCartAsItem(boolean isCreative)
 	{
-		if (itemdropped == false && (CREATIVE_DROP_ROLLINGSTOCK || isCreative == false))
+		if (!itemdropped && (CREATIVE_DROP_ROLLINGSTOCK || !isCreative))
 		{
 			itemdropped=true;
 			for (ItemStack item : getItemsDropped())
@@ -816,6 +815,9 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 					{
 						stack.getTagCompound().setInteger("cargoSelection", cargoManager.getSelectedCargo());
 					}
+                    // Only save the overlay configuration to NBT if it exists. No need to store an empty configuration in NBT as it will be initialized as the default when the entity spawns in.
+                    if (this.acceptsOverlayTextures && this.getOverlayTextureContainer().hasActiveOverlays() && stack != null)
+                        stack.getTagCompound().setTag("overlayTextureConfigTag", getOverlayTextureContainer().getOverlayConfigTag());
 					entityDropItem(stack!=null?stack:item,0);
 				}
 				else
@@ -834,13 +836,9 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 			stack.setTagCompound(var3);
 		}
 		if (this.uniqueID != -1) stack.getTagCompound().setInteger("uniqueID", this.uniqueID);
-		if (this.trainCreator != null && this.trainCreator.length() > 0) stack.getTagCompound().setString("trainCreator", this.trainCreator);
+		if (this.trainCreator != null && !this.trainCreator.isEmpty()) stack.getTagCompound().setString("trainCreator", this.trainCreator);
 		if (this.getColor() != -1) stack.getTagCompound().setInteger("trainColor", this.getColor());
 
-		// Only save the overlay configuration to NBT if it exists. No need to store an empty configuration in NBT as it will be initialized as the default when the entity spawns in.
-		if (this.acceptsOverlayTextures && this.getOverlayTextureContainer().getType() != OverlayTextureManager.Type.NONE) {
-			stack.getTagCompound().setTag("overlayTextureConfigTag", getOverlayTextureContainer().getOverlayConfigTag());
-		}
 	}
 
 	protected void setDefaultMass(double def) {

@@ -737,6 +737,8 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
                         if (var5.getInteger("cargoSelection") < rollingStock.getCargoManager().getCargoSpecificationList().length + 1)
                             rollingStock.getCargoManager().setSelectedCargo(var5.getInteger("cargoSelection"));
                     }
+                    if (var5.hasKey("overlayTextureConfigTag")) // Import overlay configuration from NBT and apply it to the entity.
+                        rollingStock.getOverlayTextureContainer().importFromConfigTag(var5.getCompoundTag("overlayTextureConfigTag"));
                 }
                 if (player != null)
                     rollingStock.setInformation(((ItemAbstractRollingStock) itemstack.getItem()).getTrainType(), player.getDisplayName(), trainCreator, (itemstack.getItem()).getItemStackDisplayName(itemstack), uniID);

@@ -24,7 +24,10 @@ class GuiButtonPaintbrushMenu extends GuiButton {
         PAUSE,
         LIGHTSON,
         LIGHTSOFF,
-        STOPRENDER
+        STOPRENDER,
+        RANDOM,
+        CONFIRM,
+        CONFIGURE
     }
     enum Texture {
         ACTIVE,
@@ -106,24 +109,44 @@ class GuiButtonPaintbrushMenu extends GuiButton {
                 case LIGHTSON:
                 case LIGHTSOFF:
                 case STOPRENDER:
+                case RANDOM:
+                case CONFIRM:
+                case CONFIGURE:
                     TEXTURE_WIDTH = 22;
                     TEXTURE_HEIGHT = 22;
                     if (texture == Texture.INACTIVE)
                         this.v = 85;
                     else
                         this.v = 107;
-                    if (type == Type.CLOSE)
-                        this.u = 0;
-                    else if (type == Type.PLAY)
-                        this.u = 22;
-                    else if (type == Type.PAUSE)
-                        this.u = 44;
-                    else if (type == Type.LIGHTSOFF)
-                        this.u = 66;
-                    else if (type == Type.LIGHTSON)
-                        this.u = 88;
-                    else
-                        this.u = 110;
+                    switch (type) {
+                        case CLOSE:
+                            this.u = 0;
+                            break;
+                        case PLAY:
+                            this.u = 22;
+                            break;
+                        case PAUSE:
+                            this.u = 44;
+                            break;
+                        case LIGHTSOFF:
+                            this.u = 66;
+                            break;
+                        case LIGHTSON:
+                            this.u = 88;
+                            break;
+                        case STOPRENDER:
+                            this.u = 110;
+                            break;
+                        case RANDOM:
+                            this.u = 132;
+                            break;
+                        case CONFIRM:
+                            this.u = 154;
+                            break;
+                        default:
+                            this.u = 176;
+                            break;
+                    }
                     break;
             }
         }

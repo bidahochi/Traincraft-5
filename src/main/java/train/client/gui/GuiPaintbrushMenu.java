@@ -18,10 +18,8 @@ import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
 import train.common.core.handlers.ConfigHandler;
 import train.common.core.network.PacketPaintbrushColor;
-import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.library.*;
 import train.common.library.register.ITrainRecord;
-import train.common.overlaytexture.OverlayTextureManager;
 
 import java.awt.*;
 import java.util.Collections;
@@ -65,16 +63,13 @@ public class GuiPaintbrushMenu extends GuiScreen {
     private GuiButtonPaintbrushMenu textureSix;
     private GuiButtonPaintbrushMenu textureSeven;
     private GuiButtonPaintbrushMenu textureEight;
-    private GuiButtonPaintbrushOverlayController overlayControllerNone;
-    private GuiButtonPaintbrushOverlayController overlayControllerDynamic;
-    private GuiButtonPaintbrushOverlayController overlayControllerFixed;
     private GuiButtonPaintbrushMenu closeMenuButton;
     private GuiButtonPaintbrushMenu playPauseButton;
-    private GuiButtonPaintbrushMenu lightControlButton;
+    private GuiButtonPaintbrushMenu overlayConfigButton;
     private GuiButtonPaintbrushMenu renderModelsButton;
     private GuiButtonPaintbrushCargoController loadCargoButton;
     private boolean renderModels;
-    private boolean disableLighting = true;
+    private final boolean disableLighting = true;
     private int optionsOnCurrentPage;
     private final int totalOptions;
     private int currentPage = 0;
@@ -115,7 +110,7 @@ public class GuiPaintbrushMenu extends GuiScreen {
         } else {
             GUI_ANCHOR_MID_X = (this.width) / 2 + 15;
         }
-        GUI_ANCHOR_Y = (this.height) / 2 - ((MENU_TEXTURE_HEIGHT) / 2) - (38 / 2);
+        GUI_ANCHOR_Y = (this.height) / 2 - ((MENU_TEXTURE_HEIGHT) / 2);
         GUI_ANCHOR_X = GUI_ANCHOR_MID_X - MENU_TEXTURE_WIDTH;
         this.buttonList.clear();
         this.buttonList.add(this.arrowUp = new GuiButtonPaintbrushMenu(0, GUI_ANCHOR_X + 388, GUI_ANCHOR_Y + 37, 12, 38, GuiButtonPaintbrushMenu.Type.ARROWUP));
@@ -130,12 +125,9 @@ public class GuiPaintbrushMenu extends GuiScreen {
         this.buttonList.add(this.textureSix = new GuiButtonPaintbrushMenu(8, GUI_ANCHOR_X + 104, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
         this.buttonList.add(this.textureSeven = new GuiButtonPaintbrushMenu(9, GUI_ANCHOR_X + 198, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
         this.buttonList.add(this.textureEight = new GuiButtonPaintbrushMenu(10, GUI_ANCHOR_X + 292, GUI_ANCHOR_Y + 103, 85, 85, GuiButtonPaintbrushMenu.Type.SELECTIONBOX));
-        this.buttonList.add(this.overlayControllerNone = new GuiButtonPaintbrushOverlayController(11, GUI_ANCHOR_X + 121, GUI_ANCHOR_Y + 202, 29, 29, GuiButtonPaintbrushOverlayController.Type.NONE));
-        this.buttonList.add(this.overlayControllerDynamic = new GuiButtonPaintbrushOverlayController(12, GUI_ANCHOR_X + 179, GUI_ANCHOR_Y + 202, 56, 29, GuiButtonPaintbrushOverlayController.Type.DYNAMIC));
-        this.buttonList.add(this.overlayControllerFixed = new GuiButtonPaintbrushOverlayController(13, GUI_ANCHOR_X + 264, GUI_ANCHOR_Y + 202, 29, 29, GuiButtonPaintbrushOverlayController.Type.FIXED));
         this.buttonList.add(this.closeMenuButton = new GuiButtonPaintbrushMenu(14, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + 10, 22, 22, GuiButtonPaintbrushMenu.Type.CLOSE));
         this.buttonList.add(this.playPauseButton = new GuiButtonPaintbrushMenu(15, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 29, 22, 22, GuiButtonPaintbrushMenu.Type.PLAY));
-        this.buttonList.add(this.lightControlButton = new GuiButtonPaintbrushMenu(16, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 77, 22, 22, GuiButtonPaintbrushMenu.Type.LIGHTSOFF));
+        this.buttonList.add(this.overlayConfigButton = new GuiButtonPaintbrushMenu(16, GUI_ANCHOR_X + 382, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 77, 22, 22, GuiButtonPaintbrushMenu.Type.LIGHTSOFF));
         this.buttonList.add(this.loadCargoButton = new GuiButtonPaintbrushCargoController(17, GUI_ANCHOR_X - 27, (int) (GUI_ANCHOR_Y + ((MENU_TEXTURE_HEIGHT * 0.5) - (29 * 0.5))), 29, 29, GuiButtonPaintbrushCargoController.Type.LOAD));
         this.updateButtons();
     }
@@ -166,9 +158,9 @@ public class GuiPaintbrushMenu extends GuiScreen {
         this.playPauseButton.visible = renderModels;
         this.playPauseButton.showButton = renderModels;
         this.playPauseButton.setType(doAnimation ? GuiButtonPaintbrushMenu.Type.PLAY : GuiButtonPaintbrushMenu.Type.PAUSE, playPauseButton.getTexture());
-        this.lightControlButton.showButton = renderModels;
-        this.lightControlButton.visible = renderModels;
-        this.lightControlButton.setType(disableLighting ? GuiButtonPaintbrushMenu.Type.LIGHTSON : GuiButtonPaintbrushMenu.Type.LIGHTSOFF, lightControlButton.getTexture());
+        this.overlayConfigButton.showButton = false;
+        this.overlayConfigButton.visible = false;
+        this.overlayConfigButton.setType(GuiButtonPaintbrushMenu.Type.CONFIGURE, overlayConfigButton.getTexture());
 
         this.renderModelsButton.visible = true;
         this.renderModelsButton.showButton = true;
@@ -179,51 +171,11 @@ public class GuiPaintbrushMenu extends GuiScreen {
         if (acceptsCargo) {
             this.loadCargoButton.setType(GuiButtonPaintbrushCargoController.Type.LOAD, GuiButtonPaintbrushCargoController.Texture.UNSELECTED);
         }
-
-        // Overlay Texture Buttons
-        if (rollingStock.acceptsOverlayTextures()) {
-            this.overlayControllerNone.visible = rollingStock.acceptsOverlayTextures();
-            this.overlayControllerNone.showButton = rollingStock.acceptsOverlayTextures();
-            this.overlayControllerDynamic.visible = true;
-            this.overlayControllerDynamic.showButton = true;
-            this.overlayControllerFixed.visible = true;
-            this.overlayControllerFixed.showButton = true;
-            this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.UNAVAILABLE);
-            this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.UNAVAILABLE);
-            OverlayTextureManager.Type type = rollingStock.getOverlayTextureContainer().getType();
-            OverlayTextureManager.Type validTypesForTexture = rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.acceptedColors.indexOf(rollingStock.getColor()));
-            if (type == OverlayTextureManager.Type.NONE)
-                this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
-            else
-                this.overlayControllerNone.setType(GuiButtonPaintbrushOverlayController.Type.NONE, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
-            if (validTypesForTexture == OverlayTextureManager.Type.DYNAMIC || validTypesForTexture == OverlayTextureManager.Type.BOTH) {
-                if (type == OverlayTextureManager.Type.DYNAMIC)
-                    this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
-                else {
-                    this.overlayControllerDynamic.setType(GuiButtonPaintbrushOverlayController.Type.DYNAMIC, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
-                }
-            }
-            if (validTypesForTexture == OverlayTextureManager.Type.FIXED || validTypesForTexture == OverlayTextureManager.Type.BOTH) {
-                if (type == OverlayTextureManager.Type.FIXED)
-                    this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.SELECTED);
-                else {
-                    this.overlayControllerFixed.setType(GuiButtonPaintbrushOverlayController.Type.FIXED, GuiButtonPaintbrushOverlayController.Texture.UNSELECTED);
-                }
-            }
-        } else {
-            this.overlayControllerNone.visible = false;
-            this.overlayControllerNone.showButton = false;
-            this.overlayControllerDynamic.visible = false;
-            this.overlayControllerDynamic.showButton = false;
-            this.overlayControllerFixed.visible = false;
-            this.overlayControllerFixed.showButton = false;
-        }
-
     }
 
     ResourceLocation rightMenuTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_menu_right.png");
     ResourceLocation leftMenuTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_menu_left.png");
-    ResourceLocation overlayBarTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_overlay_controller.png");
+
     @Override
     public void drawScreen(int mouseX, int mouseY, float par3) {
         RenderHelper.disableStandardItemLighting();
@@ -233,12 +185,6 @@ public class GuiPaintbrushMenu extends GuiScreen {
         mc.renderEngine.bindTexture(leftMenuTexture);
         this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y, 0, 0, MENU_TEXTURE_WIDTH, MENU_TEXTURE_HEIGHT);
 
-        // Draw overlay controller buttons if overlay is allowed at all and on this specific texture.
-        if (rollingStock.acceptsOverlayTextures()) {
-            mc.renderEngine.bindTexture(overlayBarTexture);
-            this.drawTexturedModalRect(GUI_ANCHOR_X, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 2, 0, 0, 206, 38);
-            this.drawTexturedModalRect(GUI_ANCHOR_MID_X, GUI_ANCHOR_Y + MENU_TEXTURE_HEIGHT - 2, 0, 38, 206, 38);
-        }
 
         // Draw cargo controller bar if cargo controller is enabled...
         if (rollingStock.getCargoManager() != null) {
@@ -259,7 +205,12 @@ public class GuiPaintbrushMenu extends GuiScreen {
                 loopRenderColor = fakeTrain.getColors()[i + RESULTS_PER_PAGE * currentPage];
                 renderEntity.setColor(loopRenderColor);
                 // Set the button to active or inactive depending on whether the texture is active.
-                ((GuiButtonPaintbrushMenu) this.buttonList.get(i + 3)).setType(GuiButtonPaintbrushMenu.Type.SELECTIONBOX, (loopRenderColor == rollingStock.getColor()) ? GuiButtonPaintbrushMenu.Texture.ACTIVE : GuiButtonPaintbrushMenu.Texture.INACTIVE);
+                boolean isDrawingCurrentColor = fakeTrain.getColors()[i + RESULTS_PER_PAGE * currentPage] == rollingStock.getColor();
+                ((GuiButtonPaintbrushMenu) this.buttonList.get(i + 3)).setType(GuiButtonPaintbrushMenu.Type.SELECTIONBOX, isDrawingCurrentColor ? GuiButtonPaintbrushMenu.Texture.ACTIVE : GuiButtonPaintbrushMenu.Texture.INACTIVE);
+
+                // This button status must be updated every tick since server would be ahead of client when running updateButtons().
+                this.overlayConfigButton.showButton = rollingStock.acceptsOverlayTextures() && !rollingStock.getOverlayTextureContainer().getAcceptedOverlaysForTexture(rollingStock.acceptedColors.indexOf(rollingStock.getColor())).isEmpty();
+                this.overlayConfigButton.visible = this.overlayConfigButton.showButton;
                 GL11.glColor4f(1, 1, 1, 1);
                 GL11.glPushMatrix();
                 GL11.glTranslated(offsetX + 50, offsetY + 50, 400);
@@ -305,7 +256,15 @@ public class GuiPaintbrushMenu extends GuiScreen {
             final int fontColor = new Color(0, 0, 0).getRGB();
             for (int i = 0; i < optionsOnCurrentPage; i++) {
                 loopRenderColor = i + RESULTS_PER_PAGE * currentPage;
-                ((GuiButtonPaintbrushMenu) this.buttonList.get(i + 3)).setType(GuiButtonPaintbrushMenu.Type.SELECTIONBOX, (fakeTrain.getColors()[i + RESULTS_PER_PAGE * currentPage] == rollingStock.getColor()) ? GuiButtonPaintbrushMenu.Texture.ACTIVE : GuiButtonPaintbrushMenu.Texture.INACTIVE);
+
+                // Set the button to the correct color depending on whether the overlay is selected.
+                boolean isDrawingCurrentColor = fakeTrain.getColors()[i + RESULTS_PER_PAGE * currentPage] == rollingStock.getColor();
+                ((GuiButtonPaintbrushMenu) this.buttonList.get(i + 3)).setType(GuiButtonPaintbrushMenu.Type.SELECTIONBOX, isDrawingCurrentColor ? GuiButtonPaintbrushMenu.Texture.ACTIVE : GuiButtonPaintbrushMenu.Texture.INACTIVE);
+
+                // This button status must be updated every tick since server would be ahead of client when running updateButtons().
+                this.overlayConfigButton.showButton = rollingStock.acceptsOverlayTextures() && !rollingStock.getOverlayTextureContainer().getAcceptedOverlaysForTexture(rollingStock.acceptedColors.indexOf(rollingStock.getColor())).isEmpty();
+                this.overlayConfigButton.visible = this.overlayConfigButton.showButton;
+
                 if (rollingStock.textureDescriptionMapContainsKey(loopRenderColor))
                     colorName = rollingStock.textureDescriptionGet(loopRenderColor);
                 else
@@ -335,24 +294,14 @@ public class GuiPaintbrushMenu extends GuiScreen {
                     drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Pause.name")), mouseX, mouseY, fontRendererObj);
                 else
                     drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Play.name")), mouseX, mouseY, fontRendererObj);
-            } else if (lightControlButton.getTexture() == GuiButtonPaintbrushMenu.Texture.ACTIVE) {
-                if (!disableLighting)
-                    drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Lights On.name")), mouseX, mouseY, fontRendererObj);
-                else
-                    drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Lights Off.name")), mouseX, mouseY, fontRendererObj);
+            } else if (overlayConfigButton.getTexture() == GuiButtonPaintbrushMenu.Texture.ACTIVE) {
+                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Customize.name")), mouseX, mouseY, fontRendererObj);
             } else if (renderModelsButton.getTexture() == GuiButtonPaintbrushMenu.Texture.ACTIVE) {
                 if (renderModels)
                     drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Hide Models.name")), mouseX, mouseY, fontRendererObj);
                 else
                     drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Show Models.name")), mouseX, mouseY, fontRendererObj);
             }
-        }  else if (mouseY > overlayControllerDynamic.yPosition) { // If mouse is somewhere on the overlay controller bar...
-            if (overlayControllerNone.getHoveringStatus())
-                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.None.name")), mouseX, mouseY, fontRendererObj);
-            else if (overlayControllerDynamic.getHoveringStatus())
-                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Dynamic Overlay.name")), mouseX, mouseY, fontRendererObj);
-            else if (overlayControllerFixed.getHoveringStatus())
-                drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Fixed Overlay.name")), mouseX, mouseY, fontRendererObj);
         } else if (mouseX < GUI_ANCHOR_X + 10) { // If mouse is somewhere on the cargo controller bar...
             if (loadCargoButton.getHoveringStatus())
                 drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("paintbrushmenu.Load Cargo.name")), mouseX, mouseY, fontRendererObj);
@@ -405,34 +354,6 @@ public class GuiPaintbrushMenu extends GuiScreen {
                 case 10: // Color selection button.
                     int newColor = fakeTrain.getColors()[(currentPage * RESULTS_PER_PAGE) + (clickedButton.id - 3)];
                     Traincraft.paintbrushColorChannel.sendToServer(new PacketPaintbrushColor(newColor, rollingStock.getEntityId()));
-                    if (rollingStock.acceptsOverlayTextures())
-                        rollingStock.getOverlayTextureContainer().setTypeAndMarkForUpdate(rollingStock.getOverlayTextureContainer().getType());
-                    /* We must update the color locally in addition to sending the packet —
-                    *  even though the packet, once received and redistributed by the server, will force an update,
-                    * we need an update immediately for menu feedback. */
-                   // rollingStock.setColor(newColor);
-                    // Check if the new texture can have an overlay. If not, remove it.
-                    if (rollingStock.getOverlayTextureContainer() != null) {
-                        OverlayTextureManager.Type validTypesForTexture = rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.acceptedColors.indexOf(rollingStock.getColor()));
-                        if (validTypesForTexture != rollingStock.getOverlayTextureContainer().getType() & validTypesForTexture != OverlayTextureManager.Type.BOTH)
-                            clearOverlay();
-                    }
-                    break;
-                case 11: // Clear overlay button.
-                    clearOverlay();
-                    updateButtons();
-                    break;
-                case 12: // Open dynamic overlay menu button.
-                    if (rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.DYNAMIC || rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.BOTH) {
-                        this.mc.thePlayer.closeScreen();
-                        editingPlayer.openGui(Traincraft.instance, GuiIDs.DYNAMIC_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
-                    }
-                    break;
-                case 13: // Open fixed overlay menu button.
-                    if (rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.FIXED || rollingStock.getOverlayTextureContainer().textureHasOverlayTypes(rollingStock.getColor()) == OverlayTextureManager.Type.BOTH) {
-                        this.mc.thePlayer.closeScreen();
-                        editingPlayer.openGui(Traincraft.instance, GuiIDs.FIXED_OVERLAY, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
-                    }
                     break;
                 case 14:
                     this.mc.thePlayer.closeScreen();
@@ -441,9 +362,13 @@ public class GuiPaintbrushMenu extends GuiScreen {
                     doAnimation = !doAnimation;
                     updateButtons();
                     break;
-                case 16:
-                    disableLighting = !disableLighting;
-                    updateButtons();
+                case 16: // Overlay Configuration Button
+                    if (rollingStock.acceptsOverlayTextures()) {
+                        int textureIndex = rollingStock.acceptedColors.indexOf(rollingStock.getColor());
+                        if (!rollingStock.getOverlayTextureContainer().getAcceptedOverlaysForTexture(textureIndex).isEmpty()) {
+                            editingPlayer.openGui(Traincraft.instance, GuiIDs.OVERLAY_MENU, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
+                        }
+                    }
                     break;
                 case 17: // Load Cargo
                     this.mc.thePlayer.closeScreen();
@@ -453,16 +378,6 @@ public class GuiPaintbrushMenu extends GuiScreen {
         }
     }
 
-    /**
-     * @author 02skaplan
-     */
-    private void clearOverlay() {
-        if (rollingStock.acceptsOverlayTextures() && rollingStock.getOverlayTextureContainer().getType() != OverlayTextureManager.Type.NONE) {
-            rollingStock.getOverlayTextureContainer().setTypeAndMarkForUpdate(OverlayTextureManager.Type.NONE); // This is redundant because the packet will force this to update, but we need it for instant feedback in the menu.
-            rollingStock.getOverlayTextureContainer().getOverlayConfigTag().setInteger("type", OverlayTextureManager.Type.NONE.ordinal());
-            Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.NONE, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
-        }
-    }
 
     @Override
     public void onGuiClosed() {
@@ -496,9 +411,10 @@ public class GuiPaintbrushMenu extends GuiScreen {
 
     @Override
     public void handleMouseInput() {
-        int mouseEvent = Mouse.getEventDWheel();
-        if (mouseEvent != 0) {
-            if (mouseEvent > 0) { // Scroll up.
+        int buttonEvent = Mouse.getEventButton();
+        int scrollEvent = Mouse.getEventDWheel();
+        if (scrollEvent != 0) {
+            if (scrollEvent > 0) { // Scroll up.
                 if (currentPage != 0) {
                     currentPage--;
                 }

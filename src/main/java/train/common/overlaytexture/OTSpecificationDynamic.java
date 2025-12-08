@@ -2,6 +2,7 @@ package train.common.overlaytexture;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.nbt.NBTTagCompound;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,10 +18,10 @@ public class OTSpecificationDynamic extends OTSpecification
     final int maxHeight;
     final private EnumOverlayFonts font;
     final private AlignmentMode alignmentMode;
-    private String displayText;
+    private String displayText = "";
     private Color foregroundColor = new Color(25, 25, 25, 255);
     private Color backgroundColor = new Color(0, 0, 0, 0);
-    private final String overlayName;
+
     private final Integer characterLimit;
 
     public enum AlignmentMode {
@@ -41,14 +42,12 @@ public class OTSpecificationDynamic extends OTSpecification
      * @param drawingPointsList List of points on the texture map for a given model on which to draw the overlay.
      */
     public OTSpecificationDynamic(String overlayName, int maxWidth, int maxHeight, Integer characterLimit, EnumOverlayFonts font, float fontSize, AlignmentMode alignmentMode, Point[] drawingPointsList) {
-        super(drawingPointsList);
-        this.overlayName = overlayName;
+        super(drawingPointsList, overlayName);
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         this.characterLimit = characterLimit;
         this.fontSize = fontSize;
         this.alignmentMode = alignmentMode;
-        setDisplayText("");
         this.font = font;
     }
 
@@ -82,10 +81,37 @@ public class OTSpecificationDynamic extends OTSpecification
         graphics.dispose();
     }
 
+    @Override
+    public void getOverlayConfigTag(NBTTagCompound nbtTag) {
+        nbtTag.setString("dynamicDisplayText", getDisplayText());
+        nbtTag.setInteger("backgroundColorRGBA", getBackgroundColor().getRGB());
+        nbtTag.setInteger("foregroundColorRGBA", getForegroundColor().getRGB());
+    }
+
+    @Override
+    public void importFromConfigTag(NBTTagCompound nbtTag) {
+        setDisplayText(nbtTag.getString("dynamicDisplayText"));
+        setBackgroundColor(new Color(nbtTag.getInteger("backgroundColorRGBA"), true));
+        setForegroundColor(new Color(nbtTag.getInteger("foregroundColorRGBA"), true));
+    }
+
+    @Override
+    public OverlayTextureManager.Type getType() {
+        return OverlayTextureManager.Type.DYNAMIC;
+    }
+
     public void setDisplayText(String displayText) {
+        setActive(!displayText.isEmpty());
         this.displayText = displayText;
     }
     public String getDisplayText() { return displayText; }
+
+    @Override
+    public void setActive(boolean active) {
+        if (!active && !displayText.isEmpty()) // Clear the display text if we are setting the overlay to inactive.
+            this.displayText = "";
+        super.setActive(active);
+    }
 
     public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
@@ -95,8 +121,5 @@ public class OTSpecificationDynamic extends OTSpecification
         this.backgroundColor = backgroundColor;
     }
     public Color getBackgroundColor() { return backgroundColor; }
-    public String getOverlayName() {
-        return overlayName;
-    }
     public Integer getCharacterLimit() { return characterLimit; }
 }

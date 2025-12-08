@@ -3,6 +3,7 @@ package train.client.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -10,7 +11,9 @@ import org.lwjgl.opengl.GL11;
 import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
 import train.common.core.network.PacketTextureOverlayConfig;
+import train.common.library.GuiIDs;
 import train.common.library.Info;
+import train.common.overlaytexture.OTSpecificationFixed;
 import train.common.overlaytexture.OverlayTextureManager;
 
 import javax.imageio.ImageIO;
@@ -24,12 +27,14 @@ import java.io.IOException;
 @SideOnly(Side.CLIENT)
 public class GuiFixedOverlay extends GuiAbstractPaintbrush {
     private ResourceLocation subTextureRenderImageLocation;
+    private final OTSpecificationFixed specificationFixed;
 
     /**
      * @author 02skaplan
      */
-    public GuiFixedOverlay(EntityPlayer editingPlayer, EntityRollingStock rollingStock) {
+    public GuiFixedOverlay(EntityPlayer editingPlayer, EntityRollingStock rollingStock, OTSpecificationFixed specificationFixed) {
         super(editingPlayer, rollingStock);
+        this.specificationFixed = specificationFixed;
     }
 
 
@@ -75,26 +80,26 @@ public class GuiFixedOverlay extends GuiAbstractPaintbrush {
         // We don't actually change the texture on the client yet; we let the server know we changed it.
         // After the server recognizes that we changed it, it will send an update packet out to all clients.
         if (newOverlayNumber != 0) {
-            rollingStock.getOverlayTextureContainer().getSpecificationFixed().setSelectedOverlay(newOverlayNumber);
-            Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(OverlayTextureManager.Type.FIXED, rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
+            specificationFixed.setSelectedOverlay(newOverlayNumber);
+            Traincraft.overlayTextureChannel.sendToServer(new PacketTextureOverlayConfig(rollingStock.getEntityId(), Minecraft.getMinecraft().thePlayer.worldObj.provider.dimensionId, rollingStock.getOverlayTextureContainer().getOverlayConfigTag()));
         }
     }
 
     @Override
     public int getTotalOptions() {
-        return rollingStock.getOverlayTextureContainer().getSpecificationFixed().getNumberOfOverlaysOnSheet();
+        return specificationFixed.getNumberOfOverlaysOnSheet();
     }
 
     @Override
     public int getSelectedOption() {
-        return rollingStock.getOverlayTextureContainer().getSpecificationFixed().getSelectedOverlay();
+        return specificationFixed.getSelectedOverlay();
     }
 
     private void renderSubtextureChoices() {
         int offsetX = GUI_ANCHOR_X + 10;
         int offsetY = GUI_ANCHOR_Y + 12;
-        int subTextureHeight = rollingStock.getOverlayTextureContainer().getSpecificationFixed().getHeightOfEachOverlay();
-        int subTextureWidth = rollingStock.getOverlayTextureContainer().getSpecificationFixed().getWidthOfEachOverlay();
+        int subTextureHeight = specificationFixed.getHeightOfEachOverlay();
+        int subTextureWidth = specificationFixed.getWidthOfEachOverlay();
         int subTextureOffsetX = (85 / 2) - (subTextureWidth / 2);
         int subTextureOffsetY = (85 / 2) - (subTextureHeight / 2);
 
@@ -117,11 +122,11 @@ public class GuiFixedOverlay extends GuiAbstractPaintbrush {
      * rendering the subtexture choices. If subtexture sheet is not 1:1, drawTexturedModalRect will draw incorrectly.</p>
      */
     private void updateSubtextureChoices() {
-        int subTextureWidth = rollingStock.getOverlayTextureContainer().getSpecificationFixed().getWidthOfEachOverlay();
-        int subTextureHeight = rollingStock.getOverlayTextureContainer().getSpecificationFixed().getHeightOfEachOverlay();
+        int subTextureWidth = specificationFixed.getWidthOfEachOverlay();
+        int subTextureHeight = specificationFixed.getHeightOfEachOverlay();
         int offsetY = currentPage * RESULTS_PER_PAGE * subTextureHeight;
         try {
-            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, Info.fixedOverlayTexturePrefix + rollingStock.getOverlayTextureContainer().getSpecificationFixed().getOverlaySheetFilePath())).getInputStream());
+            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, Info.fixedOverlayTexturePrefix + specificationFixed.getOverlaySheetFilePath())).getInputStream());
             BufferedImage subTextureRenderImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
             for (int i = 0; i < optionsOnCurrentPage; i++) {
                 subTextureRenderImage.getGraphics().drawImage(overlaySheet.getSubimage(0, offsetY, subTextureWidth, subTextureHeight), 0, i * subTextureHeight, subTextureWidth, subTextureHeight, null);
@@ -131,6 +136,19 @@ public class GuiFixedOverlay extends GuiAbstractPaintbrush {
             subTextureRenderImageLocation = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("", new DynamicTexture(subTextureRenderImage));
         } catch (IOException ignored) {
             System.out.println("[RWCTC] Fixed overlay menu rendering error.");
+        }
+    }
+
+    @Override
+    protected void actionPerformed(GuiButton clickedButton) {
+        if (clickedButton.enabled) {
+            if (clickedButton.id == 2) { // Close screen and return to overlay menu.
+                this.mc.thePlayer.closeScreen();
+                editingPlayer.openGui(Traincraft.instance, GuiIDs.OVERLAY_MENU, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
+            } else {
+                super.actionPerformed(clickedButton);
+                updateButtons();
+            }
         }
     }
 }

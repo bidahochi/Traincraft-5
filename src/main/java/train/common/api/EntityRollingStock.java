@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -49,6 +50,7 @@ import train.common.core.handlers.*;
 import train.common.core.network.PacketParkingBrake;
 import train.common.core.network.PacketRollingStockRotation;
 import train.common.core.network.PacketSetTrainLockedToClient;
+import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
 import train.common.items.*;
@@ -165,10 +167,6 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	public TileTCRail lastTrack=null;
 
 	public JsonObject renderRefs = new JsonObject();
-	/**
-	 * Used for syncing overlay texture configuration to client. Updated in onUpdate().
-	 */
-	private boolean additionalDataSentToServer = false;
 
 	public EntityRollingStock(World world) {
 		super(world);
@@ -256,6 +254,10 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				getCargoManager().setSelectedCargo(selectedCargo);
 		}
 		parkingBrake = additionalData.readBoolean();
+		if (additionalData.readBoolean()) { // If accepts overlay textures…
+			getOverlayTextureContainer().importFromConfigTag(ByteBufUtils.readTag(additionalData));
+		}
+		importTrustedListFromNBT(ByteBufUtils.readTag(additionalData));
 	}
 
 	/**
@@ -273,6 +275,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			buffer.writeInt(getCargoManager().getSelectedCargo());
 		}
 		buffer.writeBoolean(parkingBrake);
+		buffer.writeBoolean(acceptsOverlayTextures());
+		if (acceptsOverlayTextures()) {
+			ByteBufUtils.writeTag(buffer, getOverlayTextureContainer().getOverlayConfigTag());
+		}
+		NBTTagCompound lockTag = new NBTTagCompound();
+		exportTrustedListToNBT(lockTag);
+		ByteBufUtils.writeTag(buffer, lockTag);
 	}
 
 	public String getTrainName() {
@@ -698,11 +707,6 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				this.needsBogieUpdate = true;
 			}
 			this.hasSpawnedBogie = true;
-		}
-
-		if (!additionalDataSentToServer && worldObj.isRemote && ticksExisted > 10) { // If client, request overlay packet once entity is fully loaded.
-			Traincraft.lockChannel.sendToServer(new PacketSetTrainLockedToClient(getEntityId(), Minecraft.getMinecraft().thePlayer.getEntityId()));
-			additionalDataSentToServer = true;
 		}
 
 		super.manageChunkLoading();

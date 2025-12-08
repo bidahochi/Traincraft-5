@@ -34,4 +34,5 @@ public class GuiIDs {
 	public static final int CARGO_MENU = 112;
     public static final int FIXED_OVERLAY = 113;
     public static final int DYNAMIC_OVERLAY = 114;
+    public static final int OVERLAY_MENU = 115;
 }

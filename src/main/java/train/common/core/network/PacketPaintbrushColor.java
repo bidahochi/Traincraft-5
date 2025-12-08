@@ -35,21 +35,21 @@ public class PacketPaintbrushColor implements IMessage {
     public static class Handler implements IMessageHandler<PacketPaintbrushColor, IMessage> {
         @Override
         public IMessage onMessage(PacketPaintbrushColor message, MessageContext context) {
-            Entity rollingStockEntity = context.getServerHandler().playerEntity.worldObj.getEntityByID(message.entityID);
-            if (rollingStockEntity instanceof EntityRollingStock)
-            {
-                int convertedColor = ((EntityRollingStock) rollingStockEntity).acceptedColors.indexOf(message.paintbrushColor);
-                ILockoutGroup lockoutGroup = ((EntityRollingStock) rollingStockEntity).lockoutMap.get(convertedColor);
+            Entity entity = context.getServerHandler().playerEntity.worldObj.getEntityByID(message.entityID);
+            if (entity instanceof EntityRollingStock) {
+                EntityRollingStock rollingStockEntity = (EntityRollingStock) entity;
+                int convertedColor = rollingStockEntity.acceptedColors.indexOf(message.paintbrushColor);
+                if (rollingStockEntity.acceptsOverlayTextures())
+                    rollingStockEntity.getOverlayTextureContainer().markForUpdate();
+                ILockoutGroup lockoutGroup = rollingStockEntity.lockoutMap.get(convertedColor);
 
-                if (lockoutGroup == null || Traincraft.lockoutPermissionsUtil.IsUserMemberOfGroup(context.getServerHandler().playerEntity.getUniqueID(), lockoutGroup.name()))
-                {
+                if (lockoutGroup == null || Traincraft.lockoutPermissionsUtil.IsUserMemberOfGroup(context.getServerHandler().playerEntity.getUniqueID(), lockoutGroup.name())) {
 
-                    ((EntityRollingStock) rollingStockEntity).setColor(message.paintbrushColor);
+                    rollingStockEntity.setColor(message.paintbrushColor);
                     // Send message to all players within 16 chunks of the rolling stock entity.
-                    Traincraft.paintbrushColorChannel.sendToAllAround(new PacketPaintBrushClientSideUpdate(message.paintbrushColor, rollingStockEntity.getEntityId()), new NetworkRegistry.TargetPoint(rollingStockEntity.dimension, rollingStockEntity.posX, rollingStockEntity.posY, rollingStockEntity.posZ, 16D));
+                    Traincraft.paintbrushColorChannel.sendToAllAround(new PacketPaintBrushClientSideUpdate(message.paintbrushColor, entity.getEntityId()), new NetworkRegistry.TargetPoint(entity.dimension, entity.posX, entity.posY, entity.posZ, 16D));
                 }
-                else
-                {
+                else {
                     context.getServerHandler().playerEntity.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Lockout:" + EnumChatFormatting.GRAY + " You must be a member of [" + lockoutGroup.name() + "]"));
                 }
             }

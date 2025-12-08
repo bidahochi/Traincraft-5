@@ -22,29 +22,25 @@ import java.util.ArrayList;
  * <p>Contains configuration and render utilities for fixed and dynamic overlay specifications.</p>
  */
 public class OverlayTextureManager {
+
     public enum Type {
         DYNAMIC,
         FIXED,
-        BOTH,
-        NONE
+        HYBRID
     }
-    public OverlayTextureManager(Type acceptedType, AbstractTrains rollingStock) {
-        this.acceptedType = acceptedType;
+    public OverlayTextureManager(AbstractTrains rollingStock) {
         this.rollingStock = rollingStock;
     }
     public boolean markedForUpdate = false;
-    private final Type acceptedType;
     private final AbstractTrains rollingStock;
-    private Type type = Type.NONE;
-    private final ArrayList<OTSpecificationDynamic> specificationDynamicList = new ArrayList<>();
-    private OTSpecificationFixed specificationFixed;
+    private final ArrayList<OTSpecification> overlays = new ArrayList<>();
+    private boolean hasActiveOverlays = false;
     @SideOnly(Side.CLIENT)
     private BufferedImage overlaidTexture;
     @SideOnly(Side.CLIENT)
     private ResourceLocation overlaidTextureResource;
 
-    public void setTypeAndMarkForUpdate(Type type) {
-        this.type = type;
+    public void markForUpdate() {
         markedForUpdate = true;
     }
 
@@ -55,40 +51,35 @@ public class OverlayTextureManager {
     @SideOnly(Side.CLIENT)
     public void renderTexture() {
         ArrayList<OTSpecification> renderList = new ArrayList<>();
-        if (type == acceptedType || acceptedType == Type.BOTH) {
-            if (type == Type.FIXED) { // Render the fixed overlay and add it to the drawing queue.
-                specificationFixed.renderOverlay();
-                renderList.add(specificationFixed);
-            } else if (type == Type.DYNAMIC) { // Render each dynamic overlay and add it to the drawing queue
-                for (OTSpecificationDynamic dynamicOverlay : specificationDynamicList) {
-                    if (!dynamicOverlay.getDisplayText().isEmpty()) {
-                        dynamicOverlay.renderOverlay();
-                        renderList.add(dynamicOverlay);
-                    }
+
+        // Render each active overlay and add it to the drawing queue.
+        for (OTSpecification overlaySpecification : overlays) {
+            if (overlaySpecification.isActive()) {
+                overlaySpecification.renderOverlay();
+                renderList.add(overlaySpecification);
+            }
+        }
+
+        // Take the rendered overlay(s) and draw them on top of the base texture.
+        try {
+            BufferedImage baseTexture = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(RenderRollingStock.getTexture(rollingStock)).getInputStream());
+            overlaidTexture = new BufferedImage(baseTexture.getWidth(), baseTexture.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics graphics = overlaidTexture.getGraphics();
+            graphics.drawImage(baseTexture, 0, 0, null);
+
+            for (OTSpecification overlaySpecification : renderList) {
+                for (Point point : overlaySpecification.getDrawingPointsList()) {
+                    graphics.drawImage(overlaySpecification.getOverlayImage(), point.x, point.y, null);
                 }
             }
 
-            // Take the rendered overlay(s) and draw them on top of the base texture.
-            try {
-                BufferedImage baseTexture = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(RenderRollingStock.getTexture(rollingStock)).getInputStream());
-                overlaidTexture = new BufferedImage(baseTexture.getWidth(), baseTexture.getHeight(), BufferedImage.TYPE_INT_ARGB);
-                Graphics graphics = overlaidTexture.getGraphics();
-                graphics.drawImage(baseTexture, 0, 0, null);
+            graphics.dispose();
 
-                for (OTSpecification overlaySpecification : renderList) {
-                    for (Point point : overlaySpecification.getDrawingPointsList()) {
-                        graphics.drawImage(overlaySpecification.getOverlayImage(), point.x, point.y, null);
-                    }
-                }
-
-                graphics.dispose();
-
-                // Assign the new texture to a resourcelocation as a DynamicTexture, so it can be accessed by RenderRollingStock when rendering the model.
-                overlaidTextureResource = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("", new DynamicTexture(overlaidTexture));
-                markedForUpdate = false;
-            } catch (IOException ignored) {
-                System.out.println("[TC] Overlay application onto base texture failed.");
-            }
+            // Assign the new texture to a ResourceLocation as a DynamicTexture, so it can be accessed by RenderRollingStock when rendering the model.
+            overlaidTextureResource = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("", new DynamicTexture(overlaidTexture));
+            markedForUpdate = false;
+        } catch (IOException ignored) {
+            System.out.println("[TC] Overlay application onto base texture failed.");
         }
     }
 
@@ -98,40 +89,18 @@ public class OverlayTextureManager {
      * <p>Add a new fixed overlay to a specific model.</p>
      * <p>Can only be called once per model.</p>
      */
-    public OTSpecificationFixed initSpecificationFixed(OTSpecificationFixed fixedSpecification) {
-        specificationFixed = fixedSpecification;
-        return fixedSpecification;
+    public OTSpecification initOverlaySpecification(OTSpecification overlaySpecification) {
+        overlays.add(overlaySpecification);
+        return overlaySpecification;
     }
 
-    /**
-     * @author 02skaplan
-     * <p>Add a new dynamic overlay to a specific model.</p>
-     * <p>Can be called multiple times for multiple dynamic overlays.</p>
-     */
-    public OTSpecificationDynamic initSpecificationDynamic(OTSpecificationDynamic newDynamicSpecification) {
-        specificationDynamicList.add(newDynamicSpecification);
-        return newDynamicSpecification;
-    }
 
     public ResourceLocation getOverlaidTextureResource() {
         return overlaidTextureResource;
     }
 
-    public OTSpecificationFixed getSpecificationFixed() {
-        return specificationFixed;
-    }
+    public ArrayList<OTSpecification> getAllOverlays() { return overlays; }
 
-    public ArrayList<OTSpecificationDynamic> getSpecificationDynamicList() {
-        return specificationDynamicList;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public Type getAcceptedType() {
-        return acceptedType;
-    }
 
     /**
      * @author 02skaplan
@@ -140,22 +109,24 @@ public class OverlayTextureManager {
      */
     public NBTTagCompound getOverlayConfigTag() {
         NBTTagCompound nbtTagOverlayConfig = new NBTTagCompound();
-        nbtTagOverlayConfig.setInteger("type", type.ordinal());
-        // Fixed Overlay
-        if (specificationFixed != null)
-            nbtTagOverlayConfig.setInteger("selectedOverlay", specificationFixed.getSelectedOverlay());
-        // Dynamic Overlay
-        if (!specificationDynamicList.isEmpty()) {
-            NBTTagList dynamicTagList = new NBTTagList();
-            NBTTagCompound dynamicOverlayTag;
-            for (OTSpecificationDynamic dynamic : specificationDynamicList) {
-                dynamicOverlayTag = new NBTTagCompound();
-                dynamicOverlayTag.setString("dynamicDisplayText", dynamic.getDisplayText());
-                dynamicOverlayTag.setInteger("backgroundColorRGBA", dynamic.getBackgroundColor().getRGB());
-                dynamicOverlayTag.setInteger("foregroundColorRGBA", dynamic.getForegroundColor().getRGB());
-                dynamicTagList.appendTag(dynamicOverlayTag);
+        if (!overlays.isEmpty()) {
+            NBTTagList overlaysTagList = new NBTTagList();
+            NBTTagCompound overlayTag;
+            boolean active;
+            for (int i = 0; i < overlays.size(); i++) {
+                overlayTag = new NBTTagCompound();
+                overlayTag.setInteger("ordinal", i);
+                overlayTag.setInteger("typeOrdinal", overlays.get(i).getType().ordinal());
+                active = overlays.get(i).isActive();
+                overlayTag.setBoolean("active", active);
+                if (active) {
+                    hasActiveOverlays = true; // TODO#! should this even be here?
+                    overlays.get(i).getOverlayConfigTag(overlayTag);
+                }
+                overlaysTagList.appendTag(overlayTag);
             }
-            nbtTagOverlayConfig.setTag("dynamicOverlay", dynamicTagList);
+
+            nbtTagOverlayConfig.setTag("overlays", overlaysTagList);
         }
         return nbtTagOverlayConfig;
     }
@@ -166,46 +137,39 @@ public class OverlayTextureManager {
      * @param nbtTagOverlayConfig NBTTagCompound containing overlay information.
      */
     public void importFromConfigTag(NBTTagCompound nbtTagOverlayConfig) {
-        if (nbtTagOverlayConfig.hasKey("type")) {
-            if (Type.values()[nbtTagOverlayConfig.getInteger("type")] == Type.FIXED) {
-                specificationFixed.setSelectedOverlay(nbtTagOverlayConfig.getInteger("selectedOverlay"));
-                this.setTypeAndMarkForUpdate(Type.FIXED);
-            } else if (Type.values()[nbtTagOverlayConfig.getInteger("type")] == Type.DYNAMIC) {
-                if (nbtTagOverlayConfig.hasKey("dynamicOverlay")) { // Import dynamic overlays from tag list.
-                    NBTTagList overlayTagList = nbtTagOverlayConfig.getTagList("dynamicOverlay", 10); // No idea what the "10" int is for. It doesn't work without it, though!
-                    for (int i = 0; i < overlayTagList.tagCount(); i++) {
-                        specificationDynamicList.get(i).setDisplayText(overlayTagList.getCompoundTagAt(i).getString("dynamicDisplayText"));
-                        specificationDynamicList.get(i).setBackgroundColor(new Color(overlayTagList.getCompoundTagAt(i).getInteger("backgroundColorRGBA"), true));
-                        specificationDynamicList.get(i).setForegroundColor(new Color(overlayTagList.getCompoundTagAt(i).getInteger("foregroundColorRGBA"), true));
+            if (nbtTagOverlayConfig.hasKey("overlays")) { // Import overlays from tag list.
+                NBTTagList overlaysList = nbtTagOverlayConfig.getTagList("overlays", 10); // No idea what the "10" int is for. It doesn't work without it, though!
+                NBTTagCompound tag;
+                for (int i = 0; i < overlaysList.tagCount(); i++) {
+                    hasActiveOverlays = true;
+                    tag = overlaysList.getCompoundTagAt(i);
+                    int ordinal = tag.getInteger("ordinal");
+                    if (ordinal >= 0 && ordinal < overlays.size()) {
+                        /* First, let us perform a sanity check that the type stored in the NBT and the type stored in
+                        the list are the same. If not, they may have been updated and may now be screwed up.
+                         */
+                        Type type = Type.values()[tag.getInteger("typeOrdinal")];
+                        OTSpecification specification = overlays.get(ordinal);
+                        if (type == specification.getType()) {
+                            // Now that things *should* be in sync, let's import the data.
+                            specification.importFromConfigTag(tag);
+                        }
                     }
                 }
-                this.setTypeAndMarkForUpdate(Type.DYNAMIC);
+                this.markForUpdate();
             }
         }
+
+    public ArrayList<OTSpecification> getAcceptedOverlaysForTexture(int textureIndex) {
+        ArrayList<OTSpecification> acceptedOverlays = new ArrayList<>();
+        for (OTSpecification overlay : overlays) {
+            if (overlay.canBeAppliedTo(textureIndex))
+                acceptedOverlays.add(overlay);
+        }
+        return acceptedOverlays;
     }
 
-    public Type textureHasOverlayTypes(int textureIndex) {
-        boolean dynamicAccepted = false;
-        boolean fixedAccepted = false;
-        if (acceptedType == Type.DYNAMIC || acceptedType == Type.BOTH) {
-            // Ensure dynamic types are accepted if any of the dynamic specifications support this texture.
-            for (OTSpecificationDynamic specificationDynamic : specificationDynamicList) {
-                if (specificationDynamic.canBeAppliedTo(textureIndex)) {
-                    dynamicAccepted = true;
-                    break;
-                }
-            }
-        }
-        if (acceptedType == Type.FIXED || acceptedType == Type.BOTH)
-            fixedAccepted = specificationFixed.canBeAppliedTo(textureIndex);
-
-        if (dynamicAccepted && fixedAccepted)
-            return Type.BOTH;
-        else if (dynamicAccepted)
-            return Type.DYNAMIC;
-        else if (fixedAccepted)
-            return Type.FIXED;
-        else
-            return Type.NONE;
+    public boolean hasActiveOverlays() {
+        return hasActiveOverlays;
     }
 }

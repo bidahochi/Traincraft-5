@@ -28,15 +28,15 @@ public class PacketPaintBrushClientSideUpdate implements IMessage
         bbuf.writeInt(this.paintbrushColor);
         bbuf.writeInt(this.entityID);
     }
-    public static class Handler implements IMessageHandler<PacketPaintBrushClientSideUpdate, IMessage>
-    {
+    public static class Handler implements IMessageHandler<PacketPaintBrushClientSideUpdate, IMessage> {
         @Override
-        public IMessage onMessage(PacketPaintBrushClientSideUpdate message, MessageContext context)
-        {
-            Entity rollingStockEntity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(message.entityID);
-            if (rollingStockEntity instanceof EntityRollingStock)
-            {
-                ((EntityRollingStock) rollingStockEntity).setColor(message.paintbrushColor);
+        public IMessage onMessage(PacketPaintBrushClientSideUpdate message, MessageContext context) {
+            Entity entity = Minecraft.getMinecraft().thePlayer.worldObj.getEntityByID(message.entityID);
+            if (entity instanceof EntityRollingStock) {
+                EntityRollingStock rollingStockEntity = (EntityRollingStock) entity;
+                if (rollingStockEntity.acceptsOverlayTextures())
+                    rollingStockEntity.getOverlayTextureContainer().markForUpdate();
+                rollingStockEntity.setColor(message.paintbrushColor);
             }
             return null;
         }
