@@ -14,7 +14,6 @@ import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.library.GuiIDs;
 import train.common.library.Info;
 import train.common.overlaytexture.OTSpecificationFixed;
-import train.common.overlaytexture.OverlayTextureManager;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -126,7 +125,7 @@ public class GuiFixedOverlay extends GuiAbstractPaintbrush {
         int subTextureHeight = specificationFixed.getHeightOfEachOverlay();
         int offsetY = currentPage * RESULTS_PER_PAGE * subTextureHeight;
         try {
-            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, Info.fixedOverlayTexturePrefix + specificationFixed.getOverlaySheetFilePath())).getInputStream());
+            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(specificationFixed.modID, Info.fixedOverlayTexturePrefix + specificationFixed.getOverlaySheetFilePath())).getInputStream());
             BufferedImage subTextureRenderImage = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
             for (int i = 0; i < optionsOnCurrentPage; i++) {
                 subTextureRenderImage.getGraphics().drawImage(overlaySheet.getSubimage(0, offsetY, subTextureWidth, subTextureHeight), 0, i * subTextureHeight, subTextureWidth, subTextureHeight, null);

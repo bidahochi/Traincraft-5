@@ -22,6 +22,7 @@ public class OTSpecificationFixed extends OTSpecification
     private final int widthOfEachOverlay;
     private final int heightOfEachOverlay;
     private int selectedOverlay;
+    public final String modID;
 
     public OTSpecificationFixed(String overlayName, String overlaySheetFilePath, int numberOfOverlaysOnSheet, int widthOfEachOverlay, int heightOfEachOverlay, Point[] drawingPointsList) {
         super(drawingPointsList, overlayName);
@@ -29,6 +30,18 @@ public class OTSpecificationFixed extends OTSpecification
         this.numberOfOverlaysOnSheet = numberOfOverlaysOnSheet;
         this.widthOfEachOverlay = widthOfEachOverlay;
         this.heightOfEachOverlay = heightOfEachOverlay;
+        this.modID = "tc";
+        setSelectedOverlay(0);
+    }
+
+    @SuppressWarnings("unused") // This is used for addon pack support.
+    public OTSpecificationFixed(String overlayName, String overlaySheetFilePath, int numberOfOverlaysOnSheet, int widthOfEachOverlay, int heightOfEachOverlay, Point[] drawingPointsList, String modID) {
+        super(drawingPointsList, overlayName);
+        this.overlaySheetFilePath = overlaySheetFilePath;
+        this.numberOfOverlaysOnSheet = numberOfOverlaysOnSheet;
+        this.widthOfEachOverlay = widthOfEachOverlay;
+        this.heightOfEachOverlay = heightOfEachOverlay;
+        this.modID = modID;
         setSelectedOverlay(0);
     }
 
@@ -36,7 +49,7 @@ public class OTSpecificationFixed extends OTSpecification
     @SideOnly(Side.CLIENT)
     public void renderOverlay() {
         try {
-            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, Info.fixedOverlayTexturePrefix + overlaySheetFilePath)).getInputStream());
+            BufferedImage overlaySheet = ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(modID, Info.fixedOverlayTexturePrefix + overlaySheetFilePath)).getInputStream());
             overlayImage = new BufferedImage(overlaySheet.getWidth(), heightOfEachOverlay, BufferedImage.TYPE_INT_ARGB);
             overlayImage.getGraphics().drawImage(overlaySheet.getSubimage(0, heightOfEachOverlay * (getSelectedOverlay() - 1), overlaySheet.getWidth(), heightOfEachOverlay), 0, 0, null);
             overlayImage.getGraphics().dispose();

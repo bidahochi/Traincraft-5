@@ -25,8 +25,7 @@ public class OverlayTextureManager {
 
     public enum Type {
         DYNAMIC,
-        FIXED,
-        HYBRID
+        FIXED
     }
     public OverlayTextureManager(AbstractTrains rollingStock) {
         this.rollingStock = rollingStock;
