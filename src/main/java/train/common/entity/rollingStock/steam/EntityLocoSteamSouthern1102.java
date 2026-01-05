@@ -7,6 +7,10 @@ import train.common.api.SteamTrain;
 import train.common.library.EnumHeritageTrainsLegacy;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class EntityLocoSteamSouthern1102 extends SteamTrain {
 	@Override
@@ -16,7 +20,12 @@ public class EntityLocoSteamSouthern1102 extends SteamTrain {
 	}
 	public EntityLocoSteamSouthern1102(World world) {
 		super(world, EnumHeritageTrainsLegacy.locoSteamSouthern1102.getTankCapacity(), LiquidManager.WATER_FILTER);
-		
+		initOverlayTextures();
+		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+				"Engine Number",
+				23, 7, 4, EnumOverlayFonts.OxygenSansSmall, 20f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				new Point[]{ new Point(1, 2), new Point(24, 10) }
+		));
 	}
 
 	

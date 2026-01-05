@@ -6,8 +6,11 @@ import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class DieselU36B extends DieselTrain {
     @Override
@@ -30,6 +33,12 @@ public class DieselU36B extends DieselTrain {
         InsertTexture(9, "Western Pacific");
         InsertTexture(10, "Drexel Co", LockoutGroup.DRXL);
         InsertTexture(11, "Deadwood & La Mesa", LockoutGroup.DLMR);
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 7, 4, EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(44, 16), new Point(74, 16) }
+        ));
     }
 
     @Override

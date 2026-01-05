@@ -8,6 +8,10 @@ import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumHeritageTrainsLegacy;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class EntityLocoSteamBerk1225 extends SteamTrain {
 	@Override
@@ -18,7 +22,17 @@ public class EntityLocoSteamBerk1225 extends SteamTrain {
 
 	public EntityLocoSteamBerk1225(World world) {
 		super(world, EnumHeritageTrainsLegacy.locosteamBerk1225.getTankCapacity(), LiquidManager.WATER_FILTER);
-		
+		initOverlayTextures();
+		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+				"Road Name",
+				53, 5, 16, EnumOverlayFonts.OxygenSansSmall, 16f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				new Point[]{ new Point(1025, 1460), new Point(1081, 1472) }
+		));
+		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+				"Engine Number",
+				38, 19, 4, EnumOverlayFonts.OxygenSansSmall, 32f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				new Point[]{ new Point(1149, 1458), new Point(1193, 1478) }
+		));
 	}
 
 	

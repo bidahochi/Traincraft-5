@@ -7,8 +7,11 @@ import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class DieselDash944CW extends DieselTrain {
     @Override
@@ -34,7 +37,13 @@ public class DieselDash944CW extends DieselTrain {
         InsertTexture(12, "ATSF");
         InsertTexture(13, "ATSF (BNSF Patch)");
         InsertTexture(14, "Plainview");
-        InsertTexture(15, "Galesburg Clinton & Midland", train.common.enums.LockoutGroup.GCM); 
+        InsertTexture(15, "Galesburg Clinton & Midland", train.common.enums.LockoutGroup.GCM);
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                13, 6, 4, EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(104, 72), new Point(191, 72) }
+        ));
     }
 
     @Override
