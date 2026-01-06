@@ -2,22 +2,20 @@ package train.common;
 
 import com.google.gson.JsonParser;
 import com.jcirmodelsquad.tcjcir.features.signal.dynamic.TrainTalk;
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraft.world.gen.structure.MapGenVillage;
@@ -29,20 +27,24 @@ import org.apache.logging.log4j.Logger;
 import train.common.api.LiquidManager;
 import train.common.blocks.TCBlocks;
 import train.common.commands.lockout.tcAddUserToSkinGroup;
+import train.common.commands.lockout.tcRemoveUserFromSkinGroup;
 import train.common.commands.lockout.tcSetSkinGroupOwner;
 import train.common.commands.tcAdminPerm;
-import train.common.commands.lockout.tcRemoveUserFromSkinGroup;
 import train.common.core.CommonProxy;
-import train.common.core.creativetab.*;
 import train.common.core.TrainModCore;
+import train.common.core.creativetab.*;
 import train.common.core.handlers.*;
 import train.common.core.managers.TierRecipeManager;
-import train.common.core.network.PacketSyncBannedItems;
 import train.common.generation.ComponentVillageTrainstation;
 import train.common.generation.WorldGenWorld;
 import train.common.items.TCItems;
-import train.common.library.*;
-import train.common.recipes.*;
+import train.common.library.BetterEnumSounds;
+import train.common.library.BlockIDs;
+import train.common.library.Info;
+import train.common.library.TraincraftRegistry;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OverlayFontRegistry;
+import train.common.recipes.AssemblyTableRecipes;
 import train.common.recipes.rollingstock.*;
 import train.common.utils.devutils.DebugUtil;
 import train.common.utils.devutils.TrainSheetsDataGenerator;
@@ -150,6 +152,12 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 
 		/* Register the KeyBinding Handler */
 		proxy.registerKeyBindingHandler();
+
+		/* Register Overlay Fonts */
+
+		OverlayFontRegistry.registerFont(EnumOverlayFonts.OxygenSansSmall);
+		OverlayFontRegistry.registerFont(EnumOverlayFonts.OxygenSansMid);
+		OverlayFontRegistry.registerFont(EnumOverlayFonts.BapSansSmall);
 
 		/* Register Items, Blocks, ... */
 		tcLog.info("Initialize blocks, items, and other stuff");

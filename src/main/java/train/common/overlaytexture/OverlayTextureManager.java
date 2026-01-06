@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * @author 02skaplan
  * <p>Overlay texture manager class for the overlay texture system.</p>
- * <p>Contains configuration and render utilities for fixed and dynamic overlay specifications.</p>
+ * <p>Contains configuration and render utilities.</p>
  */
 public class OverlayTextureManager {
 
@@ -27,6 +27,7 @@ public class OverlayTextureManager {
         DYNAMIC,
         FIXED
     }
+
     public OverlayTextureManager(AbstractTrains rollingStock) {
         this.rollingStock = rollingStock;
     }
@@ -119,7 +120,7 @@ public class OverlayTextureManager {
                 active = overlays.get(i).isActive();
                 overlayTag.setBoolean("active", active);
                 if (active) {
-                    hasActiveOverlays = true; // TODO#! should this even be here?
+                    hasActiveOverlays = true;
                     overlays.get(i).getOverlayConfigTag(overlayTag);
                 }
                 overlaysTagList.appendTag(overlayTag);
@@ -159,6 +160,9 @@ public class OverlayTextureManager {
             }
         }
 
+    /**
+     * @author 02skaplan
+     */
     public ArrayList<OTSpecification> getAcceptedOverlaysForTexture(int textureIndex) {
         ArrayList<OTSpecification> acceptedOverlays = new ArrayList<>();
         for (OTSpecification overlay : overlays) {

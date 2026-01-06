@@ -1,44 +1,42 @@
 package train.common.overlaytexture;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import train.common.library.Info;
 
-import java.awt.*;
-import java.io.IOException;
-
-public enum EnumOverlayFonts {
+public enum EnumOverlayFonts implements IOverlayFont {
     /**
      * Recommended Java font size: 16f.
      */
-    OxygenSansSmall("textures/overlayfonts/OxygenSansSmall.ttf"),
+    OxygenSansSmall(Info.modID, "OxygenSansSmall.ttf"),
     /**
      * Recommended Java font size: 7f.
      * <p>Graciously created and provided by everyone's favorite fox, Bidahochi.</p>
      */
-    BapSansSmall("textures/overlayfonts/BapSans.ttf"),
+    BapSansSmall(Info.modID, "BapSans.ttf"),
     /**
      * Recommended Java font size: 16f.
      */
-    OxygenSansMid("textures/overlayfonts/OxygenSansMid.ttf");
-    private final String resourcePath;
+    OxygenSansMid(Info.modID, "OxygenSansMid.ttf");
 
-    EnumOverlayFonts(String resourcePath) {
+    private final String resourcePath;
+    private final String fileName;
+
+    EnumOverlayFonts(String resourcePath, String fileName) {
         this.resourcePath = resourcePath;
+        this.fileName = fileName;
     }
 
-    @SideOnly(Side.CLIENT)
-    public Font getFont() {
-        Font font;
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(Info.resourceLocation, resourcePath)).getInputStream());
-        } catch (IOException | FontFormatException ioException) {
-            System.out.println("[TC] Dynamic Texture Font Loading Failed");
-            ioException.printStackTrace();
-            font = Font.getFont(Font.SANS_SERIF);
-        }
-        return font;
+    @Override
+    public String getName() {
+        return this.name();
+    }
+
+    @Override
+    public String getResourceDomain() {
+        return this.resourcePath;
+    }
+
+    @Override
+    public String getFileName() {
+        return this.fileName;
     }
 }

@@ -55,7 +55,7 @@ public abstract class OTSpecification {
 
     /**
      * @author 02skaplan
-     * <p>Sets a restriction on what textures this overlay can be used.</p>>
+     * <p>Sets a restriction on what textures this overlay can be used.</p>
      * @param restriction Restriction type, either a blacklist or a whitelist.
      * @param restrictedTextures Indices of textures to be considered for the restriction.
      */
