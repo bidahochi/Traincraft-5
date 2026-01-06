@@ -370,6 +370,9 @@ lockmenu.Lock.name=Cerrar
 lockmenu.Title_Trusted_Players.name=Jugadores de Confianza
 lockmenu.Save and Close.name=Entregar y Salir
 lockmenu.Save To All Cars in Consist.name=Entregar a Todos Los Coches en el Tren
+lockmenu.Copy.name=Copiar Configuración
+lockmenu.Paste.name=Pegar Configuración
+
 <!-- ## ENTITY ## --> 
 entity.tc.Entity Front Bogie.name=Bogie 
 entity.tc.zeppelin big.name=Zepelín

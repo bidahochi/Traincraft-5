@@ -16,8 +16,7 @@ import java.util.Map;
  */
 public class OTSpecificationDynamic extends OTSpecification
 {
-    final float fontSize;
-    final float fontSpacing;
+    private final Map<TextAttribute, Object> fontAttributes;
     final int maxWidth;
     final int maxHeight;
     final private OverlayFontRegistry.OverlayFont font;
@@ -41,18 +40,16 @@ public class OTSpecificationDynamic extends OTSpecification
      * @param maxHeight Maximum height of overlay.
      * @param characterLimit Optional character limit. For default, set to null.
      * @param font Font registered in EnumOverlayFonts.
-     * @param fontSize Font size.
-     * @param fontSpacing Font spacing. Default is 0.0f.
+     * @param fontAttributes Map of font attributes to customize font size, spacing, kerning, etc.
      * @param alignmentMode Alignment mode dictating how the text will be drawn in the given overlay.
      * @param drawingPointsList List of points on the texture map for a given model on which to draw the overlay.
      */
-    public OTSpecificationDynamic(String overlayName, int maxWidth, int maxHeight, Integer characterLimit, IOverlayFont font, float fontSize, float fontSpacing, AlignmentMode alignmentMode, Point[] drawingPointsList) {
+    public OTSpecificationDynamic(String overlayName, int maxWidth, int maxHeight, Integer characterLimit, IOverlayFont font, Map<TextAttribute, Object> fontAttributes, AlignmentMode alignmentMode, Point[] drawingPointsList) {
         super(drawingPointsList, overlayName);
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         this.characterLimit = characterLimit;
-        this.fontSize = fontSize;
-        this.fontSpacing = fontSpacing;
+        this.fontAttributes = fontAttributes;
         this.alignmentMode = alignmentMode;
         this.font = OverlayFontRegistry.getFont(font);
     }
@@ -73,8 +70,8 @@ public class OTSpecificationDynamic extends OTSpecification
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         this.characterLimit = characterLimit;
-        this.fontSize = fontSize;
-        this.fontSpacing = 0.0f;
+        this.fontAttributes = new HashMap<>(1);
+        fontAttributes.put(TextAttribute.SIZE, fontSize);
         this.alignmentMode = alignmentMode;
         this.font = OverlayFontRegistry.getFont(font);
     }
@@ -83,9 +80,6 @@ public class OTSpecificationDynamic extends OTSpecification
     @Override
     @SideOnly(Side.CLIENT)
     public void renderOverlay() {
-        Map<TextAttribute, Object> fontAttributes = new HashMap<>(2);
-        fontAttributes.put(TextAttribute.SIZE, fontSize);
-        fontAttributes.put(TextAttribute.TRACKING, fontSpacing);
         Font renderFont = font.getFont().deriveFont(fontAttributes);
         overlayImage = new BufferedImage(maxWidth, maxHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics graphics = overlayImage.getGraphics();

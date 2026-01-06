@@ -15,14 +15,12 @@ import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.library.GuiIDs;
 import train.common.library.Info;
 import train.common.overlaytexture.OTSpecificationDynamic;
-import train.common.overlaytexture.OverlayTextureManager;
 
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -103,10 +101,6 @@ public class GuiDynamicOverlay extends GuiScreen {
      * Mouse coordinates stored to find the color selected on the color grid.
      */
     private int mouseY;
-    /**
-     * <p>Number of the overlay currently being displayed and set with respect to all available overlays for this model.</p>
-     */
-    private int correctedDynamicOverlayNumber;
     private GuiTextFieldDynamicOverlay overlayTextBox;
     private GuiTextFieldDynamicOverlay colorCodeTextBox;
     private int ticksExisted = 0;
@@ -358,6 +352,7 @@ public class GuiDynamicOverlay extends GuiScreen {
                 throw new IOException();
             }
         } catch (UnsupportedFlavorException | IOException ignored) {
+            Traincraft.tcLog.warn("Unsupported hex color import action attempted in dynamic overlay menu.");
             colorCodeTextBox.setText("");
         }
     }

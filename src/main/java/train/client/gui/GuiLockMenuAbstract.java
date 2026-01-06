@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
+import train.common.Traincraft;
 import train.common.core.handlers.ConfigHandler;
 import train.common.entity.TrustedPlayer;
 import train.common.library.Info;
@@ -175,6 +176,10 @@ public abstract class GuiLockMenuAbstract extends GuiScreen {
             drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("lockmenu.Save and Close.name")), mouseX, mouseY, fontRendererObj);
         if (closeAndSavetoAll.getTexture() == GuiButtonLockMenu.Texture.ACTIVE)
             drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("lockmenu.Save To All Cars in Consist.name")), mouseX, mouseY, fontRendererObj);
+        if (copyButton.getTexture() == GuiButtonLockMenu.Texture.ACTIVE)
+            drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("lockmenu.Copy.name")), mouseX, mouseY, fontRendererObj);
+        if (pasteButton.getTexture() == GuiButtonLockMenu.Texture.ACTIVE)
+            drawHoveringText(Collections.singletonList(StatCollector.translateToLocal("lockmenu.Paste.name")), mouseX, mouseY, fontRendererObj);
     }
 
     @Override
@@ -228,7 +233,7 @@ public abstract class GuiLockMenuAbstract extends GuiScreen {
                             updateButtons();
                         }
                     } catch (UnsupportedFlavorException | IOException e) {
-                        throw new RuntimeException(e);
+                        Traincraft.tcLog.warn("Unsupported paste action attempted in lock menu.");
                     }
                 default:
                     if (clickedButton.id >= NUMBER_OF_STATIC_BUTTONS && clickedButton.id < MAX_TRUSTEES_ON_PAGE + NUMBER_OF_STATIC_BUTTONS) { // Line Select Delete Buttons
@@ -336,5 +341,10 @@ public abstract class GuiLockMenuAbstract extends GuiScreen {
         return textFieldList;
     }
     public int getCurrentPage() { return currentPage; }
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
 }

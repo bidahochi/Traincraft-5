@@ -136,6 +136,8 @@ lockmenu.Lock.name=Lock
 lockmenu.Title_Trusted_Players.name=Trusted Players
 lockmenu.Save and Close.name=Save and Close
 lockmenu.Save To All Cars in Consist.name=Save To All Cars in Consist
+lockmenu.Copy.name=Copy Configuration
+lockmenu.Paste.name=Paste Configuration
 
 <!-- ## GUI ## -->
 menu.item.slots=Slots
