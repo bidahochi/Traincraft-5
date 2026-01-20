@@ -315,7 +315,7 @@ public class GuiDynamicOverlay extends GuiScreen {
     protected void keyTyped(char eventChar, int eventKey) {
         if (eventKey == 1) { // If ESC...
             this.mc.thePlayer.closeScreen();
-            editingPlayer.openGui(Traincraft.instance, GuiIDs.PAINTBRUSH, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
+            editingPlayer.openGui(Traincraft.instance, GuiIDs.OVERLAY_MENU, editingPlayer.getEntityWorld(), rollingStock.getEntityId(), -1, (int) editingPlayer.posZ);
         } else if (eventChar == '\r') {
             setColorFromHex();
         } else if (eventChar != '\u0000') { // Anything else...

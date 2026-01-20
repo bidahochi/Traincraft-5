@@ -157,6 +157,7 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 
 		OverlayFontRegistry.registerFont(EnumOverlayFonts.OxygenSansSmall);
 		OverlayFontRegistry.registerFont(EnumOverlayFonts.OxygenSansMid);
+		OverlayFontRegistry.registerFont(EnumOverlayFonts.BapSansMid);
 		OverlayFontRegistry.registerFont(EnumOverlayFonts.BapSansSmall);
 
 		/* Register Items, Blocks, ... */

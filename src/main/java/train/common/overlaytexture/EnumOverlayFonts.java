@@ -11,11 +11,16 @@ public enum EnumOverlayFonts implements IOverlayFont {
      * Recommended Java font size: 7f.
      * <p>Graciously created and provided by everyone's favorite fox, Bidahochi.</p>
      */
-    BapSansSmall(Info.modID, "BapSans.ttf"),
+    BapSansMid(Info.modID, "BapSans.ttf"),
     /**
      * Recommended Java font size: 16f.
      */
-    OxygenSansMid(Info.modID, "OxygenSansMid.ttf");
+    OxygenSansMid(Info.modID, "OxygenSansMid.ttf"),
+    /**
+     * Recommended Java font size: 16f.
+     * <p>Created by Cubed64</p>
+     */
+    BapSansSmall(Info.modID, "BapSansSmall.ttf");
 
     private final String resourcePath;
     private final String fileName;

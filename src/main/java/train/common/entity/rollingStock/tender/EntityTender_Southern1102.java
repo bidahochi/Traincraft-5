@@ -6,12 +6,22 @@ import net.minecraftforge.fluids.FluidRegistry;
 import train.common.api.LiquidManager;
 import train.common.api.Tender;
 import train.common.library.EnumHeritageTrainsLegacy;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class EntityTender_Southern1102 extends Tender
 {
 	public EntityTender_Southern1102(World world)
 	{
 		super(world, FluidRegistry.WATER, 0, EnumHeritageTrainsLegacy.tender_Southern1102.getTankCapacity(), LiquidManager.WATER_FILTER);
+		initOverlayTextures();
+		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+				"Road Name",
+				64, 8, 15, EnumOverlayFonts.OxygenSansSmall, 16f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				new Point[]{ new Point(582, 83), new Point(643, 97) }
+		));
 	}
 
 	@Override

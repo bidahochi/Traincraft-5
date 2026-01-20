@@ -64,7 +64,7 @@ public class DieselSD40dash2 extends DieselTrain {
         initOverlayTextures();
         getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
                 "Engine Number",
-                11, 8, 3, EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                11, 8, 3, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
                 new Point[]{ new Point(31, 13), new Point(90, 13) }
         ));
     }

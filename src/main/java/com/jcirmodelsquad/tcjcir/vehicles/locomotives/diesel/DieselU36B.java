@@ -36,7 +36,7 @@ public class DieselU36B extends DieselTrain {
         initOverlayTextures();
         getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
                 "Engine Number",
-                11, 7, 4, EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                11, 7, 4, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
                 new Point[]{ new Point(44, 16), new Point(74, 16) }
         ));
     }

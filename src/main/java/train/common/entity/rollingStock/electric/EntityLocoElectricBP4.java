@@ -23,7 +23,7 @@ public class EntityLocoElectricBP4 extends ElectricTrain {
 		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
 				"Engine Number",
 				12, 7, 4,
-				EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
 				new Point[]{ new Point(23, 35), new Point(38, 35) }
 		));
 	}

@@ -41,7 +41,7 @@ public class DieselDash944CW extends DieselTrain {
         initOverlayTextures();
         getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
                 "Engine Number",
-                13, 6, 4, EnumOverlayFonts.BapSansSmall, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                13, 6, 4, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
                 new Point[]{ new Point(104, 72), new Point(191, 72) }
         ));
     }

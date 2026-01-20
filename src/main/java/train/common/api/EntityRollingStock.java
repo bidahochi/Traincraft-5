@@ -17,7 +17,6 @@ import mods.railcraft.api.carts.ILinkableCart;
 import mods.railcraft.api.tracks.RailTools;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.entity.*;
 import net.minecraft.entity.item.EntityItem;
@@ -50,12 +49,12 @@ import train.common.core.HandleOverheating;
 import train.common.core.handlers.*;
 import train.common.core.network.PacketParkingBrake;
 import train.common.core.network.PacketRollingStockRotation;
-import train.common.core.network.PacketSetTrainLockedToClient;
-import train.common.core.network.PacketTextureOverlayConfig;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
 import train.common.items.*;
-import train.common.library.*;
+import train.common.library.BlockIDs;
+import train.common.library.GuiIDs;
+import train.common.library.ItemIDs;
 import train.common.library.register.ITrainRecord;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
@@ -1699,11 +1698,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			if (itemstack.getItem() instanceof ItemPaintbrushThing && entityplayer.isSneaking())
 			{
-				if (this.acceptedColors != null && this.acceptedColors.size() > 0) {
+				if (this.acceptedColors != null && !this.acceptedColors.isEmpty()) {
 					entityplayer.openGui(Traincraft.instance, GuiIDs.PAINTBRUSH, entityplayer.getEntityWorld(), this.getEntityId(), -1, (int) this.posZ);
+				} else if (acceptsOverlayTextures()) {
+					entityplayer.openGui(Traincraft.instance, GuiIDs.OVERLAY_MENU, entityplayer.getEntityWorld(), getEntityId(), -1, (int) playerEntity.posZ);
 				}
 
-				if (this.acceptedColors != null && this.acceptedColors.size() == 0) {
+				if (this.acceptedColors != null && this.acceptedColors.isEmpty()) {
 					entityplayer.addChatMessage(new ChatComponentText("There are no other colors available."));
 				}
 				return true;

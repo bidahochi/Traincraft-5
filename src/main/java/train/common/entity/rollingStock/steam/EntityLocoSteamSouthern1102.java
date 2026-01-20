@@ -23,7 +23,7 @@ public class EntityLocoSteamSouthern1102 extends SteamTrain {
 		initOverlayTextures();
 		getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
 				"Engine Number",
-				23, 7, 4, EnumOverlayFonts.OxygenSansSmall, 20f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+				23, 7, 4, EnumOverlayFonts.OxygenSansSmall, 16f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
 				new Point[]{ new Point(1, 2), new Point(24, 10) }
 		));
 	}
