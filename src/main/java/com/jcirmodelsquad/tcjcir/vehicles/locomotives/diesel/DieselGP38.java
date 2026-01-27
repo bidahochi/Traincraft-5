@@ -7,8 +7,16 @@ import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.awt.font.TransformAttribute;
+import java.awt.geom.AffineTransform;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DieselGP38 extends DieselTrain {
     @Override
@@ -44,6 +52,16 @@ public class DieselGP38 extends DieselTrain {
         InsertTexture(22, "Seaboard System");
         InsertTexture(23, "Chessie System");
         InsertTexture(24, "CWL", LockoutGroup.CWL);
+        initOverlayTextures();
+        Map<TextAttribute, Object> fontAttributes = new HashMap<>(2);
+        fontAttributes.put(TextAttribute.SIZE, 16f);
+        fontAttributes.put(TextAttribute.TRANSFORM, new TransformAttribute(AffineTransform.getTranslateInstance(1, -1)));
+
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number", 12, 6, 6, EnumOverlayFonts.BapSansSmall, fontAttributes, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(30, 14), new Point(89, 14) }
+        ));
+
     }
 
     @Override

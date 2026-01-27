@@ -6,8 +6,11 @@ import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class DieselU36C extends DieselTrain {
     @Override
@@ -24,6 +27,12 @@ public class DieselU36C extends DieselTrain {
         InsertTexture(3, "ATSF (Freightbonet)");
         InsertTexture(4, "Milwaukee Road");
         InsertTexture(5, "FNCC 19", LockoutGroup.FNCC);// one of a kind Super 7-36CXE
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 7, 4, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(37, 13), new Point(56, 29) }
+        ));
     }
 
     @Override

@@ -5,8 +5,11 @@ import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 
 public class DieselSD40R extends DieselTrain {
@@ -23,6 +26,12 @@ public class DieselSD40R extends DieselTrain {
         InsertTexture(1, "Southern Pacific (Late)");
         InsertTexture(2, "Blandsville & Blankerston");
         InsertTexture(3, "CSLX");
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 8, 3, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(31, 13), new Point(90, 13) }
+        ));
     }
 
     @Override

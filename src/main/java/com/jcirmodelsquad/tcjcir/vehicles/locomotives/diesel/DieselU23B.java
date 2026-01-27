@@ -7,8 +7,11 @@ import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 public class DieselU23B extends DieselTrain {
     @Override
@@ -52,6 +55,12 @@ public class DieselU23B extends DieselTrain {
         InsertTexture(30, "CSXT (YN1)");
         InsertTexture(31, "CSXT (YN2)");
         InsertTexture(32, "Chessie System");
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 7, 4, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(44, 16), new Point(74, 16) }
+        ));
     }
 
     @Override

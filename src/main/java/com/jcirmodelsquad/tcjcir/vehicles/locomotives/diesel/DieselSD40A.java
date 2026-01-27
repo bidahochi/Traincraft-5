@@ -6,8 +6,11 @@ import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 
 public class DieselSD40A extends DieselTrain {
@@ -26,6 +29,12 @@ public class DieselSD40A extends DieselTrain {
         InsertTexture(3, "Illinois Central 6009 (Operation Lifesaver)");
         InsertTexture(4, "Illinois Central (1970's)");
         InsertTexture(5, "Blandsville & Blankerston");
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 8, 3, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(31, 13), new Point(90, 13) }
+        ));
     }
 
     @Override

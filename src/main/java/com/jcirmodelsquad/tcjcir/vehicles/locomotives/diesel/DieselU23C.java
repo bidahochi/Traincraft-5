@@ -7,8 +7,16 @@ import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.awt.font.TransformAttribute;
+import java.awt.geom.AffineTransform;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DieselU23C extends DieselTrain {
     @Override
@@ -27,6 +35,15 @@ public class DieselU23C extends DieselTrain {
         InsertTexture(5, "");
         InsertTexture(6, "");
         InsertTexture(7, "");
+        initOverlayTextures();
+        Map<TextAttribute, Object> fontAttributes = new HashMap<>(2);
+        fontAttributes.put(TextAttribute.SIZE, 16f);
+        fontAttributes.put(TextAttribute.TRANSFORM, new TransformAttribute(AffineTransform.getTranslateInstance(0, -1)));
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 7, 4, EnumOverlayFonts.BapSansSmall, fontAttributes, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(44, 16), new Point(74, 16) }
+        ));
     }
 
 

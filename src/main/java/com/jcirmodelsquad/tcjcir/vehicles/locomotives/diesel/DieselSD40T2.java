@@ -7,8 +7,11 @@ import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
-import train.common.library.EnumTrains;
 import train.common.library.sounds.SoundRecord;
+import train.common.overlaytexture.EnumOverlayFonts;
+import train.common.overlaytexture.OTSpecificationDynamic;
+
+import java.awt.*;
 
 
 public class DieselSD40T2 extends DieselTrain {
@@ -40,6 +43,12 @@ public class DieselSD40T2 extends DieselTrain {
         InsertTexture(17, "CRL");
         InsertTexture(18, "CRL (Phase 1)");
         InsertTexture(19, "CRL (Phase 2)");
+        initOverlayTextures();
+        getOverlayTextureContainer().initOverlaySpecification(new OTSpecificationDynamic(
+                "Engine Number",
+                11, 8, 3, EnumOverlayFonts.BapSansMid, 7f, OTSpecificationDynamic.AlignmentMode.ALIGN_CENTER_AND_FILL,
+                new Point[]{ new Point(31, 13), new Point(90, 13) }
+        ));
     }
 
     @Override
