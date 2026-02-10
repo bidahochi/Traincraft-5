@@ -1,22 +1,26 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.steam;
 
 import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import train.common.Traincraft;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
+import train.common.api.interfaces.IMultiPartPlacementTransport;
 import train.common.library.EnumSounds;
 import train.common.library.EnumTrains;
+import train.common.library.register.ITrainRecord;
 import train.common.library.sounds.SoundRecord;
 
-public class SteamBKno2b extends SteamTrain {
+public class SteamBKno2b extends SteamTrain implements IMultiPartPlacementTransport {
 	@Override
 	public SoundRecord getSoundRecord()
 	{
 		return EnumSounds.SteamBKno2b;
 	}
 	public SteamBKno2b(World world) {
-		super(world, EnumTrains.BKno2b.getTankCapacity(), LiquidManager.WATER_FILTER);
-		
+		super(world);
+
 	}
 
 	@Override
@@ -68,6 +72,30 @@ public class SteamBKno2b extends SteamTrain {
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 0.75F;
+	}
+
+	@Override
+	public boolean isMainPart()
+	{
+		return true;
+	}
+
+	@Override
+	public ITrainRecord subTransportModelPiece()
+	{
+		return Traincraft.traincraftRegistry.getTrainRecord(SteamBKno2a.class);
+	}
+
+	@Override
+	public float getSpawnOffset()
+	{
+		return 1.5F;
+	}
+
+	@Override
+	public boolean flipEntityOnSpawn()
+	{
+		return true;
 	}
 
 }

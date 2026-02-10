@@ -20,6 +20,7 @@ import net.minecraft.util.*;
 import net.minecraft.world.World;
 import train.common.Traincraft;
 import train.common.api.*;
+import train.common.api.interfaces.IMultiPartPlacementTransport;
 import train.common.core.handlers.ConfigHandler;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
@@ -757,8 +758,28 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
                         player.addChatMessage(new ChatComponentText("To paint, use the " + StatCollector.translateToLocal("item.tc:paintbrushThing.name")));
                     }
                 }
+
+                if (rollingStock instanceof IMultiPartPlacementTransport && ((IMultiPartPlacementTransport)rollingStock).isMainPart())
+                {
+                    AbstractTrains segment = placeArticulatedSegment(player, world, i, j, k, rollingStock);
+                    if (segment.isDead)
+                    {
+                        rollingStock.setDead();
+                    }
+                    else {
+                        if (((IMultiPartPlacementTransport)rollingStock).flipEntityOnSpawn())
+                        {
+                            rollingStock.serverRealRotation += 180;
+                        }
+                        if (!rollingStock.isDead)
+                        rollingStock.isAttaching = true;
+                    }
+                }
+
+                if (!rollingStock.isDead)
                 world.spawnEntityInWorld(rollingStock);
             }
+            if (!rollingStock.isDead)
             --itemstack.stackSize;
         }
         return rollingStock;
@@ -837,4 +858,71 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
     }
 
     public abstract String GetTexturePath();
+
+    public AbstractTrains placeArticulatedSegment(EntityPlayer player, World world, int x, int y, int z, AbstractTrains original) {
+        //handle offsetting the segment
+        int dir = 0;
+        if (player != null)
+            dir = MathHelper.floor_double((player.rotationYaw * 8F) / 360F + 0.5D) & 7;
+        switch (dir) {
+            case 0: {
+                z += ((IMultiPartPlacementTransport)original).getSpawnOffset();
+                break;
+            }
+            case 1: {
+                x -= ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                z += ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                break;
+            }
+            case 2: {
+                x -= ((IMultiPartPlacementTransport)original).getSpawnOffset();
+                break;
+            }
+            case 3: {
+                x -= ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                z -= ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                break;
+            }
+            case 4: {
+                z -= ((IMultiPartPlacementTransport)original).getSpawnOffset();
+                break;
+            }
+            case 5: {
+                x += ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                z -= ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                break;
+            }
+            case 6: {
+                x += ((IMultiPartPlacementTransport)original).getSpawnOffset();
+                break;
+            }
+            case 7: {
+                x += ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                z += ((IMultiPartPlacementTransport)original).getSpawnOffset() - 1;
+                break;
+            }
+        }
+
+        //start spawning the entity with offset
+        EntityMinecart spawnedEntity;
+        //if the entity we are spawning is also articulated. Things like a Garratt might use this.
+        //if (IMultiPartPlacementTransport.class.isAssignableFrom(((IMultiPartPlacementTransport)original).subTransportModelPiece().getEntityClass())) {
+        //    spawnedEntity = placeCart(player, new ItemStack(((IMultiPartPlacementTransport)original).subTransportModelPiece().getItem()), world, x, y, z);
+        //} else {
+            spawnedEntity = placeCart(player, new ItemStack(((IMultiPartPlacementTransport)original).subTransportModelPiece().getItem()), world, x, y, z);
+        //}
+        ((AbstractTrains)spawnedEntity).isAttaching = true;
+        if (spawnedEntity instanceof Locomotive) {
+            if (!world.isRemote) {
+                player.addChatMessage(new ChatComponentText(((EntityRollingStock) spawnedEntity).getTrainName() + " can be pulled, don't forget to fuel it!"));
+                player.addChatMessage(new ChatComponentText("Attach the BACK of this locomotive to the BACK of another locomotive. Otherwise you will encounter weird problems in general."));
+            }
+            ((Locomotive) spawnedEntity).setCanBeAdjusted(true);
+            ((Locomotive) spawnedEntity).canBePulled = true;
+            if (((Locomotive) spawnedEntity).mtcStatus != 0 && ((Locomotive) spawnedEntity).trainIsWMTCSupported()) {
+                ((Locomotive) spawnedEntity).disconnectFromServer();
+            }
+        }
+        return (AbstractTrains) spawnedEntity;
+    }
 }

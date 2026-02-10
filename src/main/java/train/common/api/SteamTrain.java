@@ -67,6 +67,8 @@ public abstract class SteamTrain extends Locomotive implements IFluidHandler {
 		numCargoSlots2 = 3;
 		inventorySize = numCargoSlots + numCargoSlots2 + numCargoSlots1 + fuelSlot + waterSlot;//
 		this.dataWatcher.addObject(23, 0);
+		fuelTrain = 0;
+		locoInvent = new ItemStack[inventorySize];
 	}
 
 	/**

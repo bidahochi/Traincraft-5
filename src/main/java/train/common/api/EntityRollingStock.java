@@ -44,6 +44,7 @@ import tmt.ModelBase;
 import train.client.core.handlers.SoundUpdaterRollingStock;
 import train.common.Traincraft;
 import train.common.adminbook.ServerLogger;
+import train.common.api.interfaces.IMultiPartPlacementTransport;
 import train.common.api.pathfinding.PathFindingHelper;
 import train.common.core.HandleOverheating;
 import train.common.core.handlers.*;
