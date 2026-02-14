@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import train.common.api.crafting.ITierCraftingManager;
 import train.common.api.crafting.ITierRecipe;
+import train.common.api.crafting.RollingStockRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,8 @@ public class TierRecipeManager implements ITierCraftingManager {
 			ItemStack frame, ItemStack coupler, ItemStack chimney,
 			ItemStack cab, ItemStack boiler, ItemStack firebox,
 			ItemStack additional, ItemStack dye, ItemStack output,
-			int outputSize) {
+			int outputSize)
+	{
 		if ((tier > 0 && tier < 4) && outputSize > 0 && outputSize < 65) {
 			addRecipeFinal(tier, planks, wheels, frame, coupler, chimney, cab,
 					boiler, firebox, additional, dye, output, outputSize);
@@ -41,6 +43,12 @@ public class TierRecipeManager implements ITierCraftingManager {
 			addRecipeFinal(1, planks, wheels, frame, coupler, chimney, cab,
 					boiler, firebox, additional, dye, output, 1);
 		}
+	}
+
+	@Override
+	public void addRecipe(int tier, RollingStockRecipe recipe, ItemStack output, int outputSize)
+	{
+
 	}
 
 	public void addRecipeFinal(int tier, ItemStack planks, ItemStack wheels,

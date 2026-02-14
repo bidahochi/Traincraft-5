@@ -62,6 +62,7 @@ public class AssemblyTableRecipes extends AbstractRecipeHandler
 					}
 					for (ItemStack dye : dyeYellow) {
 						cm.addRecipe(1, new ItemStack(iron.getItem(), 1), new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.woodenFrame.item, 2), new ItemStack(iron.getItem(), 1), null, new ItemStack(ItemIDs.woodenCab.item, 1), null, null, new ItemStack(ItemIDs.seats.item, 1), dye, new ItemStack(ItemIDs.minecartPassengerAdler.item, 1), 1);
+
 					}
 				}
 
@@ -1062,6 +1063,8 @@ public class AssemblyTableRecipes extends AbstractRecipeHandler
 
 
 			}
+
+
 		}
 	}
 

@@ -658,7 +658,7 @@ public class GUICreditsBook extends GuiScreen {
     private void drawWorkBenchRecipe(List recipeList, int var5, int var6, int page, int var9, String side) {
         if (recipeList.get(page) == null)
             return;
-        ItemStack[] itemList = new ItemStack[9];
+        Object[] itemList = new ItemStack[9];
         ItemStack itemOutput = null;
         if (recipeList.get(page) instanceof ShapedTrainRecipes) {
             itemList = ((ShapedTrainRecipes) recipeList.get(page)).recipeItems;
@@ -678,24 +678,24 @@ public class GUICreditsBook extends GuiScreen {
         if (side.equals("right"))
             offset = 194;
         GL11.glEnable(32826);
-        if (itemList[0] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[0], var5 + 50 + offset, var6 + 67);
-        if (itemList[1] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[1], var5 + 68 + offset, var6 + 67);
-        if (itemList[2] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[2], var5 + 86 + offset, var6 + 67);
-        if (itemList[3] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[3], var5 + 50 + offset, var6 + 85);
-        if (itemList[4] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[4], var5 + 68 + offset, var6 + 85);
-        if (itemList[5] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[5], var5 + 86 + offset, var6 + 85);
-        if (itemList[6] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[6], var5 + 50 + offset, var6 + 103);
-        if (itemList[7] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[7], var5 + 68 + offset, var6 + 103);
-        if (itemList[8] != null)
-            renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[8], var5 + 86 + offset, var6 + 103);
+        //if (itemList[0] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[0], var5 + 50 + offset, var6 + 67);
+        //if (itemList[1] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[1], var5 + 68 + offset, var6 + 67);
+        //if (itemList[2] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[2], var5 + 86 + offset, var6 + 67);
+        //if (itemList[3] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[3], var5 + 50 + offset, var6 + 85);
+        //if (itemList[4] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[4], var5 + 68 + offset, var6 + 85);
+        //if (itemList[5] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[5], var5 + 86 + offset, var6 + 85);
+        //if (itemList[6] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[6], var5 + 50 + offset, var6 + 103);
+        //if (itemList[7] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[7], var5 + 68 + offset, var6 + 103);
+        //if (itemList[8] != null)
+        //    renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemList[8], var5 + 86 + offset, var6 + 103);
         if (itemOutput != null && itemOutput.getItem() !=null)
             renderItem.renderItemIntoGUI(this.fontRendererObj, this.mc.renderEngine, itemOutput, var5 + 145 + offset, var6 + 85);
         if (itemOutput != null && itemOutput.getItem() !=null)

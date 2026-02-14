@@ -13,22 +13,22 @@ public class GuiCustomButton extends GuiButton {
 	private int textureX = 0;
 	private int textureY = 46;
 
-	public GuiCustomButton(int par1, int par2, int par3, String par4Str, String texture, int textureX, int textureY) {
-		this(par1, par2, par3, 200, 20, par4Str, texture, textureX, textureY);
+	public GuiCustomButton(int id, int xPosition, int yPosition, String displayString, String texture, int textureX, int textureY) {
+		this(id, xPosition, yPosition, 200, 20, displayString, texture, textureX, textureY);
 	}
 
-	public GuiCustomButton(int par1, int par2, int par3, int par4, int par5, String par6Str, String texture, int textureX, int textureY) {
-		super(par1, par2, par3, par4, par5, par6Str);
+	public GuiCustomButton(int id, int xPosition, int yPosition, int buttonImageWidth, int buttonImageHeight, String displayString, String texture, int textureX, int textureY) {
+		super(id, xPosition, yPosition, buttonImageWidth, buttonImageHeight, displayString);
 		this.width = 200;
 		this.height = 20;
 		this.enabled = true;
 		this.visible = true;
-		this.id = par1;
-		this.xPosition = par2;
-		this.yPosition = par3;
-		this.width = par4;
-		this.height = par5;
-		this.displayString = par6Str;
+		this.id = id;
+		this.xPosition = xPosition;
+		this.yPosition = yPosition;
+		this.width = buttonImageWidth;
+		this.height = buttonImageHeight;
+		this.displayString = displayString;
 		this.texture = texture;
 		this.textureX = textureX;
 		this.textureY = textureY;

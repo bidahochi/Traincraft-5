@@ -108,6 +108,8 @@ public class Traincraft {
 
 	public static final SimpleNetworkWrapper BannedItems_CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel("banneditems_sync");
 
+	public static SimpleNetworkWrapper tcCraftingBenchChannel = NetworkRegistry.INSTANCE.newSimpleChannel("tc.craftingtable");
+
 	public static FMLEventChannel channel;
 
 	/*public static  SimpleNetworkWrapper itsChannel = NetworkRegistry.INSTANCE.newSimpleChannel("TransmitterSpeed");

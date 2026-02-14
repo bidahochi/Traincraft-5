@@ -1,6 +1,7 @@
 package train.common.core.handlers;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,7 +9,9 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import train.common.inventory.TrainCraftingManager;
+import train.common.library.ItemIDs;
 import train.common.recipes.ITCRecipe.ShapedTrainRecipes;
+import train.common.recipes.ITCRecipe.TCStack;
 
 import java.util.*;
 
@@ -38,6 +41,26 @@ public abstract class AbstractRecipeHandler
     public ArrayList<ItemStack> dyePink = OreDictionary.getOres("dyePink");
     public ArrayList<ItemStack> dyeCyan = OreDictionary.getOres("dyeCyan");
 
+
+    public final String itemSteel = "ingotSteel";
+    public final String ironingot = "ingotIron";
+    public final String ironCopper = "ingotCopper";
+
+    public final String circuitBasic = "circuitBasic";
+    public final String wireCopper = "wireCopper";
+
+    ItemStack anyPlankType =  new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE);
+
+    public ItemStack steelItemStack(byte amount)
+    {
+        return TCStack.ItemStack(ItemIDs.steel.item, amount);
+    }
+
+    public ItemStack ironItemStack(byte amount)
+    {
+        return TCStack.ItemStack(Items.iron_ingot, amount);
+    }
+
     public List<ItemStack> coal = new ArrayList<ItemStack>()
     {
         {
@@ -54,7 +77,8 @@ public abstract class AbstractRecipeHandler
 
     public static ArrayList<ItemStack> waterContainers(){
         ArrayList<ItemStack> containers = new ArrayList<ItemStack>();
-        for (FluidContainerRegistry.FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()){
+        for (FluidContainerRegistry.FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+        {
             if(data.fluid.fluid == FluidRegistry.WATER){
                 containers.add(data.filledContainer);
             }
@@ -67,6 +91,7 @@ public abstract class AbstractRecipeHandler
      * @param output
      * @param args
      */
+    @Deprecated // Do not need to use anymore as variants is handled during the recipe comparsion
     public final void addRecipeWithOreDic(ItemStack output, Object... args) {
 
         String pattern = "";

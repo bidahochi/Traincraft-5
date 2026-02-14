@@ -32,9 +32,9 @@ public class Info {
 	public static final String villagerPrefix = "textures/villager/";
 	public static final String fixedOverlayTexturePrefix = "textures/trains/fixedOverlays/";
 
-	public static final String TEX_TIER_I = guiPrefix + "gui_tierI_ironAge.png";
-	public static final String TEX_TIER_II = guiPrefix + "gui_tierII_steelAge.png";
-	public static final String TEX_TIER_III = guiPrefix + "gui_tierIII_advancedAge.png";
+	public static final String TEX_TIER_I = guiPrefix + "stock_crafting_bench/" + "gui_tierI_ironAge.png";
+	public static final String TEX_TIER_II = guiPrefix + "stock_crafting_bench/" + "gui_tierII_steelAge.png";
+	public static final String TEX_TIER_III = guiPrefix + "stock_crafting_bench/" + "gui_tierIII_advancedAge.png";
 
 	/* Other variables */
 	public static final String[] tooltipsTierI = new String[] { "Planks", "Chimney", "Cab", "Dye", "Component", "Boiler", "Firebox", "Wheels", "Frame", "Coupler" };
