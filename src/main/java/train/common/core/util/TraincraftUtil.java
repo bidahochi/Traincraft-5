@@ -86,7 +86,6 @@ public class TraincraftUtil{
         return false;
     }
 
-    // Your exact getOreVariants method
     private static HashMap<ItemStack, List<ItemStack>> oreDictionaryCache = new HashMap<>();
 
     public static List<ItemStack> getOreVariants(ItemStack stack)

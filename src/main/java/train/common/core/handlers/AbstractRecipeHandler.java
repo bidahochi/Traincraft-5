@@ -11,7 +11,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import train.common.inventory.TrainCraftingManager;
 import train.common.library.ItemIDs;
 import train.common.recipes.ITCRecipe.ShapedTrainRecipes;
-import train.common.recipes.ITCRecipe.TCStack;
 
 import java.util.*;
 
@@ -28,11 +27,18 @@ public abstract class AbstractRecipeHandler
     public ArrayList<ItemStack> dyeYellow = OreDictionary.getOres("dyeYellow"); //11
     public ArrayList<ItemStack> dyeOrange = OreDictionary.getOres("dyeOrange");//14
     public ArrayList<ItemStack> dyeGreen = OreDictionary.getOres("dyeGreen"); //2
+    public final ItemStack DyeGreen = new ItemStack(Items.dye, 1, 2);
     public ArrayList<ItemStack> dyeBlue = OreDictionary.getOres("dyeBlue"); //4
     public ArrayList<ItemStack> dyeBrown = OreDictionary.getOres("dyeBrown"); //3
+    public final ItemStack DyeBrown = new ItemStack(Items.dye, 1, 3);
     public ArrayList<ItemStack> dyeGray = OreDictionary.getOres("dyeGray"); //3
+    public final ItemStack DyeGray = new ItemStack(Items.dye, 1, 8);
+
     public ArrayList<ItemStack> dyeLightGray = OreDictionary.getOres("dyeLightGray"); //7
+
+    public final ItemStack DyeLightGray = new ItemStack(Items.dye, 1, 7);
     public ArrayList<ItemStack> dyeBlack = OreDictionary.getOres("dyeBlack");
+    public final ItemStack DyeBlack = new ItemStack(Items.dye, 1, 0);
     public ArrayList<ItemStack> dyeWhite = OreDictionary.getOres("dyeWhite");
     public ArrayList<ItemStack> dyeMagenta = OreDictionary.getOres("dyeMagenta");
     public ArrayList<ItemStack> dyeLime = OreDictionary.getOres("dyeLime");
@@ -44,6 +50,15 @@ public abstract class AbstractRecipeHandler
 
     public final String itemSteel = "ingotSteel";
     public final String ironingot = "ingotIron";
+    public final Item IronIngotItem = Items.iron_ingot;
+    public final Item SteelIngotItem = ItemIDs.steel.item;
+    public final Item WaterBucketItem = Items.water_bucket;
+
+    public final Item CoalItem = Items.coal;
+    public final ItemStack CoalItem(int amount)
+    {
+        return new ItemStack(CoalItem, amount);
+    }
     public final String ironCopper = "ingotCopper";
 
     public final String circuitBasic = "circuitBasic";
@@ -51,14 +66,21 @@ public abstract class AbstractRecipeHandler
 
     ItemStack anyPlankType =  new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE);
 
-    public ItemStack steelItemStack(byte amount)
+    public final ItemStack TCItemStack(ItemIDs itemIDs, int amount)
     {
-        return TCStack.ItemStack(ItemIDs.steel.item, amount);
+        return new ItemStack(itemIDs.item, amount);
     }
 
-    public ItemStack ironItemStack(byte amount)
+    public final ItemStack TCItemStack(Item item, int amount)
     {
-        return TCStack.ItemStack(Items.iron_ingot, amount);
+        return new ItemStack(item, amount);
+    }
+
+    public ItemStack getAnyPlankType(int amount)
+    {
+        ItemStack copy = anyPlankType.copy();
+        copy.stackSize = Math.min(amount, 64);;
+        return copy;
     }
 
     public List<ItemStack> coal = new ArrayList<ItemStack>()

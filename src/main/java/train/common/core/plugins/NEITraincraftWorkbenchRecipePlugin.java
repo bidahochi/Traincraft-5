@@ -117,13 +117,8 @@ public class NEITraincraftWorkbenchRecipePlugin extends ShapedRecipeHandler {
 				String oreName = OreDictionary.getOreName(OreDictionary.getOreID(item));
 
 				// Check if we need to cycle ore-dictionary variants
-				if (oreName.equals("ingotSteel") ||
-						oreName.equals("ingotIron") ||
-						oreName.equals("ingotCopper") ||
-						oreName.equals("dustPlastic") ||
-						oreName.equals("dustCoal") ||
-						oreName.startsWith("dye")) {
-
+				if (oreName != null)
+				{
 					List<ItemStack> oreList = OreDictionary.getOres(oreName);
 
 					// Apply strict filtering for dyes: only include stacks with the same metadata

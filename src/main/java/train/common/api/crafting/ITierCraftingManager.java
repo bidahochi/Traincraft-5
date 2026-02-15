@@ -16,8 +16,6 @@ public abstract interface ITierCraftingManager {
 
 	public abstract void addRecipe(int tier, ItemStack planks, ItemStack wheels, ItemStack frame, ItemStack coupler, ItemStack chimney, ItemStack cab, ItemStack boiler, ItemStack firebox, ItemStack additional, ItemStack dye, ItemStack output, int outputSize);
 
-	public abstract void addRecipe(int tier, RollingStockRecipe recipe, ItemStack output, int outputSize);
-
 	public abstract ITierRecipe getTierRecipe(int tier, ItemStack output);
 
 	@SuppressWarnings("rawtypes")
