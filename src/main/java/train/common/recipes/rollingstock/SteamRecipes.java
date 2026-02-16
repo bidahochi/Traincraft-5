@@ -2,7 +2,6 @@ package train.common.recipes.rollingstock;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import train.common.api.crafting.ITierCraftingManager;
 import train.common.core.handlers.AbstractRecipeHandler;
@@ -16,7 +15,6 @@ public class SteamRecipes extends AbstractRecipeHandler
     public SteamRecipes(ITierCraftingManager cm)
     {
         cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(Items.iron_ingot, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.coal, 1), null, new ItemStack(ItemIDs.minecartLocoC11.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(Items.iron_ingot, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.coal, 2), null, new ItemStack(ItemIDs.minecartPCH130Commute2.item, 1), 1);
 
         //doing bap recipes first
         //example of item order
@@ -56,10 +54,9 @@ public class SteamRecipes extends AbstractRecipeHandler
         cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartVanderbackTender.item, 1), 1);
         cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartSquanderbackTender.item, 1), 1);
 
-        for (ItemStack plank : plankWood) {
-            cm.addRecipe(2, new ItemStack(plank.getItem(), 2), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 1), new ItemStack(SteelIngotItem, 3), null, null, null, null, new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2a.item, 1), 1);
-            cm.addRecipe(2, new ItemStack(plank.getItem(), 1), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2b.item, 1), 1);
-        }
+        cm.addRecipe(2, getAnyPlankType(2), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 1), new ItemStack(SteelIngotItem, 3), null, null, null, null, new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2a.item, 1), 1);
+        cm.addRecipe(2, getAnyPlankType(1), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2b.item, 1), 1);
+
 
 
         cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 6), new ItemStack(ItemIDs.ironFrame.item, 3), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 4), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.iron_ingot, 4), DyeLightGray, new ItemStack(ItemIDs.minecartWCPBuckingBull.item, 1), 1);
