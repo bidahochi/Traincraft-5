@@ -63,6 +63,11 @@ public abstract class AbstractRecipeHandler
 
     public final String itemSteel = "ingotSteel";
     public final String ironingot = "ingotIron";
+    public final String anyPlanks = "plankWood";
+
+    public final String DustCoal = "dustCoal";
+
+    public final String anyLogs = "logWood";
     public final Item IronIngotItem = Items.iron_ingot;
     public final Item SteelIngotItem = ItemIDs.steel.item;
     public final Item WaterBucketItem = Items.water_bucket;

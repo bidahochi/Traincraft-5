@@ -1,5 +1,6 @@
 package train.client.gui;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
@@ -15,10 +16,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import train.client.core.handlers.RecipeBookHandler;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
+import train.common.core.util.TraincraftUtil;
 import train.common.inventory.TrainCraftingManager;
 import train.common.items.ItemAbstractRollingStock;
 import train.common.items.ItemRecipeBook;
@@ -590,7 +593,7 @@ public class GuiRecipeBook extends GuiScreen {
 				drawAssemblyBackground(recipeList, var5 - 125, var6 - 33, page - recipeListWB.size(), var9, "right");
 				drawAssemblyBackground(recipeList, var5 - 50, var6 - 33, page - recipeListWB.size() - 1, var9, "left");
 				RenderHelper.enableGUIStandardItemLighting();
-				drawAssemblyRecipe(recipeList, mouseX, mouseY, var5 - 125, var6 - 33, page - recipeListWB.size(), var9, "right");
+				drawAssemblyRecipe(recipeList, mouseX, mouseY, var5 - 126, var6 - 33, page - recipeListWB.size(), var9, "right");
 				drawAssemblyRecipe(recipeList, mouseX, mouseY, var5 - 50, var6 - 33, page - recipeListWB.size() - 1, var9, "left");
 			}
 		}
@@ -646,7 +649,7 @@ public class GuiRecipeBook extends GuiScreen {
 		//System.out.println(itemOutput);
 		int offset = 0;
 		if (side.equals("right"))
-			offset = 194;
+			offset = 195;
 		GL11.glEnable(32826);
 
 		ItemStack hoveredStack = null;
@@ -768,7 +771,17 @@ public class GuiRecipeBook extends GuiScreen {
 		}
 		else if (object instanceof String)
 		{
-			return ((ArrayList<ItemStack>)OreDictionary.getOres((String)object)).get(0);
+			List<ItemStack> stacks = OreDictionary.getOres((String)object);
+			for (ItemStack stack : stacks)
+			{
+				if (stack.getItem().getUnlocalizedName().contains("item.tc:"))
+				{
+					return stack;
+				}
+			}
+
+			return stacks.get(0);
+
 		}
 		return null;
 	}
