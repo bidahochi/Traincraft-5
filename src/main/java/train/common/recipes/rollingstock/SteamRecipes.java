@@ -2,7 +2,6 @@ package train.common.recipes.rollingstock;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import train.common.api.crafting.ITierCraftingManager;
 import train.common.core.handlers.AbstractRecipeHandler;
 import train.common.library.ItemIDs;
@@ -14,90 +13,90 @@ public class SteamRecipes extends AbstractRecipeHandler
 {
     public SteamRecipes(ITierCraftingManager cm)
     {
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(Items.iron_ingot, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.coal, 1), null, new ItemStack(ItemIDs.minecartLocoC11.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(Items.iron_ingot, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(Items.coal, 1), null, TCItemStack(ItemIDs.minecartLocoC11, 1), 1);
 
         //doing bap recipes first
         //example of item order
-        //cm.addRecipe(3, null, null, null, null, null, null, null, null, null, null, new ItemStack(ItemIDs.pennCentral.item, 1), 1);
+        //cm.addRecipe(3, null, null, null, null, null, null, null, null, null, null, TCItemStack(ItemIDs.pennCentral, 1), 1);
 
 
         //=================== BAP STEAM ===================//
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 2), null, new ItemStack(ItemIDs.minecartClimaxNew.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 2), null, TCItemStack(ItemIDs.minecartClimaxNew, 1), 1);
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), getAnyPlankType(3), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(IronIngotItem, 2), null, new ItemStack(ItemIDs.minecartVBShay2.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), getAnyPlankType(3), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(IronIngotItem, 2), null, TCItemStack(ItemIDs.minecartVBShay2, 1), 1);
 
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 2), new ItemStack(Items.iron_ingot, 4), DyeGreen, new ItemStack(ItemIDs.minecartSkook.item, 1), 1);
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, null, new ItemStack(SteelIngotItem, 4), new ItemStack(CoalItem, 2), DyeGreen, new ItemStack(ItemIDs.minecartSkookTender.item, 1), 1);
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 4), TCItemStack(ItemIDs.firebox, 2), TCItemStack(Items.iron_ingot, 4), GREEN_DYE, TCItemStack(ItemIDs.minecartSkook, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, null, TCItemStack(SteelIngotItem, 4), TCItemStack(CoalItem, 2), GREEN_DYE, TCItemStack(ItemIDs.minecartSkookTender, 1), 1);
 
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 2), DyeBlack, new ItemStack(ItemIDs.minecartShay3Truck.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 2), new ItemStack(CoalItem, 2), DyeBlack, new ItemStack(ItemIDs.minecartShay3TruckTender.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 2), BLACK_DYE, TCItemStack(ItemIDs.minecartShay3Truck, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 2), TCItemStack(CoalItem, 2), BLACK_DYE, TCItemStack(ItemIDs.minecartShay3TruckTender, 1), 1);
 
         cm.addRecipe(1,
                 null,
-                new ItemStack(ItemIDs.ironBogie.item, 4),
-                new ItemStack(ItemIDs.ironFrame.item, 2),
-                new ItemStack(IronIngotItem, 3),
-                new ItemStack(ItemIDs.ironChimney.item, 1),
-                new ItemStack(ItemIDs.ironCab.item, 1),
-                new ItemStack(ItemIDs.ironBoiler.item, 1),
-                new ItemStack(ItemIDs.ironFirebox.item, 1),
-                new ItemStack(CoalItem, 2),
-                DyeBlack,
-                new ItemStack(ItemIDs.minecartClimaxB.item, 1),
+                TCItemStack(ItemIDs.ironBogie, 4),
+                TCItemStack(ItemIDs.ironFrame, 2),
+                TCItemStack(IronIngotItem, 3),
+                TCItemStack(ItemIDs.ironChimney, 1),
+                TCItemStack(ItemIDs.ironCab, 1),
+                TCItemStack(ItemIDs.ironBoiler, 1),
+                TCItemStack(ItemIDs.ironFirebox, 1),
+                TCItemStack(CoalItem, 2),
+                BLACK_DYE,
+                TCItemStack(ItemIDs.minecartClimaxB, 1),
                 1);
 
 
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeGray, new ItemStack(ItemIDs.minecartF01.item, 1), 1);
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 3), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(CoalItem, 3), DyeGray, new ItemStack(ItemIDs.minecartP01a.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartVanderbackTender.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartSquanderbackTender.item, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), GRAY_DYE, TCItemStack(ItemIDs.minecartF01, 1), 1);
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 3), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 3), TCItemStack(ItemIDs.firebox, 1), TCItemStack(CoalItem, 3), GRAY_DYE, TCItemStack(ItemIDs.minecartP01a, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 3), TCItemStack(CoalItem, 2), GRAY_DYE, TCItemStack(ItemIDs.minecartVanderbackTender, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 3), TCItemStack(CoalItem, 2), GRAY_DYE, TCItemStack(ItemIDs.minecartSquanderbackTender, 1), 1);
 
-        cm.addRecipe(2, getAnyPlankType(2), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 1), new ItemStack(SteelIngotItem, 3), null, null, null, null, new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2a.item, 1), 1);
-        cm.addRecipe(2, getAnyPlankType(1), new ItemStack(ItemIDs.bogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 4), DyeBlack, new ItemStack(ItemIDs.minecartBKno2b.item, 1), 1);
-
-
-
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 6), new ItemStack(ItemIDs.ironFrame.item, 3), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 4), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.iron_ingot, 4), DyeLightGray, new ItemStack(ItemIDs.minecartWCPBuckingBull.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 4), new ItemStack(CoalItem, 4), DyeLightGray, new ItemStack(ItemIDs.minecartWCPBaler.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 5), new ItemStack(ItemIDs.ironFrame.item, 4), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 5), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(Items.iron_ingot, 4), DyeLightGray, new ItemStack(ItemIDs.minecartWCPMacky.item, 1), 1);
+        cm.addRecipe(2, getAnyPlankType(2), TCItemStack(ItemIDs.bogie, 3), TCItemStack(ItemIDs.steelframe, 1), TCItemStack(SteelIngotItem, 3), null, null, null, null, TCItemStack(SteelIngotItem, 4), BLACK_DYE, TCItemStack(ItemIDs.minecartBKno2a, 1), 1);
+        cm.addRecipe(2, getAnyPlankType(1), TCItemStack(ItemIDs.bogie, 3), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 4), TCItemStack(ItemIDs.firebox, 1), TCItemStack(SteelIngotItem, 4), BLACK_DYE, TCItemStack(ItemIDs.minecartBKno2b, 1), 1);
 
 
 
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 5), new ItemStack(ItemIDs.steelframe.item, 4), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 6), new ItemStack(Items.dye, 1, 0), new ItemStack(ItemIDs.minecartalco2102.item, 1), 1);
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 4), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 5), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 4), new ItemStack(Items.dye, 1, 0), new ItemStack(ItemIDs.minecartMK60.item, 1), 1);
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 3), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 4), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 2), new ItemStack(Items.dye, 1, 0), new ItemStack(ItemIDs.minecartHCS_c57.item, 1), 1);
-
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(SteelIngotItem, 3), new ItemStack(CoalItem, 3), new ItemStack(Items.dye), new ItemStack(ItemIDs.minecartTender10k.item, 1), 1);
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 6), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(SteelIngotItem, 4), new ItemStack(CoalItem, 4), new ItemStack(Items.dye), new ItemStack(ItemIDs.minecartTenderDeseret.item, 1), 1);
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(SteelIngotItem, 5), new ItemStack(CoalItem, 5), new ItemStack(Items.dye), new ItemStack(ItemIDs.minecartHCS_9k_Tender.item, 1), 1);
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(SteelIngotItem, 3), new ItemStack(CoalItem, 3), new ItemStack(Items.dye), new ItemStack(ItemIDs.minecartHotTubTender.item, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 6), TCItemStack(ItemIDs.ironFrame, 3), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 4), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(Items.iron_ingot, 4), LIGHT_GRAY_DYE, TCItemStack(ItemIDs.minecartWCPBuckingBull, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 4), TCItemStack(CoalItem, 4), LIGHT_GRAY_DYE, TCItemStack(ItemIDs.minecartWCPBaler, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 5), TCItemStack(ItemIDs.ironFrame, 4), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 5), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(Items.iron_ingot, 4), LIGHT_GRAY_DYE, TCItemStack(ItemIDs.minecartWCPMacky, 1), 1);
 
 
 
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 2), new ItemStack(ItemIDs.steelframe.item, 3), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 1), new ItemStack(ItemIDs.firebox.item, 2), null, null, new ItemStack(ItemIDs.minecartOnion.item, 1), 1);
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 2), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, null, null, new ItemStack(CoalItem, 3), null, new ItemStack(ItemIDs.minecartOnionTender.item, 1), 1);
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 5), TCItemStack(ItemIDs.steelframe, 4), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 4), TCItemStack(ItemIDs.firebox, 1), TCItemStack(SteelIngotItem, 6), TCItemStack(Items.dye, 1, 0), TCItemStack(ItemIDs.minecartalco2102, 1), 1);
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 4), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 5), TCItemStack(ItemIDs.firebox, 1), TCItemStack(SteelIngotItem, 4), TCItemStack(Items.dye, 1, 0), TCItemStack(ItemIDs.minecartMK60, 1), 1);
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 3), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 4), TCItemStack(ItemIDs.firebox, 1), TCItemStack(SteelIngotItem, 2), TCItemStack(Items.dye, 1, 0), TCItemStack(ItemIDs.minecartHCS_c57, 1), 1);
 
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeGray, new ItemStack(ItemIDs.minecartNP_L9.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartNP_11C_tender.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGray, new ItemStack(ItemIDs.minecartNP_13C_tender.item, 1), 1);
-
-
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeGreen, new ItemStack(ItemIDs.minecartAlco460.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeGreen, new ItemStack(ItemIDs.minecartLima2_8_0.item, 1), 1);
-
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(IronIngotItem, 3), new ItemStack(CoalItem, 2), DyeGreen, new ItemStack(ItemIDs.minecartTender460.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(IronIngotItem, 2), new ItemStack(CoalItem, 2), DyeGreen, new ItemStack(ItemIDs.minecartTenderLima2_8_0.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 4), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeGreen, new ItemStack(ItemIDs.minecartBrank.item, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(SteelIngotItem, 3), TCItemStack(CoalItem, 3), TCItemStack(Items.dye), TCItemStack(ItemIDs.minecartTender10k, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 6), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(SteelIngotItem, 4), TCItemStack(CoalItem, 4), TCItemStack(Items.dye), TCItemStack(ItemIDs.minecartTenderDeseret, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(SteelIngotItem, 5), TCItemStack(CoalItem, 5), TCItemStack(Items.dye), TCItemStack(ItemIDs.minecartHCS_9k_Tender, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(SteelIngotItem, 3), TCItemStack(CoalItem, 3), TCItemStack(Items.dye), TCItemStack(ItemIDs.minecartHotTubTender, 1), 1);
 
 
 
-        cm.addRecipe(1, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 3), DyeBrown, new ItemStack(ItemIDs.minecartAlco0_6_0T.item, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 2), TCItemStack(ItemIDs.steelframe, 3), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 1), TCItemStack(ItemIDs.firebox, 2), null, null, TCItemStack(ItemIDs.minecartOnion, 1), 1);
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 2), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, null, null, TCItemStack(CoalItem, 3), null, TCItemStack(ItemIDs.minecartOnionTender, 1), 1);
 
-        cm.addRecipe(2, new ItemStack(Blocks.torch, 1), new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 4), new ItemStack(SteelIngotItem, 3), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.boiler.item, 5), new ItemStack(ItemIDs.firebox.item, 1), new ItemStack(SteelIngotItem, 4), null, new ItemStack(ItemIDs.minecartPMNandN1.item, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), GRAY_DYE, TCItemStack(ItemIDs.minecartNP_L9, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 3), TCItemStack(CoalItem, 2), GRAY_DYE, TCItemStack(ItemIDs.minecartNP_11C_tender, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, TCItemStack(IronIngotItem, 3), TCItemStack(CoalItem, 2), GRAY_DYE, TCItemStack(ItemIDs.minecartNP_13C_tender, 1), 1);
 
-        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 4), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(SteelIngotItem, 3), null, null, new ItemStack(WaterBucketItem, 1), new ItemStack(SteelIngotItem, 3), new ItemStack(CoalItem, 3), null, new ItemStack(ItemIDs.minecartPMNstender.item, 1), 1);
+
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), GREEN_DYE, TCItemStack(ItemIDs.minecartAlco460, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), GREEN_DYE, TCItemStack(ItemIDs.minecartLima2_8_0, 1), 1);
+
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(IronIngotItem, 3), TCItemStack(CoalItem, 2), GREEN_DYE, TCItemStack(ItemIDs.minecartTender460, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(IronIngotItem, 2), TCItemStack(CoalItem, 2), GREEN_DYE, TCItemStack(ItemIDs.minecartTenderLima2_8_0, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 4), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), GREEN_DYE, TCItemStack(ItemIDs.minecartBrank, 1), 1);
+
+
+
+        cm.addRecipe(1, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 3), BROWN_DYE, TCItemStack(ItemIDs.minecartAlco0_6_0T, 1), 1);
+
+        cm.addRecipe(2, TCItemStack(Blocks.torch, 1), TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 4), TCItemStack(SteelIngotItem, 3), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1), TCItemStack(ItemIDs.boiler, 5), TCItemStack(ItemIDs.firebox, 1), TCItemStack(SteelIngotItem, 4), null, TCItemStack(ItemIDs.minecartPMNandN1, 1), 1);
+
+        cm.addRecipe(2, null, TCItemStack(ItemIDs.bogie, 4), TCItemStack(ItemIDs.steelframe, 2), TCItemStack(SteelIngotItem, 3), null, null, TCItemStack(WaterBucketItem, 1), TCItemStack(SteelIngotItem, 3), TCItemStack(CoalItem, 3), null, TCItemStack(ItemIDs.minecartPMNstender, 1), 1);
 
 
 
@@ -105,61 +104,61 @@ public class SteamRecipes extends AbstractRecipeHandler
 
         //=================== TIER I ===================//
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.woodenFrame.item, 1), new ItemStack(Items.stick, 1), new ItemStack(ItemIDs.ironChimney.item, 1), null, new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), null, null, new ItemStack(ItemIDs.minecartLocoCherepanov.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(Blocks.crafting_table, 1), new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.woodenFrame.item, 1), new ItemStack(Items.stick, 2), null, new ItemStack(ItemIDs.woodenCab.item, 1), null, null, new ItemStack(Blocks.furnace, 1), null, new ItemStack(ItemIDs.minecartWork.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.woodenFrame.item, 1), new ItemStack(Items.stick, 2), null, null, null, null, new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartTender.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(Items.iron_ingot, 6), new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.woodenFrame.item, 2), new ItemStack(Items.stick, 2), null, null, null, null, new ItemStack(Items.lava_bucket, 1), null, new ItemStack(ItemIDs.minecartWatertransp.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.woodenFrame, 1), TCItemStack(Items.stick, 1), TCItemStack(ItemIDs.ironChimney, 1), null, TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), null, null, TCItemStack(ItemIDs.minecartLocoCherepanov, 1), 1);
+        cm.addRecipe(1, TCItemStack(Blocks.crafting_table, 1), TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.woodenFrame, 1), TCItemStack(Items.stick, 2), null, TCItemStack(ItemIDs.woodenCab, 1), null, null, TCItemStack(Blocks.furnace, 1), null, TCItemStack(ItemIDs.minecartWork, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.woodenFrame, 1), TCItemStack(Items.stick, 2), null, null, null, null, TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartTender, 1), 1);
+        cm.addRecipe(1, TCItemStack(Items.iron_ingot, 6), TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.woodenFrame, 2), TCItemStack(Items.stick, 2), null, null, null, null, TCItemStack(Items.lava_bucket, 1), null, TCItemStack(ItemIDs.minecartWatertransp, 1), 1);
 
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(WaterBucketItem, 1), DyeGreen, new ItemStack(ItemIDs.minecartLocoBR80_DB.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(WaterBucketItem, 1), DyeGreen, new ItemStack(ItemIDs.minecartLocoNS3700Class.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(WaterBucketItem, 1), GREEN_DYE, TCItemStack(ItemIDs.minecartLocoBR80_DB, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(WaterBucketItem, 1), GREEN_DYE, TCItemStack(ItemIDs.minecartLocoNS3700Class, 1), 1);
 
 
-        cm.addRecipe(1, new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), null, null, null, null, new ItemStack(CoalItem, 2), DyeGreen, new ItemStack(ItemIDs.minecartTenderNS3700.item, 1), 1);
+        cm.addRecipe(1, TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), null, null, null, null, TCItemStack(CoalItem, 2), GREEN_DYE, TCItemStack(ItemIDs.minecartTenderNS3700, 1), 1);
 
 
         /*for (ItemStack dye : dyeBlack){
             for (ItemStack c : coal){
-                cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 4), new ItemStack(IronIngotItem, 4), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 3), new ItemStack(ItemIDs.ironFirebox.item, 2), new ItemStack(CoalItem, 2), dye, new ItemStack(ItemIDs.minecartShay3Truck.item, 1), 1);
-                cm.addRecipe(1, new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), null, null, null, null, new ItemStack(CoalItem, 2), dye, new ItemStack(ItemIDs.minecartShay3TruckTender.item, 1), 1);
+                cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 4), TCItemStack(IronIngotItem, 4), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 3), TCItemStack(ItemIDs.ironFirebox, 2), TCItemStack(CoalItem, 2), dye, TCItemStack(ItemIDs.minecartShay3Truck, 1), 1);
+                cm.addRecipe(1, TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), null, null, null, null, TCItemStack(CoalItem, 2), dye, TCItemStack(ItemIDs.minecartShay3TruckTender, 1), 1);
             }
         }*/
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoSteamShay.item, 1), 1);
-        //cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartVBShay2.item, 1), 1);
-        //cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 4), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 3), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 2), new ItemStack(CoalItem, 2), null, new ItemStack(ItemIDs.minecartClimaxNew.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 2), null, null, null, null, new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartSlateWagon.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoSteamShay, 1), 1);
+        //cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartVBShay2, 1), 1);
+        //cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 4), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 3), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 2), TCItemStack(CoalItem, 2), null, TCItemStack(ItemIDs.minecartClimaxNew, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 2), null, null, null, null, TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartSlateWagon, 1), 1);
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoAlcoSC4.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoC41.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 6), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoC41_080.item, 1), 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoC41T.item, 1), 1);
-        cm.addRecipe(1, new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), null, null, null, null, new ItemStack(CoalItem, 2), null, new ItemStack(ItemIDs.minecartTenderC41.item, 1), 1);
-        //cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoC11.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoAlcoSC4, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoC41, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 6), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoC41_080, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoC41T, 1), 1);
+        cm.addRecipe(1, TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), null, null, null, null, TCItemStack(CoalItem, 2), null, TCItemStack(ItemIDs.minecartTenderC41, 1), 1);
+        //cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoC11, 1), 1);
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironChimney.item, 1), new ItemStack(ItemIDs.ironCab.item, 1), new ItemStack(ItemIDs.ironBoiler.item, 2), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), null, new ItemStack(ItemIDs.minecartLocoSouthern1102.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironChimney, 1), TCItemStack(ItemIDs.ironCab, 1), TCItemStack(ItemIDs.ironBoiler, 2), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), null, TCItemStack(ItemIDs.minecartLocoSouthern1102, 1), 1);
 
 
         cm.addRecipe(1,
                 null,
-                new ItemStack(ItemIDs.ironBogie.item, 3),
-                new ItemStack(ItemIDs.steelframe.item, 2),
-                new ItemStack(SteelIngotItem, 2),
-                new ItemStack(ItemIDs.steelchimney.item, 1),
-                new ItemStack(ItemIDs.steelcab.item, 1),
-                new ItemStack(ItemIDs.ironBoiler.item, 1),
-                new ItemStack(ItemIDs.ironFirebox.item, 1),
-                new ItemStack(CoalItem, 1),
-                DyeGray,
-                new ItemStack(ItemIDs.minecartLocoUSATCUS.item, 1),
+                TCItemStack(ItemIDs.ironBogie, 3),
+                TCItemStack(ItemIDs.steelframe, 2),
+                TCItemStack(SteelIngotItem, 2),
+                TCItemStack(ItemIDs.steelchimney, 1),
+                TCItemStack(ItemIDs.steelcab, 1),
+                TCItemStack(ItemIDs.ironBoiler, 1),
+                TCItemStack(ItemIDs.ironFirebox, 1),
+                TCItemStack(CoalItem, 1),
+                GRAY_DYE,
+                TCItemStack(ItemIDs.minecartLocoUSATCUS, 1),
                 1);
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.ironBogie.item, 3), new ItemStack(ItemIDs.steelframe.item, 2),
-                new ItemStack(SteelIngotItem, 2), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1),
-                new ItemStack(ItemIDs.ironBoiler.item, 1), new ItemStack(ItemIDs.ironFirebox.item, 1), new ItemStack(CoalItem, 1), DyeGray,
-                new ItemStack(ItemIDs.minecartLocoUSATCUK.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.ironBogie, 3), TCItemStack(ItemIDs.steelframe, 2),
+                TCItemStack(SteelIngotItem, 2), TCItemStack(ItemIDs.steelchimney, 1), TCItemStack(ItemIDs.steelcab, 1),
+                TCItemStack(ItemIDs.ironBoiler, 1), TCItemStack(ItemIDs.ironFirebox, 1), TCItemStack(CoalItem, 1), GRAY_DYE,
+                TCItemStack(ItemIDs.minecartLocoUSATCUK, 1), 1);
 
-        cm.addRecipe(1, new ItemStack(IronIngotItem, 2), new ItemStack(ItemIDs.ironBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 2), new ItemStack(IronIngotItem, 2), null, null, null, null, new ItemStack(CoalItem, 2), null, new ItemStack(ItemIDs.minecartTenderSouthern1102.item, 1), 1);
+        cm.addRecipe(1, TCItemStack(IronIngotItem, 2), TCItemStack(ItemIDs.ironBogie, 2), TCItemStack(ItemIDs.ironFrame, 2), TCItemStack(IronIngotItem, 2), null, null, null, null, TCItemStack(CoalItem, 2), null, TCItemStack(ItemIDs.minecartTenderSouthern1102, 1), 1);
 
-        cm.addRecipe(1, null, new ItemStack(ItemIDs.woodenBogie.item, 2), new ItemStack(ItemIDs.ironFrame.item, 1), new ItemStack(IronIngotItem, 2), null, null, null, null, new ItemStack(Items.snowball, 9), null, new ItemStack(ItemIDs.minecartIceWagon.item, 1), 1);
+        cm.addRecipe(1, null, TCItemStack(ItemIDs.woodenBogie, 2), TCItemStack(ItemIDs.ironFrame, 1), TCItemStack(IronIngotItem, 2), null, null, null, null, TCItemStack(Items.snowball, 9), null, TCItemStack(ItemIDs.minecartIceWagon, 1), 1);
     }
 }

@@ -6,12 +6,10 @@ import train.common.api.crafting.ITierCraftingManager;
 import train.common.core.handlers.AbstractRecipeHandler;
 import train.common.library.ItemIDs;
 
-public class DieselRecipes extends AbstractRecipeHandler
-{
+public class DieselRecipes extends AbstractRecipeHandler {
     public DieselRecipes(ITierCraftingManager cm)
     {
-        for (ItemStack k :ingotSteel)
-        {
+        for (ItemStack k : ingotSteel) {
             Item itemSteel = k.getItem();
             int itemDamageSteel = k.getItemDamage();
 
@@ -242,20 +240,12 @@ public class DieselRecipes extends AbstractRecipeHandler
                 cm.addRecipe(2, new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.partTypeB.item, 2), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(itemSteel, 3, itemDamageSteel), new ItemStack(ItemIDs.steelchimney.item, 2), new ItemStack(ItemIDs.partComponentALCO.item, 3), new ItemStack(ItemIDs.generator.item, 3), new ItemStack(ItemIDs.dieselengine.item, 3), new ItemStack(ItemIDs.controls.item, 1), dye, new ItemStack(ItemIDs.minecartTB27.item, 1), 1);
             }
 
-            for (ItemStack dye : dyeGreen)
-            {
-                cm.addRecipe(2, new ItemStack(ItemIDs.controls.item, 2), new ItemStack(ItemIDs.partBlombergB.item, 2),
-                        new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(itemSteel, 2, itemDamageSteel),
-                        new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1),
-                        new ItemStack(ItemIDs.electmotor.item, 4), new ItemStack(ItemIDs.dieselengine.item, 4),
-                        new ItemStack(ItemIDs.generator.item, 3), dye,
-                        new ItemStack(ItemIDs.minecartDD55.item, 1), 1);
+            for (ItemStack dye : dyeGreen) {
+                cm.addRecipe(2, new ItemStack(ItemIDs.controls.item, 2), new ItemStack(ItemIDs.partBlombergB.item, 2), new ItemStack(ItemIDs.steelframe.item, 2), new ItemStack(itemSteel, 2, itemDamageSteel), new ItemStack(ItemIDs.steelchimney.item, 1), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.electmotor.item, 4), new ItemStack(ItemIDs.dieselengine.item, 4), new ItemStack(ItemIDs.generator.item, 3), dye, new ItemStack(ItemIDs.minecartDD55.item, 1), 1);
             }
 
 
-
             //=================== TIER III =================//
-
 
 
             for (ItemStack dye : dyeGreen) {//m420 & m630 divot

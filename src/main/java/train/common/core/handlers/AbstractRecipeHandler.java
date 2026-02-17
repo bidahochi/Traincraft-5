@@ -19,6 +19,26 @@ import java.util.*;
  */
 public abstract class AbstractRecipeHandler
 {
+
+    public final ItemStack BLACK_DYE      = new ItemStack(Items.dye, 1, 0);
+    public final ItemStack RED_DYE        = new ItemStack(Items.dye, 1, 1);
+    public final ItemStack GREEN_DYE      = new ItemStack(Items.dye, 1, 2);
+    public final ItemStack BROWN_DYE      = new ItemStack(Items.dye, 1, 3);
+    public final ItemStack BLUE_DYE       = new ItemStack(Items.dye, 1, 4);
+    public final ItemStack PURPLE_DYE     = new ItemStack(Items.dye, 1, 5);
+    public final ItemStack CYAN_DYE       = new ItemStack(Items.dye, 1, 6);
+    public final ItemStack LIGHT_GRAY_DYE = new ItemStack(Items.dye, 1, 7);
+    public final ItemStack GRAY_DYE       = new ItemStack(Items.dye, 1, 8);
+    public final ItemStack PINK_DYE       = new ItemStack(Items.dye, 1, 9);
+    public final ItemStack LIME_DYE       = new ItemStack(Items.dye, 1, 10);
+    public final ItemStack YELLOW_DYE     = new ItemStack(Items.dye, 1, 11);
+    public final ItemStack LIGHT_BLUE_DYE = new ItemStack(Items.dye, 1, 12);
+    public final ItemStack MAGENTA_DYE    = new ItemStack(Items.dye, 1, 13);
+    public final ItemStack ORANGE_DYE     = new ItemStack(Items.dye, 1, 14);
+    public final ItemStack WHITE_DYE      = new ItemStack(Items.dye, 1, 15);
+
+
+
     public ArrayList<ItemStack> ingotIron	= OreDictionary.getOres("ingotIron");
     public ArrayList<ItemStack> plankWood = OreDictionary.getOres("plankWood");
     public ArrayList<ItemStack> logWood = OreDictionary.getOres("logWood");
@@ -27,18 +47,11 @@ public abstract class AbstractRecipeHandler
     public ArrayList<ItemStack> dyeYellow = OreDictionary.getOres("dyeYellow"); //11
     public ArrayList<ItemStack> dyeOrange = OreDictionary.getOres("dyeOrange");//14
     public ArrayList<ItemStack> dyeGreen = OreDictionary.getOres("dyeGreen"); //2
-    public final ItemStack DyeGreen = new ItemStack(Items.dye, 1, 2);
     public ArrayList<ItemStack> dyeBlue = OreDictionary.getOres("dyeBlue"); //4
     public ArrayList<ItemStack> dyeBrown = OreDictionary.getOres("dyeBrown"); //3
-    public final ItemStack DyeBrown = new ItemStack(Items.dye, 1, 3);
     public ArrayList<ItemStack> dyeGray = OreDictionary.getOres("dyeGray"); //3
-    public final ItemStack DyeGray = new ItemStack(Items.dye, 1, 8);
-
     public ArrayList<ItemStack> dyeLightGray = OreDictionary.getOres("dyeLightGray"); //7
-
-    public final ItemStack DyeLightGray = new ItemStack(Items.dye, 1, 7);
     public ArrayList<ItemStack> dyeBlack = OreDictionary.getOres("dyeBlack");
-    public final ItemStack DyeBlack = new ItemStack(Items.dye, 1, 0);
     public ArrayList<ItemStack> dyeWhite = OreDictionary.getOres("dyeWhite");
     public ArrayList<ItemStack> dyeMagenta = OreDictionary.getOres("dyeMagenta");
     public ArrayList<ItemStack> dyeLime = OreDictionary.getOres("dyeLime");
@@ -59,26 +72,57 @@ public abstract class AbstractRecipeHandler
     {
         return new ItemStack(CoalItem, amount);
     }
+
+    public final ItemStack SteelIngot(int amount)
+    {
+        return new ItemStack(ItemIDs.steel.item, amount);
+    }
+
     public final String ironCopper = "ingotCopper";
 
     public final String circuitBasic = "circuitBasic";
     public final String wireCopper = "wireCopper";
 
-    ItemStack anyPlankType =  new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE);
+    final ItemStack anyPlankType =  new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE);
+    final ItemStack anyLogType =  new ItemStack(Blocks.log, 1, OreDictionary.WILDCARD_VALUE);
 
     public final ItemStack TCItemStack(ItemIDs itemIDs, int amount)
     {
         return new ItemStack(itemIDs.item, amount);
     }
 
+
     public final ItemStack TCItemStack(Item item, int amount)
     {
         return new ItemStack(item, amount);
     }
 
+    public final ItemStack TCItemStack(Item item, int amount, int meta)
+    {
+        return new ItemStack(item, amount, meta);
+    }
+
+
+    public final ItemStack TCItemStack(Item item)
+    {
+        return new ItemStack(item, 1);
+    }
+
+    public final ItemStack TCItemStack(Block block, int amount)
+    {
+        return new ItemStack(block, amount);
+    }
+
     public ItemStack getAnyPlankType(int amount)
     {
         ItemStack copy = anyPlankType.copy();
+        copy.stackSize = Math.min(amount, 64);;
+        return copy;
+    }
+
+    public ItemStack getAnyLogType(int amount)
+    {
+        ItemStack copy = anyLogType.copy();
         copy.stackSize = Math.min(amount, 64);;
         return copy;
     }

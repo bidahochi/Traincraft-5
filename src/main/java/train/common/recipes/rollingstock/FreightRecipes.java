@@ -9,19 +9,6 @@ public class FreightRecipes extends AbstractRecipeHandler
 {
     public FreightRecipes(ITierCraftingManager cm)
     {
-        for (ItemStack k :ingotSteel)
-        {
-            Item itemSteel = k.getItem();
-            int itemDamageSteel = k.getItemDamage();
-
-            //doing bap recipes first
-            //example of item order
-            //cm.addRecipe(3, null, null, null, null, null, null, null, null, null, null, new ItemStack(ItemIDs.pennCentral.item, 1), 1);
-
-
-
-
-        }
 
     }
 }
