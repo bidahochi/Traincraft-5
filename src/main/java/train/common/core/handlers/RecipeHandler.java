@@ -706,30 +706,29 @@ public class RecipeHandler extends AbstractRecipeHandler
 			//TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partTypeB.item,1), "MCM", "S S", "WSW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', steelItem, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentALCO.item));
 			//TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partTypeB.item,1), "MCM", "S S", "WSW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', steelItem, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentBLW.item));
 			//TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partTypeB.item,1), "MCM", "S S", "WSW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', steelItem, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentFM.item));
-		for (ItemStack steelItem: steel) {
-				for (ItemStack copperingot : copper) {
-					for (ItemStack dye : dyeBlue) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentEMD.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-					for (ItemStack dye : dyeLightBlue) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentGE.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-					for (ItemStack dye : dyeYellow) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentALCO.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-					for (ItemStack dye : dyeGray) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentBLW.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-					for (ItemStack dye : dyeBlack) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentFM.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-					for (ItemStack dye : dyeBrown) {
-						TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentCEE.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', copperingot, 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
-					}
-				}
-                TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partAlternator.item, 2), "## ", "$$E", "## ", '$', wireCopper, 'E', circuitBasic, '#', ironingot);
-                TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partTurboExhaust.item, 2), "S S", "S S", "SPS", 'S', steelItem, 'P', ItemIDs.piston.item);
-		}
+
+
+			for (ItemStack dye : dyeBlue) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentEMD.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+			for (ItemStack dye : dyeLightBlue) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentGE.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+			for (ItemStack dye : dyeYellow) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentALCO.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+			for (ItemStack dye : dyeGray) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentBLW.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+			for (ItemStack dye : dyeBlack) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentFM.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+			for (ItemStack dye : dyeBrown) {
+				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partComponentCEE.item, 6), "RDR", " C ", "PIP", 'P', new ItemStack(ItemIDs.rawPlastic.item), 'I', ironingot, 'C', "ingotCopper", 'R', new ItemStack(ItemIDs.reinforcedPlastic.item), 'D', dye);
+			}
+
+			TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partAlternator.item, 2), "## ", "$$E", "## ", '$', wireCopper, 'E', circuitBasic, '#', ironingot);
+			TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partTurboExhaust.item, 2), "S S", "S S", "SPS", 'S', ItemIDs.steel.item, 'P', ItemIDs.piston.item);
 
 
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallStraight.item, 1),  "   ", " R ", "   ", Character.valueOf('R'), Item.getItemFromBlock(Blocks.rail));// small straight track
