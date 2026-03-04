@@ -54,6 +54,7 @@ public class gsco52millgon extends AbstractStandardFreightCar
         InsertTexture(10, "SLSF (Brown)");
         InsertTexture(11, "SLSF (Black)");
         InsertTexture(12, "RI");
+        InsertTexture(13, "SOU");
     }
 
     @Override

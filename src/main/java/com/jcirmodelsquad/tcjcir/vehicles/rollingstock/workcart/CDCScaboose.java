@@ -11,8 +11,10 @@ public class CDCScaboose extends AbstractWorkCart
         super(world);
         InsertTexture(0, "CDCS", LockoutGroup.CDCS);
         InsertTexture(1, "CDCS (Modernized)", LockoutGroup.CDCS);
-        InsertTexture(2, "NPS");
-        InsertTexture(3, "MOW");
+        InsertTexture(2, "Painted, Unlettered");
+        InsertTexture(3, "NPS");
+        InsertTexture(4, "MOW");
+        InsertTexture(5, "SOUPERBOWL");
     }
 
     @Override

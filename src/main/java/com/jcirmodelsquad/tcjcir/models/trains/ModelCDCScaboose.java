@@ -260,7 +260,7 @@ public class ModelCDCScaboose extends ModelConverter //Same as Filename
 		bodyModel[13].addShapeBox(0F, 0F, 0F, 3, 2, 9, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 15
 		bodyModel[13].setRotationPoint(17.5F, 2F, -11F);
 
-		bodyModel[14].addBox(0F, 0F, 0F, 3, 2, 9, 0F); // Box 21
+		bodyModel[14].addShapeBox(0F, 0F, 0F, 3, 2, 9, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 21
 		bodyModel[14].setRotationPoint(-20.5F, 2F, -11F);
 
 		bodyModel[15].addBox(0F, 0F, 0F, 2, 2, 22, 0F); // Box 22
