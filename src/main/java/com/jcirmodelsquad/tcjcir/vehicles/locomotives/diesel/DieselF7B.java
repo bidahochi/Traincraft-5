@@ -44,6 +44,9 @@ public class DieselF7B extends DieselTrain {
         InsertTexture(21, "SP Black Widow");
         InsertTexture(22, "SP Scarlet (Bloodynose)");
         InsertTexture(23, "Pennsylvania Railroad (As Delivered)");
+        InsertTexture(24, "Southern (Black)");
+        InsertTexture(25, "Southern (Green)");
+        InsertTexture(26, "Southern (As Delivered)");
     }
 
     @Override

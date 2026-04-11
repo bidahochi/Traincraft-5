@@ -25,6 +25,7 @@ public class DieselSW9 extends DieselTrain {
         InsertTexture(3, "Conrail");
         InsertTexture(4, "Apalachicola Northern");
         InsertTexture(5, "Blandsville & Blankerston");
+        InsertTexture(6, "Southern");
     }
 
     @Override
