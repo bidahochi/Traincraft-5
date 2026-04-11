@@ -4,7 +4,7 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 import train.common.overlaytexture.EnumOverlayFonts;

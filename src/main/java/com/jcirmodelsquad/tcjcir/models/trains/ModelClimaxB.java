@@ -1213,7 +1213,7 @@ public class ModelClimaxB extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderLocomotiveModelWithoutBeacon(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		if (GetColor(entity) == 7||GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/climaxtruck_minelol.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/climaxtruck_hillcrest9.png"));

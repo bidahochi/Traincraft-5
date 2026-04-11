@@ -53,6 +53,12 @@ public class SteamBrank extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 160;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 8000;

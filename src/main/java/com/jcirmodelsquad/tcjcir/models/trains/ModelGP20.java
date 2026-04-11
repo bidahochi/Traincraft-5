@@ -109,7 +109,7 @@ public class ModelGP20 extends ModelConverter //Same as Filename
 		bodyModel[69] = new ModelRendererTurbo(this, 103, 97, textureX, textureY); // Box 351
 		bodyModel[70] = new ModelRendererTurbo(this, 92, 101, textureX, textureY); // Box 352
 		bodyModel[71] = new ModelRendererTurbo(this, 73, 97, textureX, textureY); // Box 353
-		bodyModel[72] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "glow"); // Box 117 numberboard front high
+		bodyModel[72] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "lamp"); // Box 117 numberboard front high
 		bodyModel[73] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "lamp"); // Box 118 numberboard front high
 		bodyModel[74] = new ModelRendererTurbo(this, 32, 120, textureX, textureY, "lamp"); // Box 215 headlight front 1
 		bodyModel[75] = new ModelRendererTurbo(this, 25, 120, textureX, textureY); // Box 216
@@ -1979,7 +1979,7 @@ public class ModelGP20 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 333) {
+		if (GetColor(entity) == 333) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_MPBlue.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.37, -0.0, 0);//front & rear
@@ -1988,7 +1988,7 @@ public class ModelGP20 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.74, 0, 0);//rear
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 212){
+		} else if (GetColor(entity) == 212){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.37, -0.0, 0);//front & rear
@@ -1997,7 +1997,7 @@ public class ModelGP20 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.74, 0, 0);//rear
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18  || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 25){
+		} else if (GetColor(entity) == 7 || GetColor(entity) == 18  || GetColor(entity) == 11 || GetColor(entity) == 25){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.37, -0.0, 0);//front & rear
@@ -2006,7 +2006,7 @@ public class ModelGP20 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.74, 0, 0);//rear
 			theBlombi.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 24){
+		} else if (GetColor(entity) == 1 || GetColor(entity) == 24){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Espee.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.37, -0.0, 0);//front & rear

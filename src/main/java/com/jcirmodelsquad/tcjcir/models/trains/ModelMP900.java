@@ -1279,7 +1279,7 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1342) {
+		if (GetColor(entity) == 1342) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Black.png"));//white bearing caps
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1288,8 +1288,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 654
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1348) {
+		} else if (GetColor(entity) == 654
+				||GetColor(entity) == 1348) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Silver.png"));// self explanitory
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1298,7 +1298,7 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7){
+		} else if (GetColor(entity) == 7){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_rolly.png"));// lol
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, -0.03, 0);

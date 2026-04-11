@@ -60,6 +60,12 @@ public class SteamHCS_c57 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 75;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 2000;

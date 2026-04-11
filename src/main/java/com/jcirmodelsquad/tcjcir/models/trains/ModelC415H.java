@@ -1569,7 +1569,7 @@ public class ModelC415H extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7545) {
+		if (GetColor(entity) == 3 || GetColor(entity) == 7545) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_DarkGrey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.2, -0.06, 0);
@@ -1578,7 +1578,7 @@ public class ModelC415H extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.35, 0, 0);
 			typeB2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 2312 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5) {
+		} else if (GetColor(entity) == 6 || GetColor(entity) == 2312 || GetColor(entity) == 5) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/HiAd_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.2, 0.0, 0);
@@ -1587,7 +1587,7 @@ public class ModelC415H extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.33, 0, 0);
 			hiAd.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6231 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 145) {
+		} else if (GetColor(entity) == 6231 || GetColor(entity) == 145) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/HiAd_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.2, 0.0, 0);

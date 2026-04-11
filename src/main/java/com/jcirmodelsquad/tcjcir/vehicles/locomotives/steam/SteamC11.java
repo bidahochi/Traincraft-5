@@ -77,6 +77,12 @@ public class SteamC11 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 100;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 16000;

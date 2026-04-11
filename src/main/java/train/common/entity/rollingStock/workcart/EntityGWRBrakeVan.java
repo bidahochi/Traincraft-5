@@ -27,4 +27,20 @@ public class EntityGWRBrakeVan extends AbstractWorkCart {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 3.4F;
 	}
+
+	@Override
+	public void onRenderInsertRecord()
+	{
+		train.common.Traincraft.traincraftRegistry.RegisterRollingStockModel(
+				new train.client.render.register.TrainRenderRecord(
+						train.common.library.Info.modID,
+						EntityGWRBrakeVan.class,
+						new train.client.render.models.ModelGWRBrakeVan(),
+						"GWRBrakeVan",
+						new float[] { 0F, 0.1F, 0.0F },
+						new float[] { 0F, 180F, 180F },
+						null
+				)
+		);
+	}
 }

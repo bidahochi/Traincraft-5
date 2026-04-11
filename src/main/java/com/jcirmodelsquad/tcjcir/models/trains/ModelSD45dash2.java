@@ -2351,7 +2351,7 @@ public class ModelSD45dash2 extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9 ) {
+		if (GetColor(entity) == 9 ) {
 			//silver regular truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_silvers.png"));
 			GL11.glPushMatrix();
@@ -2362,7 +2362,7 @@ public class ModelSD45dash2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.45F, 0.0F, 0);
 			flexMid.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8 ) {
+		} else if (GetColor(entity) == 8 ) {
 			//sp regular truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_sp.png"));
 			GL11.glPushMatrix();
@@ -2373,9 +2373,9 @@ public class ModelSD45dash2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.45F, 0.0F, 0);
 			flexMid.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27565
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 26 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 28 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 29) {
+		} else if (GetColor(entity) == 27565
+				||GetColor(entity) == 26 ||GetColor(entity) == 27
+				||GetColor(entity) == 28 ||GetColor(entity) == 29) {
 
 			//black dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_Black.png"));
@@ -2387,9 +2387,9 @@ public class ModelSD45dash2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.6F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 22 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 23
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 24 ) {
+		} else if (GetColor(entity) == 21
+				||GetColor(entity) == 22 ||GetColor(entity) == 23
+				||GetColor(entity) == 24 ) {
 			//silver dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_longjohns.png"));
 			GL11.glPushMatrix();
@@ -2400,7 +2400,7 @@ public class ModelSD45dash2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.6F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 25 ) {
+		} else if (GetColor(entity) == 25 ) {
 			//beansniuff dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_c2_late_-2_beansnifgren.png"));
 			GL11.glPushMatrix();

@@ -1028,7 +1028,7 @@ public class ModelWPShops600Series extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1467|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1567){
+		if (GetColor(entity) == 1467|| GetColor(entity) == 1567){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);

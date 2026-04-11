@@ -28,6 +28,10 @@ public class DieselRS2 extends DieselTrain {
         InsertTexture(6, "AGW", LockoutGroup.AGW);
         InsertTexture(7, "WM (Fireball)");
         InsertTexture(8, "WM (Speed Lettering)");
+        InsertTexture(9, "MONON (early, steam gen)");
+        InsertTexture(10, "MONON (early)");
+        InsertTexture(11, "MONON (steam gen)");
+        InsertTexture(12, "MONON");
 
     }
 

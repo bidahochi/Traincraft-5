@@ -590,7 +590,7 @@ public class ModelGeometryCar extends ModelConverter //Same as Filename
                 bodyModel[i].render(f5);
             }
         }
-        if(!(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==8)){
+        if(!(GetColor(entity)==8)){
             Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/nxtrack_bogie_Grey.png"));
         } else {
             Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/nxtrack_bogie_Black.png"));

@@ -1,13 +1,19 @@
 package tmt;
 
 import net.minecraft.entity.Entity;
+import train.common.api.AbstractTrains;
 
 /**
 * Converter to use Flansmod-Type vehicle models.
 * @Author Ferdinand Calo' (FEX___96)
 */
 public class ModelConverter extends ModelBase {
-	
+
+	public static int GetColor(Entity entity)
+	{
+		return ((AbstractTrains) entity).getColor();
+	}
+
 	public ModelRendererTurbo bodyModel[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo model[] = new ModelRendererTurbo[0];
 	public ModelRendererTurbo bodyDoorOpenModel[] = new ModelRendererTurbo[0];

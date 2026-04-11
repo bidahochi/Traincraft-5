@@ -1099,7 +1099,7 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18) {
+		if (GetColor(entity) == 14|| GetColor(entity) == 18) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_Silver_generator2.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);
@@ -1111,7 +1111,7 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1845){
+		}else if (GetColor(entity) == 6|| GetColor(entity) == 1845){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_left-generator3.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);
@@ -1123,7 +1123,7 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17){
+		}else if (GetColor(entity) == 17){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_left-generator4.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);

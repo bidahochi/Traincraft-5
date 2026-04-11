@@ -1142,7 +1142,7 @@ public class ModelCA11 extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1124) {
+		if (GetColor(entity) == 1124) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_Silver_generator2.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);

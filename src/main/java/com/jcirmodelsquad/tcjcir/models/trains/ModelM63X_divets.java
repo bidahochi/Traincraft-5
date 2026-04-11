@@ -1615,7 +1615,7 @@ public class ModelM63X_divets extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 ) {
+		if (GetColor(entity) == 6 ) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/MLW_3_axle_hiad_FNCC_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-1.75F, 0.0F, 0F);
@@ -1625,7 +1625,7 @@ public class ModelM63X_divets extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.5F, 0.0F, 0);
 			boger.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 2 ) {
+		} else if (GetColor(entity) == 2 ) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/MLW_3_axle_hiad_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-1.75F, 0.0F, 0F);
@@ -1635,7 +1635,7 @@ public class ModelM63X_divets extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.5F, 0.0F, 0);
 			boger.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3 ) {
+		} else if (GetColor(entity) == 3 ) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/MLW_3_axle_hiad_Grey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-1.75F, 0.0F, 0F);

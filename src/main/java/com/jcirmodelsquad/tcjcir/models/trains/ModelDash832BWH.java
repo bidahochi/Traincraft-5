@@ -1726,7 +1726,7 @@ public class ModelDash832BWH extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4){
+		if (GetColor(entity) == 4){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_amtrakitha.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.75, 0.0, 0);
@@ -1737,7 +1737,7 @@ public class ModelDash832BWH extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.875, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7){
+		} else if (GetColor(entity) == 14||GetColor(entity) == 7){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_silver_a.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.75, 0.0, 0);

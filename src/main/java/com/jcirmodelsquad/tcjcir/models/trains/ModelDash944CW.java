@@ -1754,7 +1754,7 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19) {
+		if (GetColor(entity) == 14 || GetColor(entity) == 1 || GetColor(entity) == 19) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/ge_hiad_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-2F, 0.0F, 0F);
@@ -1765,7 +1765,7 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 13 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17) {
+		}else if (GetColor(entity) == 13 || GetColor(entity) == 17) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/ge_hiad_SP_2.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-2F, 0.0F, 0F);

@@ -1409,7 +1409,7 @@ public class ModelAAR70TonHopper extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12345) {
+		if (GetColor(entity) == 12345) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Bettendorf_Truck_small_PRR_FCC1940s.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.03, -0.02, 0);

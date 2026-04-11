@@ -40,7 +40,7 @@ public class ElectricGM6C_2 extends ElectricTrain {
                 { new CargoSpecification(Modelpanto_gm6c_up.class, "pantopart_gm6c",
                         "Pantograph (Both Up)", 0, 3.085, 0)},
 
-        }));
+        }).setDefaultOverride(1));
     }
 
     @Override

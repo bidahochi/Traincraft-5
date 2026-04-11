@@ -2109,7 +2109,7 @@ public class ModelSW9 extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12345) {
+		if (GetColor(entity) == 12345) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_silvers_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, -0.03, 0);
@@ -2118,7 +2118,7 @@ public class ModelSW9 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.0, 0, 0);
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1342) {
+		} else if (GetColor(entity) == 1342) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Black2.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, 0.33, 0);
@@ -2127,7 +2127,7 @@ public class ModelSW9 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.0, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 346) {
+		} else if (GetColor(entity) == 346) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, 0.33, 0);
@@ -2136,7 +2136,7 @@ public class ModelSW9 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.0, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123) {
+		} else if (GetColor(entity) == 123) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blunttruck_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-0.95, 0.27, 0);
@@ -2145,7 +2145,7 @@ public class ModelSW9 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.0, 0, 0);
 			fatBlunt.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7){
+		} else if (GetColor(entity) == 7){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, -0.03, 0);

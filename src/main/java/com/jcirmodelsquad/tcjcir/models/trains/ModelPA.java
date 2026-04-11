@@ -3102,13 +3102,13 @@ public class ModelPA extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6) {
+		if (GetColor(entity) == 4||GetColor(entity) == 6) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/AlcoPATruckNKPBlue.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 24) {
+		} else if (GetColor(entity) == 1||GetColor(entity) == 11||GetColor(entity) == 7||GetColor(entity) == 9 || GetColor(entity) == 24) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/AlcoPATruckSilver.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16) {
+		} else if (GetColor(entity) == 16) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/AlcoPATruckJenksBlue.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21) {
+		} else if (GetColor(entity) == 21) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/AlcoPATruckAFTBlue.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/AlcoPATruckBlack.png"));

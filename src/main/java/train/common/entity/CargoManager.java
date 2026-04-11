@@ -6,7 +6,6 @@ import org.lwjgl.opengl.GL11;
 import tmt.ModelConverter;
 import tmt.Tessellator;
 import train.common.api.AbstractTrains;
-import train.common.library.Info;
 
 /**
  * @author 02skaplan
@@ -14,6 +13,13 @@ import train.common.library.Info;
  */
 public class CargoManager {
     private int selectedCargo = 0;
+    private int defaultOverride = -1;
+
+    public int GetDefaultOverride()
+    {
+        return defaultOverride;
+    }
+
     private final CargoSpecification[][] cargoSpecificationList;
     private ModelConverter[] renderModels;
 
@@ -25,11 +31,18 @@ public class CargoManager {
         this.cargoSpecificationList = cargoSpecificationList;
     }
 
+    public CargoManager setDefaultOverride(int defaultCargoState)
+    {
+        this.defaultOverride = defaultCargoState;
+        return this;
+    }
+
     public CargoSpecification[][] getCargoSpecificationList() {
         return cargoSpecificationList;
     }
 
-    public int getSelectedCargo() {
+    public int getSelectedCargo()
+    {
         return selectedCargo;
     }
 

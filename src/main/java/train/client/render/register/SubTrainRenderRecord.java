@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class SubTrainRenderRecord implements ISubTrainRenderRecord
 {
-    private final String SmokeType;
-    private final ArrayList<double[]> SmokeFX;
-    private final short ExplosionFXIterations;
+    private String SmokeType;
+    private ArrayList<double[]> SmokeFX;
+    private short ExplosionFXIterations;
 
 
-    private final String ExplosionType;
-    private final ArrayList<double[]> ExplosionFX;
+    private String ExplosionType;
+    private ArrayList<double[]> ExplosionFX;
 
-    private final short SmokeIterations;
+    private short SmokeIterations;
     public String getSmokeType()
     {
         return SmokeType;
@@ -30,6 +30,12 @@ public class SubTrainRenderRecord implements ISubTrainRenderRecord
         return ExplosionFX;
     }
 
+    private boolean hasSmoke;
+    private boolean hasExplosions;
+
+    public boolean hasSmoke() { return hasSmoke; }
+    public boolean hasExplosions() { return hasExplosions; }
+
     public int getExplosionFXIterations()
     {
         return ExplosionFXIterations;
@@ -45,5 +51,61 @@ public class SubTrainRenderRecord implements ISubTrainRenderRecord
         ExplosionFX = explosionFX;
         SmokeIterations = smokeIterations;
         ExplosionFXIterations = explosionFXIterations;
+        hasSmoke = smokeFX != null && smokeFX.size() > 0;
+        hasExplosions = explosionFX != null && explosionFX.size() > 0;
+    }
+
+    public SubTrainRenderRecord()
+    {
+        hasSmoke = false;
+        hasExplosions = false;
+        SmokeFX = null;
+        ExplosionFX = null;
+    }
+
+    public SubTrainRenderRecord setSmokeType(String smokeType)
+    {
+        SmokeType = smokeType;
+        return this;
+    }
+
+    public SubTrainRenderRecord setExplosionType(String explosionType)
+    {
+        ExplosionType = explosionType;
+        return this;
+    }
+
+    public SubTrainRenderRecord setSmokeIterations(int smokeIterations)
+    {
+        SmokeIterations = (short)smokeIterations;
+        return this;
+    }
+
+    public SubTrainRenderRecord setExplosionFXIterations(int explosionFXIterations)
+    {
+        ExplosionFXIterations = (short)explosionFXIterations;
+        return this;
+    }
+
+    public SubTrainRenderRecord addSmokePos(double x, double y, double z)
+    {
+        hasSmoke = true;
+        if (getSmokeFX() == null)
+        {
+            SmokeFX = new ArrayList<double[]>();
+        }
+        getSmokeFX().add(new double[] { x, y, z});
+        return this;
+    }
+
+    public SubTrainRenderRecord addExplosionFX(double x, double y, double z)
+    {
+        hasExplosions = true;
+        if (getExplosionFX() == null)
+        {
+            ExplosionFX = new ArrayList<double[]>();
+        }
+        getExplosionFX().add(new double[] { x, y, z});
+        return this;
     }
 }

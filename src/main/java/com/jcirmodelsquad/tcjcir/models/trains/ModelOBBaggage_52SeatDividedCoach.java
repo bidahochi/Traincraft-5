@@ -275,10 +275,10 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 		bodyModel[231] = new ModelRendererTurbo(this, 306, 322, textureX, textureY); // Box 380
 		bodyModel[232] = new ModelRendererTurbo(this, 305, 327, textureX, textureY); // Box 381
 		bodyModel[233] = new ModelRendererTurbo(this, 309, 331, textureX, textureY); // Box 382
-		bodyModel[234] = new ModelRendererTurbo(this, 285, 319, textureX, textureY,"glow"); // Box 86 glow
-		bodyModel[235] = new ModelRendererTurbo(this, 90, 243, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[236] = new ModelRendererTurbo(this, 90, 249, textureX, textureY,"glow"); // Box 386 glow
-		bodyModel[237] = new ModelRendererTurbo(this, 326, 273, textureX, textureY,"glow"); // Box 384 glow
+		bodyModel[234] = new ModelRendererTurbo(this, 285, 319, textureX, textureY,"lamp"); // Box 86 glow
+		bodyModel[235] = new ModelRendererTurbo(this, 90, 243, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[236] = new ModelRendererTurbo(this, 90, 249, textureX, textureY,"lamp"); // Box 386 glow
+		bodyModel[237] = new ModelRendererTurbo(this, 326, 273, textureX, textureY,"lamp"); // Box 384 glow
 		bodyModel[238] = new ModelRendererTurbo(this, 91, 266, textureX, textureY); // Box 386
 		bodyModel[239] = new ModelRendererTurbo(this, 91, 255, textureX, textureY); // Box 391
 		bodyModel[240] = new ModelRendererTurbo(this, 85, 346, textureX, textureY); // Box 386
@@ -384,7 +384,7 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 		bodyModel[340] = new ModelRendererTurbo(this, 312, 287, textureX, textureY); // Box 128
 		bodyModel[341] = new ModelRendererTurbo(this, 311, 292, textureX, textureY); // Box 128
 		bodyModel[342] = new ModelRendererTurbo(this, 315, 296, textureX, textureY); // Box 41
-		bodyModel[343] = new ModelRendererTurbo(this, 285, 284, textureX, textureY,"glow"); // Box 384 glow
+		bodyModel[343] = new ModelRendererTurbo(this, 285, 284, textureX, textureY,"lamp"); // Box 384 glow
 		bodyModel[344] = new ModelRendererTurbo(this, 87, 376, textureX, textureY); // Box 128
 		bodyModel[345] = new ModelRendererTurbo(this, 88, 367, textureX, textureY); // Box 128
 		bodyModel[346] = new ModelRendererTurbo(this, 88, 369, textureX, textureY); // Box 128
@@ -425,8 +425,8 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 		bodyModel[381] = new ModelRendererTurbo(this, 249, 370, textureX, textureY); // Box 38
 		bodyModel[382] = new ModelRendererTurbo(this, 247, 375, textureX, textureY); // Box 275
 		bodyModel[383] = new ModelRendererTurbo(this, 249, 380, textureX, textureY); // Box 276
-		bodyModel[384] = new ModelRendererTurbo(this, 181, 383, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[385] = new ModelRendererTurbo(this, 181, 373, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[384] = new ModelRendererTurbo(this, 181, 383, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[385] = new ModelRendererTurbo(this, 181, 373, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[386] = new ModelRendererTurbo(this, 182, 365, textureX, textureY); // Box 38
 		bodyModel[387] = new ModelRendererTurbo(this, 184, 370, textureX, textureY); // Box 38
 		bodyModel[388] = new ModelRendererTurbo(this, 182, 375, textureX, textureY); // Box 275
@@ -2149,10 +2149,10 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 		bodyModel[509] = new ModelRendererTurbo(this, 88, 7, textureX, textureY); // Box 283
 		bodyModel[510] = new ModelRendererTurbo(this, 3, 259, textureX, textureY); // Box 384
 		bodyModel[511] = new ModelRendererTurbo(this, 1, 263, textureX, textureY); // Box 384
-		bodyModel[512] = new ModelRendererTurbo(this, 8, 263, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[513] = new ModelRendererTurbo(this, 17, 263, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[514] = new ModelRendererTurbo(this, 26, 263, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[515] = new ModelRendererTurbo(this, 35, 263, textureX, textureY,"glow"); // Box 384 glow
+		bodyModel[512] = new ModelRendererTurbo(this, 8, 263, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[513] = new ModelRendererTurbo(this, 17, 263, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[514] = new ModelRendererTurbo(this, 26, 263, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[515] = new ModelRendererTurbo(this, 35, 263, textureX, textureY,"lamp"); // Box 384 glow
 		bodyModel[516] = new ModelRendererTurbo(this, 65, 229, textureX, textureY); // Box 374
 		bodyModel[517] = new ModelRendererTurbo(this, 65, 238, textureX, textureY); // Box 521
 		bodyModel[518] = new ModelRendererTurbo(this, 39, 388, textureX, textureY); // Box 374
@@ -2296,7 +2296,7 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 	{
 		for(int i = 0; i < 538; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2308,7 +2308,7 @@ public class ModelOBBaggage_52SeatDividedCoach extends ModelConverter //Same as 
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-E_truck_black_roller.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

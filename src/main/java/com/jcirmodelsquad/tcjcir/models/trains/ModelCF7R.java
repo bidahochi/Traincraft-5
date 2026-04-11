@@ -1259,7 +1259,7 @@ public class ModelCF7R extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123455) {
+		if (GetColor(entity) == 123455) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/fb2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.3, -0.01, 0);
@@ -1268,7 +1268,7 @@ public class ModelCF7R extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.57, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 32545||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 2546||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123543) {
+		} else if (GetColor(entity) == 11||GetColor(entity) == 4||GetColor(entity) == 32545||GetColor(entity) == 2546||GetColor(entity) == 123543) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_Grey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.28, -0.15, 0);
@@ -1278,7 +1278,7 @@ public class ModelCF7R extends ModelConverter //Same as Filename
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123454) {
+		} else if (GetColor(entity) == 123454) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeb_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.3, -0.01, 0);

@@ -81,6 +81,12 @@ public class SteamOnion extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 240;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 8000;

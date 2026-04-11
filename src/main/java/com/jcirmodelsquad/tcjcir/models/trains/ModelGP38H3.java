@@ -1336,7 +1336,7 @@ public class ModelGP38H3 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15) {
+		if (GetColor(entity) == 15) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blomber_phase5.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.7, -0.00, 0);

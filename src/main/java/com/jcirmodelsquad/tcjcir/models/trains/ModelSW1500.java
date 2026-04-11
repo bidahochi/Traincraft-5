@@ -29,7 +29,7 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 
 	public ModelSW1500() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[431];
+		bodyModel = new ModelRendererTurbo[446];
 
 		initbodyModel_1();
 
@@ -472,6 +472,21 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 		bodyModel[428] = new ModelRendererTurbo(this, 353, 218, textureX, textureY); // Box 531 cs
 		bodyModel[429] = new ModelRendererTurbo(this, 359, 195, textureX, textureY, "lamp"); // Box 275 cs speedo glow
 		bodyModel[430] = new ModelRendererTurbo(this, 140, 237, textureX, textureY); // Box 527 why dont you filter some bitches instead
+		bodyModel[431] = new ModelRendererTurbo(this, 84, 4, textureX, textureY); // Box 431
+		bodyModel[432] = new ModelRendererTurbo(this, 86, 1, textureX, textureY); // Box 432
+		bodyModel[433] = new ModelRendererTurbo(this, 86, 7, textureX, textureY); // Box 433
+		bodyModel[434] = new ModelRendererTurbo(this, 93, 1, textureX, textureY, "cull"); // Box 270 cull
+		bodyModel[435] = new ModelRendererTurbo(this, 93, 4, textureX, textureY); // Box 435
+		bodyModel[436] = new ModelRendererTurbo(this, 43, 6, textureX, textureY); // Box 364 prime base bn/frisco/bjry
+		bodyModel[437] = new ModelRendererTurbo(this, 34, 6, textureX, textureY, BoxName.prime1); // Box 6 PRIME4-1
+		bodyModel[438] = new ModelRendererTurbo(this, 34, 6, textureX, textureY, BoxName.prime3); // Box 7 PRIME4-3
+		bodyModel[439] = new ModelRendererTurbo(this, 34, 6, textureX, textureY, BoxName.prime2); // Box 8 PRIME4-2
+		bodyModel[440] = new ModelRendererTurbo(this, 34, 6, textureX, textureY, BoxName.prime4); // Box 9 PRIME4-4
+		bodyModel[441] = new ModelRendererTurbo(this, 7, 44, textureX, textureY); // Box 441
+		bodyModel[442] = new ModelRendererTurbo(this, 1, 149, textureX, textureY); // Box 442 bjry 1501 hotstart box
+		bodyModel[443] = new ModelRendererTurbo(this, 26, 152, textureX, textureY); // Box 443 hotstart box handrail
+		bodyModel[444] = new ModelRendererTurbo(this, 22, 149, textureX, textureY); // Box 444 hotstart box handrail
+		bodyModel[445] = new ModelRendererTurbo(this, 10, 4, textureX, textureY); // Box 445 nasa 3 horn
 
 		bodyModel[0].addBox(0F, 0F, 0F, 54, 1, 4, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-27F, 0F, -11F);
@@ -1800,9 +1815,54 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 
 		bodyModel[430].addShapeBox(0F, 0F, 0F, 2, 6, 2, 0F,0F, 0.25F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0.25F, 0F, 0F, -3.75F, 0F, 0F, -3.5F, 0F, 0F, -3.5F, 0F, 0F, -3.75F, 0F); // Box 527 why dont you filter some bitches instead
 		bodyModel[430].setRotationPoint(11F, 1F, 8.5F);
+
+		bodyModel[431].addBox(0F, 0F, 0F, 3, 1, 1, 0F); // Box 431
+		bodyModel[431].setRotationPoint(8F, -21.75F, -0.5F);
+
+		bodyModel[432].addBox(0F, 0F, 0F, 2, 1, 1, 0F); // Box 432
+		bodyModel[432].setRotationPoint(9F, -21.5F, 0.5F);
+
+		bodyModel[433].addBox(0F, 0F, 0F, 2, 1, 1, 0F); // Box 433
+		bodyModel[433].setRotationPoint(8.5F, -21.5F, -1.5F);
+
+		bodyModel[434].addShapeBox(0F, 0F, 0F, 2, 1, 1, 0F,0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, -1F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, -1F, 0.25F); // Box 270 cull
+		bodyModel[434].setRotationPoint(9F, -19.75F, -0.5F);
+
+		bodyModel[435].addBox(0F, 0F, 0F, 1, 1, 1, 0F); // Box 435
+		bodyModel[435].setRotationPoint(9.5F, -20.75F, -0.5F);
+
+		bodyModel[436].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 364 prime base bn/frisco/bjry
+		bodyModel[436].setRotationPoint(17F, -23F, -1F);
+
+		bodyModel[437].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F); // Box 6 PRIME4-1
+		bodyModel[437].setRotationPoint(17F, -23.5F, -1F);
+
+		bodyModel[438].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F); // Box 7 PRIME4-3
+		bodyModel[438].setRotationPoint(17F, -23.5F, -1F);
+
+		bodyModel[439].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F); // Box 8 PRIME4-2
+		bodyModel[439].setRotationPoint(17F, -23.5F, -1F);
+
+		bodyModel[440].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F); // Box 9 PRIME4-4
+		bodyModel[440].setRotationPoint(17F, -23.5F, -1F);
+
+		bodyModel[441].addBox(0F, 0F, 0F, 1, 2, 0, 0F); // Box 441
+		bodyModel[441].setRotationPoint(12.5F, -24F, 0F);
+
+		bodyModel[442].addBox(0F, 0F, 0F, 8, 7, 4, 0F); // Box 442 bjry 1501 hotstart box
+		bodyModel[442].setRotationPoint(3F, -7F, 7F);
+
+		bodyModel[443].addShapeBox(0F, 0F, 0F, 1, 8, 0, 0F,-2F, 0F, 0F, 1.5F, -1F, 0F, 1.5F, -1F, 0F, -2F, 0F, 0F, 1.5F, -1F, 0F, -2F, 0F, 0F, -2F, 0F, 0F, 1.5F, -1F, 0F); // Box 443 hotstart box handrail
+		bodyModel[443].setRotationPoint(3F, -15F, 11.01F);
+
+		bodyModel[444].addShapeBox(0F, 0F, 0F, 6, 1, 0, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 444 hotstart box handrail
+		bodyModel[444].setRotationPoint(5F, -15F, 11F);
+
+		bodyModel[445].addBox(0F, 0F, 0F, 3, 1, 1, 0F); // Box 445 nasa 3 horn
+		bodyModel[445].setRotationPoint(12F, -23.25F, 0.5F);
 	}
+
 	ModelFlexicoil2 theTrucks1 = new ModelFlexicoil2();
-	//ModelTypeAClassico theTrucks2 = new ModelTypeAClassico();
 	ModelTypeAnew theTypeA = new ModelTypeAnew();
 
 	@Override
@@ -1810,10 +1870,8 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4
-			|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 184
-			|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 535 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16
-			|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1) {
+		if (GetColor(entity) == 12 || GetColor(entity) == 4 || GetColor(entity) == 7 || GetColor(entity) == 184 || GetColor(entity) == 535
+			|| GetColor(entity) == 16 || GetColor(entity) == 4 || GetColor(entity) == 1) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1822,8 +1880,8 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18) {
+		} else if (GetColor(entity) == 6 ||GetColor(entity) == 18||GetColor(entity) == 33||GetColor(entity) == 34||GetColor(entity) == 35
+				||GetColor(entity) == 36) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1832,12 +1890,8 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 22
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 23
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 10){
+		} else if (GetColor(entity) == 17 ||GetColor(entity) == 20 ||GetColor(entity) == 21 ||GetColor(entity) == 22 ||GetColor(entity) == 23
+				||GetColor(entity) == 10||GetColor(entity) == 37||GetColor(entity) == 38){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Black2.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1846,8 +1900,8 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5) {
+		} else if (GetColor(entity) == 8
+				||GetColor(entity) == 5) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_sp.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1856,7 +1910,7 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27) {
+		} else if (GetColor(entity) == 27) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Grey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1865,7 +1919,7 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 29 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 30) {
+		} else if (GetColor(entity) == 29 ||GetColor(entity) == 30) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Csx.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.33, 0);
@@ -1874,7 +1928,7 @@ public class ModelSW1500 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.13, 0, 0);
 			theTrucks1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9) {
+		} else if (GetColor(entity) == 9) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_beangren_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, -0.03, 0);

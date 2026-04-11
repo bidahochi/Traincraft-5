@@ -1835,9 +1835,9 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
 		//FB2s
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5) {
+		if (GetColor(entity) == 16||GetColor(entity) == 19
+				||GetColor(entity) == 11||GetColor(entity) == 4
+				||GetColor(entity) == 5) {
 
 			if (((AbstractTrains) entity).getColor() == 4 || ((AbstractTrains) entity).getColor() == 5) {
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
@@ -1855,7 +1855,7 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 			GL11.glPopMatrix();
 
 		//Blombergs
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20){
+		} else if (GetColor(entity) == 20){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 
 			GL11.glPushMatrix();
@@ -1868,7 +1868,7 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 
 		//Type Bs
 		} else {
-			if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15) {
+			if (GetColor(entity) == 15) {
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_FNCC_specialblack.png"));
 			}else if (((AbstractTrains) entity).getColor() == 12 || ((AbstractTrains) entity).getColor() == 9){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));

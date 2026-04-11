@@ -1871,10 +1871,10 @@ public class ModelP42 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7) {
+		if (GetColor(entity) == 7) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/P42-40_truck_AMTK_Pz_III-IV.png"));
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		} else if (GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/P42-40_truck_AMTK_Pz_V_longy.png"));
 
 		} else {

@@ -1957,7 +1957,7 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19) {
+		if (GetColor(entity) == 6 ||GetColor(entity) == 19) {
 			//silvaaahhh
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_longjohns.png"));
 			GL11.glPushMatrix();
@@ -1968,7 +1968,7 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.7F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5 ) {
+		} else if (GetColor(entity) == 9||GetColor(entity) == 5 ) {
 			//dark grey dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_c_dash2_grey.png"));
 			GL11.glPushMatrix();
@@ -1979,9 +1979,9 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.7F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 13||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17) {
+		} else if (GetColor(entity) == 1||GetColor(entity) == 8
+				||GetColor(entity) == 13||GetColor(entity) == 11
+				||GetColor(entity) == 17) {
 			//sp dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_C_dash2_sp.png"));
 			GL11.glPushMatrix();

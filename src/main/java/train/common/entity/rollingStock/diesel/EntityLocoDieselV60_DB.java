@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -17,16 +17,8 @@ public class EntityLocoDieselV60_DB extends DieselTrain {
 	}
 
 	public EntityLocoDieselV60_DB(World world) {
-		super(world, EnumHeritageTrainsLegacy.locoDieselV60_DB.getTankCapacity(), LiquidManager.dieselFilter());
-		initLoco();
+		super(world, LiquidManager.dieselFilter());
 	}
-
-	public void initLoco() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
-
-
 
 	@Override
 	public void updateRiderPosition() {

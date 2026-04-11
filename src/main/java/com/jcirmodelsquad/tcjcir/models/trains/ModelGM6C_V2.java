@@ -1217,8 +1217,8 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1348) {
+		if (GetColor(entity) == 6 || GetColor(entity) == 15
+				|| GetColor(entity) == 1348) {
 			//silver dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_longjohns.png"));
 			GL11.glPushMatrix();
@@ -1228,7 +1228,7 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.5F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12) {
+		}else if (GetColor(entity) == 12) {
 			//conrail can eat my dick
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_c2h_black.png"));
 			GL11.glPushMatrix();

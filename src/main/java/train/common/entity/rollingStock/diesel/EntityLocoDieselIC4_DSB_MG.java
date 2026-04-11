@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -16,7 +16,7 @@ public class EntityLocoDieselIC4_DSB_MG extends DieselTrain {
 		return EnumSounds.locoElectricIC4_DSB_MG;
 	}
 	public EntityLocoDieselIC4_DSB_MG(World world) {
-		super(world, EnumHeritageTrainsLegacy.locoDieselGP7Red.getTankCapacity(), LiquidManager.dieselFilter());
+		super(world, LiquidManager.dieselFilter());
 	}
 
 	@Override

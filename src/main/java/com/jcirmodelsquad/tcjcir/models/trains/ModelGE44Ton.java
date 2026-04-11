@@ -959,7 +959,7 @@ public class ModelGE44Ton extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==13 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==5){
+		if(GetColor(entity)==13 || GetColor(entity)==5){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/tonnertruck_black_roller.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/tonnertruck_black_friction.png"));

@@ -26,4 +26,10 @@ public abstract interface ITier {
 	public abstract String getGUIName();
 
 	public abstract String getGUITexture();
+
+	public abstract int getPageNumber();
+
+	public int getTotalPage();
+
+	public abstract void setPageNumber(int pageNumber);
 }

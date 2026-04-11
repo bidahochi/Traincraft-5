@@ -1386,7 +1386,7 @@ public class ModelM420B extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15464) {
+		if (GetColor(entity) == 15464) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.52, -0.025, 0);
@@ -1395,7 +1395,7 @@ public class ModelM420B extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.05, 0, 0);
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6){
+		} else if (GetColor(entity) == 6){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/zwt_fncc_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.4, -0.025, 0);

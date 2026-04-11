@@ -135,6 +135,7 @@ public class PacketHandler
 		Traincraft.lockoutCommChannel.registerMessage(PacketLockoutAddUserToSkinGroup.Handler.class, PacketLockoutAddUserToSkinGroup.class, 26, Side.SERVER);
 
 		Traincraft.BannedItems_CHANNEL.registerMessage(PacketSyncBannedItems.Handler.class, PacketSyncBannedItems.class, 29, Side.CLIENT);
+		Traincraft.tcCraftingBenchChannel.registerMessage(PacketUpdateTCBenchPage.Handler.class, PacketUpdateTCBenchPage.class, 30, Side.SERVER);
 	}
 
 	private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

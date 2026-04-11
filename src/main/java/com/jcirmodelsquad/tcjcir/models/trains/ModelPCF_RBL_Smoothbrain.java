@@ -874,7 +874,7 @@ public class ModelPCF_RBL_Smoothbrain extends ModelConverter//Same as Filename
 				m.render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==621){
+		if(GetColor(entity)==621){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));

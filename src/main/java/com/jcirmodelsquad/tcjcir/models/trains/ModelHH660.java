@@ -973,14 +973,14 @@ public class ModelHH660 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity ,f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==18 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==17){
+		if(GetColor(entity)==18 ||GetColor(entity)==17){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/hh660_deets_ccrl.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.0F ,-0.25F,0F);
 			theDeets.render(entity,f,f1,f2,f3,f4,f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==21){
+		} else if (GetColor(entity)==21){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/hh660_deets_ser.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.0F ,-0.25F,0F);
@@ -988,7 +988,7 @@ public class ModelHH660 extends ModelConverter //Same as Filename
 			GL11.glPopMatrix();
 		}
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1453){
+		if(GetColor(entity)==1453){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blunttruck_Green.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blunttruck_Black.png"));

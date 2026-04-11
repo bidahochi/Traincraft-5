@@ -2205,7 +2205,7 @@ public class ModelSD9new extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 ) {
+		if (GetColor(entity) == 6 ) {
 			//silver
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c1_early_silvers.png"));
 			GL11.glPushMatrix();
@@ -2218,7 +2218,7 @@ public class ModelSD9new extends ModelConverter //Same as Filename
 			GL11.glTranslated(-1.53F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1 ) {
+		} else if (GetColor(entity) == 1 ) {
 			//sp
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c1_early_sp.png"));
 			GL11.glPushMatrix();
@@ -2231,7 +2231,7 @@ public class ModelSD9new extends ModelConverter //Same as Filename
 			GL11.glTranslated(-1.53F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19 ) {
+		} else if (GetColor(entity) == 19 ) {
 			//fuck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c1_early_grey.png"));
 			GL11.glPushMatrix();

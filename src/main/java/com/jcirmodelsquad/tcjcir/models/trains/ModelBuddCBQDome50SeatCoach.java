@@ -449,20 +449,20 @@ public class ModelBuddCBQDome50SeatCoach extends ModelConverter //Same as Filena
 		bodyModel[405] = new ModelRendererTurbo(this, 3, 369, textureX, textureY); // Box 921
 		bodyModel[406] = new ModelRendererTurbo(this, 72, 388, textureX, textureY, "cull"); // Box 924 cull
 		bodyModel[407] = new ModelRendererTurbo(this, 90, 359, textureX, textureY, "cull"); // Box 924 cull
-		bodyModel[408] = new ModelRendererTurbo(this, 1, 372, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[409] = new ModelRendererTurbo(this, 3, 401, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[410] = new ModelRendererTurbo(this, 101, 297, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[411] = new ModelRendererTurbo(this, 97, 335, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[412] = new ModelRendererTurbo(this, 85, 263, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[413] = new ModelRendererTurbo(this, 36, 343, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[414] = new ModelRendererTurbo(this, 45, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[415] = new ModelRendererTurbo(this, 1, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[416] = new ModelRendererTurbo(this, 49, 348, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[417] = new ModelRendererTurbo(this, 150, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[418] = new ModelRendererTurbo(this, 128, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[419] = new ModelRendererTurbo(this, 139, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[420] = new ModelRendererTurbo(this, 172, 227, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[421] = new ModelRendererTurbo(this, 172, 236, textureX, textureY,"glow"); // Box 950 glow
+		bodyModel[408] = new ModelRendererTurbo(this, 1, 372, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[409] = new ModelRendererTurbo(this, 3, 401, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[410] = new ModelRendererTurbo(this, 101, 297, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[411] = new ModelRendererTurbo(this, 97, 335, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[412] = new ModelRendererTurbo(this, 85, 263, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[413] = new ModelRendererTurbo(this, 36, 343, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[414] = new ModelRendererTurbo(this, 45, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[415] = new ModelRendererTurbo(this, 1, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[416] = new ModelRendererTurbo(this, 49, 348, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[417] = new ModelRendererTurbo(this, 150, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[418] = new ModelRendererTurbo(this, 128, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[419] = new ModelRendererTurbo(this, 139, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[420] = new ModelRendererTurbo(this, 172, 227, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[421] = new ModelRendererTurbo(this, 172, 236, textureX, textureY,"lamp"); // Box 950 glow
 		bodyModel[422] = new ModelRendererTurbo(this, 169, 230, textureX, textureY); // Box 950
 		bodyModel[423] = new ModelRendererTurbo(this, 108, 10, textureX, textureY); // Box 950
 		bodyModel[424] = new ModelRendererTurbo(this, 319, 21, textureX, textureY); // Box 950
@@ -2286,9 +2286,9 @@ public class ModelBuddCBQDome50SeatCoach extends ModelConverter //Same as Filena
 		bodyModel[618] = new ModelRendererTurbo(this, 477, 298, textureX, textureY); // Box 2
 		bodyModel[619] = new ModelRendererTurbo(this, 478, 268, textureX, textureY); // Box 2
 		bodyModel[620] = new ModelRendererTurbo(this, 477, 271, textureX, textureY); // Box 2
-		bodyModel[621] = new ModelRendererTurbo(this, 161, 275, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[622] = new ModelRendererTurbo(this, 34, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[623] = new ModelRendererTurbo(this, 12, 351, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[621] = new ModelRendererTurbo(this, 161, 275, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[622] = new ModelRendererTurbo(this, 34, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[623] = new ModelRendererTurbo(this, 12, 351, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[624] = new ModelRendererTurbo(this, 6, 237, textureX, textureY); // Box 128
 		bodyModel[625] = new ModelRendererTurbo(this, 17, 253, textureX, textureY); // Box 128
 		bodyModel[626] = new ModelRendererTurbo(this, 17, 231, textureX, textureY); // Box 176
@@ -3410,7 +3410,7 @@ public class ModelBuddCBQDome50SeatCoach extends ModelConverter //Same as Filena
 	{
 		for(int i = 0; i < 794; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -3422,7 +3422,7 @@ public class ModelBuddCBQDome50SeatCoach extends ModelConverter //Same as Filena
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -2024,7 +2024,7 @@ public class ModelSD50 extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3 ) {//for cr early order
+		if (GetColor(entity) == 12 ||GetColor(entity) == 3 ) {//for cr early order
 			//silver regular truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_c2h_black.png"));
 			GL11.glPushMatrix();
@@ -2036,7 +2036,7 @@ public class ModelSD50 extends ModelConverter //Same as Filename
 			flexMid.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11 ) {//i have no fuckin idea what the problem is
+		} else if (GetColor(entity) == 5 ||GetColor(entity) == 11 ) {//i have no fuckin idea what the problem is
 			//csx shid
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_csxes.png"));//im gonna stab
 			GL11.glPushMatrix();
@@ -2047,7 +2047,7 @@ public class ModelSD50 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.75F, 0.0F, 0);
 			flexLate.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 228 ) {
+		} else if (GetColor(entity) == 6|| GetColor(entity) == 228 ) {
 			//silver dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_longjohns.png"));
 			GL11.glPushMatrix();

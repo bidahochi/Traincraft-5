@@ -677,7 +677,7 @@ public class ModelW_A55_Combine extends ModelConverter//Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12345){
+		if(GetColor(entity)==12345){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/W_A11_truck.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -50,6 +50,12 @@ public class SteamAlco0_6_0T extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 50;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 8000;

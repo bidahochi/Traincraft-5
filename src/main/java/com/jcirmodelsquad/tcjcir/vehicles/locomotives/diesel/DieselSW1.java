@@ -42,6 +42,10 @@ public class DieselSW1 extends DieselTrain {
         InsertTexture(19, "Pacific Electric / SP");
         InsertTexture(20, "Sacramento Northern / WP");
         InsertTexture(21, "FRLC", LockoutGroup.DLMR);
+        InsertTexture(22, "Monon (DS-50)");
+        InsertTexture(23, "Monon");
+        InsertTexture(24, "Rock Island (Yellow Nose)");
+        InsertTexture(25, "AOK");
     }
 
     @Override

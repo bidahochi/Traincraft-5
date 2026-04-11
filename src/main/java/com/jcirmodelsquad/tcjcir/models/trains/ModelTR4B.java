@@ -1614,7 +1614,7 @@ public class ModelTR4B extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123456) {
+		if (GetColor(entity) == 123456) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_silvers_fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0F ,0.0F,0F);
@@ -1625,7 +1625,7 @@ public class ModelTR4B extends ModelConverter //Same as Filename
 			GL11.glPopMatrix();
 
 		}
-		/*} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		/*} else if (GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeAclassico_SP.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0F ,0.0F,0F);

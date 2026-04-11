@@ -5,10 +5,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import train.common.core.interfaces.ITier;
 import train.common.slots.SlotCrafterTier;
 import train.common.slots.SlotResultTier;
+
+import java.util.List;
 
 public class ContainerTier extends ContainerTraincraft {
 
@@ -67,18 +70,31 @@ public class ContainerTier extends ContainerTraincraft {
 	@Override
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
-		if (tier1.getResultList() != null) {
-			if (tier1.getResultList().size() <= 8) {
-				for (int i = 0; i < tier1.getResultList().size(); i++) {
-					tier.setInventorySlotContents(i + 10, new ItemStack(tier1.getResultList().get(i)));
-				}
-			}
-			else {
-				System.err.println("Too many results, too little slots!");
-			}
+
+		// Ensure resultList exists
+		List<Item> resultList = tier1.getResultList();
+		if (resultList == null) return;
+
+		// Get current page
+		int page = tier1.getPageNumber();
+		final int RESULTS_PER_PAGE = 8;
+		int startIndex = page * RESULTS_PER_PAGE;
+
+		// Loop over the visible slots (10–17)
+		for (int i = 0; i < RESULTS_PER_PAGE; i++) {
+			int slotIndex = 10 + i; // inventory slot remains fixed
+			int resultIndex = startIndex + i; // index into full result list
+
+			ItemStack stack = (resultIndex < resultList.size())
+					? new ItemStack(resultList.get(resultIndex))
+					: null; // empty if past end of results
+
+			tier.setInventorySlotContents(slotIndex, stack);
 		}
 	}
-	
+
+
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int i) {
 		return super.transferStackInSlot(player, i);

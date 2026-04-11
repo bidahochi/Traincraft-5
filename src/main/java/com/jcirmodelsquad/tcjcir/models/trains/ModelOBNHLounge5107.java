@@ -359,9 +359,9 @@ public class ModelOBNHLounge5107 extends ModelConverter //Same as Filename
 		bodyModel[315] = new ModelRendererTurbo(this, 346, 324, textureX, textureY); // Box 380
 		bodyModel[316] = new ModelRendererTurbo(this, 341, 331, textureX, textureY); // Box 381
 		bodyModel[317] = new ModelRendererTurbo(this, 353, 331, textureX, textureY); // Box 382
-		bodyModel[318] = new ModelRendererTurbo(this, 320, 319, textureX, textureY, "glow"); // Box 86 glow
-		bodyModel[319] = new ModelRendererTurbo(this, 320, 284, textureX, textureY, "glow"); // Box 384 glow
-		bodyModel[320] = new ModelRendererTurbo(this, 324, 273, textureX, textureY, "glow"); // Box 384 glow
+		bodyModel[318] = new ModelRendererTurbo(this, 320, 319, textureX, textureY, "lamp"); // Box 86 glow
+		bodyModel[319] = new ModelRendererTurbo(this, 320, 284, textureX, textureY, "lamp"); // Box 384 glow
+		bodyModel[320] = new ModelRendererTurbo(this, 324, 273, textureX, textureY, "lamp"); // Box 384 glow
 		bodyModel[321] = new ModelRendererTurbo(this, 98, 285, textureX, textureY, "cull"); // Box 393 cull
 		bodyModel[322] = new ModelRendererTurbo(this, 111, 279, textureX, textureY, "cull"); // Box 386 cull
 		bodyModel[323] = new ModelRendererTurbo(this, 382, 78, textureX, textureY); // Rear gate closed
@@ -500,8 +500,8 @@ public class ModelOBNHLounge5107 extends ModelConverter //Same as Filename
 		bodyModel[456] = new ModelRendererTurbo(this, 22, 397, textureX, textureY); // Box 128
 		bodyModel[457] = new ModelRendererTurbo(this, 25, 388, textureX, textureY); // Box 128
 		bodyModel[458] = new ModelRendererTurbo(this, 39, 397, textureX, textureY); // Box 128
-		bodyModel[459] = new ModelRendererTurbo(this, 35, 392, textureX, textureY, "glow"); // Box 384 glow
-		bodyModel[460] = new ModelRendererTurbo(this, 14, 387, textureX, textureY, "glow"); // Box 384 glow
+		bodyModel[459] = new ModelRendererTurbo(this, 35, 392, textureX, textureY, "lamp"); // Box 384 glow
+		bodyModel[460] = new ModelRendererTurbo(this, 14, 387, textureX, textureY, "lamp"); // Box 384 glow
 		bodyModel[461] = new ModelRendererTurbo(this, 51, 380, textureX, textureY); // Box 128
 		bodyModel[462] = new ModelRendererTurbo(this, 53, 377, textureX, textureY); // Box 128
 		bodyModel[463] = new ModelRendererTurbo(this, 299, 463, textureX, textureY); // Box 128 drop seat
@@ -2263,13 +2263,13 @@ public class ModelOBNHLounge5107 extends ModelConverter //Same as Filename
 		bodyModel[663] = new ModelRendererTurbo(this, 236, 411, textureX, textureY); // Box 526
 		bodyModel[664] = new ModelRendererTurbo(this, 167, 411, textureX, textureY); // Box 526
 		bodyModel[665] = new ModelRendererTurbo(this, 141, 348, textureX, textureY); // Box 526
-		bodyModel[666] = new ModelRendererTurbo(this, 81, 258, textureX, textureY, "glow"); // Box 384 glow
+		bodyModel[666] = new ModelRendererTurbo(this, 81, 258, textureX, textureY, "lamp"); // Box 384 glow
 		bodyModel[667] = new ModelRendererTurbo(this, 43, 292, textureX, textureY); // Box 543
 		bodyModel[668] = new ModelRendererTurbo(this, 69, 292, textureX, textureY); // Box 672
-		bodyModel[669] = new ModelRendererTurbo(this, 39, 387, textureX, textureY, "glow"); // Box 384 glow
+		bodyModel[669] = new ModelRendererTurbo(this, 39, 387, textureX, textureY, "lamp"); // Box 384 glow
 		bodyModel[670] = new ModelRendererTurbo(this, 7, 335, textureX, textureY); // Box 543
-		bodyModel[671] = new ModelRendererTurbo(this, 100, 437, textureX, textureY,"glow"); // Box 393 glow
-		bodyModel[672] = new ModelRendererTurbo(this, 113, 434, textureX, textureY,"glow"); // Box 386 glow
+		bodyModel[671] = new ModelRendererTurbo(this, 100, 437, textureX, textureY,"lamp"); // Box 393 glow
+		bodyModel[672] = new ModelRendererTurbo(this, 113, 434, textureX, textureY,"lamp"); // Box 386 glow
 		bodyModel[673] = new ModelRendererTurbo(this, 57, 359, textureX, textureY); // Box 526
 		bodyModel[674] = new ModelRendererTurbo(this, 57, 352, textureX, textureY); // Box 526
 		bodyModel[675] = new ModelRendererTurbo(this, 70, 359, textureX, textureY); // Box 526
@@ -2962,7 +2962,7 @@ public class ModelOBNHLounge5107 extends ModelConverter //Same as Filename
 	{
 		for(int i = 0; i < 677; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2974,7 +2974,7 @@ public class ModelOBNHLounge5107 extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-CDO_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

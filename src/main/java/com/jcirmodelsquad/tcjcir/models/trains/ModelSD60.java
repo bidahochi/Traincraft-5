@@ -2025,13 +2025,13 @@ public class ModelSD60 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1331|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 228 ) {
+		if (GetColor(entity) == 1331|| GetColor(entity) == 228 ) {
 			//silver dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexicoil_C_dash2_longjohns.png"));
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11) {
+		}else if (GetColor(entity) == 11) {
 			//up dash 2 truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_uncle.png"));
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20) {
+		}else if (GetColor(entity) == 19|| GetColor(entity) == 20) {
 			//CSX
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_csxes.png"));
 		} else {

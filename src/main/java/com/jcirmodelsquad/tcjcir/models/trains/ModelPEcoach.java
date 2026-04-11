@@ -1197,7 +1197,7 @@ public class ModelPEcoach extends ModelConverter//Same as Filename
 			}
 		}
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==6){
+		if(GetColor(entity)==4 || GetColor(entity)==6){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/pe_truccs.png"));// pe 2 axle
 			GL11.glPushMatrix();
 			GL11.glTranslated(-2.18, -0.1, 0);

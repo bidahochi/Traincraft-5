@@ -39,6 +39,7 @@ import train.common.Traincraft;
 import train.common.adminbook.ServerLogger;
 import train.common.core.HandleMaxAttachedCarts;
 import train.common.core.handlers.ConfigHandler;
+import train.common.core.handlers.ItemHandler;
 import train.common.core.network.PacketKeyPress;
 import train.common.core.network.PacketParkingBrake;
 import train.common.core.network.PacketSlotsFilled;
@@ -621,7 +622,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
+        return ItemHandler.isBanned(itemstack) == false;
     }
 
     /**

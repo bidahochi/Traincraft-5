@@ -242,8 +242,8 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 		bodyModel[199] = new ModelRendererTurbo(this, 65, 306, textureX, textureY); // Box 128
 		bodyModel[200] = new ModelRendererTurbo(this, 242, 244, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[201] = new ModelRendererTurbo(this, 243, 265, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[202] = new ModelRendererTurbo(this, 104, 255, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[203] = new ModelRendererTurbo(this, 104, 244, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[202] = new ModelRendererTurbo(this, 104, 255, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[203] = new ModelRendererTurbo(this, 104, 244, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[204] = new ModelRendererTurbo(this, 105, 247, textureX, textureY); // Box 38
 		bodyModel[205] = new ModelRendererTurbo(this, 105, 258, textureX, textureY); // Box 276
 		bodyModel[206] = new ModelRendererTurbo(this, 380, 291, textureX, textureY); // Box 38
@@ -335,13 +335,13 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 		bodyModel[292] = new ModelRendererTurbo(this, 104, 316, textureX, textureY); // Left seat part
 		bodyModel[293] = new ModelRendererTurbo(this, 115, 328, textureX, textureY,"cull"); // Left seat part cull
 		bodyModel[294] = new ModelRendererTurbo(this, 104, 310, textureX, textureY,"cull"); // Left seat part cull
-		bodyModel[295] = new ModelRendererTurbo(this, 208, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[296] = new ModelRendererTurbo(this, 199, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[297] = new ModelRendererTurbo(this, 190, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[298] = new ModelRendererTurbo(this, 181, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[299] = new ModelRendererTurbo(this, 172, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[300] = new ModelRendererTurbo(this, 163, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[301] = new ModelRendererTurbo(this, 154, 224, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[295] = new ModelRendererTurbo(this, 208, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[296] = new ModelRendererTurbo(this, 199, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[297] = new ModelRendererTurbo(this, 190, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[298] = new ModelRendererTurbo(this, 181, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[299] = new ModelRendererTurbo(this, 172, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[300] = new ModelRendererTurbo(this, 163, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[301] = new ModelRendererTurbo(this, 154, 224, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[302] = new ModelRendererTurbo(this, 84, 261, textureX, textureY); // Box 38
 		bodyModel[303] = new ModelRendererTurbo(this, 84, 266, textureX, textureY); // Box 462
 		bodyModel[304] = new ModelRendererTurbo(this, 74, 155, textureX, textureY); // Box 2
@@ -2190,21 +2190,21 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 		bodyModel[541] = new ModelRendererTurbo(this, 219, 231, textureX, textureY); // Box 128
 		bodyModel[542] = new ModelRendererTurbo(this, 74, 200, textureX, textureY); // Box 193
 		bodyModel[543] = new ModelRendererTurbo(this, 72, 205, textureX, textureY); // Box 194
-		bodyModel[544] = new ModelRendererTurbo(this, 216, 208, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[544] = new ModelRendererTurbo(this, 216, 208, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[545] = new ModelRendererTurbo(this, 241, 240, textureX, textureY); // Box 38
 		bodyModel[546] = new ModelRendererTurbo(this, 241, 250, textureX, textureY); // Box 275
 		bodyModel[547] = new ModelRendererTurbo(this, 296, 302, textureX, textureY); // Box 128
-		bodyModel[548] = new ModelRendererTurbo(this, 11, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[549] = new ModelRendererTurbo(this, 272, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[550] = new ModelRendererTurbo(this, 263, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[551] = new ModelRendererTurbo(this, 254, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[552] = new ModelRendererTurbo(this, 245, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[553] = new ModelRendererTurbo(this, 236, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[554] = new ModelRendererTurbo(this, 227, 224, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[555] = new ModelRendererTurbo(this, 218, 224, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[548] = new ModelRendererTurbo(this, 11, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[549] = new ModelRendererTurbo(this, 272, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[550] = new ModelRendererTurbo(this, 263, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[551] = new ModelRendererTurbo(this, 254, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[552] = new ModelRendererTurbo(this, 245, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[553] = new ModelRendererTurbo(this, 236, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[554] = new ModelRendererTurbo(this, 227, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[555] = new ModelRendererTurbo(this, 218, 224, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[556] = new ModelRendererTurbo(this, 238, 256, textureX, textureY); // Box 128
-		bodyModel[557] = new ModelRendererTurbo(this, 243, 263, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[558] = new ModelRendererTurbo(this, 243, 254, textureX, textureY,"glow"); // Box 566 glow
+		bodyModel[557] = new ModelRendererTurbo(this, 243, 263, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[558] = new ModelRendererTurbo(this, 243, 254, textureX, textureY,"lamp"); // Box 566 glow
 		bodyModel[559] = new ModelRendererTurbo(this, 292, 271, textureX, textureY,"cull"); // Box 275 cull
 		bodyModel[560] = new ModelRendererTurbo(this, 82, 258, textureX, textureY); // Box 276
 		bodyModel[561] = new ModelRendererTurbo(this, 195, 379, textureX, textureY); // Box 38
@@ -2864,7 +2864,7 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 674; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2876,7 +2876,7 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==14 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==9 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4){
+		if(GetColor(entity)==11 || GetColor(entity)==14 || GetColor(entity)==2 || GetColor(entity)==9 || GetColor(entity)==4){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-TR_truck_silver_friction.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
@@ -2887,7 +2887,7 @@ public class ModelBuddATSF52SeatCoach extends ModelConverter//Same as Filename
 			GL11.glTranslated(-5.14, 0, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		} else if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-TR_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

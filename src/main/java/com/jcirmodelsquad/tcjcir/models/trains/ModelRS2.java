@@ -29,7 +29,7 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 
 	public ModelRS2() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[488];
+		bodyModel = new ModelRendererTurbo[499];
 
 		initbodyModel_1();
 
@@ -529,6 +529,17 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 		bodyModel[485] = new ModelRendererTurbo(this, 347, 132, textureX, textureY); // Box 377
 		bodyModel[486] = new ModelRendererTurbo(this, 327, 131, textureX, textureY); // Box 374
 		bodyModel[487] = new ModelRendererTurbo(this, 350, 131, textureX, textureY); // Box 377
+		bodyModel[488] = new ModelRendererTurbo(this, 164, 14, textureX, textureY); // Box 409 commander base
+		bodyModel[489] = new ModelRendererTurbo(this, 164, 10, textureX, textureY, BoxName.commander); // Box 410 commander beacon
+		bodyModel[490] = new ModelRendererTurbo(this, 159, 14, textureX, textureY); // Box 409 commander base
+		bodyModel[491] = new ModelRendererTurbo(this, 159, 10, textureX, textureY, BoxName.commander); // Box 410 commander beacon
+		bodyModel[492] = new ModelRendererTurbo(this, 67, 39, textureX, textureY); // MON steam gen part
+		bodyModel[493] = new ModelRendererTurbo(this, 67, 31, textureX, textureY); // MON steam gen part
+		bodyModel[494] = new ModelRendererTurbo(this, 67, 44, textureX, textureY); // MON steam gen part
+		bodyModel[495] = new ModelRendererTurbo(this, 172, 33, textureX, textureY); // Box 299
+		bodyModel[496] = new ModelRendererTurbo(this, 181, 33, textureX, textureY); // Box 300
+		bodyModel[497] = new ModelRendererTurbo(this, 172, 21, textureX, textureY); // Box 299
+		bodyModel[498] = new ModelRendererTurbo(this, 181, 21, textureX, textureY); // Box 300
 
 		bodyModel[0].addBox(0F, 0F, 0F, 68, 2, 4, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-34F, -1F, -11F);
@@ -2021,6 +2032,39 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 		bodyModel[487].addBox(0F, 0F, -3F, 1, 1, 6, 0F); // Box 377
 		bodyModel[487].setRotationPoint(-11F, 2F, 8.25F);
 		bodyModel[487].rotateAngleX = 0.34906585F;
+
+		bodyModel[488].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F); // Box 409 commander base
+		bodyModel[488].setRotationPoint(9.32F, -24F, -0.5F);
+
+		bodyModel[489].addShapeBox(0F, 0F, 0F, 1, 2, 1, 0F,0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F); // Box 410 commander beacon
+		bodyModel[489].setRotationPoint(9.32F, -25F, -0.5F);
+
+		bodyModel[490].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, -0.5F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F, 0.1F, 0F, 0.1F); // Box 409 commander base
+		bodyModel[490].setRotationPoint(13.5F, -24F, -0.5F);
+
+		bodyModel[491].addShapeBox(0F, 0F, 0F, 1, 2, 1, 0F,0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F); // Box 410 commander beacon
+		bodyModel[491].setRotationPoint(13.5F, -25F, -0.5F);
+
+		bodyModel[492].addShapeBox(0F, 0F, 0F, 2, 2, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F); // MON steam gen part
+		bodyModel[492].setRotationPoint(20F, -18.5F, -1F);
+
+		bodyModel[493].addShapeBox(0F, 0F, 0F, 2, 5, 2, 0F,0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F); // MON steam gen part
+		bodyModel[493].setRotationPoint(20F, -23F, -1F);
+
+		bodyModel[494].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // MON steam gen part
+		bodyModel[494].setRotationPoint(27F, -18F, -4F);
+
+		bodyModel[495].addBox(0F, 0F, 0F, 3, 1, 1, 0F); // Box 299
+		bodyModel[495].setRotationPoint(22.5F, -19F, -0.5F);
+
+		bodyModel[496].addBox(0F, 0F, 0F, 1, 1, 1, 0F); // Box 300
+		bodyModel[496].setRotationPoint(22.5F, -18F, -0.5F);
+
+		bodyModel[497].addBox(0F, 0F, 0F, 3, 1, 1, 0F); // Box 299
+		bodyModel[497].setRotationPoint(20.5F, -19F, -0.5F);
+
+		bodyModel[498].addBox(0F, 0F, 0F, 1, 1, 1, 0F); // Box 300
+		bodyModel[498].setRotationPoint(20.5F, -18F, -0.5F);
 	}
 	ModelTypeBnew theTrucks4 = new ModelTypeBnew();
 	Modelrs3_details theDeets = new Modelrs3_details();
@@ -2030,7 +2074,7 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7324) {
+		if (GetColor(entity) == 4||GetColor(entity) == 7324) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.35, -0.025, 0);
@@ -2039,7 +2083,7 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.7, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6324||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 2436){
+		} else if (GetColor(entity) == 6324||GetColor(entity) == 2436){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver_Fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.35, -0.025, 0);
@@ -2048,7 +2092,7 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.7, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6323){
+		} else if (GetColor(entity) == 6323){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black_Fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.35, -0.025, 0);
@@ -2067,13 +2111,13 @@ public class ModelRS2 extends ModelConverter //Same as Filename
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-			if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 22) {
+			if (GetColor(entity) == 20||GetColor(entity) == 22) {
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/rs3-details-ccrl-nse.png"));
 				GL11.glPushMatrix();
 				//GL11.glTranslated(-1.35, -0.025, 0);
 				theDeets.render(entity, f, f1, f2, f3, f4, f5);
 				GL11.glPopMatrix();
-			} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21) {
+			} else if (GetColor(entity) == 21) {
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/rs3-details-ser.png"));
 				GL11.glPushMatrix();
 				//GL11.glTranslated(-1.35, -0.025, 0);

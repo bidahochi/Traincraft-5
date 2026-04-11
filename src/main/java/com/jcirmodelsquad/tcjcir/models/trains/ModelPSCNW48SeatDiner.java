@@ -256,9 +256,9 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 		bodyModel[214] = new ModelRendererTurbo(this, 338, 351, textureX, textureY); // Box 38
 		bodyModel[215] = new ModelRendererTurbo(this, 237, 324, textureX, textureY); // Box 38
 		bodyModel[216] = new ModelRendererTurbo(this, 22, 343, textureX, textureY); // Box 38
-		bodyModel[217] = new ModelRendererTurbo(this, 72, 299, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[217] = new ModelRendererTurbo(this, 72, 299, textureX, textureY,"lamp"); // Box 128 glow
 		bodyModel[218] = new ModelRendererTurbo(this, 73, 302, textureX, textureY); // Box 128
-		bodyModel[219] = new ModelRendererTurbo(this, 72, 294, textureX, textureY,"glow"); // Box 246 glow
+		bodyModel[219] = new ModelRendererTurbo(this, 72, 294, textureX, textureY,"lamp"); // Box 246 glow
 		bodyModel[220] = new ModelRendererTurbo(this, 73, 297, textureX, textureY); // Box 247
 		bodyModel[221] = new ModelRendererTurbo(this, 229, 256, textureX, textureY); // Box 128
 		bodyModel[222] = new ModelRendererTurbo(this, 191, 195, textureX, textureY); // Box 194
@@ -354,14 +354,14 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 		bodyModel[312] = new ModelRendererTurbo(this, 452, 395, textureX, textureY,"cull"); // Box 282 cull
 		bodyModel[313] = new ModelRendererTurbo(this, 445, 432, textureX, textureY,"cull"); // Box 283 cull
 		bodyModel[314] = new ModelRendererTurbo(this, 444, 423, textureX, textureY); // Box 284
-		bodyModel[315] = new ModelRendererTurbo(this, 128, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[316] = new ModelRendererTurbo(this, 131, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[317] = new ModelRendererTurbo(this, 134, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[318] = new ModelRendererTurbo(this, 137, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[319] = new ModelRendererTurbo(this, 140, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[320] = new ModelRendererTurbo(this, 143, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[321] = new ModelRendererTurbo(this, 146, 290, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[322] = new ModelRendererTurbo(this, 151, 292, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[315] = new ModelRendererTurbo(this, 128, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[316] = new ModelRendererTurbo(this, 131, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[317] = new ModelRendererTurbo(this, 134, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[318] = new ModelRendererTurbo(this, 137, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[319] = new ModelRendererTurbo(this, 140, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[320] = new ModelRendererTurbo(this, 143, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[321] = new ModelRendererTurbo(this, 146, 290, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[322] = new ModelRendererTurbo(this, 151, 292, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[323] = new ModelRendererTurbo(this, 84, 310, textureX, textureY); // Box 38
 		bodyModel[324] = new ModelRendererTurbo(this, 84, 304, textureX, textureY); // Box 462
 		bodyModel[325] = new ModelRendererTurbo(this, 1, 304, textureX, textureY); // Box 462
@@ -372,13 +372,13 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 		bodyModel[330] = new ModelRendererTurbo(this, 301, 350, textureX, textureY); // Box 38
 		bodyModel[331] = new ModelRendererTurbo(this, 242, 242, textureX, textureY); // Box 128
 		bodyModel[332] = new ModelRendererTurbo(this, 242, 220, textureX, textureY); // Box 177
-		bodyModel[333] = new ModelRendererTurbo(this, 124, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[334] = new ModelRendererTurbo(this, 127, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[335] = new ModelRendererTurbo(this, 121, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[336] = new ModelRendererTurbo(this, 118, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[337] = new ModelRendererTurbo(this, 115, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[338] = new ModelRendererTurbo(this, 112, 292, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[339] = new ModelRendererTurbo(this, 109, 292, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[333] = new ModelRendererTurbo(this, 124, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[334] = new ModelRendererTurbo(this, 127, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[335] = new ModelRendererTurbo(this, 121, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[336] = new ModelRendererTurbo(this, 118, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[337] = new ModelRendererTurbo(this, 115, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[338] = new ModelRendererTurbo(this, 112, 292, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[339] = new ModelRendererTurbo(this, 109, 292, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[340] = new ModelRendererTurbo(this, 24, 336, textureX, textureY); // Box 128
 		bodyModel[341] = new ModelRendererTurbo(this, 95, 363, textureX, textureY); // Box 38
 		bodyModel[342] = new ModelRendererTurbo(this, 129, 325, textureX, textureY); // Box 38
@@ -511,20 +511,20 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 		bodyModel[469] = new ModelRendererTurbo(this, 70, 328, textureX, textureY); // Box 128
 		bodyModel[470] = new ModelRendererTurbo(this, 15, 311, textureX, textureY); // Box 128
 		bodyModel[471] = new ModelRendererTurbo(this, 219, 318, textureX, textureY); // Box 128
-		bodyModel[472] = new ModelRendererTurbo(this, 101, 353, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[473] = new ModelRendererTurbo(this, 233, 352, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[472] = new ModelRendererTurbo(this, 101, 353, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[473] = new ModelRendererTurbo(this, 233, 352, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[474] = new ModelRendererTurbo(this, 123, 316, textureX, textureY); // Box 38
 		bodyModel[475] = new ModelRendererTurbo(this, 123, 315, textureX, textureY); // Box 38
 		bodyModel[476] = new ModelRendererTurbo(this, 130, 317, textureX, textureY); // Box 38
-		bodyModel[477] = new ModelRendererTurbo(this, 41, 327, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[477] = new ModelRendererTurbo(this, 41, 327, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[478] = new ModelRendererTurbo(this, 43, 324, textureX, textureY); // Box 426
-		bodyModel[479] = new ModelRendererTurbo(this, 50, 327, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[479] = new ModelRendererTurbo(this, 50, 327, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[480] = new ModelRendererTurbo(this, 52, 324, textureX, textureY); // Box 426
-		bodyModel[481] = new ModelRendererTurbo(this, 59, 327, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[481] = new ModelRendererTurbo(this, 59, 327, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[482] = new ModelRendererTurbo(this, 61, 324, textureX, textureY); // Box 426
-		bodyModel[483] = new ModelRendererTurbo(this, 219, 331, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[483] = new ModelRendererTurbo(this, 219, 331, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[484] = new ModelRendererTurbo(this, 223, 328, textureX, textureY); // Box 426
-		bodyModel[485] = new ModelRendererTurbo(this, 228, 331, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[485] = new ModelRendererTurbo(this, 228, 331, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[486] = new ModelRendererTurbo(this, 232, 328, textureX, textureY); // Box 426
 
 		bodyModel[0].addBox(0F, 0F, 0F, 5, 1, 10, 0F); // Box 2
@@ -2011,7 +2011,7 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 487; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2023,7 +2023,7 @@ public class ModelPSCNW48SeatDiner extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

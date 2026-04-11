@@ -18,7 +18,7 @@ import train.common.library.*;
 
 public class EntityHandler
 {
-	public static void init()
+	public EntityHandler()
 	{
 		EntityRegistry.registerModEntity(EntityZeppelinTwoBalloons.class, "zeppelin", EntityIds.ZEPPELIN, Traincraft.instance, 512, 1, true);//zepplin
 		EntityRegistry.registerModEntity(EntityBogie.class, "Entity Front Bogie", EntityIds.LOCOMOTIVE_BOGIE, Traincraft.instance, 512, 1, true);//front bogie
@@ -27,14 +27,6 @@ public class EntityHandler
 
 		// Don't forget to add a record to insert the render record
 		new RegisterTrains();
-
-
-		for(EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values()){
-
-			int id = Traincraft.traincraftRegistry.incrementTrainID();
-
-			EntityRegistry.registerModEntity(trains.getEntityClass(), trains.getInternalName(), id, Traincraft.instance, 512, 1, true);
-		}
 
 		for(EnumTrains trains : EnumTrains.values())
 		{

@@ -84,6 +84,12 @@ public class SteamMacky extends SteamTrain {
     }
 
     @Override
+    public int getWaterConsumption()
+    {
+        return 25;
+    }
+
+    @Override
     public int getTankCapacity()
     {
         return 2000;

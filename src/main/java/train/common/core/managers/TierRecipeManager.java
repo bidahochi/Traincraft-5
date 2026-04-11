@@ -33,7 +33,8 @@ public class TierRecipeManager implements ITierCraftingManager {
 			ItemStack frame, ItemStack coupler, ItemStack chimney,
 			ItemStack cab, ItemStack boiler, ItemStack firebox,
 			ItemStack additional, ItemStack dye, ItemStack output,
-			int outputSize) {
+			int outputSize)
+	{
 		if ((tier > 0 && tier < 4) && outputSize > 0 && outputSize < 65) {
 			addRecipeFinal(tier, planks, wheels, frame, coupler, chimney, cab,
 					boiler, firebox, additional, dye, output, outputSize);

@@ -149,10 +149,10 @@ public class ModelDRGW01400Caboose extends ModelConverter //Same as Filename
 		bodyModel[107] = new ModelRendererTurbo(this, 257, 57, textureX, textureY); // Box 1
 		bodyModel[108] = new ModelRendererTurbo(this, 377, 57, textureX, textureY); // Box 1
 		bodyModel[109] = new ModelRendererTurbo(this, 465, 57, textureX, textureY); // Box 1
-		bodyModel[110] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "glow"); // FL marker light glow
-		bodyModel[111] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "glow"); // F marker light glow
-		bodyModel[112] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "glow"); // RR marker light glow
-		bodyModel[113] = new ModelRendererTurbo(this, 457, 9, textureX, textureY, "glow"); // R marker light glow
+		bodyModel[110] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "lamp"); // FL marker light glow
+		bodyModel[111] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "lamp"); // F marker light glow
+		bodyModel[112] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "lamp"); // RR marker light glow
+		bodyModel[113] = new ModelRendererTurbo(this, 457, 9, textureX, textureY, "lamp"); // R marker light glow
 		bodyModel[114] = new ModelRendererTurbo(this, 129, 57, textureX, textureY); // Box 41
 		bodyModel[115] = new ModelRendererTurbo(this, 1, 17, textureX, textureY); // Box 41
 		bodyModel[116] = new ModelRendererTurbo(this, 481, 57, textureX, textureY); // Box 41
@@ -985,7 +985,7 @@ public class ModelDRGW01400Caboose extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14234|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12345 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 2347){
+		if (GetColor(entity) == 14234|| GetColor(entity) == 12345 ||GetColor(entity) == 2347){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);

@@ -1808,10 +1808,10 @@ public class ModelP32 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity ,f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 327) {
+		if (GetColor(entity) == 327) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/p32_bogie_silver.png"));
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 34654) {
+		} else if (GetColor(entity) == 34654) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/P42-40_truck_AMTK_Pz_V_longy.png"));
 
 		} else {

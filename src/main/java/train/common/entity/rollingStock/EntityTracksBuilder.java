@@ -1039,4 +1039,29 @@ public class EntityTracksBuilder extends EntityRollingStock implements IInventor
 	@Override
 	public GameProfile getOwner(){return null;}
 
+	@Override
+	public void onRenderInsertRecord() {
+		train.common.Traincraft.traincraftRegistry.RegisterRollingStockModel(
+				new train.client.render.register.TrainRenderRecord(
+						train.common.library.Info.modID,
+						EntityTracksBuilder.class,
+						new train.client.render.models.ModelBuilder(),
+						"builder2",
+						new float[] { 0.0F, -0.42F, 0.0F },  // translation
+						null,                               // rotation
+						null,                               // scale
+						"largesmoke",                       // smokeType
+						new ArrayList<double[]>()
+						{
+							{        // smokeFX
+							add(new double[] { -1.3D, 2.1D, 0.0D });
+							}
+						},
+						"",                       // explosionType
+						null,                                // explosionFX
+						3,                                   // smokeIterations
+						0                                    // explosionFXIterations
+				)
+		);
+	}
 }

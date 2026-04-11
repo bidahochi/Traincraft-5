@@ -12,7 +12,7 @@ public class Info {
 	/* Mod relevant information */
 	public static final String modID = "tc";
 	public static final String modName = "Fox-Traincraft";
-	public static final String modVersion = "3.1.7.8";
+	public static final String modVersion = "3.1.7.9";
 	public static final String channel = "Traincraft";
 	public static final String keyChannel = "TraincraftKey";
 	public static final String rotationChannel = "TraincraftRotation";
@@ -32,9 +32,9 @@ public class Info {
 	public static final String villagerPrefix = "textures/villager/";
 	public static final String fixedOverlayTexturePrefix = "textures/trains/fixedOverlays/";
 
-	public static final String TEX_TIER_I = guiPrefix + "gui_tierI_ironAge.png";
-	public static final String TEX_TIER_II = guiPrefix + "gui_tierII_steelAge.png";
-	public static final String TEX_TIER_III = guiPrefix + "gui_tierIII_advancedAge.png";
+	public static final String TEX_TIER_I = resourceLocation + ":" + guiPrefix + "stock_crafting_bench/" + "gui_tierI_ironAge.png";
+	public static final String TEX_TIER_II = resourceLocation + ":" + guiPrefix + "stock_crafting_bench/" + "gui_tierII_steelAge.png";
+	public static final String TEX_TIER_III = resourceLocation + ":" + guiPrefix + "stock_crafting_bench/" + "gui_tierIII_advancedAge.png";
 
 	/* Other variables */
 	public static final String[] tooltipsTierI = new String[] { "Planks", "Chimney", "Cab", "Dye", "Component", "Boiler", "Firebox", "Wheels", "Frame", "Coupler" };

@@ -3751,6 +3751,13 @@ public class ItemTCRail extends ItemPart {
 			tcRailTurn.hasModel = false;
 		}
 		world.setBlockMetadataWithNotify(x + originShiftX, y + 1, z + originShiftZ, facing, 3);//to force client update
+
+		for (int i = 0; i < 10; i++) { //check the spaces the straight should take up *before* trying to place it. Prevent tile corruption/track duping.
+			if (!canPlaceTrack(player, world, x + (dx*i), y + 1, z + (dz*i))) {
+				return false;
+			}
+		}
+
 		putDownSingleRail(world, x, y + 1, z, facing, x + centerX, y + 1, z + centerZ, radius, tempType.getLabel(), true, x + originShiftX, y + 1, z + originShiftZ, true, false);
 		for (int i = 1; i < EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i++) {
 			putDownSingleRail(world, x + (dx*i), y + 1, z + (dz*i), facing, x + centerX, y + 1, z + centerZ, radius, typeVariantStraight, false, x+originShiftX, y + 1, z + originShiftZ, true, false);

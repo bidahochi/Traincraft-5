@@ -53,6 +53,12 @@ public class SteamAlco2102 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 75;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 17000;

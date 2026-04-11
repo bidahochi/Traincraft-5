@@ -56,10 +56,10 @@ public class ContainerWorkbenchCart extends Container {
 
 		if (!worldObj.isRemote) {
 			for (int var2 = 0; var2 < 9; ++var2) {
-				ItemStack var3 = craftMatrix.getStackInSlotOnClosing(var2);
-
-				if (var3 != null) {
-					par1EntityPlayer.dropItem(var3.getItem(), var3.stackSize);
+				ItemStack stackToDrop = craftMatrix.getStackInSlotOnClosing(var2);
+				if (stackToDrop != null)
+				{
+					par1EntityPlayer.entityDropItem(stackToDrop.copy(), 0.0F);
 				}
 			}
 		}

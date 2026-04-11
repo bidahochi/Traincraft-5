@@ -1,13 +1,19 @@
 package train.common.core.handlers;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import train.common.inventory.TrainCraftingManager;
+import train.common.library.ItemIDs;
 import train.common.recipes.ITCRecipe.ShapedTrainRecipes;
 
 import java.util.*;
@@ -17,6 +23,26 @@ import java.util.*;
  */
 public abstract class AbstractRecipeHandler
 {
+
+    public final ItemStack BLACK_DYE      = new ItemStack(Items.dye, 1, 0);
+    public final ItemStack RED_DYE        = new ItemStack(Items.dye, 1, 1);
+    public final ItemStack GREEN_DYE      = new ItemStack(Items.dye, 1, 2);
+    public final ItemStack BROWN_DYE      = new ItemStack(Items.dye, 1, 3);
+    public final ItemStack BLUE_DYE       = new ItemStack(Items.dye, 1, 4);
+    public final ItemStack PURPLE_DYE     = new ItemStack(Items.dye, 1, 5);
+    public final ItemStack CYAN_DYE       = new ItemStack(Items.dye, 1, 6);
+    public final ItemStack LIGHT_GRAY_DYE = new ItemStack(Items.dye, 1, 7);
+    public final ItemStack GRAY_DYE       = new ItemStack(Items.dye, 1, 8);
+    public final ItemStack PINK_DYE       = new ItemStack(Items.dye, 1, 9);
+    public final ItemStack LIME_DYE       = new ItemStack(Items.dye, 1, 10);
+    public final ItemStack YELLOW_DYE     = new ItemStack(Items.dye, 1, 11);
+    public final ItemStack LIGHT_BLUE_DYE = new ItemStack(Items.dye, 1, 12);
+    public final ItemStack MAGENTA_DYE    = new ItemStack(Items.dye, 1, 13);
+    public final ItemStack ORANGE_DYE     = new ItemStack(Items.dye, 1, 14);
+    public final ItemStack WHITE_DYE      = new ItemStack(Items.dye, 1, 15);
+
+
+
     public ArrayList<ItemStack> ingotIron	= OreDictionary.getOres("ingotIron");
     public ArrayList<ItemStack> plankWood = OreDictionary.getOres("plankWood");
     public ArrayList<ItemStack> logWood = OreDictionary.getOres("logWood");
@@ -38,6 +64,78 @@ public abstract class AbstractRecipeHandler
     public ArrayList<ItemStack> dyePink = OreDictionary.getOres("dyePink");
     public ArrayList<ItemStack> dyeCyan = OreDictionary.getOres("dyeCyan");
 
+
+    public final String itemSteel = "ingotSteel";
+    public final String ironingot = "ingotIron";
+    public final String anyPlanks = "plankWood";
+
+    public final String DustCoal = "dustCoal";
+
+    public final String anyLogs = "logWood";
+    public final Item IronIngotItem = Items.iron_ingot;
+    public final Item SteelIngotItem = ItemIDs.steel.item;
+    public final Item WaterBucketItem = Items.water_bucket;
+
+    public final Item CoalItem = Items.coal;
+    public final ItemStack CoalItem(int amount)
+    {
+        return new ItemStack(CoalItem, amount);
+    }
+
+    public final ItemStack SteelIngot(int amount)
+    {
+        return new ItemStack(ItemIDs.steel.item, amount);
+    }
+
+    public final String ironCopper = "ingotCopper";
+    public final String ingotGold = "ingotGold";
+    public final String circuitBasic = "circuitBasic";
+    public final String wireCopper = "wireCopper";
+
+    final ItemStack anyPlankType =  new ItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE);
+    final ItemStack anyLogType =  new ItemStack(Blocks.log, 1, OreDictionary.WILDCARD_VALUE);
+
+    public final ItemStack TCItemStack(ItemIDs itemIDs, int amount)
+    {
+        return new ItemStack(itemIDs.item, amount);
+    }
+
+
+    public final ItemStack TCItemStack(Item item, int amount)
+    {
+        return new ItemStack(item, amount);
+    }
+
+    public final ItemStack TCItemStack(Item item, int amount, int meta)
+    {
+        return new ItemStack(item, amount, meta);
+    }
+
+
+    public final ItemStack TCItemStack(Item item)
+    {
+        return new ItemStack(item, 1);
+    }
+
+    public final ItemStack TCItemStack(Block block, int amount)
+    {
+        return new ItemStack(block, amount);
+    }
+
+    public ItemStack getAnyPlankType(int amount)
+    {
+        ItemStack copy = anyPlankType.copy();
+        copy.stackSize = Math.min(amount, 64);;
+        return copy;
+    }
+
+    public ItemStack getAnyLogType(int amount)
+    {
+        ItemStack copy = anyLogType.copy();
+        copy.stackSize = Math.min(amount, 64);;
+        return copy;
+    }
+
     public List<ItemStack> coal = new ArrayList<ItemStack>()
     {
         {
@@ -48,13 +146,13 @@ public abstract class AbstractRecipeHandler
 
     public ArrayList<ItemStack> ingotRainbontrium = OreDictionary.getOres("ingotRainbontrium");
 
-
     public ArrayList<ItemStack> redstone = OreDictionary.getOres("dustRedstone");
     public ArrayList<ItemStack> waterbucket = waterContainers();
 
     public static ArrayList<ItemStack> waterContainers(){
         ArrayList<ItemStack> containers = new ArrayList<ItemStack>();
-        for (FluidContainerRegistry.FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData()){
+        for (FluidContainerRegistry.FluidContainerData data : FluidContainerRegistry.getRegisteredFluidContainerData())
+        {
             if(data.fluid.fluid == FluidRegistry.WATER){
                 containers.add(data.filledContainer);
             }
@@ -62,11 +160,55 @@ public abstract class AbstractRecipeHandler
         return containers;
     }
 
+    public ArrayList<ItemStack> concretes = getConcretes();
+
+    private ArrayList<ItemStack> getConcretes()
+    {
+        ArrayList<ItemStack> concretes = new ArrayList<ItemStack>();
+        if (Loader.isModLoaded("Railcraft"))
+        {
+            Item railcraftItem = GameRegistry.findItem("Railcraft", "cube");
+            concretes.add(new ItemStack(railcraftItem, 1, 1));
+        }
+
+
+        concretes.addAll(OreDictionary.getOres("concrete"));
+
+        return concretes;
+    }
+
+    public List<ItemStack> CREOSOTE_CONTAINERS = getCREOSOTE_CONTAINERS();
+
+    private List<ItemStack> getCREOSOTE_CONTAINERS()
+    {
+        Fluid creosote = FluidRegistry.getFluid("creosote");
+
+        List<ItemStack> CREOSOTE_CONTAINERS = new ArrayList<>();
+
+        CREOSOTE_CONTAINERS.clear();
+
+        for (Object obj : Item.itemRegistry) {
+            Item item = (Item) obj;
+            ItemStack stack = new ItemStack(item, 1);
+            FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(stack);
+            if (fluid != null && fluid.getFluid() == creosote)
+            {
+                if (Item.itemRegistry.getNameForObject(item).toLowerCase().contains("bucket") == false)
+                {
+                    CREOSOTE_CONTAINERS.add(stack.copy());
+                }
+            }
+        }
+
+        return CREOSOTE_CONTAINERS;
+    }
+
     /**
      * Adds Recipe to TrainCraftingManager and will attempt to grab every input item from ore dictionary
      * @param output
      * @param args
      */
+    @Deprecated // Do not need to use anymore as variants is handled during the recipe comparsion
     public final void addRecipeWithOreDic(ItemStack output, Object... args) {
 
         String pattern = "";

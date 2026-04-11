@@ -516,7 +516,7 @@ public class Model29080DOT111 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithStandardFreightRollingStock(bodyModel, entity, f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==15){
+		if(GetColor(entity)==15){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));

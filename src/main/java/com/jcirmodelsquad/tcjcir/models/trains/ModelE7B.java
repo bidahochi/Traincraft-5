@@ -81,13 +81,13 @@ public class ModelE7B extends ModelConverter //Same as Filename
 		bodyModel[37] = new ModelRendererTurbo(this, 413, 60, textureX, textureY); // Box 314
 		bodyModel[38] = new ModelRendererTurbo(this, 420, 60, textureX, textureY); // Box 316
 		bodyModel[39] = new ModelRendererTurbo(this, 273, 2, textureX, textureY); // Box 231
-		bodyModel[40] = new ModelRendererTurbo(this, 384, 69, textureX, textureY, "glow"); // Box 247 headlight rear left
+		bodyModel[40] = new ModelRendererTurbo(this, 384, 69, textureX, textureY, "lamp"); // Box 247 headlight rear left
 		bodyModel[41] = new ModelRendererTurbo(this, 312, 143, textureX, textureY); // Box 222
 		bodyModel[42] = new ModelRendererTurbo(this, 301, 143, textureX, textureY); // Box 223
 		bodyModel[43] = new ModelRendererTurbo(this, 263, 201, textureX, textureY); // Box 438
 		bodyModel[44] = new ModelRendererTurbo(this, 263, 201, textureX, textureY); // Box 439
 		bodyModel[45] = new ModelRendererTurbo(this, 293, 99, textureX, textureY); // Box 441
-		bodyModel[46] = new ModelRendererTurbo(this, 384, 64, textureX, textureY, "glow"); // Box 418 headlight rear right
+		bodyModel[46] = new ModelRendererTurbo(this, 384, 64, textureX, textureY, "lamp"); // Box 418 headlight rear right
 		bodyModel[47] = new ModelRendererTurbo(this, 392, 57, textureX, textureY); // Box 443
 		bodyModel[48] = new ModelRendererTurbo(this, 397, 57, textureX, textureY); // Box 444
 		bodyModel[49] = new ModelRendererTurbo(this, 409, 50, textureX, textureY); // Box 445
@@ -178,10 +178,10 @@ public class ModelE7B extends ModelConverter //Same as Filename
 		bodyModel[134] = new ModelRendererTurbo(this, 253, 4, textureX, textureY); // Box 202
 		bodyModel[135] = new ModelRendererTurbo(this, 264, 4, textureX, textureY); // Box 203
 		bodyModel[136] = new ModelRendererTurbo(this, 273, 2, textureX, textureY); // Box 231
-		bodyModel[137] = new ModelRendererTurbo(this, 329, 69, textureX, textureY, "glow"); // Box 247 headlight rear left
+		bodyModel[137] = new ModelRendererTurbo(this, 329, 69, textureX, textureY, "lamp"); // Box 247 headlight rear left
 		bodyModel[138] = new ModelRendererTurbo(this, 217, 88, textureX, textureY); // Box 222
 		bodyModel[139] = new ModelRendererTurbo(this, 213, 82, textureX, textureY); // Box 223
-		bodyModel[140] = new ModelRendererTurbo(this, 329, 64, textureX, textureY, "glow"); // Box 418 headlight rear right
+		bodyModel[140] = new ModelRendererTurbo(this, 329, 64, textureX, textureY, "lamp"); // Box 418 headlight rear right
 		bodyModel[141] = new ModelRendererTurbo(this, 307, 57, textureX, textureY); // Box 452 some door that magically vibes in the back
 		bodyModel[142] = new ModelRendererTurbo(this, 49, 23, textureX, textureY); // Box 0
 		bodyModel[143] = new ModelRendererTurbo(this, 43, 15, textureX, textureY); // Box 0
@@ -1440,7 +1440,7 @@ public class ModelE7B extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for (int i = 0; i < 348; i++) {
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -1452,9 +1452,9 @@ public class ModelE7B extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		if (GetColor(entity) == 11 || GetColor(entity) == 7 || GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckSilverFriction.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27) {
+		} else if (GetColor(entity) == 27) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckJenksBlueFriction.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckBlackFriction.png"));

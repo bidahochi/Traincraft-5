@@ -424,10 +424,10 @@ public class ModelPSscrewyoutoomanydiners extends ModelConverter //Same as Filen
 		bodyModel[381] = new ModelRendererTurbo(this, 409, 267, textureX, textureY); // Box 128
 		bodyModel[382] = new ModelRendererTurbo(this, 390, 258, textureX, textureY); // Box 128
 		bodyModel[383] = new ModelRendererTurbo(this, 389, 262, textureX, textureY); // Box 128
-		bodyModel[384] = new ModelRendererTurbo(this, 464, 317, textureX, textureY, "glow"); // Box 440 glow
-		bodyModel[385] = new ModelRendererTurbo(this, 464, 312, textureX, textureY, "glow"); // Box 548 glow
-		bodyModel[386] = new ModelRendererTurbo(this, 475, 312, textureX, textureY, "glow"); // Box 440 glow
-		bodyModel[387] = new ModelRendererTurbo(this, 478, 318, textureX, textureY, "glow"); // Box 440 glow
+		bodyModel[384] = new ModelRendererTurbo(this, 464, 317, textureX, textureY, "lamp"); // Box 440 glow
+		bodyModel[385] = new ModelRendererTurbo(this, 464, 312, textureX, textureY, "lamp"); // Box 548 glow
+		bodyModel[386] = new ModelRendererTurbo(this, 475, 312, textureX, textureY, "lamp"); // Box 440 glow
+		bodyModel[387] = new ModelRendererTurbo(this, 478, 318, textureX, textureY, "lamp"); // Box 440 glow
 		bodyModel[388] = new ModelRendererTurbo(this, 485, 306, textureX, textureY); // Box 128
 		bodyModel[389] = new ModelRendererTurbo(this, 485, 282, textureX, textureY); // Box 447
 		bodyModel[390] = new ModelRendererTurbo(this, 67, 206, textureX, textureY); // Box 128
@@ -467,8 +467,8 @@ public class ModelPSscrewyoutoomanydiners extends ModelConverter //Same as Filen
 		bodyModel[424] = new ModelRendererTurbo(this, 444, 90, textureX, textureY); // Box 176
 		bodyModel[425] = new ModelRendererTurbo(this, 427, 68, textureX, textureY); // Box 128
 		bodyModel[426] = new ModelRendererTurbo(this, 430, 294, textureX, textureY); // Box 128
-		bodyModel[427] = new ModelRendererTurbo(this, 440, 282, textureX, textureY, "glow"); // Box 128 glow
-		bodyModel[428] = new ModelRendererTurbo(this, 440, 285, textureX, textureY, "glow"); // Box 440 glow
+		bodyModel[427] = new ModelRendererTurbo(this, 440, 282, textureX, textureY, "lamp"); // Box 128 glow
+		bodyModel[428] = new ModelRendererTurbo(this, 440, 285, textureX, textureY, "lamp"); // Box 440 glow
 		bodyModel[429] = new ModelRendererTurbo(this, 52, 261, textureX, textureY); // Box 128
 		bodyModel[430] = new ModelRendererTurbo(this, 52, 283, textureX, textureY); // Box 128
 		bodyModel[431] = new ModelRendererTurbo(this, 244, 261, textureX, textureY); // Box 128
@@ -490,8 +490,8 @@ public class ModelPSscrewyoutoomanydiners extends ModelConverter //Same as Filen
 		bodyModel[447] = new ModelRendererTurbo(this, 5, 282, textureX, textureY); // Box 434
 		bodyModel[448] = new ModelRendererTurbo(this, 15, 287, textureX, textureY); // Box 435
 		bodyModel[449] = new ModelRendererTurbo(this, 84, 238, textureX, textureY); // Box 128
-		bodyModel[450] = new ModelRendererTurbo(this, 84, 226, textureX, textureY, "glow"); // Box 128 glow
-		bodyModel[451] = new ModelRendererTurbo(this, 84, 213, textureX, textureY, "glow"); // Box 440 glow
+		bodyModel[450] = new ModelRendererTurbo(this, 84, 226, textureX, textureY, "lamp"); // Box 128 glow
+		bodyModel[451] = new ModelRendererTurbo(this, 84, 213, textureX, textureY, "lamp"); // Box 440 glow
 		bodyModel[452] = new ModelRendererTurbo(this, 368, 98, textureX, textureY); // Box 128
 		bodyModel[453] = new ModelRendererTurbo(this, 379, 114, textureX, textureY); // Box 128
 		bodyModel[454] = new ModelRendererTurbo(this, 379, 143, textureX, textureY); // Box 176
@@ -2280,7 +2280,7 @@ public class ModelPSscrewyoutoomanydiners extends ModelConverter //Same as Filen
 	{
 		for(int i = 0; i < 552; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2292,7 +2292,7 @@ public class ModelPSscrewyoutoomanydiners extends ModelConverter //Same as Filen
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()== 11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14){
+		if(GetColor(entity)== 11 || GetColor(entity) == 14){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
