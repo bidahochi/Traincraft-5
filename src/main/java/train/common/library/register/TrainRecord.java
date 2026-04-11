@@ -5,6 +5,9 @@ import train.common.core.util.TraincraftUtil;
 import train.common.enums.InventorySize;
 import train.common.library.EnumTrainType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TrainRecord implements ITrainRecord
 {
     /**
@@ -57,14 +60,14 @@ public class TrainRecord implements ITrainRecord
                        String[] colors, int guiRenderScale, int cargoCapacity)
     {
         this(internalName, entityClass, item, enumTrainType, mass, colors, guiRenderScale);
-        this.cargoCapacity = cargoCapacity;
+        this.cargoCapacity = (byte) Math.min(128, cargoCapacity);
     }
 
     public TrainRecord(String internalName, Class entityClass, Item item, String trainType, double mass,
                        String[] colors, int guiRenderScale, int cargoCapacity)
     {
         this(internalName, entityClass, item, trainType, mass, colors, guiRenderScale);
-        this.cargoCapacity = cargoCapacity;
+        this.cargoCapacity = (byte) Math.min(128, cargoCapacity);
     }
 
     /**
@@ -167,6 +170,8 @@ public class TrainRecord implements ITrainRecord
      */
     public TrainRecord(String internalName) { this.internalName = internalName; }
 
+    public TrainRecord(String internalName, Class entityClass, Item item) { this.internalName = internalName; this.entityClass = entityClass; this.item = item; }
+
     private final String internalName;
     private Class entityClass;
     private Item item;
@@ -184,7 +189,7 @@ public class TrainRecord implements ITrainRecord
     private int guiRenderScale;
     private double bogieLocoPosition;
     private String[] additionalTooltip;
-    private int cargoCapacity;
+    private byte cargoCapacity;
 
     public String getInternalName() { return this.internalName; }
 
@@ -195,10 +200,8 @@ public class TrainRecord implements ITrainRecord
     public TrainRecord setTrainType(String type) { this.trainType = type; return this; }
     public TrainRecord setTrainType(EnumTrainType type) { this.trainType = type.TrainType; return this; }
 
-    @Deprecated
     public int getMHP() { return this.MHP; }
 
-    @Deprecated
     public TrainRecord setMHP(int mhp) { this.MHP = mhp; return this; }
 
     public int getMaxSpeed() { return this.maxSpeed; }
@@ -210,7 +213,9 @@ public class TrainRecord implements ITrainRecord
     public int getFuelConsumption() { return this.fuelConsumption; }
     public TrainRecord setFuelConsumption(int consumption) { this.fuelConsumption = consumption; return this; }
 
+
     public int getWaterConsumption() { return this.waterConsumption; }
+
     public TrainRecord setWaterConsumption(int consumption) {this.waterConsumption = consumption; return this; }
 
     public int getHeatingTime() { return this.heatingTime; }
@@ -222,16 +227,8 @@ public class TrainRecord implements ITrainRecord
     public double getBrakeRate() { return this.brakeRate; }
     public TrainRecord setBrakeRate(double rate) { this.brakeRate = rate; return this; }
 
-    /*
-    OVERRIDE THE GET TANK CAPACITY METHOD IN THE ENTITY CLASS
-     */
-    @Deprecated
     public int getTankCapacity() { return this.tankCapacity; }
 
-    /*
-    OVERRIDE THE GET TANK CAPACITY METHOD IN THE ENTITY CLASS
-     */
-    @Deprecated
     public TrainRecord setTankCapacity(int capacity) { this.tankCapacity = capacity; return this; }
 
     public int[] getColors() { return this.colors; }
@@ -258,14 +255,14 @@ public class TrainRecord implements ITrainRecord
 
     public int getCargoCapacity() { return cargoCapacity; }
 
-    @Deprecated
     /*
         USE setCargoCapacity(InventorySize inventorySize)
      */
     public TrainRecord setCargoCapacity(int capacity)
     {
-        this.cargoCapacity = capacity; return this;
+        this.cargoCapacity = (byte) Math.min(128, capacity); return this;
     }
+
     public TrainRecord setCargoCapacity(InventorySize inventorySize)
     {
         switch (inventorySize)

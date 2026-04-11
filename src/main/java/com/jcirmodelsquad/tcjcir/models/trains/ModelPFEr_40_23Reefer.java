@@ -541,7 +541,7 @@ public class ModelPFEr_40_23Reefer extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithStandardFreightRollingStock(bodyModel, entity, f5);
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12345) {
+		if (GetColor(entity) == 12345) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Bettendorf_Truck_small_PRR_FCC1940s.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.41, -0.02, 0);

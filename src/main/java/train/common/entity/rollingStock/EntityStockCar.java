@@ -84,4 +84,20 @@ public class EntityStockCar extends EntityRollingStock implements IPassenger {
 		}
 	}
 
+	@Override
+	public void onRenderInsertRecord()
+	{
+		train.common.Traincraft.traincraftRegistry.RegisterRollingStockModel(
+				new train.client.render.register.TrainRenderRecord(
+						train.common.library.Info.modID,
+						EntityStockCar.class,
+						new train.client.render.models.ModelStockCar(),
+						"stockcar_",
+						new float[] { -0.0F, -0.40F, 0.0F },
+						new float[] { 0, 0, 0 },
+						null
+				)
+		);
+	}
+
 }

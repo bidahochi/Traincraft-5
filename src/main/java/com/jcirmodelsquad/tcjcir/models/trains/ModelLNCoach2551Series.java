@@ -296,16 +296,16 @@ public class ModelLNCoach2551Series extends ModelConverter//Same as Filename
 		bodyModel[253] = new ModelRendererTurbo(this, 255, 305, textureX, textureY); // Left seat part
 		bodyModel[254] = new ModelRendererTurbo(this, 117, 213, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[255] = new ModelRendererTurbo(this, 117, 223, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[256] = new ModelRendererTurbo(this, 120, 230, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[257] = new ModelRendererTurbo(this, 120, 220, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[256] = new ModelRendererTurbo(this, 120, 230, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[257] = new ModelRendererTurbo(this, 120, 220, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[258] = new ModelRendererTurbo(this, 121, 210, textureX, textureY); // Box 38
 		bodyModel[259] = new ModelRendererTurbo(this, 121, 204, textureX, textureY); // Box 611
-		bodyModel[260] = new ModelRendererTurbo(this, 158, 207, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[261] = new ModelRendererTurbo(this, 167, 207, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[262] = new ModelRendererTurbo(this, 176, 207, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[263] = new ModelRendererTurbo(this, 185, 207, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[264] = new ModelRendererTurbo(this, 194, 207, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[265] = new ModelRendererTurbo(this, 203, 207, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[260] = new ModelRendererTurbo(this, 158, 207, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[261] = new ModelRendererTurbo(this, 167, 207, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[262] = new ModelRendererTurbo(this, 176, 207, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[263] = new ModelRendererTurbo(this, 185, 207, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[264] = new ModelRendererTurbo(this, 194, 207, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[265] = new ModelRendererTurbo(this, 203, 207, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[266] = new ModelRendererTurbo(this, 358, 292, textureX, textureY); // Box 192
 		bodyModel[267] = new ModelRendererTurbo(this, 327, 292, textureX, textureY); // Box 614
 		bodyModel[268] = new ModelRendererTurbo(this, 325, 295, textureX, textureY); // Box 614
@@ -330,7 +330,7 @@ public class ModelLNCoach2551Series extends ModelConverter//Same as Filename
 		bodyModel[287] = new ModelRendererTurbo(this, 326, 73, textureX, textureY); // Left step part
 		bodyModel[288] = new ModelRendererTurbo(this, 340, 71, textureX, textureY); // Left step part
 		bodyModel[289] = new ModelRendererTurbo(this, 326, 71, textureX, textureY); // Left step part
-		bodyModel[290] = new ModelRendererTurbo(this, 379, 43, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[290] = new ModelRendererTurbo(this, 379, 43, textureX, textureY,"lamp"); // Box 128 glow
 		bodyModel[291] = new ModelRendererTurbo(this, 331, 92, textureX, textureY); // Right step part
 		bodyModel[292] = new ModelRendererTurbo(this, 329, 95, textureX, textureY); // Right step part
 		bodyModel[293] = new ModelRendererTurbo(this, 331, 98, textureX, textureY); // Right step part
@@ -385,11 +385,11 @@ public class ModelLNCoach2551Series extends ModelConverter//Same as Filename
 		bodyModel[342] = new ModelRendererTurbo(this, 59, 103, textureX, textureY); // Box 204
 		bodyModel[343] = new ModelRendererTurbo(this, 69, 78, textureX, textureY); // Box 128
 		bodyModel[344] = new ModelRendererTurbo(this, 69, 97, textureX, textureY); // Box 202
-		bodyModel[345] = new ModelRendererTurbo(this, 394, 41, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[346] = new ModelRendererTurbo(this, 211, 208, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[347] = new ModelRendererTurbo(this, 154, 208, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[348] = new ModelRendererTurbo(this, 135, 208, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[349] = new ModelRendererTurbo(this, 214, 208, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[345] = new ModelRendererTurbo(this, 394, 41, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[346] = new ModelRendererTurbo(this, 211, 208, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[347] = new ModelRendererTurbo(this, 154, 208, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[348] = new ModelRendererTurbo(this, 135, 208, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[349] = new ModelRendererTurbo(this, 214, 208, textureX, textureY,"lamp"); // Box 128 glow
 		bodyModel[350] = new ModelRendererTurbo(this, 135, 151, textureX, textureY); // Box 2
 		bodyModel[351] = new ModelRendererTurbo(this, 135, 141, textureX, textureY); // Box 29
 		bodyModel[352] = new ModelRendererTurbo(this, 142, 148, textureX, textureY); // Box 2
@@ -2135,7 +2135,7 @@ public class ModelLNCoach2551Series extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 500; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2147,7 +2147,7 @@ public class ModelLNCoach2551Series extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==3 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==5 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==7){
+		if(GetColor(entity)==1 || GetColor(entity)==3 || GetColor(entity)==5 || GetColor(entity)==7){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/CW_topEqualized_passengerTruck_L&N_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

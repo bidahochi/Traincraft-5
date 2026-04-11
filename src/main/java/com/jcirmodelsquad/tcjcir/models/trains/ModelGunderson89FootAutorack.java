@@ -453,7 +453,7 @@ public class ModelGunderson89FootAutorack extends ModelConverter //Same as Filen
 	{
 		ModelRenderHelper.renderModelWithStandardFreightRollingStock(bodyModel, entity, f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==3249){
+		if(GetColor(entity)==3249){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));

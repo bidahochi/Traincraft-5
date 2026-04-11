@@ -1612,7 +1612,7 @@ public class ModelU25B extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 		
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14354) {
+		if (GetColor(entity) == 14354) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/fb2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.52, 0.335, 0);
@@ -1621,7 +1621,7 @@ public class ModelU25B extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.05, 0, 0);
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18){
+		} else if (GetColor(entity) == 6||GetColor(entity) == 18){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.52, -0.025, 0);

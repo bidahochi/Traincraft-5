@@ -1193,7 +1193,7 @@ public class ModelHBC1B extends ModelConverter//Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7){
+		if (GetColor(entity) == 14|| GetColor(entity) == 15 ||GetColor(entity) == 7){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/swing-motion_caboose_Truck_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.055, 0, 0);

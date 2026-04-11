@@ -28,10 +28,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
-import train.client.core.handlers.ClientTickHandler;
-import train.client.core.handlers.CustomRenderHandler;
-import train.client.core.handlers.RecipeBookHandler;
-import train.client.core.handlers.TCKeyHandler;
+import train.client.core.handlers.*;
 import train.client.core.helpers.JLayerHook;
 import train.client.gui.*;
 import train.client.render.*;
@@ -73,6 +70,7 @@ import train.common.tile.tileSwitch.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
+
 
 public class ClientProxy extends CommonProxy
 {
@@ -473,11 +471,13 @@ public class ClientProxy extends CommonProxy
 							GL11.glTranslated(-x, -(y + .35), -z);
 							if (player != Minecraft.getMinecraft().thePlayer)
 							{
-								GL11.glTranslated(0, 0.87f, 0); //rough approx. but gets the job done for everything in range 0.5-1
+								//GL11.glTranslated(0, 0.87f, 0); //rough approx. but gets the job done for everything in range 0.5-1
+								GL11.glTranslated(0, 1 - (trains.getPlayerScale() - trains.getPlayerModelOffset(false)), 0);
 							}
 							else
 							{
-								GL11.glTranslated(0, 0, 0); //rough approx. but gets the job done for everything in range 0.5-1
+								//GL11.glTranslated(0, 0, 0); //rough approx. but gets the job done for everything in range 0.5-1
+								GL11.glTranslated(0, ((1 - trains.getPlayerScale()) * -1) + trains.getPlayerModelOffset(true) , 0);
 							}
 
 							return true;

@@ -84,6 +84,12 @@ public class SteamBuckingBull extends SteamTrain {
     }
 
     @Override
+    public int getWaterConsumption()
+    {
+        return 70;
+    }
+
+    @Override
     public int getTankCapacity()
     {
         return 2000;

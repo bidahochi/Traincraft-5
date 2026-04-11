@@ -313,19 +313,19 @@ public class ModelDRGWBaggage700Series extends ModelConverter //Same as Filename
 		bodyModel[270] = new ModelRendererTurbo(this, 150, 152, textureX, textureY); // Box 341
 		bodyModel[271] = new ModelRendererTurbo(this, 78, 163, textureX, textureY); // Box 11
 		bodyModel[272] = new ModelRendererTurbo(this, 128, 166, textureX, textureY); // Box 11
-		bodyModel[273] = new ModelRendererTurbo(this, 126, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[273] = new ModelRendererTurbo(this, 126, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[274] = new ModelRendererTurbo(this, 137, 166, textureX, textureY); // Box 11
-		bodyModel[275] = new ModelRendererTurbo(this, 135, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[275] = new ModelRendererTurbo(this, 135, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[276] = new ModelRendererTurbo(this, 173, 166, textureX, textureY); // Box 11
-		bodyModel[277] = new ModelRendererTurbo(this, 171, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[277] = new ModelRendererTurbo(this, 171, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[278] = new ModelRendererTurbo(this, 182, 166, textureX, textureY); // Box 11
-		bodyModel[279] = new ModelRendererTurbo(this, 180, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[279] = new ModelRendererTurbo(this, 180, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[280] = new ModelRendererTurbo(this, 155, 166, textureX, textureY); // Box 11
-		bodyModel[281] = new ModelRendererTurbo(this, 153, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[281] = new ModelRendererTurbo(this, 153, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[282] = new ModelRendererTurbo(this, 164, 166, textureX, textureY); // Box 11
-		bodyModel[283] = new ModelRendererTurbo(this, 162, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[283] = new ModelRendererTurbo(this, 162, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[284] = new ModelRendererTurbo(this, 146, 166, textureX, textureY); // Box 11
-		bodyModel[285] = new ModelRendererTurbo(this, 144, 170, textureX, textureY,"glow"); // Box 11 glow
+		bodyModel[285] = new ModelRendererTurbo(this, 144, 170, textureX, textureY,"lamp"); // Box 11 glow
 		bodyModel[286] = new ModelRendererTurbo(this, 136, 184, textureX, textureY,"cull"); // Box 128 cull
 		bodyModel[287] = new ModelRendererTurbo(this, 136, 212, textureX, textureY,"cull"); // Box 305 cull
 		bodyModel[288] = new ModelRendererTurbo(this, 258, 201, textureX, textureY,"cull"); // Box 305 cull
@@ -497,17 +497,17 @@ public class ModelDRGWBaggage700Series extends ModelConverter //Same as Filename
 		bodyModel[454] = new ModelRendererTurbo(this, 190, 201, textureX, textureY); // Box 578
 		bodyModel[455] = new ModelRendererTurbo(this, 187, 201, textureX, textureY); // Box 579
 		bodyModel[456] = new ModelRendererTurbo(this, 83, 222, textureX, textureY); // Box 460
-		bodyModel[457] = new ModelRendererTurbo(this, 81, 238, textureX, textureY,"glow"); // Box 460 glow
+		bodyModel[457] = new ModelRendererTurbo(this, 81, 238, textureX, textureY,"lamp"); // Box 460 glow
 		bodyModel[458] = new ModelRendererTurbo(this, 81, 234, textureX, textureY); // Box 460
 		bodyModel[459] = new ModelRendererTurbo(this, 77, 218, textureX, textureY); // Box 460
 		bodyModel[460] = new ModelRendererTurbo(this, 77, 222, textureX, textureY); // Box 640
 		bodyModel[461] = new ModelRendererTurbo(this, 66, 222, textureX, textureY); // Box 460
-		bodyModel[462] = new ModelRendererTurbo(this, 64, 238, textureX, textureY,"glow"); // Box 460 glow
+		bodyModel[462] = new ModelRendererTurbo(this, 64, 238, textureX, textureY,"lamp"); // Box 460 glow
 		bodyModel[463] = new ModelRendererTurbo(this, 64, 234, textureX, textureY); // Box 460
 		bodyModel[464] = new ModelRendererTurbo(this, 60, 222, textureX, textureY); // Box 460
 		bodyModel[465] = new ModelRendererTurbo(this, 60, 218, textureX, textureY); // Box 640
 		bodyModel[466] = new ModelRendererTurbo(this, 100, 222, textureX, textureY); // Box 460
-		bodyModel[467] = new ModelRendererTurbo(this, 98, 238, textureX, textureY,"glow"); // Box 460 glow
+		bodyModel[467] = new ModelRendererTurbo(this, 98, 238, textureX, textureY,"lamp"); // Box 460 glow
 		bodyModel[468] = new ModelRendererTurbo(this, 98, 234, textureX, textureY); // Box 460
 		bodyModel[469] = new ModelRendererTurbo(this, 94, 222, textureX, textureY); // Box 460
 		bodyModel[470] = new ModelRendererTurbo(this, 94, 218, textureX, textureY); // Box 640
@@ -1949,7 +1949,7 @@ public class ModelDRGWBaggage700Series extends ModelConverter //Same as Filename
 	{
 		for(int i = 0; i < 471; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -1961,7 +1961,7 @@ public class ModelDRGWBaggage700Series extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==13 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==5){
+		if(GetColor(entity)==13 || GetColor(entity) ==5){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/P_S_truck_green.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
@@ -1972,7 +1972,7 @@ public class ModelDRGWBaggage700Series extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.88, 0, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==0 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==5 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==8 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==7 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==15 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() ==14){
+		} else if(GetColor(entity)==11 || GetColor(entity) ==0 || GetColor(entity) ==5 || GetColor(entity) ==8 || GetColor(entity) ==7 || GetColor(entity) ==15 || GetColor(entity) ==14){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/P_S_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

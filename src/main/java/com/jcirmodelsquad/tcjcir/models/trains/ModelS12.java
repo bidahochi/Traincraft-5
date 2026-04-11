@@ -1685,7 +1685,7 @@ public class ModelS12 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3246) {
+		if (GetColor(entity) == 3246) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, -0.03, 0);
@@ -1694,7 +1694,7 @@ public class ModelS12 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.0, 0, 0);
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3) {
+		} else if (GetColor(entity) == 3) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_greygray_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.1, -0.02, 0);
@@ -1703,7 +1703,7 @@ public class ModelS12 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.2, 0, 0);
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18) {
+		} else if (GetColor(entity) == 17 || GetColor(entity) == 18) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_silvers_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.1, -0.02, 0);
@@ -1713,7 +1713,7 @@ public class ModelS12 extends ModelConverter //Same as Filename
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 		}
-		else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20) {
+		else if (GetColor(entity) == 20) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_silvers_FRICK.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.1, -0.02, 0);

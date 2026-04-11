@@ -319,15 +319,15 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 		bodyModel[276] = new ModelRendererTurbo(this, 15, 263, textureX, textureY); // Box 128
 		bodyModel[277] = new ModelRendererTurbo(this, 15, 239, textureX, textureY); // Box 185
 		bodyModel[278] = new ModelRendererTurbo(this, 176, 250, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[279] = new ModelRendererTurbo(this, 177, 244, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[280] = new ModelRendererTurbo(this, 177, 255, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[281] = new ModelRendererTurbo(this, 284, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[282] = new ModelRendererTurbo(this, 277, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[283] = new ModelRendererTurbo(this, 270, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[284] = new ModelRendererTurbo(this, 263, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[285] = new ModelRendererTurbo(this, 256, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[286] = new ModelRendererTurbo(this, 249, 247, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[287] = new ModelRendererTurbo(this, 242, 247, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[279] = new ModelRendererTurbo(this, 177, 244, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[280] = new ModelRendererTurbo(this, 177, 255, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[281] = new ModelRendererTurbo(this, 284, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[282] = new ModelRendererTurbo(this, 277, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[283] = new ModelRendererTurbo(this, 270, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[284] = new ModelRendererTurbo(this, 263, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[285] = new ModelRendererTurbo(this, 256, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[286] = new ModelRendererTurbo(this, 249, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[287] = new ModelRendererTurbo(this, 242, 247, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[288] = new ModelRendererTurbo(this, 110, 262, textureX, textureY); // Box 38
 		bodyModel[289] = new ModelRendererTurbo(this, 116, 289, textureX, textureY); // Box 38
 		bodyModel[290] = new ModelRendererTurbo(this, 148, 297, textureX, textureY); // Box 38
@@ -350,11 +350,11 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 		bodyModel[307] = new ModelRendererTurbo(this, 501, 266, textureX, textureY); // Box 38
 		bodyModel[308] = new ModelRendererTurbo(this, 489, 266, textureX, textureY); // Box 38
 		bodyModel[309] = new ModelRendererTurbo(this, 498, 269, textureX, textureY); // Box 38
-		bodyModel[310] = new ModelRendererTurbo(this, 441, 286, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[311] = new ModelRendererTurbo(this, 6, 268, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[312] = new ModelRendererTurbo(this, 3, 268, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[313] = new ModelRendererTurbo(this, 0, 268, textureX, textureY,"glow"); // Box 384 glow
-		bodyModel[314] = new ModelRendererTurbo(this, 28, 291, textureX, textureY,"glow"); // Box 384 glow
+		bodyModel[310] = new ModelRendererTurbo(this, 441, 286, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[311] = new ModelRendererTurbo(this, 6, 268, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[312] = new ModelRendererTurbo(this, 3, 268, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[313] = new ModelRendererTurbo(this, 0, 268, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[314] = new ModelRendererTurbo(this, 28, 291, textureX, textureY,"lamp"); // Box 384 glow
 		bodyModel[315] = new ModelRendererTurbo(this, 192, 258, textureX, textureY); // Box 38
 		bodyModel[316] = new ModelRendererTurbo(this, 192, 264, textureX, textureY); // Box 462
 		bodyModel[317] = new ModelRendererTurbo(this, 67, 297, textureX, textureY); // Box 38
@@ -2164,18 +2164,18 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 		bodyModel[574] = new ModelRendererTurbo(this, 426, 365, textureX, textureY); // Right seat part
 		bodyModel[575] = new ModelRendererTurbo(this, 424, 373, textureX, textureY); // Right seat part
 		bodyModel[576] = new ModelRendererTurbo(this, 240, 355, textureX, textureY); // Box 492
-		bodyModel[577] = new ModelRendererTurbo(this, 240, 358, textureX, textureY,"glow"); // Box 492 Glow
+		bodyModel[577] = new ModelRendererTurbo(this, 240, 358, textureX, textureY,"lamp"); // Box 492 Glow
 		bodyModel[578] = new ModelRendererTurbo(this, 244, 334, textureX, textureY); // Box 739
-		bodyModel[579] = new ModelRendererTurbo(this, 244, 337, textureX, textureY,"glow"); // Box 740 glow
+		bodyModel[579] = new ModelRendererTurbo(this, 244, 337, textureX, textureY,"lamp"); // Box 740 glow
 		bodyModel[580] = new ModelRendererTurbo(this, 53, 354, textureX, textureY); // Box 493
 		bodyModel[581] = new ModelRendererTurbo(this, 363, 360, textureX, textureY); // Box 492
-		bodyModel[582] = new ModelRendererTurbo(this, 363, 363, textureX, textureY,"glow"); // Box 492 Glow
+		bodyModel[582] = new ModelRendererTurbo(this, 363, 363, textureX, textureY,"lamp"); // Box 492 Glow
 		bodyModel[583] = new ModelRendererTurbo(this, 371, 334, textureX, textureY); // Box 739
-		bodyModel[584] = new ModelRendererTurbo(this, 371, 337, textureX, textureY,"glow"); // Box 740 glow
+		bodyModel[584] = new ModelRendererTurbo(this, 371, 337, textureX, textureY,"lamp"); // Box 740 glow
 		bodyModel[585] = new ModelRendererTurbo(this, 489, 360, textureX, textureY); // Box 492
-		bodyModel[586] = new ModelRendererTurbo(this, 489, 363, textureX, textureY,"glow"); // Box 492 Glow
+		bodyModel[586] = new ModelRendererTurbo(this, 489, 363, textureX, textureY,"lamp"); // Box 492 Glow
 		bodyModel[587] = new ModelRendererTurbo(this, 489, 341, textureX, textureY); // Box 739
-		bodyModel[588] = new ModelRendererTurbo(this, 489, 344, textureX, textureY,"glow"); // Box 740 glow
+		bodyModel[588] = new ModelRendererTurbo(this, 489, 344, textureX, textureY,"lamp"); // Box 740 glow
 		bodyModel[589] = new ModelRendererTurbo(this, 75, 11, textureX, textureY); // Box 128
 		bodyModel[590] = new ModelRendererTurbo(this, 182, 299, textureX, textureY); // Box 38
 
@@ -2463,7 +2463,7 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 	{
 		for(int i = 0; i < 591; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2475,7 +2475,7 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
@@ -2486,7 +2486,7 @@ public class ModelPSCNW20SeatCoach_Lounge extends ModelConverter//Same as Filena
 			GL11.glTranslated(5.38, 0, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11){
+		} else if(GetColor(entity)==11){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_UP_grey.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

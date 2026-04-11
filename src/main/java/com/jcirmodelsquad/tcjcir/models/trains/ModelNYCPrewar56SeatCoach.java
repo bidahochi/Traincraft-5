@@ -192,16 +192,16 @@ public class ModelNYCPrewar56SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[148] = new ModelRendererTurbo(this, 431, 75, textureX, textureY); // Box 38
 		bodyModel[149] = new ModelRendererTurbo(this, 106, 339, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[150] = new ModelRendererTurbo(this, 106, 346, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[151] = new ModelRendererTurbo(this, 105, 351, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[152] = new ModelRendererTurbo(this, 105, 344, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[151] = new ModelRendererTurbo(this, 105, 351, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[152] = new ModelRendererTurbo(this, 105, 344, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[153] = new ModelRendererTurbo(this, 106, 269, textureX, textureY); // Box 38
 		bodyModel[154] = new ModelRendererTurbo(this, 106, 263, textureX, textureY); // Box 462
-		bodyModel[155] = new ModelRendererTurbo(this, 155, 258, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[156] = new ModelRendererTurbo(this, 160, 258, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[157] = new ModelRendererTurbo(this, 165, 258, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[158] = new ModelRendererTurbo(this, 170, 258, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[159] = new ModelRendererTurbo(this, 175, 258, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[160] = new ModelRendererTurbo(this, 180, 258, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[155] = new ModelRendererTurbo(this, 155, 258, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[156] = new ModelRendererTurbo(this, 160, 258, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[157] = new ModelRendererTurbo(this, 165, 258, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[158] = new ModelRendererTurbo(this, 170, 258, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[159] = new ModelRendererTurbo(this, 175, 258, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[160] = new ModelRendererTurbo(this, 180, 258, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[161] = new ModelRendererTurbo(this, 297, 272, textureX, textureY); // Box 38
 		bodyModel[162] = new ModelRendererTurbo(this, 374, 307, textureX, textureY); // Box 38
 		bodyModel[163] = new ModelRendererTurbo(this, 330, 321, textureX, textureY); // Box 38
@@ -483,8 +483,8 @@ public class ModelNYCPrewar56SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[439] = new ModelRendererTurbo(this, 272, 312, textureX, textureY,"cull"); // Left seat part cull
 		bodyModel[440] = new ModelRendererTurbo(this, 106, 353, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[441] = new ModelRendererTurbo(this, 106, 361, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[442] = new ModelRendererTurbo(this, 104, 366, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[443] = new ModelRendererTurbo(this, 104, 358, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[442] = new ModelRendererTurbo(this, 104, 366, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[443] = new ModelRendererTurbo(this, 104, 358, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[444] = new ModelRendererTurbo(this, 86, 280, textureX, textureY); // Box 38
 		bodyModel[445] = new ModelRendererTurbo(this, 87, 261, textureX, textureY); // Box 38
 		bodyModel[446] = new ModelRendererTurbo(this, 308, 315, textureX, textureY); // Box 38
@@ -511,10 +511,10 @@ public class ModelNYCPrewar56SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[467] = new ModelRendererTurbo(this, 73, 64, textureX, textureY); // Box 38
 		bodyModel[468] = new ModelRendererTurbo(this, 73, 66, textureX, textureY); // Box 503
 		bodyModel[469] = new ModelRendererTurbo(this, 296, 9, textureX, textureY); // Box 504
-		bodyModel[470] = new ModelRendererTurbo(this, 79, 245, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[471] = new ModelRendererTurbo(this, 72, 254, textureX, textureY,"glow"); // Box 505 glow
-		bodyModel[472] = new ModelRendererTurbo(this, 72, 245, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[473] = new ModelRendererTurbo(this, 229, 254, textureX, textureY,"glow"); // Box 505 glow
+		bodyModel[470] = new ModelRendererTurbo(this, 79, 245, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[471] = new ModelRendererTurbo(this, 72, 254, textureX, textureY,"lamp"); // Box 505 glow
+		bodyModel[472] = new ModelRendererTurbo(this, 72, 245, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[473] = new ModelRendererTurbo(this, 229, 254, textureX, textureY,"lamp"); // Box 505 glow
 		bodyModel[474] = new ModelRendererTurbo(this, 72, 249, textureX, textureY); // Box 128
 		bodyModel[475] = new ModelRendererTurbo(this, 322, 5, textureX, textureY); // Box 204
 		bodyModel[476] = new ModelRendererTurbo(this, 322, 9, textureX, textureY); // Box 205
@@ -2874,7 +2874,7 @@ public class ModelNYCPrewar56SeatCoach extends ModelConverter //Same as Filename
 	{
 		for(int i = 0; i < 676; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2886,7 +2886,7 @@ public class ModelNYCPrewar56SeatCoach extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()== 28 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 29 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 30 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 31){ //add back in once Sue line skin is remade: ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==0
+		if(GetColor(entity)== 28 || GetColor(entity) == 29 || GetColor(entity) == 30 || GetColor(entity) == 31){ //add back in once Sue line skin is remade: ||GetColor(entity)==0
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -1907,7 +1907,7 @@ public class ModelFAFDL extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 621 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 954) {
+		if (GetColor(entity) == 621 ||GetColor(entity) == 954) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.19, -0.03, 0);
@@ -1916,7 +1916,7 @@ public class ModelFAFDL extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.53, 0, 0);
 			theBetterTrucks.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		}else if (GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_b.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.19, -0.03, 0);

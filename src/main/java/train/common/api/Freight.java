@@ -10,6 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import train.common.adminbook.ServerLogger;
+import train.common.core.handlers.ItemHandler;
 
 /**
  * Unless you are making a new base class for a specific stock you should
@@ -190,7 +191,7 @@ public abstract class Freight extends EntityRollingStock implements IInventory
 	
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
+		return ItemHandler.isBanned(itemstack) == false;
 	}
 	public int getAmmountOfCargo() {
 		return this.dataWatcher.getWatchableObjectInt(22);

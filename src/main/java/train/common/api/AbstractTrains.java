@@ -10,7 +10,6 @@ import mods.railcraft.api.carts.IRoutableCart;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -81,6 +80,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 
 	private ITrainRenderRecord renderSpec;
 	private SubTrainRenderRecord subTrainRenderRecordSpec;
+
 	/**
 	 * The name of the train based on the item name
 	 */
@@ -249,7 +249,7 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	public AbstractTrains(World world) {
 		super(world);
 		color = -1;
-		trainSpec = Traincraft.traincraftRegistry.getTrainRecord(this.getClass());
+		trainSpec = Traincraft.instance.traincraftRegistry.getTrainRecord(this.getClass());
 		acceptedColors = new ArrayList<Integer>();
 		this.setMinecartName(trainSpec.name());
 		if (trainSpec.getColors() != null)
@@ -315,13 +315,18 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 		prevPosX = x;
 		prevPosY = y;
 		prevPosZ = z;
+
+		if (getCargoManager() != null && getCargoManager().GetDefaultOverride() != -1)
+		{
+			getCargoManager().setSelectedCargo(getCargoManager().GetDefaultOverride());
+		}
 	}
 
 	private void GetRenderSpec()
 	{
 		if (worldObj.isRemote)
 		{
-			renderSpec = Traincraft.traincraftRegistry.getTrainRenderRecord(this.getClass(), this);
+			renderSpec = Traincraft.instance.traincraftRegistry.getTrainRenderRecord(this.getClass(), this);
 			subTrainRenderRecordSpec = renderSpec.getSubTrainRenderRecord(((short) this.getColor()));
 		}
 	}
@@ -394,6 +399,12 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	}
 
 	public float getPlayerScale(){ 	return 0.65f;}
+
+	public float getPlayerModelOffset(boolean isSelf)
+	{
+		// 0.15 must match the base value of the other
+		return isSelf ? 0.15f : (0.15f * 2f) + 0.02f;
+	}
 
 	public abstract boolean isLocomotive();
 
@@ -1135,6 +1146,19 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 		}
 		return renderSpec;
 	}
+
+
+	public float[] getRenderScale(){return getRenderSpec().getScale();}
+
+	@SideOnly(Side.CLIENT)
+	public float[] modelOffsets(){return getRenderSpec().getTrans();}
+
+	@SideOnly(Side.CLIENT)
+	public float[] modelRotations(){return getRenderSpec().getRotate();}
+
+	public boolean hasSmoke() {return getSubTrainRenderRecordSpec() != null && getSubTrainRenderRecordSpec().hasSmoke();}
+
+	public boolean hasExplosion() {return getSubTrainRenderRecordSpec() != null && getSubTrainRenderRecordSpec().hasExplosions();}
 
 	public SubTrainRenderRecord getSubTrainRenderRecordSpec()
 	{

@@ -160,19 +160,19 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 		bodyModel[116] = new ModelRendererTurbo(this, 431, 77, textureX, textureY); // Box 38
 		bodyModel[117] = new ModelRendererTurbo(this, 64, 308, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[118] = new ModelRendererTurbo(this, 64, 318, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[119] = new ModelRendererTurbo(this, 69, 324, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[120] = new ModelRendererTurbo(this, 69, 314, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[119] = new ModelRendererTurbo(this, 69, 324, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[120] = new ModelRendererTurbo(this, 69, 314, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[121] = new ModelRendererTurbo(this, 82, 288, textureX, textureY); // Box 38
 		bodyModel[122] = new ModelRendererTurbo(this, 82, 294, textureX, textureY); // Box 462
-		bodyModel[123] = new ModelRendererTurbo(this, 132, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[124] = new ModelRendererTurbo(this, 141, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[125] = new ModelRendererTurbo(this, 150, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[126] = new ModelRendererTurbo(this, 159, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[127] = new ModelRendererTurbo(this, 168, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[128] = new ModelRendererTurbo(this, 177, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[129] = new ModelRendererTurbo(this, 186, 303, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[130] = new ModelRendererTurbo(this, 275, 353, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[131] = new ModelRendererTurbo(this, 77, 353, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[123] = new ModelRendererTurbo(this, 132, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[124] = new ModelRendererTurbo(this, 141, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[125] = new ModelRendererTurbo(this, 150, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[126] = new ModelRendererTurbo(this, 159, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[127] = new ModelRendererTurbo(this, 168, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[128] = new ModelRendererTurbo(this, 177, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[129] = new ModelRendererTurbo(this, 186, 303, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[130] = new ModelRendererTurbo(this, 275, 353, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[131] = new ModelRendererTurbo(this, 77, 353, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[132] = new ModelRendererTurbo(this, 364, 362, textureX, textureY); // Box 38
 		bodyModel[133] = new ModelRendererTurbo(this, 361, 359, textureX, textureY); // Box 38
 		bodyModel[134] = new ModelRendererTurbo(this, 366, 359, textureX, textureY); // Box 38
@@ -454,8 +454,8 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 		bodyModel[410] = new ModelRendererTurbo(this, 217, 161, textureX, textureY); // Box 547
 		bodyModel[411] = new ModelRendererTurbo(this, 159, 308, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[412] = new ModelRendererTurbo(this, 159, 318, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[413] = new ModelRendererTurbo(this, 160, 324, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[414] = new ModelRendererTurbo(this, 160, 314, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[413] = new ModelRendererTurbo(this, 160, 324, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[414] = new ModelRendererTurbo(this, 160, 314, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[415] = new ModelRendererTurbo(this, 27, 335, textureX, textureY); // Box 614
 		bodyModel[416] = new ModelRendererTurbo(this, 36, 334, textureX, textureY); // Box 614
 		bodyModel[417] = new ModelRendererTurbo(this, 34, 337, textureX, textureY); // Box 614
@@ -521,7 +521,7 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 		bodyModel[477] = new ModelRendererTurbo(this, 386, 360, textureX, textureY); // Box 38
 		bodyModel[478] = new ModelRendererTurbo(this, 389, 365, textureX, textureY); // Box 38
 		bodyModel[479] = new ModelRendererTurbo(this, 388, 369, textureX, textureY); // Box 38
-		bodyModel[480] = new ModelRendererTurbo(this, 452, 32, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[480] = new ModelRendererTurbo(this, 452, 32, textureX, textureY,"lamp"); // Box 128 glow
 		bodyModel[481] = new ModelRendererTurbo(this, 1, 248, textureX, textureY); // Box 128
 		bodyModel[482] = new ModelRendererTurbo(this, 404, 239, textureX, textureY); // Box 128
 		bodyModel[483] = new ModelRendererTurbo(this, 75, 264, textureX, textureY); // Box 38
@@ -2152,12 +2152,12 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 		bodyModel[576] = new ModelRendererTurbo(this, 70, 353, textureX, textureY); // Box 38
 		bodyModel[577] = new ModelRendererTurbo(this, 75, 395, textureX, textureY); // Box 563
 		bodyModel[578] = new ModelRendererTurbo(this, 75, 397, textureX, textureY); // Box 571
-		bodyModel[579] = new ModelRendererTurbo(this, 438, 50, textureX, textureY,"glow"); // Box 71 markerlight twO
-		bodyModel[580] = new ModelRendererTurbo(this, 438, 45, textureX, textureY,"glow"); // Box 1208 makrerlight twO
+		bodyModel[579] = new ModelRendererTurbo(this, 438, 50, textureX, textureY,"lamp"); // Box 71 markerlight twO
+		bodyModel[580] = new ModelRendererTurbo(this, 438, 45, textureX, textureY,"lamp"); // Box 1208 makrerlight twO
 		bodyModel[581] = new ModelRendererTurbo(this, 9, 51, textureX, textureY); // Box 128
 		bodyModel[582] = new ModelRendererTurbo(this, 419, 45, textureX, textureY); // Box 128
-		bodyModel[583] = new ModelRendererTurbo(this, 1, 56, textureX, textureY,"glow"); // Box 71 markerlight twO
-		bodyModel[584] = new ModelRendererTurbo(this, 1, 51, textureX, textureY,"glow"); // Box 1208 makrerlight twO
+		bodyModel[583] = new ModelRendererTurbo(this, 1, 56, textureX, textureY,"lamp"); // Box 71 markerlight twO
+		bodyModel[584] = new ModelRendererTurbo(this, 1, 51, textureX, textureY,"lamp"); // Box 1208 makrerlight twO
 
 		bodyModel[500].addShapeBox(0F, 0F, 0F, 0, 8, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 574
 		bodyModel[500].setRotationPoint(-62F, -7F, 2F);
@@ -2424,7 +2424,7 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 	{
 		for(int i = 0; i < 585; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2436,7 +2436,7 @@ public class ModelACF_LN_KCS60SeatDividedCoach extends ModelConverter//Same as F
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==3 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4){
+		if(GetColor(entity)==3 || GetColor(entity)==4){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-CDO_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

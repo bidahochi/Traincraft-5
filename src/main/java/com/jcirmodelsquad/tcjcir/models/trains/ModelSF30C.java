@@ -971,7 +971,7 @@ public class ModelSF30C extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15) {
+		if (GetColor(entity) == 15) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/fb3_Grey.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/fb3_Grey.png"));

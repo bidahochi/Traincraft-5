@@ -14,10 +14,6 @@ public interface ITrainRenderRecord
 
     String getTexturePrefix();
 
-    boolean hasSmoke();
-
-    boolean hasExplosion();
-
     float[] getTrans();
 
     float[] getRotate();

@@ -1973,11 +1973,11 @@ public class Modelclass74 extends ModelConverter //Same as Filename
 				m.render(f5);
 			}
 		}
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5) {
+		if (GetColor(entity) == 5) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Detail_Kit_Class_74_Steam_Punk_Rail.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1){
+		} else if (GetColor(entity) == 1){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Detail_Kit_Class_74_GCM.png"));
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17){
+		} else if (GetColor(entity) == 16 || GetColor(entity) == 17){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Detail_Kit_Class_74_CRL.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/000EMPTY.png"));//empty cus it was being a bitch and i dont give enough a shit to make it work normally

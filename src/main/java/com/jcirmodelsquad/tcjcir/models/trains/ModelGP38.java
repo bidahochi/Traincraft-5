@@ -2308,8 +2308,8 @@ public class ModelGP38 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 26
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 27 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 28) {
+		if (GetColor(entity) == 18 || GetColor(entity) == 26
+				|| GetColor(entity) == 27 || GetColor(entity) == 28) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.47, -0.0, 0);//front & rear
@@ -2318,7 +2318,7 @@ public class ModelGP38 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.93, 0, 0);//rear
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14321){
+		} else if (GetColor(entity) == 14321){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.47, -0.0, 0);//front & rear
@@ -2327,8 +2327,8 @@ public class ModelGP38 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.93, 0, 0);//rear
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 22
-		|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 23){
+		} else if (GetColor(entity) == 6 ||GetColor(entity) == 22
+		|| GetColor(entity) == 23){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.47, -0.0, 0);//front & rear
@@ -2337,8 +2337,8 @@ public class ModelGP38 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.93, 0, 0);//rear
 			theBlombi.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 36 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 37
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 38 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 40){
+		} else if (GetColor(entity) == 36 ||GetColor(entity) == 37
+				||GetColor(entity) == 38 ||GetColor(entity) == 40){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/BlombergB_csxbleu.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.47, -0.0, 0);//front & rear

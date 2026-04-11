@@ -1142,9 +1142,9 @@ public class ModelU50 extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7 ||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 0
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18) {
+		if (GetColor(entity) == 7 ||GetColor(entity) == 16
+				||GetColor(entity) == 17||GetColor(entity) == 0
+				||GetColor(entity) == 18) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.38, -0.03, 0);
@@ -1159,7 +1159,7 @@ public class ModelU50 extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.43, 0, 0);//rear
 			theBetterTrucks.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1) {
+		}else if (GetColor(entity) == 1) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/tuypeB_southrn_pasicifc_textuire.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.38, -0.03, 0);

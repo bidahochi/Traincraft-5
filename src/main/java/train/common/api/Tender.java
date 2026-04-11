@@ -84,13 +84,6 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 
 	public int freightInventorySize;
 
-	
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return true;
-	}
-
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		super.writeEntityToNBT(nbttagcompound);

@@ -16,11 +16,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import train.client.gui.sideTabs.SideTabManager;
+import train.common.Traincraft;
+import train.common.api.crafting.ITierRecipe;
 import train.common.containers.ContainerTraincraft;
 import train.common.core.interfaces.ITier;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
 import train.common.library.Info;
+import train.common.utils.devutils.DebugUtil;
 
 import java.util.List;
 
@@ -148,7 +151,7 @@ public abstract class GuiTraincraft extends GuiContainer {
 			if (/* slot instanceof Slot && */slot.slotNumber < 10) {
 				String var4 = tier.getGUITexture();
 				GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.9F);
-				mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,var4));
+				mc.renderEngine.bindTexture(new ResourceLocation(var4));
 				int x = slot.xDisplayPosition;
 				int y = slot.yDisplayPosition;
 				GL11.glEnable(GL11.GL_BLEND);
@@ -197,15 +200,23 @@ public abstract class GuiTraincraft extends GuiContainer {
 
 
 		List<ItemStack> itemStacks = null;
+		ITierRecipe tierRecipe;
 		if (recipeSize == -1) {
-			itemStacks = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(recipes.size() - 1))).getInput();
+			tierRecipe = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(recipes.size() - 1)));
 		}
 		else if (recipeSize == recipes.size()) {
-			itemStacks = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(0))).getInput();
+			tierRecipe = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(0)));
 		}
 		else {
-			itemStacks = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(recipeSize))).getInput();
+			tierRecipe = TierRecipeManager.getInstance().getTierRecipe(tier.Tier(), new ItemStack(recipes.get(recipeSize)));
 		}
+
+		if (tierRecipe == null || tierRecipe.getInput() == null)
+		{
+			return;
+		}
+		itemStacks = tierRecipe.getInput();
+
 		drawOverlays2(itemStacks.get(0), 25, 27);
 		drawOverlays2(itemStacks.get(1), 43, 93);
 		drawOverlays2(itemStacks.get(2), 79, 93);

@@ -531,9 +531,9 @@ public class ModelPSCNW16_1_3Sleeper extends ModelConverter//Same as Filename
 		bodyModel[488] = new ModelRendererTurbo(this, 276, 346, textureX, textureY); // Box 38
 		bodyModel[489] = new ModelRendererTurbo(this, 233, 354, textureX, textureY); // Box 38
 		bodyModel[490] = new ModelRendererTurbo(this, 20, 354, textureX, textureY); // Box 38
-		bodyModel[491] = new ModelRendererTurbo(this, 151, 348, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[492] = new ModelRendererTurbo(this, 272, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[493] = new ModelRendererTurbo(this, 52, 349, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[491] = new ModelRendererTurbo(this, 151, 348, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[492] = new ModelRendererTurbo(this, 272, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[493] = new ModelRendererTurbo(this, 52, 349, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[494] = new ModelRendererTurbo(this, 214, 350, textureX, textureY); // Box 38
 		bodyModel[495] = new ModelRendererTurbo(this, 229, 368, textureX, textureY); // Box 38
 		bodyModel[496] = new ModelRendererTurbo(this, 1, 350, textureX, textureY); // Box 38
@@ -2156,18 +2156,18 @@ public class ModelPSCNW16_1_3Sleeper extends ModelConverter//Same as Filename
 		bodyModel[600] = new ModelRendererTurbo(this, 468, 293, textureX, textureY); // Box 38
 		bodyModel[601] = new ModelRendererTurbo(this, 462, 277, textureX, textureY); // Box 38
 		bodyModel[602] = new ModelRendererTurbo(this, 468, 267, textureX, textureY); // Box 38
-		bodyModel[603] = new ModelRendererTurbo(this, 393, 182, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[604] = new ModelRendererTurbo(this, 393, 180, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[605] = new ModelRendererTurbo(this, 390, 180, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[606] = new ModelRendererTurbo(this, 388, 176, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[607] = new ModelRendererTurbo(this, 391, 176, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[608] = new ModelRendererTurbo(this, 384, 178, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[609] = new ModelRendererTurbo(this, 429, 174, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[610] = new ModelRendererTurbo(this, 383, 174, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[611] = new ModelRendererTurbo(this, 338, 172, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[612] = new ModelRendererTurbo(this, 353, 166, textureX, textureY,"glow"); // Box 462 glow
+		bodyModel[603] = new ModelRendererTurbo(this, 393, 182, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[604] = new ModelRendererTurbo(this, 393, 180, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[605] = new ModelRendererTurbo(this, 390, 180, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[606] = new ModelRendererTurbo(this, 388, 176, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[607] = new ModelRendererTurbo(this, 391, 176, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[608] = new ModelRendererTurbo(this, 384, 178, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[609] = new ModelRendererTurbo(this, 429, 174, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[610] = new ModelRendererTurbo(this, 383, 174, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[611] = new ModelRendererTurbo(this, 338, 172, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[612] = new ModelRendererTurbo(this, 353, 166, textureX, textureY,"lamp"); // Box 462 glow
 		bodyModel[613] = new ModelRendererTurbo(this, 353, 168, textureX, textureY); // Box 618
-		bodyModel[614] = new ModelRendererTurbo(this, 353, 164, textureX, textureY,"glow"); // Box 462 glow
+		bodyModel[614] = new ModelRendererTurbo(this, 353, 164, textureX, textureY,"lamp"); // Box 462 glow
 		bodyModel[615] = new ModelRendererTurbo(this, 353, 170, textureX, textureY); // Box 620
 		bodyModel[616] = new ModelRendererTurbo(this, 466, 306, textureX, textureY); // Bed netting R
 		bodyModel[617] = new ModelRendererTurbo(this, 44, 372, textureX, textureY); // Bed netting R
@@ -2731,7 +2731,7 @@ public class ModelPSCNW16_1_3Sleeper extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 665; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2743,7 +2743,7 @@ public class ModelPSCNW16_1_3Sleeper extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -70,9 +70,9 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List flavorList, boolean advanced)
     {
-        par3List.add("\u00a77" + "Pack: " + GetContentPackName());
+        flavorList.add("\u00a77" + "Pack: " + GetContentPackName());
         ITrainRecord trainRecord = Traincraft.traincraftRegistry.getCurrentTrain(this);
         if (trainRecord == null)
         {
@@ -88,20 +88,20 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
         if (itemCacheData.TransportYear != "")
         {
-            par3List.add("\u00a77" + (itemCacheData.TransportYear != "" ? translate("menu.item.year") + ": " + itemCacheData.TransportYear : ""));
+            flavorList.add("\u00a77" + (itemCacheData.TransportYear != "" ? translate("menu.item.year") + ": " + itemCacheData.TransportYear : ""));
         }
 
-        par3List.add("\u00a77" + translate("menu.item.country") + ": " + translate("menu.item." + itemCacheData.TransportCountry.toLowerCase()));
+        flavorList.add("\u00a77" + translate("menu.item.country") + ": " + translate("menu.item." + itemCacheData.TransportCountry.toLowerCase()));
 
-        if (par1ItemStack.hasTagCompound())
+        if (itemStack.hasTagCompound())
         {
-            NBTTagCompound var5 = par1ItemStack.getTagCompound();
+            NBTTagCompound var5 = itemStack.getTagCompound();
             trainCreator = var5.getString("trainCreator");
             trainNote = var5.getString("trainNote");
 			/*if (id > 0)
-				par3List.add("\u00a77" + "ID: " + id);*/
+				flavorList.add("\u00a77" + "ID: " + id);*/
             if (trainCreator.length() > 0) {
-                par3List.add("\u00a77" + "Creator: " + trainCreator);
+                flavorList.add("\u00a77" + "Creator: " + trainCreator);
             }
             int color = var5.getInteger("trainColor");
             if (var5.hasKey("trainColor"))
@@ -119,16 +119,16 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
                 if (itemCacheData.textureDescriptionMap.containsKey(actualPos))
                 {
-                    par3List.add("\u00a77" + "Scheme: " + itemCacheData.textureDescriptionMap.get(actualPos));
+                    flavorList.add("\u00a77" + "Scheme: " + itemCacheData.textureDescriptionMap.get(actualPos));
                 }
                 else
                 {
-                    par3List.add("\u00a77" + "Color: " + AbstractTrains.getColorAsString(color));
+                    flavorList.add("\u00a77" + "Color: " + AbstractTrains.getColorAsString(color));
                 }
             }
 
             if (!trainNote.isEmpty()) {
-                par3List.add("\u00a77" + "Notes: " + trainNote);
+                flavorList.add("\u00a77" + "Notes: " + trainNote);
             }
         }
 
@@ -137,35 +137,35 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
         if (getTrainType().length() > 0)
         {
-            par3List.add("\u00a77" + translate("menu.item.types") + ": " + getTrainType());
+            flavorList.add("\u00a77" + translate("menu.item.types") + ": " + getTrainType());
         }
 
-        par3List.add("\u00a77" + translate("menu.item.fictional") + ": " + (itemCacheData.IsFictional ? translate("menu.item.yes") : translate("menu.item.no")));
+        flavorList.add("\u00a77" + translate("menu.item.fictional") + ": " + (itemCacheData.IsFictional ? translate("menu.item.yes") : translate("menu.item.no")));
 
-        par3List.add(EnumChatFormatting.RED + translate("menu.item.lockout") + ": " + (itemCacheData.HasPublicSkins ? EnumChatFormatting.GREEN + translate("menu.item.lockout.public") : EnumChatFormatting.RED + translate("menu.item.lockout.notpublic")));
+        flavorList.add(EnumChatFormatting.RED + translate("menu.item.lockout") + ": " + (itemCacheData.HasPublicSkins ? EnumChatFormatting.GREEN + translate("menu.item.lockout.public") : EnumChatFormatting.RED + translate("menu.item.lockout.notpublic")));
 
-        if (trainRecord.getMHP() > 0) {
-            par3List.add("\u00a77" + "Power: " + trainRecord.getMHP() + " " +  translate("menu.item.mhp"));
+        if (itemCacheData.TransportMetricHorsePower > 0) {
+            flavorList.add("\u00a77" + "Power: " + itemCacheData.TransportMetricHorsePower + " " +  translate("menu.item.mhp"));
         }
 
         if (itemCacheData.TractiveEffort != 0){
-            par3List.add(EnumChatFormatting.GREEN + translate("menu.item.tractiveeffort") +": " + itemCacheData.TractiveEffort + " lbf");
+            flavorList.add(EnumChatFormatting.GREEN + translate("menu.item.tractiveeffort") +": " + itemCacheData.TractiveEffort + " lbf");
         }
 
         if (trainRecord.getMass() != 0)
         {
-            par3List.add("\u00a77" + "Mass: " + (trainRecord.getMass() * 10));
+            flavorList.add("\u00a77" + "Mass: " + (trainRecord.getMass() * 10));
         }
         else if (itemCacheData.WeightKg != 0)
         {
-            par3List.add(EnumChatFormatting.GREEN + translate("menu.item.weight") +": " + itemCacheData.WeightKg + "kg");
+            flavorList.add(EnumChatFormatting.GREEN + translate("menu.item.weight") +": " + itemCacheData.WeightKg + "kg");
         }
 
         if (itemCacheData.maxSpeed > 0) {
-            par3List.add("\u00a77" + translate("menu.item.speed") + ": " + itemCacheData.maxSpeed + " km/h");
+            flavorList.add("\u00a77" + translate("menu.item.speed") + ": " + itemCacheData.maxSpeed + " km/h");
         }
         if (getCargoCapacity() > 0) {
-            par3List.add("\u00a77" + translate("menu.item.slots") + ": " + getCargoCapacity());
+            flavorList.add("\u00a77" + translate("menu.item.slots") + ": " + getCargoCapacity());
         }
 
 
@@ -175,15 +175,15 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
             if (trainType.contains("tankcar"))
             {
-                par3List.add("\u00a77" + "Capacity: " + itemCacheData.TankCapacity + "mb.");
+                flavorList.add("\u00a77" + "Capacity: " + itemCacheData.TankCapacity + "mb.");
             }
             else if (trainType.contains("tender"))
             {
-                par3List.add("\u00a77" + "Water capacity: " + itemCacheData.TankCapacity + "mb.");
+                flavorList.add("\u00a77" + "Water capacity: " + itemCacheData.TankCapacity + "mb.");
             }
             else if (trainType.contains("slug"))
             {
-                par3List.add("\u00a77" + "Reduces train weight when fueled");
+                flavorList.add("\u00a77" + "Reduces train weight when fueled");
             }
         }
 
@@ -191,17 +191,17 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
 
         if (cargoFlavorText != null)
         {
-            par3List.add("\u00a77" + cargoFlavorText);
+            flavorList.add("\u00a77" + cargoFlavorText);
         }
 
         if (additionnalInfo != null) {
             for (String info : additionnalInfo) {
-                par3List.add("\u00a77" + info);
+                flavorList.add("\u00a77" + info);
             }
         }
 
 
-        //par3List.add("\u00a77" + "Notes: "+getCargoCapacity());
+        //flavorList.add("\u00a77" + "Notes: "+getCargoCapacity());
     }
 
     private String getCargoFlavorText(RollingStockItemCache itemCacheData)

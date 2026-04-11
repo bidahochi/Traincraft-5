@@ -159,14 +159,14 @@ public class ModelPS73Baggage extends ModelConverter //Same as Filename
 		bodyModel[117] = new ModelRendererTurbo(this, 107, 186, textureX, textureY); // Box 38
 		bodyModel[118] = new ModelRendererTurbo(this, 131, 188, textureX, textureY); // Box 38
 		bodyModel[119] = new ModelRendererTurbo(this, 126, 186, textureX, textureY); // Box 38
-		bodyModel[120] = new ModelRendererTurbo(this, 94, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[121] = new ModelRendererTurbo(this, 85, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[122] = new ModelRendererTurbo(this, 76, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[123] = new ModelRendererTurbo(this, 67, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[124] = new ModelRendererTurbo(this, 112, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[125] = new ModelRendererTurbo(this, 103, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[126] = new ModelRendererTurbo(this, 130, 211, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[127] = new ModelRendererTurbo(this, 121, 211, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[120] = new ModelRendererTurbo(this, 94, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[121] = new ModelRendererTurbo(this, 85, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[122] = new ModelRendererTurbo(this, 76, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[123] = new ModelRendererTurbo(this, 67, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[124] = new ModelRendererTurbo(this, 112, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[125] = new ModelRendererTurbo(this, 103, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[126] = new ModelRendererTurbo(this, 130, 211, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[127] = new ModelRendererTurbo(this, 121, 211, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[128] = new ModelRendererTurbo(this, 45, 238, textureX, textureY); // Box 38
 		bodyModel[129] = new ModelRendererTurbo(this, 71, 244, textureX, textureY); // Box 176
 		bodyModel[130] = new ModelRendererTurbo(this, 70, 238, textureX, textureY); // Box 177
@@ -291,13 +291,13 @@ public class ModelPS73Baggage extends ModelConverter //Same as Filename
 		bodyModel[249] = new ModelRendererTurbo(this, 169, 182, textureX, textureY); // Box 38
 		bodyModel[250] = new ModelRendererTurbo(this, 167, 174, textureX, textureY); // Box 38
 		bodyModel[251] = new ModelRendererTurbo(this, 167, 178, textureX, textureY); // Box 38
-		bodyModel[252] = new ModelRendererTurbo(this, 90, 190, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[253] = new ModelRendererTurbo(this, 119, 190, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[252] = new ModelRendererTurbo(this, 90, 190, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[253] = new ModelRendererTurbo(this, 119, 190, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[254] = new ModelRendererTurbo(this, 75, 266, textureX, textureY,"cull"); // Box 414 cull
 		bodyModel[255] = new ModelRendererTurbo(this, 75, 271, textureX, textureY,"cull"); // Box 414 cull
 		bodyModel[256] = new ModelRendererTurbo(this, 75, 276, textureX, textureY,"cull"); // Box 414 cull
-		bodyModel[257] = new ModelRendererTurbo(this, 90, 219, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[258] = new ModelRendererTurbo(this, 138, 219, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[257] = new ModelRendererTurbo(this, 90, 219, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[258] = new ModelRendererTurbo(this, 138, 219, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[259] = new ModelRendererTurbo(this, 78, 15, textureX, textureY); // Box 228
 		bodyModel[260] = new ModelRendererTurbo(this, 77, 12, textureX, textureY); // Box 228
 		bodyModel[261] = new ModelRendererTurbo(this, 78, 3, textureX, textureY); // Box 193
@@ -1181,7 +1181,7 @@ public class ModelPS73Baggage extends ModelConverter //Same as Filename
 	{
 		for(int i = 0; i < 276; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -1193,7 +1193,7 @@ public class ModelPS73Baggage extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12453){
+		if(GetColor(entity)==12453){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -215,7 +215,7 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[172] = new ModelRendererTurbo(this, 340, 42, textureX, textureY); // Box 128
 		bodyModel[173] = new ModelRendererTurbo(this, 334, 36, textureX, textureY); // Box 224
 		bodyModel[174] = new ModelRendererTurbo(this, 383, 121, textureX, textureY); // Box 2
-		bodyModel[175] = new ModelRendererTurbo(this, 380, 104, textureX, textureY,"glow"); // tail sign glow
+		bodyModel[175] = new ModelRendererTurbo(this, 380, 104, textureX, textureY,"lamp"); // tail sign glow
 		bodyModel[176] = new ModelRendererTurbo(this, 435, 39, textureX, textureY); // Box 103
 		bodyModel[177] = new ModelRendererTurbo(this, 434, 43, textureX, textureY); // Box 103
 		bodyModel[178] = new ModelRendererTurbo(this, 434, 48, textureX, textureY); // Box 103
@@ -236,17 +236,17 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[193] = new ModelRendererTurbo(this, 451, 41, textureX, textureY); // Box 311
 		bodyModel[194] = new ModelRendererTurbo(this, 451, 48, textureX, textureY); // Box 2
 		bodyModel[195] = new ModelRendererTurbo(this, 451, 44, textureX, textureY); // Box 313
-		bodyModel[196] = new ModelRendererTurbo(this, 444, 42, textureX, textureY,"glow"); // Box 186 rear MARS light R
-		bodyModel[197] = new ModelRendererTurbo(this, 444, 48, textureX, textureY,"glow"); // Box 187 rear MARS light W
+		bodyModel[196] = new ModelRendererTurbo(this, 444, 42, textureX, textureY,"lamp"); // Box 186 rear MARS light R
+		bodyModel[197] = new ModelRendererTurbo(this, 444, 48, textureX, textureY,"lamp"); // Box 187 rear MARS light W
 		bodyModel[198] = new ModelRendererTurbo(this, 441, 50, textureX, textureY); // Box 405
 		bodyModel[199] = new ModelRendererTurbo(this, 441, 40, textureX, textureY); // Box 317
 		bodyModel[200] = new ModelRendererTurbo(this, 441, 47, textureX, textureY); // Box 405
 		bodyModel[201] = new ModelRendererTurbo(this, 441, 43, textureX, textureY); // Box 319
 		bodyModel[202] = new ModelRendererTurbo(this, 347, 72, textureX, textureY); // Box 38
-		bodyModel[203] = new ModelRendererTurbo(this, 352, 72, textureX, textureY,"glow"); // marker light glow
+		bodyModel[203] = new ModelRendererTurbo(this, 352, 72, textureX, textureY,"lamp"); // marker light glow
 		bodyModel[204] = new ModelRendererTurbo(this, 342, 72, textureX, textureY); // Box 38
 		bodyModel[205] = new ModelRendererTurbo(this, 347, 87, textureX, textureY); // Box 290
-		bodyModel[206] = new ModelRendererTurbo(this, 352, 87, textureX, textureY,"glow"); // marker light glow
+		bodyModel[206] = new ModelRendererTurbo(this, 352, 87, textureX, textureY,"lamp"); // marker light glow
 		bodyModel[207] = new ModelRendererTurbo(this, 342, 87, textureX, textureY); // Box 292
 		bodyModel[208] = new ModelRendererTurbo(this, 283, 138, textureX, textureY,"cull"); // Box 31 cull
 		bodyModel[209] = new ModelRendererTurbo(this, 283, 143, textureX, textureY); // Box 31
@@ -349,25 +349,25 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[306] = new ModelRendererTurbo(this, 8, 119, textureX, textureY); // Box 128
 		bodyModel[307] = new ModelRendererTurbo(this, 8, 117, textureX, textureY); // Box 261
 		bodyModel[308] = new ModelRendererTurbo(this, 48, 104, textureX, textureY); // Box 2
-		bodyModel[309] = new ModelRendererTurbo(this, 341, 228, textureX, textureY,"glow"); // Box 275 glow
+		bodyModel[309] = new ModelRendererTurbo(this, 341, 228, textureX, textureY,"lamp"); // Box 275 glow
 		bodyModel[310] = new ModelRendererTurbo(this, 342, 231, textureX, textureY); // Box 275
-		bodyModel[311] = new ModelRendererTurbo(this, 327, 220, textureX, textureY,"glow"); // Box 485 glow
+		bodyModel[311] = new ModelRendererTurbo(this, 327, 220, textureX, textureY,"lamp"); // Box 485 glow
 		bodyModel[312] = new ModelRendererTurbo(this, 328, 223, textureX, textureY); // Box 486
-		bodyModel[313] = new ModelRendererTurbo(this, 466, 228, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[313] = new ModelRendererTurbo(this, 466, 228, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[314] = new ModelRendererTurbo(this, 468, 231, textureX, textureY); // Box 38
-		bodyModel[315] = new ModelRendererTurbo(this, 466, 220, textureX, textureY,"glow"); // Box 490 glow
+		bodyModel[315] = new ModelRendererTurbo(this, 466, 220, textureX, textureY,"lamp"); // Box 490 glow
 		bodyModel[316] = new ModelRendererTurbo(this, 467, 223, textureX, textureY); // Box 491
-		bodyModel[317] = new ModelRendererTurbo(this, 485, 228, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[317] = new ModelRendererTurbo(this, 485, 228, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[318] = new ModelRendererTurbo(this, 486, 231, textureX, textureY); // Box 38
-		bodyModel[319] = new ModelRendererTurbo(this, 485, 220, textureX, textureY,"glow"); // Box 495 glow
+		bodyModel[319] = new ModelRendererTurbo(this, 485, 220, textureX, textureY,"lamp"); // Box 495 glow
 		bodyModel[320] = new ModelRendererTurbo(this, 486, 223, textureX, textureY); // Box 496
-		bodyModel[321] = new ModelRendererTurbo(this, 494, 225, textureX, textureY,"glow"); // Box 2 glow
+		bodyModel[321] = new ModelRendererTurbo(this, 494, 225, textureX, textureY,"lamp"); // Box 2 glow
 		bodyModel[322] = new ModelRendererTurbo(this, 496, 228, textureX, textureY); // Box 2
-		bodyModel[323] = new ModelRendererTurbo(this, 494, 217, textureX, textureY,"glow"); // Box 506 glow
+		bodyModel[323] = new ModelRendererTurbo(this, 494, 217, textureX, textureY,"lamp"); // Box 506 glow
 		bodyModel[324] = new ModelRendererTurbo(this, 496, 220, textureX, textureY); // Box 507
-		bodyModel[325] = new ModelRendererTurbo(this, 505, 227, textureX, textureY,"glow"); // Box 2 glow
+		bodyModel[325] = new ModelRendererTurbo(this, 505, 227, textureX, textureY,"lamp"); // Box 2 glow
 		bodyModel[326] = new ModelRendererTurbo(this, 506, 229, textureX, textureY); // Box 2
-		bodyModel[327] = new ModelRendererTurbo(this, 505, 219, textureX, textureY,"glow"); // Box 510 glow
+		bodyModel[327] = new ModelRendererTurbo(this, 505, 219, textureX, textureY,"lamp"); // Box 510 glow
 		bodyModel[328] = new ModelRendererTurbo(this, 506, 221, textureX, textureY); // Box 511
 		bodyModel[329] = new ModelRendererTurbo(this, 492, 318, textureX, textureY); // Box 527
 		bodyModel[330] = new ModelRendererTurbo(this, 492, 330, textureX, textureY); // Box 532
@@ -2256,9 +2256,9 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[565] = new ModelRendererTurbo(this, 122, 254, textureX, textureY); // Box 128
 		bodyModel[566] = new ModelRendererTurbo(this, 123, 248, textureX, textureY); // Box 128
 		bodyModel[567] = new ModelRendererTurbo(this, 117, 258, textureX, textureY,"cull"); // Box 128 cull
-		bodyModel[568] = new ModelRendererTurbo(this, 31, 237, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[569] = new ModelRendererTurbo(this, 27, 237, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[570] = new ModelRendererTurbo(this, 20, 237, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[568] = new ModelRendererTurbo(this, 31, 237, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[569] = new ModelRendererTurbo(this, 27, 237, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[570] = new ModelRendererTurbo(this, 20, 237, textureX, textureY,"lamp"); // Box 128 glow
 		bodyModel[571] = new ModelRendererTurbo(this, 89, 267, textureX, textureY); // Box 38
 		bodyModel[572] = new ModelRendererTurbo(this, 89, 274, textureX, textureY); // Box 38
 		bodyModel[573] = new ModelRendererTurbo(this, 89, 281, textureX, textureY); // Box 38
@@ -2268,13 +2268,13 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[577] = new ModelRendererTurbo(this, 83, 265, textureX, textureY); // Box 38
 		bodyModel[578] = new ModelRendererTurbo(this, 83, 272, textureX, textureY); // Box 38
 		bodyModel[579] = new ModelRendererTurbo(this, 83, 279, textureX, textureY); // Box 38
-		bodyModel[580] = new ModelRendererTurbo(this, 1, 237, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[581] = new ModelRendererTurbo(this, 15, 237, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[582] = new ModelRendererTurbo(this, 8, 237, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[580] = new ModelRendererTurbo(this, 1, 237, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[581] = new ModelRendererTurbo(this, 15, 237, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[582] = new ModelRendererTurbo(this, 8, 237, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[583] = new ModelRendererTurbo(this, 192, 236, textureX, textureY); // Box 38
 		bodyModel[584] = new ModelRendererTurbo(this, 222, 239, textureX, textureY); // Folding seat/bed F
-		bodyModel[585] = new ModelRendererTurbo(this, 239, 250, textureX, textureY,"glow"); // Box 462 glow
-		bodyModel[586] = new ModelRendererTurbo(this, 239, 239, textureX, textureY,"glow"); // Box 462 glow
+		bodyModel[585] = new ModelRendererTurbo(this, 239, 250, textureX, textureY,"lamp"); // Box 462 glow
+		bodyModel[586] = new ModelRendererTurbo(this, 239, 239, textureX, textureY,"lamp"); // Box 462 glow
 		bodyModel[587] = new ModelRendererTurbo(this, 46, 259, textureX, textureY); // Box 38
 		bodyModel[588] = new ModelRendererTurbo(this, 1, 265, textureX, textureY); // Box 38
 		bodyModel[589] = new ModelRendererTurbo(this, 1, 240, textureX, textureY); // Box 38
@@ -2338,14 +2338,14 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[647] = new ModelRendererTurbo(this, 189, 160, textureX, textureY); // Box 41
 		bodyModel[648] = new ModelRendererTurbo(this, 201, 160, textureX, textureY); // Box 41
 		bodyModel[649] = new ModelRendererTurbo(this, 400, 121, textureX, textureY); // Box 2
-		bodyModel[650] = new ModelRendererTurbo(this, 397, 105, textureX, textureY,"glow"); // tail sign glow
-		bodyModel[651] = new ModelRendererTurbo(this, 458, 48, textureX, textureY,"glow"); // Box 186 rear MARS light AMTK L
-		bodyModel[652] = new ModelRendererTurbo(this, 458, 42, textureX, textureY,"glow"); // Box 186 rear MARS light AMTK R
+		bodyModel[650] = new ModelRendererTurbo(this, 397, 105, textureX, textureY,"lamp"); // tail sign glow
+		bodyModel[651] = new ModelRendererTurbo(this, 458, 48, textureX, textureY,"lamp"); // Box 186 rear MARS light AMTK L
+		bodyModel[652] = new ModelRendererTurbo(this, 458, 42, textureX, textureY,"lamp"); // Box 186 rear MARS light AMTK R
 		bodyModel[653] = new ModelRendererTurbo(this, 458, 53, textureX, textureY); // Box 2
 		bodyModel[654] = new ModelRendererTurbo(this, 458, 38, textureX, textureY); // Box 185
-		bodyModel[655] = new ModelRendererTurbo(this, 352, 77, textureX, textureY,"glow"); // marker light AMTK glow
+		bodyModel[655] = new ModelRendererTurbo(this, 352, 77, textureX, textureY,"lamp"); // marker light AMTK glow
 		bodyModel[656] = new ModelRendererTurbo(this, 347, 77, textureX, textureY); // Box 38
-		bodyModel[657] = new ModelRendererTurbo(this, 352, 92, textureX, textureY,"glow"); // marker light AMTK glow
+		bodyModel[657] = new ModelRendererTurbo(this, 352, 92, textureX, textureY,"lamp"); // marker light AMTK glow
 		bodyModel[658] = new ModelRendererTurbo(this, 347, 92, textureX, textureY); // Box 659
 		bodyModel[659] = new ModelRendererTurbo(this, 291, 336, textureX, textureY); // Box 559
 		bodyModel[660] = new ModelRendererTurbo(this, 277, 343, textureX, textureY,"cull"); // Box 529 cull
@@ -2402,7 +2402,7 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 		bodyModel[711] = new ModelRendererTurbo(this, 247, 250, textureX, textureY); // Box 38
 		bodyModel[712] = new ModelRendererTurbo(this, 245, 238, textureX, textureY); // Box 38
 		bodyModel[713] = new ModelRendererTurbo(this, 255, 239, textureX, textureY); // Box 38
-		bodyModel[714] = new ModelRendererTurbo(this, 23, 237, textureX, textureY,"glow"); // Box 128 glow
+		bodyModel[714] = new ModelRendererTurbo(this, 23, 237, textureX, textureY,"lamp"); // Box 128 glow
 
 		bodyModel[500].addShapeBox(2F, 0F, 2F, 1, 4, 1, 0F,0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, -0.5F, 0F, -0.5F, -0.5F); // Left seat part
 		bodyModel[500].setRotationPoint(21F, -4.5F, -6.4F);
@@ -3081,7 +3081,7 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 	{
 		for(int i = 0; i < 715; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -3093,7 +3093,7 @@ public class ModelACFGN1DR_17SeatParlorObservation extends ModelConverter//Same 
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

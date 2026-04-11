@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -18,15 +18,8 @@ public class EntityLocoDieselChME3 extends DieselTrain
 	}
 
 	public EntityLocoDieselChME3(World world) {
-		super(world, EnumHeritageTrainsLegacy.locoDieselChME3.getTankCapacity(), LiquidManager.dieselFilter());
-		initLoco();
+		super(world, LiquidManager.dieselFilter());
 	}
-
-	public void initLoco() {
-		fuelTrain = 0;
-		locoInvent = new ItemStack[inventorySize];
-	}
-
 
 
 	@Override
@@ -34,20 +27,6 @@ public class EntityLocoDieselChME3 extends DieselTrain
 		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.35F, posZ);
 	}
 
-
-
-	
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (worldObj.isRemote) {
-			return;
-		}
-		checkInvent(locoInvent[0]);
-	}
-
-	
 
 	@Override
 	public String getInventoryName() {
@@ -60,18 +39,4 @@ public class EntityLocoDieselChME3 extends DieselTrain
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (1.5F);
 	}
-
-	@Override
-	public float transportMetricHorsePower()
-	{
-		return 2383;
-	}
-
-	@Override
-	public int getTankCapacity()
-	{
-		return 5000;
-	}
-
-	
 }

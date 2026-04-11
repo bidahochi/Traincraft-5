@@ -2213,10 +2213,10 @@ public class ModelE8A extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7) {
+		if (GetColor(entity) == 6 || GetColor(entity) == 8 || GetColor(entity) == 7) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckSilver.png"));
 		}
-		else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9){
+		else if(GetColor(entity) == 1 || GetColor(entity) == 9){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckSilverFriction.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/NewBlombergA1ATruckBlack.png"));

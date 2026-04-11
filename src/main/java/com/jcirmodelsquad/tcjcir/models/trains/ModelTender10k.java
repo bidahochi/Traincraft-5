@@ -402,8 +402,8 @@ public class ModelTender10k extends ModelConverter //Same as Filename
 				m.render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==19 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==20
-		|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==21 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==22){
+		if(GetColor(entity)==19 || GetColor(entity)==20
+		|| GetColor(entity)==21 || GetColor(entity)==22){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));//70Ton_Greyish
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-0.95F, 0.0F, 0F);

@@ -23,7 +23,6 @@ public class TraincraftRegistry
 
     }
 
-    private List<ITrainRecord> trainRecords = new ArrayList<>();
     private Map<Item, ITrainRecord> trainRecordsByItem = new HashMap<>();
 
     private Map<Class<?>, ITrainRenderRecord> trainRenderRecords = new HashMap<>();
@@ -41,7 +40,6 @@ public class TraincraftRegistry
     public void RegisterRollingStockEntity(Item item, ITrainRecord trainRecord, Object mod)
     {
         trainRecordsByItem.put(item, trainRecord);
-        trainRecords.add(trainRecord);
 
         int id = incrementTrainID();
 
@@ -51,7 +49,6 @@ public class TraincraftRegistry
     public void RegisterRollingStockEntities(Map<Item, ITrainRecord> entries, Object mod)
     {
         trainRecordsByItem.putAll(entries);
-        trainRecords.addAll(entries.values());
 
         for (Map.Entry<Item, ITrainRecord> entry : entries.entrySet())
         {
@@ -112,11 +109,6 @@ public class TraincraftRegistry
             trainRecords.put(trains.getItem(), trains);
         }
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values())
-        {
-            trainRecords.put(trains.getItem(), trains);
-        }
-
         return trainRecords;
     }
 
@@ -138,13 +130,6 @@ public class TraincraftRegistry
             return trainRecordsByItem.get(item);
         }
 
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values())
-        {
-            if(trains!=null && trains.getItem()!=null && trains.getItem() == item){
-                return trains;
-            }
-        }
-
         return null;
     }
 
@@ -158,15 +143,7 @@ public class TraincraftRegistry
             }
         }
 
-        for (ITrainRecord trains : trainRecords) {
-            if (trains.getEntityClass().equals(entityClass))
-            {
-                return trains;
-            }
-        }
-
-        for (EnumHeritageTrainsLegacy trains : EnumHeritageTrainsLegacy.values())
-        {
+        for (ITrainRecord trains : trainRecordsByItem.values()) {
             if (trains.getEntityClass().equals(entityClass))
             {
                 return trains;

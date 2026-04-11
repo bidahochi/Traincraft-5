@@ -1870,7 +1870,7 @@ public class ModelES44new extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 230) {
+		if (GetColor(entity) == 14 || GetColor(entity) == 17 || GetColor(entity) == 230) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/ge_hiad_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-2F, 0.0F, 0F);
@@ -1881,7 +1881,7 @@ public class ModelES44new extends ModelConverter //Same as Filename
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15437) {
+		}else if (GetColor(entity) == 11 || GetColor(entity) == 15437) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/ge_hiad_youpee.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-2F, 0.0F, 0F);

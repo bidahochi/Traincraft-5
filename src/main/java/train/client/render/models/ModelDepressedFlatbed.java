@@ -58,35 +58,35 @@ public class ModelDepressedFlatbed extends ModelConverter //Same as Filename
 		trucks.render(entity,f,f1,f2,f3,f4,f5);
 		GL11.glPopMatrix();
 
-		/*if( entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==7) {
+		/*if( GetColor(entity)==7) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/CharB1.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.9, 0.14, -0.0425);
 			GL11.glScalef(0.55f, 0.55f, 0.55f);
 			tank1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if( entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==0) {
+		} else if( GetColor(entity)==0) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/PanzerI.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.45, 0.025, -0.11);
 			GL11.glScalef(0.55f, 0.55f, 0.55f);
 			tank3.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if( entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11) {
+		}else if( GetColor(entity)==11) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/helicopterFreedom.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.1,0.37,-0.1);
 			GL11.glRotatef(180, 0, 0, 1);
 			heli.render(entity,f,f1,f2,f3,f4,f5);
 			GL11.glPopMatrix();
-		}else if( entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4) {
+		}else if( GetColor(entity)==4) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/gp7_Yellow.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.3,0.45,-0.1);
 			GL11.glRotatef(180, 0, 0, 1);
 			gp7.render(entity,f,f1,f2,f3,f4,f5);
 			GL11.glPopMatrix();
-		}else if( entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==15) {
+		}else if( GetColor(entity)==15) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/boxcab_White.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(0.3,-0.25,-0.1);

@@ -78,6 +78,12 @@ public class SteamPELoco extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 80;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 4000;

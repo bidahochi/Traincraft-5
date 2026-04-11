@@ -1,5 +1,6 @@
 package train.client.gui;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ import train.common.containers.ContainerTier;
 import train.common.core.interfaces.ITier;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
+import train.common.core.network.PacketUpdateTCBenchPage;
 import train.common.library.*;
 import train.common.library.register.ITrainRecord;
 
@@ -65,14 +67,14 @@ public class GuiCrafterTier extends GuiTraincraft {
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 
 		fontRendererObj.drawString(tier1.getGUIName(), 9 + 1, 6, 0x000000);
-		fontRendererObj.drawString("Output:", 90 + 1, 118, 0x000000);
+		fontRendererObj.drawString("Output:      " + (tier1.getPageNumber() + 1) + "/" + tier1.getTotalPage(), 90 + 1, 118, 0x000000);
 		fontRendererObj.drawString("Storage:", 9 + 1, 118, 0xffffff);
-		fontRendererObj.drawString("Inventory:", 9 + 1, 164, 0xffffff);
+		fontRendererObj.drawString("Inventory: " + tier1.getTotalPage(), 9 + 1, 164, 0xffffff);
 
 		fontRendererObj.drawString(tier1.getGUIName(), 9, 6, 0xd3a900);
-		fontRendererObj.drawString("Output:", 90, 118, 0xd3a900);
+		fontRendererObj.drawString("Output:      " + (tier1.getPageNumber() + 1) + "/" + tier1.getTotalPage(), 90, 118, 0xd3a900);
 		fontRendererObj.drawString("Storage:", 9, 118, 0x202020);
-		fontRendererObj.drawString("Inventory:", 9, 164, 0x202020);
+		fontRendererObj.drawString("Inventory: ", 9, 164, 0x202020);
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -87,7 +89,7 @@ public class GuiCrafterTier extends GuiTraincraft {
 		int j = (width - xSize) / 2;
 		int k = (height - ySize) / 2;
 
-		mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,tier1.getGUITexture()));
+		mc.renderEngine.bindTexture(new ResourceLocation(tier1.getGUITexture()));
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(j, k, 0, 0, this.xSize, this.ySize);
 
@@ -179,9 +181,37 @@ public class GuiCrafterTier extends GuiTraincraft {
 	}
 
 	@Override
-	protected void mouseClicked(int x, int y, int button) {
-		super.mouseClicked(x, y, button);
+	public void initGui() {
+		super.initGui();
+		buttonList.clear();
+		int xMove = 125;
+		buttonList.add(new GuiCustomButton(99, ((width - xSize) / 2) + xMove , ((height - ySize) / 2) + 116, 10, 10, "", Info.guiPrefix + "Icons.png", 48, 0 ));
+		buttonList.add(new GuiCustomButton(100, ((width - xSize) / 2) + xMove + 10, ((height - ySize) / 2) + 116, 10, 10, "", Info.guiPrefix + "Icons.png", 64, 0 ));
 	}
+
+	@Override
+	protected void actionPerformed(GuiButton guibutton)
+	{
+		switch (guibutton.id) {
+			case 99:
+				if (tier1.getPageNumber() > 0) {
+					tier1.setPageNumber(tier1.getPageNumber() - 1);
+					inventorySlots.detectAndSendChanges();
+					Traincraft.tcCraftingBenchChannel.sendToServer(
+							new PacketUpdateTCBenchPage(tier1.getPageNumber(), tile)
+					);
+				}
+				break;
+			case 100:
+				tier1.setPageNumber(tier1.getPageNumber() + 1);
+				inventorySlots.detectAndSendChanges();
+				Traincraft.tcCraftingBenchChannel.sendToServer(
+						new PacketUpdateTCBenchPage(tier1.getPageNumber(), tile)
+				);
+				break;
+		}
+	}
+
 	@Override
 	protected void initSideTabs(IInventory inventory) {
 		super.initSideTabs(inventory);

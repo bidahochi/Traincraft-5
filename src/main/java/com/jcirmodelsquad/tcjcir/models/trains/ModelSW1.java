@@ -1791,7 +1791,7 @@ public class ModelSW1 extends ModelConverter //Same as Filename
 
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 436) {
+		if (GetColor(entity) == 436) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeA_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0F ,0.0F,0F);
@@ -1801,7 +1801,7 @@ public class ModelSW1 extends ModelConverter //Same as Filename
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 788) {
+		} else if (GetColor(entity) == 788) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeA_SP.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0F ,0.0F,0F);
@@ -1811,8 +1811,7 @@ public class ModelSW1 extends ModelConverter //Same as Filename
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6) {
+		} else if (GetColor(entity) == 18 || GetColor(entity) == 19 || GetColor(entity) == 6 || GetColor(entity) == 1) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0F ,-0.035F,0F);

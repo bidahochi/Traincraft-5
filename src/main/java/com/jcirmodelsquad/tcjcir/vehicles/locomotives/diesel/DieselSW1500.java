@@ -48,6 +48,13 @@ public class DieselSW1500 extends DieselTrain {
         InsertTexture(26, "CSXT (Yn1)");
         InsertTexture(27, "CSXT (Stealth)");
         InsertTexture(28, "Seaboard");
+        InsertTexture(29, "BJRY 1501");
+        InsertTexture(30, "NASA 1");
+        InsertTexture(31, "NASA 2 (Early)");
+        InsertTexture(32, "NASA 3 (Early)");
+        InsertTexture(33, "NASA 2 (Late)");
+        InsertTexture(34, "NASA 3 (Late)");
+        InsertTexture(35, "Madison Railroad (ex NASA 3)");
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import train.common.api.crafting.ITierRecipe;
+import train.common.core.util.TraincraftUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,8 +63,10 @@ public class TierRecipe implements ITierRecipe {
 	}
 
 	public ItemStack hasComponents(ItemStack... items) {
-		for (int i = 0; i < stacks.length; i++) {
-			if(!areItemsIdentical(items[i], stacks[i])) {
+		for (int i = 0; i < stacks.length; i++)
+		{
+			if(areItemsIdentical(items[i], stacks[i]) == false && TraincraftUtil.itemStackMatches(items[i], stacks[i]) == false )
+			{
 				return null;
 			}
 			if(!areSizesIdentical(items[i], stacks[i])) {

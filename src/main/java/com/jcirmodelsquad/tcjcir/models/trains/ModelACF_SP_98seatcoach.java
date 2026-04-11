@@ -309,7 +309,7 @@ public class ModelACF_SP_98seatcoach extends ModelConverter //Same as Filename
 		bodyModel[269] = new ModelRendererTurbo(this, 168, 90, textureX, textureY); // Box ac upfit ducting
 		bodyModel[270] = new ModelRendererTurbo(this, 168, 80, textureX, textureY); // Box ac upfit ducting
 		bodyModel[271] = new ModelRendererTurbo(this, 311, 23, textureX, textureY); // Box ac interiorbit
-		bodyModel[272] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 272
+		bodyModel[272] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 272
 		bodyModel[273] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 273
 		bodyModel[274] = new ModelRendererTurbo(this, 60, 48, textureX, textureY); // Box fanstem
 		bodyModel[275] = new ModelRendererTurbo(this, 45, 41, textureX, textureY, "cull"); // Box cull safetyfan
@@ -320,22 +320,22 @@ public class ModelACF_SP_98seatcoach extends ModelConverter //Same as Filename
 		bodyModel[280] = new ModelRendererTurbo(this, 45, 41, textureX, textureY, "cull"); // Box cull safetyfan
 		bodyModel[281] = new ModelRendererTurbo(this, 60, 48, textureX, textureY); // Box fanstem
 		bodyModel[282] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 282
-		bodyModel[283] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 283
+		bodyModel[283] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 283
 		bodyModel[284] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 284
-		bodyModel[285] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 285
-		bodyModel[286] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 286
+		bodyModel[285] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 285
+		bodyModel[286] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 286
 		bodyModel[287] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 287
 		bodyModel[288] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 288
-		bodyModel[289] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 290
+		bodyModel[289] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 290
 		bodyModel[290] = new ModelRendererTurbo(this, 314, 42, textureX, textureY, "cull"); // Box cull luggage
 		bodyModel[291] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 292
 		bodyModel[292] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 293
-		bodyModel[293] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 295
-		bodyModel[294] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 296
+		bodyModel[293] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 295
+		bodyModel[294] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 296
 		bodyModel[295] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 297
 		bodyModel[296] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 298
-		bodyModel[297] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 300
-		bodyModel[298] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 301
+		bodyModel[297] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 300
+		bodyModel[298] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 301
 		bodyModel[299] = new ModelRendererTurbo(this, 45, 47, textureX, textureY); // Box 302
 		bodyModel[300] = new ModelRendererTurbo(this, 316, 50, textureX, textureY, "cull"); // Box 300
 		bodyModel[301] = new ModelRendererTurbo(this, 79, 66, textureX, textureY); // Box brakebrake
@@ -347,7 +347,7 @@ public class ModelACF_SP_98seatcoach extends ModelConverter //Same as Filename
 		bodyModel[307] = new ModelRendererTurbo(this, 115, 161, textureX, textureY, "cull"); // Box cull hanrails
 		bodyModel[308] = new ModelRendererTurbo(this, 120, 161, textureX, textureY, "cull"); // Box cull hanrails
 		bodyModel[309] = new ModelRendererTurbo(this, 120, 161, textureX, textureY, "cull"); // Box cull hanrails
-		bodyModel[310] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "glow"); // Box 310
+		bodyModel[310] = new ModelRendererTurbo(this, 55, 49, textureX, textureY, "lamp"); // Box 310
 		bodyModel[311] = new ModelRendererTurbo(this, 16, 121, textureX, textureY); // Box 321
 		bodyModel[312] = new ModelRendererTurbo(this, 1, 119, textureX, textureY); // Box 322
 		bodyModel[313] = new ModelRendererTurbo(this, 16, 113, textureX, textureY); // Box 323
@@ -1880,7 +1880,7 @@ public class ModelACF_SP_98seatcoach extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for (int i = 0; i < 457; i++) {
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

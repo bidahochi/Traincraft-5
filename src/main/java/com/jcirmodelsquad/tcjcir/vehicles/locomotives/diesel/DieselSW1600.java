@@ -20,6 +20,7 @@ public class DieselSW1600 extends DieselTrain {
         super(world, LiquidManager.dieselFilter());
         
         InsertTexture(0, "FNCC (KIT-L)", LockoutGroup.FNCC);
+        InsertTexture(1, "FNCC (DAR80)", LockoutGroup.FNCC);
     }
 
     @Override

@@ -36,15 +36,13 @@ public class TCItems {
                     case "ItemRollingStock":
                         items.item = new ItemTCRollingStock(items.iconName, items.TypeOfRollingStock);
                         break;
-                    case "ItemRotativeDigger":
-                        items.item = new ItemRotativeDigger();
-                        break;
                     case "ItemContainer":
                         items.item = new ItemContainer(items.iconName);
                         break;
                 }
 			}
 		}
+		ItemIDs.minecartRotativeDigger.item = new ItemRotativeDigger();
 		//ItemIDs.signal.item = new ItemSignal(ItemIDs.signal.itemID, BlockIDs.activeSignal.block).setIconIndex(ItemIDs.signal.iconIndex);
 		ItemIDs.chunkLoaderActivator.item = new ItemChunkLoaderActivator();
 		ItemIDs.recipeBook.item = new ItemRecipeBook();

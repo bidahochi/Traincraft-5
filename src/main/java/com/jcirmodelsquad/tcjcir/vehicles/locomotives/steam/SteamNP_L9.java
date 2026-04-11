@@ -46,6 +46,12 @@ public class SteamNP_L9 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 180;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 3000;

@@ -1452,7 +1452,7 @@ public class ModelTB27 extends ModelConverter //Same as Filename
 
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15) {
+		if (GetColor(entity) == 15) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.4, -0.00, 0);
@@ -1461,7 +1461,7 @@ public class ModelTB27 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.8, 0, 0);
 			theB.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 239||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 226){
+		} else if (GetColor(entity) == 239||GetColor(entity) == 226){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.4, -0.00, 0);

@@ -124,13 +124,13 @@ public class ModelNSCCNBaggage extends ModelConverter//Same as Filename
 		bodyModel[81] = new ModelRendererTurbo(this, 143, 71, textureX, textureY); // Baggage door type 2 L
 		bodyModel[82] = new ModelRendererTurbo(this, 304, 206, textureX, textureY); // Box 38
 		bodyModel[83] = new ModelRendererTurbo(this, 299, 205, textureX, textureY); // Box 38
-		bodyModel[84] = new ModelRendererTurbo(this, 82, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[85] = new ModelRendererTurbo(this, 73, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[86] = new ModelRendererTurbo(this, 64, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[87] = new ModelRendererTurbo(this, 100, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[88] = new ModelRendererTurbo(this, 91, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[89] = new ModelRendererTurbo(this, 118, 201, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[90] = new ModelRendererTurbo(this, 109, 201, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[84] = new ModelRendererTurbo(this, 82, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[85] = new ModelRendererTurbo(this, 73, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[86] = new ModelRendererTurbo(this, 64, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[87] = new ModelRendererTurbo(this, 100, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[88] = new ModelRendererTurbo(this, 91, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[89] = new ModelRendererTurbo(this, 118, 201, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[90] = new ModelRendererTurbo(this, 109, 201, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[91] = new ModelRendererTurbo(this, 324, 96, textureX, textureY); // Box 204
 		bodyModel[92] = new ModelRendererTurbo(this, 324, 76, textureX, textureY); // Box 194
 		bodyModel[93] = new ModelRendererTurbo(this, 66, 96, textureX, textureY); // Box 204
@@ -1781,7 +1781,7 @@ public class ModelNSCCNBaggage extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 405; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -1793,7 +1793,7 @@ public class ModelNSCCNBaggage extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==0 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==10 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==14 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==6 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==18 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==19){
+		if(GetColor(entity)==2 || GetColor(entity)==11 || GetColor(entity)==12 || GetColor(entity)==0 || GetColor(entity)==10 || GetColor(entity)==14 || GetColor(entity)==1 || GetColor(entity)==4 || GetColor(entity)==6 || GetColor(entity)==18 || GetColor(entity)==19){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/CN_6_wheel_lightweight_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

@@ -1409,16 +1409,16 @@ public class ModelF3b extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 356
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 126
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 12
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 10
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 20
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 31){
+		if (GetColor(entity) == 356
+				|| GetColor(entity) == 126
+				|| GetColor(entity) == 11
+				|| GetColor(entity) == 8
+				|| GetColor(entity) == 12
+				|| GetColor(entity) == 10
+				|| GetColor(entity) == 19
+				|| GetColor(entity) == 20
+				|| GetColor(entity) == 21
+				|| GetColor(entity) == 31){
 
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
@@ -1430,7 +1430,7 @@ public class ModelF3b extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.16, -0.025, 0);
 			theTrucc.render(entity, f, f1, f2, f3, f4, f5);//rear
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 832) {
+		} else if (GetColor(entity) == 832) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Espee.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.16, -0.025, 0);

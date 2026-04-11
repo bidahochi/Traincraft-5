@@ -411,35 +411,35 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[365] = new ModelRendererTurbo(this, 72, 388, textureX, textureY,"cull"); // Box 924 cull
 		bodyModel[366] = new ModelRendererTurbo(this, 91, 388, textureX, textureY,"cull"); // Box 924 cull
 		bodyModel[367] = new ModelRendererTurbo(this, 90, 359, textureX, textureY,"cull"); // Box 924 cull
-		bodyModel[368] = new ModelRendererTurbo(this, 1, 372, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[369] = new ModelRendererTurbo(this, 3, 401, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[370] = new ModelRendererTurbo(this, 94, 297, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[371] = new ModelRendererTurbo(this, 91, 335, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[368] = new ModelRendererTurbo(this, 1, 372, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[369] = new ModelRendererTurbo(this, 3, 401, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[370] = new ModelRendererTurbo(this, 94, 297, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[371] = new ModelRendererTurbo(this, 91, 335, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[372] = new ModelRendererTurbo(this, 91, 294, textureX, textureY); // Box 910
 		bodyModel[373] = new ModelRendererTurbo(this, 89, 289, textureX, textureY); // Box 911
-		bodyModel[374] = new ModelRendererTurbo(this, 150, 268, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[375] = new ModelRendererTurbo(this, 85, 263, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[376] = new ModelRendererTurbo(this, 36, 343, textureX, textureY,"glow"); // Box 128 glow
-		bodyModel[377] = new ModelRendererTurbo(this, 45, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[378] = new ModelRendererTurbo(this, 23, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[379] = new ModelRendererTurbo(this, 1, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[380] = new ModelRendererTurbo(this, 49, 348, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[381] = new ModelRendererTurbo(this, 150, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[382] = new ModelRendererTurbo(this, 128, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[383] = new ModelRendererTurbo(this, 139, 277, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[384] = new ModelRendererTurbo(this, 172, 227, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[385] = new ModelRendererTurbo(this, 172, 236, textureX, textureY,"glow"); // Box 950 glow
+		bodyModel[374] = new ModelRendererTurbo(this, 150, 268, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[375] = new ModelRendererTurbo(this, 85, 263, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[376] = new ModelRendererTurbo(this, 36, 343, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[377] = new ModelRendererTurbo(this, 45, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[378] = new ModelRendererTurbo(this, 23, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[379] = new ModelRendererTurbo(this, 1, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[380] = new ModelRendererTurbo(this, 49, 348, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[381] = new ModelRendererTurbo(this, 150, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[382] = new ModelRendererTurbo(this, 128, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[383] = new ModelRendererTurbo(this, 139, 277, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[384] = new ModelRendererTurbo(this, 172, 227, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[385] = new ModelRendererTurbo(this, 172, 236, textureX, textureY,"lamp"); // Box 950 glow
 		bodyModel[386] = new ModelRendererTurbo(this, 169, 230, textureX, textureY); // Box 950
 		bodyModel[387] = new ModelRendererTurbo(this, 108, 10, textureX, textureY); // Box 950
 		bodyModel[388] = new ModelRendererTurbo(this, 319, 21, textureX, textureY); // Box 950
 		bodyModel[389] = new ModelRendererTurbo(this, 108, 342, textureX, textureY,"cull"); // Box 275 NP cull
 		bodyModel[390] = new ModelRendererTurbo(this, 118, 304, textureX, textureY,"cull"); // Box 909 NP cull
-		bodyModel[391] = new ModelRendererTurbo(this, 108, 347, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[392] = new ModelRendererTurbo(this, 118, 309, textureX, textureY,"glow"); // Box 909 glow
+		bodyModel[391] = new ModelRendererTurbo(this, 108, 347, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[392] = new ModelRendererTurbo(this, 118, 309, textureX, textureY,"lamp"); // Box 909 glow
 		bodyModel[393] = new ModelRendererTurbo(this, 17, 408, textureX, textureY,"cull"); // Box 275 NP cull
 		bodyModel[394] = new ModelRendererTurbo(this, 9, 379, textureX, textureY,"cull"); // Box 909 NP cull
-		bodyModel[395] = new ModelRendererTurbo(this, 17, 413, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[396] = new ModelRendererTurbo(this, 9, 384, textureX, textureY,"glow"); // Box 909 glow
+		bodyModel[395] = new ModelRendererTurbo(this, 17, 413, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[396] = new ModelRendererTurbo(this, 9, 384, textureX, textureY,"lamp"); // Box 909 glow
 		bodyModel[397] = new ModelRendererTurbo(this, 370, 156, textureX, textureY); // Box 2
 		bodyModel[398] = new ModelRendererTurbo(this, 318, 156, textureX, textureY); // Box 2
 		bodyModel[399] = new ModelRendererTurbo(this, 326, 149, textureX, textureY); // Box 2 cull test
@@ -2196,9 +2196,9 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[623] = new ModelRendererTurbo(this, 477, 298, textureX, textureY); // Box 2
 		bodyModel[624] = new ModelRendererTurbo(this, 478, 268, textureX, textureY); // Box 2
 		bodyModel[625] = new ModelRendererTurbo(this, 477, 271, textureX, textureY); // Box 2
-		bodyModel[626] = new ModelRendererTurbo(this, 161, 275, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[627] = new ModelRendererTurbo(this, 34, 351, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[628] = new ModelRendererTurbo(this, 12, 351, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[626] = new ModelRendererTurbo(this, 161, 275, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[627] = new ModelRendererTurbo(this, 34, 351, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[628] = new ModelRendererTurbo(this, 12, 351, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[629] = new ModelRendererTurbo(this, 31, 240, textureX, textureY); // Box 128
 		bodyModel[630] = new ModelRendererTurbo(this, 6, 237, textureX, textureY); // Box 128
 		bodyModel[631] = new ModelRendererTurbo(this, 17, 253, textureX, textureY); // Box 128
@@ -2209,7 +2209,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 		bodyModel[636] = new ModelRendererTurbo(this, 113, 284, textureX, textureY,"cull"); // Box 911 cull
 		bodyModel[637] = new ModelRendererTurbo(this, 100, 284, textureX, textureY,"cull"); // Box 911 cull
 		bodyModel[638] = new ModelRendererTurbo(this, 89, 284, textureX, textureY,"cull"); // Box 911 cull
-		bodyModel[639] = new ModelRendererTurbo(this, 161, 272, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[639] = new ModelRendererTurbo(this, 161, 272, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[640] = new ModelRendererTurbo(this, 89, 322, textureX, textureY,"cull"); // Box 917 cull
 		bodyModel[641] = new ModelRendererTurbo(this, 448, 315, textureX, textureY); // Box 2
 		bodyModel[642] = new ModelRendererTurbo(this, 467, 318, textureX, textureY); // Box 2
@@ -2873,7 +2873,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 	{
 		for(int i = 0; i < 696; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2885,10 +2885,10 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==6||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==5||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==16){
+		if(GetColor(entity)==6||
+				GetColor(entity)==12||
+				GetColor(entity)==5||
+				GetColor(entity)==16){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(0, 0, 1, 0);
@@ -2899,7 +2899,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 			GL11.glTranslated(5.5, 0, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-			if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==6){
+			if(GetColor(entity)==6){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Cyan.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2911,7 +2911,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==12){
+			else if(GetColor(entity)==12){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_LightBlue.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2923,7 +2923,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==5){
+			else if(GetColor(entity)==5){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Purple.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2935,7 +2935,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==16){
+			else if(GetColor(entity)==16){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Skin16.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2947,13 +2947,13 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-		} else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==10||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==14||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==0||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==13||
-				entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==17){
+		} else if(GetColor(entity)==2||
+				GetColor(entity)==10||
+				GetColor(entity)==14||
+				GetColor(entity)==4||
+				GetColor(entity)==0||
+				GetColor(entity)==13||
+				GetColor(entity)==17){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-CDO_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(0, 0, 1, 0);
@@ -2964,7 +2964,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 			GL11.glTranslated(5.5, 0, 0);
 			bogie2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-			if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2){
+			if(GetColor(entity)==2){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Green.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2976,7 +2976,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==10){
+			else if(GetColor(entity)==10){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Lime.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -2988,7 +2988,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==14){
+			else if(GetColor(entity)==14){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Orange.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3000,7 +3000,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU2.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==4){
+			else if(GetColor(entity)==4){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Blue.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3012,7 +3012,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU2.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==0){
+			else if(GetColor(entity)==0){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Black.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3024,7 +3024,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU2.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==13){
+			else if(GetColor(entity)==13){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Magenta.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3036,7 +3036,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==17){
+			else if(GetColor(entity)==17){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Skin17.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3048,7 +3048,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU3.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-		}else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==21){
+		}else if(GetColor(entity)==21){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_ATpurple.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(0, 0, 1, 0);
@@ -3070,7 +3070,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 			GL11.glTranslated(0, 0, 0);
 			SeatsU4.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 			GL11.glPopMatrix();
-		}else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		}else if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
@@ -3092,7 +3092,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 			GL11.glTranslated(5.5, 0, 0);
 			bogie1.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-			if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==8){
+			if(GetColor(entity)==8){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Grey.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3104,7 +3104,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==7){
+			else if(GetColor(entity)==7){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_LightGrey.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3116,7 +3116,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==15){
+			else if(GetColor(entity)==15){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_White.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3128,7 +3128,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==3){
+			else if(GetColor(entity)==3){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Brown.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3140,7 +3140,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==11){
+			else if(GetColor(entity)==11){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Yellow.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3152,7 +3152,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1){
+			else if(GetColor(entity)==1){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Red.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3164,7 +3164,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==9){
+			else if(GetColor(entity)==9){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Pink.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3176,7 +3176,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==18){
+			else if(GetColor(entity)==18){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Skin18.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3188,7 +3188,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==19){
+			else if(GetColor(entity)==19){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Skin19.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);
@@ -3200,7 +3200,7 @@ public class ModelBuddDome46SeatCoach extends ModelConverter //Same as Filename
 				SeatsU1.render(entity, f, f1, f2, f3, f4, f5);//upper seats
 				GL11.glPopMatrix();
 			}
-			else if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==20){
+			else if(GetColor(entity)==20){
 				Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/Budd_lightweight_Dome46SeatCoach_Skin20.png"));
 				GL11.glPushMatrix();
 				GL11.glRotatef(0, 0, 0, 0);

@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -19,7 +19,7 @@ public class EntityLocoDieselSD40 extends DieselTrain
 	}
 
 	public EntityLocoDieselSD40(World world) {
-		super(world, EnumHeritageTrainsLegacy.locoDieselSD40.getTankCapacity(), LiquidManager.dieselFilter());
+		super(world, LiquidManager.dieselFilter());
 	}
 
 	@Override
@@ -39,18 +39,4 @@ public class EntityLocoDieselSD40 extends DieselTrain
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (1.2F);
 	}
-
-	@Override
-	public float transportMetricHorsePower()
-	{
-		return 3041;
-	}
-
-	@Override
-	public int getTankCapacity()
-	{
-		return 20000;
-	}
-
-	
 }

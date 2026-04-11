@@ -143,17 +143,17 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 		bodyModel[99] = new ModelRendererTurbo(this, 105, 239, textureX, textureY); // Box 38
 		bodyModel[100] = new ModelRendererTurbo(this, 103, 252, textureX, textureY); // Box 275
 		bodyModel[101] = new ModelRendererTurbo(this, 105, 259, textureX, textureY); // Box 276
-		bodyModel[102] = new ModelRendererTurbo(this, 105, 257, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[103] = new ModelRendererTurbo(this, 105, 242, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[102] = new ModelRendererTurbo(this, 105, 257, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[103] = new ModelRendererTurbo(this, 105, 242, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[104] = new ModelRendererTurbo(this, 106, 262, textureX, textureY); // Box 38
 		bodyModel[105] = new ModelRendererTurbo(this, 106, 233, textureX, textureY); // Box 462
-		bodyModel[106] = new ModelRendererTurbo(this, 126, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[107] = new ModelRendererTurbo(this, 135, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[108] = new ModelRendererTurbo(this, 144, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[109] = new ModelRendererTurbo(this, 153, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[110] = new ModelRendererTurbo(this, 162, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[111] = new ModelRendererTurbo(this, 171, 344, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[112] = new ModelRendererTurbo(this, 122, 346, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[106] = new ModelRendererTurbo(this, 126, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[107] = new ModelRendererTurbo(this, 135, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[108] = new ModelRendererTurbo(this, 144, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[109] = new ModelRendererTurbo(this, 153, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[110] = new ModelRendererTurbo(this, 162, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[111] = new ModelRendererTurbo(this, 171, 344, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[112] = new ModelRendererTurbo(this, 122, 346, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[113] = new ModelRendererTurbo(this, 413, 313, textureX, textureY); // Box 38
 		bodyModel[114] = new ModelRendererTurbo(this, 413, 304, textureX, textureY); // Box 38
 		bodyModel[115] = new ModelRendererTurbo(this, 391, 260, textureX, textureY); // Box 38
@@ -389,9 +389,9 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 		bodyModel[345] = new ModelRendererTurbo(this, 391, 278, textureX, textureY); // Box 38
 		bodyModel[346] = new ModelRendererTurbo(this, 391, 284, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[347] = new ModelRendererTurbo(this, 412, 260, textureX, textureY); // Box 38
-		bodyModel[348] = new ModelRendererTurbo(this, 412, 257, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[348] = new ModelRendererTurbo(this, 412, 257, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[349] = new ModelRendererTurbo(this, 412, 267, textureX, textureY); // Box 38
-		bodyModel[350] = new ModelRendererTurbo(this, 412, 264, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[350] = new ModelRendererTurbo(this, 412, 264, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[351] = new ModelRendererTurbo(this, 437, 313, textureX, textureY); // Box 38
 		bodyModel[352] = new ModelRendererTurbo(this, 417, 297, textureX, textureY); // Box 38
 		bodyModel[353] = new ModelRendererTurbo(this, 433, 298, textureX, textureY); // Box 38
@@ -399,9 +399,9 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 		bodyModel[355] = new ModelRendererTurbo(this, 420, 308, textureX, textureY); // Box 38
 		bodyModel[356] = new ModelRendererTurbo(this, 420, 314, textureX, textureY,"cull"); // Box 38 cull
 		bodyModel[357] = new ModelRendererTurbo(this, 428, 297, textureX, textureY); // Box 38
-		bodyModel[358] = new ModelRendererTurbo(this, 428, 294, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[358] = new ModelRendererTurbo(this, 428, 294, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[359] = new ModelRendererTurbo(this, 428, 304, textureX, textureY); // Box 38
-		bodyModel[360] = new ModelRendererTurbo(this, 428, 301, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[360] = new ModelRendererTurbo(this, 428, 301, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[361] = new ModelRendererTurbo(this, 335, 268, textureX, textureY); // Box 38
 		bodyModel[362] = new ModelRendererTurbo(this, 338, 273, textureX, textureY); // Box 38
 		bodyModel[363] = new ModelRendererTurbo(this, 337, 277, textureX, textureY); // Box 38
@@ -469,8 +469,8 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 		bodyModel[425] = new ModelRendererTurbo(this, 262, 239, textureX, textureY); // Box 38
 		bodyModel[426] = new ModelRendererTurbo(this, 264, 252, textureX, textureY); // Box 275
 		bodyModel[427] = new ModelRendererTurbo(this, 262, 259, textureX, textureY); // Box 276
-		bodyModel[428] = new ModelRendererTurbo(this, 47, 401, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[429] = new ModelRendererTurbo(this, 179, 346, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[428] = new ModelRendererTurbo(this, 47, 401, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[429] = new ModelRendererTurbo(this, 179, 346, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[430] = new ModelRendererTurbo(this, 289, 273, textureX, textureY); // Right seat part
 		bodyModel[431] = new ModelRendererTurbo(this, 289, 303, textureX, textureY); // Left seat part
 		bodyModel[432] = new ModelRendererTurbo(this, 296, 285, textureX, textureY); // Right seat part
@@ -2994,7 +2994,7 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 671; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -3006,7 +3006,7 @@ public class ModelPRECOPendulumCoach extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==14 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==1){
+		if(GetColor(entity)==14 || GetColor(entity)==2 || GetColor(entity)==1){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/PRECO_truck_black.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

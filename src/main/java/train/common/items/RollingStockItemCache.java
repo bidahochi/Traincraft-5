@@ -29,11 +29,13 @@ public class RollingStockItemCache
         {
             maxSpeed = ((Locomotive) train).transportTopSpeed();
             TractiveEffort = ((Locomotive) train).transportTractiveEffort();
+            TransportMetricHorsePower = ((Locomotive) train).transportMetricHorsePower();
         }
         else
         {
             maxSpeed = 0;
             TractiveEffort = 0;
+            TransportMetricHorsePower = 0;
         }
 
         WeightKg = train.weightKg();
@@ -76,6 +78,7 @@ public class RollingStockItemCache
 
     public final float TractiveEffort;
     public final float maxSpeed;
+    public final float TransportMetricHorsePower;
 
     public final float WeightKg;
     public int TankCapacity;

@@ -94,6 +94,23 @@ public class TrainRenderRecord implements ITrainRenderRecord
         return this;
     }
 
+    public TrainRenderRecord AddSubTrainRenderRecord(int skinNumber, SubTrainRenderRecord recordsToInsert)
+    {
+        if (subTrainRenderRecords == null)
+        {
+            Traincraft.tcLog.fatal("ERROR: ATTEMPTED TO INSERT RENDER RECORD INTO NON LOCOMOTIVE RENDER RECORD");
+        }
+
+        if (skinNumber == 0 || subTrainRenderRecords.containsKey(skinNumber))
+        {
+            Traincraft.tcLog.fatal("ERROR: ATTEMPTED TO OVERRIDE RENDER RECORD MUST MODIFY ITS ORIGINAL ID:" + skinNumber);
+        }
+
+        subTrainRenderRecords.put((short)skinNumber, recordsToInsert);
+
+        return this;
+    }
+
     private final Class<? extends AbstractTrains> entityClass;
     private ModelBase model;
     /**
@@ -133,18 +150,6 @@ public class TrainRenderRecord implements ITrainRenderRecord
     }
 
     @Override
-    public boolean hasSmoke()
-    {
-        return hasSmoke;
-    }
-
-    @Override
-    public boolean hasExplosion()
-    {
-        return hasExplosion;
-    }
-
-    @Override
     public float[] getTrans()
     {
         return trans;
@@ -173,7 +178,7 @@ public class TrainRenderRecord implements ITrainRenderRecord
     {
         if (subTrainRenderRecords == null)
         {
-            return null;
+            return new SubTrainRenderRecord();
         }
 
         if (record > 0

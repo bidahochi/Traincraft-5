@@ -2015,8 +2015,8 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 19
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1219||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 119
+		if (GetColor(entity) == 6||GetColor(entity) == 19
+				||GetColor(entity) == 1219||GetColor(entity) == 119
 		) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver_SINGLESHOE.png"));
 			GL11.glPushMatrix();
@@ -2028,8 +2028,8 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.3, -0.02, 0);
 			theBlomb.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 21
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 23||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 10) {
+		} else if (GetColor(entity) == 8||GetColor(entity) == 21
+				||GetColor(entity) == 23||GetColor(entity) == 10) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Blac.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.3, -0.02, 0);
@@ -2040,7 +2040,7 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.3, -0.02, 0);
 			theBlomb.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 17) {
+		} else if (GetColor(entity) == 17) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.3, -0.02, 0);
@@ -2051,7 +2051,7 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.3, -0.02, 0);
 			theBlomb.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 18) {
+		} else if (GetColor(entity) == 18) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Beansniff_SINGLESHOE.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.3, -0.02, 0);
@@ -2062,8 +2062,8 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 			GL11.glTranslated(1.3, -0.02, 0);
 			theBlomb.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 24
-		||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 25) {
+		} else if (GetColor(entity) == 15||GetColor(entity) == 24
+		||GetColor(entity) == 25) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.28, -0.025, 0);
@@ -2081,7 +2081,7 @@ public class ModelCF7angle_freelance extends ModelConverter //Same as Filename
 				ear.render(entity, f, f1, f2, f3, f4, f5);
 				GL11.glPopMatrix();
 			}
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16) {
+		} else if (GetColor(entity) == 16) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_FNCC.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.28, -0.025, 0);

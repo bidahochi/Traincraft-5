@@ -2,6 +2,7 @@ package train.common;
 
 import com.google.gson.JsonParser;
 import com.jcirmodelsquad.tcjcir.features.signal.dynamic.TrainTalk;
+import com.jcirmodelsquad.tcjcir.recipes.*;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -45,7 +46,6 @@ import train.common.library.TraincraftRegistry;
 import train.common.overlaytexture.EnumOverlayFonts;
 import train.common.overlaytexture.OverlayFontRegistry;
 import train.common.recipes.AssemblyTableRecipes;
-import train.common.recipes.rollingstock.*;
 import train.common.utils.devutils.DebugUtil;
 import train.common.utils.devutils.TrainSheetsDataGenerator;
 import train.common.utils.lockout.ILockoutGroup;
@@ -107,6 +107,8 @@ public class Traincraft {
 	public static SimpleNetworkWrapper lockoutCommChannel;
 
 	public static final SimpleNetworkWrapper BannedItems_CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel("banneditems_sync");
+
+	public static SimpleNetworkWrapper tcCraftingBenchChannel = NetworkRegistry.INSTANCE.newSimpleChannel("tc.craftingtable");
 
 	public static FMLEventChannel channel;
 
@@ -184,7 +186,7 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 		trainCompositeSuit = proxy.addArmor("CompositeSuit");
 		TCBlocks.init();
 		TCItems.init();
-		EntityHandler.init();
+		new EntityHandler();
 
 
 		proxy.registerTileEntities();

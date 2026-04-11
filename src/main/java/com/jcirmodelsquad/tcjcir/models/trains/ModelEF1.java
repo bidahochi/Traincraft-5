@@ -865,7 +865,7 @@ public class ModelEF1 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 15) {
+		if (GetColor(entity) == 15) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/ef1d_black.png"));
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/ef1tp_black.png"));
 		} else {

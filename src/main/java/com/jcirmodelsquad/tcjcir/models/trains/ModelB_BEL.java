@@ -1471,8 +1471,8 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 43231||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 320
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 343) {
+		if (GetColor(entity) == 43231||GetColor(entity) == 320
+				||GetColor(entity) == 343) {
 			//fb2 black late
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();
@@ -1482,7 +1482,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.12, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14236){
+		} else if (GetColor(entity) == 6||GetColor(entity) == 14236){
 			//type b silver early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
@@ -1492,7 +1492,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.06, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 7||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 9){
+		} else if (GetColor(entity) == 7||GetColor(entity) == 9){
 			//fb2 blac early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();
@@ -1502,7 +1502,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1123){
+		} else if (GetColor(entity) == 1123){
 			//fb2 u p is where the poop is early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_up_early.png"));
 			GL11.glPushMatrix();
@@ -1512,8 +1512,8 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 5
-				||entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 11){
+		} else if (GetColor(entity) == 8||GetColor(entity) == 5
+				||GetColor(entity) == 11){
 			//type b black early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Black.png"));
 			GL11.glPushMatrix();
@@ -1523,7 +1523,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.06, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 16){
+		} else if (GetColor(entity) == 16){
 			//fb2 silver early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_silver_a.png"));
 			GL11.glPushMatrix();
@@ -1533,7 +1533,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.06, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3247){
+		} else if (GetColor(entity) == 3247){
 			//fb2 grey late
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_grey.png"));
 			GL11.glPushMatrix();
@@ -1543,7 +1543,7 @@ public class ModelB_BEL extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.12, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3249){
+		} else if (GetColor(entity) == 3249){
 			//fb2 CRASH SMASH XPLODE late
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_de_bleu.png"));
 			GL11.glPushMatrix();

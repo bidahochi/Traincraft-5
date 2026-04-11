@@ -830,7 +830,7 @@ public class ModelMP15DCW9 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1345344) {
+		if (GetColor(entity) == 1345344) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeasmol_Green.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.0, 0.05, 0);
@@ -840,7 +840,7 @@ public class ModelMP15DCW9 extends ModelConverter //Same as Filename
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123454 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 4) {
+		} else if (GetColor(entity) == 123454 || GetColor(entity) == 4) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/flexicoil2_Black.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.05, 0.13, 0);

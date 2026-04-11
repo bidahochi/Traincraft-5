@@ -53,6 +53,12 @@ public class SteamLima2_8_0 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 130;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 3000;

@@ -1145,7 +1145,7 @@ public class ModelDR441500BShark extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 123456) {
+		if (GetColor(entity) == 123456) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.28, -0.03, 0);
@@ -1154,7 +1154,7 @@ public class ModelDR441500BShark extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.59, 0, 0);
 			theBetterTrucks.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 14) {
+		} else if (GetColor(entity) == 14) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_EJ&EGreen.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.22, -0.03, 0);

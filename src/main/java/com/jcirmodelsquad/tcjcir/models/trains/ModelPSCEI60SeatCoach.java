@@ -198,17 +198,17 @@ public class ModelPSCEI60SeatCoach extends ModelConverter//Same as Filename
 		bodyModel[155] = new ModelRendererTurbo(this, 105, 239, textureX, textureY); // Box 38
 		bodyModel[156] = new ModelRendererTurbo(this, 103, 252, textureX, textureY); // Box 275
 		bodyModel[157] = new ModelRendererTurbo(this, 105, 259, textureX, textureY); // Box 276
-		bodyModel[158] = new ModelRendererTurbo(this, 105, 257, textureX, textureY,"glow"); // Box 275 glow
-		bodyModel[159] = new ModelRendererTurbo(this, 105, 242, textureX, textureY,"glow"); // Box 285 glow
+		bodyModel[158] = new ModelRendererTurbo(this, 105, 257, textureX, textureY,"lamp"); // Box 275 glow
+		bodyModel[159] = new ModelRendererTurbo(this, 105, 242, textureX, textureY,"lamp"); // Box 285 glow
 		bodyModel[160] = new ModelRendererTurbo(this, 106, 262, textureX, textureY); // Box 38
 		bodyModel[161] = new ModelRendererTurbo(this, 106, 233, textureX, textureY); // Box 462
-		bodyModel[162] = new ModelRendererTurbo(this, 156, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[163] = new ModelRendererTurbo(this, 163, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[164] = new ModelRendererTurbo(this, 170, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[165] = new ModelRendererTurbo(this, 177, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[166] = new ModelRendererTurbo(this, 184, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[167] = new ModelRendererTurbo(this, 191, 249, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[168] = new ModelRendererTurbo(this, 198, 249, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[162] = new ModelRendererTurbo(this, 156, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[163] = new ModelRendererTurbo(this, 163, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[164] = new ModelRendererTurbo(this, 170, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[165] = new ModelRendererTurbo(this, 177, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[166] = new ModelRendererTurbo(this, 184, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[167] = new ModelRendererTurbo(this, 191, 249, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[168] = new ModelRendererTurbo(this, 198, 249, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[169] = new ModelRendererTurbo(this, 99, 269, textureX, textureY); // Right seat part
 		bodyModel[170] = new ModelRendererTurbo(this, 99, 297, textureX, textureY); // Left seat part
 		bodyModel[171] = new ModelRendererTurbo(this, 130, 269, textureX, textureY); // Right seat part
@@ -227,8 +227,8 @@ public class ModelPSCEI60SeatCoach extends ModelConverter//Same as Filename
 		bodyModel[184] = new ModelRendererTurbo(this, 427, 259, textureX, textureY); // Box 38
 		bodyModel[185] = new ModelRendererTurbo(this, 338, 303, textureX, textureY); // Box 38
 		bodyModel[186] = new ModelRendererTurbo(this, 462, 274, textureX, textureY); // Box 38
-		bodyModel[187] = new ModelRendererTurbo(this, 204, 250, textureX, textureY,"glow"); // Box 38 glow
-		bodyModel[188] = new ModelRendererTurbo(this, 152, 250, textureX, textureY,"glow"); // Box 38 glow
+		bodyModel[187] = new ModelRendererTurbo(this, 204, 250, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[188] = new ModelRendererTurbo(this, 152, 250, textureX, textureY,"lamp"); // Box 38 glow
 		bodyModel[189] = new ModelRendererTurbo(this, 360, 303, textureX, textureY); // Box 38
 		bodyModel[190] = new ModelRendererTurbo(this, 349, 303, textureX, textureY); // Box 38
 		bodyModel[191] = new ModelRendererTurbo(this, 347, 307, textureX, textureY); // Box 38
@@ -2388,7 +2388,7 @@ public class ModelPSCEI60SeatCoach extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 580; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
@@ -2400,7 +2400,7 @@ public class ModelPSCEI60SeatCoach extends ModelConverter//Same as Filename
 				bodyModel[i].render(f5);
 			}
 		}
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==123456){
+		if(GetColor(entity)==123456){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/41-N-11_truck_silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

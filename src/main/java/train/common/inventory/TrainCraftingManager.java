@@ -47,17 +47,14 @@ public class TrainCraftingManager {
 	private TrainCraftingManager() {}
 
 
-
-
-
-	public void addRecipe(ItemStack par1ItemStack, Object... obj) {
+	public void addRecipe(ItemStack output, Object... recipe) {
 		String var3 = "";
-		int var4 = 0;
+		int idx = 0;
 		int var5 = 0;
 		int var6 = 0;
 
-		if (obj[var4] instanceof String[]) {
-			String[] var7 = (String[]) obj[var4++];
+		if (recipe[idx] instanceof String[]) {
+			String[] var7 = (String[]) recipe[idx++];
 
 			for (int var8 = 0; var8 < var7.length; ++var8) {
 				String var9 = var7[var8];
@@ -67,47 +64,62 @@ public class TrainCraftingManager {
 			}
 		}
 		else {
-			while (obj[var4] instanceof String) {
-				String var11 = (String) obj[var4++];
+			while (recipe[idx] instanceof String) {
+				String var11 = (String) recipe[idx++];
 				++var6;
 				var5 = var11.length();
 				var3 = var3 + var11;
 			}
 		}
-		HashMap var12;
 
-		for (var12 = new HashMap(); var4 < obj.length; var4 += 2) {
-			Character var13 = (Character) obj[var4];
-			ItemStack var14 = null;
+		HashMap<Character, Object> itemMap = new HashMap<Character, Object>();
 
-			if (obj[var4 + 1] instanceof Item) {
-				var14 = new ItemStack((Item) obj[var4 + 1]);
+		for (;idx < recipe.length; idx += 2)
+		{
+			Character chr = (Character) recipe[idx];
+
+			Object in = recipe[idx + 1];
+
+			if (in instanceof Item) {
+				itemMap.put(chr, new ItemStack((Item) in));
 			}
-			else if (obj[var4 + 1] instanceof Block) {
-				var14 = new ItemStack((Block) obj[var4 + 1], 1, -1);
+			else if (in instanceof Block) {
+				itemMap.put(chr, new ItemStack((Block) in, 1, -1));
 			}
-			else if (obj[var4 + 1] instanceof ItemStack) {
-				var14 = (ItemStack) obj[var4 + 1];
+			else if (in instanceof ItemStack) {
+				itemMap.put(chr, (ItemStack) in);
+			}
+			else if (in instanceof String)
+			{
+				itemMap.put(chr, in);
 			}
 
-			var12.put(var13, var14);
 		}
 
-		ItemStack[] var15 = new ItemStack[/* var5 * var6 */9];
+		Object[] var15 = new Object[9];
 
 		for (int var16 = 0; var16 < var5 * var6; ++var16) {
 			char var10 = var3.charAt(var16);
 
-			if (var12.containsKey(var10)) {
-				var15[var16] = ((ItemStack) var12.get(var10)).copy();
-			}
-			else {
+			if (itemMap.containsKey(var10)) {
+
+				Object ingredient = itemMap.get(var10);
+
+				if (ingredient instanceof ItemStack) {
+					var15[var16] = ((ItemStack) ingredient).copy();
+				}
+				else if (ingredient instanceof String) {
+					// OreDictionary entry
+					var15[var16] = ingredient;
+				}
+
+			} else {
 				var15[var16] = null;
 			}
 		}
 
-		this.recipes.add(new ShapedTrainRecipes(var5, var6, var15, par1ItemStack));
-		this.shapedRecipes.add(new ShapedTrainRecipes(var5, var6, var15, par1ItemStack));
+		this.recipes.add(new ShapedTrainRecipes(var5, var6, var15, output));
+		this.shapedRecipes.add(new ShapedTrainRecipes(var5, var6, var15, output));
 	}
 
 	public void addShapelessRecipe(ItemStack par1ItemStack, Object... obj) {

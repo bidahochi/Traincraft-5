@@ -1308,7 +1308,7 @@ public class ModelB23_wrx extends ModelConverter //Same as Filename
 
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1345) {
+		if (GetColor(entity) == 1345) {
 			//fb2 black late
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();
@@ -1318,7 +1318,7 @@ public class ModelB23_wrx extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.12, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1632){
+		} else if (GetColor(entity) == 1632){
 			//type b silver early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
@@ -1328,7 +1328,7 @@ public class ModelB23_wrx extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.05, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1987){
+		} else if (GetColor(entity) == 1987){
 			//fb2 blac early
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();

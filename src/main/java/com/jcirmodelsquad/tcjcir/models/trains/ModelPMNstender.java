@@ -122,15 +122,15 @@ public class ModelPMNstender extends ModelConverter //Same as Filename
 		bodyModel[80] = new ModelRendererTurbo(this, 229, 17, textureX, textureY); // Box 83
 		bodyModel[81] = new ModelRendererTurbo(this, 229, 4, textureX, textureY); // Box 83
 		bodyModel[82] = new ModelRendererTurbo(this, 182, 58, textureX, textureY); // Box 83
-		bodyModel[83] = new ModelRendererTurbo(this, 182, 53, textureX, textureY, "glow"); // Rear headlight glow
+		bodyModel[83] = new ModelRendererTurbo(this, 182, 53, textureX, textureY, "lamp"); // Rear headlight glow
 		bodyModel[84] = new ModelRendererTurbo(this, 188, 48, textureX, textureY); // Box 2 headlight 3
 		bodyModel[85] = new ModelRendererTurbo(this, 189, 45, textureX, textureY); // Box 2 headlight 3
 		bodyModel[86] = new ModelRendererTurbo(this, 189, 59, textureX, textureY); // Box 2 headlight 2
 		bodyModel[87] = new ModelRendererTurbo(this, 189, 53, textureX, textureY, "cull"); // Box 2 headlight 3 support cull
-		bodyModel[88] = new ModelRendererTurbo(this, 188, 40, textureX, textureY, "glow"); // Box 2 headlight 3 glow
+		bodyModel[88] = new ModelRendererTurbo(this, 188, 40, textureX, textureY, "lamp"); // Box 2 headlight 3 glow
 		bodyModel[89] = new ModelRendererTurbo(this, 195, 49, textureX, textureY); // Box 2 headlight 2
 		bodyModel[90] = new ModelRendererTurbo(this, 195, 54, textureX, textureY, "cull"); // Box 2 headlight 2 support cull
-		bodyModel[91] = new ModelRendererTurbo(this, 196, 44, textureX, textureY, "glow"); // Box 2 headlight 2 glow
+		bodyModel[91] = new ModelRendererTurbo(this, 196, 44, textureX, textureY, "lamp"); // Box 2 headlight 2 glow
 		bodyModel[92] = new ModelRendererTurbo(this, 0, 102, textureX, textureY); // Box 134
 		bodyModel[93] = new ModelRendererTurbo(this, 6, 97, textureX, textureY); // Box 134
 		bodyModel[94] = new ModelRendererTurbo(this, 8, 94, textureX, textureY); // Box 134
@@ -448,7 +448,7 @@ public class ModelPMNstender extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for (int i = 0; i < 95; i++) {
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("glow")) {
+			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

@@ -870,7 +870,7 @@ public class ModelSMSC1 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 6) {
+		if (GetColor(entity) == 6) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBlombergA1ATruckSilverFncc.png"));
 
 		} else {

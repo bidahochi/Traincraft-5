@@ -57,6 +57,12 @@ public class SteamMK60 extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 75;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 2000;

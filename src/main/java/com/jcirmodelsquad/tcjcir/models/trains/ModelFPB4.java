@@ -1394,7 +1394,7 @@ public class ModelFPB4 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderLocomotiveModelWithoutBeacon(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1234556) {
+		if (GetColor(entity) == 1234556) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.31, -0.03, 0);

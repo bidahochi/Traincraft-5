@@ -5,7 +5,7 @@ import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
 import train.common.core.util.TraincraftUtil;
-import train.common.library.EnumHeritageTrainsLegacy;
+
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -16,7 +16,7 @@ public class DieselFOLM1B extends DieselTrain {
         return EnumSounds.DieselFOLM1B;
     }
     public DieselFOLM1B(World world) {
-        super(world, EnumHeritageTrainsLegacy.locoDieselFOL_M1.getTankCapacity(), LiquidManager.dieselFilter());
+        super(world, LiquidManager.dieselFilter());
 
     }
 

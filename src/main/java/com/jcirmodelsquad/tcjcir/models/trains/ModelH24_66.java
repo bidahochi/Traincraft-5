@@ -2899,7 +2899,7 @@ public class ModelH24_66 extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8){
+		if (GetColor(entity) == 8){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FM_trimount_SP_Grey.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);
@@ -2912,7 +2912,7 @@ public class ModelH24_66 extends ModelConverter //Same as Filename
 			GL11.glPopMatrix();
 
 		}
-		else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1){
+		else if (GetColor(entity) == 1){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FM_trimount_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glRotatef(180, 0, 1, 0);

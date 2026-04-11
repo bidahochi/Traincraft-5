@@ -56,6 +56,12 @@ public class SteamP01a extends SteamTrain {
 	}
 
 	@Override
+	public int getWaterConsumption()
+	{
+		return 75;
+	}
+
+	@Override
 	public int getTankCapacity()
 	{
 		return 4000;

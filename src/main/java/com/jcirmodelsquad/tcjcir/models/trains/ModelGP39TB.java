@@ -962,7 +962,7 @@ public class ModelGP39TB extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 1564) {
+		if (GetColor(entity) == 1564) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_DarkerGrey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.47, -0.0, 0);//front & rear

@@ -381,8 +381,8 @@ public class Model40highcube extends ModelConverter //Same as Filename
 		GL11.glTranslated(2.055,0,0.03);
 		bogie.render(entity,f,f1,f2,f3,f4,f5);
 		GL11.glPopMatrix();*/
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==3 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==8
-				|| entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==16 || entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==17){
+		if(GetColor(entity)==3 || GetColor(entity)==8
+				|| GetColor(entity)==16 || GetColor(entity)==17){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));

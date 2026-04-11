@@ -246,7 +246,7 @@ public class ModelSteelSlabFlat extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithStandardFreightRollingStock(bodyModel, entity, f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==9345){
+		if(GetColor(entity)==9345){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));

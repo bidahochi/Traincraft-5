@@ -1892,7 +1892,7 @@ public class ModelSDP40 extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 3246 ) {
+		if (GetColor(entity) == 3246 ) {
 			//silver regular truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_silvers.png"));
 			GL11.glPushMatrix();
@@ -1903,7 +1903,7 @@ public class ModelSDP40 extends ModelConverter //Same as Filename
 			GL11.glTranslated(-3.45F, 0.0F, 0);
 			flexMid.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 43324 ) {
+		} else if (GetColor(entity) == 43324 ) {
 			//sp regular truck
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/flexcoil_c2h_sp.png"));
 			GL11.glPushMatrix();

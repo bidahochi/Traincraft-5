@@ -19,6 +19,8 @@ import train.client.renderhelper.ModelRenderHelper;
 import train.common.api.AbstractTrains;
 import train.common.library.Info;
 
+import static tmt.ModelConverter.GetColor;
+
 public class ModelFOL_M1 extends ModelBase
 {
 	int textureX = 512;
@@ -790,7 +792,7 @@ public class ModelFOL_M1 extends ModelBase
 	{
 		ModelRenderHelper.renderModelWithRollingStockLightControls(fol_m1Model, entity, f5);
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==8){
+		if(GetColor(entity)==8){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FOL_M1_Bogie_grey.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FOL_M1_Bogie.png"));

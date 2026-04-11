@@ -13,13 +13,16 @@ import org.lwjgl.opengl.GL11;
 import train.client.gui.GuiCrafterTier;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
+import train.common.core.util.TraincraftUtil;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static codechicken.lib.gui.GuiDraw.*;
+import static train.common.library.Info.*;
 
 public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 	private List<TierRecipe> recipeList = assemblyListCleaner(TierRecipeManager.getInstance().getRecipeList());
@@ -101,7 +104,7 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 		}
 
 		shape.result.relx = 87;
-		shape.result.rely = 118;
+		shape.result.rely = 117;
 		return shape;
 	}
 
@@ -171,11 +174,13 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 			cycleTicks++;
 			final int CYCLE_DELAY = 15;
 
-			for (int i = 0; i < ingredients.size(); i++) {
+			for (int i = 0; i < ingredients.size(); i++)
+			{
 
 				PositionedStack stack = ingredients.get(i);
 				ItemStack item = stack.item;
 
+				// Get the OreDictionary name
 				String oreName = OreDictionary.getOreName(OreDictionary.getOreID(item));
 
 				// Check if we need to cycle ore-dictionary variants
@@ -183,9 +188,23 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 						oreName.equals("ingotIron") ||
 						oreName.equals("ingotCopper") ||
 						oreName.equals("dustPlastic") ||
-						oreName.equals("dustCoal")) {
+						oreName.equals("dustCoal") ||
+						oreName.startsWith("dye")) {
 
 					List<ItemStack> oreList = OreDictionary.getOres(oreName);
+
+					// Apply strict filtering for dyes: only include stacks with the same metadata
+					if (oreName.startsWith("dye")) {
+						final int itemMeta = item.getItemDamage(); // current item's metadata
+						oreList = oreList.stream()
+								.filter(s -> {
+									int meta = s.getItemDamage();
+									// Match only if metadata is the same OR the OreDictionary entry is not a wildcard
+									return meta == itemMeta || meta != OreDictionary.WILDCARD_VALUE;
+								})
+								.map(ItemStack::copy)
+								.collect(Collectors.toList());
+					}
 
 					// Only cycle every 15 ticks
 					if (cycleTicks % CYCLE_DELAY == 0 && !oreList.isEmpty()) {
@@ -193,8 +212,8 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 						// Keep the original stack size
 						int stackSize = item.stackSize;
 
-						// Use a stable Random instance
-						int index = floorMod((cycle + i), oreList.size());
+						// Use a stable index for cycling
+						int index = Math.floorMod((cycle + i), oreList.size());
 
 						// Assign a new item but preserve size
 						ItemStack next = oreList.get(index).copy();
@@ -202,9 +221,9 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 
 						stack.item = next;
 					}
-
 				}
-				else {
+				else
+				{
 					// Use your default random renderer if not an ore entry
 					int originalSize = item.stackSize;
 					randomRenderPermutation(stack, cycle + i);
@@ -247,18 +266,20 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 	}
 
 	public String getGuiTexture() {
-		return "tc:textures/gui/gui_tierI_ironAge.png";
+		return TEX_TIER_I;
 	}
 
-	public String getGuiTexture(int tier) {
-		if (tier == 1) {
-			return "tc:textures/gui/gui_tierI_ironAge.png";
+	public String getGuiTexture(int tier)
+	{
+		switch (tier)
+		{
+			case 2:
+				return TEX_TIER_II;
+			case 3:
+				return TEX_TIER_III;
+			default:
+				return TEX_TIER_I;
 		}
-		else if (tier == 2) {
-			return "tc:textures/gui/gui_tierII_steelAge.png";
-		}
-		else if (tier == 3) { return "tc:textures/gui/gui_tierIII_advancedAge.png"; }
-		return "tc:textures/gui/gui_tierI_ironAge.png";
 	}
 
 	@Override
@@ -289,7 +310,7 @@ public class NEIAssemblyTableRecipePlugin extends ShapedRecipeHandler {
 
 	@Override
 	public void loadTransferRects() {
-		transferRects.add(new RecipeTransferRect(new Rectangle(91, 100, 72, 10), "assembly tables"));
+		transferRects.add(new RecipeTransferRect(new Rectangle(78, 105, 41, 10), "assembly tables"));
 	}
 
 	@Override

@@ -988,7 +988,7 @@ public class ModelF40PH extends ModelConverter //Same as Filename
 		ModelRenderHelper.renderLocomotiveModelWithoutBeacon(bodyModel, entity ,f5);
 
 
-		if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 80) {
+		if (GetColor(entity) == 80) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/typeb_Grey.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.55, 0.25, 0);
@@ -997,7 +997,7 @@ public class ModelF40PH extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.8, 0, 0);
 			theBlombi.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		}else if (entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor() == 8) {
+		}else if (GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.65, -0.0, 0);//front & rear

@@ -310,7 +310,7 @@ public class ModelSquanderbackTender extends ModelConverter //Same as Filename
 			}
 		}
 
-		if(entity instanceof AbstractTrains && ((AbstractTrains) entity).getColor()==2){
+		if(GetColor(entity)==2){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FrictionTruck_CDCS.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/FrictionTruck_Greyish_small.png"));

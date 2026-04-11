@@ -16,6 +16,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import train.common.core.interfaces.ITCRecipe;
 import train.common.core.util.TraincraftUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 public class ShapedTrainRecipes implements ITCRecipe {
 	/** How many horizontal slots this recipe is wide. */
 	public final int recipeWidth;
@@ -24,7 +29,7 @@ public class ShapedTrainRecipes implements ITCRecipe {
 	public final int recipeHeight;
 
 	/** Is a array of ItemStack that composes the recipe. */
-	public final ItemStack[] recipeItems;
+	public final Object[] recipeItems;
 
 	/** Is a array of ItemStack that composes the recipe. */
 	public boolean[] slots;
@@ -36,7 +41,7 @@ public class ShapedTrainRecipes implements ITCRecipe {
 	public final int recipeOutputItemID;
 	private boolean field_92049_f = false;
 
-	public ShapedTrainRecipes(int par1, int par2, ItemStack[] stacks, ItemStack stack) {
+	public ShapedTrainRecipes(int par1, int par2, Object[] stacks, ItemStack stack) {
 		recipeOutputItemID = Item.getIdFromItem(stack.getItem());
 		recipeWidth = par1;
 		recipeHeight = par2;
@@ -70,30 +75,65 @@ public class ShapedTrainRecipes implements ITCRecipe {
 		return true;
 	}
 
+	private static HashMap<String, ArrayList<ItemStack>> oreDictionaryCache = new HashMap<>();
+
+	public static List<ItemStack> getOreVariants(String stack)
+	{
+		if (oreDictionaryCache.containsKey(stack))
+		{
+			return oreDictionaryCache.get(stack);
+		}
+
+		ArrayList<ItemStack> result = OreDictionary.getOres(stack);
+		oreDictionaryCache.put(stack, result);
+
+		return result;
+	}
+
 	/**
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
-	private boolean checkMatch(IInventory inventory, boolean par4) {
-		for (int i = 0; i < 9/* recipeItems.length */; i++) {
-			ItemStack var9 = recipeItems[i];
-			ItemStack var10 = inventory.getStackInSlot(i);
+	private boolean checkMatch(IInventory inventory, boolean par4)
+	{
+		for (int i = 0; i < 9/* recipeItems.length */; i++)
+		{
+			Object target = recipeItems[i];
+			ItemStack slot = inventory.getStackInSlot(i);
 
-			if (var10 != null || var9 != null) {
-				if (var10 == null || var9 == null) {
-					//System.out.println(var9.getDisplayName() + " : " + var10.getDisplayName());
+			if (slot != null || target != null)
+			{
+				if (slot == null || target == null)
+				{
+					//System.out.println(var9.getDisplayName() + " : " + slot.getDisplayName());
 					slots[i] = false;
 					continue;
 				}
-				if(!TraincraftUtil.itemStackMatches(var9, var10) || var9.stackSize > var10.stackSize ){
-					slots[i] = false;
-					continue;
+
+				if (target instanceof ItemStack)
+				{
+					if (!OreDictionary.itemMatches((ItemStack)target, slot, false))
+					{
+						slots[i] = false;
+						continue;
+					}
 				}
-				if (var9.getItemDamage() != OreDictionary.WILDCARD_VALUE && var9.getItemDamage() != var10.getItemDamage()) {
-					//System.out.println(var9.getDisplayName() + " : " + var10.getDisplayName());
-					slots[i] = false;
-					continue;
+				else if (target instanceof String)
+				{
+					boolean matched = false;
+
+					Iterator<ItemStack> itr = getOreVariants((String)target).iterator();
+					while (itr.hasNext() && !matched)
+					{
+						matched = OreDictionary.itemMatches(itr.next(), slot, false);
+					}
+
+					if (!matched)
+					{
+						slots[i] = false;
+						continue;
+					}
 				}
-				//System.out.println(recipeItems.length + ":" + var9.getDisplayName() + " : " + var10.getDisplayName());
+
 				slots[i] = true;
 			}
 			else {
