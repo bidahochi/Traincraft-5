@@ -33,8 +33,6 @@ public class TrainRenderRecord implements ITrainRenderRecord
         this.trans = trans;
         this.rotate = rotate;
         this.scale = scale;
-        hasSmoke = false;
-        hasExplosion = false;
         subTrainRenderRecords = null;
     }
 
@@ -63,8 +61,6 @@ public class TrainRenderRecord implements ITrainRenderRecord
         this.trans = trans;
         this.rotate = rotate;
         this.scale = scale;
-        this.hasSmoke = smokeType != null && smokeType.length() > 0;
-        this.hasExplosion = explosionType != null && explosionType.length() > 0;
         subTrainRenderRecords = new HashMap<>();
         subTrainRenderRecords.put((short) 0, new SubTrainRenderRecord(smokeType, smokeFX, explosionType, explosionFX, (short)smokeIterations, (short)explosionFXIterations));
     }
@@ -113,6 +109,19 @@ public class TrainRenderRecord implements ITrainRenderRecord
 
     private final Class<? extends AbstractTrains> entityClass;
     private ModelBase model;
+    private String additionalTexturePath = "";
+
+    /**
+     * Used to add additional folder pathing that's prior to the texture prefix
+     * @param additionalTexturePath
+     * @return
+     */
+    public TrainRenderRecord setAdditionalTexturePath(String additionalTexturePath)
+    {
+        this.additionalTexturePath = additionalTexturePath + "/";
+        return this;
+    }
+
     /**
      * Must name your folder this and your texture must start with this.
      */
@@ -123,8 +132,6 @@ public class TrainRenderRecord implements ITrainRenderRecord
     private float[] trans;
     private float[] rotate;
     private float[] scale;
-    private boolean hasSmoke;
-    private boolean hasExplosion;
 
     public String GetModID()
     {
@@ -170,7 +177,7 @@ public class TrainRenderRecord implements ITrainRenderRecord
     @Override
     public ResourceLocation getTextureFile(String colorAsString)
     {
-        return new ResourceLocation(GetModID(), Info.trainsPrefix + getTexturePrefix() + "/" + getTexturePrefix() + colorAsString + ".png");
+        return new ResourceLocation(GetModID(), Info.trainsPrefix + additionalTexturePath + getTexturePrefix() + "/" + getTexturePrefix() + colorAsString + ".png");
     }
 
     @Override

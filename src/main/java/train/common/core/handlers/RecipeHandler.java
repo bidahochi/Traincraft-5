@@ -261,7 +261,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 	{
 		for (RailVariants railVariant : RailVariants.values())
 		{
-			HashMap<EnumCoreTrack, HashMap<String, EnumTracks>> tracks = EnumTracks.GetTracksByGroup(railVariant);
+			HashMap<EnumCoreTrack, HashMap<String, ITrackDefinition>> tracks = EnumTracks.GetTracksByGroup(railVariant);
 			TrackItemIDs straight1X = tracks.get(EnumCoreTrack.CORE_SMALL_STRAIGHT).get("").getItem();
 			TrackItemIDs straight3X = tracks.get(EnumCoreTrack.CORE_MEDIUM_STRAIGHT).get("").getItem();
 			TrackItemIDs straight6X = tracks.get(EnumCoreTrack.CORE_LONG_STRAIGHT).get("").getItem();

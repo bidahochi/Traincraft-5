@@ -228,6 +228,8 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
                     return "Cargo: wheat, seeds";
                 case ASSEMBLED_TRAIN_TRACK:
                     return "Cargo: only rails";
+                default:
+                    return "Cargo: any";
             }
         }
 
@@ -289,7 +291,7 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
         }
         if (tile != null)
         {
-            EnumTracks enumTracks = EnumTracks.GetTrackByLabel(tile.getType());
+            ITrackDefinition enumTracks = EnumTracks.GetTrackByLabel(tile.getType());
             if (enumTracks == null)
             {
                 par2EntityPlayer.addChatMessage(new ChatComponentText("An error occurred please try replacing the track"));

@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import train.client.render.models.blocks.track.AbstractTrackModel;
 import train.common.items.RailVariants;
 import train.common.library.EnumTracks;
+import train.common.library.ITrackDefinition;
 import train.common.library.Info;
 import train.common.tile.TileTCRail;
 
@@ -139,7 +140,7 @@ public class ModelSmallStraightTCTrack extends AbstractTrackModel {
 		render(tcRail.getTrackType(), type, getRailDirection(tcRail), x, y, z, 1, 1, 1, 1 );
 	}
 
-	public void render(EnumTracks enumTracks, String type, int facing, double x, double y, double z, float r, float g, float b, float a )
+	public void render(ITrackDefinition enumTracks, String type, int facing, double x, double y, double z, float r, float g, float b, float a )
 	{
 		setupRender(facing, x, y, z, r, g, b, a);
 

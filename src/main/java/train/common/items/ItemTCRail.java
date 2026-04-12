@@ -22,24 +22,62 @@ import train.common.tile.TileTCRailGag;
 import static train.common.core.handlers.ConfigHandler.ENGINEERGAMING;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static train.common.library.EnumCoreTrack.CORE_5X11_45DEGREE_TURN_R;
 import static train.common.library.EnumTracks.*;
 
 public class ItemTCRail extends ItemPart {
-	private EnumTracks type;
-	EnumTracks tempType;
+	private ITrackDefinition type;
+	ITrackDefinition tempType;
 
-	private String typeVariantStraightLabel = EnumTracks.SMALL_STRAIGHT.getLabel();
-	private String typeVariantDiagonalStraightLabel = EnumTracks.SMALL_DIAGONAL_STRAIGHT.getLabel();
+	private String typeVariantStraightLabel;
+	private String typeVariantDiagonalStraightLabel;
 	private String typeVariant90Turn;
 
-	public void setEnumTrack(EnumTracks enumTrack)
+	public void setEnumTrack(ITrackDefinition enumTrack)
 	{
 		type = enumTrack;
 	}
 
+	private static Set<String> LegacyIsTCTurnTrackHash = new HashSet<String>()
+	{{
+		add("MEDIUM_RIGHT_TURN");
+		add("LARGE_RIGHT_TURN");
+		add("LARGE_LEFT_TURN");
+		add("VERY_LARGE_RIGHT_TURN");
+		add("VERY_LARGE_LEFT_TURN");
+		add("MEDIUM_LEFT_TURN");
+		add("SUPER_LARGE_LEFT_TURN");
+		add("SUPER_LARGE_RIGHT_TURN");
+		add("LEFT_TURN_29X29");
+		add("RIGHT_TURN_29X29");
+		add("LEFT_TURN_32X32");
+		add("RIGHT_TURN_32X32");
+		add("LEFT_TURN_1X1");
+		add("RIGHT_TURN_1X1");
+
+		add("EMBEDDED_MEDIUM_RIGHT_TURN");
+		add("EMBEDDED_LARGE_RIGHT_TURN");
+		add("EMBEDDED_LARGE_LEFT_TURN");
+		add("EMBEDDED_VERY_LARGE_RIGHT_TURN");
+		add("EMBEDDED_VERY_LARGE_LEFT_TURN");
+		add("EMBEDDED_MEDIUM_LEFT_TURN");
+		add("EMBEDDED_SUPER_LARGE_LEFT_TURN");
+		add("EMBEDDED_SUPER_LARGE_RIGHT_TURN");
+
+		add("EMBEDDED_SMALL_RIGHT_PARALLEL_CURVE");
+		add("EMBEDDED_SMALL_LEFT_PARALLEL_CURVE");
+		add("EMBEDDED_MEDIUM_RIGHT_PARALLEL_CURVE");
+		add("EMBEDDED_MEDIUM_LEFT_PARALLEL_CURVE");
+		add("EMBEDDED_LARGE_RIGHT_PARALLEL_CURVE");
+		add("EMBEDDED_LARGE_LEFT_PARALLEL_CURVE");
+	}};
+
+	@Deprecated
 	public static boolean isTCTurnTrack(TileTCRail tile) {
 		if(tile==null || tile.getType()==null){return false;}
 		return (tile.getType().equals(EnumTracks.MEDIUM_LEFT_SWITCH.getLabel()) && tile.getSwitchState())
@@ -49,47 +87,7 @@ public class ItemTCRail extends ItemPart {
 				|| (tile.getType().equals(EnumTracks.MEDIUM_RIGHT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
 				|| (tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
 				|| (tile.getType().equals(EnumTracks.LARGE_LEFT_PARALLEL_SWITCH.getLabel()) && tile.getSwitchState())
-
-				|| tile.getType().equals(EnumTracks.MEDIUM_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.LARGE_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.VERY_LARGE_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.VERY_LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.MEDIUM_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.SUPER_LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.SUPER_LARGE_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.LEFT_TURN_29X29.getLabel())
-				|| tile.getType().equals(EnumTracks.RIGHT_TURN_29X29.getLabel())
-				|| tile.getType().equals(EnumTracks.LEFT_TURN_32X32.getLabel())
-				|| tile.getType().equals(EnumTracks.RIGHT_TURN_32X32.getLabel())
-				|| tile.getType().equals(EnumTracks.LEFT_TURN_1X1.getLabel())
-				|| tile.getType().equals(EnumTracks.RIGHT_TURN_1X1.getLabel())
-
-				|| tile.getType().equals(EnumTracks.SMALL_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.SMALL_LEFT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.MEDIUM_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.LARGE_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.LARGE_LEFT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.S_CURVE_20x2_LEFT.getLabel())
-				|| tile.getType().equals(EnumTracks.S_CURVE_20x2_RIGHT.getLabel())
-
-				|| tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_LARGE_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_VERY_LARGE_RIGHT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_VERY_LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_SUPER_LARGE_LEFT_TURN.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_SUPER_LARGE_RIGHT_TURN.getLabel())
-
-				|| tile.getType().equals(EnumTracks.EMBEDDED_SMALL_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_SMALL_LEFT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_MEDIUM_LEFT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_LARGE_RIGHT_PARALLEL_CURVE.getLabel())
-				|| tile.getType().equals(EnumTracks.EMBEDDED_LARGE_LEFT_PARALLEL_CURVE.getLabel());
-
+				|| LegacyIsTCTurnTrackHash.contains(tile.getType());
 
 	}
 
@@ -107,6 +105,7 @@ public class ItemTCRail extends ItemPart {
 				;
 	}
 
+	@Deprecated
 	public static boolean isTCSwitch(TileTCRail tile) {
 		if(tile==null || tile.getType()==null){return false;}
 		return
@@ -118,7 +117,8 @@ public class ItemTCRail extends ItemPart {
 				//|| (tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH.getLabel()));
 	}
 
-	public ItemTCRail(EnumTracks t) {
+	public ItemTCRail(EnumTracks t)
+	{
 		super(t.getItem().iconName);
 		this.overridePath("tracks");
 		this.type = t;
@@ -326,10 +326,10 @@ public class ItemTCRail extends ItemPart {
 		int[][] trackPositions;
 		if (type.getRailType() == TCRailTypes.RailTypes.DIAGONAL || type.getRailType() == TCRailTypes.RailTypes.STRAIGHT) {
 			tempType = getPlacementDirection(player, world, facing0, 0);
-			trackPositions = tempType.getUsedSpaceFromType(player);
+			trackPositions = EnumTracks.getUsedSpaceFromType(player, tempType);
 		}
 		else {
-			trackPositions = type.getUsedSpaceFromType(player);
+			trackPositions = EnumTracks.getUsedSpaceFromType(player, type);
 		}
 		if ( trackPositions != null )
 		{
@@ -367,33 +367,9 @@ public class ItemTCRail extends ItemPart {
 
 	private void setSharedStraightTypeVariant()
 	{
-		switch (type.getVariant())
-		{
-			case NORMAL:
-				typeVariantStraightLabel = EnumTracks.SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-			case EMBEDDED:
-				typeVariantStraightLabel = EnumTracks.EMBEDDED_SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.EMBEDDED_SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-			case CONCRETE_TYPE1:
-				typeVariantStraightLabel = EnumTracks.CONCRETE_TYPE1_SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.CONCRETE_TYPE1_SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-			case CONCRETE_TYPE2:
-				typeVariantStraightLabel = EnumTracks.CONCRETE_TYPE2_SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.CONCRETE_TYPE2_SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-			case TREATED_WOOD_TYPE1:
-				typeVariantStraightLabel = WOOD_TYPE1_SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.WOOD_TYPE1_SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-			case WOOD_TYPE2:
-				typeVariantStraightLabel = WOOD_TYPE2_SMALL_STRAIGHT.getLabel();
-				typeVariantDiagonalStraightLabel = EnumTracks.WOOD_TYPE2_SMALL_DIAGONAL_STRAIGHT.getLabel();
-				break;
-		}
+		HashMap<EnumCoreTrack, HashMap<String, ITrackDefinition>> tracks = EnumTracks.GetTracksByGroup(type.getVariant());
+		typeVariantStraightLabel = tracks.get(EnumCoreTrack.CORE_SMALL_STRAIGHT).get("").getLabel();
+		typeVariantDiagonalStraightLabel = tracks.get(EnumCoreTrack.CORE_SMALL_DIAGONAL_STRAIGHT).get("").getLabel();
 	}
 
 	@Override
@@ -1631,7 +1607,7 @@ public class ItemTCRail extends ItemPart {
 					return false;
 				}
 
-				switch (type) {
+				switch ((EnumTracks)type) {
 					case TWO_WAYS_CROSSING:
 						typeVariantStraightLabel = EnumTracks.SMALL_STRAIGHT.getLabel();
 						break;
@@ -2318,9 +2294,9 @@ public class ItemTCRail extends ItemPart {
 
 	}
 
-	private boolean handleDiagonalSlopes(World world, EntityPlayer player, int facing, EnumTracks type, int gagEnd, double slopeAngle, int x, int y, int z, ItemStack itemstack) {
+	private boolean handleDiagonalSlopes(World world, EntityPlayer player, int facing, ITrackDefinition type, int gagEnd, double slopeAngle, int x, int y, int z, ItemStack itemstack) {
 		Item idDropped = this.type.getItem().item;
-		int[][] usedSpace = type.getUsedSpaceFromType(player);
+		int[][] usedSpace = EnumTracks.getUsedSpaceFromType(player, type);
 		//make sure space is usable
         for (int[] ints : usedSpace) {
             int offsetX = ints[0];
@@ -2412,7 +2388,7 @@ public class ItemTCRail extends ItemPart {
 		return MathHelper.floor_double((par10 * 4.0F / 360.0F + 0.5D)) & 3;
 	}
 
-	private EnumTracks getPlacementDirection(EntityPlayer player, World world, int l, float par10)
+	private ITrackDefinition getPlacementDirection(EntityPlayer player, World world, int l, float par10)
 	{
 		tempType = type;
 
@@ -2460,7 +2436,7 @@ public class ItemTCRail extends ItemPart {
 											 .replace("BALLAST", "DYNAMIC")
 											 .replace("_SNOW", "");
 
-				EnumTracks track = EnumTracks.GetTrackByLabel(nameConverted);
+				ITrackDefinition track = EnumTracks.GetTrackByLabel(nameConverted);
 				if (track != null)
 				{
 					tempType = track;
@@ -2594,7 +2570,7 @@ public class ItemTCRail extends ItemPart {
 		return tempType;
 	}
 
-	private boolean smallStraight(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean smallStraight(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -2627,7 +2603,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	public boolean SCurve(EntityPlayer player, World world, int x, int y, int z, int dir, EnumTracks tempType, float pyaw, int[] xArray, int[]zArray, int[] xArray2, int[] zArray2, float radius, int length, int width){
+	public boolean SCurve(EntityPlayer player, World world, int x, int y, int z, int dir, ITrackDefinition tempType, float pyaw, int[] xArray, int[]zArray, int[] xArray2, int[] zArray2, float radius, int length, int width){
 		float yaw = MathHelper.wrapAngleTo180_float(player != null ? player.rotationYaw : pyaw);
 		String ori = getTrackOrientation(dir,yaw);
 
@@ -2766,7 +2742,7 @@ public class ItemTCRail extends ItemPart {
 
 	}
 
-	private boolean parallelRightSwitchEast(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelRightSwitchEast(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x + check, y + 1, z))
 				return false;
@@ -2817,7 +2793,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelRightSwitchWest(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelRightSwitchWest(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x - check, y + 1, z))
 				return false;
@@ -2869,7 +2845,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelRightSwitchSouth(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelRightSwitchSouth(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x, y + 1, z + check))
 				return false;
@@ -2920,7 +2896,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelRightSwitchNorth(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType)
+	private boolean parallelRightSwitchNorth(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType)
 	{
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x, y + 1, z - check))
@@ -2972,7 +2948,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelLeftSwitchNorth(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelLeftSwitchNorth(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x, y + 1, z - check))
 				return false;
@@ -3023,7 +2999,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelLeftSwitchSouth(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelLeftSwitchSouth(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x, y + 1, z + check))
 				return false;
@@ -3074,7 +3050,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelLeftSwitchEast(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelLeftSwitchEast(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x + check, y + 1, z))
 				return false;
@@ -3126,7 +3102,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean parallelLeftSwitchWest(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean parallelLeftSwitchWest(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		for (int check = 1; check < 10; check++) {
 			if (!canPlaceTrack(player, world, x - check, y + 1, z))
 				return false;
@@ -3178,7 +3154,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean largeRightParallelSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight){
+	private boolean largeRightParallelSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight){
 
 		int dx = 0;
 		int dz = 0;
@@ -3427,7 +3403,7 @@ public class ItemTCRail extends ItemPart {
 
 	}
 
-	private boolean largeLeftParallelSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight){
+	private boolean largeLeftParallelSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight){
 
 		int dx = 0;
 		int dz = 0;
@@ -3676,7 +3652,7 @@ public class ItemTCRail extends ItemPart {
 
 	}
 
-	private boolean crossover10x2Switch(EntityPlayer player, World world, int x, int y, int z, int facing, EnumTracks tempType, String typeVariantStraight, String typeVariant90Turn, boolean sneaking, boolean isRight) {
+	private boolean crossover10x2Switch(EntityPlayer player, World world, int x, int y, int z, int facing, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn, boolean sneaking, boolean isRight) {
 		int dx = 1;
 		int dz = 1;
 		int[] xArray, zArray, tArray;
@@ -3768,7 +3744,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean rightDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType)
+	private boolean rightDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -3853,7 +3829,7 @@ public class ItemTCRail extends ItemPart {
 
 		return true;
 	}
-	private boolean leftDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType)
+	private boolean leftDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -3940,7 +3916,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean doubleDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean doubleDiamondCrossing(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -4048,7 +4024,7 @@ public class ItemTCRail extends ItemPart {
 
 		return true;
 	}
-	private boolean diagonalTwoWaysCrossing(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean diagonalTwoWaysCrossing(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -4143,7 +4119,7 @@ public class ItemTCRail extends ItemPart {
 
 		return true;
 	}
-	private boolean fourWaysCrossing(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean fourWaysCrossing(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		if (!canPlaceTrack(player, world, x, y + 1, z)) {
 			return false;
@@ -4283,7 +4259,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 	
-	private boolean smallDiagonalStraight(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean smallDiagonalStraight(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		TileTCRailGag[] tileGag;
 		if (player.isSneaking()) {
@@ -4345,7 +4321,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean diagonalStraight(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks type)
+	private boolean diagonalStraight(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition type)
 	{
 		int trackLength = 0;
 		if (EnumCoreTrack.CORE_LONG_DIAGONAL_STRAIGHT.equals(type.getCoreTrack())) trackLength = 3;
@@ -4442,7 +4418,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean turn1XRight(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean turn1XRight(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray = {0};
 		int[] zArray = {0};
@@ -4468,7 +4444,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	private boolean turn1XLeft(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean turn1XLeft(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray = {0};
 		int[] zArray = {0};
@@ -4495,7 +4471,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean turnTrack(EntityPlayer player, World world, int x, int y, int z, int dir, EnumTracks tempType, float pyaw, int[] xArray, int[]zArray, float radius){
+	private boolean turnTrack(EntityPlayer player, World world, int x, int y, int z, int dir, ITrackDefinition tempType, float pyaw, int[] xArray, int[]zArray, float radius){
 
 		float yaw = MathHelper.wrapAngleTo180_float(player != null ? player.rotationYaw : pyaw);
 		String orientation = getTrackOrientation(dir,yaw);
@@ -4555,7 +4531,7 @@ public class ItemTCRail extends ItemPart {
 
 
 
-	private boolean mediumRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean mediumRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray;
 		int[] zArray;
@@ -4587,7 +4563,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	private boolean mediumLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean mediumLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray;
 		int[] zArray;
@@ -4620,7 +4596,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	private boolean largeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean largeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		int[] xArray;
 		int[] zArray;
 		if (player.isSneaking()) {
@@ -4651,7 +4627,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	private boolean largeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	private boolean largeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		int[] xArray;
 		int[] zArray;
 		if (player.isSneaking()) {
@@ -4682,7 +4658,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	public boolean veryLargeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	public boolean veryLargeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		int[] xArray;
 		int[] zArray;
 		if (player.isSneaking()) {
@@ -4718,7 +4694,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	public boolean veryLargeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	public boolean veryLargeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 		int[] xArray;
 		int[] zArray;
 		if (player.isSneaking()) {
@@ -4749,7 +4725,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	public boolean superLargeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	public boolean superLargeRight45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray;
 		int[] zArray;
@@ -4782,7 +4758,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	public boolean superLargeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType) {
+	public boolean superLargeLeft45DegreeTurn(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType) {
 
 		int[] xArray;
 		int[] zArray;
@@ -4817,7 +4793,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean mediumRight45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight, String typeVariant90Turn){
+	private boolean mediumRight45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn){
 		int dx = 0;
 		int dz = 0;
 
@@ -4917,7 +4893,7 @@ public class ItemTCRail extends ItemPart {
 
 		return true;
 	}
-	private boolean mediumLeft45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight, String typeVariant90Turn){
+	private boolean mediumLeft45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn){
 		int dx = 0;
 		int dz = 0;
 
@@ -5016,7 +4992,7 @@ public class ItemTCRail extends ItemPart {
 		return true;
 	}
 
-	private boolean largeRight45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight, String typeVariant90Turn){
+	private boolean largeRight45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn){
 
 		int dx = 0;
 		int dz = 0;
@@ -5150,7 +5126,7 @@ public class ItemTCRail extends ItemPart {
 		}
 		return true;
 	}
-	private boolean largeLeft45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, EnumTracks tempType, String typeVariantStraight, String typeVariant90Turn){
+	private boolean largeLeft45DegreeSwitch(EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn){
 
 		int dx = 0;
 		int dz = 0;
@@ -5346,7 +5322,7 @@ public class ItemTCRail extends ItemPart {
 		}
 
 
-		par3List.add("\u00a77" + type.getTooltip());
+		par3List.add("\u00a77" + EnumTracks.getTooltip(type));
 		if ((TCRailTypes.RailTypes.SLOPE.equals(this.getTrackType().getRailType()) && this.getTrackType().getBallastType() == BallastTypes.DYNAMIC)
 				|| (TCRailTypes.RailTypes.STRAIGHT.equals(this.getTrackType().getRailType()) && this.getTrackType().getLabel().contains("ROAD_CROSSING") == false))
 		{
@@ -5355,7 +5331,7 @@ public class ItemTCRail extends ItemPart {
 		}
 	}
 
-	public EnumTracks getTrackType() {
+	public ITrackDefinition getTrackType() {
 		return this.type;
 	}
 }

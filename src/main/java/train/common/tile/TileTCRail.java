@@ -17,6 +17,7 @@ import train.common.items.ItemTCRail;
 import train.common.items.TCRailTypes;
 import train.common.library.BlockIDs;
 import train.common.library.EnumTracks;
+import train.common.library.ITrackDefinition;
 
 import static train.common.library.EnumCoreTrack.*;
 
@@ -136,14 +137,14 @@ public class TileTCRail extends TileEntity {
 		}
 	}
 
-	private EnumTracks renderType = null;
-	public EnumTracks getTrackType()
+	private ITrackDefinition renderType = null;
+	public ITrackDefinition getTrackType()
 	{
 		if (renderType == null)
 		{
 			if(hasModel && getType() != null)
 			{
-				EnumTracks temp = EnumTracks.GetTrackByLabel(getType());
+				ITrackDefinition temp = EnumTracks.GetTrackByLabel(getType());
 
 				if (temp != null)
 				{
@@ -155,7 +156,7 @@ public class TileTCRail extends TileEntity {
 	}
 
 	/** Not meant for main use this is for debug only **/
-	public EnumTracks getTrackTypeByLabel()
+	public ITrackDefinition getTrackTypeByLabel()
 	{
 
 			if (getType() != null)
@@ -209,7 +210,7 @@ public class TileTCRail extends TileEntity {
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
-		EnumTracks track = getTrackType();
+		ITrackDefinition track = getTrackType();
 
 		if (track == null)
 		{
@@ -261,7 +262,7 @@ public class TileTCRail extends TileEntity {
 		 */
 		if(type.contains("SLOPE"))
 		{
-			EnumTracks track = EnumTracks.GetTrackByLabel(type);
+			ITrackDefinition track = EnumTracks.GetTrackByLabel(type);
 			switch (track.getCoreTrack())
 			{
 				case CORE_3_SLOPE:

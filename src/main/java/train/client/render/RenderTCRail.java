@@ -20,9 +20,12 @@ import train.client.render.models.blocks.track.turn.degree90.ModelLeftTurnTCTrac
 import train.client.render.models.blocks.track.turn.degree90.ModelRightTurnTCTrack;
 import train.common.items.BallastTypes;
 import train.common.library.EnumTracks;
+import train.common.library.ITrackDefinition;
+import train.common.library.TrackItemIDs;
 import train.common.tile.TileTCRail;
 
 import static train.common.library.EnumCoreTrack.CORE_10x2_CROSSOVER_SWITCH_R;
+import static train.common.library.EnumTracks.*;
 
 public class RenderTCRail extends TileEntitySpecialRenderer {
 
@@ -69,31 +72,29 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 			
 			if (railTile.hasModel && railTile.getTrackType() != null)
 			{
-				EnumTracks track = railTile.getTrackType();
+				ITrackDefinition track = railTile.getTrackType();
 				switch (track.getCoreTrack())
 				{
 					case CORE_SMALL_STRAIGHT:
-						switch (track)
+						if (TrackItemIDs.tcRailSmallRoadCrossingDynamic.equals(track.getItem()))
 						{
-							case SMALL_ROAD_CROSSING:{
-								modelRoadCrossing.render("crossing", railTile, x, y, z);
-								break;
-							}
-							case SMALL_ROAD_CROSSING_1:{
-								modelRoadCrossing.render("crossing1", railTile, x, y, z);
-								break;
-							}
-							case SMALL_ROAD_CROSSING_2:{
-								modelRoadCrossing.render("crossing2", railTile, x, y, z);
-								break;
-							}
-							case SMALL_ROAD_CROSSING_DYNAMIC:{
-								modelRoadCrossing.renderDynamic(railTile, x, y, z);
-								break;
-							}
-							default:
-								modelSmallStraight.render("straight", railTile, x, y, z);
-							break;
+							modelRoadCrossing.renderDynamic(railTile, x, y, z);
+						}
+						else if (TrackItemIDs.tcRailSmallRoadCrossing2.equals(track.getItem()))
+						{
+							modelRoadCrossing.render("crossing2", railTile, x, y, z);
+						}
+						else if (TrackItemIDs.tcRailSmallRoadCrossing1.equals(track.getItem()))
+						{
+							modelRoadCrossing.render("crossing1", railTile, x, y, z);
+						}
+						else if (TrackItemIDs.tcRailSmallRoadCrossing.equals(track.getItem()))
+						{
+							modelRoadCrossing.render("crossing", railTile, x, y, z);
+						}
+						else
+						{
+							modelSmallStraight.render("straight", railTile, x, y, z);
 						}
 					break;
 
@@ -371,8 +372,8 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 						break;
 					default:
 					{
-						switch (track)
-						{
+						//switch (track)
+						//{
 							//case EMBEDDED_LARGE_CURVED_SLOPE_DYNAMIC:
 							//case EMBEDDED_LARGE_RIGHT_CURVED_SLOPE_DYNAMIC: {
 							//	modelRightCurvedSlope.render("embedded_large", railTile, x, y, z);
@@ -400,7 +401,7 @@ public class RenderTCRail extends TileEntitySpecialRenderer {
 							//	modelLeftCurvedSlope.render("embedded_superlarge", railTile, x, y, z);
 							//	break;
 							//}
-						}
+						//}
 					}
 				}
 
