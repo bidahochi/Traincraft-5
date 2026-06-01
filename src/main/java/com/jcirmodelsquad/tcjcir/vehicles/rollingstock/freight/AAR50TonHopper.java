@@ -37,4 +37,14 @@ public class AAR50TonHopper extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 1.75F;
     }
+
+    @Override
+    protected double getRearBogieOffset() {
+        return -1D;
+    }
+
+    @Override
+    protected double getFrontBogieOffset() {
+        return 1D;
+    }
 }

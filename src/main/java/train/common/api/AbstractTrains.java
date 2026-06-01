@@ -56,8 +56,8 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 	public boolean isAttached = false;
 	public boolean isAttaching = false;
 	public static int numberOfTrains;
-	public double Link1;
-	public double Link2;
+	public int Link1;
+	public int Link2;
 	protected boolean linked = false;
 	public EntityRollingStock cartLinked1;
 	public EntityRollingStock cartLinked2;
@@ -663,8 +663,8 @@ public abstract class AbstractTrains extends EntityMinecart implements IMinecart
 		linked = nbttagcompound.getBoolean("linked");
 		//motionX = nbttagcompound.getDouble("motionX");
 		//motionZ = nbttagcompound.getDouble("motionZ");
-		Link1 = nbttagcompound.getDouble("Link1");
-		Link2 = nbttagcompound.getDouble("Link2");
+		Link1 = (int)nbttagcompound.getDouble("Link1");
+		Link2 = (int)nbttagcompound.getDouble("Link2");
 		if(nbttagcompound.hasKey("Dim")){
 			this.dimension=nbttagcompound.getInteger("Dim");
 		}

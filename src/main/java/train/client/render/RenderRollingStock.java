@@ -2,12 +2,9 @@ package train.client.render;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.jcirmodelsquad.tcjcir.models.trains.ModelRotaryPlow;
-import com.jcirmodelsquad.tcjcir.vehicles.locomotives.RotaryPlow1;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockRailBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -15,23 +12,22 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
 import org.lwjgl.opengl.GL11;
-import tmt.ModelBase;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
+import train.client.render.register.ITrainRenderRecord;
 import train.client.render.register.SubTrainRenderRecord;
-import train.client.renderhelper.ModelRenderHelper;
 import train.common.api.AbstractRotarySnowPlow;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
 import train.common.entity.rollingStock.EntityTracksBuilder;
-import train.client.render.register.ITrainRenderRecord;
-import train.common.overlaytexture.OverlayTextureManager;
-import train.common.utils.devutils.DebugUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import static train.client.render.RenderRollingStockHelper.smoothRenderYaw;
+import static train.client.render.RenderRollingStockHelper.useMasterPhysicsRenderRotation;
 
 @SideOnly(Side.CLIENT)
 public class RenderRollingStock extends Render {
@@ -118,6 +114,11 @@ public class RenderRollingStock extends Render {
 		//System.out.println(Math.abs(yaw - serverYaw));
 		//System.out.println("yaw after "+yaw+" server yaw after "+serverYaw);
 
+		if (cart instanceof train.common.api.masterphysics.IMasterPhysicsRenderOffset) {
+			y += ((train.common.api.masterphysics.IMasterPhysicsRenderOffset) cart)
+					.getMasterPhysicsRenderYOffset();
+		}
+
 		GL11.glTranslatef((float) x, (float) y, (float) z);
 		int i = MathHelper.floor_double(cart.posX);
 		int j = MathHelper.floor_double(cart.posY);
@@ -131,7 +132,34 @@ public class RenderRollingStock extends Render {
 			cart.setMountedYOffset(-0.5);
 			GL11.glTranslatef(0f, -0.30f, 0f);
 		}
-		if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+
+
+		if (useMasterPhysicsRenderRotation(cart)) {
+			/*
+			 * New two-bogie master-physics stock:
+			 * The entity/body rotation is already derived from the front/rear bogies.
+			 * Do not use the old bogieLoco render branch, because that adds the old
+			 * +90 degree convention and makes converted stock render sideways.
+			 */
+			float targetYaw = cart.rotationYawClientReal;
+
+			/*
+			 * Fallback if client yaw has not been populated yet.
+			 */
+			if (targetYaw == 0.0F && cart.serverRealRotation != 0.0F) {
+				targetYaw = cart.serverRealRotation;
+			}
+
+			float newYaw = smoothRenderYaw(cart, targetYaw);
+
+			float renderYaw = newYaw; //+ getMasterPhysicsRenderYawOffset(cart);
+
+			GL11.glRotatef(90.0F - renderYaw, 0.0F, 1.0F, 0.0F);
+
+			cart.setRenderYaw(renderYaw);
+			cart.setRenderPitch(pitch);
+		}
+		else if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
 			//GL11.glRotatef((float)(90-cart.rotationYawClientReal), 0.0F, 1.0F, 0.0F);
 			if (cart.oldClientYaw == 0) cart.oldClientYaw = cart.rotationYawClientReal;
 
@@ -199,7 +227,15 @@ public class RenderRollingStock extends Render {
 		//if(cart.bogie!=null)cart.worldObj.spawnParticle("reddust", cart.bogie.posX, cart.bogie.posY, cart.bogie.posZ, 0.1, 0.4, 0.1);
 
 		//GL11.glRotatef(180.0F - yaw, 0.0F, 1.0F, 0.0F);
-		if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+		if (useMasterPhysicsRenderRotation(cart))
+		{
+			/*
+			 * New two-bogie system already derives anglePitchClient from the bogie pair.
+			 * If pitch is too strong, divide it here.
+			 */
+			GL11.glRotatef((float) -cart.anglePitchClient, 0.0F, 0.0F, 1.0F);
+		}
+		else if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
 			GL11.glRotatef((float) -cart.anglePitchClient, 0.0F, 0.0F, 1.0F);
 		}
 		else
