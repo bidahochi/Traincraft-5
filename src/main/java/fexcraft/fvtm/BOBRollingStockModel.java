@@ -69,6 +69,8 @@ public class BOBRollingStockModel extends FVTMFormatBase {
         if (info == null) {
             return;
         }
+        int baseTexture = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
+
         for (int i = 0; i < info.models.size(); i++) {
             if (shouldSkipRender(entity, info, i)) {
                 continue;
@@ -76,6 +78,8 @@ public class BOBRollingStockModel extends FVTMFormatBase {
             GL11.glPushMatrix();
             if (info.textures.size() > i && info.textures.get(i) != null) {
                 Tessellator.bindTexture(info.textures.get(i));
+            } else {
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, baseTexture);
             }
 
             if (info.positions.size() > i && info.positions.get(i) != null) {
@@ -121,6 +125,12 @@ public class BOBRollingStockModel extends FVTMFormatBase {
             case 6: {
                 //in the car
                 return Minecraft.getMinecraft().thePlayer != entity.riddenByEntity;
+            }
+            case 7: {
+                if (Minecraft.getMinecraft().thePlayer != entity.riddenByEntity) {
+                    return false;
+                }
+                else return Minecraft.getMinecraft().gameSettings.thirdPersonView == 0;
             }
         }
         return false;

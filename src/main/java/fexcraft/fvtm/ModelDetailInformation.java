@@ -21,6 +21,7 @@ public class ModelDetailInformation {
      * 4: third person only
      * 5: not in the car, regardless of viewpoint
      * 6: in the car, regardless of viewpoint
+     * 7: third person, or out of car
      */
     public HashMap<FVTMFormatBase, Integer> modelRenderMethod = new HashMap<>();
     public LinkedList<FVTMFormatBase> models = new LinkedList<>();
