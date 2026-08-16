@@ -3,7 +3,13 @@ package com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
+import train.common.api.LightFixtureType;
 import train.common.api.LiquidManager;
+import train.common.api.RollingStockLightBehaviorOverride;
+import train.common.api.RollingStockLightChannel;
+import train.common.api.RollingStockLightDefinition;
+import train.common.api.RollingStockLightFunction;
+import train.common.api.RollingStockSkinLightingProfiles;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
@@ -11,6 +17,36 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselTB27 extends DieselTrain {
+    static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        RollingStockSkinLightingProfiles.builder("bap:tb27")
+        .defaults()
+        .fixtureType(
+            LightFixtureType.NUMBERBOARD,
+            "rear_numberboard_right", "rear_numberboard_left",
+            "front_numberboard_right", "front_numberboard_left",
+            "front_numberboard_sp_right", "front_numberboard_sp_left")
+        .fixtureType(
+            LightFixtureType.MARKER_LIGHT,
+            "rear_marker_right", "rear_marker_left",
+            "front_marker_right", "front_marker_left",
+            "front_marker_sp_right", "front_marker_sp_left")
+        .steadyHeadlight(
+            "rear_headlight_lower_right", "rear_headlight_lower_left",
+            "rear_headlight_upper_right", "rear_headlight_upper_left",
+            "front_headlight_lower", "front_headlight_upper")
+        .gyralite("front_gyralite_right", "front_gyralite_left")
+        .behavior(
+            RollingStockLightBehaviorOverride.builder()
+            .controlCircuit(RollingStockLightChannel.HEADLIGHT)
+            .function(RollingStockLightFunction.STEADY)
+            .effect(RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
+            .beamDimensions(0, 0)
+            .hotspotEnabled(false)
+            .clientProjectorEligible(false)
+            .build(),
+            "cab_speedometer")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -24,6 +60,12 @@ public class DieselTB27 extends DieselTrain {
         InsertTexture(2, "Avanste Northeastern (Bida Fictional)"/*, LockoutGroup.ANE*/);
         InsertTexture(3, "SPR", LockoutGroup.SPR);
 
+    }
+
+    @Override
+    protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
     @Override

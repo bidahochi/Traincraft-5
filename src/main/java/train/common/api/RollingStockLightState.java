@@ -7,7 +7,11 @@ public final class RollingStockLightState
 
     private RollingStockLightState() {}
 
-    /** Resolves synchronized controls and the fixture time function to normalized intensity. */
+    /**
+     * Resolves synchronized controls and the fixture time function to normalized intensity.
+     * A {@code null} control source represents stock without light controls: both headlight ends
+     * are bright and every named circuit is enabled.
+     */
     public static float intensity(
         IRollingStockLightControls stock,
         RollingStockLightDefinition definition,
@@ -28,7 +32,8 @@ public final class RollingStockLightState
         }
         else
         {
-            if (stock.isLightChannelEnabled(definition.controlCircuit()) == false)
+            if (stock != null
+                    && stock.isLightChannelEnabled(definition.controlCircuit()) == false)
             {
                 return 0;
             }
@@ -51,6 +56,10 @@ public final class RollingStockLightState
     public static RollingStockHeadlightLevel headlightLevel(
         IRollingStockLightControls stock, RollingStockLightDefinition definition)
     {
+        if (stock == null)
+        {
+            return RollingStockHeadlightLevel.BRIGHT;
+        }
         if (definition.directionX() > 0.05F)
         {
             return stock.getFrontHeadlightLevel();

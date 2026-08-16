@@ -185,13 +185,13 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 		bodyModel[140] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 166
 		bodyModel[141] = new ModelRendererTurbo(this, 1, 83, textureX, textureY); // Box 167
 		bodyModel[142] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 168
-		bodyModel[143] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[143] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // Box 410 glow marker
 		bodyModel[144] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 170
-		bodyModel[145] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[145] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // Box 410 glow marker
 		bodyModel[146] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 172
-		bodyModel[147] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[147] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // Box 410 glow marker
 		bodyModel[148] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 174
-		bodyModel[149] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[149] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // Box 410 glow marker
 		bodyModel[150] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 176
 		bodyModel[151] = new ModelRendererTurbo(this, 148, 5, textureX, textureY, "cull"); // Box 178 cull
 		bodyModel[152] = new ModelRendererTurbo(this, 133, 81, textureX, textureY); // Box 179
@@ -269,8 +269,8 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 		bodyModel[224] = new ModelRendererTurbo(this, 1, 42, textureX, textureY); // Box 246
 		bodyModel[225] = new ModelRendererTurbo(this, 23, 42, textureX, textureY); // Box 81
 		bodyModel[226] = new ModelRendererTurbo(this, 23, 45, textureX, textureY); // Box 248
-		bodyModel[227] = new ModelRendererTurbo(this, 461, 2, textureX, textureY, "lamp"); // Box 426 glow
-		bodyModel[228] = new ModelRendererTurbo(this, 461, 2, textureX, textureY, "lamp"); // Box 250 glow
+		bodyModel[227] = new ModelRendererTurbo(this, 461, 2, textureX, textureY, "lamp").setLightFixtureId("rear_center"); // Box 426 glow
+		bodyModel[228] = new ModelRendererTurbo(this, 461, 2, textureX, textureY, "lamp").setLightFixtureId("front_center"); // Box 250 glow
 		bodyModel[229] = new ModelRendererTurbo(this, 408, 102, textureX, textureY); // Box 282
 		bodyModel[230] = new ModelRendererTurbo(this, 395, 99, textureX, textureY); // Box 283
 		bodyModel[231] = new ModelRendererTurbo(this, 421, 100, textureX, textureY); // Box 24
@@ -286,10 +286,10 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 		bodyModel[241] = new ModelRendererTurbo(this, 384, 116, textureX, textureY); // Box 373
 		bodyModel[242] = new ModelRendererTurbo(this, 387, 116, textureX, textureY); // Box 373
 		bodyModel[243] = new ModelRendererTurbo(this, 374, 115, textureX, textureY); // Box 421 prime base
-		bodyModel[244] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime1); // Box 6 PRIME4-1
-		bodyModel[245] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime3); // Box 7 PRIME4-3
-		bodyModel[246] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime2); // Box 8 PRIME4-2
-		bodyModel[247] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime4); // Box 9 PRIME4-4
+		bodyModel[244] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime1).setLightFixtureId("prime_1"); // Box 6 PRIME4-1
+		bodyModel[245] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime3).setLightFixtureId("prime_3"); // Box 7 PRIME4-3
+		bodyModel[246] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime2).setLightFixtureId("prime_2"); // Box 8 PRIME4-2
+		bodyModel[247] = new ModelRendererTurbo(this, 374, 119, textureX, textureY, BoxName.prime4).setLightFixtureId("prime_4"); // Box 9 PRIME4-4
 		bodyModel[248] = new ModelRendererTurbo(this, 374, 123, textureX, textureY, "cull"); // Box 355 support cull
 		bodyModel[249] = new ModelRendererTurbo(this, 148, 5, textureX, textureY, "cull"); // Box 275
 		bodyModel[250] = new ModelRendererTurbo(this, 176, 54, textureX, textureY, "cull"); // Box 561 cull ptc antenna shiz
@@ -297,10 +297,10 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 		bodyModel[252] = new ModelRendererTurbo(this, 179, 52, textureX, textureY); // Box 563
 		bodyModel[253] = new ModelRendererTurbo(this, 160, 52, textureX, textureY); // Box 564
 		bodyModel[254] = new ModelRendererTurbo(this, 79, 70, textureX, textureY); // Box 410
-		bodyModel[255] = new ModelRendererTurbo(this, 91, 66, textureX, textureY, "lamp"); // Box 411 front light R
-		bodyModel[256] = new ModelRendererTurbo(this, 86, 69, textureX, textureY, "lamp"); // Box 412 front light L
-		bodyModel[257] = new ModelRendererTurbo(this, 86, 69, textureX, textureY, "lamp"); // Box 257
-		bodyModel[258] = new ModelRendererTurbo(this, 91, 66, textureX, textureY, "lamp"); // Box 258
+		bodyModel[255] = new ModelRendererTurbo(this, 91, 66, textureX, textureY, "lamp").setLightFixtureId("front_right"); // Box 411 front light R
+		bodyModel[256] = new ModelRendererTurbo(this, 86, 69, textureX, textureY, "lamp").setLightFixtureId("front_left"); // Box 412 front light L
+		bodyModel[257] = new ModelRendererTurbo(this, 86, 69, textureX, textureY, "lamp").setLightFixtureId("rear_left"); // Box 257
+		bodyModel[258] = new ModelRendererTurbo(this, 91, 66, textureX, textureY, "lamp").setLightFixtureId("rear_right"); // Box 258
 		bodyModel[259] = new ModelRendererTurbo(this, 72, 67, textureX, textureY); // Box 259
 
 		bodyModel[0].addBox(0F, 0F, 0F, 20, 16, 1, 0F); // Box 2

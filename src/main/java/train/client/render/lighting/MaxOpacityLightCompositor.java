@@ -88,6 +88,13 @@ final class MaxOpacityLightCompositor
         try
         {
             ensure(targetWidth, targetHeight);
+            copyDepth(
+                main.framebufferObject,
+                EFFECTS.framebuffer(),
+                targetWidth,
+                targetHeight);
+            EXTFramebufferObject.glBindFramebufferEXT(
+                EXTFramebufferObject.GL_FRAMEBUFFER_EXT, main.framebufferObject);
             for (int index = 0; index < COLOR_BUCKETS.size(); index++)
             {
                 renderColorBucket(main, COLOR_BUCKETS.values(index));
@@ -137,7 +144,6 @@ final class MaxOpacityLightCompositor
             OpenGlHelper.func_153161_d(0);
             EFFECTS.bind();
             EFFECTS.clearColor();
-            copyDepth(main.framebufferObject, EFFECTS.framebuffer(), width, height);
             EFFECTS.bind();
             LightEffectRenderBatch.setupEffectState();
             GL11.glBlendFunc(GL11.GL_ONE, GL11.GL_ONE);

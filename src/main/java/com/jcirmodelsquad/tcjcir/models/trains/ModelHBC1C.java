@@ -172,19 +172,19 @@ public class ModelHBC1C extends ModelConverter //Same as Filename
 		bodyModel[127] = new ModelRendererTurbo(this, 153, 151, textureX, textureY); // Box 404
 		bodyModel[128] = new ModelRendererTurbo(this, 207, 151, textureX, textureY); // Box 405
 		bodyModel[129] = new ModelRendererTurbo(this, 246, 194, textureX, textureY); // Box 288
-		bodyModel[130] = new ModelRendererTurbo(this, 248, 201, textureX, textureY, "lamp"); // Box 289 rear light L
-		bodyModel[131] = new ModelRendererTurbo(this, 248, 206, textureX, textureY, "lamp"); // Box 290 rear light R
+		bodyModel[130] = new ModelRendererTurbo(this, 248, 201, textureX, textureY, "lamp").setLightFixtureId("rear_left"); // Box 289 rear light L
+		bodyModel[131] = new ModelRendererTurbo(this, 248, 206, textureX, textureY, "lamp").setLightFixtureId("rear_right"); // Box 290 rear light R
 		bodyModel[132] = new ModelRendererTurbo(this, 257, 194, textureX, textureY); // Box 410
-		bodyModel[133] = new ModelRendererTurbo(this, 259, 206, textureX, textureY, "lamp"); // Box 411 front light R
-		bodyModel[134] = new ModelRendererTurbo(this, 259, 201, textureX, textureY, "lamp"); // Box 412 front light L
+		bodyModel[133] = new ModelRendererTurbo(this, 259, 206, textureX, textureY, "lamp").setLightFixtureId("front_right"); // Box 411 front light R
+		bodyModel[134] = new ModelRendererTurbo(this, 259, 201, textureX, textureY, "lamp").setLightFixtureId("front_left"); // Box 412 front light L
 		bodyModel[135] = new ModelRendererTurbo(this, 308, 155, textureX, textureY, "cull"); // Box 3 cull aww
 		bodyModel[136] = new ModelRendererTurbo(this, 310, 150, textureX, textureY); // Box 5
 		bodyModel[137] = new ModelRendererTurbo(this, 308, 139, textureX, textureY, "cull"); // Box 3 cull aww
 		bodyModel[138] = new ModelRendererTurbo(this, 310, 134, textureX, textureY); // Box 5
-		bodyModel[139] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime1); // Box 6 PRIME1-1
-		bodyModel[140] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime3); // Box 7 PRIME1-3
-		bodyModel[141] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime2); // Box 8 PRIME1-2
-		bodyModel[142] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime4); // Box 9 PRIME1-4
+		bodyModel[139] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime1).setLightFixtureId("prime_1"); // Box 6 PRIME1-1
+		bodyModel[140] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime3).setLightFixtureId("prime_3"); // Box 7 PRIME1-3
+		bodyModel[141] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime2).setLightFixtureId("prime_2"); // Box 8 PRIME1-2
+		bodyModel[142] = new ModelRendererTurbo(this, 251, 216, textureX, textureY, BoxName.prime4).setLightFixtureId("prime_4"); // Box 9 PRIME1-4
 		bodyModel[143] = new ModelRendererTurbo(this, 251, 212, textureX, textureY); // Box 428
 		bodyModel[144] = new ModelRendererTurbo(this, 25, 170, textureX, textureY); // Box 423
 		bodyModel[145] = new ModelRendererTurbo(this, 25, 170, textureX, textureY); // Box 424
@@ -336,10 +336,10 @@ public class ModelHBC1C extends ModelConverter //Same as Filename
 		bodyModel[291] = new ModelRendererTurbo(this, 439, 132, textureX, textureY); // Box 571
 		bodyModel[292] = new ModelRendererTurbo(this, 423, 176, textureX, textureY); // Box 293
 		bodyModel[293] = new ModelRendererTurbo(this, 2, 81, textureX, textureY); // Import Box40 seatbelts please
-		bodyModel[294] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp"); // Box 294 markerlight
-		bodyModel[295] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp"); // Box 294 markerlight
-		bodyModel[296] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp"); // Box 294 markerlight
-		bodyModel[297] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp"); // Box 294 markerlight
+		bodyModel[294] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // Box 294 markerlight
+		bodyModel[295] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // Box 294 markerlight
+		bodyModel[296] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // Box 294 markerlight
+		bodyModel[297] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // Box 294 markerlight
 
 		bodyModel[0].addBox(0F, 0F, 0F, 3, 2, 3, 0F); // Box 1
 		bodyModel[0].setRotationPoint(32.5F, 3F, -1.5F);

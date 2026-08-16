@@ -314,12 +314,18 @@ public class RenderRollingStock extends Render {
 		{
 			cart.modelInstance = cart.getRenderSpec().getModel();
 		}
+        boolean captureBeamOcclusion =
+            renderModeGUI == false
+            && ClientRollingStockLighting.requiresBeamOcclusion(cart, time);
         // World effects are deferred until RenderWorldLast, matching the
         // AFTER_BLOCK_ENTITIES pass. GUI renders must not enter that world queue.
         if (renderModeGUI == false)
         {
-            RollingStockLightOcclusion.beginStock(cart);
-            RollingStockDepthMask.beginModel(cart.getEntityId());
+            if (captureBeamOcclusion)
+            {
+                RollingStockLightOcclusion.beginStock(cart);
+                RollingStockDepthMask.beginModel(cart.getEntityId());
+            }
             ClientRollingStockLighting.begin(cart, time, lightingTexture);
         }
 
@@ -359,8 +365,11 @@ public class RenderRollingStock extends Render {
             ClientRollingStockLighting.end();
             if (renderModeGUI == false)
             {
-                RollingStockDepthMask.endModel();
-                RollingStockLightOcclusion.endStock();
+                if (captureBeamOcclusion)
+                {
+                    RollingStockDepthMask.endModel();
+                    RollingStockLightOcclusion.endStock();
+                }
             }
         }
 

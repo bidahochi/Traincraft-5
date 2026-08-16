@@ -196,6 +196,7 @@ public final class LightEffectRenderBatch
             ViewTransform viewTransform = VIEW_TRANSFORM.captured()
                                           ? VIEW_TRANSFORM
                                           : ViewTransform.capture();
+            RollingStockShadowRenderer.beginFrame();
             boolean composited = MaxOpacityLightCompositor.render(FRAME_SUBMISSIONS);
             if (composited == false
                     && containsVisibleBeam(FRAME_SUBMISSIONS)

@@ -128,6 +128,20 @@ public final class RollingStockLightBehaviorOverride
                .build();
     }
 
+    /**
+     * Keeps the model-authored source emission while suppressing every projected-light effect.
+     * Control circuit, function, color, availability, and source-glow values remain inherited.
+     */
+    public static RollingStockLightBehaviorOverride emissiveOnly()
+    {
+        return builder()
+               .effect(RollingStockLightDefinition.Effect.EMISSIVE_ONLY)
+               .beamDimensions(0, 0)
+               .hotspotEnabled(false)
+               .clientProjectorEligible(false)
+               .build();
+    }
+
     public static RollingStockLightBehaviorOverride gyralite()
     {
         return builder()

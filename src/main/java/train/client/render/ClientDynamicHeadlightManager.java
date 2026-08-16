@@ -56,17 +56,31 @@ public final class ClientDynamicHeadlightManager {
         REQUESTED_DIRECTION_Z.clear();
         EntityPlayer player = minecraft.thePlayer;
         for (Object value : world.loadedEntityList) {
-            if ((value instanceof EntityRollingStock) == false
-                    || (value instanceof IRollingStockLightControls) == false) {
+            if ((value instanceof EntityRollingStock) == false) {
                 continue;
             }
             EntityRollingStock stock = (EntityRollingStock) value;
-            IRollingStockLightControls controls = (IRollingStockLightControls) value;
+            IRollingStockLightControls controls =
+                    value instanceof IRollingStockLightControls
+                            ? (IRollingStockLightControls) value
+                            : null;
             if (stock.isDead || stock.getDistanceSqToEntity(player) > RANGE_SQUARED) {
                 continue;
             }
-            collect(stock, 1, controls.getFrontHeadlightLevel(), REQUESTED);
-            collect(stock, -1, controls.getRearHeadlightLevel(), REQUESTED);
+            collect(
+                    stock,
+                    1,
+                    controls == null
+                            ? RollingStockHeadlightLevel.BRIGHT
+                            : controls.getFrontHeadlightLevel(),
+                    REQUESTED);
+            collect(
+                    stock,
+                    -1,
+                    controls == null
+                            ? RollingStockHeadlightLevel.BRIGHT
+                            : controls.getRearHeadlightLevel(),
+                    REQUESTED);
         }
         selectSources(world, REQUESTED, SOURCES);
     }

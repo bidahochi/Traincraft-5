@@ -220,7 +220,8 @@ final class ClientDynamicHeadlightRenderer
 
     static boolean isDynamicSurfaceSource(LightEffectSubmission submission)
     {
-        return LightEffectRenderBatch.hasVisibleBeam(submission);
+        return submission.definition.clientProjectorEligible()
+               && LightEffectRenderBatch.hasVisibleBeam(submission);
     }
 
     private static boolean supported(ContextCapabilities capabilities)
@@ -484,8 +485,7 @@ final class ClientDynamicHeadlightRenderer
     {
         if (first.ownerId != second.ownerId
                 || first.definition.channel() != second.definition.channel()
-                || first.definition.color() != second.definition.color()
-                || samePose(first.cameraRelativePose, second.cameraRelativePose) == false)
+                || first.definition.color() != second.definition.color())
         {
             return false;
         }
@@ -494,45 +494,54 @@ final class ClientDynamicHeadlightRenderer
         {
             return false;
         }
-        float dx = first.x - second.x;
-        float dy = first.y - second.y;
-        float dz = first.z - second.z;
+        float firstX = transformedPoint(first, first.x, first.y, first.z, 0);
+        float firstY = transformedPoint(first, first.x, first.y, first.z, 1);
+        float firstZ = transformedPoint(first, first.x, first.y, first.z, 2);
+        float secondX = transformedPoint(second, second.x, second.y, second.z, 0);
+        float secondY = transformedPoint(second, second.x, second.y, second.z, 1);
+        float secondZ = transformedPoint(second, second.x, second.y, second.z, 2);
+        float dx = firstX - secondX;
+        float dy = firstY - secondY;
+        float dz = firstZ - secondZ;
         return dx * dx + dy * dy + dz * dz <= 9.0F;
     }
 
-    private static boolean samePose(float[] first, float[] second)
+    private static float transformedPoint(
+        LightEffectSubmission submission, float x, float y, float z, int component)
     {
-        if (first == second)
-        {
-            return true;
-        }
-        if (first == null || second == null || first.length != 16 || second.length != 16)
-        {
-            return false;
-        }
-        for (int index = 0; index < 16; index++)
-        {
-            if (Float.floatToIntBits(first[index]) != Float.floatToIntBits(second[index]))
-            {
-                return false;
-            }
-        }
-        return true;
+        float[] pose = submission.cameraRelativePose;
+        return pose[component] * x
+               + pose[4 + component] * y
+               + pose[8 + component] * z
+               + pose[12 + component];
     }
 
     private static float normalizedDirectionDot(
         LightEffectSubmission first, LightEffectSubmission second)
     {
+        float firstX = transformedDirection(first, first.dx, first.dy, first.dz, 0);
+        float firstY = transformedDirection(first, first.dx, first.dy, first.dz, 1);
+        float firstZ = transformedDirection(first, first.dx, first.dy, first.dz, 2);
+        float secondX = transformedDirection(second, second.dx, second.dy, second.dz, 0);
+        float secondY = transformedDirection(second, second.dx, second.dy, second.dz, 1);
+        float secondZ = transformedDirection(second, second.dx, second.dy, second.dz, 2);
         float firstLength = (float) Math.sqrt(
-                                first.dx * first.dx + first.dy * first.dy + first.dz * first.dz);
+                                firstX * firstX + firstY * firstY + firstZ * firstZ);
         float secondLength = (float) Math.sqrt(
-                                 second.dx * second.dx + second.dy * second.dy + second.dz * second.dz);
+                                 secondX * secondX + secondY * secondY + secondZ * secondZ);
         if (firstLength <= 1.0E-5F || secondLength <= 1.0E-5F)
         {
             return -1.0F;
         }
-        return (first.dx * second.dx + first.dy * second.dy + first.dz * second.dz)
+        return (firstX * secondX + firstY * secondY + firstZ * secondZ)
                / (firstLength * secondLength);
+    }
+
+    private static float transformedDirection(
+        LightEffectSubmission submission, float x, float y, float z, int component)
+    {
+        float[] pose = submission.cameraRelativePose;
+        return pose[component] * x + pose[4 + component] * y + pose[8 + component] * z;
     }
 
     private static void prepareSource(LightEffectSubmission submission)

@@ -27,13 +27,16 @@ public final class RollingStockLightOcclusion
     private static final List<Entry> FRAME_ENTRIES = new ArrayList<Entry>();
     private static final ArrayDeque<Entry> ENTRY_POOL = new ArrayDeque<Entry>();
     private static final ArrayDeque<PartPose> PART_POSE_POOL = new ArrayDeque<PartPose>();
+    private static final float[] SHARED_PARENT_POSE = new float[16];
     private static Entry activeEntry;
+    private static boolean sharedPartCapture;
 
     private RollingStockLightOcclusion() {}
 
     public static void beginStock(EntityRollingStock stock)
     {
         activeEntry = null;
+        sharedPartCapture = false;
         if (stock == null || stock.modelInstance == null)
         {
             return;
@@ -66,6 +69,47 @@ public final class RollingStockLightOcclusion
     public static void endStock()
     {
         activeEntry = null;
+        sharedPartCapture = false;
+    }
+
+    /**
+     * Captures one parent model-view matrix for a static TMT batch. Every part in that batch still
+     * records its own local translation and rotation, but avoids a synchronous GPU matrix readback.
+     */
+    public static boolean beginSharedPartCapture()
+    {
+        if (activeEntry == null)
+        {
+            return false;
+        }
+        MATRIX_BUFFER.clear();
+        GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, MATRIX_BUFFER);
+        MATRIX_BUFFER.rewind();
+        MATRIX_BUFFER.get(SHARED_PARENT_POSE);
+        sharedPartCapture = true;
+        return true;
+    }
+
+    /** Records one static-batch part using the parent pose captured by the matching begin call. */
+    public static void captureSharedPart(
+        ModelRendererTurbo part, float scale, boolean rotationOrder)
+    {
+        Entry entry = activeEntry;
+        if (sharedPartCapture == false
+                || entry == null
+                || part == null
+                || entry.seenParts.put(part, Boolean.TRUE) != null)
+        {
+            return;
+        }
+        PartPose pose = acquirePartPose();
+        populatePartPose(pose, part, scale, rotationOrder, SHARED_PARENT_POSE);
+        entry.parts.add(pose);
+    }
+
+    public static void endSharedPartCapture()
+    {
+        sharedPartCapture = false;
     }
 
     /** Called before batching can consume a requested TMT part. */
@@ -77,6 +121,21 @@ public final class RollingStockLightOcclusion
             return;
         }
         PartPose pose = acquirePartPose();
+        MATRIX_BUFFER.clear();
+        GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, MATRIX_BUFFER);
+        MATRIX_BUFFER.rewind();
+        MATRIX_BUFFER.get(SHARED_PARENT_POSE);
+        populatePartPose(pose, part, scale, rotationOrder, SHARED_PARENT_POSE);
+        entry.parts.add(pose);
+    }
+
+    private static void populatePartPose(
+        PartPose pose,
+        ModelRendererTurbo part,
+        float scale,
+        boolean rotationOrder,
+        float[] parentPose)
+    {
         pose.part = part;
         pose.scale = scale;
         pose.rotationOrder = rotationOrder;
@@ -86,11 +145,7 @@ public final class RollingStockLightOcclusion
         pose.rotateAngleX = part.rotateAngleX;
         pose.rotateAngleY = part.rotateAngleY;
         pose.rotateAngleZ = part.rotateAngleZ;
-        MATRIX_BUFFER.clear();
-        GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, MATRIX_BUFFER);
-        MATRIX_BUFFER.rewind();
-        MATRIX_BUFFER.get(pose.parentPose);
-        entry.parts.add(pose);
+        System.arraycopy(parentPose, 0, pose.parentPose, 0, pose.parentPose.length);
     }
 
     static List<Entry> entries()
@@ -163,6 +218,7 @@ public final class RollingStockLightOcclusion
     static void clearFrame()
     {
         activeEntry = null;
+        sharedPartCapture = false;
         for (Entry entry : FRAME_ENTRIES)
         {
             recycleEntry(entry);

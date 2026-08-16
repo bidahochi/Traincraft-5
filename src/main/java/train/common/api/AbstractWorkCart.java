@@ -1,8 +1,5 @@
 package train.common.api;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,11 +27,11 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	public int furnaceCookTime = 0;
 
     private RollingStockHeadlightLevel frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
-    private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
+    private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
     private boolean ditchLightsEnabled = true;
     private boolean beaconEnabled = true;
-    private boolean auxLightsEnabled;
-    private boolean gyraLightsEnabled;
+    private boolean auxLightsEnabled = true;
+    private boolean gyraLightsEnabled = true;
 
 
 	public AbstractWorkCart(World world)
@@ -120,7 +117,7 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		}
 		nbttagcompound.setTag("Items", var2);
 		nbttagcompound.setInteger("tcFrontHeadlightLevel", frontHeadlightLevel.ordinal());
-        nbttagcompound.setInteger("tcRearHeadlightLevel", rearHeadlightLevel.ordinal());
+		nbttagcompound.setInteger("tcRearHeadlightLevel", rearHeadlightLevel.ordinal());
         nbttagcompound.setInteger(
             "tcLightChannels",
             RollingStockLightStateCodec.persistentChannels(packLightState()));
@@ -144,48 +141,24 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		this.furnaceCookTime = nbttagcompound.getShort("CookTime");
 		this.currentItemBurnTime = AbstractWorkCart.getItemBurnTime(this.furnaceItemStacks[1]);
 
-		JsonObject previousState = new JsonObject();
-        if (nbttagcompound.hasKey("lightingDetailsJSON"))
-        {
-		try {
-                JsonElement parsedState = Traincraft.jsonParser.parse(nbttagcompound.getString("lightingDetailsJSON"));
-                if (parsedState.isJsonObject())
+		frontHeadlightLevel =
+			nbttagcompound.hasKey("tcFrontHeadlightLevel")
+			? RollingStockHeadlightLevel.fromOrdinal(
+				nbttagcompound.getInteger("tcFrontHeadlightLevel"))
+			: RollingStockHeadlightLevel.BRIGHT;
+		rearHeadlightLevel =
+			nbttagcompound.hasKey("tcRearHeadlightLevel")
+			? RollingStockHeadlightLevel.fromOrdinal(
+				nbttagcompound.getInteger("tcRearHeadlightLevel"))
+			: RollingStockHeadlightLevel.BRIGHT;
+		if (nbttagcompound.hasKey("tcLightChannels"))
 		{
-                    previousState = parsedState.getAsJsonObject();
+			int channels = nbttagcompound.getInteger("tcLightChannels");
+			ditchLightsEnabled = (channels & RollingStockLightChannel.DITCH.mask()) != 0;
+			beaconEnabled = (channels & RollingStockLightChannel.BEACON.mask()) != 0;
+			auxLightsEnabled = (channels & RollingStockLightChannel.AUX.mask()) != 0;
+			gyraLightsEnabled = (channels & RollingStockLightChannel.GYRA.mask()) != 0;
 		}
-	}
-		catch (JsonParseException ignored)
-	{
-                // Missing or malformed legacy lighting state migrates to the documented defaults.
-		}
-        }
-
-        boolean previousLights = jsonBoolean(previousState, "isLightsEnabled", true);
-        frontHeadlightLevel =
-            nbttagcompound.hasKey("tcFrontHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal (
-                nbttagcompound.getInteger("tcFrontHeadlightLevel"))
-            : previousLights
-            ? RollingStockHeadlightLevel.BRIGHT
-            : RollingStockHeadlightLevel.OFF;
-        rearHeadlightLevel =
-            nbttagcompound.hasKey("tcRearHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal(
-                nbttagcompound.getInteger("tcRearHeadlightLevel"))
-            : RollingStockHeadlightLevel.OFF;
-			if (nbttagcompound.hasKey("tcLightChannels"))
-		{
-            int channels = nbttagcompound.getInteger("tcLightChannels");
-            ditchLightsEnabled = (channels & RollingStockLightChannel.DITCH.mask()) != 0;
-            beaconEnabled = (channels & RollingStockLightChannel.BEACON.mask()) != 0;
-            auxLightsEnabled = (channels & RollingStockLightChannel.AUX.mask()) != 0;
-            gyraLightsEnabled = (channels & RollingStockLightChannel.GYRA.mask()) != 0;
-			}
-        else
-			{
-            ditchLightsEnabled = jsonByte(previousState,"ditchLightMode",(byte) 1) > 0;
-            beaconEnabled = jsonBoolean(previousState, "isBeaconEnabled", true);
-			}
         dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
 		}
 
@@ -295,16 +268,6 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
             dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
         }
 
-	}
-
-    private static boolean jsonBoolean(JsonObject object, String key, boolean fallback)
-	{
-        return object != null && object.has(key) ? object.get(key).getAsBoolean() : fallback;
-	}
-
-    private static byte jsonByte(JsonObject object, String key, byte fallback)
-	{
-        return object != null && object.has(key) ? object.get(key).getAsByte() : fallback;
 	}
 
 	@Override

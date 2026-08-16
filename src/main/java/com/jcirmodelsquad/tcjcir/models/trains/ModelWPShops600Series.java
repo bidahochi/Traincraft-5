@@ -18,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
+import tmt.LightSourceFaceDirection;
 import tmt.Tessellator;
 import train.client.renderhelper.ModelRenderHelper;
 import train.common.api.AbstractTrains;
@@ -261,10 +262,10 @@ public class ModelWPShops600Series extends ModelConverter //Same as Filename
 		bodyModel[216] = new ModelRendererTurbo(this, 75, 11, textureX, textureY); // Box 218
 		bodyModel[217] = new ModelRendererTurbo(this, 70, 11, textureX, textureY); // Box 219
 		bodyModel[218] = new ModelRendererTurbo(this, 75, 11, textureX, textureY); // Box 220
-		bodyModel[219] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "lamp"); // Box 401 gyra glow
+		bodyModel[219] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "lamp").setLightFixtureId("front_gyralite"); // Box 401 gyra glow
 		bodyModel[220] = new ModelRendererTurbo(this, 145, 1, textureX, textureY); // Box 400 sp E gyra box
 		bodyModel[221] = new ModelRendererTurbo(this, 128, 1, textureX, textureY); // Box 221
-		bodyModel[222] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "lamp"); // Box 222 gyra glow
+		bodyModel[222] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "lamp").setLightFixtureId("rear_gyralite"); // Box 222 gyra glow
 		bodyModel[223] = new ModelRendererTurbo(this, 394, 111, textureX, textureY); // Box 300
 		bodyModel[224] = new ModelRendererTurbo(this, 448, 111, textureX, textureY); // Box 224
 		bodyModel[225] = new ModelRendererTurbo(this, 9, 61, textureX, textureY); // Box 225
@@ -273,13 +274,13 @@ public class ModelWPShops600Series extends ModelConverter //Same as Filename
 		bodyModel[228] = new ModelRendererTurbo(this, 160, 6, textureX, textureY); // Box 373
 		bodyModel[229] = new ModelRendererTurbo(this, 157, 6, textureX, textureY); // Box 373
 		bodyModel[230] = new ModelRendererTurbo(this, 79, 73, textureX, textureY); // Box 153
-		bodyModel[231] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[231] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("front_right_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
 		bodyModel[232] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 170
-		bodyModel[233] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[233] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("front_left_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
 		bodyModel[234] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 172
-		bodyModel[235] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[235] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
 		bodyModel[236] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 174
-		bodyModel[237] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[237] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
 		bodyModel[238] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 176
 
 		bodyModel[0].addBox(0F, 0F, 0F, 3, 2, 3, 0F); // Box 1 coupler

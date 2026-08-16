@@ -103,23 +103,24 @@ public final class ClientRollingStockLighting
     }
 
     /**
-     * Reports whether a model part carries a recognized lighting tag.
+     * Reports whether a model part declares a light fixture.
      *
      * @param modelPart model geometry to inspect
-     * @return {@code true} when the part name maps to a rolling-stock light channel
+     * @return {@code true} when the part has a stable fixture id or a recognized legacy tag
      */
     public static boolean isSemantic(ModelRendererTurbo modelPart)
     {
         return modelPart != null
-               && RollingStockLightChannel.fromTaggedPartName(modelPart.boxName) != null;
+               && (modelPart.lightFixtureId != null
+                   || RollingStockLightChannel.fromTaggedPartName(modelPart.boxName) != null);
     }
 
     /**
      * Prepares lightmap and effect state before rendering one model part.
      *
-     * <p>Parts without a lighting tag, inactive fixtures, and calls outside an active scope return
-     * a no-op token. Every returned token must be passed to {@link #endPart(PartLight)} so any
-     * changed OpenGL lightmap state is restored.
+     * <p>Parts without a fixture id or recognized legacy tag, inactive fixtures, and calls outside
+     * an active scope return a no-op token. Every returned token must be passed to
+     * {@link #endPart(PartLight)} so any changed OpenGL lightmap state is restored.
      *
      * @param modelPart model part about to be rendered
      * @param modelScale scale used to convert model coordinates into render coordinates
@@ -129,8 +130,7 @@ public final class ClientRollingStockLighting
     {
         Context context = ACTIVE.get();
         if (context == null
-                || isSemantic(modelPart) == false
-                || (context.stock instanceof IRollingStockLightControls) == false)
+                || isSemantic(modelPart) == false)
         {
             return PartLight.NONE;
         }
@@ -145,6 +145,8 @@ public final class ClientRollingStockLighting
         {
             surface = surface.select(selectedPrime);
         }
+        List<DetectedLightSurface> sourceSurfaces =
+            selectSourceSurfaces(modelPart, surface, selectedPrime);
         float intensity = context.sampleIntensity(definition);
         // An inactive fixture is ordinary ambient display-list geometry. Avoid
         // lightmap state traffic, matrix readbacks and Prime immediate drawing
@@ -171,7 +173,7 @@ public final class ClientRollingStockLighting
             explicitlyAvailable
             ? availabilityOverride.enabled()
             : fixtureMetadata.definition.taggedUvRegions().isEmpty() == false
-            && resolvedFixture.sourceVisible(lightTexture, surface, selectedPrime);
+            && resolvedFixture.sourceVisible(lightTexture, sourceSurfaces);
         float effectX = oldX, effectY = oldY;
         float[] pose = null;
         if (available)
@@ -200,11 +202,26 @@ public final class ClientRollingStockLighting
             if (definition.effect() != RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
             {
                 pose = captureModelViewMatrix();
-                submitFixtureEffects(
+                boolean multipleSources = sourceSurfaces.size() > 1;
+                for (DetectedLightSurface sourceSurface : sourceSurfaces)
+                {
+                    String submissionKey =
+                        multipleSources && sourceSurface.sourceFace != null
+                        ? definition.id() + ":face" + sourceSurface.sourceFace.faceIndex
+                        : definition.id();
+                    submitFixtureEffects(
+                        context,
+                        definition,
+                        submissionKey,
+                        sourceSurface,
+                        modelScale,
+                        intensity,
+                        pose);
+                }
+                submitCommanderSurfaceGlows(
                     context,
                     fixtureMetadata,
                     definition,
-                    surface,
                     modelScale,
                     intensity,
                     pose);
@@ -429,6 +446,89 @@ public final class ClientRollingStockLighting
         return false;
     }
 
+    /** Resolves authored multi-sided source faces while retaining the normal single-face path. */
+    private static List<DetectedLightSurface> selectSourceSurfaces(
+        ModelRendererTurbo modelPart,
+        DetectedLightSurface surface,
+        DetectedLightFace selectedPrime)
+    {
+        if (selectedPrime != null
+                || modelPart.lightSourceFaceIndices == null
+                || modelPart.lightSourceFaceIndices.length < 2)
+        {
+            return Collections.singletonList(surface);
+        }
+        List<DetectedLightSurface> selected = new ArrayList<DetectedLightSurface>();
+        for (int faceIndex : modelPart.lightSourceFaceIndices)
+        {
+            for (DetectedLightFace face : surface.faces)
+            {
+                if (face.faceIndex == faceIndex)
+                {
+                    selected.add(surface.select(face));
+                    break;
+                }
+            }
+        }
+        return selected.isEmpty() ? Collections.singletonList(surface) : selected;
+    }
+
+    /**
+     * Reports whether this stock currently needs the beam self-occlusion capture path.
+     *
+     * <p>Emission-only stock must not pay for per-part pose readbacks or framebuffer depth copies.
+     * Unknown model metadata is handled conservatively for the first inventory render; the shared
+     * model cache makes subsequent entities immediately use the resolved result.
+     */
+    public static boolean requiresBeamOcclusion(EntityRollingStock stock, double animationTime)
+    {
+        if (stock == null || stock.modelInstance == null)
+        {
+            return false;
+        }
+        Map<ModelRendererTurbo, FixtureMetadata> metadata =
+            MODEL_METADATA.get(stock.modelInstance);
+        if (metadata == null)
+        {
+            return true;
+        }
+        RollingStockSkinLighting skin = stock.getSkinLighting();
+        Map<String, RollingStockLightOverride> overrides = skin.lightOverrides();
+        IRollingStockLightControls controls =
+            stock instanceof IRollingStockLightControls
+            ? (IRollingStockLightControls) stock
+            : null;
+        for (FixtureMetadata fixture : metadata.values())
+        {
+            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (override != null
+                    && override.availabilityOverridden()
+                    && override.enabled() == false)
+            {
+                continue;
+            }
+            RollingStockLightDefinition definition =
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+            float intensity =
+                RollingStockLightState.intensity(controls, definition, animationTime);
+            if (requiresBeamOcclusion(definition, intensity))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean requiresBeamOcclusion(
+        RollingStockLightDefinition definition, float intensity)
+    {
+        return definition != null
+               && intensity > 0.0F
+               && definition.effect() == RollingStockLightDefinition.Effect.BEAM
+               && definition.beamLength() > 0.0F
+               && definition.beamWidth() > 0.0F;
+    }
+
     /** Builds and caches the detected surface and default definition for one semantic model part. */
     private static FixtureMetadata fixtureMetadata(
         Context context, ModelRendererTurbo modelPart, float modelScale)
@@ -453,6 +553,12 @@ public final class ClientRollingStockLighting
                 context.stock.getRenderScale());
         RollingStockLightChannel channel =
             RollingStockLightChannel.fromTaggedPartName(modelPart.boxName);
+        // ID-only fixtures are configured by their entity profile. HEADLIGHT supplies a safe,
+        // steady compatibility baseline until that profile replaces the inferred behavior.
+        if (channel == null)
+        {
+            channel = RollingStockLightChannel.HEADLIGHT;
+        }
         String fixtureId =
             modelPart.lightFixtureId != null
             ? modelPart.lightFixtureId
@@ -481,7 +587,9 @@ public final class ClientRollingStockLighting
             : producesBeam
             ? RollingStockLightDefinition.Effect.BEAM
             : RollingStockLightDefinition.Effect.EMISSIVE_ONLY;
-        String lower = modelPart.boxName.toLowerCase(Locale.ROOT);
+        String lower = modelPart.boxName == null
+                       ? ""
+                       : modelPart.boxName.toLowerCase(Locale.ROOT);
         List<CommanderSurface> commanderSurfaces =
             lower.contains("commander")
             ? mergeCommanderSurfaces(context, surface.faces)
@@ -737,8 +845,8 @@ public final class ClientRollingStockLighting
     /** Submits the glow, beam, and special surfaces produced by one active fixture. */
     private static void submitFixtureEffects(
         Context context,
-        FixtureMetadata metadata,
         RollingStockLightDefinition definition,
+        String submissionKey,
         DetectedLightSurface surface,
         float modelScale,
         float intensity,
@@ -808,7 +916,7 @@ public final class ClientRollingStockLighting
             LightEffectSubmission.fixtureLocal(
                 modelViewMatrix,
                 context.stock.getEntityId(),
-                definition.id(),
+                submissionKey,
                 definition,
                 localX,
                 localY,
@@ -827,8 +935,6 @@ public final class ClientRollingStockLighting
                 context.visibility.beamAlpha,
                 context.visibility.hotspotAlpha,
                 fixtureReach));
-        submitCommanderSurfaceGlows(
-            context, metadata, definition, modelScale, intensity, modelViewMatrix);
         String diagnostic = context.modelScope + ":" + definition.id();
         if (LOGGED_SUBMISSIONS.add(diagnostic))
         {
@@ -1438,7 +1544,11 @@ public final class ClientRollingStockLighting
             }
             float intensity =
                 RollingStockLightState.intensity(
-                    (IRollingStockLightControls) stock, definition, animationTime);
+                    stock instanceof IRollingStockLightControls
+                    ? (IRollingStockLightControls) stock
+                    : null,
+                    definition,
+                    animationTime);
             partLights.put(
                 definition.id(), intensity, selectLightmapMode(definition, intensity));
             return intensity;
@@ -1535,7 +1645,7 @@ public final class ClientRollingStockLighting
         ResourceLocation primeTexture;
         int sourceGeneration = Integer.MIN_VALUE;
         int primeGeneration = Integer.MIN_VALUE;
-        int sourceFaceIndex = Integer.MIN_VALUE;
+        int sourceFaceSignature = Integer.MIN_VALUE;
         boolean sourceAvailable;
         boolean sourceAvailableCached;
         boolean primeAvailable;
@@ -1551,24 +1661,37 @@ public final class ClientRollingStockLighting
         /** Returns cached texture-alpha availability for the fixture's visible source face. */
         boolean sourceVisible(
             ResourceLocation lightTexture,
-            DetectedLightSurface surface,
-            DetectedLightFace selectedFace)
+            List<DetectedLightSurface> sourceSurfaces)
         {
             int generation = TextureAlphaMaskCache.resourceGeneration();
-            int faceIndex = selectedFace == null ? -1 : selectedFace.faceIndex;
+            int faceSignature = 1;
+            for (DetectedLightSurface surface : sourceSurfaces)
+            {
+                faceSignature =
+                    31 * faceSignature
+                    + (surface.sourceFace == null ? -1 : surface.sourceFace.faceIndex);
+            }
             if (sourceAvailableCached
                     && sourceGeneration == generation
-                    && sourceFaceIndex == faceIndex
+                    && sourceFaceSignature == faceSignature
                     && sameResource(sourceTexture, lightTexture))
             {
                 return sourceAvailable;
             }
-            boolean visible = isSourceVisible(lightTexture, surface, selectedFace);
+            boolean visible = false;
+            for (DetectedLightSurface surface : sourceSurfaces)
+            {
+                if (isSourceVisible(lightTexture, surface, surface.sourceFace))
+                {
+                    visible = true;
+                    break;
+                }
+            }
             if (TextureAlphaMaskCache.ready(lightTexture))
             {
                 sourceTexture = lightTexture;
                 sourceGeneration = generation;
-                sourceFaceIndex = faceIndex;
+                sourceFaceSignature = faceSignature;
                 sourceAvailable = visible;
                 sourceAvailableCached = true;
             }

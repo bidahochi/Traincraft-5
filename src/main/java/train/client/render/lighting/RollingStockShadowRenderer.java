@@ -27,6 +27,7 @@ import train.common.Traincraft;
 final class RollingStockShadowRenderer
 {
     private static final int SHADOW_SIZE = 256;
+    private static final int MAXIMUM_SHADOW_MAPS_PER_FRAME = 4;
     private static final float NEAR_DISTANCE = 0.03F;
     private static final FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(16);
     private static final FloatBuffer POSE_BUFFER = BufferUtils.createFloatBuffer(16);
@@ -42,14 +43,26 @@ final class RollingStockShadowRenderer
     private static boolean availableForCurrentLight;
     private static boolean failed;
     private static boolean loggedFailure;
+    private static int renderedThisFrame;
     private static ContextCapabilities allocatedContext;
 
     private RollingStockShadowRenderer() {}
+
+    /** Resets the optional cross-stock shadow budget before rendering this frame's beams. */
+    static void beginFrame()
+    {
+        renderedThisFrame = 0;
+        availableForCurrentLight = false;
+    }
 
     static boolean prepare(LightEffectSubmission submission)
     {
         availableForCurrentLight = false;
         if (OpenGlHelper.shadersSupported == false || failed)
+        {
+            return false;
+        }
+        if (renderedThisFrame >= MAXIMUM_SHADOW_MAPS_PER_FRAME)
         {
             return false;
         }
@@ -98,6 +111,7 @@ final class RollingStockShadowRenderer
                 UP,
                 length,
                 width);
+            renderedThisFrame++;
             availableForCurrentLight = true;
             return true;
         }
@@ -161,6 +175,7 @@ final class RollingStockShadowRenderer
         failed = false;
         loggedFailure = false;
         availableForCurrentLight = false;
+        renderedThisFrame = 0;
     }
 
     private static boolean hasCandidate(
@@ -173,37 +188,46 @@ final class RollingStockShadowRenderer
     {
         for (RollingStockLightOcclusion.Entry entry : entries)
         {
-            if (entry.ownerId == ownerId)
+            if (entry.ownerId == ownerId
+                    || isCandidate(entry, origin, direction, length, beamWidth) == false)
             {
                 continue;
             }
-            float centerX = (entry.bounds.minimumX + entry.bounds.maximumX) * 0.5F;
-            float centerY = (entry.bounds.minimumY + entry.bounds.maximumY) * 0.5F;
-            float centerZ = (entry.bounds.minimumZ + entry.bounds.maximumZ) * 0.5F;
-            float eyeX = transformX(entry.pose, centerX, centerY, centerZ);
-            float eyeY = transformY(entry.pose, centerX, centerY, centerZ);
-            float eyeZ = transformZ(entry.pose, centerX, centerY, centerZ);
-            float offsetX = eyeX - origin[0];
-            float offsetY = eyeY - origin[1];
-            float offsetZ = eyeZ - origin[2];
-            float along = offsetX * direction[0]
-                          + offsetY * direction[1]
-                          + offsetZ * direction[2];
-            float radius = transformedRadius(entry);
-            if (along + radius < 0.0F || along - radius > length)
-            {
-                continue;
-            }
-            float distanceSquared = offsetX * offsetX + offsetY * offsetY + offsetZ * offsetZ;
-            float perpendicularSquared = Math.max(0.0F, distanceSquared - along * along);
-            float coneRadius = beamWidth * Math.max(0.0F, Math.min(1.0F, along / length));
-            float allowed = radius + coneRadius;
-            if (perpendicularSquared <= allowed * allowed)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
+    }
+
+    /** Conservative whole-stock beam test shared by discovery and shadow drawing. */
+    private static boolean isCandidate(
+        RollingStockLightOcclusion.Entry entry,
+        float[] origin,
+        float[] direction,
+        float length,
+        float beamWidth)
+    {
+        float centerX = (entry.bounds.minimumX + entry.bounds.maximumX) * 0.5F;
+        float centerY = (entry.bounds.minimumY + entry.bounds.maximumY) * 0.5F;
+        float centerZ = (entry.bounds.minimumZ + entry.bounds.maximumZ) * 0.5F;
+        float eyeX = transformX(entry.pose, centerX, centerY, centerZ);
+        float eyeY = transformY(entry.pose, centerX, centerY, centerZ);
+        float eyeZ = transformZ(entry.pose, centerX, centerY, centerZ);
+        float offsetX = eyeX - origin[0];
+        float offsetY = eyeY - origin[1];
+        float offsetZ = eyeZ - origin[2];
+        float along = offsetX * direction[0]
+                      + offsetY * direction[1]
+                      + offsetZ * direction[2];
+        float radius = transformedRadius(entry);
+        if (along + radius < 0.0F || along - radius > length)
+        {
+            return false;
+        }
+        float distanceSquared = offsetX * offsetX + offsetY * offsetY + offsetZ * offsetZ;
+        float perpendicularSquared = Math.max(0.0F, distanceSquared - along * along);
+        float coneRadius = beamWidth * Math.max(0.0F, Math.min(1.0F, along / length));
+        float allowed = radius + coneRadius;
+        return perpendicularSquared <= allowed * allowed;
     }
 
     private static float transformedRadius(RollingStockLightOcclusion.Entry entry)
@@ -340,7 +364,8 @@ final class RollingStockShadowRenderer
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             for (RollingStockLightOcclusion.Entry entry : entries)
             {
-                if (entry.ownerId == ownerId)
+                if (entry.ownerId == ownerId
+                        || isCandidate(entry, origin, direction, length, width) == false)
                 {
                     continue;
                 }

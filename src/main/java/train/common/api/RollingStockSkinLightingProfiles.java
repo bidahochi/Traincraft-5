@@ -7,8 +7,9 @@ import java.util.Map;
 
 /**
  * Immutable Java-authored collection of default and per-skin lighting exceptions for one stock.
- * The builder prefixes local fixture names with a stable model scope, normalizes skin keys once,
- * supports vararg fixture groups, and seals every returned {@link RollingStockSkinLighting}.
+ * The builder records a stable stock scope separately from model-local fixture keys, normalizes
+ * skin keys once, supports vararg fixture groups, and seals every returned
+ * {@link RollingStockSkinLighting}.
  * Model extraction remains authoritative; profiles contain only genuine behavioral exceptions.
  */
 public final class RollingStockSkinLightingProfiles
@@ -16,16 +17,20 @@ public final class RollingStockSkinLightingProfiles
     /** Empty profile collection used by rolling stock without Java-authored exceptions. */
     public static final RollingStockSkinLightingProfiles EMPTY =
         new RollingStockSkinLightingProfiles(
+            "",
             RollingStockSkinLighting.EMPTY,
             Collections.<String, RollingStockSkinLighting>emptyMap());
 
+    private final String fixtureScope;
     private final RollingStockSkinLighting defaults;
     private final Map<String, RollingStockSkinLighting> skins;
 
     private RollingStockSkinLightingProfiles(
+        String fixtureScope,
         RollingStockSkinLighting defaults,
         Map<String, RollingStockSkinLighting> skins)
     {
+        this.fixtureScope = fixtureScope;
         this.defaults = defaults;
         this.skins = skins;
     }
@@ -53,6 +58,12 @@ public final class RollingStockSkinLightingProfiles
         return defaults;
     }
 
+    /** Returns the namespaced stock scope that owns these model-local fixture keys. */
+    public String fixtureScope()
+    {
+        return fixtureScope;
+    }
+
     private static String normalizeSkin(String value)
     {
         return value.trim().toLowerCase(Locale.ROOT);
@@ -61,7 +72,7 @@ public final class RollingStockSkinLightingProfiles
     /** Mutable declaration builder; {@link #build()} returns detached immutable profiles. */
     public static final class Builder
     {
-        private final String fixturePrefix;
+        private final String fixtureScope;
         private final RollingStockSkinLighting defaults = new RollingStockSkinLighting();
         private final Map<String, RollingStockSkinLighting> skins =
             new LinkedHashMap<String, RollingStockSkinLighting>();
@@ -73,7 +84,9 @@ public final class RollingStockSkinLightingProfiles
                 throw new IllegalArgumentException("Fixture scope must not be blank");
             }
             String normalized = fixtureScope.trim();
-            fixturePrefix = normalized.endsWith("/") ? normalized : normalized + "/";
+            this.fixtureScope = normalized.endsWith("/")
+                                ? normalized.substring(0, normalized.length() - 1)
+                                : normalized;
         }
 
         /** Selects stock-wide defaults that are composed beneath every named skin. */
@@ -119,7 +132,7 @@ public final class RollingStockSkinLightingProfiles
                     RollingStockSkinLighting.immutableComposite(defaults, entry.getValue()));
             }
             return new RollingStockSkinLightingProfiles(
-                       sealedDefaults, Collections.unmodifiableMap(sealed));
+                       fixtureScope, sealedDefaults, Collections.unmodifiableMap(sealed));
         }
 
         private String fixtureId(String fixture)
@@ -129,7 +142,7 @@ public final class RollingStockSkinLightingProfiles
                 throw new IllegalArgumentException("Fixture name must not be blank");
             }
             String normalized = fixture.trim();
-            return normalized.indexOf(':') >= 0 ? normalized : fixturePrefix + normalized;
+            return normalized;
         }
     }
 
@@ -235,6 +248,18 @@ public final class RollingStockSkinLightingProfiles
             for (String fixture : required(fixtures))
             {
                 lighting.setLightMarker(parent.fixtureId(fixture), color);
+            }
+            return this;
+        }
+
+        /** Makes every supplied fixture source-emissive without changing its operational role. */
+        public SkinBuilder emissiveOnly(String... fixtures)
+        {
+            for (String fixture : required(fixtures))
+            {
+                lighting.setLightBehavior(
+                    parent.fixtureId(fixture),
+                    RollingStockLightBehaviorOverride.emissiveOnly());
             }
             return this;
         }

@@ -64,6 +64,8 @@ public class ModelRendererTurbo
     /** Prime parts illuminate only the authored exterior phase face. */
     public boolean lightExteriorFaceOnly;
     public int lightExteriorFaceIndex = -1;
+    /** Optional source polygons that emit from more than one side of the same fixture. */
+    public int[] lightSourceFaceIndices;
     public boolean isShape = false;
     public boolean isBatchUnsafeShape = false;
 
@@ -78,8 +80,10 @@ public class ModelRendererTurbo
     }
 
     /**
-     * Assigns the stable skin-facing fixture id, conventionally
-     * {@code namespace:model/fixture}. Existing ids are a compatibility boundary.
+     * Marks this part as a light fixture and assigns its stable model-local key, such as
+     * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
+     * Legacy semantic {@link #boxName} values such as {@code lamp} remain supported as a
+     * discovery fallback, but new fixtures should use an explicit id.
      */
     public ModelRendererTurbo setLightFixtureId(String fixtureId)
     {
@@ -117,11 +121,35 @@ public class ModelRendererTurbo
      */
     public ModelRendererTurbo setLightSourceFace(LightSourceFaceDirection direction)
     {
-        if (direction == null)
+        return setLightSourceFaces(direction);
+    }
+
+    /**
+     * Selects every polygon side that visibly emits for a multi-sided lens. All selected sides
+     * retain this part's single fixture id and therefore share one entity-profile definition.
+     */
+    public ModelRendererTurbo setLightSourceFaces(LightSourceFaceDirection... directions)
+    {
+        if (directions == null || directions.length == 0)
         {
-            throw new NullPointerException("direction");
+            throw new IllegalArgumentException("At least one light source face is required");
         }
-        lightExteriorFaceIndex = direction.faceIndex();
+        LinkedHashSet<Integer> faceIndices = new LinkedHashSet<Integer>();
+        for (LightSourceFaceDirection direction : directions)
+        {
+            if (direction == null)
+            {
+                throw new NullPointerException("direction");
+            }
+            faceIndices.add(direction.faceIndex());
+        }
+        lightSourceFaceIndices = new int[faceIndices.size()];
+        int index = 0;
+        for (Integer faceIndex : faceIndices)
+        {
+            lightSourceFaceIndices[index++] = faceIndex;
+        }
+        lightExteriorFaceIndex = lightSourceFaceIndices[0];
         return this;
     }
 
@@ -182,6 +210,7 @@ public class ModelRendererTurbo
     private static final float BATCH_DEGENERATE_FACE_AREA_EPSILON = 1.0E-5F;
     private List<BatchFace> batchFaces = new ArrayList<BatchFace>();
     private boolean batchFacesDirty = true;
+    private long batchFaceSignature;
 
     /*
      * The owner is the model object that created this part. ModelRendererTurboBatch
@@ -1739,6 +1768,7 @@ public class ModelRendererTurbo
     			face.flipFace();
     		}
     	}
+        invalidateBatchFaces();
     }
     
     /**
@@ -2324,11 +2354,16 @@ public class ModelRendererTurbo
             rebuilt.add(new BatchFace(copyVertices(polygon.vertices), normal));
         }
         batchFaces = rebuilt;
+        batchFaceSignature = calculateBatchFaceSignature(rebuilt);
         batchFacesDirty = false;
     }
 
     private long getBatchFaceSignature(){
-        List<BatchFace> batchFaces = getBatchFaces();
+        getBatchFaces();
+        return batchFaceSignature;
+    }
+
+    private static long calculateBatchFaceSignature(List<BatchFace> batchFaces){
         long result = 1469598103934665603L;
         result = 31L * result + batchFaces.size();
         for(BatchFace face : batchFaces){

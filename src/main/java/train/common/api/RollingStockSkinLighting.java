@@ -237,4 +237,5 @@ public final class RollingStockSkinLighting
             throw new UnsupportedOperationException("The empty skin-lighting profile is immutable");
         }
     }
+
 }

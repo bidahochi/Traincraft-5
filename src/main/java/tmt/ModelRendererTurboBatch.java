@@ -23,6 +23,7 @@ import train.common.api.RollingStockLightChannel;
 import train.common.core.handlers.ConfigHandler;
 
 import train.client.render.lighting.BoundedIdentityCache;
+import train.client.render.lighting.RollingStockLightOcclusion;
 
 /**
  * Makes large rolling-stock bodies cheaper to render.
@@ -67,6 +68,8 @@ public final class ModelRendererTurboBatch {
         BoundedIdentityCache<FVTMFormatBase, StaticBatchLayout>(MAXIMUM_STATIC_LAYOUTS);
     private static final BoundedIdentityCache<List<Entry>, EntryGroups> STATIC_ENTRY_GROUPS = new
         BoundedIdentityCache<List<Entry>, EntryGroups>(MAXIMUM_STATIC_LAYOUTS);
+    private static final BoundedIdentityCache<List<Entry>, Long> STATIC_SIGNATURES = new
+        BoundedIdentityCache<List<Entry>, Long>(MAXIMUM_STATIC_LAYOUTS * RenderGroup.values().length);
 
 	private ModelRendererTurboBatch() {
 	}
@@ -94,6 +97,7 @@ public final class ModelRendererTurboBatch {
         STATIC_ARRAY_LAYOUTS.clear();
         STATIC_FVTM_LAYOUTS.clear();
         STATIC_ENTRY_GROUPS.clear();
+        STATIC_SIGNATURES.clear();
     }
 
     /** Evicts least-recently-used compiled batches and deletes their OpenGL display lists. */
@@ -167,7 +171,7 @@ public final class ModelRendererTurboBatch {
 			}
 			return true;
 		}
-		if (context != null && context.suppressed.contains(turbo)) {
+		if (context != null && isSuppressed(context, turbo)) {
 			return true;
 		}
 		if (context != null && context.suppressOnly && tryRenderNestedStaticModel(context, turbo, scale, rotorder)) {
@@ -249,9 +253,8 @@ public final class ModelRendererTurboBatch {
 		if (entries.size() < MIN_BATCH_SIZE) {
 			return false;
 		}
-		for (Entry entry : entries) {
-			context.suppressed.add(entry.turbo);
-		}
+		suppressStaticEntries(context, entries);
+		captureStaticOcclusion(entries);
 		renderEntries(context, entries);
 		return true;
 	}
@@ -283,6 +286,7 @@ public final class ModelRendererTurboBatch {
 			context.suppressed.add(entry.turbo);
 			runtimeSuppressed.add(entry.turbo);
 		}
+		captureStaticOcclusion(entries);
 		renderEntries(context, entries, FVTM_RUNTIME_MIN_BATCH_SIZE, sharedSubmodelOwnerId(owner), FVTM_RUNTIME_BATCH_INDEX, true);
 		return runtimeSuppressed;
 	}
@@ -361,7 +365,7 @@ public final class ModelRendererTurboBatch {
 				continue;
 			}
 			for (ModelRendererTurbo turbo : group) {
-				if (!context.suppressed.contains(turbo)
+				if (!isSuppressed(context, turbo)
 						&& isBatchCompatible(turbo)
 						&& (!strictStaticNames || isSafeFVTMPartName(turbo))) {
 					entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
@@ -408,6 +412,7 @@ public final class ModelRendererTurboBatch {
 		if (entries.size() < NESTED_RUNTIME_MIN_BATCH_SIZE || !containsTurbo(entries, turbo)) {
 			return false;
 		}
+		captureStaticOcclusion(entries);
 		renderEntries(context, entries, NESTED_RUNTIME_MIN_BATCH_SIZE, sharedSubmodelOwnerId(nestedOwner), NESTED_RUNTIME_BATCH_INDEX, true);
 		context.scopedSuppressionOwner = nestedOwner;
 		for (Entry entry : entries) {
@@ -524,14 +529,53 @@ public final class ModelRendererTurboBatch {
 		}
 		List<Entry> entries = staticArrayEntries(model, scale, rotorder);
 		if (entries.size() >= MIN_BATCH_SIZE) {
-			for (Entry entry : entries) {
-				context.suppressed.add(entry.turbo);
-			}
+			suppressStaticEntries(context, entries);
+			captureStaticOcclusion(entries);
 			renderEntries(context, entries);
 			context.suppressOnly = true;
 			return true;
 		}
 		context.suppressOnly = true;
+		return false;
+	}
+
+	/** Captures a static batch with one shared GPU matrix readback instead of one per model box. */
+	private static void captureStaticOcclusion(List<Entry> entries) {
+		if (!RollingStockLightOcclusion.beginSharedPartCapture()) {
+			return;
+		}
+		try {
+			for (Entry entry : entries) {
+				RollingStockLightOcclusion.captureSharedPart(
+					entry.turbo, entry.scale, entry.rotorder);
+			}
+		}
+		finally {
+			RollingStockLightOcclusion.endSharedPartCapture();
+		}
+	}
+
+	/** Reuses the immutable static layout's identity index instead of rebuilding a set per stock. */
+	private static void suppressStaticEntries(Context context, List<Entry> entries) {
+		EntryGroups groups = STATIC_ENTRY_GROUPS.get(entries);
+		if (groups != null) {
+			context.staticallySuppressed.add(groups);
+			return;
+		}
+		for (Entry entry : entries) {
+			context.suppressed.add(entry.turbo);
+		}
+	}
+
+	private static boolean isSuppressed(Context context, ModelRendererTurbo turbo) {
+		if (context.suppressed.contains(turbo)) {
+			return true;
+		}
+		for (EntryGroups groups : context.staticallySuppressed) {
+			if (groups.contains(turbo)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1304,6 +1348,14 @@ public final class ModelRendererTurboBatch {
 	 * different from the last compile.</p>
 	 */
 	static long signature(List<Entry> entries) {
+		Long cached = STATIC_SIGNATURES.get(entries);
+		if (cached != null) {
+			return cached.longValue();
+		}
+		return calculateSignature(entries);
+	}
+
+	private static long calculateSignature(List<Entry> entries) {
 		long result = 1125899906842597L;
 		for (Entry entry : entries) {
 			result = 31L * result + System.identityHashCode(entry.turbo);
@@ -1406,6 +1458,7 @@ public final class ModelRendererTurboBatch {
 		private List<Entry> spareEntries = new ArrayList<Entry>();
 		private final Set<ModelRendererTurbo> suppressed = Collections.newSetFromMap(new IdentityHashMap<ModelRendererTurbo, Boolean>());
 		private final Set<ModelRendererTurbo> scopedSuppressed = Collections.newSetFromMap(new IdentityHashMap<ModelRendererTurbo, Boolean>());
+		private final List<EntryGroups> staticallySuppressed = new ArrayList<EntryGroups>();
 
 		private void reset(Object owner, Entity entity) {
 			this.owner = owner;
@@ -1419,6 +1472,7 @@ public final class ModelRendererTurboBatch {
             spareEntries.clear();
             suppressed.clear();
             scopedSuppressed.clear();
+			staticallySuppressed.clear();
 		}
 	}
 
@@ -1465,6 +1519,8 @@ public final class ModelRendererTurboBatch {
     private static final class EntryGroups
     {
         private final List<Entry>[] entries;
+        private final IdentityHashMap<ModelRendererTurbo, Boolean> parts =
+            new IdentityHashMap<ModelRendererTurbo, Boolean>();
 
         @SuppressWarnings("unchecked")
         private EntryGroups(List<Entry> source)
@@ -1477,11 +1533,18 @@ public final class ModelRendererTurboBatch {
             for (Entry entry : source)
             {
                 entries[entry.group.ordinal()].add(entry);
+                parts.put(entry.turbo, Boolean.TRUE);
             }
             for (int index = 0; index < entries.length; index++)
             {
                 entries[index] = Collections.unmodifiableList(entries[index]);
+                STATIC_SIGNATURES.put(entries[index], calculateSignature(entries[index]));
             }
+        }
+
+        private boolean contains(ModelRendererTurbo turbo)
+        {
+            return parts.containsKey(turbo);
         }
     }
 

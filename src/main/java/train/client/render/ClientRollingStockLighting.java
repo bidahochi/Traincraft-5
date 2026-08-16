@@ -72,14 +72,15 @@ public final class ClientRollingStockLighting {
     }
 
     public static boolean isSemantic(ModelRendererTurbo part) {
-        return part != null && RollingStockLightChannel.fromTaggedPartName(part.boxName) != null;
+        return part != null
+                && (part.lightFixtureId != null
+                        || RollingStockLightChannel.fromTaggedPartName(part.boxName) != null);
     }
 
     public static PartLight beginPart(ModelRendererTurbo part, float scale) {
         Context context = ACTIVE.get();
         if (context == null
-                || isSemantic(part) == false
-                || (context.stock instanceof IRollingStockLightControls) == false) return PartLight.NONE;
+                || isSemantic(part) == false) return PartLight.NONE;
         FixtureMetadata metadata = metadata(context, part, scale);
         DetectedLightSurface surface = metadata.surface;
         ResolvedFixture resolved = context.resolve(metadata);
@@ -274,6 +275,8 @@ public final class ClientRollingStockLighting {
                         context.stock.getRenderScale());
         RollingStockLightChannel channel =
                 RollingStockLightChannel.fromTaggedPartName(part.boxName);
+        // ID-only fixtures receive their actual role from the entity lighting profile.
+        if (channel == null) channel = RollingStockLightChannel.HEADLIGHT;
         String fixtureId =
                 part.lightFixtureId != null
                         ? part.lightFixtureId
@@ -296,7 +299,7 @@ public final class ClientRollingStockLighting {
                         : producesBeam
                                 ? RollingStockLightDefinition.Effect.BEAM
                                 : RollingStockLightDefinition.Effect.EMISSIVE_ONLY;
-        String lower = part.boxName.toLowerCase(Locale.ROOT);
+        String lower = part.boxName == null ? "" : part.boxName.toLowerCase(Locale.ROOT);
         List<CommanderSurface> commanderSurfaces =
                 lower.contains("commander")
                         ? commanderSurfaces(context, surface.faces)
@@ -953,7 +956,11 @@ public final class ClientRollingStockLighting {
             if (cached != null) return cached.intensity();
             float intensity =
                     RollingStockLightState.intensity(
-                            (IRollingStockLightControls) stock, definition, time);
+                            stock instanceof IRollingStockLightControls
+                                    ? (IRollingStockLightControls) stock
+                                    : null,
+                            definition,
+                            time);
             partLights.put(definition.id(), intensity, mode(definition, intensity));
             return intensity;
         }
