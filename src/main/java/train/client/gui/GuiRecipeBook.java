@@ -19,6 +19,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import train.client.core.handlers.RecipeBookHandler;
+import train.client.render.lighting.LightEffectRenderBatch;
+import train.common.core.handlers.ConfigHandler;
 import train.common.core.managers.TierRecipe;
 import train.common.core.managers.TierRecipeManager;
 import train.common.core.util.TraincraftUtil;
@@ -64,6 +66,10 @@ public class GuiRecipeBook extends GuiScreen {
 	private GuiButtonNextPage buttonNextPage;
 	private GuiButtonNextPage buttonPreviousPage;
 	private GuiButtonNextPage buttonBack;
+    private GuiButton lightingModeButton;
+    private static final int LIGHTING_MODE_BUTTON_ID = 8;
+    private static final String ENHANCED_LIGHTING_LABEL = "Lighting: Enhanced";
+    private static final String ORIGINAL_LIGHTING_LABEL = "Lighting: Original 1.7";
     private GuiButtonSearch buttonSearchPrevious;
     private GuiButtonSearch buttonSearchNext;
     private GuiButtonSearch buttonSearch;
@@ -388,7 +394,9 @@ public class GuiRecipeBook extends GuiScreen {
 		});
 		addPage("this page was intentionally left blank, as a joke.","","right",null);
 		if (rightPage != null && recipeList != null && recipeListWB != null)
+        {
 			bookTotalPages = this.rightPage.size() + (recipeList.size() / 2) + (recipeListWB.size() / 2);
+        }
         // Initialize recipe map for searching.
         initializeRecipeSearchMap();
 	}
@@ -445,6 +453,14 @@ public class GuiRecipeBook extends GuiScreen {
         this.buttonList.add(this.buttonSearchPrevious = new GuiButtonSearch(5, halfWidth + 160, ((halfHeight - bookImageHeight / 2) - 10), 10, 10, GuiButtonSearch.Type.PREVIOUSRESULT));
         this.buttonList.add(this.buttonSearchNext = new GuiButtonSearch(6, halfWidth + 170, ((halfHeight - bookImageHeight / 2) - 10), 10, 10,  GuiButtonSearch.Type.NEXTRESULT));
         this.buttonList.add(this.buttonSearch = new GuiButtonSearch(7, halfWidth + 7, ((halfHeight - bookImageHeight / 2) - 10), 10, 10, GuiButtonSearch.Type.SEARCH));
+        this.lightingModeButton = new GuiButton(
+            LIGHTING_MODE_BUTTON_ID,
+            halfWidth + 5,
+            halfHeight + 72,
+            145,
+            20,
+            lightingModeText());
+        this.buttonList.add(this.lightingModeButton);
         this.updateButtons();
 	}
 
@@ -463,6 +479,24 @@ public class GuiRecipeBook extends GuiScreen {
         this.buttonSearchNext.showButton = this.currPage > 0;
         this.buttonSearch.visible = this.currPage > 0;
         this.buttonSearch.showButton = this.currPage > 0;
+        this.lightingModeButton.visible = this.currPage == 0;
+	}
+
+    /** Returns the label for the currently persisted advanced-lighting setting. */
+    private String lightingModeText()
+    {
+        return ConfigHandler.ENABLE_ADVANCED_LIGHTING
+               ? ENHANCED_LIGHTING_LABEL
+               : ORIGINAL_LIGHTING_LABEL;
+    }
+
+    /** Persists the compatibility mode and clears queued/context-bound lighting resources. */
+    private void toggleLightingMode()
+    {
+        ConfigHandler.setAdvancedLightingEnabled(
+            ConfigHandler.ENABLE_ADVANCED_LIGHTING == false);
+        LightEffectRenderBatch.clear();
+        this.lightingModeButton.displayString = lightingModeText();
 	}
 
 	/**
@@ -510,6 +544,9 @@ public class GuiRecipeBook extends GuiScreen {
                     break;
                 case 7: // Search button (if hitting RETURN is too complicated for you).
                     runSearch();
+                    break;
+                case LIGHTING_MODE_BUTTON_ID:
+                    toggleLightingMode();
                     break;
             }
             this.updateButtons();
@@ -589,7 +626,8 @@ public class GuiRecipeBook extends GuiScreen {
 				drawWorkBenchRecipe(recipeListWB, mouseX, mouseY,  var5, var6, page, var9, "left");
 			}
             // Drawing the train recipes...
-			else if ((page - recipeListWB.size()) >= 0 && (page - recipeListWB.size()) < recipeList.size() && recipeList.get(page - recipeListWB.size()) != null) {
+			else
+            { if ((page - recipeListWB.size()) >= 0 && (page - recipeListWB.size()) < recipeList.size() && recipeList.get(page - recipeListWB.size()) != null) {
 				drawAssemblyBackground(recipeList, var5 - 125, var6 - 33, page - recipeListWB.size(), var9, "right");
 				drawAssemblyBackground(recipeList, var5 - 50, var6 - 33, page - recipeListWB.size() - 1, var9, "left");
 				RenderHelper.enableGUIStandardItemLighting();
@@ -597,40 +635,59 @@ public class GuiRecipeBook extends GuiScreen {
 				drawAssemblyRecipe(recipeList, mouseX, mouseY, var5 - 50, var6 - 33, page - recipeListWB.size() - 1, var9, "left");
 			}
 		}
+        }
 		GL11.glDisable(GL11.GL_LIGHTING);
 	}
 
 	private void drawAssemblyBackground(List<TierRecipe> recipeList, int var5, int var6, int page, int var9, String side) {
 		if (page < 0)
+        {
 			return;
+        }
 		int tier = recipeList.get(page).getTier();
 		if (tier == 1)
+        {
 			mc.renderEngine.bindTexture(new ResourceLocation(Info.TEX_TIER_I));
+        }
 		if (tier == 2)
+        {
 			mc.renderEngine.bindTexture(new ResourceLocation(Info.TEX_TIER_II));
+        }
 		if (tier == 3)
+        {
 			mc.renderEngine.bindTexture(new ResourceLocation(Info.TEX_TIER_III));
+        }
 		//if (side.equals("right"))
 		//GL11.glScaled(0.7, 0.7, 0.7);
 		if (side.equals("left"))
+        {
 			this.drawTexturedModalRect(var5 + 70, var6 + 50, 0, 0, 177, 163);
+        }
 		if (side.equals("right"))
+        {
 			this.drawTexturedModalRect(var5 + 340, var6 + 50, 0, 0, 177, 163);
 	}
+    }
 
 	private void drawWorkBenchBackground(List<ShapedTrainRecipes> recipeListWB, int var5, int var6, int page, int var9, String side) {
 		//int var4 = this.mc.renderEngine.getTexture("/gui/crafting.png");
 		//GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,Info.guiPrefix+"crafting_table.png"));
 		if (side.equals("left"))
+        {
 			this.drawTexturedModalRect(var5 + 20, var6 + 50, 0, 0, 177, 80);
+        }
 		if (side.equals("right"))
+        {
 			this.drawTexturedModalRect(var5 + 215, var6 + 50, 0, 0, 177, 80);
 	}
+    }
 
 	private void drawWorkBenchRecipe(List recipeList, int mouseX, int mouseY, int var5, int var6, int page, int var9, String side) {
 		if (recipeList.get(page) == null)
+        {
 			return;
+        }
 		Object[] itemList = new ItemStack[9];
 		ItemStack itemOutput = null;
 		if (recipeList.get(page) instanceof ShapedTrainRecipes) {
@@ -641,15 +698,19 @@ public class GuiRecipeBook extends GuiScreen {
 			List<ItemStack> itemListShapeless = ((ShapelessTrainRecipe) recipeList.get(page)).recipeItems;
 			for (int t = 0; t < itemListShapeless.size(); t++) {
 				if (itemListShapeless != null && itemListShapeless.get(t) != null)
+                {
 					itemList[t] = itemListShapeless.get(t);
 			}
+            }
 			itemOutput = ((ShapelessTrainRecipe) recipeList.get(page)).getRecipeOutput();
 		}
 
 		//System.out.println(itemOutput);
 		int offset = 0;
 		if (side.equals("right"))
+        {
 			offset = 195;
+        }
 		GL11.glEnable(32826);
 
 		ItemStack hoveredStack = null;
@@ -663,7 +724,9 @@ public class GuiRecipeBook extends GuiScreen {
 		for (int i = 0; i < 9; i++) {
 
 			if (itemList[i] == null)
+            {
 				continue;
+            }
 
 			ItemStack stack = getItemStackFromInput(itemList[i]);
 
@@ -722,7 +785,9 @@ public class GuiRecipeBook extends GuiScreen {
             this.fontRendererObj.drawString(itemOutput.getItem().getItemStackDisplayName(itemOutput), var5 + 20 + offset, var6 + 40, (!searchQuery.isEmpty() && itemOutput.getItem().getItemStackDisplayName(itemOutput).toLowerCase().contains(searchQuery.toLowerCase())) ? 0x21d12d : 0);
         }
 		if (itemOutput != null)
+        {
 			this.fontRendererObj.drawString("Crafted in: Train Workbench", var5 + 20 + offset, var6 + 130, 0);
+        }
 		if (itemOutput != null)
 		{
 			for (int z = 0; z < RecipeBookHandler.vanillaWorkTableRecipes.length; z++)
@@ -769,7 +834,8 @@ public class GuiRecipeBook extends GuiScreen {
 		{
 			return (ItemStack) object;
 		}
-		else if (object instanceof String)
+		else
+        { if (object instanceof String)
 		{
 			List<ItemStack> stacks = OreDictionary.getOres((String)object);
 			for (ItemStack stack : stacks)
@@ -783,11 +849,14 @@ public class GuiRecipeBook extends GuiScreen {
 			return stacks.get(0);
 
 		}
+		}
 		return null;
 	}
 
 	private void drawAssemblyRecipe(List<TierRecipe> recipeList, int mouseX, int mouseY, int var5, int var6, int page, int var9, String side) {
-		if (page < 0 || recipeList.get(page) == null) return;
+		if (page < 0 || recipeList.get(page) == null)
+        { return;
+        }
 
 		TierRecipe recipe = recipeList.get(page);
 		int tier = recipe.getTier();
@@ -808,7 +877,9 @@ public class GuiRecipeBook extends GuiScreen {
 		// --- Render input items ---
 		for (int i = 0; i < itemList.size(); i++) {
 			ItemStack stack = itemList.get(i);
-			if (stack == null) continue;
+			if (stack == null)
+            { continue;
+            }
 
 			int x = var5 + positions[i][0] + offset;
 			int y = var6 + positions[i][1];
@@ -858,11 +929,13 @@ public class GuiRecipeBook extends GuiScreen {
 			this.fontRendererObj.drawString("Tier: " + tier, var5 - var9 + this.bookImageWidth - 56, var6 + 40, 0);
 			this.fontRendererObj.drawString(fontRendererObj.trimStringToWidth(name, 150),
 					var5 - var9 + this.bookImageWidth - 45, var6 + 56, nameColor);
-		} else if (side.equals("right")) {
+		} else
+        { if (side.equals("right")) {
 			this.fontRendererObj.drawString("Tier: " + tier, var5 - var9 + this.bookImageWidth + 338, var6 + 40, 0);
 			this.fontRendererObj.drawString(fontRendererObj.trimStringToWidth(name, 150),
 					var5 - var9 + this.bookImageWidth + 225, var6 + 56, nameColor);
 		}
+        }
 
 		// --- Draw tooltip for hovered item (with blue for ItemAbstractRollingStock) ---
 		if (hoveredStack != null) {
@@ -916,19 +989,27 @@ public class GuiRecipeBook extends GuiScreen {
      */
     @Override
     protected void keyTyped(char eventChar, int eventKey) {
-        if (eventKey == 1 || eventChar == '\u007F') { // If ESC or CTRL+Backspace...
-            if (searchQuery.isEmpty()) { // If search query is empty, exit.
+        if (eventKey == 1 || eventChar == '\u007F') // If ESC or CTRL+Backspace...
+        {
+            if (searchQuery.isEmpty()) // If search query is empty, exit.
+            {
                 this.mc.thePlayer.closeScreen();
-            } else { // If there is a search query, clear it.
+            } else // If there is a search query, clear it.
+            {
                 searchQuery = "";
                 resetSearch();
             }
-        } else if (eventChar != '\u0000') { // If character is not a modifier key...
-            if (eventChar == '\b') { // If character is backspace...
+        } else
+        { if (eventChar != '\u0000') // If character is not a modifier key...
+            {
+            if (eventChar == '\b') // If character is backspace...
+                {
                 searchQuery = searchQuery.substring(0, Math.max(0, searchQuery.length() - 1));
                 resetSearch();
-            } else if (eventChar == '\r') { // If character is return...
-                if (!searchQuery.isEmpty()) {
+            } else
+                { if (eventChar == '\r') // If character is return...
+                    {
+                if (searchQuery.isEmpty() == false) {
                     if (Pattern.compile(":\\d+").matcher(searchQuery).find()) {
                         int newPage = Integer.parseInt(searchQuery.substring(1)) - 1;
                         if (newPage > 0 && newPage < bookTotalPages) {
@@ -942,9 +1023,12 @@ public class GuiRecipeBook extends GuiScreen {
                         runSearch();
                     }
                 }
-            } else { // If character is not a backspace...
+            } else // If character is not a backspace...
+                    {
                 searchQuery += Character.toString(eventChar);
             }
+        }
+    }
         }
     }
 
@@ -955,23 +1039,35 @@ public class GuiRecipeBook extends GuiScreen {
      * This method also handles highlighting and darkening GUI search buttons.
      */
     public void runSearch() {
-        if (resultIndexList.isEmpty()) { // If we need to search for the query...
+        if (resultIndexList.isEmpty()) // If we need to search for the query...
+        {
             for (Map.Entry<String, ArrayList<Integer>> mapEntry : recipeMapSearch(recipeIndexMap, searchQuery.toLowerCase()).entrySet()) {
                 for (int value : mapEntry.getValue()) {
-                    if (!resultIndexList.contains(((value / 2) + rightPage.size())))
+                    if (resultIndexList.contains(((value / 2) + rightPage.size())) == false)
+                    {
                         resultIndexList.add(((value / 2) + rightPage.size()));
                 }
             }
         }
-        if (!resultIndexList.isEmpty() && searchResultsPosition < resultIndexList.size()) { // If the search is complete, display and increment result.
+        }
+        if (resultIndexList.isEmpty() == false && searchResultsPosition < resultIndexList.size()) // If the search is complete, display and increment result.
+        {
             if (searchResultsPosition == resultIndexList.size() - 1)
+            {
                 this.buttonSearchNext.setType(GuiButtonSearch.Type.NEXTRESULT, GuiButtonSearch.Texture.INACTIVE);
+            }
             else
+            {
                 this.buttonSearchNext.setType(GuiButtonSearch.Type.NEXTRESULT, GuiButtonSearch.Texture.ACTIVE);
+            }
             if (searchResultsPosition - 1 < 0)
+            {
                 this.buttonSearchPrevious.setType(GuiButtonSearch.Type.PREVIOUSRESULT, GuiButtonSearch.Texture.INACTIVE);
+            }
             else
+            {
                 this.buttonSearchPrevious.setType(GuiButtonSearch.Type.PREVIOUSRESULT, GuiButtonSearch.Texture.ACTIVE);
+            }
             this.currPage = resultIndexList.get(searchResultsPosition);
             this.currRecipe = this.currPage * 2;
             this.updateButtons();

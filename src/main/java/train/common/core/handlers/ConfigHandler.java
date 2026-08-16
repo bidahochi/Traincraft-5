@@ -57,12 +57,18 @@ public class ConfigHandler {
 	public static boolean ENABLE_DSS_WEBUI;
 	public static boolean ENGINEERGAMING;
 	public static boolean ENABLE_TMT_MODEL_BATCHING;
+    public static boolean ENABLE_ADVANCED_LIGHTING = true;
     public static int MAX_TRUSTEES_ON_PADLOCK;
 	public static String[] ROLLINGSTOCK_INVENTORY_BLACKLIST_RAW;
 
 	public static boolean ROLLINGSTOCK_INVENTORY_BAN_OPEN_FLUID_CONTAINERS;
 
 	public static boolean ROLLINGSTOCK_PLAYER_SCALING;
+    private static final String ADVANCED_LIGHTING_KEY = "Enable_Advanced_Lighting";
+    private static final String ADVANCED_LIGHTING_COMMENT =
+        "Enables Traincraft's enhanced client lighting effects. Disable to use the original "
+        + "1.7 model lighting path on lower-spec or incompatible hardware.";
+    private static File activeConfigFile;
 
 	public static void changeFirstLoad(){
 		Configuration cf = new Configuration(new File(Traincraft.configDirectory, Info.modName + ".cfg"), "1.0");
@@ -72,6 +78,7 @@ public class ConfigHandler {
 	}
 
 	public static void init(File configFile) {
+        activeConfigFile = configFile;
 		Configuration cf = new Configuration(configFile, "1.0");
 
 		try
@@ -102,6 +109,7 @@ public class ConfigHandler {
 			WINDMILL_CHECK_RADIUS = cf.getInt("WINDMILL_CHECK_RADIUS", CATEGORY_GENERAL, 1, -1, 10, "This sets the radius for the can-see-the-sky-check area around the windmill. 0=only location of windmill, 1=3x3, 2=5x5 etc. Use -1 to turn of this check completely. DEFAULT: 1");
 			FORCE_TEXTURE_BINDING = cf.get(CATEGORY_GENERAL, "Force_Texture_Binding", true, "Enable this if trains and rollingstock are using block/item textures").getBoolean(true);
 			ENABLE_TMT_MODEL_BATCHING = cf.get(CATEGORY_GENERAL, "Enable_TMT_Model_Batching", true, "Batches compatible static rollingstock model boxes into fewer display-list calls. Disable if a custom model renders incorrectly.").getBoolean(true);
+            ENABLE_ADVANCED_LIGHTING = advancedLightingProperty(cf).getBoolean(true);
 			DISABLE_NEI_RECIPES = cf.get(CATEGORY_GENERAL, "DISABLE_NEI_RECIPES", false, "disables our system of registering recipes with NEI").getBoolean(false);
 			DISABLE_TRAIN_WORKBENCH = cf.get(CATEGORY_GENERAL, "DISABLE_TRAIN_WORKBENCH", false, "disables the train workbench, for those of you who want to use a custom part builder").getBoolean(false);
 			ENABLE_WAGON_REMOVAL_NOTICES = cf.get(CATEGORY_GENERAL, "ENABLE_WAGON_REMOVAL_NOTICES", true, "When OP and creative mode, tells you the owner of the train or rollingstock you just removed").getBoolean(true);
@@ -144,4 +152,25 @@ public class ConfigHandler {
 			}
 		}
 	}
+
+    public static void setAdvancedLightingEnabled(boolean enabled)
+    {
+        ENABLE_ADVANCED_LIGHTING = enabled;
+        File configFile = activeConfigFile == null
+                          ? new File(Traincraft.configDirectory, Info.modName + ".cfg")
+                          : activeConfigFile;
+        Configuration configuration = new Configuration(configFile, "1.0");
+        configuration.load();
+        advancedLightingProperty(configuration).set(enabled);
+        configuration.save();
+    }
+
+    private static Property advancedLightingProperty(Configuration configuration)
+    {
+        return configuration.get(
+                   CATEGORY_GENERAL,
+                   ADVANCED_LIGHTING_KEY,
+                   true,
+                   ADVANCED_LIGHTING_COMMENT);
+    }
 }

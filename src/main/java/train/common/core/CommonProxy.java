@@ -27,6 +27,7 @@ import train.common.api.LiquidTank;
 import train.common.api.Tender;
 import train.common.containers.*;
 import train.common.core.handlers.*;
+import train.common.core.network.ServerLightActionQueue;
 import train.common.core.util.ReplacementStreamPlayer;
 import train.common.entity.digger.EntityRotativeDigger;
 import train.common.entity.rollingStock.EntityJukeBoxCart;
@@ -84,6 +85,7 @@ public class CommonProxy implements IGuiHandler {
 		registerEvent(worldEvents);
 		registerEvent(chunkEvents);
 		registerEvent(playerSyncHandler);
+        registerEvent(ServerLightActionQueue.INSTANCE);
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(Traincraft.instance, chunkEvents);
 

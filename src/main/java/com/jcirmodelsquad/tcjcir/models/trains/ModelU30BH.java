@@ -106,11 +106,11 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[61] = new ModelRendererTurbo(this, 491, 127, textureX, textureY); // Box 263
 		bodyModel[62] = new ModelRendererTurbo(this, 493, 114, textureX, textureY); // Box 264
 		bodyModel[63] = new ModelRendererTurbo(this, 108, 145, textureX, textureY); // Box 193
-		bodyModel[64] = new ModelRendererTurbo(this, 201, 60, textureX, textureY, "ditch"); // Box 190 ditchlight f1
+		bodyModel[64] = new ModelRendererTurbo(this, 201, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/front_right_lower"); // Box 190 ditchlight f1
 		bodyModel[65] = new ModelRendererTurbo(this, 469, 164, textureX, textureY); // Box 273
-		bodyModel[66] = new ModelRendererTurbo(this, 193, 61, textureX, textureY, "ditch"); // Box 275 ditchlight f2
-		bodyModel[67] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, "ditch"); // Box 276 ditchlight r1
-		bodyModel[68] = new ModelRendererTurbo(this, 222, 60, textureX, textureY, "ditch"); // Box 278 ditchlight r2
+		bodyModel[66] = new ModelRendererTurbo(this, 193, 61, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/front_right_upper"); // Box 275 ditchlight f2
+		bodyModel[67] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/rear_left_lower"); // Box 276 ditchlight r1
+		bodyModel[68] = new ModelRendererTurbo(this, 222, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/rear_left_upper"); // Box 278 ditchlight r2
 		bodyModel[69] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
 		bodyModel[70] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
 		bodyModel[71] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 284 Headlight Rear down
@@ -157,12 +157,12 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[112] = new ModelRendererTurbo(this, 414, 99, textureX, textureY); // Box 413
 		bodyModel[113] = new ModelRendererTurbo(this, 137, 91, textureX, textureY); // Box 414
 		bodyModel[114] = new ModelRendererTurbo(this, 222, 66, textureX, textureY); // Box 440
-		bodyModel[115] = new ModelRendererTurbo(this, 222, 60, textureX, textureY, "ditch"); // Box 441 ditchlight r2
+		bodyModel[115] = new ModelRendererTurbo(this, 222, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/rear_right_upper"); // Box 441 ditchlight r2
 		bodyModel[116] = new ModelRendererTurbo(this, 213, 65, textureX, textureY); // Box 442
-		bodyModel[117] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, "ditch"); // Box 443 ditchlight r1
+		bodyModel[117] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/rear_right_lower"); // Box 443 ditchlight r1
 		bodyModel[118] = new ModelRendererTurbo(this, 193, 66, textureX, textureY); // Box 444
-		bodyModel[119] = new ModelRendererTurbo(this, 193, 61, textureX, textureY, "ditch"); // Box 445 ditchlight f2
-		bodyModel[120] = new ModelRendererTurbo(this, 201, 60, textureX, textureY, "ditch"); // Box 446 ditchlight f1
+		bodyModel[119] = new ModelRendererTurbo(this, 193, 61, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/front_left_upper"); // Box 445 ditchlight f2
+		bodyModel[120] = new ModelRendererTurbo(this, 201, 60, textureX, textureY, "ditch").setLightFixtureId("bap:u30bh/front_left_lower"); // Box 446 ditchlight f1
 		bodyModel[121] = new ModelRendererTurbo(this, 201, 65, textureX, textureY); // Box 447
 		bodyModel[122] = new ModelRendererTurbo(this, 141, 94, textureX, textureY); // Box 448
 		bodyModel[123] = new ModelRendererTurbo(this, 142, 88, textureX, textureY); // Box 450
@@ -245,8 +245,10 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[200] = new ModelRendererTurbo(this, 41, 185, textureX, textureY); // Box 106 cab backbox
 		bodyModel[201] = new ModelRendererTurbo(this, 176, 16, textureX, textureY); // Box 401
 		bodyModel[202] = new ModelRendererTurbo(this, 173, 15, textureX, textureY); // Box 402
-		bodyModel[203] = new ModelRendererTurbo(this, 481, 109, textureX, textureY, "lamp"); // Box 165 numberboard
-		bodyModel[204] = new ModelRendererTurbo(this, 481, 109, textureX, textureY, "lamp"); // Box 167 numberboard
+		bodyModel[203] = new ModelRendererTurbo(this, 481, 109, textureX, textureY,
+                                                "numberboard").setLightFixtureId("bap:u30bh/rear_numberboard_right"); // Box 165 numberboard
+		bodyModel[204] = new ModelRendererTurbo(this, 481, 109, textureX, textureY,
+                                                "numberboard").setLightFixtureId("bap:u30bh/rear_numberboard_left"); // Box 167 numberboard
 		bodyModel[205] = new ModelRendererTurbo(this, 224, 156, textureX, textureY); // Box 63
 		bodyModel[206] = new ModelRendererTurbo(this, 207, 114, textureX, textureY); // Box 318
 		bodyModel[207] = new ModelRendererTurbo(this, 240, 120, textureX, textureY); // Box 322
@@ -267,7 +269,7 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[222] = new ModelRendererTurbo(this, 42, 197, textureX, textureY); // Box 413 cs
 		bodyModel[223] = new ModelRendererTurbo(this, 28, 189, textureX, textureY); // Box 86 cs
 		bodyModel[224] = new ModelRendererTurbo(this, 23, 210, textureX, textureY); // Box 531 cs
-		bodyModel[225] = new ModelRendererTurbo(this, 55, 188, textureX, textureY, "lamp"); // Box 275 cs speedo glow
+		bodyModel[225] = new ModelRendererTurbo(this, 55, 188, textureX, textureY, "instrument").setLightFixtureId("bap:u30bh/cab_speedometer"); // Box 275 cs speedo glow
 		bodyModel[226] = new ModelRendererTurbo(this, 263, 28, textureX, textureY); // Box 545
 		bodyModel[227] = new ModelRendererTurbo(this, 244, 28, textureX, textureY); // Box 546
 		bodyModel[228] = new ModelRendererTurbo(this, 411, 186, textureX, textureY); // Box 547
@@ -288,10 +290,12 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[243] = new ModelRendererTurbo(this, 83, 181, textureX, textureY); // Box 25
 		bodyModel[244] = new ModelRendererTurbo(this, 96, 183, textureX, textureY); // Box 405
 		bodyModel[245] = new ModelRendererTurbo(this, 109, 181, textureX, textureY); // Box 406
-		bodyModel[246] = new ModelRendererTurbo(this, 12, 86, textureX, textureY, "lamp"); // Box 401 schnoz gyra
+		bodyModel[246] = new ModelRendererTurbo(this, 12, 86, textureX, textureY, "lamp").setLightFixtureId("bap:u30bh/front_center"); // Box 401 schnoz gyra
 		bodyModel[247] = new ModelRendererTurbo(this, 115, 45, textureX, textureY); // Box 355 brakewheel
-		bodyModel[248] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "lamp"); // Box 117 numberboard
-		bodyModel[249] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "lamp"); // Box 118 numberboard
+		bodyModel[248] = new ModelRendererTurbo(this, 39, 54, textureX, textureY,
+                                                "numberboard").setLightFixtureId("bap:u30bh/front_numberboard_right"); // Box 117 numberboard
+		bodyModel[249] = new ModelRendererTurbo(this, 39, 54, textureX, textureY,
+                                                "numberboard").setLightFixtureId("bap:u30bh/front_numberboard_left"); // Box 118 numberboard
 		bodyModel[250] = new ModelRendererTurbo(this, 21, 39, textureX, textureY); // Box 43
 		bodyModel[251] = new ModelRendererTurbo(this, 7, 39, textureX, textureY); // Box 175
 		bodyModel[252] = new ModelRendererTurbo(this, 303, 204, textureX, textureY); // Box 413 smol fuel tank
@@ -341,8 +345,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 		bodyModel[296] = new ModelRendererTurbo(this, 1, 96, textureX, textureY); // Box 187 ph2 headlight
 		bodyModel[297] = new ModelRendererTurbo(this, 127, 71, textureX, textureY, "cull"); // Box 3 cull aww
 		bodyModel[298] = new ModelRendererTurbo(this, 129, 66, textureX, textureY); // Box 5
-		bodyModel[299] = new ModelRendererTurbo(this, 22, 190, textureX, textureY, "lamp"); // Box 412 cab signalling glowey
-		bodyModel[300] = new ModelRendererTurbo(this, 12, 194, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[299] = new ModelRendererTurbo(this, 22, 190, textureX, textureY, "instrument").setLightFixtureId("bap:u30bh/cab_signal"); // Box 412 cab signalling glowey
+		bodyModel[300] = new ModelRendererTurbo(this, 12, 194, textureX, textureY, "instrument").setLightFixtureId("bap:u30bh/cab_speedometer_left"); // Box 71 glow speedometer
 		bodyModel[301] = new ModelRendererTurbo(this, 12, 189, textureX, textureY); // Box 307 spedo
 		bodyModel[302] = new ModelRendererTurbo(this, 151, 100, textureX, textureY); // Box 429 u30bh bit
 		bodyModel[303] = new ModelRendererTurbo(this, 153, 71, textureX, textureY, "cull"); // Box 339 cull pw beacon holdy
@@ -1380,7 +1384,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 
 		ModelRenderHelper.renderModelWithRollingStockLightControls(bodyModel, entity, f5);
 
-		if (GetColor(entity) == 567) {
+		switch (GetColor(entity)) {
+		case 567:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/TypeB_2_Silver.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, -0.025, 0);
@@ -1389,7 +1394,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks4.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (GetColor(entity) == 3){
+			break;
+		case 3:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_nocta.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, 0.0, 0);
@@ -1398,7 +1404,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (GetColor(entity) == 5){
+			break;
+		case 5:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/blombergB_2_Blac.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, -0.01, 0);
@@ -1407,7 +1414,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks3.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (GetColor(entity) == 1721){
+			break;
+		case 1721:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_silver_a.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, 0.0, 0);
@@ -1416,8 +1424,10 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (GetColor(entity) == 17 ||GetColor(entity) == 18 ||
-				GetColor(entity) == 19){
+			break;
+		case 17:
+		case 18:
+		case 19:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, 0.0, 0);
@@ -1431,7 +1441,8 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(0, 0, 0);
 			crldeets.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else {
+			break;
+		default:
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/fb2_new_black_a.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.54, 0.0, 0);
@@ -1440,6 +1451,7 @@ public class ModelU30BH extends ModelConverter //Same as Filename
 			GL11.glTranslated(3.07, 0, 0);
 			theTrucks2.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
+			break;
 		}
 	}
 }

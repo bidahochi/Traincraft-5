@@ -1,6 +1,7 @@
 package train.client.core.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -13,6 +14,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import train.client.render.RenderTCRail;
+import train.client.render.lighting.LightEffectRenderBatch;
 import train.client.render.TrackRenderRouteCache;
 import train.common.enums.TCTrackDirection;
 import train.common.items.BallastTypes;
@@ -29,7 +31,7 @@ public class CustomRenderHandler
     private String previewBallastTexture;
     private int previewBallastColor;
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onRenderWorldLast(RenderWorldLastEvent event )
     {
         EntityClientPlayerMP player = Minecraft.getMinecraft().thePlayer;
@@ -37,6 +39,9 @@ public class CustomRenderHandler
         {
             renderTCRailPreview(player);
         }
+        // Lighting effects consume the completed opaque/world depth. Flush only
+        // after Traincraft's own world-last track work has finished.
+        LightEffectRenderBatch.flush();
     }
 
     private void renderTCRailPreview(EntityClientPlayerMP player)
@@ -77,9 +82,9 @@ public class CustomRenderHandler
         Vector2f placementDirection = ItemTCRail.getDirectionVector(facing);
 
         // Render
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
         GL11.glPushMatrix();
         GL11.glTranslated(targetX - cameraX, placementY + 1 - cameraY, targetZ - cameraZ);
-        GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glEnable(GL11.GL_BLEND);
 
         ITrackDefinition track = item.getTrackType();
@@ -145,6 +150,7 @@ public class CustomRenderHandler
 
 
             GL11.glPopMatrix();
+        GL11.glPopAttrib();
     }
 
     private void renderStraightPreview(ItemTCRail item, EntityClientPlayerMP player, float previewRed, float previewGreen, float previewBlue, float previewAlpha)

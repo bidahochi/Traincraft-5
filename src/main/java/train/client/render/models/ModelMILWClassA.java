@@ -172,8 +172,8 @@ public class ModelMILWClassA extends ModelBase
 		milwclassaModel[147] = new ModelRendererTurbo(this, 49, 113, textureX, textureY); // Box 190
 		milwclassaModel[148] = new ModelRendererTurbo(this, 145, 113, textureX, textureY); // Box 191
 		milwclassaModel[149] = new ModelRendererTurbo(this, 153, 113, textureX, textureY); // Box 191
-		milwclassaModel[150] = new ModelRendererTurbo(this, 417, 113, textureX, textureY, "lamp"); // Box 192
-		milwclassaModel[151] = new ModelRendererTurbo(this, 433, 113, textureX, textureY, "lamp"); // Box 193
+		milwclassaModel[150] = new ModelRendererTurbo(this, 417, 113, textureX, textureY, "lamp").setLightFixtureGroup("center_headlight"); // Box 192
+		milwclassaModel[151] = new ModelRendererTurbo(this, 433, 113, textureX, textureY, "lamp").setLightFixtureGroup("center_headlight"); // Box 193
 		milwclassaModel[152] = new ModelRendererTurbo(this, 441, 113, textureX, textureY); // Box 194
 		milwclassaModel[153] = new ModelRendererTurbo(this, 1, 121, textureX, textureY); // Box 195
 		milwclassaModel[154] = new ModelRendererTurbo(this, 49, 113, textureX, textureY); // Box 194

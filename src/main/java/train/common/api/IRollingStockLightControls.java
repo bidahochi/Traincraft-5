@@ -1,29 +1,46 @@
 package train.common.api;
 
-import com.google.gson.JsonObject;
+/**
+ * Defines the synchronized operator controls exposed by rolling stock with configurable lighting.
+ *
+ * <p>This is the authoritative replacement for the legacy combined-light contract. Fixture identity
+ * and behavior remain model/profile concerns; implementations expose only synchronized operator
+ * state.
+ */
 
 public interface IRollingStockLightControls
 {
-    String lightingDetailsJSON();
+    /** @return the synchronized front-headlight level */
+    public RollingStockHeadlightLevel getFrontHeadlightLevel();
 
-    JsonObject lightingDetailsAsJSON();
+    /** @return the synchronized rear-headlight level */
+    public RollingStockHeadlightLevel getRearHeadlightLevel();
+
+    /** @param level new front-headlight level; {@code null} is treated as off */
+    public
+    void setFrontHeadlightLevel(RollingStockHeadlightLevel level);
+
+    /** @param level new rear-headlight level; {@code null} is treated as off */
+    public
+    void setRearHeadlightLevel(RollingStockHeadlightLevel level);
 
     /**
+     * Reports whether a logical lighting circuit is active.
      *
-     * @param isLightsOn set 0 if loco lights is false, 1 if true
+     * @param channel circuit to query
+     * @return whether the circuit is enabled
      */
-    void setPacketLights(boolean isLightsOn);
+    public boolean isLightChannelEnabled(RollingStockLightChannel channel);
 
     /**
+     * Changes a logical lighting circuit.
      *
-     * @param isBeaconOn set 0 if loco beacon is false, 1 if true
+     * @param channel circuit to change
+     * @param enabled whether the circuit should be enabled
      */
-    void setPacketBeacon(boolean isBeaconOn);
+    public
 
-    void setPacketDitchLightsMode(byte ditchLightMode);
+    void setLightChannelEnabled(RollingStockLightChannel channel,
 
-    boolean isBeaconEnabled();
-    boolean isLightsEnabled();
-    byte getBeaconCycleIndex();
-    boolean isDitchLightsEnabled();
+    boolean enabled);
 }

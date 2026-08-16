@@ -30,6 +30,9 @@ import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 import train.client.core.handlers.ClientTickHandler;
 import train.client.core.handlers.CustomRenderHandler;
+import train.client.render.lighting.LightingResourceReloadListener;
+import net.minecraft.client.resources.IReloadableResourceManager;
+import net.minecraft.client.Minecraft;
 import train.client.core.handlers.RecipeBookHandler;
 import train.client.core.handlers.TCKeyHandler;
 import train.client.core.helpers.JLayerHook;
@@ -117,6 +120,11 @@ public class ClientProxy extends CommonProxy
 		registerEvent(tiltingHandler);*/
 		registerEvent(tickHandler);
 		registerEvent(renderHandler);
+        if (Minecraft.getMinecraft().getResourceManager() instanceof IReloadableResourceManager)
+        {
+            ((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(
+                new LightingResourceReloadListener());
+        }
 		registerEvent(huDloco);
 		registerEvent(new HUDAipkit());
 		registerEvent(wiggle);
@@ -299,9 +307,11 @@ public class ClientProxy extends CommonProxy
 		if (y == -1) {
 			for (Object ent : world.loadedEntityList) {
 				if (((Entity) ent).getEntityId() == x)
+                {
 					entity1 = (Entity) ent;
 			}
 		}
+        }
 
 		for (cpw.mods.fml.common.network.IGuiHandler handler : devGuiHandlers) {
 			Object gui = handler.getClientGuiElement(ID, player, world, x, y, z);
@@ -375,9 +385,11 @@ public class ClientProxy extends CommonProxy
         case (GuiIDs.OVERLAY_MENU):
             return entity1 != null ? new GuiOverlayMenu(player, (EntityRollingStock) entity1) : null;
 		case (GuiIDs.LOCK_MENU):
-			if (entity != null) { // If player is riding the entity (locomotives).
+			if (entity != null) // If player is riding the entity (locomotives).
+                {
 				return new GuiLockMenu(player, (EntityRollingStock) entity);
-			} else { // If player is not riding the entity (freight).
+			} else // If player is not riding the entity (freight).
+                {
 				return entity1 != null ? new GuiLockMenu(player, ((EntityRollingStock) entity1)) : null;
 			}
 		case (GuiIDs.LOCK_MENU_LOCKABLES):

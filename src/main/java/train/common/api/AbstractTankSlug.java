@@ -1,6 +1,8 @@
 package train.common.api;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +13,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 import train.common.Traincraft;
 import train.common.library.GuiIDs;
-import train.common.library.register.ITrainRecord;
 
 public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandler, INoFuelTransferEntity, IRollingStockLightControls
 {
@@ -20,10 +21,12 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
     private int update = 8;
     private LiquidManager.StandardTank theTank;
 
-    public boolean isLightsEnabled = true; // This is always on since there is nothing to control this presently on Tanker Slugs
-    public boolean isBeaconEnabled = true; // This is always on since there is nothing to control this presently on Tanker Slugs
-    public byte beaconCycleIndex = 0;
-    public byte ditchLightMode = 1;
+    private RollingStockHeadlightLevel frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
+    private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
+    private boolean ditchLightsEnabled = true;
+    private boolean beaconEnabled = true;
+    private boolean auxLightsEnabled;
+    private boolean gyraLightsEnabled;
 
 
     public AbstractTankSlug(World world)
@@ -33,7 +36,7 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
         {
             initFreightWater();
             this.theTank = LiquidManager.getInstance().new FilteredTank(getTankCapacity(), LiquidManager.dieselFilter());
-            dataWatcher.addObject(28, lightingDetailsJSON());
+            dataWatcher.addObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
         }
     }
 
@@ -46,7 +49,6 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
     @Override
     public void onUpdate()
     {
-        cycleBeaconIndex();
         super.onUpdate();
         checkInvent(cargoItems[0]);
         if (worldObj.isRemote) {
@@ -61,9 +63,11 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
                 motionZ *= 0.94;
             }
         }
-        else if (theTank != null && theTank.getFluid() == null) {
+        else
+        { if (theTank != null && theTank.getFluid() == null) {
             this.dataWatcher.updateObject(18, 0);
             this.dataWatcher.updateObject(4, 0);
+        }
         }
 
         if (getAmount() > 0) {
@@ -73,26 +77,16 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
                 drain(ForgeDirection.UNKNOWN, 8,true);
             }
 
-        } else if (getAmount() <= 0) {
+        } else
+        { if (getAmount() <= 0) {
             // setColor(getColorFromString("Empty"));
             setDefaultMass(trainSpec.getMass());
         }
-
-        if (!worldObj.isRemote)
-        {
-            dataWatcher.updateObject(28, lightingDetailsJSON());
-        }
     }
 
-    private void cycleBeaconIndex()
-    {
-        if (isBeaconEnabled && ticksExisted % 5 == 0)
-        {
-            beaconCycleIndex++;
-            if (beaconCycleIndex == 4)
+        if (worldObj.isRemote == false)
             {
-                beaconCycleIndex = 0;
-            }
+            synchronizeLightState ();
         }
     }
 
@@ -127,7 +121,11 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
             new FluidStack(theTank.getFluid(), this.dataWatcher.getWatchableObjectInt(18)).writeToNBT(nbttagcompound);
         }
 
-        nbttagcompound.setString("lightingDetailsJSON", lightingDetailsJSON());
+        nbttagcompound.setInteger("tcFrontHeadlightLevel", frontHeadlightLevel.ordinal());
+        nbttagcompound.setInteger("tcRearHeadlightLevel", rearHeadlightLevel.ordinal());
+        nbttagcompound.setInteger(
+            "tcLightChannels",
+            RollingStockLightStateCodec.persistentChannels(packLightState()));
     }
 
     @Override
@@ -146,21 +144,50 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
             fill(ForgeDirection.UNKNOWN, FluidStack.loadFluidStackFromNBT(nbttagcompound), true);
         }
 
-        JsonObject lightingDetailsJSONObject;
-        try {
-            lightingDetailsJSONObject = Traincraft.jsonParser.parse(nbttagcompound.getString("lightingDetailsJSON")).getAsJsonObject();
-        }
-        catch (Exception e)
+        JsonObject previousState = new JsonObject();
+        if (nbttagcompound.hasKey("lightingDetailsJSON"))
         {
-            lightingDetailsJSONObject = lightingDetailsAsJSON();
+        try {
+                JsonElement parsedState = Traincraft.jsonParser.parse(nbttagcompound.getString("lightingDetailsJSON"));
+                if (parsedState.isJsonObject())
+                {
+                    previousState = parsedState.getAsJsonObject();
+        }
+            }
+        catch (JsonParseException ignored)
+        {
+                // Missing or malformed legacy lighting state migrates to the documented defaults.
+            }
         }
 
-        isLightsEnabled = lightingDetailsJSONObject.get("isLightsEnabled").getAsBoolean();
-        isBeaconEnabled = lightingDetailsJSONObject.get("isBeaconEnabled").getAsBoolean();
-        ditchLightMode = lightingDetailsJSONObject.get("ditchLightMode").getAsByte();
-        beaconCycleIndex = lightingDetailsJSONObject.get("beaconCycleIndex").getAsByte();
+        boolean previousLights = jsonBoolean(previousState, "isLightsEnabled", true);
+        frontHeadlightLevel =
+            nbttagcompound.hasKey("tcFrontHeadlightLevel")
+            ? RollingStockHeadlightLevel.fromOrdinal(
+                nbttagcompound.getInteger("tcFrontHeadlightLevel"))
+            : previousLights
+            ? RollingStockHeadlightLevel.BRIGHT
+            : RollingStockHeadlightLevel.OFF;
+        rearHeadlightLevel =
+            nbttagcompound.hasKey("tcRearHeadlightLevel")
+            ? RollingStockHeadlightLevel.fromOrdinal(
+                nbttagcompound.getInteger("tcRearHeadlightLevel"))
+            : RollingStockHeadlightLevel.OFF;
+        if (nbttagcompound.hasKey("tcLightChannels"))
+        {
+            int channels = nbttagcompound.getInteger("tcLightChannels");
+            ditchLightsEnabled = (channels & RollingStockLightChannel.DITCH.mask()) != 0;
+            beaconEnabled = (channels & RollingStockLightChannel.BEACON.mask()) != 0;
+            auxLightsEnabled = (channels & RollingStockLightChannel.AUX.mask()) != 0;
+            gyraLightsEnabled = (channels & RollingStockLightChannel.GYRA.mask()) != 0;
+        }
+        else
+        {
+            ditchLightsEnabled = jsonByte(previousState, "ditchLightMode", (byte) 1) > 0;
+            beaconEnabled = jsonBoolean(previousState, "isBeaconEnabled", true);
+        }
 
-        dataWatcher.updateObject(28, lightingDetailsJSON());
+        dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
     }
 
     private void placeInInvent(ItemStack itemstack1) {
@@ -169,27 +196,35 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
                 cargoItems[i] = itemstack1;
                 return;
             }
-            else if (cargoItems[i] != null && cargoItems[i].getItem() == itemstack1.getItem() && itemstack1.isStackable() && (!itemstack1.getHasSubtypes() || cargoItems[i].getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(cargoItems[i], itemstack1)) {
+            else
+            { if (cargoItems[i] != null && cargoItems[i].getItem() == itemstack1.getItem() && itemstack1.isStackable() && (itemstack1.getHasSubtypes() == false || cargoItems[i].getItemDamage() == itemstack1.getItemDamage()) && ItemStack.areItemStackTagsEqual(cargoItems[i], itemstack1)) {
                 int var9 = cargoItems[i].stackSize + itemstack1.stackSize;
                 if (var9 <= itemstack1.getMaxStackSize()) {
                     cargoItems[i].stackSize = var9;
 
                 }
-                else if (cargoItems[i].stackSize < itemstack1.getMaxStackSize()) {
+                else
+                    { if (cargoItems[i].stackSize < itemstack1.getMaxStackSize()) {
                     cargoItems[i].stackSize += 1;
                 }
+                    }
                 return;
             }
-            else if (i == cargoItems.length - 1) {
+            else
+                { if (i == cargoItems.length - 1) {
                 entityDropItem(itemstack1,1);
                 return;
             }
         }
     }
+        }
+    }
 
     public void liquidInSlot(ItemStack itemstack) {
         if (worldObj.isRemote)
+        {
             return;
+        }
         this.update += 1;
         if (this.update % 8 == 0 && itemstack != null) {
             ItemStack result = LiquidManager.getInstance().processContainer(this, 0, this, itemstack);
@@ -286,76 +321,122 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
         return FluidRegistry.getFluid(this.dataWatcher.getWatchableObjectInt(4))!=null? FluidRegistry.getFluid(this.dataWatcher.getWatchableObjectInt(4)).getUnlocalizedName():null;
     }
 
-    //region Implement IRollingStockLightControls
-    public String lightingDetailsJSON()
+    @Override
+    public RollingStockHeadlightLevel getFrontHeadlightLevel()
     {
-        JsonObject lightingDetailsJSON = new JsonObject();
-        lightingDetailsJSON.addProperty("isLightsEnabled", isLightsEnabled);
-        lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
-        lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
-        lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
-        return lightingDetailsJSON.toString();
+        return worldObj != null && worldObj.isRemote
+               ? RollingStockLightStateCodec.front(synchronizedLightState())
+               : frontHeadlightLevel;
     }
 
-    public JsonObject lightingDetailsAsJSON()
+    @Override
+
+    public RollingStockHeadlightLevel getRearHeadlightLevel()
     {
-        JsonObject lightingDetailsJSON = new JsonObject();
-        lightingDetailsJSON.addProperty("isLightsEnabled", isLightsEnabled);
-        lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
-        lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
-        lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
-        return lightingDetailsJSON;
+        return worldObj != null && worldObj.isRemote
+               ? RollingStockLightStateCodec.rear(synchronizedLightState())
+               : rearHeadlightLevel;
     }
 
-    /**
-     *
-     * @param isLightsOn set 0 if lights is false, 1 if true
-     */
-    public void setPacketLights(boolean isLightsOn)
+    @Override
+    public void setFrontHeadlightLevel(RollingStockHeadlightLevel level)
     {
-        isLightsEnabled = isLightsOn;
+        frontHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
+        synchronizeLightState();
     }
 
-    /**
-     *
-     * @param isBeaconOn set 0 if beacon is false, 1 if true
-     */
-    public void setPacketBeacon(boolean isBeaconOn)
+    @Override
+    public void setRearHeadlightLevel(RollingStockHeadlightLevel level)
     {
-        isBeaconEnabled = isBeaconOn;
+        rearHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
+        synchronizeLightState();
     }
 
-    /**Sets the Ditch light mode
-     *
-     * @param ditchLightMode set 0 for off,
-     */
-    public void setPacketDitchLightsMode(byte ditchLightMode)
+    @Override
+    public boolean isLightChannelEnabled(RollingStockLightChannel channel)
     {
-        this.ditchLightMode = ditchLightMode;
+        return RollingStockLightStateCodec.enabled(synchronizedLightState(), channel);
     }
 
-    public boolean isLightsEnabled()
+    @Override
+    public void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled)
     {
-        return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("isLightsEnabled").getAsBoolean();
+        if (channel == null)
+        {
+            return;
+        }
+        switch (channel)
+        {
+            case HEADLIGHT:
+                if (enabled == false)
+    {
+                    frontHeadlightLevel = RollingStockHeadlightLevel.OFF;
+                    rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
+    }
+                else
+                {
+                    if(frontHeadlightLevel == RollingStockHeadlightLevel.OFF
+                            && rearHeadlightLevel == RollingStockHeadlightLevel.OFF)
+    {
+                        frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
+    }
+                }
+                break;
+            case DITCH:
+                ditchLightsEnabled = enabled;
+                break;
+            case BEACON:
+                beaconEnabled = enabled;
+                break;
+            case AUX:
+                auxLightsEnabled = enabled;
+                break;
+            case GYRA:
+                gyraLightsEnabled = enabled;
+                break;
+            default:
+        return;
+    }
+        synchronizeLightState();
     }
 
-    public boolean isBeaconEnabled()
+    /** Packs server-owned fields into the stable synchronized representation. */
+    private int packLightState()
     {
-        return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("isBeaconEnabled").getAsBoolean();
+        return RollingStockLightStateCodec.pack(
+                   frontHeadlightLevel,
+                   rearHeadlightLevel,
+                   ditchLightsEnabled,
+                   beaconEnabled,
+                   auxLightsEnabled,
+                   gyraLightsEnabled);
     }
 
-    public byte getBeaconCycleIndex()
+    /** Reads the watcher on clients and the authoritative fields on the server. */
+    private int synchronizedLightState()
     {
-        return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("beaconCycleIndex").getAsByte();
+        return worldObj != null && worldObj.isRemote
+               ? dataWatcher.getWatchableObjectInt(RollingStockLightStateCodec.WATCHER_SLOT)
+               : packLightState();
     }
 
-    public boolean isDitchLightsEnabled()
+    /** Publishes a server-side control mutation through the stable watcher slot. */
+    private void synchronizeLightState()
     {
-        return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("ditchLightMode").getAsByte() > 0;
+        if (worldObj != null && worldObj.isRemote == false)
+    {
+            dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
+        }
+
     }
 
-    private JsonObject AsJsonObject(String string)
+    private static boolean jsonBoolean(JsonObject object, String key, boolean fallback)
     {
-        return Traincraft.jsonParser.parse(string).getAsJsonObject();
+        return object != null && object.has(key) ? object.get(key).getAsBoolean() : fallback;
+    }
+
+    private static byte jsonByte(JsonObject object, String key, byte fallback)
+    {
+        return object != null && object.has(key) ? object.get(key).getAsByte() : fallback;
     }
 }

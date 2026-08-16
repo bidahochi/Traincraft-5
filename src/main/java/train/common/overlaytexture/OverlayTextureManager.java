@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import train.client.render.RenderRollingStock;
+import train.client.render.lighting.TextureAlphaMaskCache;
 import train.common.api.AbstractTrains;
 
 import javax.imageio.ImageIO;
@@ -77,6 +78,7 @@ public class OverlayTextureManager {
 
             // Assign the new texture to a ResourceLocation as a DynamicTexture, so it can be accessed by RenderRollingStock when rendering the model.
             overlaidTextureResource = Minecraft.getMinecraft().getTextureManager().getDynamicTextureLocation("", new DynamicTexture(overlaidTexture));
+            TextureAlphaMaskCache.register(overlaidTextureResource, overlaidTexture);
             markedForUpdate = false;
         } catch (IOException ignored) {
             System.out.println("[TC] Overlay application onto base texture failed.");
@@ -95,7 +97,14 @@ public class OverlayTextureManager {
     }
 
 
+    @SideOnly(Side.CLIENT)
+
+
     public ResourceLocation getOverlaidTextureResource() {
+        // A resource reload clears the bounded mask cache without recreating
+        // existing DynamicTextures, so ensure the live image is registered on
+        // every retrieval. Registration is a cheap cache hit after the first.
+        TextureAlphaMaskCache.register(overlaidTextureResource, overlaidTexture);
         return overlaidTextureResource;
     }
 
@@ -137,7 +146,8 @@ public class OverlayTextureManager {
      * @param nbtTagOverlayConfig NBTTagCompound containing overlay information.
      */
     public void importFromConfigTag(NBTTagCompound nbtTagOverlayConfig) {
-            if (nbtTagOverlayConfig.hasKey("overlays")) { // Import overlays from tag list.
+            if (nbtTagOverlayConfig.hasKey("overlays")) // Import overlays from tag list.
+        {
                 NBTTagList overlaysList = nbtTagOverlayConfig.getTagList("overlays", 10); // No idea what the "10" int is for. It doesn't work without it, though!
                 NBTTagCompound tag;
                 for (int i = 0; i < overlaysList.tagCount(); i++) {
@@ -167,7 +177,9 @@ public class OverlayTextureManager {
         ArrayList<OTSpecification> acceptedOverlays = new ArrayList<>();
         for (OTSpecification overlay : overlays) {
             if (overlay.canBeAppliedTo(textureIndex))
+            {
                 acceptedOverlays.add(overlay);
+        }
         }
         return acceptedOverlays;
     }

@@ -84,6 +84,18 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	@SideOnly(Side.CLIENT)
 	public ModelBase modelInstance;
 
+    /** Returns the immutable Java-authored profile collection for this rolling-stock type. */
+    protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return RollingStockSkinLightingProfiles.EMPTY;
+    }
+
+    /** Resolves skin-authored lighting exceptions from the stock's canonical skin key. */
+    public RollingStockSkinLighting getSkinLighting()
+    {
+        return getSkinLightingProfiles().forSkin(getColorAsString());
+    }
+
 	public float maxSpeed;
 	public float railMaxSpeed;
 	public double speedLimiter = 1;
@@ -304,10 +316,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		if (additionalData.readBoolean()) {
 			int selectedCargo = additionalData.readInt();
 			if (getCargoManager().isValidCargoSelection(selectedCargo))
+            {
 				getCargoManager().setSelectedCargo(selectedCargo);
 		}
+        }
 		parkingBrake = additionalData.readBoolean();
-		if (additionalData.readBoolean()) { // If accepts overlay textures…
+		if (additionalData.readBoolean())   // If accepts overlay textures…
+ {
 			getOverlayTextureContainer().importFromConfigTag(ByteBufUtils.readTag(additionalData));
 		}
 		importTrustedListFromNBT(ByteBufUtils.readTag(additionalData));
@@ -466,10 +481,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			applyRollingStockDamage(damagesource, i, ((EntityPlayer)damagesource.getEntity()).capabilities.isCreativeMode);
 		}
-		else if (canMobDamageRollingStock(damagesource))
+		else
+        { if (canMobDamageRollingStock(damagesource))
 		{
 			applyRollingStockDamage(damagesource, i, false);
 		}
+        }
 		return true;
 	}
 
@@ -584,30 +601,42 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				if (cartLinked1.Link1 == this.uniqueID) {
 					cartLinked1.Link1 = 0;
 					cartLinked1.cartLinked1 = null;
-					if(cartLinked1.RollingStock!=null)cartLinked1.RollingStock.clear();
+					if(cartLinked1.RollingStock!=null)
+                    {cartLinked1.RollingStock.clear();
+                    }
 					//System.out.println("clear cartLinked1 link1");
 				}
-				else if (cartLinked1.Link2 == this.uniqueID) {
+				else
+                { if (cartLinked1.Link2 == this.uniqueID) {
 					cartLinked1.Link2 = 0;
 					cartLinked1.cartLinked2 = null;
-					if(cartLinked1.RollingStock!=null)cartLinked1.RollingStock.clear();
+					if(cartLinked1.RollingStock!=null)
+                        {cartLinked1.RollingStock.clear();
+                        }
 					//System.out.println("clear cartLinked1 link2");
 				}
 			}
+            }
 			if (this.cartLinked2 != null) {
 				if (cartLinked2.Link1 == this.uniqueID) {
 					cartLinked2.Link1 = 0;
 					cartLinked2.cartLinked1 = null;
-					if(cartLinked2.RollingStock!=null)cartLinked2.RollingStock.clear();
+					if(cartLinked2.RollingStock!=null)
+                    {cartLinked2.RollingStock.clear();
+                    }
 					//System.out.println("clear cartLinked2 link1");
 				}
-				else if (cartLinked2.Link2 == this.uniqueID) {
+				else
+                { if (cartLinked2.Link2 == this.uniqueID) {
 					cartLinked2.Link2 = 0;
 					cartLinked2.cartLinked2 = null;
-					if(cartLinked2.RollingStock!=null)cartLinked2.RollingStock.clear();
+					if(cartLinked2.RollingStock!=null)
+                        {cartLinked2.RollingStock.clear();
+                        }
 					//System.out.println("clear cartLinked2 link2");
 				}
 			}
+            }
 			this.cartLinked1 = null;
 			this.cartLinked2 = null;
 			this.isAttached = false;
@@ -630,7 +659,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						trainHandler.getTrains().get(i2).Link2 = 0;
 					}
 					if ((trainHandler.getTrains().get(i2)) != this) {
-						if (trainHandler != null && trainHandler.getTrains() != null && trainHandler.getTrains().get(i2) != null && trainHandler.getTrains().get(i2).trainHandler != null && trainHandler.getTrains().get(i2).trainHandler.getTrains() != null) trainHandler.getTrains().get(i2).trainHandler.getTrains().clear();
+						if (trainHandler != null && trainHandler.getTrains() != null && trainHandler.getTrains().get(i2) != null && trainHandler.getTrains().get(i2).trainHandler != null && trainHandler.getTrains().get(i2).trainHandler.getTrains() != null)
+                        { trainHandler.getTrains().get(i2).trainHandler.getTrains().clear();
+					}
 					}
 				}
 			}
@@ -711,7 +742,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		 * if the global trains list is empty this is only used when the first @EntityRollingStock
 		 * is put down or when the world reloads
 		 */
-		if (updateTicks % 40 != 0) return;
+		if (updateTicks % 40 != 0)
+        { return;
+        }
 		if (allTrains.size() == 0) {
 			//System.out.println("array empty");
 			if ((this.cartLinked1 != null || this.cartLinked2 != null)) {
@@ -723,7 +756,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			 * isn't part of a trains yet
 			 */
 		}
-		else if (trainHandler == null || (trainHandler != null && trainHandler.getTrains().size() == 0)) {
+		else
+        { if (trainHandler == null || (trainHandler != null && trainHandler.getTrains().size() == 0)) {
 			if ((this.cartLinked1 != null || this.cartLinked2 != null)) {
 				if (this.cartLinked1 != null && cartLinked1.trainHandler != null && cartLinked1.trainHandler.getTrains() != null && cartLinked1.trainHandler.getTrains().size() != 0) {
 					trainHandler = cartLinked1.trainHandler;
@@ -737,6 +771,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				trainHandler = new TrainHandler(this);
 			}
 		}
+        }
 		/**
 		 * getting main locomotive of the trains and copying its destination to
 		 * all attached carts
@@ -744,7 +779,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		if (trainHandler != null && trainHandler.getTrains().size() > 1) {
 			if (this instanceof Locomotive && !((Locomotive) this).canBeAdjusted && this.getDestination().length() > 0) {
 				for (int i = 0; i < trainHandler.getTrains().size(); i++) {
-					if (trainHandler.getTrains().get(i) != null && !trainHandler.getTrains().get(i).equals(this)) trainHandler.getTrains().get(i).destination = this.getDestination();
+					if (trainHandler.getTrains().get(i) != null &&trainHandler.getTrains().get(i).equals(this) == false)
+                    { trainHandler.getTrains().get(i).destination = this.getDestination();
+                    }
 					CartTools.setCartOwner(trainHandler.getTrains().get(i), CartTools.getCartOwner(this));
 				}
 			}
@@ -752,10 +789,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		/**
 		 * Resets destination
 		 */
-		else if (!(this instanceof Locomotive)) {
+		else
+        { if ((this instanceof Locomotive) == false) {
 			destination = "";
 		}
 	}
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -831,7 +870,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						(posZ - Math.sin(this.serverRealRotation * TraincraftUtil.radian) * this.bogieShift), this, this.uniqueID, 0, this.bogieShift);
 
 				//if(!worldObj.isRemote)System.out.println("ID: "+this.getID());
-				if (!worldObj.isRemote) worldObj.spawnEntityInWorld(bogieLoco);
+				if (worldObj.isRemote == false)
+                { worldObj.spawnEntityInWorld(bogieLoco);
+                }
 				this.needsBogieUpdate = true;
 			}
 			this.hasSpawnedBogie = true;
@@ -872,7 +913,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 		if (worldObj.isRemote && Traincraft.proxy.getCurrentScreen() == null && riddenByEntity instanceof EntityLivingBase) {
 			EntityLivingBase entity = (EntityLivingBase) riddenByEntity;
-			if (TraincraftEntityHelper.getIsJumping(entity)) isBraking = true;
+			if (TraincraftEntityHelper.getIsJumping(entity))
+            { isBraking = true;
+		}
 		}
 
 		int var2;
@@ -969,13 +1012,15 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						if (((EntityRollingStock) entity).uniqueID == this.Link1) {
 							this.cartLinked1 = (EntityRollingStock) entity;
 						}
-						else if (((EntityRollingStock) entity).uniqueID == this.Link2) {
+						else
+                        { if (((EntityRollingStock) entity).uniqueID == this.Link2) {
 							this.cartLinked2 = (EntityRollingStock) entity;
 						}
 					}
 				}
 			}
 		}
+        }
 
 		prevPosX = posX;
 		prevPosY = posY;
@@ -1046,9 +1091,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 		if (worldObj.isAirBlock(floor_posX, floor_posY, floor_posZ)) {
 			floor_posY--;
-		} else if (isRailBlockAt(worldObj, floor_posX, floor_posY + 1, floor_posZ) || worldObj.getBlock(floor_posX, floor_posY + 1, floor_posZ) == BlockIDs.tcRail.block || worldObj.getBlock(floor_posX, floor_posY + 1, floor_posZ) == BlockIDs.tcRailGag.block) {
+		} else
+        { if (isRailBlockAt(worldObj, floor_posX, floor_posY + 1, floor_posZ) || worldObj.getBlock(floor_posX, floor_posY + 1, floor_posZ) == BlockIDs.tcRail.block || worldObj.getBlock(floor_posX, floor_posY + 1, floor_posZ) == BlockIDs.tcRailGag.block) {
 			floor_posY++;
 		}
+        }
 		
 		l = worldObj.getBlock(floor_posX, floor_posY, floor_posZ);
 
@@ -1089,7 +1136,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			this.previousServerRealRotation = this.rotationYaw;
 
-			if (delta < -179.0F || delta > 179.0F) { // if (delta > 170.0F || delta < 190.0F) {
+			if (delta < -179.0F || delta > 179.0F) // if (delta > 170.0F || delta < 190.0F) {
+            {
 
 				this.rotationYaw += 180.0F;
 				this.isServerInReverse = !this.isServerInReverse;
@@ -1114,10 +1162,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				double rads = Math.atan((posY - prevPosY) / zDist);
 				tempPitch = (float) ((Math.atan((posY - prevPosY) / zDist)) * degrees);
 			}
-			else if (Math.abs(xDist) > 0.02) {
+			else
+            { if (Math.abs(xDist) > 0.02) {
 				tempPitch = (float) (( Math.atan((posY - prevPosY) / xDist)) * degrees);
 				//pitch=tempPitch;
 			}
+            }
 
 			//if (Math.abs(tempPitch) > 16) {
 				//tempPitch=Math.copySign(16, tempPitch);
@@ -1125,14 +1175,20 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			if (tempPitch2 < tempPitch && Math.abs(tempPitch2 - tempPitch) > 3) {
 				tempPitch2 += 3;
 			}
-			else if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 3) {
+			else
+            { if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 3) {
 				tempPitch2 -= 3;
 			}
-			else if (tempPitch2 < tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
+			else
+                { if (tempPitch2 < tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
 				tempPitch2 += 0.5;
 			}
-			else if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
+			else
+                    { if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
 				tempPitch2 -= 0.5;
+			}
+                    }
+                }
 			}
 			anglePitch = -tempPitch2;
 			rollingServerPitch = tempPitch2;
@@ -1164,11 +1220,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				if (entity != this.riddenByEntity && entity.canBePushed() && entity instanceof EntityMinecart) {
 					entity.applyEntityCollision(this);
 				}
-				else if (entity != this.riddenByEntity && entity.canBePushed() && !(entity instanceof EntityMinecart)) {
+				else
+                { if (entity != this.riddenByEntity && entity.canBePushed() &&(entity instanceof EntityMinecart) == false) {
 					this.applyEntityCollision(entity);
 				}
 			}
 		}
+        }
 
 		handleTrain();
 		handleOverheating.HandleHeatLevel(this);
@@ -1213,7 +1271,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				 flag = (worldObj.getBlockMetadata(floor_posX, floor_posY, floor_posZ) & 8) != 0;
 				 flag1 = !flag;
 				 if (i1 == 8) {i1 = 0;}
-				 else if (i1 == 9) {i1 = 1;}
+				 else
+                { if (i1 == 9) {i1 = 1;}
+			 }
 			 }
 
 			if (block == Blocks.detector_rail){
@@ -1265,7 +1325,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			 posX = floor_posX + 0.5D;
 			 d17 = posZ - floor_posZ;
 			 }
-			 else if (d10 == 0.0D) {
+			 else
+            { if (d10 == 0.0D) {
 			 posZ = floor_posZ + 0.5D;
 			 d17 = posX - floor_posX;
 			 }
@@ -1292,19 +1353,25 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						 d10 = 0;
 						 d9 += 2;
 					 }
-					 else if (d9 < 0 && d10 > 0)
+					 else
+                        { if (d9 < 0 && d10 > 0)
 					 {
 						 d9 = 0;
 						 d10 += 2;
 					 }
-					 else if (d10 < 0 && d9 < 0)
+					 else
+                            { if (d10 < 0 && d9 < 0)
 					 {
 						 d10 -= 2;
 						 d9 = 0;
 					 }
-					 else if (d9 > 0 && d10 > 0) {
+					 else
+                                { if (d9 > 0 && d10 > 0) {
 						 d10 += 2;
 						 d9 = 0;
+					 }
+                                }
+                            }
 					 }
 					 if (FMLCommonHandler.instance().getMinecraftServerInstance() != null &&
 					 this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer)
@@ -1315,6 +1382,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 					 }
 				 }
 			 }
+            }
 			 posX = d18 + d9 * d17;
 			 posZ = d19 + d10 * d17;
 			setPosition(posX, posY + yOffset + 0.35, posZ);
@@ -1325,17 +1393,21 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			 MathHelper.floor_double(posZ) - floor_posZ == ai[0][2]) {
 			 setPosition(posX, posY + ai[0][1], posZ);
 			 }
-			 else if (ai[1][1] != 0 && MathHelper.floor_double(posX) - floor_posX == ai[1][0] &&
+			 else
+            { if (ai[1][1] != 0 && MathHelper.floor_double(posX) - floor_posX == ai[1][0] &&
 			 MathHelper.floor_double(posZ) - floor_posZ == ai[1][2]) {
 			 setPosition(posX, posY + ai[1][1], posZ);
 			 }
+            }
 			
 			 applyDragAndPushForces();
 			
 			Vec3 vec3d1 = func_514_g(posX, posY, posZ);
 			if (vec3d1 != null && vec3d != null) {
 				double d28 = (vec3d.yCoord - vec3d1.yCoord) * 0.050000000000000003D;
-				if (this instanceof Locomotive) d28 = 0;
+				if (this instanceof Locomotive)
+                { d28 = 0;
+                }
 				double d14 = Math.sqrt(motionX * motionX + motionZ * motionZ);
 				if (d14 > 0.0D) {
 					motionX = (motionX / d14) * (d14 + d28);
@@ -1361,25 +1433,34 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			 motionX += (motionX / d31) * 0.059999999999999998D;
 			 motionZ += (motionZ / d31) * 0.059999999999999998D;
 			 }
-			 else if (i1 == 1) {
+			 else
+                { if (i1 == 1) {
 			 if (worldObj.isBlockNormalCubeDefault(floor_posX - 1, floor_posY, floor_posZ,false)) {
 			 motionX = 0.02D;
 			 }
-			 else if (worldObj.isBlockNormalCubeDefault(floor_posX + 1, floor_posY, floor_posZ,false)) {
+			 else
+                        { if (worldObj.isBlockNormalCubeDefault(floor_posX + 1, floor_posY, floor_posZ,false)) {
 			 motionX = -0.02D;
 			 }
 			 }
-			 else if (i1 == 0) {
+                    }
+			 else
+                    { if (i1 == 0) {
 			 if (worldObj.isBlockNormalCubeDefault(floor_posX, floor_posY, floor_posZ - 1,false)) {
 			 motionZ = 0.02D;
 			 }
-			 else if (worldObj.isBlockNormalCubeDefault(floor_posX, floor_posY, floor_posZ + 1,false)) {
+			 else
+                            { if (worldObj.isBlockNormalCubeDefault(floor_posX, floor_posY, floor_posZ + 1,false)) {
 			 motionZ = -0.02D;
 			 }
 			 }
 			 }
 		}
-		else if (block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
+                }
+            }
+        }
+		else
+        { if (block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
 			limitSpeedOnTCRail();
 
 			TileEntity tileEntity = this.worldObj.getTileEntity(floor_posX, floor_posY, floor_posZ);
@@ -1423,11 +1504,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						moveOnTC90TurnRail(floor_posX, floor_posY, floor_posZ, tileRail.r, tileRail.cx, tileRail.cz);
 				}
 			}
-			else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
+			else
+                { if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) &&tileRail.getSwitchState() == false))
 			{
 				pathFindingHelper.moveOnTCStraight(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 			}
-			else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
+			else
+                    { if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
 			{
 				if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, floor_posX, floor_posY, floor_posZ, meta)) {
 
@@ -1437,11 +1520,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				}
 			}
 
-			else if (TCRailTypes.isSlopeTrack(tileRail))
+			else
+                        { if (TCRailTypes.isSlopeTrack(tileRail))
 			{
 				pathFindingHelper.moveOnTCSlope(this, floor_posY, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.getBlockMetadata(), tileRail.slopeLength);
 			}
-			else if (TCRailTypes.isDiagonalTrack(tileRail))
+			else
+                            { if (TCRailTypes.isDiagonalTrack(tileRail))
 			{
 				if (tileRail.getRailLength() == 0) {
 					pathFindingHelper.moveOnTCDiagonal(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), 1);
@@ -1451,15 +1536,24 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 					pathFindingHelper.moveOnTCDiagonal(this, floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
 				}
 			}
-			else if (TCRailTypes.isCrossingTrack(tileRail)) {
+			else
+                                { if (TCRailTypes.isCrossingTrack(tileRail)) {
 				moveOnTCTwoWaysCrossing(floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.yCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 			}
-			else if (TCRailTypes.isDiagonalCrossingTrack(tileRail))
+			else
+                                    { if (TCRailTypes.isDiagonalCrossingTrack(tileRail))
 			{
 				moveOnTCDiamondCrossing(floor_posX, floor_posY, floor_posZ, tileRail.xCoord, tileRail.yCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 			}
 		}
-		else { // If we are not on a rail…
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+		else   // If we are not on a rail…
+ {
 			// Remove any active detectors if derailed.
 			if (!activeDetectors.isEmpty()) {
 				removeObsoleteDetectors(new LinkedList<>());
@@ -1467,6 +1561,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			super.onUpdate();
 		}
 	}
+    }
 
 	/**
 	 * @author 02skaplan
@@ -1487,10 +1582,14 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				}
 			}
 			removeObsoleteDetectors(trackPairedDetectors);
-		} else if (!activeDetectors.isEmpty()){ // Remove all active detectors when we move to a track that doesn't have any detectors.
+		} else
+        { if (activeDetectors.isEmpty() ==
+                    false) // Remove all active detectors when we move to a track that doesn't have any detectors.
+            {
 			removeObsoleteDetectors(trackPairedDetectors);
 		}
 	}
+    }
 
 	/**
 	 * @author 02skaplan
@@ -1625,19 +1724,23 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			//System.out.println(l);
 			if (l == 2 || l == 0){
 				moveEntity(motionX, 0.0D, 0.0D);
-			} else if (l == 1 || l == 3){
+			} else
+            { if (l == 1 || l == 3){
 				moveEntity(0.0D, 0.0D, motionZ);
 			}
 		}
+        }
 		else {
 			int l = MathHelper.floor_double(rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			//System.out.println(l);
 			if (l == 2 || l == 0){
 				moveEntity(motionX, 0.0D, 0.0D);
 			}
-			else if (l == 1 || l == 3){
+			else
+            { if (l == 1 || l == 3){
 				moveEntity(0.0D, 0.0D, motionZ);
 			}
+            }
 			//moveEntity(motionX, 0.0D, motionZ);
 		}
 	}
@@ -1653,18 +1756,28 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		}
 		if (l == 0 || l == 4) {
 			moveEntity(motionX, 0.0D, 0.0D);
-		} else if (l == 2 || l == 6) {
+		} else
+        { if (l == 2 || l == 6) {
 			moveEntity(0.0D, 0.0D, motionZ);
-		} else if (l == 1) {
+		} else
+            { if (l == 1) {
 			pathFindingHelper.moveOnTCDiagonal(this, i, j, k, cx, cz, 5, 1);
-		} else if (l == 3) {
+		} else
+                { if (l == 3) {
 			pathFindingHelper.moveOnTCDiagonal(this, i, j, k, cx, cz, 6, 1);
-		} else if (l == 5) {
+		} else
+                    { if (l == 5) {
 			pathFindingHelper.moveOnTCDiagonal(this, i, j, k, cx, cz, 7, 1);
-		} else if (l == 7) {
+		} else
+                        { if (l == 7) {
 			pathFindingHelper.moveOnTCDiagonal(this, i, j, k, cx, cz, 4, 1);
 		}
 	}
+                    }
+                }
+            }
+        }
+    }
 
 	public void limitSpeedOnTCRail() {
 		railMaxSpeed = 3;
@@ -1698,10 +1811,18 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		if (!onGround) {
 			d2 = getMaxSpeedAirLateral();
 		}
-		if (motionX < -d2) motionX = -d2;
-		if (motionX > d2) motionX = d2;
-		if (motionZ < -d2) motionZ = -d2;
-		if (motionZ > d2) motionZ = d2;
+		if (motionX < -d2)
+        { motionX = -d2;
+        }
+		if (motionX > d2)
+        { motionX = d2;
+        }
+		if (motionZ < -d2)
+        { motionZ = -d2;
+        }
+		if (motionZ > d2)
+        { motionZ = d2;
+        }
 		double moveY = motionY;
 		if (getMaxSpeedAirVertical() > 0 && motionY > getMaxSpeedAirVertical()) {
 			moveY = getMaxSpeedAirVertical();
@@ -1729,9 +1850,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		int k = MathHelper.floor_double(d2);
 		if (isRailBlockAt(worldObj, i, j - 1, k)) {
 			j--;
-		} else if (isRailBlockAt(worldObj, i, j + 1, k)) {
+		} else
+        { if (isRailBlockAt(worldObj, i, j + 1, k)) {
 			j++;
 		}
+        }
 		Block l = worldObj.getBlock(i, j, k);
 		if (BlockRailBase.func_150051_a(l)) {
 			int i1 = ((BlockRailBase) l).getBasicRailMetadata(worldObj, this, i, j, k);// getBasicRailMetadata2(worldObj, this, i, j, k);
@@ -1757,7 +1880,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			if (d10 == 0.0D) {
 				d3 = d2 - k;
 			}
-			else if (d12 == 0.0D) {
+			else
+            { if (d12 == 0.0D) {
 				d3 = d - i;
 			}
 			else {
@@ -1765,13 +1889,16 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				double d14 = d2 - d6;
 				d3 =  (d13 * d10 + d14 * d12) * 2D;
 			}
+            }
 			d1 = d5 + d11 * d3;
 			if (d11 < 0.0D) {
 				d1++;
 			}
-			else if (d11 > 0.0D) {
+			else
+            { if (d11 > 0.0D) {
 				d1 += 0.5D;
 			}
+            }
 			return Vec3.createVectorHelper(d4 + d10 * d3, d1, d6 + d12 * d3);
 		}
 		else {
@@ -1853,15 +1980,21 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			boolean isTrustedPlayer = isPlayerTrusted(playerEntity.getDisplayName());
 			if (!playerEntity.getDisplayName().equalsIgnoreCase(this.getTransportOwner()) && !canBeRiddenWhileLocked(this) && !isTrustedPlayer)
 			{
-				if (!worldObj.isRemote) entityplayer.addChatMessage(new ChatComponentText("Train is locked by " + this.getTransportOwner() + "."));
+				if (worldObj.isRemote == false)
+                { entityplayer.addChatMessage(new ChatComponentText("Train is locked by " + this.getTransportOwner() + "."));
+                }
 				return true;
 			}
-			else if (!playerEntity.getDisplayName().equalsIgnoreCase(this.getTransportOwner()) && entityplayer.inventory.getCurrentItem() != null && entityplayer.inventory.getCurrentItem().getItem() instanceof ItemDye && (this instanceof Locomotive) && !isTrustedPlayer)
+			else
+            { if (playerEntity.getDisplayName().equalsIgnoreCase(this.getTransportOwner()) == false && entityplayer.inventory.getCurrentItem() != null && entityplayer.inventory.getCurrentItem().getItem() instanceof ItemDye && (this instanceof Locomotive) &&isTrustedPlayer == false)
 			{
-				if (!worldObj.isRemote) entityplayer.addChatMessage(new ChatComponentText("Train is locked by " + this.getTransportOwner() + "."));
+				if (worldObj.isRemote == false)
+                    { entityplayer.addChatMessage(new ChatComponentText("Train is locked by " + this.getTransportOwner() + "."));
+                    }
 				return true;
 			}
 		}
+        }
 
 		if (itemstack != null)
 		{
@@ -1872,8 +2005,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			if (trainsOnClick.onClickWithBrakeHandle(this,itemstack,playerEntity,worldObj))
 			{
-				setParkingBrakeFromPacket(!parkingBrake);
-				dataWatcher.updateObject(30, "" + !getParkingBrakeDW());
+				setParkingBrakeFromPacket(parkingBrake == false);
+				dataWatcher.updateObject(30, "" + (getParkingBrakeDW() == false));
 				return true;
 			}
 
@@ -1960,7 +2093,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 					}
 				}
 
-			} else if (theItem == ItemIDs.emptyCanister.item) {
+			} else
+            { if (theItem == ItemIDs.emptyCanister.item) {
 				thisAsDieselTrain.getTank().drain(1000, true);
 				for (int i = 0; i < entityPlayer.inventory.getSizeInventory(); i++) {
 					if (entityPlayer.inventory.getStackInSlot(i) != null && entityPlayer.inventory.getStackInSlot(i).isItemEqual(itemStack)) {
@@ -1974,6 +2108,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 					}
 				}
 			}
+            }
 			return true;
 		}
 
@@ -1997,7 +2132,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN +  "Successfully paired with train! Right click again to unpair."));
 
 					}
-					else if (!this.locked || Objects.equals(entityPlayer.getDisplayName(), this.getTransportOwner()))
+					else
+                    { if (this.locked == false || Objects.equals(entityPlayer.getDisplayName(), this.getTransportOwner()))
 					{
 						theItem2.attachedLocomotive = thisAsLocomotive;
 						entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN +"Successfully paired with train! Right click again to unpair."));
@@ -2007,6 +2143,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 						entityPlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You do not have permission to pair with this train. Maybe you aren't the owner?"));
 					}
 				}
+                }
 				else
 				{
 					theItem2.attachedLocomotive = null;
@@ -2019,10 +2156,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			return true;
 		}
-		else if (itemStack.getItem() == ItemIDs.remoteController.item && !worldObj.isRemote && this instanceof Locomotive)
+		else
+        { if (itemStack.getItem() == ItemIDs.remoteController.item &&worldObj.isRemote == false && this instanceof Locomotive)
 		{
 			return true;
 		}
+        }
 
 		return false;
 	}
@@ -2064,11 +2203,15 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		}
 
 		if (par1Entity instanceof EntityBogie) {
-			if (((EntityBogie) par1Entity).entityMainTrainID == this.uniqueID) return;
+			if (((EntityBogie) par1Entity).entityMainTrainID == this.uniqueID)
+            { return;
+		}
 		}
 		if (par1Entity == bogieLoco){ return;}
 		if (par1Entity instanceof EntityRollingStock && ((EntityRollingStock) par1Entity).bogieLoco != null) {
-			if (par1Entity == ((EntityRollingStock) par1Entity).bogieLoco) return;
+			if (par1Entity == ((EntityRollingStock) par1Entity).bogieLoco)
+            { return;
+		}
 		}
 
 		MinecraftForge.EVENT_BUS.post(new MinecartCollisionEvent(this, par1Entity));
@@ -2131,7 +2274,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 							distancesZ[3] = 100;
 							euclidian[3] = MathHelper.sqrt_double((distancesX[3] * distancesX[3]) + (distancesZ[3] * distancesZ[3]));
 						}
-						else if (((EntityRollingStock) par1Entity).bogieLoco == null && this.bogieLoco != null)
+						else
+                        { if (((EntityRollingStock) par1Entity).bogieLoco == null && this.bogieLoco != null)
 						{
 							distancesX[0] = entity.posX - this.posX;
 							distancesZ[0] = entity.posZ - this.posZ;
@@ -2161,6 +2305,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 							distancesZ[3] = entity.bogieLoco.posZ - this.bogieLoco.posZ;
 							euclidian[3] = MathHelper.sqrt_double((distancesX[3] * distancesX[3]) + (distancesZ[3] * distancesZ[3]));
 						}
+                        }
 						double min = euclidian[0];
 						int minIndex = 0;
 						for (int k = 0; k < euclidian.length; k++) {
@@ -2236,7 +2381,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 								par1Entity.motionZ *= 0.949999988079071D;
 							}
 						}
-						else if ((!(par1Entity instanceof Locomotive) && isPoweredCart()) || (!((EntityMinecart) par1Entity).isPoweredCart() && isPoweredCart()))
+						else
+                        { if (((par1Entity instanceof Locomotive) == false && isPoweredCart()) || (((EntityMinecart) par1Entity).isPoweredCart() == false && isPoweredCart()))
 						{
 							//System.out.println("2 "+par1Entity +"     "+ this);
 							if (par1Entity instanceof EntityBogie && ((EntityBogie) par1Entity).entityMainTrain != null) {
@@ -2291,15 +2437,18 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 						}
 					}
+                    }
 					else {
 
 						if (!(par1Entity instanceof EntityItem) && !(par1Entity instanceof EntityPlayer && this instanceof Locomotive) && !(par1Entity instanceof EntityLiving) && !(par1Entity instanceof EntityBogie))
 						{
 							this.addVelocity(-d0 * 2, 0.0D, -d1 * 2);
 						}
-						else if ((par1Entity instanceof EntityBogie))
+						else
+                        { if ((par1Entity instanceof EntityBogie))
 						{
 
+						}
 						}
 
 						// Adding velocity to coupled entity with clamping force.
@@ -2307,7 +2456,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 							// Players should be pushed, but not launched.
 							par1Entity.addVelocity(d0 * 2, 0.0D, d1 * 2);
 						}
-						else if (par1Entity instanceof Locomotive && this instanceof Locomotive) {
+						else
+                        { if (par1Entity instanceof Locomotive && this instanceof Locomotive) {
 							// Locomotive pushing another locomotive gets reduced force.
 							par1Entity.addVelocity(d0 * 2, 0.0D, d1 * 2);
 						}
@@ -2315,6 +2465,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 							// Keep the heavy clamp/push force for non-player entities.
 							par1Entity.addVelocity(d0 * 2 * 100, 0.0D, d1 * 2 * 100);
 						}
+                        }
 
 						if (par1Entity instanceof EntityPlayer)
 						{
@@ -2342,7 +2493,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ) *60;
 		//f1 *= 6;//ratio
 		//f1 *= 10;//to get speed in "pseudo m/s"
-		if ((f1 * 3.6) < 35) {//if speed is smaller than 35km/h then don't do any damage but push entities
+		if ((f1 * 3.6) < 35)//if speed is smaller than 35km/h then don't do any damage but push entities
+        {
 			return;
 		}
 		int j1 = (int) Math.ceil((f1) * ((par1Entity instanceof EntityCreeper)?100:1));
@@ -2580,10 +2732,18 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		float targetSpeed = (float) (maxSpeed * limiter);
 		float targetSpeedX = (float) Math.copySign(targetSpeed, motionX);
 		float targetSpeedZ = (float) Math.copySign(targetSpeed, motionZ);
-		if (motionX > targetSpeedX && motionX != 0) motionX -= 0.01;
-		if (motionZ > targetSpeedZ && motionZ != 0) motionZ -= 0.01;
-		if (motionX < targetSpeedX && motionX != 0) motionX += 0.01;
-		if (motionZ < targetSpeedZ && motionZ != 0) motionZ += 0.01;
+		if (motionX > targetSpeedX && motionX != 0)
+        { motionX -= 0.01;
+        }
+		if (motionZ > targetSpeedZ && motionZ != 0)
+        { motionZ -= 0.01;
+        }
+		if (motionX < targetSpeedX && motionX != 0)
+        { motionX += 0.01;
+        }
+		if (motionZ < targetSpeedZ && motionZ != 0)
+        { motionZ += 0.01;
+        }
 		//System.out.println(motionX + " X " + targetSpeedX);
 		//System.out.println(motionZ + " Z " + targetSpeedZ);
 		if ((Math.abs(motionX) < Math.abs(targetSpeedX) + 0.01) && (Math.abs(motionX) > Math.abs(targetSpeedX) - 0.01)) {
@@ -2601,16 +2761,22 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		if (i1 == 2) {
 			motionX -= d4;
 		}
-		else if (i1 == 3) {
+		else
+        { if (i1 == 3) {
 			motionX += d4;
 		}
-		else if (i1 == 4) {
+		else
+            { if (i1 == 4) {
 			motionZ += d4;
 		}
-		else if (i1 == 5) {
+		else
+                { if (i1 == 5) {
 			motionZ -= d4;
 		}
 	}
+            }
+        }
+    }
 
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return (!isDead && entityplayer.getDistanceSqToEntity(this) <= 300D);
@@ -2794,16 +2960,20 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 		if (worldObj.getBlock(i, j - 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j - 1, k) == BlockIDs.tcRailGag.block) {
 			--j;
-		} else if (worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRailGag.block){
+		} else
+        { if (worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRailGag.block){
 			j++;
 		}
+        }
 
 		Block l = this.worldObj.getBlock(i, j, k);
 		int i1;
 		if (l == BlockIDs.tcRail.block || l == BlockIDs.tcRailGag.block) {
 			i1 = worldObj.getBlockMetadata(i, j, k);
 			if (i1 == 2){ i1 = 0;}
-			else if (i1 == 3){ i1 = 1;}
+			else
+            { if (i1 == 3){ i1 = 1;}
+		}
 		}
 		else {
 			return null;
@@ -2815,13 +2985,15 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				par3 = j + 1;
 			}
 		}
-		else if (l == BlockIDs.tcRail.block || l == BlockIDs.tcRailGag.block) {
+		else
+        { if (l == BlockIDs.tcRail.block || l == BlockIDs.tcRailGag.block) {
 			TileEntity tile = worldObj.getTileEntity(i, j, k);
 			if (tile != null && tile instanceof TileTCRail) {
 				if (((TileTCRail) tile).getType() != null && !TCRailTypes.isSlopeTrack((TileTCRail) tile)) {
 					par3 = j;
 				}
-			} else if (tile != null && tile instanceof TileTCRailGag) {
+			} else
+                { if (tile != null && tile instanceof TileTCRailGag) {
 				int xOrigin = ((TileTCRailGag) tile).originX;
 				int yOrigin = ((TileTCRailGag) tile).originY;
 				int zOrigin = ((TileTCRailGag) tile).originZ;
@@ -2830,6 +3002,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 					par3 = j;
 				}
 			}
+		}
+            }
 		}
 		int[][] aint = matrix[i1];
 		double d4 = aint[1][0] - aint[0][0];
@@ -2844,10 +3018,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			if (aint[0][1] != 0 && MathHelper.floor_double(par1) - i == aint[0][0] && MathHelper.floor_double(par5) - k == aint[0][2]) {
 				par3 += aint[0][1];
 			}
-			else if (aint[1][1] != 0 && MathHelper.floor_double(par1) - i == aint[1][0] && MathHelper.floor_double(par5) - k == aint[1][2]) {
+			else
+            { if (aint[1][1] != 0 && MathHelper.floor_double(par1) - i == aint[1][0] && MathHelper.floor_double(par5) - k == aint[1][2]) {
 				par3 += aint[1][1];
 			}
 		}
+        }
 		return this.func_70489_a(par1, par3, par5);
 	}
 
@@ -2858,9 +3034,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		int k = MathHelper.floor_double(par5);
 		if (worldObj.getBlock(i, j - 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j - 1, k) == BlockIDs.tcRailGag.block) {
 			--j;
-		} else if (worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRailGag.block){
+		} else
+        { if (worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRail.block || worldObj.getBlock(i, j + 1, k) == BlockIDs.tcRailGag.block){
 			j++;
 		}
+        }
 
 		Block l = this.worldObj.getBlock(i, j, k);
 		int i1 = 0;
@@ -2894,7 +3072,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			if (d10 == 0.0D) {
 				d3 = par5 - k;
 			}
-			else if (d12 == 0.0D) {
+			else
+            { if (d12 == 0.0D) {
 				d3 = par1 - i;
 			}
 			else {
@@ -2902,6 +3081,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				double d14 = par5 - d6;
 				d3 = (d13 * d10 + d14 * d12) * 2.0D;
 			}
+            }
 			return Vec3.createVectorHelper(d4 + d10 * d3, par3, d6 + d12 * d3);
 		}
 		else {

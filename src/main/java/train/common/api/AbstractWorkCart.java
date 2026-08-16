@@ -1,6 +1,8 @@
 package train.common.api;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,10 +29,12 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	public int currentItemBurnTime = 0;
 	public int furnaceCookTime = 0;
 
-	public boolean isLightsEnabled = true;
-	public boolean isBeaconEnabled = true;
-	public byte beaconCycleIndex = 0;
-	public byte ditchLightMode = 1;
+    private RollingStockHeadlightLevel frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
+    private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
+    private boolean ditchLightsEnabled = true;
+    private boolean beaconEnabled = true;
+    private boolean auxLightsEnabled;
+    private boolean gyraLightsEnabled;
 
 
 	public AbstractWorkCart(World world)
@@ -39,7 +43,7 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		if (world != null)
 		{
 			initCabooseWorkCart();
-			dataWatcher.addObject(28, lightingDetailsJSON());
+			dataWatcher.addObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
 		}
 	}
 
@@ -75,19 +79,19 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		return 0D;
 	}
 
-	/** Returns the distance that the RollingStockCar Entity
-	 *  should be from the other RollingStockCar Entity being coupled to
+    /**
+     * Returns the distance that the RollingStockCar Entity should be from the other RollingStockCar
+     * Entity being coupled to
 	 */
 
 	@Override
 	public void onUpdate()
 	{
-		cycleBeaconIndex();
 		super.onUpdate();
 		updateBurning();
 		if (!worldObj.isRemote)
 		{
-			dataWatcher.updateObject(28, lightingDetailsJSON());
+            synchronizeLightState();
 		}
 	}
 
@@ -115,7 +119,11 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 			}
 		}
 		nbttagcompound.setTag("Items", var2);
-		nbttagcompound.setString("lightingDetailsJSON", lightingDetailsJSON());
+		nbttagcompound.setInteger("tcFrontHeadlightLevel", frontHeadlightLevel.ordinal());
+        nbttagcompound.setInteger("tcRearHeadlightLevel", rearHeadlightLevel.ordinal());
+        nbttagcompound.setInteger(
+            "tcLightChannels",
+            RollingStockLightStateCodec.persistentChannels(packLightState()));
 	}
 
 	@Override
@@ -136,104 +144,167 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		this.furnaceCookTime = nbttagcompound.getShort("CookTime");
 		this.currentItemBurnTime = AbstractWorkCart.getItemBurnTime(this.furnaceItemStacks[1]);
 
-		JsonObject lightingDetailsJSONObject;
+		JsonObject previousState = new JsonObject();
+        if (nbttagcompound.hasKey("lightingDetailsJSON"))
+        {
 		try {
-			lightingDetailsJSONObject = Traincraft.jsonParser.parse(nbttagcompound.getString("lightingDetailsJSON")).getAsJsonObject();
-		}
-		catch (Exception e)
+                JsonElement parsedState = Traincraft.jsonParser.parse(nbttagcompound.getString("lightingDetailsJSON"));
+                if (parsedState.isJsonObject())
 		{
-			lightingDetailsJSONObject = lightingDetailsAsJSON();
+                    previousState = parsedState.getAsJsonObject();
 		}
-
-		isLightsEnabled = lightingDetailsJSONObject.get("isLightsEnabled").getAsBoolean();
-		isBeaconEnabled = lightingDetailsJSONObject.get("isBeaconEnabled").getAsBoolean();
-		ditchLightMode = lightingDetailsJSONObject.get("ditchLightMode").getAsByte();
-		beaconCycleIndex = lightingDetailsJSONObject.get("beaconCycleIndex").getAsByte();
-		dataWatcher.updateObject(28, lightingDetailsJSON());
 	}
-
-	private void cycleBeaconIndex()
+		catch (JsonParseException ignored)
 	{
-		if (isLightsEnabled && ticksExisted % 5 == 0)
+                // Missing or malformed legacy lighting state migrates to the documented defaults.
+		}
+        }
+
+        boolean previousLights = jsonBoolean(previousState, "isLightsEnabled", true);
+        frontHeadlightLevel =
+            nbttagcompound.hasKey("tcFrontHeadlightLevel")
+            ? RollingStockHeadlightLevel.fromOrdinal (
+                nbttagcompound.getInteger("tcFrontHeadlightLevel"))
+            : previousLights
+            ? RollingStockHeadlightLevel.BRIGHT
+            : RollingStockHeadlightLevel.OFF;
+        rearHeadlightLevel =
+            nbttagcompound.hasKey("tcRearHeadlightLevel")
+            ? RollingStockHeadlightLevel.fromOrdinal(
+                nbttagcompound.getInteger("tcRearHeadlightLevel"))
+            : RollingStockHeadlightLevel.OFF;
+			if (nbttagcompound.hasKey("tcLightChannels"))
 		{
-			beaconCycleIndex++;
-			if (beaconCycleIndex == 4)
-			{
-				beaconCycleIndex = 0;
+            int channels = nbttagcompound.getInteger("tcLightChannels");
+            ditchLightsEnabled = (channels & RollingStockLightChannel.DITCH.mask()) != 0;
+            beaconEnabled = (channels & RollingStockLightChannel.BEACON.mask()) != 0;
+            auxLightsEnabled = (channels & RollingStockLightChannel.AUX.mask()) != 0;
+            gyraLightsEnabled = (channels & RollingStockLightChannel.GYRA.mask()) != 0;
 			}
+        else
+			{
+            ditchLightsEnabled = jsonByte(previousState,"ditchLightMode",(byte) 1) > 0;
+            beaconEnabled = jsonBoolean(previousState, "isBeaconEnabled", true);
+			}
+        dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
 		}
+
+    @Override
+    public RollingStockHeadlightLevel getFrontHeadlightLevel()
+	{
+		return worldObj != null && worldObj.isRemote
+               ? RollingStockLightStateCodec.front(synchronizedLightState())
+               : frontHeadlightLevel;
 	}
 
-	public String lightingDetailsJSON()
+    @Override
+    public RollingStockHeadlightLevel getRearHeadlightLevel()
 	{
-		JsonObject lightingDetailsJSON = new JsonObject();
-		lightingDetailsJSON.addProperty("isLightsEnabled", isLightsEnabled);
-		lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
-		lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
-		lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
-		return lightingDetailsJSON.toString();
+        return worldObj != null && worldObj.isRemote
+               ? RollingStockLightStateCodec.rear(synchronizedLightState())
+               : rearHeadlightLevel;
 	}
 
-	public JsonObject lightingDetailsAsJSON()
+    @Override
+    public void setFrontHeadlightLevel(RollingStockHeadlightLevel level)
 	{
-		JsonObject lightingDetailsJSON = new JsonObject();
-		lightingDetailsJSON.addProperty("isLightsEnabled", isLightsEnabled);
-		lightingDetailsJSON.addProperty("isBeaconEnabled", isBeaconEnabled);
-		lightingDetailsJSON.addProperty("beaconCycleIndex", beaconCycleIndex);
-		lightingDetailsJSON.addProperty("ditchLightMode", ditchLightMode);
-		return lightingDetailsJSON;
+        frontHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
+        synchronizeLightState();
 	}
 
-	/**
-	 *
-	 * @param isLightsOn set 0 if loco lights is false, 1 if true
-	 */
-	public void setPacketLights(boolean isLightsOn)
+    @Override
+    public void setRearHeadlightLevel(RollingStockHeadlightLevel level)
 	{
-		isLightsEnabled = isLightsOn;
+        rearHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
+        synchronizeLightState();
 	}
 
-	/**
-	 *
-	 * @param isBeaconEnabled set 0 if loco beacon is false, 1 if true
-	 */
-	public void setPacketBeacon(boolean isBeaconEnabled)
+    @Override
+    public boolean isLightChannelEnabled(RollingStockLightChannel channel)
 	{
-		this.isBeaconEnabled = isBeaconEnabled;
+        return RollingStockLightStateCodec.enabled(synchronizedLightState(), channel);
 	}
 
-	/**Sets the Ditch light mode
-	 *
-	 * @param ditchLightMode set 0 for off,
-	 */
-	public void setPacketDitchLightsMode(byte ditchLightMode)
+    @Override
+    public void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled)
+    {
+        if (channel == null)
+        {
+            return;
+        }
+        switch (channel)
+        {
+            case HEADLIGHT:
+                if (enabled == false)
+                {
+                    frontHeadlightLevel = RollingStockHeadlightLevel.OFF;
+                    rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
+                }
+                else
 	{
-		this.ditchLightMode = ditchLightMode;
+                    if (frontHeadlightLevel == RollingStockHeadlightLevel.OFF
+                            && rearHeadlightLevel == RollingStockHeadlightLevel.OFF)
+                    {
+                        frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
+                    }
+                }
+                break;
+            case DITCH:
+                ditchLightsEnabled = enabled;
+                break;
+            case BEACON:
+                beaconEnabled = enabled;
+                break;
+            case AUX:
+                auxLightsEnabled = enabled;
+                break;
+            case GYRA:
+                gyraLightsEnabled = enabled;
+                break;
+            default:
+                return;
+        }
+        synchronizeLightState();
 	}
 
-	public boolean isLightsEnabled()
+    /** Packs server-owned fields into the stable synchronized representation. */
+    private int packLightState()
 	{
-		return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("isLightsEnabled").getAsBoolean();
+        return RollingStockLightStateCodec.pack(
+                   frontHeadlightLevel,
+                   rearHeadlightLevel,
+                   ditchLightsEnabled,
+                   beaconEnabled,
+                   auxLightsEnabled,
+                   gyraLightsEnabled);
 	}
 
-	public boolean isBeaconEnabled()
+    /** Reads the watcher on clients and the authoritative fields on the server. */
+    private int synchronizedLightState()
 	{
-		return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("isBeaconEnabled").getAsBoolean();
+        return worldObj != null && worldObj.isRemote
+               ? dataWatcher.getWatchableObjectInt(RollingStockLightStateCodec.WATCHER_SLOT)
+               : packLightState();
 	}
 
-	public byte getBeaconCycleIndex()
+    /** Publishes a server-side control mutation through the stable watcher slot. */
+    private void synchronizeLightState()
 	{
-		return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("beaconCycleIndex").getAsByte();
+        if (worldObj != null && worldObj.isRemote == false)
+        {
+            dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
+        }
+
 	}
 
-	public boolean isDitchLightsEnabled()
+    private static boolean jsonBoolean(JsonObject object, String key, boolean fallback)
 	{
-		return AsJsonObject(dataWatcher.getWatchableObjectString(28)).get("ditchLightMode").getAsByte() > 0;
+        return object != null && object.has(key) ? object.get(key).getAsBoolean() : fallback;
 	}
 
-	private JsonObject AsJsonObject(String string)
+    private static byte jsonByte(JsonObject object, String key, byte fallback)
 	{
-		return Traincraft.jsonParser.parse(string).getAsJsonObject();
+        return object != null && object.has(key) ? object.get(key).getAsByte() : fallback;
 	}
 
 	@Override
@@ -247,7 +318,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't this more of a set than a get?*
+     * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be
+     * extended. *Isn't this more of a set than a get?*
 	 */
 	@Override
 	public int getInventoryStackLimit() {
@@ -255,8 +327,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * For tile entities, ensures the chunk containing the tile entity is saved to disk later - the game won't think it
-	 * hasn't changed and skip it.
+     * For tile entities, ensures the chunk containing the tile entity is saved to disk later - the
+     * game won't think it hasn't changed and skip it.
 	 */
 	@Override
 	public void markDirty()
@@ -266,8 +338,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 
 	@SideOnly(Side.CLIENT)
 	/**
-	 * Returns an integer between 0 and the passed value representing how close the current item is to being completely
-	 * cooked
+     * Returns an integer between 0 and the passed value representing how close the current item is
+     * to being completely cooked
 	 */
 	public int getCookProgressScaled(int par1) {
 		return this.furnaceCookTime * par1 / 200;
@@ -280,7 +352,9 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		}
 		if (!worldObj.isRemote) {
 			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-			if(lockThisCart(itemstack, entityplayer))return true;
+			if(lockThisCart(itemstack, entityplayer))
+            {return true;
+            }
 			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
 				return true;
 			}
@@ -293,8 +367,9 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 
 	@SideOnly(Side.CLIENT)
 	/**
-	 * Returns an integer between 0 and the passed value representing how much burn time is left on the current fuel
-	 * item, where 0 means that the item is exhausted and the passed value means that the item is fresh
+     * Returns an integer between 0 and the passed value representing how much burn time is left on
+     * the current fuel item, where 0 means that the item is exhausted and the passed value means
+     * that the item is fresh
 	 */
 	public int getBurnTimeRemainingScaled(int par1) {
 		if (this.currentItemBurnTime == 0) {
@@ -354,7 +429,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack isn't full, etc.
+     * Returns true if the furnace can smelt an item, i.e. has a source item, destination stack
+     * isn't full, etc.
 	 */
 	private boolean canSmelt() {
 		if (this.furnaceItemStacks[0] == null) {
@@ -363,18 +439,25 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		else {
 			ItemStack var1 = FurnaceRecipes.smelting().getSmeltingResult(this.furnaceItemStacks[0]);
 			if (var1 == null)
+            {
 				return false;
+            }
 			if (this.furnaceItemStacks[2] == null)
+            {
 				return true;
-			if (!this.furnaceItemStacks[2].isItemEqual(var1))
+            }
+			if (this.furnaceItemStacks[2].isItemEqual(var1) == false)
+            {
 				return false;
+            }
 			int result = furnaceItemStacks[2].stackSize + var1.stackSize;
 			return (result <= getInventoryStackLimit() && result <= var1.getMaxStackSize());
 		}
 	}
 
 	/**
-	 * Turn one item from the furnace source stack into the appropriate smelted item in the furnace result stack
+     * Turn one item from the furnace source stack into the appropriate smelted item in the furnace
+     * result stack
 	 */
 	public void smeltItem() {
 		if (this.canSmelt()) {
@@ -383,9 +466,11 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 			if (this.furnaceItemStacks[2] == null) {
 				this.furnaceItemStacks[2] = var1.copy();
 			}
-			else if (this.furnaceItemStacks[2].isItemEqual(var1)) {
+			else
+            { if (this.furnaceItemStacks[2].isItemEqual(var1)) {
 				furnaceItemStacks[2].stackSize += var1.stackSize;
 			}
+            }
 			--this.furnaceItemStacks[0].stackSize;
 			if (this.furnaceItemStacks[0].stackSize <= 0) {
 				this.furnaceItemStacks[0] = null;
@@ -394,7 +479,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0 if the item isn't fuel
+     * Returns the number of ticks that the supplied fuel item will keep the furnace burning, or 0
+     * if the item isn't fuel
 	 */
 	public static int getItemBurnTime(ItemStack par0ItemStack) {
 		if (par0ItemStack == null) {
@@ -407,7 +493,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 			if (par0ItemStack.getItem() instanceof ItemBlock && Block.getBlockFromItem(var2) != null) {
 				Block var3 = Block.getBlockFromItem(var2);
 
-				if (var3 == Block.getBlockById(126)) {//126 is wooden slab
+				if (var3 == Block.getBlockById(126))   // 126 is wooden slab
+ {
 					return 150;
 				}
 
@@ -417,26 +504,38 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 			}
 
 			if (var2 instanceof ItemTool && ((ItemTool) var2).getToolMaterialName().equals("WOOD"))
+            {
 				return 200;
+            }
 			if (var2 instanceof ItemSword && ((ItemSword) var2).getToolMaterialName().equals("WOOD"))
+            {
 				return 200;
+            }
 			if (var1 == Item.getIdFromItem(Items.stick))
+            {
 				return 100;
+            }
 			if (var1 == Item.getIdFromItem(Items.coal))
+            {
 				return 1600;
+            }
 			if (var1 == Item.getIdFromItem(Items.lava_bucket))
+            {
 				return 20000;
+            }
 			if (var1 == Block.getIdFromBlock(Blocks.sapling))//6 is sapling
+            {
 				return 100;
+            }
 			if (var1 == Item.getIdFromItem(Items.blaze_rod))
+            {
 				return 2400;
+            }
 			return GameRegistry.getFuelValue(par0ItemStack);
 		}
 	}
 
-	/**
-	 * Return true if item is a fuel source (getItemBurnTime() > 0).
-	 */
+    /** Return true if item is a fuel source (getItemBurnTime() > 0). */
 	public static boolean isItemFuel(ItemStack par0ItemStack) {
 		return getItemBurnTime(par0ItemStack) > 0;
 	}
@@ -453,7 +552,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem - like when you close a workbench GUI.
+     * When some containers are closed they call this on each slot, then drop whatever it returns as
+     * an EntityItem - like when you close a workbench GUI.
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int par1) {
@@ -468,7 +568,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a new stack.
+     * Removes from an inventory slot (first arg) up to a specified number (second arg) of items and
+     * returns them in a new stack.
 	 */
 	@Override
 	public ItemStack decrStackSize(int par1, int par2) {
@@ -493,7 +594,8 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	/**
-	 * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
+     * Sets the given item stack to the specified slot in the inventory (can be crafting or armor
+     * sections).
 	 */
 	@Override
 	public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {

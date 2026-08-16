@@ -110,39 +110,28 @@ public class GuiControlCar extends GuiContainer
         controlCar.guiTCTextFieldTrainNote = new GuiTCTextField(fontRendererObj, width/2 - 85, var2 - 39, 170,15);
         controlCar.guiTCTextFieldTrainNote.setText(controlCar.getTrainNote());
         //endregion guiTCTextFieldTrainNote
-
-        //region Lights On/Off
-        if (controlCar.isLightsEnabled())
-        {
-            buttonList.add(this.buttonLock = new GuiButton(6, var1 + 108, var2 + 166, 67, 12, "Lights: On"));
-        }
-        else
-        {
-            buttonList.add(this.buttonLock = new GuiButton(6, var1 + 108, var2 + 166, 67, 12, "Lights: Off"));
-        }
-        //endregion Lights On/Off
-
-        //region Beacon On/Off
-        if (controlCar.isBeaconEnabled())
-        {
-            buttonList.add(this.buttonLock = new GuiButton(7, var1 + 41, var2 + 166, 67, 12, "Beacon: On"));
-        }
-        else
-        {
-            buttonList.add(this.buttonLock = new GuiButton(7, var1 + 41, var2 + 166, 67, 12, "Beacon: Off"));
-        }
-        //endregion Beacon On/Off
-
-        //region DitchLights On/Off
-        if (controlCar.isDitchLightsEnabled())
-        {
-            buttonList.add(this.buttonLock = new GuiButton(8, var1 + 90, var2 + 178, 85, 12, "Ditch Lights: On"));
-        }
-        else
-        {
-            buttonList.add(this.buttonLock = new GuiButton(8, var1 + 90, var2 + 178, 85, 12, "Ditch Lights: Off"));
-        }
-        //endregion DitchLights On/Off
+            buttonList.add( new GuiButton(6, var1 + 108, var2 + 166, 67, 12,
+                "Front: " + controlCar.getFrontHeadlightLevel().name()));
+            buttonList.add( new GuiButton(
+                10, var1 + 176, var2 + 166, 67, 12,
+                "Rear: " + controlCar.getRearHeadlightLevel().name()));
+            buttonList.add( new GuiButton(7, var1 + 41, var2 + 166, 67, 12,
+                "Beacon: " + channelLabel(RollingStockLightChannel.BEACON)));
+            buttonList.add( new GuiButton(
+                8, var1 + 90, var2 + 178,
+                85,
+                12,
+                "Ditch Lights: " + channelLabel(RollingStockLightChannel.DITCH)));
+        buttonList.add(
+            new GuiButton(
+                11,
+                var1 + 176,
+                var2 + 178, 67, 12,
+                "Aux: " + channelLabel(RollingStockLightChannel.AUX)));
+            buttonList.add( new GuiButton(
+                12, var1 + 176, var2 + 190,
+                67, 12,
+                "Gyra: " + channelLabel(RollingStockLightChannel.GYRA)));
     }
 
     @Override
@@ -158,12 +147,14 @@ public class GuiControlCar extends GuiContainer
                     guibutton.displayString = "Brake: On";
                     this.initGui();
                 }
-                else if (locomotiveUnderControl.getSpeed() < 10) {
+                else
+                { if (locomotiveUnderControl.getSpeed() < 10) {
                     Traincraft.brakeChannel.sendToServer(new PacketParkingBrake(false, locomotiveUnderControl.getEntityId()));
                     locomotiveUnderControl.parkingBrake=false;
                     locomotiveUnderControl.isBraking=false;
                     guibutton.displayString = "Brake: Off";
                     this.initGui();
+                }
                 }
             break;
 
@@ -171,49 +162,50 @@ public class GuiControlCar extends GuiContainer
                 TransportLockGuiHandler.handleLockButton(this, guibutton, (EntityPlayer)controlCar.riddenByEntity, controlCar, isShiftKeyDown());
             break;
 
-            case 6: // Lights
-                if (controlCar.isLightsEnabled())
-                {
-                    Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLights(false, controlCar.getEntityId()));
-                    controlCar.isLightsEnabled = false;
-                    guibutton.displayString = "Lights: Off";
-                }
-                else
-                {
-                    Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLights(true, controlCar.getEntityId()));
-                    controlCar.isLightsEnabled = true;
-                    guibutton.displayString = "Lights: On";
-                }
+            case 6:
+                sendHeadlight (
+                    PacketRollingStockLightState.FRONT, controlCar.getFrontHeadlightLevel().next());
             break;
-            case 7: // Beacon
-                if (controlCar.isBeaconEnabled())
-                {
-                    Traincraft.rollingStockBeaconChannel.sendToServer(new PacketRollingStockBeacon(false, controlCar.getEntityId()));
-                    controlCar.isBeaconEnabled = false;
-                    guibutton.displayString = "Beacon: Off";
-                }
-                else
-                {
-                    Traincraft.rollingStockBeaconChannel.sendToServer(new PacketRollingStockBeacon(true, controlCar.getEntityId()));
-                    controlCar.isBeaconEnabled = true;
-                    guibutton.displayString = "Beacon: On";
-                }
+            case 7:
+                sendChannel (PacketRollingStockLightState.BEACON, RollingStockLightChannel.BEACON);
             break;
-            case 8: // DitchLights
-                if (controlCar.isDitchLightsEnabled())
-                {
-                    Traincraft.rollingStockDitchLightsChannel.sendToServer(new PacketRollingStockDitchLights((byte)0, controlCar.getEntityId()));
-                    controlCar.ditchLightMode = 0;
-                    guibutton.displayString = "Ditch Lights: Off";
-                }
-                else
-                {
-                    Traincraft.rollingStockDitchLightsChannel.sendToServer(new PacketRollingStockDitchLights((byte)1, controlCar.getEntityId()));
-                    controlCar.ditchLightMode = 1;
-                    guibutton.displayString = "Ditch Lights: On";
-                }
+            case 8:
+                sendChannel (PacketRollingStockLightState.DITCH, RollingStockLightChannel.DITCH);
+                break;
+            case 10:
+                sendHeadlight(
+                    PacketRollingStockLightState.REAR, controlCar.getRearHeadlightLevel().next());
+                break;
+            case 11:
+                sendChannel(PacketRollingStockLightState.AUX, RollingStockLightChannel.AUX);
+                break;
+            case 12:
+                sendChannel(PacketRollingStockLightState.GYRA, RollingStockLightChannel.GYRA);
             break;
+                }
+                }
+
+    /** Requests an explicit directional level; display state updates from server synchronization. */
+    private void sendHeadlight(byte control, RollingStockHeadlightLevel level)
+                {
+        Traincraft.rollingStockLightsChannel.sendToServer(
+            new PacketRollingStockLightState(
+                controlCar.getEntityId(), control, (byte) level.ordinal()));
+                }
+
+    /** Requests the inverse named-circuit state without mutating the client entity locally. */
+    private void sendChannel(byte control, RollingStockLightChannel channel)
+                {
+        boolean enabled = controlCar.isLightChannelEnabled(channel) == false;
+        Traincraft.rollingStockLightsChannel.sendToServer(
+            new PacketRollingStockLightState(
+                controlCar.getEntityId(), control, (byte)(enabled ? 1 : 0)));
         }
+
+    /** Returns the label state from the synchronized watcher. */
+    private String channelLabel(RollingStockLightChannel channel)
+    {
+        return controlCar.isLightChannelEnabled(channel) ? "On" : "Off";
     }
 
     @Override
@@ -222,12 +214,22 @@ public class GuiControlCar extends GuiContainer
         String state = "";
         if (controlCar.getTrainLockedFromPacket()) {
             if (controlCar.getTransportOwner().equalsIgnoreCase(((EntityPlayer) controlCar.riddenByEntity).getDisplayName()))
+            {
                 state = "Locked";
-            else if (controlCar.isPlayerTrusted(((EntityPlayer) controlCar.riddenByEntity).getDisplayName()))
+            }
+            else
+            { if (controlCar.isPlayerTrusted(((EntityPlayer) controlCar.riddenByEntity).getDisplayName()))
+                {
                 if (controlCar.isPlayerTrustedToBreak(((EntityPlayer) controlCar.riddenByEntity).getDisplayName()))
+                    {
                     state = "Trusted Access+";
+                    }
                 else
+                    {
                     state = "Trusted Access";
+        }
+                }
+            }
         } else {
             state = "Unlocked";
         }
@@ -292,6 +294,39 @@ public class GuiControlCar extends GuiContainer
     @Override
     public void updateScreen() {
         super.updateScreen();
+        for (Object value : buttonList)
+        {
+            if ((value instanceof GuiButton) == false)
+            {
+                continue;
+            }
+            GuiButton button = (GuiButton) value;
+            switch (button.id)
+            {
+                case 6:
+                    button.displayString = "Front: " + controlCar.getFrontHeadlightLevel().name();
+                    break;
+                case 10:
+                    button.displayString = "Rear: " + controlCar.getRearHeadlightLevel().name();
+                    break;
+                case 7:
+                    button.displayString =
+                        "Beacon: " + channelLabel(RollingStockLightChannel.BEACON);
+                    break;
+                case 8:
+                    button.displayString =
+                        "Ditch Lights: " + channelLabel(RollingStockLightChannel.DITCH);
+                    break;
+                case 11:
+                    button.displayString = "Aux: " + channelLabel(RollingStockLightChannel.AUX);
+                    break;
+                case 12:
+                    button.displayString = "Gyra: " + channelLabel(RollingStockLightChannel.GYRA);
+                    break;
+                default:
+                    break;
+            }
+        }
         if (controlCar.guiTCTextFieldTrainNote.isFocused()) {
             controlCar.guiTCTextFieldTrainNote.updateCursorCounter();
         }
@@ -302,12 +337,14 @@ public class GuiControlCar extends GuiContainer
     {
         if (controlCar.guiTCTextFieldTrainNote.isFocused()) {
             controlCar.guiTCTextFieldTrainNote.textboxKeyTyped(par1, par2);
-        } else if (par1 == 1 || (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode() || par2 == Keyboard.KEY_ESCAPE)){
+        } else
+        { if (par1 == 1 || (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode() || par2 == Keyboard.KEY_ESCAPE)){
             Traincraft.lockChannel.sendToServer(new PacketAddNote(controlCar.getEntityId(), controlCar.guiTCTextFieldTrainNote.getText()));
             mc.thePlayer.closeScreen();
         } else {
             super.keyTyped(par1, par2);
         }
+    }
     }
 
     @Override

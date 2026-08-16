@@ -2,11 +2,10 @@ package train.client.gui;
 
 import com.google.gson.JsonObject;
 import com.jcirmodelsquad.tcjcir.features.autotrain.IAT2Compatible;
+import java.util.Collections;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -17,10 +16,7 @@ import train.common.Traincraft;
 import train.common.api.*;
 import train.common.api.locomotive.AbstractBoilerLocomotive;
 import train.common.core.network.*;
-import train.common.inventory.InventoryLoco;
 import train.common.library.Info;
-
-import java.util.Collections;
 
 public abstract class AbstractGuiLocomotive extends GuiContainer {
 
@@ -39,6 +35,25 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	protected AbstractGuiLocomotive(net.minecraft.inventory.Container container, Locomotive locomotive) {
 		super(container);
 		this.loco = locomotive;
+        if (locomotive instanceof DieselTrain)
+        {
+            this.ySize = 199;
+        }
+    }
+
+    /** Sends the inverse of the synchronized named-circuit state; the server remains authoritative. */
+    private void sendChannel(byte control, RollingStockLightChannel channel)
+    {
+        boolean enabled = loco.isLightChannelEnabled(channel) == false;
+        Traincraft.rollingStockLightsChannel.sendToServer(
+            new PacketRollingStockLightState(
+                loco.getEntityId(), control, (byte)(enabled ? 1 : 0)));
+    }
+
+    /** Returns the display state derived from the synchronized watcher, not client prediction. */
+    private String channelLabel(RollingStockLightChannel channel)
+    {
+        return loco.isLightChannelEnabled(channel) ? "On" : "Off";
 	}
 
 	@Override
@@ -46,15 +61,17 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		super.initGui();
 		buttonList.clear();
 		//region ParkingBrake
-		if (!loco.getParkingBrakeFromPacket())
+		if (loco.getParkingBrakeFromPacket() == false)
 		{
-			if (loco instanceof AbstractBoilerLocomotive) { // steam locomotive brake off
+			if (loco instanceof AbstractBoilerLocomotive) // steam locomotive brake off
+		{
 				textureX = 41;
 				textureY = 13;
 				textureSizeX = 40;
 				textureSizeY = 13;
 			}
-			else { // diesel and electric locomotive brake off
+			else // diesel and electric locomotive brake off
+            {
 				textureX = 126;
 				textureY = 13;
 				textureSizeX = 43;
@@ -66,13 +83,15 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		}
 		else
 		{
-			if (loco instanceof AbstractBoilerLocomotive) { // steam locomotive brake on
+			if (loco instanceof AbstractBoilerLocomotive) // steam locomotive brake on
+            {
 				textureX = 0;
 				textureY = 13;
 				textureSizeX = 40;
 				textureSizeY = 13;
 			}
-			else { // diesel and electric locomotive brake on
+			else // diesel and electric locomotive brake on
+            {
 				textureX = 82;
 				textureY = 13;
 				textureSizeX = 43;
@@ -129,39 +148,84 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		loco.guiTCTextFieldTrainNote = new GuiTCTextField(fontRendererObj, width/2 - 85, var2 - 39, 170,15);
 		loco.guiTCTextFieldTrainNote.setText(loco.getTrainNote());
 		//endregion guiTCTextFieldTrainNote
-
-		//region Lights On/Off
-		if (loco.isLightsEnabled())
+		if (loco instanceof DieselTrain)
 		{
-			buttonList.add(this.buttonLock = new GuiButton(6, var1 + 108, var2 + 166, 67, 12, "Lights: On"));
+            addDieselLightControls( var1, var2);
 		}
 		else
 		{
-			buttonList.add(this.buttonLock = new GuiButton(6, var1 + 108, var2 + 166, 67, 12, "Lights: Off"));
+			buttonList.add( new GuiButton(6, var1 + 108, var2 + 166, 67, 12,
+                    "Front: " + loco.getFrontHeadlightLevel().name()));
+            buttonList.add(
+                new GuiButton(
+                    10,
+                    var1 + 176,
+                    var2 + 166,
+                    67,
+                    12,
+                    "Rear: " + loco.getRearHeadlightLevel().name()));
+            buttonList.add(
+                new GuiButton(
+                    11,
+                    var1 + 176,
+                    var2 + 178,
+                    67,
+                    12,
+                    "Aux: " + channelLabel(RollingStockLightChannel.AUX)));
+            buttonList.add(
+                new GuiButton(
+                    12,
+                    var1 + 176,
+                    var2 + 190,
+                    67,
+                    12,
+                    "Gyra: " + channelLabel(RollingStockLightChannel.GYRA)));
 		}
-		//endregion Lights On/Off
 
 		//region Beacon On/Off
-		if (loco.isBeaconEnabled())
+		if ((loco instanceof DieselTrain) == false
+                &&loco.isLightChannelEnabled(RollingStockLightChannel.BEACON))
 		{
 			buttonList.add(this.buttonLock = new GuiButton(7, var1 + 41, var2 + 166, 67, 12, "Beacon: On"));
 		}
 		else
 		{
+            if ((loco instanceof DieselTrain) == false)
+		{
 			buttonList.add(this.buttonLock = new GuiButton(7, var1 + 41, var2 + 166, 67, 12, "Beacon: Off"));
 		}
+        }
 		//endregion Beacon On/Off
 
 		//region DitchLights On/Off
-		if (loco.isDitchLightsEnabled())
+		if ((loco instanceof DieselTrain) == false
+                &&loco.isLightChannelEnabled(RollingStockLightChannel.DITCH))
 		{
 			buttonList.add(this.buttonLock = new GuiButton(8, var1 + 90, var2 + 178, 85, 12, "Ditch Lights: On"));
 		}
 		else
 		{
+            if ((loco instanceof DieselTrain) == false)
+		{
 			buttonList.add(this.buttonLock = new GuiButton(8, var1 + 90, var2 + 178, 85, 12, "Ditch Lights: Off"));
 		}
+        }
 		//endregion DitchLights On/Off
+	}
+
+    /** Adds transparent hit regions over the lighting controls painted into the diesel panel. */
+    private void addDieselLightControls(int x, int y)
+    {
+        buttonList.add(new GuiPanelHitButton(13, x + 8, y + 164, 12, 25, "Front lights: Off"));
+        buttonList.add(new GuiPanelHitButton(14, x + 20, y + 164, 15, 25, "Front lights: Dim"));
+        buttonList.add(new GuiPanelHitButton(15, x + 35, y + 164, 12, 25, "Front lights: Bright"));
+        buttonList.add(new GuiPanelHitButton(16, x + 47, y + 164, 12, 25, "Rear lights: Off"));
+        buttonList.add(new GuiPanelHitButton(17, x + 59, y + 164, 15, 25, "Rear lights: Dim"));
+        buttonList.add(new GuiPanelHitButton(18, x + 74, y + 164, 12, 25, "Rear lights: Bright"));
+        buttonList.add(new GuiPanelHitButton(11, x + 86, y + 168, 12, 22, "Aux lights"));
+        buttonList.add(new GuiPanelHitButton(7, x + 102, y + 168, 12, 22, "Beacon"));
+        buttonList.add(new GuiPanelHitButton(12, x + 118, y + 168, 12, 22, "Gyralite"));
+        buttonList.add(new GuiPanelHitButton(8, x + 134, y + 168, 12, 22, "Ditch lights"));
 	}
 
 	@Override
@@ -177,13 +241,15 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 					guibutton.displayString = "Brake: On";
 					this.initGui();
 				}
-				else if (loco.getSpeed() < 10) {
+				else
+                { if (loco.getSpeed() < 10) {
 					Traincraft.brakeChannel.sendToServer(new PacketParkingBrake(false, loco.getEntityId()));
 					loco.parkingBrake=false;
 					loco.isBraking=false;
 					guibutton.displayString = "Brake: Off";
 					this.initGui();
 				}
+                }
 			break;
 			case 3:
 				TransportLockGuiHandler.handleLockButton(this, guibutton, (EntityPlayer)loco.riddenByEntity, loco, isShiftKeyDown());
@@ -196,7 +262,8 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 						loco.isLocoTurnedOn = false;
 						guibutton.displayString = "Start Engine";
 						/**
-						 * We implemented Auto ParkingBrake since Brutal tried to did it in the Locomotive API when you turn off the damn Train
+                         * We implemented Auto ParkingBrake since Brutal tried to did it in the
+                         * Locomotive API when you turn off the damn Train
 						 */
 						Traincraft.brakeChannel.sendToServer(new PacketParkingBrake(true, loco.getEntityId()));
 						loco.parkingBrake = true;
@@ -219,7 +286,8 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 						loco.isLocoTurnedOn = false;
 						guibutton.displayString = "Start Engine";
 						/**
-						 * We implemented Auto ParkingBrake since Brutal tried to did it in the Locomotive API when you turn off the damn Train
+                         * We implemented Auto ParkingBrake since Brutal tried to did it in the
+                         * Locomotive API when you turn off the damn Train
 						 */
 						Traincraft.brakeChannel.sendToServer(new PacketParkingBrake(true, loco.getEntityId()));
 						loco.parkingBrake = true;
@@ -235,47 +303,51 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 					guibutton.displayString = "Stop Engine";
 				}
 			break;
-			case 6: // Lights
-				if (loco.isLightsEnabled())
-				{
-					Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLights(false, loco.getEntityId()));
-					loco.isLocomotiveLightsEnabled = false;
-					guibutton.displayString = "Lights: Off";
-				}
-				else
-				{
-					Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLights(true, loco.getEntityId()));
-					loco.isLocomotiveLightsEnabled = true;
-					guibutton.displayString = "Lights: On";
-				}
+			case 6: // Front Off/Dim/Bright
+                RollingStockHeadlightLevel front =loco.getFrontHeadlightLevel().next();
+					Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLightState( loco.getEntityId(),
+                        PacketRollingStockLightState.FRONT,
+                        (byte) front.ordinal()));
 			break;
 			case 7: // Beacon
-				if (loco.isBeaconEnabled())
-				{
-					Traincraft.rollingStockBeaconChannel.sendToServer(new PacketRollingStockBeacon(false, loco.getEntityId()));
-					loco.isLocomotiveBeaconEnabled = false;
-					guibutton.displayString = "Beacon: Off";
-				}
-				else
-				{
-					Traincraft.rollingStockBeaconChannel.sendToServer(new PacketRollingStockBeacon(true, loco.getEntityId()));
-					loco.isLocomotiveBeaconEnabled = true;
-					guibutton.displayString = "Beacon: On";
-				}
+                sendChannel (PacketRollingStockLightState.BEACON, RollingStockLightChannel.BEACON);
 			break;
 			case 8: // DitchLights
-				if (loco.isDitchLightsEnabled())
-				{
-					Traincraft.rollingStockDitchLightsChannel.sendToServer(new PacketRollingStockDitchLights((byte)0, loco.getEntityId()));
-					loco.ditchLightMode = 0;
-					guibutton.displayString = "Ditch Lights: Off";
-				}
-				else
-				{
-					Traincraft.rollingStockDitchLightsChannel.sendToServer(new PacketRollingStockDitchLights((byte)1, loco.getEntityId()));
-					loco.ditchLightMode = 1;
-					guibutton.displayString = "Ditch Lights: On";
-				}
+                sendChannel (PacketRollingStockLightState.DITCH, RollingStockLightChannel.DITCH);
+                break;
+            case 10: // Rear Off/Dim/Bright
+                RollingStockHeadlightLevel rear =loco.getRearHeadlightLevel().next();
+					Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLightState( loco.getEntityId(),
+                        PacketRollingStockLightState.REAR,
+                        (byte) rear.ordinal()));
+                break;
+            case 11: // Aux
+                sendChannel(PacketRollingStockLightState.AUX, RollingStockLightChannel.AUX);
+                break;
+            case 12: // Gyra
+                sendChannel(PacketRollingStockLightState.GYRA, RollingStockLightChannel.GYRA);
+                break;
+            case 13:
+            case 14:
+            case 15:
+                RollingStockHeadlightLevel selectedFront =
+                    RollingStockHeadlightLevel.fromOrdinal(
+					guibutton.id - 13);
+					Traincraft.rollingStockLightsChannel.sendToServer(new PacketRollingStockLightState( loco.getEntityId(),
+                        PacketRollingStockLightState.FRONT,
+                        (byte) selectedFront.ordinal()));
+                break;
+            case 16:
+            case 17:
+            case 18:
+                RollingStockHeadlightLevel selectedRear =
+                    RollingStockHeadlightLevel.fromOrdinal(
+					guibutton.id - 16);
+                Traincraft.rollingStockLightsChannel.sendToServer(
+                    new PacketRollingStockLightState(
+                        loco.getEntityId(),
+                        PacketRollingStockLightState.REAR,
+                        (byte) selectedRear.ordinal()));
    			break;
 			case 9: //drop fire
 				Traincraft.ignitionChannel.sendToServer(new PacketDropFire(loco.getEntityId()));
@@ -291,12 +363,22 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		String state = "";
 		if (loco.getTrainLockedFromPacket()) {
 			if (loco.getTransportOwner().equalsIgnoreCase(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+            {
 				state = "Locked";
-			else if (loco.isPlayerTrusted(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+            }
+			else
+            { if (loco.isPlayerTrusted(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+                {
 				if (loco.isPlayerTrustedToBreak(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+                    {
 					state = "Trusted Access+";
+                    }
 				else
+                    {
 					state = "Trusted Access";
+		}
+                }
+            }
 		} else {
 			state = "Unlocked";
 		}
@@ -352,7 +434,9 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	}
 
 	@Override
-	public void drawScreen(int mouseX, int mouseY, float par3){ //determines and renders the water level for steam locomotives and fuel level for diesel locomotives
+	public void drawScreen(int mouseX, int mouseY, float par3)   // determines and renders the water level for steam locomotives and fuel
+{
+        // level for diesel locomotives
 		super.drawScreen(mouseX, mouseY,par3);
 		if(loco instanceof AbstractBoilerLocomotive)
 		{
@@ -364,7 +448,8 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 						mouseX, mouseY, fontRendererObj);
 			}
 		}
-		else if(loco instanceof DieselTrain){
+		else
+        { if(loco instanceof DieselTrain){
 			int j = (width - xSize) / 2;
 			int k = (height - ySize) / 2;
 			if (mouseX>j+143 && mouseX<j+161 && mouseY>k+18 && mouseY<k+68)
@@ -382,12 +467,52 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 				}
 			}
 		}
+        }
 		loco.guiTCTextFieldTrainNote.drawTextBox();
 	}
 
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
+        // Lighting controls are server-authoritative. Refresh legacy text buttons
+        // from DataWatcher state instead of preserving a client-side prediction.
+        if ((loco instanceof DieselTrain) == false)
+        {
+            for (Object value : buttonList)
+            {
+                if ((value instanceof GuiButton) == false)
+                {
+                    continue;
+                }
+                GuiButton button = (GuiButton) value;
+                switch (button.id)
+                {
+                    case 6:
+                        button.displayString = "Front: " + loco.getFrontHeadlightLevel().name();
+                        break;
+                    case 10:
+                        button.displayString = "Rear: " + loco.getRearHeadlightLevel().name();
+                        break;
+                    case 11:
+                        button.displayString = "Aux: " + channelLabel(RollingStockLightChannel.AUX);
+                        break;
+                    case 12:
+                        button.displayString =
+                            "Gyra: " + channelLabel(RollingStockLightChannel.GYRA);
+                        break;
+                    case 7:
+                        button.displayString =
+                            "Beacon: " + channelLabel(RollingStockLightChannel.BEACON);
+                        break;
+                    case 8:
+                        button.displayString =
+                            "Ditch Lights: " + channelLabel(RollingStockLightChannel.DITCH);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 		if (loco.guiTCTextFieldTrainNote.isFocused()) {
 			loco.guiTCTextFieldTrainNote.updateCursorCounter();
 		}
@@ -399,13 +524,15 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 
 		if (loco.guiTCTextFieldTrainNote.isFocused()) {
 			loco.guiTCTextFieldTrainNote.textboxKeyTyped(par1, par2);
-		} else if (par1 == 1 || (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode() || par2 == Keyboard.KEY_ESCAPE)){
+		} else
+        { if (par1 == 1 || (par2 == this.mc.gameSettings.keyBindInventory.getKeyCode() || par2 == Keyboard.KEY_ESCAPE)){
 			Traincraft.lockChannel.sendToServer(new PacketAddNote(loco.getEntityId(), loco.guiTCTextFieldTrainNote.getText()));
 			mc.thePlayer.closeScreen();
 		} else {
 			super.keyTyped(par1, par2);
 		}
 	}
+    }
 
 	@Override
 	protected void mouseClicked(int par1, int par2, int par3) {
@@ -414,7 +541,9 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int t, int g) { //renders locomotive inventory GUI background and fluids and locomotive performance information
+	protected void drawGuiContainerBackgroundLayer(float f, int t, int g)   // renders locomotive inventory GUI background and fluids and locomotive
+ {
+        // performance information
 		String i = getGuiTexture();
 
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -424,8 +553,74 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
 
 		drawLocomotiveContents(j, k, i);
+        if (loco instanceof DieselTrain)
+        {
+            drawDieselLightControls(j, k);
+        }
 		drawPerformanceInformation();
 	}
+
+    /** Draws lever positions from synchronized front/rear levels and named-circuit flags. */
+    private void drawDieselLightControls(int left, int top)
+    {
+        drawDialLever(
+            left + 21,
+            top
+            + 172
+            + (loco.getFrontHeadlightLevel() == RollingStockHeadlightLevel.OFF ? 1 : 0),
+            dialAngle(loco.getFrontHeadlightLevel()));
+        drawDialLever(
+            left + 60,
+            top
+            + 172
+            + (loco.getRearHeadlightLevel() == RollingStockHeadlightLevel.OFF ? 1 : 0),
+            dialAngle(loco.getRearHeadlightLevel()));
+        drawFlickHandle(left + 89, top, loco.isLightChannelEnabled(RollingStockLightChannel.AUX));
+        drawFlickHandle(
+            left + 105, top, loco.isLightChannelEnabled(RollingStockLightChannel.BEACON));
+        drawFlickHandle(left + 121, top, loco.isLightChannelEnabled(RollingStockLightChannel.GYRA));
+        drawFlickHandle(
+            left + 137, top, loco.isLightChannelEnabled(RollingStockLightChannel.DITCH));
+    }
+
+    /** Maps OFF/DIM/BRIGHT to the authored panel lever angles in degrees. */
+    private static float dialAngle(RollingStockHeadlightLevel level)
+    {
+        return level == RollingStockHeadlightLevel.OFF
+               ? -90.0F
+               : level == RollingStockHeadlightLevel.DIM ? 0.0F : 90.0F;
+    }
+
+    /** Draws one rotated dial lever while preserving the surrounding matrix transform. */
+    private void drawDialLever(int x, int y, float angle)
+    {
+        GL11.glPushMatrix();
+        GL11.glTranslatef(x + 4.0F, y + 10.0F, 0.0F);
+        GL11.glRotatef(angle, 0.0F, 0.0F, 1.0F);
+        GL11.glTranslatef(-(x + 4.0F), -(y + 10.0F), 0.0F);
+        drawTexturedModalRect(x, y, 0, 210, 8, 20);
+        GL11.glPopMatrix();
+    }
+
+    /** Draws a two-position switch handle over the panel artwork. */
+    private void drawFlickHandle(int x, int top, boolean enabled)
+    {
+        drawTexturedModalRect(x, top + (enabled ? 174 : 180), 10, 223, 6, 7);
+    }
+
+    private static final class GuiPanelHitButton extends GuiButton
+    {
+        private GuiPanelHitButton(int id, int x, int y, int width, int height, String label)
+        {
+            super(id, x, y, width, height, label);
+        }
+
+        @Override
+        public void drawButton(net.minecraft.client.Minecraft minecraft, int mouseX, int mouseY)
+        {
+            // The modern diesel atlas supplies the visuals; this widget is only its hit area.
+        }
+    }
 
 	protected abstract String getGuiTexture();
 

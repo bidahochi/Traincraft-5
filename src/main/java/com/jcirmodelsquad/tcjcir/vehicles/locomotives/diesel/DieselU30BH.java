@@ -4,6 +4,9 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.api.RollingStockLightFunction;
+import train.common.api.RollingStockLightColors;
+import train.common.api.RollingStockSkinLightingProfiles;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
@@ -11,6 +14,28 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselU30BH extends DieselTrain {
+    static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        RollingStockSkinLightingProfiles.builder("bap:u30bh")
+        .defaults()
+        .gyralite("front_center")
+        .color(RollingStockLightColors.WARM_WHITE, "front_center")
+        .setSkin("purple")
+        .alternatingDitch(
+            0,
+            RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_left_lower",
+            "front_left_upper",
+            "rear_left_lower",
+            "rear_left_upper")
+        .alternatingDitch(
+            1,
+            RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_right_lower",
+            "front_right_upper",
+            "rear_right_lower",
+            "rear_right_upper")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -25,6 +50,13 @@ public class DieselU30BH extends DieselTrain {
         InsertTexture(3, "CRL (70s-80s)");
         InsertTexture(4, "CRL (80s-2006)");
         InsertTexture(5, "CRL (2006-onwards)");
+    }
+
+
+    @Override
+    protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 

@@ -1,6 +1,16 @@
 package tmt;
 
 import fexcraft.fvtm.BOBRollingStockModel;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.entity.Entity;
@@ -8,16 +18,11 @@ import org.lwjgl.opengl.GL11;
 import train.common.api.AbstractRotarySnowPlow;
 import train.common.api.EntityRollingStock;
 import train.common.api.IRollingStockLightControls;
+import train.common.api.RollingStockHeadlightLevel;
+import train.common.api.RollingStockLightChannel;
 import train.common.core.handlers.ConfigHandler;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import train.client.render.lighting.BoundedIdentityCache;
 
 /**
  * Makes large rolling-stock bodies cheaper to render.
@@ -40,16 +45,72 @@ public final class ModelRendererTurboBatch {
 	private static final int FVTM_RUNTIME_BATCH_INDEX = -1;
 	private static final int NESTED_RUNTIME_MIN_BATCH_SIZE = 8;
 	private static final int NESTED_RUNTIME_BATCH_INDEX = -2;
+	private static final int MAXIMUM_COMPILED_BATCHES = 2048;
+    private static final int MAXIMUM_DETAIL_LAYOUTS = 512;
+    private static final int MAXIMUM_MODEL_GROUPS = 256;
+    private static final int MAXIMUM_STATIC_LAYOUTS = 512;
+    private static final int MAXIMUM_PART_GROUPS = 32768;
 	private static final ThreadLocal<Context> ACTIVE = new ThreadLocal<Context>();
-	private static final Map<BatchKey, CompiledBatch> CACHE = new HashMap<BatchKey, CompiledBatch>();
-	private static final Map<DetailLayoutKey, CompiledBatch> DETAIL_LAYOUT_CACHE = new HashMap<DetailLayoutKey, CompiledBatch>();
-	private static final Map<ModelRendererTurbo, RenderGroup> GROUP_CACHE = new IdentityHashMap<ModelRendererTurbo, RenderGroup>();
+	private static final ThreadLocal<Context> REUSABLE_CONTEXT = new ThreadLocal<Context>();
+    private static final Map<BatchKey, CompiledBatch> CACHE = new LinkedHashMap<BatchKey, CompiledBatch>(256, 0.75F, true);
+	private static final Map<DetailLayoutKey, CompiledBatch> DETAIL_LAYOUT_CACHE = new
+        LinkedHashMap<DetailLayoutKey, CompiledBatch>(128, 0.75F, true);
+	private static final BoundedIdentityCache<ModelRendererTurbo, RenderGroup> GROUP_CACHE = new
+        BoundedIdentityCache<ModelRendererTurbo, RenderGroup>(MAXIMUM_PART_GROUPS);
 	private static final Map<Class<?>, List<StaticBodyField>> STATIC_BODY_FIELDS = new HashMap<Class<?>, List<StaticBodyField>>();
 	private static final Map<Class<?>, List<StaticBodyField>> NESTED_MODEL_FIELDS = new HashMap<Class<?>, List<StaticBodyField>>();
-	private static final Map<Object, DynamicPartGroups> DYNAMIC_GROUPS = new IdentityHashMap<Object, DynamicPartGroups>();
+	private static final BoundedIdentityCache<Object, DynamicPartGroups> DYNAMIC_GROUPS = new
+        BoundedIdentityCache<Object, DynamicPartGroups>(MAXIMUM_MODEL_GROUPS);
+    private static final BoundedIdentityCache<ModelRendererTurbo[], StaticBatchLayout> STATIC_ARRAY_LAYOUTS = new
+        BoundedIdentityCache<ModelRendererTurbo[], StaticBatchLayout>(MAXIMUM_STATIC_LAYOUTS);
+    private static final BoundedIdentityCache<FVTMFormatBase, StaticBatchLayout> STATIC_FVTM_LAYOUTS = new
+        BoundedIdentityCache<FVTMFormatBase, StaticBatchLayout>(MAXIMUM_STATIC_LAYOUTS);
+    private static final BoundedIdentityCache<List<Entry>, EntryGroups> STATIC_ENTRY_GROUPS = new
+        BoundedIdentityCache<List<Entry>, EntryGroups>(MAXIMUM_STATIC_LAYOUTS);
 
 	private ModelRendererTurboBatch() {
 	}
+
+	/**
+     * Deletes render-thread-owned display lists and clears all model/layout reflection caches.
+     * Called on resource reload; invoking it without a current OpenGL context is invalid.
+     */
+	public static void clearLightingCaches()
+    {
+        for (CompiledBatch batch : CACHE.values())
+        {
+            GL11.glDeleteLists(batch.displayList, 1);
+        }
+        for (CompiledBatch batch : DETAIL_LAYOUT_CACHE.values())
+        {
+            GL11.glDeleteLists(batch.displayList, 1);
+        }
+        CACHE.clear();
+        DETAIL_LAYOUT_CACHE.clear();
+        GROUP_CACHE.clear();
+        STATIC_BODY_FIELDS.clear();
+        NESTED_MODEL_FIELDS.clear();
+        DYNAMIC_GROUPS.clear();
+        STATIC_ARRAY_LAYOUTS.clear();
+        STATIC_FVTM_LAYOUTS.clear();
+        STATIC_ENTRY_GROUPS.clear();
+    }
+
+    /** Evicts least-recently-used compiled batches and deletes their OpenGL display lists. */
+    private static <K> void trimCompiledCache(Map<K, CompiledBatch> cache, int maximumSize)
+    {
+        while (cache.size() > maximumSize)
+        {
+            Iterator<Map.Entry<K, CompiledBatch>> iterator = cache.entrySet().iterator();
+            if (iterator.hasNext() == false)
+            {
+                return;
+            }
+            CompiledBatch batch = iterator.next().getValue();
+            iterator.remove();
+            GL11.glDeleteLists(batch.displayList, 1);
+        }
+    }
 
 	public static void begin(Object owner) {
 		begin(owner, null);
@@ -59,7 +120,14 @@ public final class ModelRendererTurboBatch {
 		if (!ConfigHandler.ENABLE_TMT_MODEL_BATCHING || owner == null) {
 			return;
 		}
-		ACTIVE.set(new Context(owner, entity));
+        Context context = REUSABLE_CONTEXT.get();
+        if (context == null)
+        {
+            context = new Context();
+            REUSABLE_CONTEXT.set(context);
+        }
+        context.reset(owner, entity);
+        ACTIVE.set(context);
 	}
 
 	public static void end() {
@@ -136,10 +204,11 @@ public final class ModelRendererTurboBatch {
 		if (owner instanceof BOBRollingStockModel) {
 			rendered |= renderFVTMGroups(owner, ((BOBRollingStockModel)owner).getBaseModel(), scale, rotorder);
 		}
-		else if (owner instanceof ModelConverter) {
+		else
+        { if (owner instanceof ModelConverter) {
 			rendered |= renderArray(owner, ((ModelConverter)owner).bodyModel, scale, rotorder);
 		}
-		else if (owner instanceof FVTMFormatBase) {
+		else { if (owner instanceof FVTMFormatBase) {
 			rendered |= renderFVTMGroups(owner, (FVTMFormatBase)owner, scale, rotorder);
 		}
 		else {
@@ -149,6 +218,8 @@ public final class ModelRendererTurboBatch {
 					rendered |= renderArray(owner, model, scale, rotorder);
 				}
 			}
+		}
+            }
 		}
 		context.suppressOnly = true;
 		return rendered;
@@ -174,17 +245,7 @@ public final class ModelRendererTurboBatch {
 		if (context == null || context.flushing || model == null || model.groups == null) {
 			return false;
 		}
-		List<Entry> entries = new ArrayList<Entry>();
-		for (FVTMFormatBase.TurboList group : model.groups) {
-			if (group == null || !isSafeFVTMGroupName(group.name)) {
-				continue;
-			}
-			for (ModelRendererTurbo turbo : group) {
-				if (isBatchCompatible(turbo) && isSafeFVTMPartName(turbo)) {
-					entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
-				}
-			}
-		}
+		List<Entry> entries = staticFVTMEntries( model, scale, rotorder);
 		if (entries.size() < MIN_BATCH_SIZE) {
 			return false;
 		}
@@ -461,12 +522,7 @@ public final class ModelRendererTurboBatch {
 			}
 			return false;
 		}
-		List<Entry> entries = new ArrayList<Entry>(model.length);
-		for (ModelRendererTurbo turbo : model) {
-			if (isBatchCompatible(turbo) && isSafeStaticPartName(turbo)) {
-				entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
-			}
-		}
+		List<Entry> entries = staticArrayEntries(model, scale, rotorder);
 		if (entries.size() >= MIN_BATCH_SIZE) {
 			for (Entry entry : entries) {
 				context.suppressed.add(entry.turbo);
@@ -478,6 +534,57 @@ public final class ModelRendererTurboBatch {
 		context.suppressOnly = true;
 		return false;
 	}
+
+	/** Returns an identity-cached immutable layout for batch-safe parts of a generated array. */
+	private static List<Entry> staticArrayEntries(ModelRendererTurbo[] model, float scale, boolean rotorder)
+    {
+        StaticBatchLayout cached = STATIC_ARRAY_LAYOUTS.get(model);
+        if (cached != null && cached.matches(scale, rotorder))
+        {
+            return cached.entries;
+        }
+        List<Entry> entries = new ArrayList<Entry>(model.length);
+        for (ModelRendererTurbo turbo : model)
+        {
+            if (isBatchCompatible(turbo) && isSafeStaticPartName(turbo))
+            {
+                entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
+            }
+        }
+        StaticBatchLayout layout = new StaticBatchLayout(scale, rotorder, entries);
+        STATIC_ARRAY_LAYOUTS.put(model, layout);
+        STATIC_ENTRY_GROUPS.put(layout.entries, new EntryGroups(layout.entries));
+        return layout.entries;
+    }
+
+    /** Returns an identity-cached immutable layout for batch-safe FVTM groups and parts. */
+    private static List<Entry> staticFVTMEntries(FVTMFormatBase model, float scale, boolean rotorder)
+    {
+        StaticBatchLayout cached = STATIC_FVTM_LAYOUTS.get(model);
+        if (cached != null && cached.matches(scale, rotorder))
+        {
+            return cached.entries;
+        }
+        List<Entry> entries = new ArrayList<Entry>();
+        for (FVTMFormatBase.TurboList group : model.groups)
+        {
+            if (group == null || isSafeFVTMGroupName(group.name) == false)
+            {
+                continue;
+            }
+            for (ModelRendererTurbo turbo : group)
+            {
+                if (isBatchCompatible(turbo) && isSafeFVTMPartName(turbo))
+                {
+                    entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
+                }
+            }
+        }
+        StaticBatchLayout layout = new StaticBatchLayout(scale, rotorder, entries);
+        STATIC_FVTM_LAYOUTS.put(model, layout);
+        STATIC_ENTRY_GROUPS.put(layout.entries, new EntryGroups(layout.entries));
+        return layout.entries;
+    }
 
 	private static List<StaticBodyField> getStaticBodyFields(Class<?> type) {
 		List<StaticBodyField> cached = STATIC_BODY_FIELDS.get(type);
@@ -810,9 +917,18 @@ public final class ModelRendererTurboBatch {
 			return;
 		}
 		List<Entry> entries = context.entries;
-		context.entries = new ArrayList<Entry>();
+		context.entries = context.spareEntries;
+        context.entries.clear();
+        try
+        {
 		renderEntries(context, entries);
 	}
+        finally
+        {
+            entries.clear();
+            context.spareEntries = entries;
+        }
+    }
 
 	/**
 	 * Draws a group of collected parts.
@@ -869,7 +985,9 @@ public final class ModelRendererTurboBatch {
 	 */
 	private static boolean isBatchCompatible(ModelRendererTurbo turbo) {
 		return turbo != null
-				&& !turbo.field_1402_i
+				&& train.client.render.lighting.ClientRollingStockLighting.isSemantic(turbo) == false
+			   && train.client.render.lighting.PlacedModelLighting.requiresImmediateRendering(turbo) == false
+               &&turbo.field_1402_i == false
 				&& turbo.showModel
 				&& turbo.useLegacyCompiler
 				&& !turbo.forcedRecompile
@@ -947,9 +1065,11 @@ public final class ModelRendererTurboBatch {
 		if (group == RenderGroup.CULL) {
 			GL11.glDisable(GL11.GL_CULL_FACE);
 		}
-		else if (isFullbright(context, group)) {
+		else
+        { if (isFullbright(context, group)) {
 			Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 		}
+        }
 		try {
 			callCompiledBatch(context, groupEntries, group, cacheOwnerId, cacheBatchIndex, sharedGeometrySignature);
 		}
@@ -957,11 +1077,13 @@ public final class ModelRendererTurboBatch {
 			if (group == RenderGroup.CULL) {
 				GL11.glEnable(GL11.GL_CULL_FACE);
 			}
-			else if (isFullbright(context, group)) {
+			else
+            { if (isFullbright(context, group)) {
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
 			}
 		}
 	}
+    }
 
 	private static void renderDetailLayoutGroup(Context context, List<Entry> entries, RenderGroup group, int cacheOwnerId, List<DetailPlacement> placements) {
 		List<Entry> groupEntries = entriesForGroup(entries, group);
@@ -971,9 +1093,11 @@ public final class ModelRendererTurboBatch {
 		if (group == RenderGroup.CULL) {
 			GL11.glDisable(GL11.GL_CULL_FACE);
 		}
-		else if (isFullbright(context, group)) {
+		else
+        { if (isFullbright(context, group)) {
 			Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 		}
+        }
 		try {
 			callDetailLayout(context, groupEntries, group, cacheOwnerId, placements);
 		}
@@ -981,13 +1105,20 @@ public final class ModelRendererTurboBatch {
 			if (group == RenderGroup.CULL) {
 				GL11.glEnable(GL11.GL_CULL_FACE);
 			}
-			else if (isFullbright(context, group)) {
+			else
+            { if (isFullbright(context, group)) {
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
 			}
 		}
 	}
+    }
 
 	private static List<Entry> entriesForGroup(List<Entry> entries, RenderGroup group) {
+        EntryGroups cached = STATIC_ENTRY_GROUPS.get(entries);
+        if (cached != null)
+        {
+            return cached.entries[group.ordinal()];
+        }
 		List<Entry> groupEntries = new ArrayList<Entry>();
 		for (Entry entry : entries) {
 			if (entry.group == group) {
@@ -1000,10 +1131,10 @@ public final class ModelRendererTurboBatch {
 	/**
 	 * Decides whether a light part should glow for this specific entity right now.
 	*
-	 * <p>The display list only stores the lamp's shape. It does not store "on" or "off".
-	 * Locomotives that implement {@link IRollingStockLightControls} decide that here every
-	 * frame. Models without those controls keep the older behavior where lamp-named parts are
-	 * always fullbright, which is needed for some decorative passenger lights.</p>
+     * <p>The display list only stores the lamp's shape. It does not store "on" or "off". Rolling
+     * stock that implements {@link IRollingStockLightControls} decides that here every frame.
+     * Models without those controls keep the older behavior where lamp-named parts are always
+     * fullbright, which is needed for some decorative passenger lights.
 	 */
 	private static boolean isFullbright(Context context, RenderGroup group) {
 		if (!group.isLightGroup()) {
@@ -1013,35 +1144,50 @@ public final class ModelRendererTurboBatch {
 			return true;
 		}
 		IRollingStockLightControls lights = (IRollingStockLightControls)context.entity;
+        int phase = beaconPhase(context.entity);
 		switch (group) {
 			case LAMP:
-				return lights.isLightsEnabled();
+				return lights.getFrontHeadlightLevel() != RollingStockHeadlightLevel.OFF
+                       || lights.getRearHeadlightLevel() != RollingStockHeadlightLevel.OFF;
 			case DITCH:
-				return lights.isDitchLightsEnabled();
+				return lights.isLightChannelEnabled(RollingStockLightChannel.DITCH);
 			case COMMANDER:
-				return lights.isBeaconEnabled()
+				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON)
 						&& context.entity instanceof EntityRollingStock
-						&& ((EntityRollingStock)context.entity).ticksExisted % 30 == 0;
+						&& ((EntityRollingStock)context.entity).ticksExisted % 10 < 5;
 			case PRIME1:
-				return lights.isBeaconEnabled() && lights.getBeaconCycleIndex() == 0;
+				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON) && phase == 0;
 			case PRIME2:
-				return lights.isBeaconEnabled() && lights.getBeaconCycleIndex() == 1;
+				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON) && phase == 1;
 			case PRIME3:
-				return lights.isBeaconEnabled() && lights.getBeaconCycleIndex() == 2;
+				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON) && phase == 2;
 			case PRIME4:
-				return lights.isBeaconEnabled() && lights.getBeaconCycleIndex() == 3;
+				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON) && phase == 3;
 			default:
 				return false;
 		}
 	}
 
+    /** Returns the synchronized four-step beacon phase, advancing once every five ticks. */
+    private static int beaconPhase(Entity entity)
+    {
+        if ((entity instanceof EntityRollingStock) == false)
+        {
+            return 0;
+        }
+        EntityRollingStock stock = (EntityRollingStock) entity;
+        long ticks =
+            stock.worldObj == null ? stock.ticksExisted : stock.worldObj.getTotalWorldTime();
+        return (int)((ticks / 5L) & 3L);
+    }
+
 	/**
 	 * Gets the compiled display list for this group, or builds it if it is missing/stale.
 	*
 	 * <p>The cache key separates model instance, flush number, and render bucket. The signature
-	 * then checks whether the same parts and transforms are still being used. If the geometry
-	 * or transform data changes, {@link ModelRendererTurbo#batchTransformHash()} must change
-	 * too, otherwise an old display list could be reused by mistake.</p>
+     * then checks whether the same parts and transforms are still being used. If the geometry or
+     * transform data changes, {@link ModelRendererTurbo#batchTransformHash()} must change too,
+     * otherwise an old display list could be reused by mistake.
 	 */
 	private static void callCompiledBatch(Context context, List<Entry> entries, RenderGroup group) {
 		callCompiledBatch(context, entries, group, System.identityHashCode(context.owner), context.flushIndex, false);
@@ -1065,6 +1211,7 @@ public final class ModelRendererTurboBatch {
 			}
 			batch = compile(entries, signature);
 			CACHE.put(key, batch);
+            trimCompiledCache(CACHE, MAXIMUM_COMPILED_BATCHES);
 		}
 		return batch;
 	}
@@ -1089,6 +1236,7 @@ public final class ModelRendererTurboBatch {
 			}
 			layout = compileDetailLayout(geometry.displayList, placements, signature);
 			DETAIL_LAYOUT_CACHE.put(key, layout);
+            trimCompiledCache(DETAIL_LAYOUT_CACHE, MAXIMUM_DETAIL_LAYOUTS);
 		}
 		GL11.glCallList(layout.displayList);
 	}
@@ -1247,20 +1395,30 @@ public final class ModelRendererTurboBatch {
 	 * at another placement.</p>
 	 */
 	private static final class Context {
-		private final Object owner;
-		private final Entity entity;
+		private Object owner;
+		private Entity entity;
 		private int flushIndex;
 		private boolean suppressOnly;
 		private boolean captureEnabled;
 		private boolean flushing;
 		private Object scopedSuppressionOwner;
 		private List<Entry> entries = new ArrayList<Entry>();
+		private List<Entry> spareEntries = new ArrayList<Entry>();
 		private final Set<ModelRendererTurbo> suppressed = Collections.newSetFromMap(new IdentityHashMap<ModelRendererTurbo, Boolean>());
 		private final Set<ModelRendererTurbo> scopedSuppressed = Collections.newSetFromMap(new IdentityHashMap<ModelRendererTurbo, Boolean>());
 
-		private Context(Object owner, Entity entity) {
+		private void reset(Object owner, Entity entity) {
 			this.owner = owner;
 			this.entity = entity;
+            flushIndex = 0;
+            suppressOnly = false;
+            captureEnabled = false;
+            flushing = false;
+            scopedSuppressionOwner = null;
+            entries.clear();
+            spareEntries.clear();
+            suppressed.clear();
+            scopedSuppressed.clear();
 		}
 	}
 
@@ -1284,6 +1442,48 @@ public final class ModelRendererTurboBatch {
 	private static final class DynamicPartGroups {
 		private final List<ModelRendererTurbo> rotary = new ArrayList<ModelRendererTurbo>();
 	}
+
+    private static final class StaticBatchLayout
+    {
+        private final int scaleBits;
+        private final boolean rotorder;
+        private final List<Entry> entries;
+
+        private StaticBatchLayout(float scale, boolean rotorder, List<Entry> entries)
+        {
+            this.scaleBits = Float.floatToIntBits(scale);
+            this.rotorder = rotorder;
+            this.entries = Collections.unmodifiableList(entries);
+        }
+
+        private boolean matches(float scale, boolean currentRotorder)
+        {
+            return scaleBits == Float.floatToIntBits(scale) && rotorder == currentRotorder;
+        }
+    }
+
+    private static final class EntryGroups
+    {
+        private final List<Entry>[] entries;
+
+        @SuppressWarnings("unchecked")
+        private EntryGroups(List<Entry> source)
+        {
+            entries = (List<Entry>[]) new List<?>[RenderGroup.values().length];
+            for (int index = 0; index < entries.length; index++)
+            {
+                entries[index] = new ArrayList<Entry>();
+            }
+            for (Entry entry : source)
+            {
+                entries[entry.group.ordinal()].add(entry);
+            }
+            for (int index = 0; index < entries.length; index++)
+            {
+                entries[index] = Collections.unmodifiableList(entries[index]);
+            }
+        }
+    }
 
 	public static final class DetailPlacement {
 		/*

@@ -1,8 +1,7 @@
 package tmt;
 
-import org.lwjgl.opengl.GL11;
-
 import java.util.ArrayList;
+import org.lwjgl.opengl.GL11;
 
 
 public class TexturedPolygon {
@@ -11,10 +10,11 @@ public class TexturedPolygon {
     private ArrayList<Vec3f> iNormals;
 	public TexturedVertex[] vertices;
 	
-	public TexturedPolygon(TexturedVertex apositionTexturevertex[]){
+	public TexturedPolygon(TexturedVertex[] vertices){
 		normals = new float[0];
 		iNormals = new ArrayList<Vec3f>();
-		vertices = apositionTexturevertex;
+        this.
+		vertices = vertices;
     }
 
 	
@@ -22,67 +22,63 @@ public class TexturedPolygon {
 		normals = new float[] {x, y, z};
 	}
 	
-	public void setNormals(ArrayList<Vec3f> iNormal){
-		iNormals = iNormal;
+	public void setNormals(ArrayList<Vec3f> individualNormals){
+		iNormals = individualNormals;
 	}
 
 	Vec3f getLegacyFaceNormal(){
 		if(normals.length == 3){
 			return new Vec3f(normals[0], normals[1], normals[2]);
 		}
-		if(vertices.length >= 3){
-			return vertices[1].vector3F.subtract(vertices[2].vector3F)
-					.crossProduct(vertices[1].vector3F.subtract(vertices[0].vector3F))
-					.normalize();
-		}
-		return null;
+			return TurboFaceNormal.resolve(vertices);
 	}
 
-	public void draw(Tessellator tessellator, float f){
+	public void draw(Tessellator tessellator, float scale){
+        Vec3f faceNormal = null;
+        if (iNormals.isEmpty())
+        {
+            faceNormal = getLegacyFaceNormal();
+            if (faceNormal == null)
+            {
+                return;
+            }
+        }
         if(vertices.length == 3){
         	tessellator.startDrawing(GL11.GL_TRIANGLES);
         }
-        else if (vertices.length == 4){
+        else
+        { if (vertices.length == 4){
         	tessellator.startDrawing(GL11.GL_QUADS);
         }
         else{
         	tessellator.startDrawing(GL11.GL_POLYGON);
         }
-
-        if(iNormals.size() == 0){
-	        if(normals.length == 3){
-	        	tessellator.setNormal(normals[0], normals[1], normals[2]);
-	        }
-	        else if(vertices.length >= 3){
-		        Vec3f Vec3d2 =
-		        		vertices[1].vector3F.subtract(vertices[2].vector3F)
-								.crossProduct(vertices[1].vector3F.subtract(vertices[0].vector3F))
-								.normalize();
-		        tessellator.setNormal(Vec3d2.xCoord, Vec3d2.yCoord, Vec3d2.zCoord);
-	        }
-	        else{
-	        	return;
-	        }
+	        } if(faceNormal != null){
+		        tessellator.setNormal(faceNormal.xCoord, faceNormal.yCoord, faceNormal.zCoord);
         }
-        for(int i = 0; i < vertices.length; i++){
-            TexturedVertex positionTexturevertex = vertices[i];
-            if(i < iNormals.size()){
-            	tessellator.setNormal(iNormals.get(i).xCoord, iNormals.get(i).yCoord, iNormals.get(i).zCoord);
+        for(int index = 0; index < vertices.length; index++){
+            TexturedVertex vertex = vertices[index];
+            if(index < iNormals.size()){
+                Vec3f normal = iNormals.get(index);
+                tessellator.setNormal(normal.xCoord, normal.yCoord, normal.zCoord);
             }
-            tessellator.addVertexWithUV(positionTexturevertex.vector3F.xCoord * f, positionTexturevertex.vector3F.yCoord * f, positionTexturevertex.vector3F.zCoord * f, positionTexturevertex.textureX, positionTexturevertex.textureY);
+            tessellator.addVertexWithUV(
+                vertex.vector3F.xCoord * scale,
+                vertex.vector3F.yCoord * scale,
+                vertex.vector3F.zCoord * scale,
+                vertex.textureX,
+                vertex.textureY);
         }
         tessellator.draw();
     }
 
 
 	public void flipFace() {
-		TexturedVertex[] apositiontexturevertex = new TexturedVertex[this.vertices.length];
+		TexturedVertex[] reversed = new TexturedVertex[vertices.length];
 
-		for (int i = 0; i < this.vertices.length; ++i) {
-			apositiontexturevertex[i] = this.vertices[this.vertices.length - i - 1];
-		}
-
-		this.vertices = apositiontexturevertex;
+		for (int index = 0; index <vertices.length; index ++) {
+            reversed[index] =vertices[vertices.length - index - 1];
+		}vertices = reversed;
 	}
 	
 }

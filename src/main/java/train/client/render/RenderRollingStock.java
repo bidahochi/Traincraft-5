@@ -1,5 +1,10 @@
 package train.client.render;
 
+import train.client.render.lighting.ClientRollingStockLighting;
+import train.client.render.lighting.LightEffectRenderBatch;
+import train.client.render.lighting.RollingStockDepthMask;
+import train.client.render.lighting.RollingStockLightOcclusion;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import cpw.mods.fml.relauncher.Side;
@@ -43,6 +48,10 @@ public class RenderRollingStock extends Render {
 
 	public final void renderTheMinecart(EntityRollingStock cart, double x, double y, double z, float yaw, float time, boolean renderModeGUI)
 	{
+        if (renderModeGUI == false)
+        {
+            LightEffectRenderBatch.captureWorldView();
+        }
 		GL11.glPushMatrix();
 		long var10 = cart.getEntityId() * 493286711L;
 		var10 = var10 * var10 * 4392167121L + var10 * 98761L;
@@ -79,7 +88,9 @@ public class RenderRollingStock extends Render {
 				pitch = (float) (Math.atan(var27.yCoord) * 73.0D);
 			}
 
-		}else if (renderYVect != null) {//only on TC rails
+		}else
+        { if (renderYVect != null)//only on TC rails
+            {
 			Vec3 var25 = cart.renderY(var15, var17, var19, 0.30000001192092896D);
 			Vec3 var26 = cart.renderY(var15, var17, var19, -0.30000001192092896D);
 
@@ -92,6 +103,7 @@ public class RenderRollingStock extends Render {
 			}
 			y += (var25.yCoord + var26.yCoord) / 2.0D - var17;
 		}
+        }
 
 		yaw %= 360.0F;
 		if (yaw < 0.0F) {
@@ -123,13 +135,18 @@ public class RenderRollingStock extends Render {
 		if (cart.worldObj != null && (BlockRailBase.func_150049_b_(cart.worldObj, i, j, k)
 				|| BlockRailBase.func_150049_b_(cart.worldObj, i, j - 1, k))) {
 			cart.setMountedYOffset(-0.55);
-		} else if (cart.posYFromServer != 0) {
+		} else
+        { if (cart.posYFromServer != 0) {
 			cart.setMountedYOffset(-0.5);
 			GL11.glTranslatef(0f, -0.30f, 0f);
 		}
-		if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+        }
+		if (cart.bogieLoco != null)// || cart.bogieUtility[0]!=null){
+        {
 			//GL11.glRotatef((float)(90-cart.rotationYawClientReal), 0.0F, 1.0F, 0.0F);
-			if (cart.oldClientYaw == 0) cart.oldClientYaw = cart.rotationYawClientReal;
+			if (cart.oldClientYaw == 0)
+            { cart.oldClientYaw = cart.rotationYawClientReal;
+            }
 
 			float rotationYawBogie = cart.rotationYawClientReal;
 			float tempYaw = (cart.rotationYawClientReal - cart.oldClientYaw);
@@ -168,7 +185,9 @@ public class RenderRollingStock extends Render {
 			}
 			else
 			{
-				if (cart.oldClientYaw == 0) cart.oldClientYaw = cart.rotationYawClientReal;
+				if (cart.oldClientYaw == 0)
+                { cart.oldClientYaw = cart.rotationYawClientReal;
+                }
 
 				float rotationYaw = cart.rotationYawClientReal;
 				float tempYaw = (cart.rotationYawClientReal - cart.oldClientYaw);
@@ -195,7 +214,8 @@ public class RenderRollingStock extends Render {
 		//if(cart.bogie!=null)cart.worldObj.spawnParticle("reddust", cart.bogie.posX, cart.bogie.posY, cart.bogie.posZ, 0.1, 0.4, 0.1);
 
 		//GL11.glRotatef(180.0F - yaw, 0.0F, 1.0F, 0.0F);
-		if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+		if (cart.bogieLoco != null)// || cart.bogieUtility[0]!=null){
+        {
 			GL11.glRotatef((float) -cart.anglePitchClient, 0.0F, 0.0F, 1.0F);
 		}
 		else
@@ -253,16 +273,25 @@ public class RenderRollingStock extends Render {
 			GL11.glScalef(cart.getRenderScale()[0], cart.getRenderScale()[1], cart.getRenderScale()[2]);
 		}
 
-		if (!cart.acceptsOverlayTextures() || !cart.getOverlayTextureContainer().hasActiveOverlays())
+        ResourceLocation lightingTexture;
+
+		if (cart.acceptsOverlayTextures() == false ||cart.getOverlayTextureContainer().hasActiveOverlays() == false)
 		{
-			Tessellator.bindTexture(getTexture(cart));
+            lightingTexture =getTexture(cart);
+            Tessellator.bindTexture(lightingTexture);
 		}
 		else
 		{
 			if (cart.getOverlayTextureContainer().markedForUpdate)
+            {
 				cart.getOverlayTextureContainer().renderTexture();
-            else
-			    Tessellator.bindTexture(cart.getOverlayTextureContainer().getOverlaidTextureResource());
+            }
+            lightingTexture =cart.getOverlayTextureContainer().getOverlaidTextureResource();
+            if (lightingTexture == null)
+            {
+                lightingTexture = getTexture(cart);
+            }
+            Tessellator.bindTexture(lightingTexture);
 		}
 		int skyLight = cart.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		if (!renderModeGUI)
@@ -274,7 +303,9 @@ public class RenderRollingStock extends Render {
 		else
 		{
 			if (renderGUIFullBright)
+            {
 				GL11.glDisable(GL11.GL_LIGHTING);
+            }
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f,
 					240f);
 		}
@@ -283,6 +314,17 @@ public class RenderRollingStock extends Render {
 		{
 			cart.modelInstance = cart.getRenderSpec().getModel();
 		}
+        // World effects are deferred until RenderWorldLast, matching the
+        // AFTER_BLOCK_ENTITIES pass. GUI renders must not enter that world queue.
+        if (renderModeGUI == false)
+        {
+            RollingStockLightOcclusion.beginStock(cart);
+            RollingStockDepthMask.beginModel(cart.getEntityId());
+            ClientRollingStockLighting.begin(cart, time, lightingTexture);
+        }
+
+        try
+        {
 
 		switch (cart.specialRenderMode)
 		{
@@ -311,13 +353,24 @@ public class RenderRollingStock extends Render {
 
 			break;
 		}
+        }
+        finally
+        {
+            ClientRollingStockLighting.end();
+            if (renderModeGUI == false)
+            {
+                RollingStockDepthMask.endModel();
+                RollingStockLightOcclusion.endStock();
+            }
+        }
 
 		if (cart.hasSmoke())
 		{
 			SubTrainRenderRecord subTrainRender = cart.getSubTrainRenderRecordSpec();
 			ArrayList<double[]> smokePosition = subTrainRender.getSmokeFX();
 
-			if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+			if (cart.bogieLoco != null)// || cart.bogieUtility[0]!=null){
+            {
 				renderSmokeFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, subTrainRender.getSmokeType(), smokePosition, subTrainRender.getSmokeIterations(), time);
 			}
 			else {
@@ -327,7 +380,8 @@ public class RenderRollingStock extends Render {
 		if (cart.hasExplosion())
 		{
 			SubTrainRenderRecord subTrainRender = cart.getSubTrainRenderRecordSpec();
-			if (cart.bogieLoco != null) {// || cart.bogieUtility[0]!=null){
+			if (cart.bogieLoco != null)// || cart.bogieUtility[0]!=null){
+            {
 				renderExplosionFX(cart, 90 + cart.rotationYawClientReal, (float) cart.anglePitchClient, subTrainRender.getExplosionType(), subTrainRender.getExplosionFX(), subTrainRender.getExplosionFXIterations());
 			}
 			else {
@@ -339,13 +393,17 @@ public class RenderRollingStock extends Render {
 	}
 
 	private static void renderSmokeFX(EntityRollingStock cart, float yaw, float pitch, String smokeType, ArrayList<double[]> smokeFX, int smokeIterations, float time) {
-		if(cart instanceof Locomotive && !((Locomotive)cart).isLocoTurnedOn()){return;}
-		if(Math.abs(pitch)>30)return;
+		if(cart instanceof Locomotive &&((Locomotive)cart).isLocoTurnedOn() == false){return;}
+		if(Math.abs(pitch)>30)
+        {return;
+        }
 		//if (pitch != 0 && !hasSmokeOnSlopes) { return; }
 		if ((cart instanceof Locomotive && ((Locomotive) cart).getFuel() > 0) || (cart instanceof EntityTracksBuilder && ((EntityTracksBuilder) cart).getFuel() > 0)) {
 			int r = random.nextInt(10 * smokeIterations);
 			double speed = 0;
-			if (cart instanceof Locomotive) speed = ((Locomotive) cart).getSpeed();
+			if (cart instanceof Locomotive)
+            { speed = ((Locomotive) cart).getSpeed();
+            }
 			if (r < ((smokeIterations * 4) + (speed * 5))) {
 				double rotatedvec[];
 				for (int j = 0; j < smokeIterations; j++) {
@@ -389,11 +447,15 @@ public class RenderRollingStock extends Render {
 
 
 	private static void renderExplosionFX(EntityRollingStock cart, float yaw, float pitch, String explosionType, ArrayList<double[]> explosionFX, int explosionFXIterations) {
-		if(cart instanceof Locomotive && !((Locomotive)cart).isLocoTurnedOn())return;
+		if(cart instanceof Locomotive &&((Locomotive)cart).isLocoTurnedOn() == false)
+        {return;
+        }
 		float yawMod = yaw % 360;
 		double pitchRads = Math.toDegrees(pitch);
 		//if (pitch != 0 && !hasSmokeOnSlopes) { return; }
-		if(Math.abs(pitch)>30)return;
+		if(Math.abs(pitch)>30)
+        {return;
+        }
 		if (cart instanceof Locomotive && ((Locomotive) cart).getFuel() > 0) {
 			int r = random.nextInt(300);
 			if (r < (explosionFXIterations * 10)) {
@@ -404,19 +466,22 @@ public class RenderRollingStock extends Render {
 							cart.worldObj.spawnParticle(explosionType, cart.posX - explosion[0], cart.posY + explosion[1] + ((Math.tan(pitchRads)* 4  * -explosion[1])), cart.posZ - explosion[2], 0.0D, 0.0D, 0.0D);
 						}
 					}
-					else if (yawMod == 90) {
+					else
+                    { if (yawMod == 90) {
 						for (double[] explosion : explosionFX) {
 							cart.worldObj.spawnParticle(explosionType, cart.posX + explosion[2], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ + explosion[0], 0.0D, 0.0D, 0.0D);
 							cart.worldObj.spawnParticle(explosionType, cart.posX - explosion[2], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ + explosion[0], 0.0D, 0.0D, 0.0D);
 						}
 					}
-					else if (yawMod == 0) {
+					else
+                        { if (yawMod == 0) {
 						for (double[] explosion : explosionFX) {
 							cart.worldObj.spawnParticle(explosionType, cart.posX + explosion[0], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ + explosion[2], 0.0D, 0.0D, 0.0D);
 							cart.worldObj.spawnParticle(explosionType, cart.posX + explosion[0], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ - explosion[2], 0.0D, 0.0D, 0.0D);
 						}
 					}
-					else if (yawMod == -90) {
+					else
+                            { if (yawMod == -90) {
 						for (double[] explosion : explosionFX) {
 							cart.worldObj.spawnParticle(explosionType, cart.posX + explosion[2], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ - explosion[0], 0.0D, 0.0D, 0.0D);
 							cart.worldObj.spawnParticle(explosionType, cart.posX - explosion[2], cart.posY + explosion[1] + ((Math.tan(pitchRads)*4 * -explosion[1])), cart.posZ - explosion[0], 0.0D, 0.0D, 0.0D);
@@ -426,6 +491,9 @@ public class RenderRollingStock extends Render {
 			}
 		}
 	}
+            }
+        }
+    }
 
 	@Override
 	public void doRender(Entity par1Entity, double x, double y, double d2, float yaw, float time)
