@@ -10,6 +10,15 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselDR441500Shark extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dr441500shark")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_335", "marker_body_336", "marker_body_531",
+            "marker_body_532")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -55,4 +64,10 @@ public class DieselDR441500Shark extends DieselTrain {
 
 
 
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

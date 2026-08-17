@@ -11,6 +11,14 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamAlco0_6_0T extends SteamTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:alco0_6_0t")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_275", "numberboard_body_309", "numberboard_body_74")
+        .build();
+
 	@Override
 	public SoundRecord getSoundRecord()
 	{
@@ -42,5 +50,12 @@ public class SteamAlco0_6_0T extends SteamTrain {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 1.15F;
 	}
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

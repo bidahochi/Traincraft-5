@@ -14,6 +14,20 @@ import train.common.overlaytexture.OTSpecificationDynamic;
 import java.awt.*;
 
 public class DieselU23B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:u23b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_140", "marker_body_141", "marker_body_149",
+            "marker_body_150", "marker_body_228", "marker_body_229",
+            "marker_body_305", "marker_body_306")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_324", "numberboard_body_325", "numberboard_body_326",
+            "numberboard_body_327", "numberboard_body_401", "numberboard_body_402")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -88,6 +102,13 @@ public class DieselU23B extends DieselTrain {
     @Override
     public String getInventoryName() {
         return "GE U23B";
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

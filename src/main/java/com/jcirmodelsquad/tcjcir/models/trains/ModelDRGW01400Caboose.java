@@ -149,10 +149,10 @@ public class ModelDRGW01400Caboose extends ModelConverter //Same as Filename
 		bodyModel[107] = new ModelRendererTurbo(this, 257, 57, textureX, textureY); // Box 1
 		bodyModel[108] = new ModelRendererTurbo(this, 377, 57, textureX, textureY); // Box 1
 		bodyModel[109] = new ModelRendererTurbo(this, 465, 57, textureX, textureY); // Box 1
-		bodyModel[110] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // FL marker light glow
-		bodyModel[111] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // F marker light glow
-		bodyModel[112] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // RR marker light glow
-		bodyModel[113] = new ModelRendererTurbo(this, 457, 9, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // R marker light glow
+		bodyModel[110] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "marker").setLightFixtureId("front_left_marker"); // FL marker light glow
+		bodyModel[111] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "marker").setLightFixtureId("front_right_marker"); // F marker light glow
+		bodyModel[112] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "marker").setLightFixtureId("rear_right_marker"); // RR marker light glow
+		bodyModel[113] = new ModelRendererTurbo(this, 457, 9, textureX, textureY, "marker").setLightFixtureId("rear_left_marker"); // R marker light glow
 		bodyModel[114] = new ModelRendererTurbo(this, 129, 57, textureX, textureY); // Box 41
 		bodyModel[115] = new ModelRendererTurbo(this, 1, 17, textureX, textureY); // Box 41
 		bodyModel[116] = new ModelRendererTurbo(this, 481, 57, textureX, textureY); // Box 41

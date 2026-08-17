@@ -230,10 +230,10 @@ public class ModelH24_66L extends ModelConverter //Same as Filename
 		bodyModel[182] = new ModelRendererTurbo(this, 389, 183, textureX, textureY); // Box 358
 		bodyModel[183] = new ModelRendererTurbo(this, 398, 208, textureX, textureY); // Box 2
 		bodyModel[184] = new ModelRendererTurbo(this, 368, 208, textureX, textureY); // Box 2
-		bodyModel[185] = new ModelRendererTurbo(this, 51, 42, textureX, textureY, BoxName.lamp); // marker light FL
-		bodyModel[186] = new ModelRendererTurbo(this, 15, 42, textureX, textureY, BoxName.lamp); // marker light FR
-		bodyModel[187] = new ModelRendererTurbo(this, 341, 303, textureX, textureY, BoxName.lamp); // marker light RL
-		bodyModel[188] = new ModelRendererTurbo(this, 405, 303, textureX, textureY, BoxName.lamp); // marker light RR
+		bodyModel[185] = new ModelRendererTurbo(this, 51, 42, textureX, textureY, BoxName.marker).setLightFixtureId("marker_fl"); // marker light FL
+		bodyModel[186] = new ModelRendererTurbo(this, 15, 42, textureX, textureY, BoxName.marker).setLightFixtureId("marker_fr"); // marker light FR
+		bodyModel[187] = new ModelRendererTurbo(this, 341, 303, textureX, textureY, BoxName.marker).setLightFixtureId("marker_rl"); // marker light RL
+		bodyModel[188] = new ModelRendererTurbo(this, 405, 303, textureX, textureY, BoxName.marker).setLightFixtureId("marker_rr"); // marker light RR
 		bodyModel[189] = new ModelRendererTurbo(this, 44, 33, textureX, textureY); // Box 2
 		bodyModel[190] = new ModelRendererTurbo(this, 16, 33, textureX, textureY); // Box 2
 		bodyModel[191] = new ModelRendererTurbo(this, 49, 26, textureX, textureY, BoxName.lamp); // numberboard type 1 F

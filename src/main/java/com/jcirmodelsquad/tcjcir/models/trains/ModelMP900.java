@@ -102,7 +102,7 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[58] = new ModelRendererTurbo(this, 43, 121, textureX, textureY, BoxName.ditch); // Box 256 ditchlight rear 1
 		bodyModel[59] = new ModelRendererTurbo(this, 30, 36, textureX, textureY); // Box 282
 		bodyModel[60] = new ModelRendererTurbo(this, 43, 33, textureX, textureY); // Box 283
-		bodyModel[61] = new ModelRendererTurbo(this, 115, 92, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[61] = new ModelRendererTurbo(this, 115, 92, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_61"); // Box 71 glow speedometer
 		bodyModel[62] = new ModelRendererTurbo(this, 124, 94, textureX, textureY); // Box 307
 		bodyModel[63] = new ModelRendererTurbo(this, 92, 111, textureX, textureY); // Box 413
 		bodyModel[64] = new ModelRendererTurbo(this, 87, 158, textureX, textureY); // Box 86
@@ -177,8 +177,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[133] = new ModelRendererTurbo(this, 85, 152, textureX, textureY, "lamp"); // Box 333 lamp front gyro sp
 		bodyModel[134] = new ModelRendererTurbo(this, 78, 152, textureX, textureY, "lamp"); // Box 334 lamp front gyro sp
 		bodyModel[135] = new ModelRendererTurbo(this, 88, 134, textureX, textureY); // Box 299
-		bodyModel[136] = new ModelRendererTurbo(this, 108, 135, textureX, textureY, "lamp"); // Box 300 glow marker
-		bodyModel[137] = new ModelRendererTurbo(this, 98, 135, textureX, textureY, "lamp"); // Box 348 glow marker
+		bodyModel[136] = new ModelRendererTurbo(this, 108, 135, textureX, textureY, "marker").setLightFixtureId("marker_body_136"); // Box 300 glow marker
+		bodyModel[137] = new ModelRendererTurbo(this, 98, 135, textureX, textureY, "marker").setLightFixtureId("marker_body_137"); // Box 348 glow marker
 		bodyModel[138] = new ModelRendererTurbo(this, 135, 134, textureX, textureY); // Box 308 sp light cover
 		bodyModel[139] = new ModelRendererTurbo(this, 148, 134, textureX, textureY); // Box 309 sp light cover
 		bodyModel[140] = new ModelRendererTurbo(this, 194, 156, textureX, textureY, "lamp"); // Box 331 lamp rear 2 beam sp
@@ -192,8 +192,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[148] = new ModelRendererTurbo(this, 154, 146, textureX, textureY); // Box 422
 		bodyModel[149] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "lamp"); // Box 333 lamp rear gyro sp
 		bodyModel[150] = new ModelRendererTurbo(this, 173, 157, textureX, textureY, "lamp"); // Box 334 lamp rear gyro sp
-		bodyModel[151] = new ModelRendererTurbo(this, 190, 150, textureX, textureY, "lamp"); // Box 300 glow marker
-		bodyModel[152] = new ModelRendererTurbo(this, 200, 150, textureX, textureY, "lamp"); // Box 348 glow marker
+		bodyModel[151] = new ModelRendererTurbo(this, 190, 150, textureX, textureY, "marker").setLightFixtureId("marker_body_151"); // Box 300 glow marker
+		bodyModel[152] = new ModelRendererTurbo(this, 200, 150, textureX, textureY, "marker").setLightFixtureId("marker_body_152"); // Box 348 glow marker
 		bodyModel[153] = new ModelRendererTurbo(this, 180, 149, textureX, textureY); // Box 416
 		bodyModel[154] = new ModelRendererTurbo(this, 161, 134, textureX, textureY); // Box 423
 		bodyModel[155] = new ModelRendererTurbo(this, 174, 134, textureX, textureY); // Box 424
@@ -241,8 +241,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[197] = new ModelRendererTurbo(this, 209, 133, textureX, textureY); // Box 188
 		bodyModel[198] = new ModelRendererTurbo(this, 237, 132, textureX, textureY); // Box 189
 		bodyModel[199] = new ModelRendererTurbo(this, 222, 132, textureX, textureY); // Box 190
-		bodyModel[200] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "lamp"); // Box 193 numberboard glow
-		bodyModel[201] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "lamp"); // Box 194 numberboard glow
+		bodyModel[200] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_200"); // Box 193 numberboard glow
+		bodyModel[201] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_201"); // Box 194 numberboard glow
 		bodyModel[202] = new ModelRendererTurbo(this, 237, 132, textureX, textureY); // Box 556
 		bodyModel[203] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "lamp"); // Box 557
 		bodyModel[204] = new ModelRendererTurbo(this, 209, 133, textureX, textureY); // Box 558

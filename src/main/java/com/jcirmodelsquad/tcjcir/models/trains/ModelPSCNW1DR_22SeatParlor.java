@@ -325,13 +325,13 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[282] = new ModelRendererTurbo(this, 15, 263, textureX, textureY); // Box 128
 		bodyModel[283] = new ModelRendererTurbo(this, 15, 239, textureX, textureY); // Box 185
 		bodyModel[284] = new ModelRendererTurbo(this, 176, 250, textureX, textureY,"cull"); // Box 275 cull
-		bodyModel[285] = new ModelRendererTurbo(this, 177, 244, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[286] = new ModelRendererTurbo(this, 177, 255, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[287] = new ModelRendererTurbo(this, 270, 247, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[288] = new ModelRendererTurbo(this, 263, 247, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[289] = new ModelRendererTurbo(this, 256, 247, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[290] = new ModelRendererTurbo(this, 249, 247, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[291] = new ModelRendererTurbo(this, 242, 247, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[285] = new ModelRendererTurbo(this, 177, 244, textureX, textureY,"interior").setLightFixtureId("interior_body_285"); // Box 38 glow
+		bodyModel[286] = new ModelRendererTurbo(this, 177, 255, textureX, textureY,"interior").setLightFixtureId("interior_body_286"); // Box 38 glow
+		bodyModel[287] = new ModelRendererTurbo(this, 270, 247, textureX, textureY,"interior").setLightFixtureId("interior_body_287"); // Box 38 glow
+		bodyModel[288] = new ModelRendererTurbo(this, 263, 247, textureX, textureY,"interior").setLightFixtureId("interior_body_288"); // Box 38 glow
+		bodyModel[289] = new ModelRendererTurbo(this, 256, 247, textureX, textureY,"interior").setLightFixtureId("interior_body_289"); // Box 38 glow
+		bodyModel[290] = new ModelRendererTurbo(this, 249, 247, textureX, textureY,"interior").setLightFixtureId("interior_body_290"); // Box 38 glow
+		bodyModel[291] = new ModelRendererTurbo(this, 242, 247, textureX, textureY,"interior").setLightFixtureId("interior_body_291"); // Box 38 glow
 		bodyModel[292] = new ModelRendererTurbo(this, 127, 263, textureX, textureY); // Box 38
 		bodyModel[293] = new ModelRendererTurbo(this, 116, 289, textureX, textureY); // Box 38
 		bodyModel[294] = new ModelRendererTurbo(this, 170, 298, textureX, textureY); // Box 38
@@ -354,11 +354,11 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[311] = new ModelRendererTurbo(this, 501, 266, textureX, textureY); // Box 38
 		bodyModel[312] = new ModelRendererTurbo(this, 489, 266, textureX, textureY); // Box 38
 		bodyModel[313] = new ModelRendererTurbo(this, 498, 269, textureX, textureY); // Box 38
-		bodyModel[314] = new ModelRendererTurbo(this, 441, 286, textureX, textureY,"lamp"); // Box 384 glow
-		bodyModel[315] = new ModelRendererTurbo(this, 6, 268, textureX, textureY,"lamp"); // Box 384 glow
-		bodyModel[316] = new ModelRendererTurbo(this, 3, 268, textureX, textureY,"lamp"); // Box 384 glow
-		bodyModel[317] = new ModelRendererTurbo(this, 0, 268, textureX, textureY,"lamp"); // Box 384 glow
-		bodyModel[318] = new ModelRendererTurbo(this, 28, 291, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[314] = new ModelRendererTurbo(this, 441, 286, textureX, textureY,"interior").setLightFixtureId("interior_body_314"); // Box 384 glow
+		bodyModel[315] = new ModelRendererTurbo(this, 6, 268, textureX, textureY,"interior").setLightFixtureId("interior_body_315"); // Box 384 glow
+		bodyModel[316] = new ModelRendererTurbo(this, 3, 268, textureX, textureY,"interior").setLightFixtureId("interior_body_316"); // Box 384 glow
+		bodyModel[317] = new ModelRendererTurbo(this, 0, 268, textureX, textureY,"interior").setLightFixtureId("interior_body_317"); // Box 384 glow
+		bodyModel[318] = new ModelRendererTurbo(this, 28, 291, textureX, textureY,"interior").setLightFixtureId("interior_body_318"); // Box 384 glow
 		bodyModel[319] = new ModelRendererTurbo(this, 192, 258, textureX, textureY); // Box 38
 		bodyModel[320] = new ModelRendererTurbo(this, 192, 264, textureX, textureY); // Box 462
 		bodyModel[321] = new ModelRendererTurbo(this, 67, 297, textureX, textureY); // Box 38
@@ -422,13 +422,13 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[379] = new ModelRendererTurbo(this, 188, 329, textureX, textureY); // Box 38
 		bodyModel[380] = new ModelRendererTurbo(this, 188, 326, textureX, textureY); // Box 589
 		bodyModel[381] = new ModelRendererTurbo(this, 151, 258, textureX, textureY); // Box 38
-		bodyModel[382] = new ModelRendererTurbo(this, 9, 268, textureX, textureY,"lamp"); // Box 384 glow
-		bodyModel[383] = new ModelRendererTurbo(this, 85, 292, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[382] = new ModelRendererTurbo(this, 9, 268, textureX, textureY,"interior").setLightFixtureId("interior_body_382"); // Box 384 glow
+		bodyModel[383] = new ModelRendererTurbo(this, 85, 292, textureX, textureY,"interior").setLightFixtureId("interior_body_383"); // Box 384 glow
 		bodyModel[384] = new ModelRendererTurbo(this, 115, 341, textureX, textureY); // Box 492
 		bodyModel[385] = new ModelRendererTurbo(this, 180, 342, textureX, textureY); // Box 492
 		bodyModel[386] = new ModelRendererTurbo(this, 177, 353, textureX, textureY); // Box 492
 		bodyModel[387] = new ModelRendererTurbo(this, 153, 340, textureX, textureY); // Box 38
-		bodyModel[388] = new ModelRendererTurbo(this, 173, 344, textureX, textureY,"lamp"); // Box 492 glow
+		bodyModel[388] = new ModelRendererTurbo(this, 173, 344, textureX, textureY,"interior").setLightFixtureId("interior_body_388"); // Box 492 glow
 		bodyModel[389] = new ModelRendererTurbo(this, 172, 328, textureX, textureY); // Box 492
 		bodyModel[390] = new ModelRendererTurbo(this, 176, 322, textureX, textureY); // Box 493
 		bodyModel[391] = new ModelRendererTurbo(this, 155, 322, textureX, textureY,"cull"); // Box 495 cull
@@ -437,7 +437,7 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[394] = new ModelRendererTurbo(this, 98, 1, textureX, textureY); // Box 270
 		bodyModel[395] = new ModelRendererTurbo(this, 97, 6, textureX, textureY); // Box 271
 		bodyModel[396] = new ModelRendererTurbo(this, 149, 303, textureX, textureY); // Box 38
-		bodyModel[397] = new ModelRendererTurbo(this, 12, 268, textureX, textureY,"lamp"); // Box 384 glow
+		bodyModel[397] = new ModelRendererTurbo(this, 12, 268, textureX, textureY,"interior").setLightFixtureId("interior_body_397"); // Box 384 glow
 		bodyModel[398] = new ModelRendererTurbo(this, 184, 272, textureX, textureY); // Box 38
 		bodyModel[399] = new ModelRendererTurbo(this, 184, 281, textureX, textureY); // Box 38
 		bodyModel[400] = new ModelRendererTurbo(this, 73, 290, textureX, textureY); // Box 38
@@ -445,11 +445,11 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[402] = new ModelRendererTurbo(this, 163, 303, textureX, textureY); // Box 38
 		bodyModel[403] = new ModelRendererTurbo(this, 117, 321, textureX, textureY); // Box 492
 		bodyModel[404] = new ModelRendererTurbo(this, 173, 340, textureX, textureY); // Box 492
-		bodyModel[405] = new ModelRendererTurbo(this, 190, 354, textureX, textureY,"lamp"); // Box 492 glow
+		bodyModel[405] = new ModelRendererTurbo(this, 190, 354, textureX, textureY,"interior").setLightFixtureId("interior_body_405"); // Box 492 glow
 		bodyModel[406] = new ModelRendererTurbo(this, 190, 350, textureX, textureY); // Box 492
-		bodyModel[407] = new ModelRendererTurbo(this, 166, 344, textureX, textureY,"lamp"); // Box 492 glow
+		bodyModel[407] = new ModelRendererTurbo(this, 166, 344, textureX, textureY,"interior").setLightFixtureId("interior_body_407"); // Box 492 glow
 		bodyModel[408] = new ModelRendererTurbo(this, 166, 340, textureX, textureY); // Box 492
-		bodyModel[409] = new ModelRendererTurbo(this, 166, 352, textureX, textureY,"lamp"); // Box 492 glow
+		bodyModel[409] = new ModelRendererTurbo(this, 166, 352, textureX, textureY,"interior").setLightFixtureId("interior_body_409"); // Box 492 glow
 		bodyModel[410] = new ModelRendererTurbo(this, 166, 348, textureX, textureY); // Box 492
 		bodyModel[411] = new ModelRendererTurbo(this, 322, 352, textureX, textureY); // Left seat part
 		bodyModel[412] = new ModelRendererTurbo(this, 294, 352, textureX, textureY); // Left seat part
@@ -2240,20 +2240,20 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 		bodyModel[589] = new ModelRendererTurbo(this, 109, 1, textureX, textureY); // Box 278
 		bodyModel[590] = new ModelRendererTurbo(this, 108, 6, textureX, textureY); // Box 279
 		bodyModel[591] = new ModelRendererTurbo(this, 56, 86, textureX, textureY); // Box 169
-		bodyModel[592] = new ModelRendererTurbo(this, 61, 86, textureX, textureY,"lamp"); // Box 169 marker lens LF
-		bodyModel[593] = new ModelRendererTurbo(this, 51, 86, textureX, textureY,"lamp"); // Box 169 marker lens LR
+		bodyModel[592] = new ModelRendererTurbo(this, 61, 86, textureX, textureY,"marker").setLightFixtureId("marker_lf"); // Box 169 marker lens LF
+		bodyModel[593] = new ModelRendererTurbo(this, 51, 86, textureX, textureY,"marker").setLightFixtureId("marker_lr_body_593"); // Box 169 marker lens LR
 		bodyModel[594] = new ModelRendererTurbo(this, 56, 66, textureX, textureY); // Box 548
-		bodyModel[595] = new ModelRendererTurbo(this, 51, 66, textureX, textureY,"lamp"); // Box 549 marker lens RF
-		bodyModel[596] = new ModelRendererTurbo(this, 61, 66, textureX, textureY,"lamp"); // Box 547 marker lens LR
+		bodyModel[595] = new ModelRendererTurbo(this, 51, 66, textureX, textureY,"marker").setLightFixtureId("marker_rf"); // Box 549 marker lens RF
+		bodyModel[596] = new ModelRendererTurbo(this, 61, 66, textureX, textureY,"marker").setLightFixtureId("marker_lr_body_596"); // Box 547 marker lens LR
 		bodyModel[597] = new ModelRendererTurbo(this, 67, 99, textureX, textureY); // Box 204
 		bodyModel[598] = new ModelRendererTurbo(this, 67, 95, textureX, textureY); // Box 204 marker lense
-		bodyModel[599] = new ModelRendererTurbo(this, 65, 92, textureX, textureY,"lamp"); // Box 204 marker lens
-		bodyModel[600] = new ModelRendererTurbo(this, 65, 88, textureX, textureY,"lamp"); // Box 204 marker lens
+		bodyModel[599] = new ModelRendererTurbo(this, 65, 92, textureX, textureY,"marker").setLightFixtureId("marker_body_599"); // Box 204 marker lens
+		bodyModel[600] = new ModelRendererTurbo(this, 65, 88, textureX, textureY,"marker").setLightFixtureId("marker_body_600"); // Box 204 marker lens
 		bodyModel[601] = new ModelRendererTurbo(this, 66, 85, textureX, textureY); // Box 204 marker lense
 		bodyModel[602] = new ModelRendererTurbo(this, 67, 80, textureX, textureY); // Box 617
 		bodyModel[603] = new ModelRendererTurbo(this, 67, 76, textureX, textureY); // Box 618
-		bodyModel[604] = new ModelRendererTurbo(this, 65, 73, textureX, textureY,"lamp"); // Box 619 marker lens
-		bodyModel[605] = new ModelRendererTurbo(this, 65, 69, textureX, textureY,"lamp"); // Box 620 marker lens
+		bodyModel[604] = new ModelRendererTurbo(this, 65, 73, textureX, textureY,"marker").setLightFixtureId("marker_body_604"); // Box 619 marker lens
+		bodyModel[605] = new ModelRendererTurbo(this, 65, 69, textureX, textureY,"marker").setLightFixtureId("marker_body_605"); // Box 620 marker lens
 		bodyModel[606] = new ModelRendererTurbo(this, 66, 66, textureX, textureY); // Box 621
 		bodyModel[607] = new ModelRendererTurbo(this, 16, 190, textureX, textureY); // Box 128
 		bodyModel[608] = new ModelRendererTurbo(this, 319, 164, textureX, textureY); // Box 2
@@ -2750,7 +2750,7 @@ public class ModelPSCNW1DR_22SeatParlor extends ModelConverter//Same as Filename
 	{
 		for(int i = 0; i < 638; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
+			if (bodyModel[i].boxName != null && (bodyModel[i].boxName.contains("lamp") || bodyModel[i].boxName.contains("marker"))) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

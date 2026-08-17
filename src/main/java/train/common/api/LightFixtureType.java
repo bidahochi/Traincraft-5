@@ -16,6 +16,7 @@ public enum LightFixtureType
         .controlCircuit(RollingStockLightChannel.DITCH)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.BEAM)
+        .beamLength(RollingStockLightDefinition.DEFAULT_DITCH_LIGHT_BEAM_LENGTH)
         .hotspotEnabled(true)
         .clientProjectorEligible(true)
         .build(),
@@ -30,6 +31,17 @@ public enum LightFixtureType
         .clientProjectorEligible(false)
         .build(),
         "An auxiliary illuminated numberboard surface without a projected beam."),
+    INTERIOR_LIGHT(
+        RollingStockLightBehaviorOverride.builder()
+        .controlCircuit(RollingStockLightChannel.AUX)
+        .function(RollingStockLightFunction.STEADY)
+        .effect(RollingStockLightDefinition.Effect.EMISSIVE_ONLY)
+        .beamDimensions(0, 0)
+        .sourceGlow(0, 0)
+        .hotspotEnabled(false)
+        .clientProjectorEligible(false)
+        .build(),
+        "Non-projecting passenger-compartment illumination controlled by the auxiliary circuit."),
     BEACON(
         steadyBeacon(),
         "A steady beacon controlled by the beacon circuit."),

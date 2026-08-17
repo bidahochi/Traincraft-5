@@ -185,13 +185,13 @@ public class ModelICCBaywindowWP extends ModelConverter //Same as Filename
 		bodyModel[140] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 166
 		bodyModel[141] = new ModelRendererTurbo(this, 1, 83, textureX, textureY); // Box 167
 		bodyModel[142] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 168
-		bodyModel[143] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // Box 410 glow marker
+		bodyModel[143] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("front_right_marker"); // Box 410 glow marker
 		bodyModel[144] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 170
-		bodyModel[145] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // Box 410 glow marker
+		bodyModel[145] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("front_left_marker"); // Box 410 glow marker
 		bodyModel[146] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 172
-		bodyModel[147] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // Box 410 glow marker
+		bodyModel[147] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("rear_right_marker"); // Box 410 glow marker
 		bodyModel[148] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 174
-		bodyModel[149] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // Box 410 glow marker
+		bodyModel[149] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("rear_left_marker"); // Box 410 glow marker
 		bodyModel[150] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 176
 		bodyModel[151] = new ModelRendererTurbo(this, 148, 5, textureX, textureY, "cull"); // Box 178 cull
 		bodyModel[152] = new ModelRendererTurbo(this, 133, 81, textureX, textureY); // Box 179

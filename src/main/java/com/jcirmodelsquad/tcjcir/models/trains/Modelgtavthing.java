@@ -89,8 +89,8 @@ public class Modelgtavthing extends ModelConverter //Same as Filename
 		bodyModel[43] = new ModelRendererTurbo(this, 121, 25, textureX, textureY); // Box 31
 		bodyModel[44] = new ModelRendererTurbo(this, 137, 25, textureX, textureY); // Box 40
 		bodyModel[45] = new ModelRendererTurbo(this, 161, 25, textureX, textureY); // Box 41
-		bodyModel[46] = new ModelRendererTurbo(this, 185, 25, textureX, textureY, "lamp"); // Box 115 liveryimg 2
-		bodyModel[47] = new ModelRendererTurbo(this, 201, 25, textureX, textureY, "lamp"); // Box 116 liveryimg 2
+		bodyModel[46] = new ModelRendererTurbo(this, 185, 25, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_46"); // Box 115 liveryimg 2
+		bodyModel[47] = new ModelRendererTurbo(this, 201, 25, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_47"); // Box 116 liveryimg 2
 		bodyModel[48] = new ModelRendererTurbo(this, 473, 9, textureX, textureY); // box64
 		bodyModel[49] = new ModelRendererTurbo(this, 497, 9, textureX, textureY); // box65
 		bodyModel[50] = new ModelRendererTurbo(this, 1, 17, textureX, textureY); // Box 44
@@ -150,8 +150,8 @@ public class Modelgtavthing extends ModelConverter //Same as Filename
 		bodyModel[104] = new ModelRendererTurbo(this, 361, 33, textureX, textureY); // Box 48
 		bodyModel[105] = new ModelRendererTurbo(this, 241, 41, textureX, textureY); // Box 43
 		bodyModel[106] = new ModelRendererTurbo(this, 385, 41, textureX, textureY); // Box 44
-		bodyModel[107] = new ModelRendererTurbo(this, 233, 33, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[108] = new ModelRendererTurbo(this, 489, 33, textureX, textureY, "lamp"); // Box 118 liveryimg 2
+		bodyModel[107] = new ModelRendererTurbo(this, 233, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_107"); // Box 117 liveryimg 2
+		bodyModel[108] = new ModelRendererTurbo(this, 489, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_108"); // Box 118 liveryimg 2
 		bodyModel[109] = new ModelRendererTurbo(this, 409, 17, textureX, textureY, "lamp"); // Box 186 lamp
 		bodyModel[110] = new ModelRendererTurbo(this, 137, 25, textureX, textureY, "lamp"); // Box 187 lamp
 		bodyModel[111] = new ModelRendererTurbo(this, 161, 49, textureX, textureY); // Box 201

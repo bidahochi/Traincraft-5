@@ -178,8 +178,8 @@ public class ModelBeep extends ModelConverter //Same as Filename
 		bodyModel[143] = new ModelRendererTurbo(this, 65, 89, textureX, textureY, "lamp"); // Box 215 lamp
 		bodyModel[144] = new ModelRendererTurbo(this, 249, 89, textureX, textureY); // Box 216 socket
 		bodyModel[145] = new ModelRendererTurbo(this, 121, 89, textureX, textureY, "lamp"); // Box 217 lamp
-		bodyModel[146] = new ModelRendererTurbo(this, 113, 33, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[147] = new ModelRendererTurbo(this, 193, 73, textureX, textureY, "lamp"); // Box 118 liveryimg 2
+		bodyModel[146] = new ModelRendererTurbo(this, 113, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_146"); // Box 117 liveryimg 2
+		bodyModel[147] = new ModelRendererTurbo(this, 193, 73, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_147"); // Box 118 liveryimg 2
 		bodyModel[148] = new ModelRendererTurbo(this, 65, 121, textureX, textureY); // Box 223
 		bodyModel[149] = new ModelRendererTurbo(this, 17, 105, textureX, textureY); // Box 184
 		bodyModel[150] = new ModelRendererTurbo(this, 193, 105, textureX, textureY); // Box 185

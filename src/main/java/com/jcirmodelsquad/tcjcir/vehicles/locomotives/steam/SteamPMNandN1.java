@@ -10,6 +10,15 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamPMNandN1 extends SteamTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:pmnandn1")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_448", "numberboard_body_449", "numberboard_body_493",
+            "numberboard_body_494")
+        .build();
+
 
 	@Override
 	public SoundRecord getSoundRecord()
@@ -44,4 +53,11 @@ public class SteamPMNandN1 extends SteamTrain {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 1.15F;
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

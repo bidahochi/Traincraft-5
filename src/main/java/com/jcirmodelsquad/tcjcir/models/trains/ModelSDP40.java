@@ -43,7 +43,7 @@ public class ModelSDP40 extends ModelConverter //Same as Filename
 	private void initbodyModel_1()
 	{
 		bodyModel[0] = new ModelRendererTurbo(this, 98, 151, textureX, textureY); // Box 307
-		bodyModel[1] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[1] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_1"); // Box 71 glow speedometer
 		bodyModel[2] = new ModelRendererTurbo(this, 118, 164, textureX, textureY); // Box 527 cab backpannel
 		bodyModel[3] = new ModelRendererTurbo(this, 207, 16, textureX, textureY, BoxName.prime4); // Box 9 PRIME3-4
 		bodyModel[4] = new ModelRendererTurbo(this, 207, 16, textureX, textureY, BoxName.prime2); // Box 8 PRIME3-2
@@ -285,8 +285,8 @@ public class ModelSDP40 extends ModelConverter //Same as Filename
 		bodyModel[240] = new ModelRendererTurbo(this, 434, 2, textureX, textureY); // Box 276
 		bodyModel[241] = new ModelRendererTurbo(this, 415, 5, textureX, textureY); // Box 277
 		bodyModel[242] = new ModelRendererTurbo(this, 396, 2, textureX, textureY); // Box 279
-		bodyModel[243] = new ModelRendererTurbo(this, 133, 90, textureX, textureY, "lamp"); // Box 117 numberboard front
-		bodyModel[244] = new ModelRendererTurbo(this, 125, 87, textureX, textureY, "lamp"); // Box 118 numberboard front
+		bodyModel[243] = new ModelRendererTurbo(this, 133, 90, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_243"); // Box 117 numberboard front
+		bodyModel[244] = new ModelRendererTurbo(this, 125, 87, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_244"); // Box 118 numberboard front
 		bodyModel[245] = new ModelRendererTurbo(this, 173, 57, textureX, textureY); // Box 184 o2 generator
 		bodyModel[246] = new ModelRendererTurbo(this, 238, 196, textureX, textureY); // Box 378
 		bodyModel[247] = new ModelRendererTurbo(this, 499, 29, textureX, textureY); // Box 379
@@ -300,7 +300,7 @@ public class ModelSDP40 extends ModelConverter //Same as Filename
 		bodyModel[255] = new ModelRendererTurbo(this, 204, 34, textureX, textureY); // Box 364
 		bodyModel[256] = new ModelRendererTurbo(this, 483, 8, textureX, textureY); // Box 376
 		bodyModel[257] = new ModelRendererTurbo(this, 483, 14, textureX, textureY); // Box 377
-		bodyModel[258] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[258] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "marker").setLightFixtureId("marker_two"); // Box 71 markerlight twO
 		bodyModel[259] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[260] = new ModelRendererTurbo(this, 335, 123, textureX, textureY); // Box 489
 		bodyModel[261] = new ModelRendererTurbo(this, 310, 153, textureX, textureY); // Box 278

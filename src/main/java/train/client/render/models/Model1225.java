@@ -2,8 +2,8 @@
 // Copyright (C) 2018 Minecraft-SMP.de
 // This file is for Flan's Flying Mod Version 4.0.x+
 
-// Model: 
-// Model Creator: 
+// Model:
+// Model Creator:
 // Created on: 25.05.2017 - 01:10:20
 // Last changed on: 25.05.2017 - 01:10:20
 
@@ -4146,9 +4146,12 @@ public class Model1225 extends ModelConverter //Same as Filename
 		bodyModel[1073] = new ModelRendererTurbo(this, 201, 337, textureX, textureY); // Box 1161
 		bodyModel[1074] = new ModelRendererTurbo(this, 209, 337, textureX, textureY); // Box 1162
 		bodyModel[1075] = new ModelRendererTurbo(this, 297, 17, textureX, textureY); // Box 1163
-		bodyModel[1076] = new ModelRendererTurbo(this, 233, 337, textureX, textureY); // Box 1161
-		bodyModel[1077] = new ModelRendererTurbo(this, 241, 337, textureX, textureY); // Box 1162
-		bodyModel[1078] = new ModelRendererTurbo(this, 249, 337, textureX, textureY); // Box 1163
+		bodyModel[1076] = new ModelRendererTurbo(this, 233, 337, textureX, textureY,
+            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1161
+		bodyModel[1077] = new ModelRendererTurbo(this, 241, 337, textureX, textureY,
+            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1162
+		bodyModel[1078] = new ModelRendererTurbo(this, 249, 337, textureX, textureY,
+            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1163
 		bodyModel[1079] = new ModelRendererTurbo(this, 257, 337, textureX, textureY); // Box 1164
 		bodyModel[1080] = new ModelRendererTurbo(this, 265, 337, textureX, textureY); // Box 1165
 		bodyModel[1081] = new ModelRendererTurbo(this, 33, 153, textureX, textureY); // Box 1166

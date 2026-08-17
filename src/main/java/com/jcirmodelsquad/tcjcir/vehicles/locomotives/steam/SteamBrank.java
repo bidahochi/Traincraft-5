@@ -11,6 +11,14 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamBrank extends SteamTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:brank")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_133", "numberboard_body_256")
+        .build();
+
 	@Override
 	public SoundRecord getSoundRecord()
 	{
@@ -45,4 +53,11 @@ public class SteamBrank extends SteamTrain {
 	{
 		return "US";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -347,8 +347,8 @@ public class ModelF3b extends ModelConverter //Same as Filename
 		bodyModel[304] = new ModelRendererTurbo(this, 471, 161, textureX, textureY, "cull"); // Box 321 CULL bunit ab shit
 		bodyModel[305] = new ModelRendererTurbo(this, 472, 155, textureX, textureY); // Box 322 bunit ab shit
 		bodyModel[306] = new ModelRendererTurbo(this, 111, 3, textureX, textureY); // Box 323 bunit water tank
-		bodyModel[307] = new ModelRendererTurbo(this, 421, 164, textureX, textureY, "lamp"); // Box 585 numberboard glow wp steam light
-		bodyModel[308] = new ModelRendererTurbo(this, 421, 164, textureX, textureY, "lamp"); // Box 584 numberboard glow wp steam headilght
+		bodyModel[307] = new ModelRendererTurbo(this, 421, 164, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_307"); // Box 585 numberboard glow wp steam light
+		bodyModel[308] = new ModelRendererTurbo(this, 421, 164, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_308"); // Box 584 numberboard glow wp steam headilght
 		bodyModel[309] = new ModelRendererTurbo(this, 420, 158, textureX, textureY); // Box 256 wp steam headlight bit
 		bodyModel[310] = new ModelRendererTurbo(this, 421, 168, textureX, textureY); // Box 254 wp steam headlight bit
 		bodyModel[311] = new ModelRendererTurbo(this, 421, 168, textureX, textureY); // Box 253 wp steam headlight bit

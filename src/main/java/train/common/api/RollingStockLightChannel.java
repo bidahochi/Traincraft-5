@@ -36,6 +36,12 @@ public enum RollingStockLightChannel
             // rendering behavior is locked separately by the extracted fixture definition.
             return HEADLIGHT;
         }
+        if (name.contains("interior"))
+        {
+            // Passenger-compartment illumination uses AUX so it follows rolling-stock light
+            // controls today and can receive a dedicated control later without changing models.
+            return AUX;
+        }
         if (name.contains("ditch"))
         {
             return DITCH;
@@ -49,6 +55,10 @@ public enum RollingStockLightChannel
             return BEACON;
         }
         if (name.contains("numberboard"))
+        {
+            return AUX;
+        }
+        if (name.contains("marker"))
         {
             return AUX;
         }
@@ -68,6 +78,12 @@ public enum RollingStockLightChannel
     public static boolean taggedPartIsInstrument(String partName)
     {
         return partName != null && partName.toLowerCase(Locale.ROOT).contains("instrument");
+    }
+
+    /** Returns whether a semantic model tag declares non-projecting interior illumination. */
+    public static boolean taggedPartIsInterior(String partName)
+    {
+        return partName != null && partName.toLowerCase(Locale.ROOT).contains("interior");
     }
 
     public static RollingStockLightFunction defaultFunction(String partName)

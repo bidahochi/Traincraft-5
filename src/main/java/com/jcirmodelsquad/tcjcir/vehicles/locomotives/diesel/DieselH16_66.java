@@ -10,6 +10,16 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselH16_66 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:fmh16_66")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_fl", "marker_fm_body_479", "marker_fm_body_484",
+            "marker_fm_body_486", "marker_fm_body_527", "marker_fr",
+            "marker_rl", "marker_rm", "marker_rr")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -95,4 +105,10 @@ public class DieselH16_66 extends DieselTrain {
     
     
 
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

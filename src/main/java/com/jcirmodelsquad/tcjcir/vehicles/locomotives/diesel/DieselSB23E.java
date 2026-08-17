@@ -11,6 +11,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselSB23E extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sb23e")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_189", "marker_body_190", "marker_body_215",
+            "marker_body_216")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_176", "numberboard_body_177", "numberboard_body_187",
+            "numberboard_body_188", "numberboard_body_241", "numberboard_body_242")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -54,4 +67,11 @@ public class DieselSB23E extends DieselTrain {
     public String getInventoryName() {
         return "CEE SB23E";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

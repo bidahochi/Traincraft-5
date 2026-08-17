@@ -63,8 +63,8 @@ public class ModelCF7_H_Round extends ModelConverter//Same as Filename
 		bodyModel[25] = new ModelRendererTurbo(this, 22, 150, textureX, textureY); // Box 134
 		bodyModel[26] = new ModelRendererTurbo(this, 32, 133, textureX, textureY); // Box 135
 		bodyModel[27] = new ModelRendererTurbo(this, 4, 155, textureX, textureY, "lamp"); // Box 136 headlight front
-		bodyModel[28] = new ModelRendererTurbo(this, 2, 147, textureX, textureY, "lamp"); // Box 137 numberboard
-		bodyModel[29] = new ModelRendererTurbo(this, 2, 140, textureX, textureY, "lamp"); // Box 138 numberboard
+		bodyModel[28] = new ModelRendererTurbo(this, 2, 147, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_28"); // Box 137 numberboard
+		bodyModel[29] = new ModelRendererTurbo(this, 2, 140, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_29"); // Box 138 numberboard
 		bodyModel[30] = new ModelRendererTurbo(this, 33, 125, textureX, textureY); // Box 140
 		bodyModel[31] = new ModelRendererTurbo(this, 70, 192, textureX, textureY); // Box 141
 		bodyModel[32] = new ModelRendererTurbo(this, 151, 197, textureX, textureY); // Box 262

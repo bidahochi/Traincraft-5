@@ -146,11 +146,11 @@ public class ModelM640 extends ModelConverter //Same as Filename
 		bodyModel[98] = new ModelRendererTurbo(this, 34, 36, textureX, textureY); // Box 71
 		bodyModel[99] = new ModelRendererTurbo(this, 104, 64, textureX, textureY); // Box 120
 		bodyModel[100] = new ModelRendererTurbo(this, 104, 60, textureX, textureY); // Box 121
-		bodyModel[101] = new ModelRendererTurbo(this, 26, 11, textureX, textureY, "lamp"); // Box 117 numberboard f
+		bodyModel[101] = new ModelRendererTurbo(this, 26, 11, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_101"); // Box 117 numberboard f
 		bodyModel[102] = new ModelRendererTurbo(this, 14, 36, textureX, textureY); // Box 205
 		bodyModel[103] = new ModelRendererTurbo(this, 45, 37, textureX, textureY); // Box 206
 		bodyModel[104] = new ModelRendererTurbo(this, 9, 37, textureX, textureY); // Box 207
-		bodyModel[105] = new ModelRendererTurbo(this, 22, 11, textureX, textureY, "lamp"); // Box 216 classlights
+		bodyModel[105] = new ModelRendererTurbo(this, 22, 11, textureX, textureY, "marker").setLightFixtureId("marker_body_105"); // Box 216 classlights
 		bodyModel[106] = new ModelRendererTurbo(this, 13, 32, textureX, textureY); // Box 224
 		bodyModel[107] = new ModelRendererTurbo(this, 45, 32, textureX, textureY); // Box 225
 		bodyModel[108] = new ModelRendererTurbo(this, 75, 163, textureX, textureY); // Box 253
@@ -159,10 +159,10 @@ public class ModelM640 extends ModelConverter //Same as Filename
 		bodyModel[111] = new ModelRendererTurbo(this, 69, 6, textureX, textureY); // Box 234
 		bodyModel[112] = new ModelRendererTurbo(this, 5, 44, textureX, textureY); // Box 315 door swing left
 		bodyModel[113] = new ModelRendererTurbo(this, 30, 35, textureX, textureY); // Box 194 backbit for vertical headlight
-		bodyModel[114] = new ModelRendererTurbo(this, 41, 11, textureX, textureY, "lamp"); // Box 197 numberboard f
+		bodyModel[114] = new ModelRendererTurbo(this, 41, 11, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_114"); // Box 197 numberboard f
 		bodyModel[115] = new ModelRendererTurbo(this, 104, 34, textureX, textureY); // Box 208
 		bodyModel[116] = new ModelRendererTurbo(this, 104, 29, textureX, textureY); // Box 209 door swing left
-		bodyModel[117] = new ModelRendererTurbo(this, 49, 11, textureX, textureY, "lamp"); // Box 217 classlights
+		bodyModel[117] = new ModelRendererTurbo(this, 49, 11, textureX, textureY, "marker").setLightFixtureId("marker_body_117"); // Box 217 classlights
 		bodyModel[118] = new ModelRendererTurbo(this, 1, 35, textureX, textureY); // Box 231
 		bodyModel[119] = new ModelRendererTurbo(this, 53, 35, textureX, textureY); // Box 232
 		bodyModel[120] = new ModelRendererTurbo(this, 62, 3, textureX, textureY); // Box 233

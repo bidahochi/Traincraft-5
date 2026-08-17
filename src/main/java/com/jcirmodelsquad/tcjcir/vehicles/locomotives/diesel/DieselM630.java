@@ -12,6 +12,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselM630 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:m630")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_classlight_left", "front_classlight_right", "rear_marker_left",
+            "rear_marker_right")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_left", "front_numberboard_right", "rear_numberboard_left",
+            "rear_numberboard_right")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -58,5 +71,12 @@ public class DieselM630 extends DieselTrain {
 
     
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

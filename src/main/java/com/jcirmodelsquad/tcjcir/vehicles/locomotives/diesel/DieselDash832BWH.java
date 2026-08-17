@@ -10,6 +10,20 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselDash832BWH extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dash832bwh")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_aussy_body_286", "marker_aussy_body_287", "marker_body_284",
+            "marker_body_285", "marker_crl_body_172", "marker_crl_body_173",
+            "rear_marker_box_body_399", "rear_marker_box_body_400")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_159", "numberboard_body_160", "numberboard_body_384",
+            "numberboard_body_385", "numberboard_upper_body_256", "numberboard_upper_body_258")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -63,5 +77,12 @@ public class DieselDash832BWH extends DieselTrain {
 
 
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

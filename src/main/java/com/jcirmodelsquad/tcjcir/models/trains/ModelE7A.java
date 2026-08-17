@@ -220,8 +220,8 @@ public class ModelE7A extends ModelConverter //Same as Filename
 		bodyModel[173] = new ModelRendererTurbo(this, 490, 83, textureX, textureY); // Box 604
 		bodyModel[174] = new ModelRendererTurbo(this, 490, 91, textureX, textureY); // Box 605
 		bodyModel[175] = new ModelRendererTurbo(this, 499, 95, textureX, textureY); // Box 606
-		bodyModel[176] = new ModelRendererTurbo(this, 125, 177, textureX, textureY,BoxName.lamp); // Box 352 markerlight
-		bodyModel[177] = new ModelRendererTurbo(this, 51, 177, textureX, textureY,BoxName.lamp); // Box 353 markerlight
+		bodyModel[176] = new ModelRendererTurbo(this, 125, 177, textureX, textureY,BoxName.marker).setLightFixtureId("marker_body_176"); // Box 352 markerlight
+		bodyModel[177] = new ModelRendererTurbo(this, 51, 177, textureX, textureY,BoxName.marker).setLightFixtureId("marker_body_177"); // Box 353 markerlight
 		bodyModel[178] = new ModelRendererTurbo(this, 475, 125, textureX, textureY); // Box 356
 		bodyModel[179] = new ModelRendererTurbo(this, 494, 103, textureX, textureY); // Box 357
 		bodyModel[180] = new ModelRendererTurbo(this, 489, 101, textureX, textureY); // Box 358
@@ -474,8 +474,8 @@ public class ModelE7A extends ModelConverter //Same as Filename
 		bodyModel[427] = new ModelRendererTurbo(this, 48, 170, textureX, textureY); // Box 144
 		bodyModel[428] = new ModelRendererTurbo(this, 133, 170, textureX, textureY); // Box 111
 		bodyModel[429] = new ModelRendererTurbo(this, 43, 170, textureX, textureY); // Box 144
-		bodyModel[430] = new ModelRendererTurbo(this, 138, 171, textureX, textureY,BoxName.lamp); // Marker light fireman glow number b
-		bodyModel[431] = new ModelRendererTurbo(this, 38, 171, textureX, textureY,BoxName.lamp); // Marker light engneer glow number b
+		bodyModel[430] = new ModelRendererTurbo(this, 138, 171, textureX, textureY,BoxName.marker).setLightFixtureId("marker_fireman_number_b_body_430"); // Marker light fireman glow number b
+		bodyModel[431] = new ModelRendererTurbo(this, 38, 171, textureX, textureY,BoxName.marker).setLightFixtureId("marker_engneer_number_b_body_431"); // Marker light engneer glow number b
 		bodyModel[432] = new ModelRendererTurbo(this, 50, 168, textureX, textureY,BoxName.lamp); // Box 144 liveryimg 2 glow
 		bodyModel[433] = new ModelRendererTurbo(this, 126, 168, textureX, textureY,BoxName.lamp); // Box 111 liveryimg 2 glow
 		bodyModel[434] = new ModelRendererTurbo(this, 194, 37, textureX, textureY); // Box 193
@@ -2124,9 +2124,9 @@ public class ModelE7A extends ModelConverter //Same as Filename
 		bodyModel[548] = new ModelRendererTurbo(this, 299, 57, textureX, textureY); // Box 0
 		bodyModel[549] = new ModelRendererTurbo(this, 272, 57, textureX, textureY); // Box 0
 		bodyModel[550] = new ModelRendererTurbo(this, 43, 166, textureX, textureY); // Box 144
-		bodyModel[551] = new ModelRendererTurbo(this, 38, 166, textureX, textureY, "lamp"); // Marker light engneer glow number b
+		bodyModel[551] = new ModelRendererTurbo(this, 38, 166, textureX, textureY, "marker").setLightFixtureId("marker_engneer_number_b_body_551"); // Marker light engneer glow number b
 		bodyModel[552] = new ModelRendererTurbo(this, 133, 166, textureX, textureY); // Box 111
-		bodyModel[553] = new ModelRendererTurbo(this, 138, 166, textureX, textureY, "lamp"); // Marker light fireman glow number b
+		bodyModel[553] = new ModelRendererTurbo(this, 138, 166, textureX, textureY, "marker").setLightFixtureId("marker_fireman_number_b_body_553"); // Marker light fireman glow number b
 		bodyModel[554] = new ModelRendererTurbo(this, 212, 37, textureX, textureY); // Box 405
 		bodyModel[555] = new ModelRendererTurbo(this, 206, 37, textureX, textureY); // Box 406
 		bodyModel[556] = new ModelRendererTurbo(this, 181, 46, textureX, textureY); // Box 299

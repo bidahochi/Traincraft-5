@@ -16,6 +16,19 @@ import train.common.library.GuiIDs;
 
 @Deprecated
 public class BUnitGP7b extends LiquidTank implements IFluidHandler {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:bunitgp7b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_437", "marker_body_438", "marker_body_439",
+            "marker_body_440")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_127", "front_numberboard_body_128", "rear_numberboard_body_206",
+            "rear_numberboard_body_207")
+        .build();
+
 	public int freightInventorySize;
 
 	private int update = 8;
@@ -252,4 +265,11 @@ public class BUnitGP7b extends LiquidTank implements IFluidHandler {
 	public String getLiquidName(){
 		return FluidRegistry.getFluid(this.dataWatcher.getWatchableObjectInt(4))!=null? FluidRegistry.getFluid(this.dataWatcher.getWatchableObjectInt(4)).getUnlocalizedName():null;
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

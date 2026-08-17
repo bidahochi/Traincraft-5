@@ -9,6 +9,15 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP40TC extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp40tc")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_159", "marker_body_160", "marker_body_174",
+            "marker_body_175")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -85,4 +94,10 @@ public class DieselGP40TC extends DieselTrain {
     
 
 
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

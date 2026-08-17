@@ -4,6 +4,15 @@ import net.minecraft.world.World;
 import train.common.api.AbstractPassengerCar;
 
 public class PSCNW12SeatParlor_Observation extends AbstractPassengerCar {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:pscnw12seatparlor_observation")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_lf", "marker_lr_body_405", "marker_lr_body_408",
+            "marker_rf")
+        .build();
+
 
 	public PSCNW12SeatParlor_Observation(World world)
 	{
@@ -28,4 +37,10 @@ public class PSCNW12SeatParlor_Observation extends AbstractPassengerCar {
 	public String transportYear() {
 		return "1939";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

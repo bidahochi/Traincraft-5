@@ -11,6 +11,20 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselSD45dash2 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd45")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_two_body_478", "marker_two_body_482", "marker_two_body_484")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_486", "front_numberboard_body_487", "numberboard_body_225",
+            "numberboard_body_226", "numberboard_body_507", "numberboard_body_508",
+            "rear_numberboard_body_480", "rear_numberboard_body_481", "rear_numberboard_body_488",
+            "rear_numberboard_body_489")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -114,5 +128,12 @@ public class DieselSD45dash2 extends DieselTrain {
 
 
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

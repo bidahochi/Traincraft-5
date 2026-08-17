@@ -312,9 +312,9 @@ public class ModelNP_L9 extends ModelConverter //Same as Filename
 		bodyModel[273] = new ModelRendererTurbo(this, 38, 16, textureX, textureY); // Box 2 headlight 1
 		bodyModel[274] = new ModelRendererTurbo(this, 40, 9, textureX, textureY); // Box 2 headlight 1
 		bodyModel[275] = new ModelRendererTurbo(this, 42, 5, textureX, textureY); // Box 2 headlight 1
-		bodyModel[276] = new ModelRendererTurbo(this, 36, 7, textureX, textureY, "lamp"); // Box 2 headlight 1 number boards glow
-		bodyModel[277] = new ModelRendererTurbo(this, 35, 14, textureX, textureY, "lamp"); // Box 2 headlight 1 number boards glow
-		bodyModel[278] = new ModelRendererTurbo(this, 35, 14, textureX, textureY, "lamp"); // Box 2 headlight 1 number boards glow
+		bodyModel[276] = new ModelRendererTurbo(this, 36, 7, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_276"); // Box 2 headlight 1 number boards glow
+		bodyModel[277] = new ModelRendererTurbo(this, 35, 14, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_277"); // Box 2 headlight 1 number boards glow
+		bodyModel[278] = new ModelRendererTurbo(this, 35, 14, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_278"); // Box 2 headlight 1 number boards glow
 		bodyModel[279] = new ModelRendererTurbo(this, 36, 14, textureX, textureY, "lamp"); // Box 2 headlight 1 glow
 		bodyModel[280] = new ModelRendererTurbo(this, 22, 11, textureX, textureY); // Box 2 headlight 2
 		bodyModel[281] = new ModelRendererTurbo(this, 17, 11, textureX, textureY, "lamp"); // Box 2 headlight 2 glow
@@ -322,9 +322,9 @@ public class ModelNP_L9 extends ModelConverter //Same as Filename
 		bodyModel[283] = new ModelRendererTurbo(this, 21, 8, textureX, textureY); // Box 2 headlight 2
 		bodyModel[284] = new ModelRendererTurbo(this, 24, 19, textureX, textureY); // Box 2 headlight 2
 		bodyModel[285] = new ModelRendererTurbo(this, 27, 14, textureX, textureY, "cull"); // Box 2 headlight 2 suport cull
-		bodyModel[286] = new ModelRendererTurbo(this, 17, 11, textureX, textureY, "lamp"); // Box 2 headlight 2 number boards glow
+		bodyModel[286] = new ModelRendererTurbo(this, 17, 11, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_286"); // Box 2 headlight 2 number boards glow
 		bodyModel[287] = new ModelRendererTurbo(this, 29, 8, textureX, textureY); // Box 2 headlight 2
-		bodyModel[288] = new ModelRendererTurbo(this, 17, 11, textureX, textureY, "lamp"); // Box 2 headlight 2 number boards glow
+		bodyModel[288] = new ModelRendererTurbo(this, 17, 11, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_288"); // Box 2 headlight 2 number boards glow
 		bodyModel[289] = new ModelRendererTurbo(this, 29, 8, textureX, textureY); // Box 2 headlight 2
 		bodyModel[290] = new ModelRendererTurbo(this, 112, 160, textureX, textureY); // Box 2
 		bodyModel[291] = new ModelRendererTurbo(this, 112, 160, textureX, textureY); // Box 2

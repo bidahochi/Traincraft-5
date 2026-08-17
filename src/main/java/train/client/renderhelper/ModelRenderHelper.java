@@ -44,7 +44,21 @@ public class ModelRenderHelper
                     GL11.glEnable(GL11.GL_CULL_FACE);
                 break;
                 case "lamp":
+                case "instrument":
                     if (hasHeadlights(rollingStock))
+                    {
+                        Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
+                        bm.render(f5);
+                        Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);
+                    }
+                    else
+                    {
+                        bm.render(f5);
+                    }
+                break;
+                case "numberboard":
+                case "marker":
+                    if (rollingStock.isLightChannelEnabled(RollingStockLightChannel.AUX))
                     {
                         Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                         bm.render(f5);
@@ -110,7 +124,13 @@ public class ModelRenderHelper
         }
         for (ModelRendererTurbo bm : bodyModel)
         {
-            if (bm.boxName.contains("lamp") || bm.boxName.contains("ditch") || bm.boxName.contains("commander") || bm.boxName.contains("prime"))
+            if (bm.boxName.contains("lamp")
+                    || bm.boxName.contains("numberboard")
+                    || bm.boxName.contains("marker")
+                    || bm.boxName.contains("instrument")
+                    || bm.boxName.contains("ditch")
+                    || bm.boxName.contains("commander")
+                    || bm.boxName.contains("prime"))
             {
                 Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                 bm.render(f5);
@@ -152,7 +172,10 @@ public class ModelRenderHelper
         }
         for (ModelRendererTurbo bm : bodyModel)
         {
-            if (bm.boxName.contains("lamp") && hasHeadlights(locomotive))
+            if ((bm.boxName.contains("lamp") || bm.boxName.contains("instrument"))
+                    && hasHeadlights(locomotive)
+                    || (bm.boxName.contains("numberboard") || bm.boxName.contains("marker"))
+                    && locomotive.isLightChannelEnabled(RollingStockLightChannel.AUX))
             {
                 Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                 bm.render(f5);
@@ -189,7 +212,10 @@ public class ModelRenderHelper
         }
         for (ModelRendererTurbo bm : bodyModel)
         {
-            if (bm.boxName.contains("lamp") && hasHeadlights(locomotive))
+            if ((bm.boxName.contains("lamp") || bm.boxName.contains("instrument"))
+                    && hasHeadlights(locomotive)
+                    || (bm.boxName.contains("numberboard") || bm.boxName.contains("marker"))
+                    && locomotive.isLightChannelEnabled(RollingStockLightChannel.AUX))
             {
                 Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                 bm.render(f5);
@@ -273,6 +299,9 @@ public class ModelRenderHelper
             switch (bm.boxName)
             {
                 case "lamp":
+                case "numberboard":
+                case "marker":
+                case "instrument":
                     Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                     bm.render(f5);
                     Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

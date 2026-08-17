@@ -490,8 +490,8 @@ public class ModelPMNandN1 extends ModelConverter //Same as Filename
 		bodyModel[445] = new ModelRendererTurbo(this, 33, 47, textureX, textureY); // Box 2 headlight
 		bodyModel[446] = new ModelRendererTurbo(this, 21, 52, textureX, textureY); // Box 2 Numberboard
 		bodyModel[447] = new ModelRendererTurbo(this, 32, 51, textureX, textureY); // Numberboard nonlit
-		bodyModel[448] = new ModelRendererTurbo(this, 21, 48, textureX, textureY, "lamp"); // Box 2 Numberboard glow
-		bodyModel[449] = new ModelRendererTurbo(this, 21, 48, textureX, textureY, "lamp"); // Box 2 Numberboard glow
+		bodyModel[448] = new ModelRendererTurbo(this, 21, 48, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_448"); // Box 2 Numberboard glow
+		bodyModel[449] = new ModelRendererTurbo(this, 21, 48, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_449"); // Box 2 Numberboard glow
 		bodyModel[450] = new ModelRendererTurbo(this, 4, 159, textureX, textureY); // Box 505
 		bodyModel[451] = new ModelRendererTurbo(this, 4, 159, textureX, textureY); // Box 505
 		bodyModel[452] = new ModelRendererTurbo(this, 30, 159, textureX, textureY); // Box 505
@@ -535,8 +535,8 @@ public class ModelPMNandN1 extends ModelConverter //Same as Filename
 		bodyModel[490] = new ModelRendererTurbo(this, 58, 33, textureX, textureY); // Box 2
 		bodyModel[491] = new ModelRendererTurbo(this, 48, 33, textureX, textureY); // Box 2
 		bodyModel[492] = new ModelRendererTurbo(this, 49, 30, textureX, textureY); // Box 2 Numberboard
-		bodyModel[493] = new ModelRendererTurbo(this, 58, 26, textureX, textureY, "lamp"); // Box 2 Numberboard glow
-		bodyModel[494] = new ModelRendererTurbo(this, 46, 26, textureX, textureY, "lamp"); // Box 2 Numberboard glow
+		bodyModel[493] = new ModelRendererTurbo(this, 58, 26, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_493"); // Box 2 Numberboard glow
+		bodyModel[494] = new ModelRendererTurbo(this, 46, 26, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_494"); // Box 2 Numberboard glow
 		bodyModel[495] = new ModelRendererTurbo(this, 58, 30, textureX, textureY); // Box 2 Numberboard
 		bodyModel[496] = new ModelRendererTurbo(this, 141, 174, textureX, textureY); // Box 27
 		bodyModel[497] = new ModelRendererTurbo(this, 100, 174, textureX, textureY); // Box 27

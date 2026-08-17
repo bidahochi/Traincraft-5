@@ -125,11 +125,11 @@ public class ModelC415H extends ModelConverter //Same as Filename
 		bodyModel[79] = new ModelRendererTurbo(this, 33, 145, textureX, textureY); // Box 1517
 		bodyModel[80] = new ModelRendererTurbo(this, 22, 133, textureX, textureY); // Box 1518
 		bodyModel[81] = new ModelRendererTurbo(this, 43, 140, textureX, textureY); // Box 1519
-		bodyModel[82] = new ModelRendererTurbo(this, 25, 138, textureX, textureY, BoxName.lamp); // Box 1521 markerlight
-		bodyModel[83] = new ModelRendererTurbo(this, 25, 138, textureX, textureY, BoxName.lamp); // Box 1522 markerlight
+		bodyModel[82] = new ModelRendererTurbo(this, 25, 138, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_82"); // Box 1521 markerlight
+		bodyModel[83] = new ModelRendererTurbo(this, 25, 138, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_83"); // Box 1522 markerlight
 		bodyModel[84] = new ModelRendererTurbo(this, 239, 133, textureX, textureY); // Box 1523
-		bodyModel[85] = new ModelRendererTurbo(this, 252, 138, textureX, textureY, BoxName.lamp); // Box 1526 markerlight
-		bodyModel[86] = new ModelRendererTurbo(this, 252, 138, textureX, textureY, BoxName.lamp); // Box 1527 markerlight
+		bodyModel[85] = new ModelRendererTurbo(this, 252, 138, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_85"); // Box 1526 markerlight
+		bodyModel[86] = new ModelRendererTurbo(this, 252, 138, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_86"); // Box 1527 markerlight
 		bodyModel[87] = new ModelRendererTurbo(this, 425, 178, textureX, textureY); // Box 1528
 		bodyModel[88] = new ModelRendererTurbo(this, 123, 104, textureX, textureY); // Box 1529
 		bodyModel[89] = new ModelRendererTurbo(this, 113, 114, textureX, textureY); // Box 1530

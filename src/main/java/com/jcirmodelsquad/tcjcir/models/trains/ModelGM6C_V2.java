@@ -132,8 +132,8 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[89] = new ModelRendererTurbo(this, 52, 69, textureX, textureY, "lamp"); // Box 186 headlight front
 		bodyModel[90] = new ModelRendererTurbo(this, 51, 56, textureX, textureY); // Box 48
 		bodyModel[91] = new ModelRendererTurbo(this, 51, 52, textureX, textureY); // Box 133
-		bodyModel[92] = new ModelRendererTurbo(this, 83, 59, textureX, textureY, "lamp"); // Box 198 numberboard
-		bodyModel[93] = new ModelRendererTurbo(this, 83, 59, textureX, textureY, "lamp"); // Box 199 numberboard
+		bodyModel[92] = new ModelRendererTurbo(this, 83, 59, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_92"); // Box 198 numberboard
+		bodyModel[93] = new ModelRendererTurbo(this, 83, 59, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_93"); // Box 199 numberboard
 		bodyModel[94] = new ModelRendererTurbo(this, 264, 48, textureX, textureY); // Box 34
 		bodyModel[95] = new ModelRendererTurbo(this, 448, 25, textureX, textureY); // Box 188
 		bodyModel[96] = new ModelRendererTurbo(this, 439, 29, textureX, textureY); // Box 189
@@ -149,8 +149,8 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[106] = new ModelRendererTurbo(this, 445, 20, textureX, textureY, "lamp"); // Box 187 headlight rear
 		bodyModel[107] = new ModelRendererTurbo(this, 445, 20, textureX, textureY, "lamp"); // Box 186 headlight rear
 		bodyModel[108] = new ModelRendererTurbo(this, 439, 16, textureX, textureY); // Box 133
-		bodyModel[109] = new ModelRendererTurbo(this, 437, 21, textureX, textureY, "lamp"); // Box 260 numberboard
-		bodyModel[110] = new ModelRendererTurbo(this, 437, 21, textureX, textureY, "lamp"); // Box 261 numberboard
+		bodyModel[109] = new ModelRendererTurbo(this, 437, 21, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_109"); // Box 260 numberboard
+		bodyModel[110] = new ModelRendererTurbo(this, 437, 21, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_110"); // Box 261 numberboard
 		bodyModel[111] = new ModelRendererTurbo(this, 452, 91, textureX, textureY); // Box 80
 		bodyModel[112] = new ModelRendererTurbo(this, 447, 113, textureX, textureY); // Box 390
 		bodyModel[113] = new ModelRendererTurbo(this, 497, 113, textureX, textureY); // Box 391
@@ -161,7 +161,7 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[118] = new ModelRendererTurbo(this, 266, 32, textureX, textureY); // Box 222
 		bodyModel[119] = new ModelRendererTurbo(this, 243, 10, textureX, textureY); // Box 190
 		bodyModel[120] = new ModelRendererTurbo(this, 245, 6, textureX, textureY); // Box 191
-		bodyModel[121] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "lamp"); // Box 71 markerlight rear
+		bodyModel[121] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "marker").setLightFixtureId("rear_marker"); // Box 71 markerlight rear
 		bodyModel[122] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "lamp"); // Box 1208 makrerlight rear
 		bodyModel[123] = new ModelRendererTurbo(this, 216, 182, textureX, textureY); // Box 196
 		bodyModel[124] = new ModelRendererTurbo(this, 229, 111, textureX, textureY); // Box 197
@@ -234,7 +234,7 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[191] = new ModelRendererTurbo(this, 25, 129, textureX, textureY); // Box 418
 		bodyModel[192] = new ModelRendererTurbo(this, 26, 125, textureX, textureY); // Box 419
 		bodyModel[193] = new ModelRendererTurbo(this, 49, 126, textureX, textureY); // Box 420
-		bodyModel[194] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "lamp"); // Box 71 markerlight front
+		bodyModel[194] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "marker").setLightFixtureId("front_marker"); // Box 71 markerlight front
 		bodyModel[195] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "lamp"); // Box 1208 makrerlight front
 		bodyModel[196] = new ModelRendererTurbo(this, 353, 144, textureX, textureY); // Box 562
 		bodyModel[197] = new ModelRendererTurbo(this, 353, 149, textureX, textureY); // Box 563
@@ -308,13 +308,13 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[265] = new ModelRendererTurbo(this, 21, 13, textureX, textureY); // Box 413 cs
 		bodyModel[266] = new ModelRendererTurbo(this, 7, 5, textureX, textureY); // Box 86 cs
 		bodyModel[267] = new ModelRendererTurbo(this, 2, 26, textureX, textureY); // Box 531 cs
-		bodyModel[268] = new ModelRendererTurbo(this, 34, 4, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[268] = new ModelRendererTurbo(this, 34, 4, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_268"); // Box 71 glow speedometer
 		bodyModel[269] = new ModelRendererTurbo(this, 37, 11, textureX, textureY); // Box 307 spedo
 		bodyModel[270] = new ModelRendererTurbo(this, 7, 42, textureX, textureY); // Box 412 cs
 		bodyModel[271] = new ModelRendererTurbo(this, 21, 42, textureX, textureY); // Box 413 cs
 		bodyModel[272] = new ModelRendererTurbo(this, 7, 34, textureX, textureY); // Box 86 cs
 		bodyModel[273] = new ModelRendererTurbo(this, 2, 55, textureX, textureY); // Box 531 cs
-		bodyModel[274] = new ModelRendererTurbo(this, 34, 33, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[274] = new ModelRendererTurbo(this, 34, 33, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_274"); // Box 71 glow speedometer
 		bodyModel[275] = new ModelRendererTurbo(this, 37, 40, textureX, textureY); // Box 307 spedo
 		bodyModel[276] = new ModelRendererTurbo(this, 463, 105, textureX, textureY); // Box 276
 		bodyModel[277] = new ModelRendererTurbo(this, 196, 58, textureX, textureY); // Box 277

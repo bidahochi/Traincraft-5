@@ -10,6 +10,10 @@ public class WPShops600Series extends AbstractWorkCart
     static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
         RollingStockSkinLightingProfiles.builder("bap:wp_shops_600")
         .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_left_marker", "front_right_marker", "rear_left_marker",
+            "rear_right_marker")
         .emissiveOnly(
             "front_gyralite", "rear_gyralite",
             "front_right_marker", "front_left_marker",

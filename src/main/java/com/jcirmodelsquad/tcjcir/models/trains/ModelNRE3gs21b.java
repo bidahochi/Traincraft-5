@@ -158,7 +158,7 @@ public class ModelNRE3gs21b extends ModelConverter //Same as Filename
 		bodyModel[112] = new ModelRendererTurbo(this, 89, 113, textureX, textureY); // Box 422
 		bodyModel[113] = new ModelRendererTurbo(this, 241, 113, textureX, textureY); // Box 423
 		bodyModel[114] = new ModelRendererTurbo(this, 193, 9, textureX, textureY, "lamp"); // Box 424 liverimg 2
-		bodyModel[115] = new ModelRendererTurbo(this, 249, 17, textureX, textureY, "lamp"); // Box 425 liveryimg 2
+		bodyModel[115] = new ModelRendererTurbo(this, 249, 17, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_115"); // Box 425 liveryimg 2
 		bodyModel[116] = new ModelRendererTurbo(this, 41, 145, textureX, textureY); // Box 426
 		bodyModel[117] = new ModelRendererTurbo(this, 33, 89, textureX, textureY); // Box 428
 		bodyModel[118] = new ModelRendererTurbo(this, 209, 129, textureX, textureY); // Box 429
@@ -327,7 +327,7 @@ public class ModelNRE3gs21b extends ModelConverter //Same as Filename
 		bodyModel[281] = new ModelRendererTurbo(this, 177, 224, textureX, textureY, "cull"); // Box 369 cull
 		bodyModel[282] = new ModelRendererTurbo(this, 241, 145, textureX, textureY); // Box 372
 		bodyModel[283] = new ModelRendererTurbo(this, 49, 41, textureX, textureY, "lamp"); // Box 424 liverimg 2
-		bodyModel[284] = new ModelRendererTurbo(this, 49, 41, textureX, textureY, "lamp"); // Box 425 liveryimg 2
+		bodyModel[284] = new ModelRendererTurbo(this, 49, 41, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_284"); // Box 425 liveryimg 2
 		bodyModel[285] = new ModelRendererTurbo(this, 193, 225, textureX, textureY); // Box 327
 		bodyModel[286] = new ModelRendererTurbo(this, 209, 225, textureX, textureY); // Box 328
 		bodyModel[287] = new ModelRendererTurbo(this, 217, 225, textureX, textureY); // Box 329

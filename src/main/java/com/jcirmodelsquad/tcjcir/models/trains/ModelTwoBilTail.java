@@ -384,16 +384,16 @@ public class ModelTwoBilTail extends ModelConverter //Same as Filename
 		bodyModel[346] = new ModelRendererTurbo(this, 57, 261, textureX, textureY); // Box 102
 		bodyModel[347] = new ModelRendererTurbo(this, 89, 97, textureX, textureY); // Box 102
 		bodyModel[348] = new ModelRendererTurbo(this, 276, 214, textureX, textureY); // Box 711
-		bodyModel[349] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[350] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[351] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[352] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[353] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[354] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[355] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[356] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[357] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
-		bodyModel[358] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"lamp"); // Ceiling Lamp
+		bodyModel[349] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_349"); // Ceiling Lamp
+		bodyModel[350] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_350"); // Ceiling Lamp
+		bodyModel[351] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_351"); // Ceiling Lamp
+		bodyModel[352] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_352"); // Ceiling Lamp
+		bodyModel[353] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_353"); // Ceiling Lamp
+		bodyModel[354] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_354"); // Ceiling Lamp
+		bodyModel[355] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_355"); // Ceiling Lamp
+		bodyModel[356] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_356"); // Ceiling Lamp
+		bodyModel[357] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_357"); // Ceiling Lamp
+		bodyModel[358] = new ModelRendererTurbo(this, 1, 197, textureX, textureY,"interior").setLightFixtureId("interior_body_358"); // Ceiling Lamp
 
 		bodyModel[0].addBox(0F, 0F, 0F, 81, 1, 22, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-41.5F, 1F, -11F);

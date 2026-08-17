@@ -166,7 +166,7 @@ public class ModelBrank extends ModelConverter //Same as Filename
 		bodyModel[130] = new ModelRendererTurbo(this, 118, 19, textureX, textureY); // Box 212
 		bodyModel[131] = new ModelRendererTurbo(this, 116, 12, textureX, textureY); // Box 213
 		bodyModel[132] = new ModelRendererTurbo(this, 129, 12, textureX, textureY,"lamp"); // bulb2
-		bodyModel[133] = new ModelRendererTurbo(this, 129, 17, textureX, textureY,"lamp"); // numberboard
+		bodyModel[133] = new ModelRendererTurbo(this, 129, 17, textureX, textureY,"numberboard").setLightFixtureId("numberboard_body_133"); // numberboard
 		bodyModel[134] = new ModelRendererTurbo(this, 132, 8, textureX, textureY); // Box 184
 		bodyModel[135] = new ModelRendererTurbo(this, 116, 0, textureX, textureY); // Box 96
 		bodyModel[136] = new ModelRendererTurbo(this, 129, 0, textureX, textureY,"lamp"); // bulb
@@ -289,7 +289,7 @@ public class ModelBrank extends ModelConverter //Same as Filename
 		bodyModel[253] = new ModelRendererTurbo(this, 0, 147, textureX, textureY); // Box 292
 		bodyModel[254] = new ModelRendererTurbo(this, 80, 131, textureX, textureY); // Box 293 coal load
 		bodyModel[255] = new ModelRendererTurbo(this, 113, 175, textureX, textureY); // Box 294
-		bodyModel[256] = new ModelRendererTurbo(this, 113, 186, textureX, textureY,"lamp"); // Box 295 numberboard
+		bodyModel[256] = new ModelRendererTurbo(this, 113, 186, textureX, textureY,"numberboard").setLightFixtureId("numberboard_body_256"); // Box 295 numberboard
 		bodyModel[257] = new ModelRendererTurbo(this, 113, 179, textureX, textureY); // Box 296
 		bodyModel[258] = new ModelRendererTurbo(this, 126, 187, textureX, textureY,"lamp"); // Box 297 headlight rear
 		bodyModel[259] = new ModelRendererTurbo(this, 35, 135, textureX, textureY); // Box 305

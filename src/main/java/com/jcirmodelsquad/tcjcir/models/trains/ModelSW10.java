@@ -240,7 +240,7 @@ public class ModelSW10 extends ModelConverter //Same as Filename
 		bodyModel[196] = new ModelRendererTurbo(this, 469, 4, textureX, textureY, BoxName.commander); // Box 410 commander beacon
 		bodyModel[197] = new ModelRendererTurbo(this, 424, 138, textureX, textureY); // Box 297 ec
 		bodyModel[198] = new ModelRendererTurbo(this, 415, 121, textureX, textureY); // Box 302
-		bodyModel[199] = new ModelRendererTurbo(this, 467, 188, textureX, textureY, "lamp"); // Box 275 cs2 speedo glow
+		bodyModel[199] = new ModelRendererTurbo(this, 467, 188, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_199"); // Box 275 cs2 speedo glow
 		bodyModel[200] = new ModelRendererTurbo(this, 12, 165, textureX, textureY); // Box 529
 		bodyModel[201] = new ModelRendererTurbo(this, 14, 162, textureX, textureY); // Box 530
 		bodyModel[202] = new ModelRendererTurbo(this, 14, 168, textureX, textureY); // Box 531
@@ -296,12 +296,12 @@ public class ModelSW10 extends ModelConverter //Same as Filename
 		bodyModel[252] = new ModelRendererTurbo(this, 454, 197, textureX, textureY); // Box 413 cs
 		bodyModel[253] = new ModelRendererTurbo(this, 440, 189, textureX, textureY); // Box 86 cs
 		bodyModel[254] = new ModelRendererTurbo(this, 435, 210, textureX, textureY); // Box 531 cs
-		bodyModel[255] = new ModelRendererTurbo(this, 430, 180, textureX, textureY, "lamp"); // Box 71 cs glow speedometer
+		bodyModel[255] = new ModelRendererTurbo(this, 430, 180, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_255"); // Box 71 cs glow speedometer
 		bodyModel[256] = new ModelRendererTurbo(this, 430, 175, textureX, textureY); // Box 307 cs speedo
-		bodyModel[257] = new ModelRendererTurbo(this, 275, 150, textureX, textureY, "lamp"); // Box 168 numberboard front double
-		bodyModel[258] = new ModelRendererTurbo(this, 275, 150, textureX, textureY, "lamp"); // Box 167 numberboard front double
-		bodyModel[259] = new ModelRendererTurbo(this, 482, 22, textureX, textureY, "lamp"); // Box 168 numberboard rear double
-		bodyModel[260] = new ModelRendererTurbo(this, 482, 22, textureX, textureY, "lamp"); // Box 167 numberboard rear double
+		bodyModel[257] = new ModelRendererTurbo(this, 275, 150, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_double_body_257"); // Box 168 numberboard front double
+		bodyModel[258] = new ModelRendererTurbo(this, 275, 150, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_double_body_258"); // Box 167 numberboard front double
+		bodyModel[259] = new ModelRendererTurbo(this, 482, 22, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_double_body_259"); // Box 168 numberboard rear double
+		bodyModel[260] = new ModelRendererTurbo(this, 482, 22, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_double_body_260"); // Box 167 numberboard rear double
 		bodyModel[261] = new ModelRendererTurbo(this, 368, 64, textureX, textureY); // Box 184 o2 generator
 		bodyModel[262] = new ModelRendererTurbo(this, 27, 169, textureX, textureY); // Box 426 flexicoil short skirt
 		bodyModel[263] = new ModelRendererTurbo(this, 66, 169, textureX, textureY); // Box 427 flexicoil short skirt

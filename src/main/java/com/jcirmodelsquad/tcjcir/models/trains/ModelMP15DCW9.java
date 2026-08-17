@@ -126,8 +126,8 @@ public class ModelMP15DCW9 extends ModelConverter //Same as Filename
 		bodyModel[79] = new ModelRendererTurbo(this, 33, 33, textureX, textureY); // Box 335
 		bodyModel[80] = new ModelRendererTurbo(this, 121, 33, textureX, textureY); // Box 338
 		bodyModel[81] = new ModelRendererTurbo(this, 449, 33, textureX, textureY); // Box 339
-		bodyModel[82] = new ModelRendererTurbo(this, 41, 9, textureX, textureY, "lamp"); // Box 341 liveryimg 2 glow
-		bodyModel[83] = new ModelRendererTurbo(this, 65, 9, textureX, textureY, "lamp"); // Box 342 liveryimg 2 glow
+		bodyModel[82] = new ModelRendererTurbo(this, 41, 9, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_82"); // Box 341 liveryimg 2 glow
+		bodyModel[83] = new ModelRendererTurbo(this, 65, 9, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_83"); // Box 342 liveryimg 2 glow
 		bodyModel[84] = new ModelRendererTurbo(this, 473, 33, textureX, textureY); // Box 33
 		bodyModel[85] = new ModelRendererTurbo(this, 17, 41, textureX, textureY); // Box 89
 		bodyModel[86] = new ModelRendererTurbo(this, 233, 41, textureX, textureY); // Box 399

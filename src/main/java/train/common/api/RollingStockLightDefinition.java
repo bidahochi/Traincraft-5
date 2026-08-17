@@ -13,6 +13,12 @@ import java.util.Objects;
  */
 public final class RollingStockLightDefinition
 {
+    /** Conventional high-beam reach used by automatically discovered headlights. */
+    public static final float DEFAULT_HEADLIGHT_BEAM_LENGTH = 5.0F;
+    /** Default ditch-light reach: three quarters of the conventional high headlight beam. */
+    public static final float DEFAULT_DITCH_LIGHT_BEAM_LENGTH =
+        DEFAULT_HEADLIGHT_BEAM_LENGTH * 0.75F;
+
     /** Selects which visual products a fixture may submit to the client renderer. */
     public enum Effect
     {
@@ -246,7 +252,7 @@ public final class RollingStockLightDefinition
                .direction(1, 0, 0)
                .color(RollingStockLightColors.WARM_WHITE)
                .effect(Effect.BEAM)
-               .beamDimensions(5, 0.45F)
+               .beamDimensions(DEFAULT_HEADLIGHT_BEAM_LENGTH, 0.45F)
                .sourceGlow(0.10F, 0.85F)
                .hotspotEnabled(true)
                .clientProjectorEligible(true)

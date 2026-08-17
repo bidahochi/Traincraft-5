@@ -10,6 +10,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP20 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp20")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_box_chop_body_263", "marker_box_chop_body_265", "marker_box_lownose_body_266",
+            "marker_box_lownose_body_267", "marker_sd9_body_259", "marker_sd9_body_261")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_72", "front_numberboard_body_73", "numberboard_chop_body_144",
+            "numberboard_chop_body_145", "rear_numberboard_body_135", "rear_numberboard_body_136")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -59,4 +72,11 @@ public class DieselGP20 extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP20";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

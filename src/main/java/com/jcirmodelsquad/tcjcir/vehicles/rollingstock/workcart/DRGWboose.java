@@ -11,6 +11,10 @@ public class DRGWboose extends AbstractWorkCart
     static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
         RollingStockSkinLightingProfiles.builder("bap:drgw_01400_caboose")
         .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_left_marker", "front_right_marker", "rear_left_marker",
+            "rear_right_marker")
         .emissiveOnly(
             "front_left_marker", "front_right_marker",
             "rear_right_marker", "rear_left_marker")

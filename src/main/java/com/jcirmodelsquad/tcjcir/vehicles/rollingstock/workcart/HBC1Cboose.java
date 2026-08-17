@@ -11,6 +11,10 @@ public class HBC1Cboose extends AbstractWorkCart
     static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
         RollingStockSkinLightingProfiles.builder("bap:hbc1c")
         .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_left_marker", "front_right_marker", "rear_left_marker",
+            "rear_right_marker")
         .emissiveOnly(
             "rear_left", "rear_right", "front_right", "front_left",
             "rear_right_marker", "rear_left_marker",

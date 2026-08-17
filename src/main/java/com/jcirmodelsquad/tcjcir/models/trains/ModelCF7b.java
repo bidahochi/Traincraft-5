@@ -191,8 +191,8 @@ public class ModelCF7b extends ModelConverter //Same as Filename
 		bodyModel[148] = new ModelRendererTurbo(this, 235, 113, textureX, textureY); // Box 43
 		bodyModel[149] = new ModelRendererTurbo(this, 246, 111, textureX, textureY); // Box 601
 		bodyModel[150] = new ModelRendererTurbo(this, 215, 90, textureX, textureY); // Box 402
-		bodyModel[151] = new ModelRendererTurbo(this, 251, 92, textureX, textureY, "lamp"); // Box 117 Numberboard R
-		bodyModel[152] = new ModelRendererTurbo(this, 251, 92, textureX, textureY, "lamp"); // Box 118 Numberboard R
+		bodyModel[151] = new ModelRendererTurbo(this, 251, 92, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_right_body_151"); // Box 117 Numberboard R
+		bodyModel[152] = new ModelRendererTurbo(this, 251, 92, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_right_body_152"); // Box 118 Numberboard R
 		bodyModel[153] = new ModelRendererTurbo(this, 82, 83, textureX, textureY); // Box 51
 		bodyModel[154] = new ModelRendererTurbo(this, 176, 62, textureX, textureY); // Box 186 fan
 		bodyModel[155] = new ModelRendererTurbo(this, 176, 62, textureX, textureY); // Box 682 fan
@@ -242,8 +242,8 @@ public class ModelCF7b extends ModelConverter //Same as Filename
 		bodyModel[199] = new ModelRendererTurbo(this, 11, 53, textureX, textureY); // Box 202
 		bodyModel[200] = new ModelRendererTurbo(this, 41, 53, textureX, textureY); // Box 203
 		bodyModel[201] = new ModelRendererTurbo(this, 337, 104, textureX, textureY); // Box 74
-		bodyModel[202] = new ModelRendererTurbo(this, 348, 111, textureX, textureY, "lamp"); // Box 117 Numberboard
-		bodyModel[203] = new ModelRendererTurbo(this, 348, 111, textureX, textureY, "lamp"); // Box 118 Numberboard
+		bodyModel[202] = new ModelRendererTurbo(this, 348, 111, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_202"); // Box 117 Numberboard
+		bodyModel[203] = new ModelRendererTurbo(this, 348, 111, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_203"); // Box 118 Numberboard
 		bodyModel[204] = new ModelRendererTurbo(this, 339, 99, textureX, textureY, "lamp"); // Box 186 Headlight Front
 		bodyModel[205] = new ModelRendererTurbo(this, 339, 99, textureX, textureY, "lamp"); // Box 187 Headlight Front
 		bodyModel[206] = new ModelRendererTurbo(this, 31, 53, textureX, textureY); // Box 209

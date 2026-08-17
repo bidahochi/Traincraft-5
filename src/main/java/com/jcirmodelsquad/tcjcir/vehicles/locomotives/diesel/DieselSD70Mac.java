@@ -11,6 +11,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselSD70Mac extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd70mac")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_marker_bugeye_body_196", "front_marker_bugeye_body_197", "rear_marker_bugeye_body_257",
+            "rear_marker_bugeye_body_258", "rear_marker_high", "rear_marker_low")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_175", "numberboard_body_176", "rear_numberboard_body_36",
+            "rear_numberboard_body_37")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -86,4 +99,11 @@ public class DieselSD70Mac extends DieselTrain {
             riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
         }
     }*/
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

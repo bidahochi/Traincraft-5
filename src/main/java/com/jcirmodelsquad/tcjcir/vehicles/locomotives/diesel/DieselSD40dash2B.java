@@ -10,6 +10,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselSD40dash2B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd40dash2b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_155", "marker_body_156", "marker_body_301",
+            "marker_body_302")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_247", "numberboard_body_248", "numberboard_body_268",
+            "numberboard_body_269")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -88,5 +101,12 @@ public class DieselSD40dash2B extends DieselTrain {
 
 
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

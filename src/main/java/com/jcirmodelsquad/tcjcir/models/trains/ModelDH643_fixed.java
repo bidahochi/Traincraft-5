@@ -143,8 +143,8 @@ public class ModelDH643_fixed extends ModelConverter //Same as Filename
 		bodyModel[100] = new ModelRendererTurbo(this, 42, 90, textureX, textureY); // Box 278
 		bodyModel[101] = new ModelRendererTurbo(this, 44, 99, textureX, textureY); // Box 280
 		bodyModel[102] = new ModelRendererTurbo(this, 42, 90, textureX, textureY); // Box 281
-		bodyModel[103] = new ModelRendererTurbo(this, 324, 110, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[104] = new ModelRendererTurbo(this, 324, 113, textureX, textureY, "lamp"); // Box 298 liveryimg 2
+		bodyModel[103] = new ModelRendererTurbo(this, 324, 110, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_103"); // Box 117 liveryimg 2
+		bodyModel[104] = new ModelRendererTurbo(this, 324, 113, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_104"); // Box 298 liveryimg 2
 		bodyModel[105] = new ModelRendererTurbo(this, 41, 92, textureX, textureY); // Box 302
 		bodyModel[106] = new ModelRendererTurbo(this, 42, 90, textureX, textureY); // Box 303
 		bodyModel[107] = new ModelRendererTurbo(this, 42, 90, textureX, textureY); // Box 305
@@ -294,8 +294,8 @@ public class ModelDH643_fixed extends ModelConverter //Same as Filename
 		bodyModel[251] = new ModelRendererTurbo(this, 107, 94, textureX, textureY); // Box 327
 		bodyModel[252] = new ModelRendererTurbo(this, 131, 102, textureX, textureY); // Box 328
 		bodyModel[253] = new ModelRendererTurbo(this, 129, 151, textureX, textureY); // Box 1519
-		bodyModel[254] = new ModelRendererTurbo(this, 134, 155, textureX, textureY, "lamp"); // Box 1521 marker bullshit stupid
-		bodyModel[255] = new ModelRendererTurbo(this, 134, 155, textureX, textureY, "lamp"); // Box 1522 marker bullshit stupid
+		bodyModel[254] = new ModelRendererTurbo(this, 134, 155, textureX, textureY, "marker").setLightFixtureId("marker_bullshit_stupid_body_254"); // Box 1521 marker bullshit stupid
+		bodyModel[255] = new ModelRendererTurbo(this, 134, 155, textureX, textureY, "marker").setLightFixtureId("marker_bullshit_stupid_body_255"); // Box 1522 marker bullshit stupid
 		bodyModel[256] = new ModelRendererTurbo(this, 134, 151, textureX, textureY); // Box 259
 		bodyModel[257] = new ModelRendererTurbo(this, 259, 173, textureX, textureY, "lamp"); // Box 448 headlight front n
 		bodyModel[258] = new ModelRendererTurbo(this, 259, 178, textureX, textureY, "lamp"); // Box 449 headlight front n
@@ -325,8 +325,8 @@ public class ModelDH643_fixed extends ModelConverter //Same as Filename
 		bodyModel[282] = new ModelRendererTurbo(this, 187, 132, textureX, textureY); // Box 398 not a ditchlight will not glow
 		bodyModel[283] = new ModelRendererTurbo(this, 194, 127, textureX, textureY); // Box 398 not a ditchlight will not glow
 		bodyModel[284] = new ModelRendererTurbo(this, 187, 127, textureX, textureY); // Box 398 not a ditchlight will not glow
-		bodyModel[285] = new ModelRendererTurbo(this, 324, 112, textureX, textureY, "lamp"); // Box 286 markerlight glow
-		bodyModel[286] = new ModelRendererTurbo(this, 329, 112, textureX, textureY, "lamp"); // Box 287 markerlight glow
+		bodyModel[285] = new ModelRendererTurbo(this, 324, 112, textureX, textureY, "marker").setLightFixtureId("marker_body_285"); // Box 286 markerlight glow
+		bodyModel[286] = new ModelRendererTurbo(this, 329, 112, textureX, textureY, "marker").setLightFixtureId("marker_body_286"); // Box 287 markerlight glow
 
 		bodyModel[0].addBox(0F, 0F, 0F, 3, 2, 3, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-56F, 3F, -1.5F);

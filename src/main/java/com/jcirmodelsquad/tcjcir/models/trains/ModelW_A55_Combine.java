@@ -60,11 +60,11 @@ public class ModelW_A55_Combine extends ModelConverter//Same as Filename
 		bodyModel[17] = new ModelRendererTurbo(this, 273, 1, textureX, textureY); // Box 204
 		bodyModel[18] = new ModelRendererTurbo(this, 465, 17, textureX, textureY); // headlightcaselow
 		bodyModel[19] = new ModelRendererTurbo(this, 1, 1, textureX, textureY,"lamp"); // bulb4
-		bodyModel[20] = new ModelRendererTurbo(this, 497, 25, textureX, textureY,"lamp"); // numberboard2
+		bodyModel[20] = new ModelRendererTurbo(this, 497, 25, textureX, textureY,"numberboard").setLightFixtureId("numberboard_body_20"); // numberboard2
 		bodyModel[21] = new ModelRendererTurbo(this, 273, 1, textureX, textureY); // Box 204
 		bodyModel[22] = new ModelRendererTurbo(this, 465, 17, textureX, textureY); // headlightcaselow
 		bodyModel[23] = new ModelRendererTurbo(this, 1, 1, textureX, textureY,"lamp"); // bulb4
-		bodyModel[24] = new ModelRendererTurbo(this, 497, 25, textureX, textureY,"lamp"); // numberboard2
+		bodyModel[24] = new ModelRendererTurbo(this, 497, 25, textureX, textureY,"numberboard").setLightFixtureId("numberboard_body_24"); // numberboard2
 		bodyModel[25] = new ModelRendererTurbo(this, 305, 55, textureX, textureY); // Box 59
 		bodyModel[26] = new ModelRendererTurbo(this, 489, 33, textureX, textureY); // Box 62
 		bodyModel[27] = new ModelRendererTurbo(this, 185, 41, textureX, textureY); // Box 63

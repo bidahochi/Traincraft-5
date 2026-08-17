@@ -281,10 +281,10 @@ public class ModelHBC1B extends ModelConverter//Same as Filename
 		bodyModel[237] = new ModelRendererTurbo(this, 297, 231, textureX, textureY); // Box 52 door swing right
 		bodyModel[238] = new ModelRendererTurbo(this, 139, 231, textureX, textureY); // Box 314 door swing right
 		bodyModel[239] = new ModelRendererTurbo(this, 423, 176, textureX, textureY); // Box 293
-		bodyModel[240] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // Box 294 markerlight
-		bodyModel[241] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // Box 294 markerlight
-		bodyModel[242] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // Box 294 markerlight
-		bodyModel[243] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // Box 294 markerlight
+		bodyModel[240] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "marker").setLightFixtureId("rear_right_marker"); // Box 294 markerlight
+		bodyModel[241] = new ModelRendererTurbo(this, 241, 208, textureX, textureY, "marker").setLightFixtureId("rear_left_marker"); // Box 294 markerlight
+		bodyModel[242] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "marker").setLightFixtureId("front_left_marker"); // Box 294 markerlight
+		bodyModel[243] = new ModelRendererTurbo(this, 234, 208, textureX, textureY, "marker").setLightFixtureId("front_right_marker"); // Box 294 markerlight
 		bodyModel[244] = new ModelRendererTurbo(this, 151, 112, textureX, textureY); // Box 299
 		bodyModel[245] = new ModelRendererTurbo(this, 119, 112, textureX, textureY); // Box 300
 		bodyModel[246] = new ModelRendererTurbo(this, 127, 127, textureX, textureY); // Box 301

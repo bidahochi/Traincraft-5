@@ -5,10 +5,6 @@ import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LightFixtureType;
 import train.common.api.LiquidManager;
-import train.common.api.RollingStockLightBehaviorOverride;
-import train.common.api.RollingStockLightChannel;
-import train.common.api.RollingStockLightDefinition;
-import train.common.api.RollingStockLightFunction;
 import train.common.api.RollingStockSkinLightingProfiles;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
@@ -35,16 +31,6 @@ public class DieselTB27 extends DieselTrain {
             "rear_headlight_upper_right", "rear_headlight_upper_left",
             "front_headlight_lower", "front_headlight_upper")
         .gyralite("front_gyralite_right", "front_gyralite_left")
-        .behavior(
-            RollingStockLightBehaviorOverride.builder()
-            .controlCircuit(RollingStockLightChannel.HEADLIGHT)
-            .function(RollingStockLightFunction.STEADY)
-            .effect(RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
-            .beamDimensions(0, 0)
-            .hotspotEnabled(false)
-            .clientProjectorEligible(false)
-            .build(),
-            "cab_speedometer")
         .build();
 
     @Override

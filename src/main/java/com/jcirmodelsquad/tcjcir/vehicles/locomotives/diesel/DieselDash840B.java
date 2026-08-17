@@ -11,6 +11,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselDash840B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dash840b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_261", "marker_body_262", "marker_crl_body_348",
+            "marker_crl_body_349", "marker_sou_body_350", "marker_sou_body_351")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_256", "numberboard_body_257", "numberboard_body_326",
+            "numberboard_body_327")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -51,6 +64,13 @@ public class DieselDash840B extends DieselTrain {
     @Override
     public String getInventoryName() {
         return "GE B40-8";
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

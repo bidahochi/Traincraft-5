@@ -140,11 +140,11 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[97] = new ModelRendererTurbo(this, 337, 103, textureX, textureY); // Box 327
 		bodyModel[98] = new ModelRendererTurbo(this, 334, 84, textureX, textureY); // Box 38
 		bodyModel[99] = new ModelRendererTurbo(this, 334, 103, textureX, textureY); // Box 251
-		bodyModel[100] = new ModelRendererTurbo(this, 357, 84, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[100] = new ModelRendererTurbo(this, 357, 84, textureX, textureY,"interior").setLightFixtureId("interior_body_100"); // Box 38 glow
 		bodyModel[101] = new ModelRendererTurbo(this, 296, 145, textureX, textureY); // Box 472
 		bodyModel[102] = new ModelRendererTurbo(this, 295, 143, textureX, textureY); // Box 38
 		bodyModel[103] = new ModelRendererTurbo(this, 295, 150, textureX, textureY); // Box 327
-		bodyModel[104] = new ModelRendererTurbo(this, 294, 65, textureX, textureY,"lamp"); // marker light red glow
+		bodyModel[104] = new ModelRendererTurbo(this, 294, 65, textureX, textureY,"marker").setLightFixtureId("marker_red_body_104"); // marker light red glow
 		bodyModel[105] = new ModelRendererTurbo(this, 304, 65, textureX, textureY); // Box 38
 		bodyModel[106] = new ModelRendererTurbo(this, 299, 64, textureX, textureY); // Box 38
 		bodyModel[107] = new ModelRendererTurbo(this, 344, 52, textureX, textureY); // Box 260
@@ -190,19 +190,19 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[147] = new ModelRendererTurbo(this, 55, 209, textureX, textureY); // Box 128
 		bodyModel[148] = new ModelRendererTurbo(this, 81, 217, textureX, textureY); // Box 128
 		bodyModel[149] = new ModelRendererTurbo(this, 81, 204, textureX, textureY); // Box 324
-		bodyModel[150] = new ModelRendererTurbo(this, 84, 202, textureX, textureY,"lamp"); // Box 324 glow
-		bodyModel[151] = new ModelRendererTurbo(this, 84, 222, textureX, textureY,"lamp"); // Box 338 glow
+		bodyModel[150] = new ModelRendererTurbo(this, 84, 202, textureX, textureY,"interior").setLightFixtureId("interior_body_150"); // Box 324 glow
+		bodyModel[151] = new ModelRendererTurbo(this, 84, 222, textureX, textureY,"interior").setLightFixtureId("interior_body_151"); // Box 338 glow
 		bodyModel[152] = new ModelRendererTurbo(this, 312, 304, textureX, textureY); // Box 332
 		bodyModel[153] = new ModelRendererTurbo(this, 312, 257, textureX, textureY); // Box 128
 		bodyModel[154] = new ModelRendererTurbo(this, 312, 254, textureX, textureY); // Box 128
 		bodyModel[155] = new ModelRendererTurbo(this, 312, 310, textureX, textureY); // Box 329
 		bodyModel[156] = new ModelRendererTurbo(this, 312, 307, textureX, textureY); // Box 330
-		bodyModel[157] = new ModelRendererTurbo(this, 312, 264, textureX, textureY,"lamp"); // Box 128 glow
-		bodyModel[158] = new ModelRendererTurbo(this, 312, 317, textureX, textureY,"lamp"); // Box 340 glow
+		bodyModel[157] = new ModelRendererTurbo(this, 312, 264, textureX, textureY,"interior").setLightFixtureId("interior_body_157"); // Box 128 glow
+		bodyModel[158] = new ModelRendererTurbo(this, 312, 317, textureX, textureY,"interior").setLightFixtureId("interior_body_158"); // Box 340 glow
 		bodyModel[159] = new ModelRendererTurbo(this, 103, 236, textureX, textureY); // Box 38
 		bodyModel[160] = new ModelRendererTurbo(this, 103, 247, textureX, textureY); // Box 275
-		bodyModel[161] = new ModelRendererTurbo(this, 104, 252, textureX, textureY,"lamp"); // Box 275 glow
-		bodyModel[162] = new ModelRendererTurbo(this, 104, 241, textureX, textureY,"lamp"); // Box 285 glow
+		bodyModel[161] = new ModelRendererTurbo(this, 104, 252, textureX, textureY,"interior").setLightFixtureId("interior_body_161"); // Box 275 glow
+		bodyModel[162] = new ModelRendererTurbo(this, 104, 241, textureX, textureY,"interior").setLightFixtureId("interior_body_162"); // Box 285 glow
 		bodyModel[163] = new ModelRendererTurbo(this, 105, 244, textureX, textureY); // Box 38
 		bodyModel[164] = new ModelRendererTurbo(this, 105, 255, textureX, textureY); // Box 276
 		bodyModel[165] = new ModelRendererTurbo(this, 300, 289, textureX, textureY); // Box 128
@@ -218,14 +218,14 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[175] = new ModelRendererTurbo(this, 306, 312, textureX, textureY); // Box 318
 		bodyModel[176] = new ModelRendererTurbo(this, 300, 309, textureX, textureY); // Box 320
 		bodyModel[177] = new ModelRendererTurbo(this, 301, 313, textureX, textureY); // Box 321
-		bodyModel[178] = new ModelRendererTurbo(this, 190, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[179] = new ModelRendererTurbo(this, 181, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[180] = new ModelRendererTurbo(this, 172, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[181] = new ModelRendererTurbo(this, 163, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[182] = new ModelRendererTurbo(this, 154, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[183] = new ModelRendererTurbo(this, 145, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[184] = new ModelRendererTurbo(this, 136, 224, textureX, textureY,"lamp"); // Box 38 glow
-		bodyModel[185] = new ModelRendererTurbo(this, 199, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[178] = new ModelRendererTurbo(this, 190, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_178"); // Box 38 glow
+		bodyModel[179] = new ModelRendererTurbo(this, 181, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_179"); // Box 38 glow
+		bodyModel[180] = new ModelRendererTurbo(this, 172, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_180"); // Box 38 glow
+		bodyModel[181] = new ModelRendererTurbo(this, 163, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_181"); // Box 38 glow
+		bodyModel[182] = new ModelRendererTurbo(this, 154, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_182"); // Box 38 glow
+		bodyModel[183] = new ModelRendererTurbo(this, 145, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_183"); // Box 38 glow
+		bodyModel[184] = new ModelRendererTurbo(this, 136, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_184"); // Box 38 glow
+		bodyModel[185] = new ModelRendererTurbo(this, 199, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_185"); // Box 38 glow
 		bodyModel[186] = new ModelRendererTurbo(this, 372, 24, textureX, textureY); // Box 1353
 		bodyModel[187] = new ModelRendererTurbo(this, 388, 24, textureX, textureY); // Box 1354
 		bodyModel[188] = new ModelRendererTurbo(this, 372, 22, textureX, textureY); // Box 1358
@@ -345,7 +345,7 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[302] = new ModelRendererTurbo(this, 60, 330, textureX, textureY); // Box 38
 		bodyModel[303] = new ModelRendererTurbo(this, 3, 325, textureX, textureY); // Box 380
 		bodyModel[304] = new ModelRendererTurbo(this, 13, 331, textureX, textureY); // Box 382
-		bodyModel[305] = new ModelRendererTurbo(this, 64, 280, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[305] = new ModelRendererTurbo(this, 64, 280, textureX, textureY,"interior").setLightFixtureId("interior_body_305"); // Box 128 glow
 		bodyModel[306] = new ModelRendererTurbo(this, 69, 280, textureX, textureY); // Box 38
 		bodyModel[307] = new ModelRendererTurbo(this, 50, 286, textureX, textureY); // Box 38
 		bodyModel[308] = new ModelRendererTurbo(this, 32, 291, textureX, textureY); // Box 340
@@ -2155,25 +2155,25 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[500] = new ModelRendererTurbo(this, 359, 301, textureX, textureY); // Box 492
 		bodyModel[501] = new ModelRendererTurbo(this, 363, 306, textureX, textureY); // Box 492
 		bodyModel[502] = new ModelRendererTurbo(this, 361, 314, textureX, textureY); // Box 492
-		bodyModel[503] = new ModelRendererTurbo(this, 208, 224, textureX, textureY,"lamp"); // Box 38 glow
+		bodyModel[503] = new ModelRendererTurbo(this, 208, 224, textureX, textureY,"interior").setLightFixtureId("interior_body_503"); // Box 38 glow
 		bodyModel[504] = new ModelRendererTurbo(this, 298, 211, textureX, textureY); // Box 128
-		bodyModel[505] = new ModelRendererTurbo(this, 311, 211, textureX, textureY,"lamp"); // Box 338 glow
+		bodyModel[505] = new ModelRendererTurbo(this, 311, 211, textureX, textureY,"interior").setLightFixtureId("interior_body_505"); // Box 338 glow
 		bodyModel[506] = new ModelRendererTurbo(this, 299, 223, textureX, textureY); // Box 128
 		bodyModel[507] = new ModelRendererTurbo(this, 301, 220, textureX, textureY); // Box 563
 		bodyModel[508] = new ModelRendererTurbo(this, 428, 302, textureX, textureY); // Box 128
 		bodyModel[509] = new ModelRendererTurbo(this, 411, 267, textureX, textureY); // Box 128
 		bodyModel[510] = new ModelRendererTurbo(this, 418, 267, textureX, textureY); // Box 177
 		bodyModel[511] = new ModelRendererTurbo(this, 426, 281, textureX, textureY); // Box 176
-		bodyModel[512] = new ModelRendererTurbo(this, 428, 314, textureX, textureY,"lamp"); // Box 128 glow
-		bodyModel[513] = new ModelRendererTurbo(this, 411, 274, textureX, textureY,"lamp"); // Box 128 glow
-		bodyModel[514] = new ModelRendererTurbo(this, 418, 274, textureX, textureY,"lamp"); // Box 177 glow
-		bodyModel[515] = new ModelRendererTurbo(this, 426, 290, textureX, textureY,"lamp"); // Box 176 glow
+		bodyModel[512] = new ModelRendererTurbo(this, 428, 314, textureX, textureY,"interior").setLightFixtureId("interior_body_512"); // Box 128 glow
+		bodyModel[513] = new ModelRendererTurbo(this, 411, 274, textureX, textureY,"interior").setLightFixtureId("interior_body_513"); // Box 128 glow
+		bodyModel[514] = new ModelRendererTurbo(this, 418, 274, textureX, textureY,"interior").setLightFixtureId("interior_body_514"); // Box 177 glow
+		bodyModel[515] = new ModelRendererTurbo(this, 426, 290, textureX, textureY,"interior").setLightFixtureId("interior_body_515"); // Box 176 glow
 		bodyModel[516] = new ModelRendererTurbo(this, 411, 342, textureX, textureY); // Box 588
 		bodyModel[517] = new ModelRendererTurbo(this, 418, 342, textureX, textureY); // Box 589
 		bodyModel[518] = new ModelRendererTurbo(this, 426, 326, textureX, textureY); // Box 590
-		bodyModel[519] = new ModelRendererTurbo(this, 411, 349, textureX, textureY,"lamp"); // Box 591 glow
-		bodyModel[520] = new ModelRendererTurbo(this, 418, 349, textureX, textureY,"lamp"); // Box 592 glow
-		bodyModel[521] = new ModelRendererTurbo(this, 426, 335, textureX, textureY,"lamp"); // Box 593 glow
+		bodyModel[519] = new ModelRendererTurbo(this, 411, 349, textureX, textureY,"interior").setLightFixtureId("interior_body_519"); // Box 591 glow
+		bodyModel[520] = new ModelRendererTurbo(this, 418, 349, textureX, textureY,"interior").setLightFixtureId("interior_body_520"); // Box 592 glow
+		bodyModel[521] = new ModelRendererTurbo(this, 426, 335, textureX, textureY,"interior").setLightFixtureId("interior_body_521"); // Box 593 glow
 		bodyModel[522] = new ModelRendererTurbo(this, 411, 264, textureX, textureY); // Box 128
 		bodyModel[523] = new ModelRendererTurbo(this, 418, 264, textureX, textureY); // Box 177
 		bodyModel[524] = new ModelRendererTurbo(this, 428, 294, textureX, textureY); // Box 128
@@ -2195,18 +2195,18 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[540] = new ModelRendererTurbo(this, 344, 68, textureX, textureY); // Box 128
 		bodyModel[541] = new ModelRendererTurbo(this, 346, 68, textureX, textureY); // Box 128
 		bodyModel[542] = new ModelRendererTurbo(this, 346, 73, textureX, textureY); // Box 128
-		bodyModel[543] = new ModelRendererTurbo(this, 308, 220, textureX, textureY,"lamp"); // Box 338 glow
-		bodyModel[544] = new ModelRendererTurbo(this, 308, 217, textureX, textureY,"lamp"); // Box 338 glow
-		bodyModel[545] = new ModelRendererTurbo(this, 302, 228, textureX, textureY,"lamp"); // Box 128 glow
+		bodyModel[543] = new ModelRendererTurbo(this, 308, 220, textureX, textureY,"interior").setLightFixtureId("interior_body_543"); // Box 338 glow
+		bodyModel[544] = new ModelRendererTurbo(this, 308, 217, textureX, textureY,"interior").setLightFixtureId("interior_body_544"); // Box 338 glow
+		bodyModel[545] = new ModelRendererTurbo(this, 302, 228, textureX, textureY,"interior").setLightFixtureId("interior_body_545"); // Box 128 glow
 		bodyModel[546] = new ModelRendererTurbo(this, 426, 276, textureX, textureY); // Box 582
 		bodyModel[547] = new ModelRendererTurbo(this, 446, 301, textureX, textureY); // Box 583
 		bodyModel[548] = new ModelRendererTurbo(this, 326, 13, textureX, textureY); // Box 584
 		bodyModel[549] = new ModelRendererTurbo(this, 299, 200, textureX, textureY); // Box 586
 		bodyModel[550] = new ModelRendererTurbo(this, 301, 205, textureX, textureY); // Box 587
 		bodyModel[551] = new ModelRendererTurbo(this, 301, 208, textureX, textureY); // Box 588
-		bodyModel[552] = new ModelRendererTurbo(this, 308, 205, textureX, textureY,"lamp"); // Box 589 glow
-		bodyModel[553] = new ModelRendererTurbo(this, 308, 208, textureX, textureY,"lamp"); // Box 590 glow
-		bodyModel[554] = new ModelRendererTurbo(this, 302, 198, textureX, textureY,"lamp"); // Box 591 glow
+		bodyModel[552] = new ModelRendererTurbo(this, 308, 205, textureX, textureY,"interior").setLightFixtureId("interior_body_552"); // Box 589 glow
+		bodyModel[553] = new ModelRendererTurbo(this, 308, 208, textureX, textureY,"interior").setLightFixtureId("interior_body_553"); // Box 590 glow
+		bodyModel[554] = new ModelRendererTurbo(this, 302, 198, textureX, textureY,"interior").setLightFixtureId("interior_body_554"); // Box 591 glow
 		bodyModel[555] = new ModelRendererTurbo(this, 341, 35, textureX, textureY); // Box 592
 		bodyModel[556] = new ModelRendererTurbo(this, 335, 18, textureX, textureY); // Box 593
 		bodyModel[557] = new ModelRendererTurbo(this, 346, 20, textureX, textureY); // Box 594
@@ -2227,16 +2227,16 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[572] = new ModelRendererTurbo(this, 303, 356, textureX, textureY); // Box 609
 		bodyModel[573] = new ModelRendererTurbo(this, 317, 352, textureX, textureY); // Box 610
 		bodyModel[574] = new ModelRendererTurbo(this, 310, 356, textureX, textureY); // Box 611
-		bodyModel[575] = new ModelRendererTurbo(this, 294, 105, textureX, textureY,"lamp"); // marker light red glow
+		bodyModel[575] = new ModelRendererTurbo(this, 294, 105, textureX, textureY,"marker").setLightFixtureId("marker_red_body_575"); // marker light red glow
 		bodyModel[576] = new ModelRendererTurbo(this, 304, 105, textureX, textureY); // Box 613
 		bodyModel[577] = new ModelRendererTurbo(this, 299, 105, textureX, textureY); // Box 614
 		bodyModel[578] = new ModelRendererTurbo(this, 296, 152, textureX, textureY); // Box 615
 		bodyModel[579] = new ModelRendererTurbo(this, 344, 84, textureX, textureY); // Box 38
 		bodyModel[580] = new ModelRendererTurbo(this, 344, 103, textureX, textureY); // Box 618
-		bodyModel[581] = new ModelRendererTurbo(this, 360, 54, textureX, textureY,"lamp"); // marker light red glow
+		bodyModel[581] = new ModelRendererTurbo(this, 360, 54, textureX, textureY,"marker").setLightFixtureId("marker_red_body_581"); // marker light red glow
 		bodyModel[582] = new ModelRendererTurbo(this, 365, 54, textureX, textureY); // marker light green off
 		bodyModel[583] = new ModelRendererTurbo(this, 362, 50, textureX, textureY); // Box 38
-		bodyModel[584] = new ModelRendererTurbo(this, 365, 39, textureX, textureY,"lamp"); // marker light red glow
+		bodyModel[584] = new ModelRendererTurbo(this, 365, 39, textureX, textureY,"marker").setLightFixtureId("marker_red_body_584"); // marker light red glow
 		bodyModel[585] = new ModelRendererTurbo(this, 360, 39, textureX, textureY); // marker light green off
 		bodyModel[586] = new ModelRendererTurbo(this, 362, 35, textureX, textureY); // Box 607
 		bodyModel[587] = new ModelRendererTurbo(this, 369, 51, textureX, textureY); // Box 38
@@ -2268,9 +2268,9 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 		bodyModel[613] = new ModelRendererTurbo(this, 294, 108, textureX, textureY); // marker light red off
 		bodyModel[614] = new ModelRendererTurbo(this, 289, 65, textureX, textureY); // marker light red off
 		bodyModel[615] = new ModelRendererTurbo(this, 360, 57, textureX, textureY); // marker light red off
-		bodyModel[616] = new ModelRendererTurbo(this, 365, 57, textureX, textureY,"lamp"); // marker light green glow
+		bodyModel[616] = new ModelRendererTurbo(this, 365, 57, textureX, textureY,"marker").setLightFixtureId("marker_green_body_616"); // marker light green glow
 		bodyModel[617] = new ModelRendererTurbo(this, 365, 30, textureX, textureY); // marker light red off
-		bodyModel[618] = new ModelRendererTurbo(this, 360, 30, textureX, textureY,"lamp"); // marker light green glow
+		bodyModel[618] = new ModelRendererTurbo(this, 360, 30, textureX, textureY,"marker").setLightFixtureId("marker_green_body_618"); // marker light green glow
 
 		bodyModel[500].addShapeBox(0F, 0F, 0F, 3, 1, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 492
 		bodyModel[500].setRotationPoint(34F, -5F, -1.5F);
@@ -2647,7 +2647,7 @@ public class ModelBuddRDG56SeatCoach_Observation extends ModelConverter//Same as
 	{
 		for(int i = 0; i < 619; i++)
 		{
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
+			if (bodyModel[i].boxName != null && (bodyModel[i].boxName.contains("lamp") || bodyModel[i].boxName.contains("marker"))) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

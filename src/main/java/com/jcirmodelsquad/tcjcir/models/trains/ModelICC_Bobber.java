@@ -155,13 +155,13 @@ public class ModelICC_Bobber extends ModelConverter //Same as Filename
 		bodyModel[110] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 166
 		bodyModel[111] = new ModelRendererTurbo(this, 1, 83, textureX, textureY); // Box 167
 		bodyModel[112] = new ModelRendererTurbo(this, 10, 84, textureX, textureY); // Box 168
-		bodyModel[113] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_right_marker"); // Box 410 glow marker
+		bodyModel[113] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("front_right_marker"); // Box 410 glow marker
 		bodyModel[114] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 170
-		bodyModel[115] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("front_left_marker"); // Box 410 glow marker
+		bodyModel[115] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("front_left_marker"); // Box 410 glow marker
 		bodyModel[116] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 172
-		bodyModel[117] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker"); // Box 410 glow marker
+		bodyModel[117] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("rear_right_marker"); // Box 410 glow marker
 		bodyModel[118] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 174
-		bodyModel[119] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker"); // Box 410 glow marker
+		bodyModel[119] = new ModelRendererTurbo(this, 155, 45, textureX, textureY, "marker").setLightFixtureId("rear_left_marker"); // Box 410 glow marker
 		bodyModel[120] = new ModelRendererTurbo(this, 156, 41, textureX, textureY); // Box 176
 		bodyModel[121] = new ModelRendererTurbo(this, 148, 5, textureX, textureY, "cull"); // Box 178 cull
 		bodyModel[122] = new ModelRendererTurbo(this, 133, 82, textureX, textureY); // Box 179

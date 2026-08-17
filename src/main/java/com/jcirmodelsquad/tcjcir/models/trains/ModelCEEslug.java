@@ -155,8 +155,8 @@ public class ModelCEEslug extends ModelConverter //Same as Filename
 		bodyModel[110] = new ModelRendererTurbo(this, 41, 101, textureX, textureY); // Box 302
 		bodyModel[111] = new ModelRendererTurbo(this, 19, 101, textureX, textureY); // Box 303
 		bodyModel[112] = new ModelRendererTurbo(this, 34, 105, textureX, textureY); // Box 304
-		bodyModel[113] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "lamp"); // Box 307 glowey marker
-		bodyModel[114] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "lamp"); // Box 308 glowey marker
+		bodyModel[113] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "marker").setLightFixtureId("marker_body_113"); // Box 307 glowey marker
+		bodyModel[114] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "marker").setLightFixtureId("marker_body_114"); // Box 308 glowey marker
 		bodyModel[115] = new ModelRendererTurbo(this, 113, 17, textureX, textureY); // Box 309
 		bodyModel[116] = new ModelRendererTurbo(this, 314, 117, textureX, textureY, "cull"); // Box 310 cull fueltank support
 		bodyModel[117] = new ModelRendererTurbo(this, 314, 117, textureX, textureY, "cull"); // Box 311 cull fueltank support
@@ -317,7 +317,7 @@ public class ModelCEEslug extends ModelConverter //Same as Filename
 		bodyModel[272] = new ModelRendererTurbo(this, 42, 197, textureX, textureY); // Box 413 cs
 		bodyModel[273] = new ModelRendererTurbo(this, 28, 189, textureX, textureY); // Box 86 cs
 		bodyModel[274] = new ModelRendererTurbo(this, 23, 210, textureX, textureY); // Box 531 cs
-		bodyModel[275] = new ModelRendererTurbo(this, 55, 188, textureX, textureY, "lamp"); // Box 275 cs speedo glow
+		bodyModel[275] = new ModelRendererTurbo(this, 55, 188, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_275"); // Box 275 cs speedo glow
 		bodyModel[276] = new ModelRendererTurbo(this, 245, 24, textureX, textureY); // Box 544
 		bodyModel[277] = new ModelRendererTurbo(this, 263, 28, textureX, textureY); // Box 545
 		bodyModel[278] = new ModelRendererTurbo(this, 244, 28, textureX, textureY); // Box 546
@@ -343,8 +343,8 @@ public class ModelCEEslug extends ModelConverter //Same as Filename
 		bodyModel[298] = new ModelRendererTurbo(this, 83, 181, textureX, textureY); // Box 25
 		bodyModel[299] = new ModelRendererTurbo(this, 12, 86, textureX, textureY, "lamp"); // Box 401 schnoz gyra
 		bodyModel[300] = new ModelRendererTurbo(this, 115, 45, textureX, textureY); // Box 355 brakewheel
-		bodyModel[301] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "lamp"); // Box 117 numberboard
-		bodyModel[302] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "lamp"); // Box 118 numberboard
+		bodyModel[301] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_301"); // Box 117 numberboard
+		bodyModel[302] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_302"); // Box 118 numberboard
 		bodyModel[303] = new ModelRendererTurbo(this, 21, 39, textureX, textureY); // Box 43
 		bodyModel[304] = new ModelRendererTurbo(this, 7, 39, textureX, textureY); // Box 175
 		bodyModel[305] = new ModelRendererTurbo(this, 437, 78, textureX, textureY); // Box 430 early nonsense
@@ -389,8 +389,8 @@ public class ModelCEEslug extends ModelConverter //Same as Filename
 		bodyModel[344] = new ModelRendererTurbo(this, 147, 207, textureX, textureY); // Box 72 emd cab
 		bodyModel[345] = new ModelRendererTurbo(this, 154, 205, textureX, textureY); // Box 70 emd cab
 		bodyModel[346] = new ModelRendererTurbo(this, 122, 219, textureX, textureY); // Box 52 door swing right emd cab
-		bodyModel[347] = new ModelRendererTurbo(this, 144, 190, textureX, textureY, "lamp"); // Box 117 numberboard front emd cab
-		bodyModel[348] = new ModelRendererTurbo(this, 144, 190, textureX, textureY, "lamp"); // Box 118 numberboard front emd cab
+		bodyModel[347] = new ModelRendererTurbo(this, 144, 190, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_347"); // Box 117 numberboard front emd cab
+		bodyModel[348] = new ModelRendererTurbo(this, 144, 190, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_348"); // Box 118 numberboard front emd cab
 		bodyModel[349] = new ModelRendererTurbo(this, 163, 194, textureX, textureY); // Box 133 emd cab
 		bodyModel[350] = new ModelRendererTurbo(this, 175, 205, textureX, textureY); // Box 360 emd cab
 		bodyModel[351] = new ModelRendererTurbo(this, 104, 203, textureX, textureY); // box64 emd cab

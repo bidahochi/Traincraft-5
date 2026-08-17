@@ -12,6 +12,18 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselCE8 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:ce8")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_124", "marker_body_126")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_141", "numberboard_body_142", "rear_numberboard_right_body_196",
+            "rear_numberboard_right_body_197")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -53,4 +65,11 @@ public class DieselCE8 extends DieselTrain {
     public String transportYear() {
         return "1980";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

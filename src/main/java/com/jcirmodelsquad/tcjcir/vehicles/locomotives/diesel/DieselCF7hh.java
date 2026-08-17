@@ -11,6 +11,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselCF7hh extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:cf7hh")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_334", "marker_body_335", "marker_body_39",
+            "marker_body_41")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_133", "numberboard_body_134", "numberboard_body_317",
+            "numberboard_body_318")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -49,4 +62,11 @@ public class DieselCF7hh extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

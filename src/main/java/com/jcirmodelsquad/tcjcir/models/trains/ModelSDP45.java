@@ -189,8 +189,8 @@ public class ModelSDP45 extends ModelConverter //Same as Filename
 		bodyModel[143] = new ModelRendererTurbo(this, 78, 6, textureX, textureY); // Box 72
 		bodyModel[144] = new ModelRendererTurbo(this, 83, 4, textureX, textureY); // Box 70
 		bodyModel[145] = new ModelRendererTurbo(this, 51, 18, textureX, textureY); // Box 52 door swing right
-		bodyModel[146] = new ModelRendererTurbo(this, 77, 71, textureX, textureY, "lamp"); // Box 117 numberboard front
-		bodyModel[147] = new ModelRendererTurbo(this, 69, 68, textureX, textureY, "lamp"); // Box 118 numberboard front
+		bodyModel[146] = new ModelRendererTurbo(this, 77, 71, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_146"); // Box 117 numberboard front
+		bodyModel[147] = new ModelRendererTurbo(this, 69, 68, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_147"); // Box 118 numberboard front
 		bodyModel[148] = new ModelRendererTurbo(this, 65, 55, textureX, textureY); // Box 133
 		bodyModel[149] = new ModelRendererTurbo(this, 3, 133, textureX, textureY); // Box 176
 		bodyModel[150] = new ModelRendererTurbo(this, 6, 125, textureX, textureY); // Box 177
@@ -284,7 +284,7 @@ public class ModelSDP45 extends ModelConverter //Same as Filename
 		bodyModel[238] = new ModelRendererTurbo(this, 340, 3, textureX, textureY); // Box 275
 		bodyModel[239] = new ModelRendererTurbo(this, 306, 19, textureX, textureY); // Box 274
 		bodyModel[240] = new ModelRendererTurbo(this, 306, 1, textureX, textureY); // Box 273
-		bodyModel[241] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[241] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "marker").setLightFixtureId("marker_two"); // Box 71 markerlight twO
 		bodyModel[242] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[243] = new ModelRendererTurbo(this, 302, 50, textureX, textureY); // Box 271
 		bodyModel[244] = new ModelRendererTurbo(this, 302, 45, textureX, textureY); // Box 272

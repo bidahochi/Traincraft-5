@@ -172,8 +172,9 @@ public final class ClientRollingStockLighting
         boolean available =
             explicitlyAvailable
             ? availabilityOverride.enabled()
-            : fixtureMetadata.definition.taggedUvRegions().isEmpty() == false
-            && resolvedFixture.sourceVisible(lightTexture, sourceSurfaces);
+            : RollingStockLightChannel.taggedPartIsInterior(modelPart.boxName)
+            || (fixtureMetadata.definition.taggedUvRegions().isEmpty() == false
+                && resolvedFixture.sourceVisible(lightTexture, sourceSurfaces));
         float effectX = oldX, effectY = oldY;
         float[] pose = null;
         if (available)
@@ -572,15 +573,18 @@ public final class ClientRollingStockLighting
             : createFallbackFixtureId(context, modelPart, channel);
         boolean instrument =
                     RollingStockLightChannel.taggedPartIsInstrument(modelPart.boxName),
+                interior =
+                    RollingStockLightChannel.taggedPartIsInterior(modelPart.boxName),
                 illuminated =
                     RollingStockLightChannel.taggedPartIsIlluminatedSurface(modelPart.boxName),
                 beamChannel =
                     instrument == false
+                    && interior == false
                     && (channel == RollingStockLightChannel.HEADLIGHT
                         || channel == RollingStockLightChannel.DITCH),
                     producesBeam = beamChannel && surface.beamInferred && illuminated == false;
         RollingStockLightDefinition.Effect effect =
-            instrument
+            instrument || interior
             ? RollingStockLightDefinition.Effect.EMISSIVE_ONLY
             : illuminated
             ? RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE
@@ -603,11 +607,15 @@ public final class ClientRollingStockLighting
         ModelRendererTurbo.LightSourceGlowShape shape = modelPart.lightSourceGlowShape;
         float[] definitionDirection = context.calculateDefinitionDirection(surface);
         float glowRadius =
-            instrument || illuminated || lower.contains("commander")
+            instrument || interior || illuminated || lower.contains("commander")
             ? 0
             : Math.max(0.04F, Math.min(0.18F, surface.radius * modelScale * 1.35F));
         float beamLength =
-            producesBeam ? (channel == RollingStockLightChannel.DITCH ? 2.5F : 5.0F) : 0;
+            producesBeam
+            ? (channel == RollingStockLightChannel.DITCH
+               ? RollingStockLightDefinition.DEFAULT_DITCH_LIGHT_BEAM_LENGTH
+               : RollingStockLightDefinition.DEFAULT_HEADLIGHT_BEAM_LENGTH)
+            : 0;
         List<RollingStockLightDefinition.UvRegion> uvRegions =
             collectTexturedUvRegions(surface);
         RollingStockLightDefinition definition =
@@ -625,7 +633,7 @@ public final class ClientRollingStockLighting
             .color(color)
             .effect(effect)
             .beamDimensions(beamLength, producesBeam ? 0.45F : 0)
-            .sourceGlow(glowRadius, instrument || illuminated ? 0 : 0.85F)
+            .sourceGlow(glowRadius, instrument || interior || illuminated ? 0 : 0.85F)
             .sourceGlowShape(
                 shape == null ? 1 : shape.widthScale(),
                 shape == null ? 1 : shape.heightScale(),

@@ -11,6 +11,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselES44h extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:es44h")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_aussy_body_214", "marker_aussy_body_215", "marker_body_120",
+            "marker_body_121")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_135", "numberboard_body_136", "numberboard_body_52",
+            "numberboard_body_54", "numberboard_upper_body_105", "numberboard_upper_body_203")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -91,5 +104,12 @@ public class DieselES44h extends DieselTrain {
 
 
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

@@ -10,6 +10,18 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP39TDash2B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp39tdash2b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_two_body_122", "marker_two_body_193")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_213", "numberboard_body_214", "rear_numberboard_body_211",
+            "rear_numberboard_body_212")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord() {
         return EnumSounds.DieselGP39TDash2B;
@@ -50,4 +62,11 @@ public class DieselGP39TDash2B extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

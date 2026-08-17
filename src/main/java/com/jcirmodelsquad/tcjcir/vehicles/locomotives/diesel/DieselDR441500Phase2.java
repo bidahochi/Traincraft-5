@@ -11,6 +11,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselDR441500Phase2 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dr441500phase2")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_483", "marker_body_484", "marker_l_type_1",
+            "marker_r_type_1")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_left_body_460", "numberboard_left_body_468", "rear_numberboard_right_body_461",
+            "rear_numberboard_right_body_466")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -60,5 +73,12 @@ public class DieselDR441500Phase2 extends DieselTrain {
 
     
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

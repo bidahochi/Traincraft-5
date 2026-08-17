@@ -103,9 +103,9 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[60] = new ModelRendererTurbo(this, 177, 112, textureX, textureY); // Box 328
 		bodyModel[61] = new ModelRendererTurbo(this, 284, 120, textureX, textureY); // Box 281
 		bodyModel[62] = new ModelRendererTurbo(this, 287, 110, textureX, textureY); // Box 282
-		bodyModel[63] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "lamp"); // Box 393 numberboard
+		bodyModel[63] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_63"); // Box 393 numberboard
 		bodyModel[64] = new ModelRendererTurbo(this, 434, 70, textureX, textureY); // Box 394
-		bodyModel[65] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "lamp"); // Box 395 numberboard
+		bodyModel[65] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_65"); // Box 395 numberboard
 		bodyModel[66] = new ModelRendererTurbo(this, 391, 35, textureX, textureY); // Box 398
 		bodyModel[67] = new ModelRendererTurbo(this, 391, 35, textureX, textureY); // Box 399
 		bodyModel[68] = new ModelRendererTurbo(this, 9, 141, textureX, textureY); // Box 252
@@ -160,7 +160,7 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[117] = new ModelRendererTurbo(this, 141, 30, textureX, textureY); // Box 172
 		bodyModel[118] = new ModelRendererTurbo(this, 36, 83, textureX, textureY); // Box 177
 		bodyModel[119] = new ModelRendererTurbo(this, 168, 61, textureX, textureY); // Box 314 door swing right
-		bodyModel[120] = new ModelRendererTurbo(this, 149, 27, textureX, textureY, "lamp"); // Box 242 numberboard top
+		bodyModel[120] = new ModelRendererTurbo(this, 149, 27, textureX, textureY, "numberboard").setLightFixtureId("numberboard_upper_body_120"); // Box 242 numberboard top
 		bodyModel[121] = new ModelRendererTurbo(this, 52, 81, textureX, textureY); // Box 210
 		bodyModel[122] = new ModelRendererTurbo(this, 36, 76, textureX, textureY); // Box 122
 		bodyModel[123] = new ModelRendererTurbo(this, 29, 78, textureX, textureY, "lamp"); // Box 154 headlight nose
@@ -175,8 +175,8 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[132] = new ModelRendererTurbo(this, 42, 9, textureX, textureY); // Box 273
 		bodyModel[133] = new ModelRendererTurbo(this, 14, 9, textureX, textureY); // Box 274
 		bodyModel[134] = new ModelRendererTurbo(this, 55, 10, textureX, textureY); // Box 275
-		bodyModel[135] = new ModelRendererTurbo(this, 37, 97, textureX, textureY, "lamp"); // Box 396 glow marker
-		bodyModel[136] = new ModelRendererTurbo(this, 37, 97, textureX, textureY, "lamp"); // Box 396 glow marker
+		bodyModel[135] = new ModelRendererTurbo(this, 37, 97, textureX, textureY, "marker").setLightFixtureId("marker_body_135"); // Box 396 glow marker
+		bodyModel[136] = new ModelRendererTurbo(this, 37, 97, textureX, textureY, "marker").setLightFixtureId("marker_body_136"); // Box 396 glow marker
 		bodyModel[137] = new ModelRendererTurbo(this, 38, 18, textureX, textureY); // Box 236
 		bodyModel[138] = new ModelRendererTurbo(this, 52, 17, textureX, textureY); // Box 86
 		bodyModel[139] = new ModelRendererTurbo(this, 30, 32, textureX, textureY); // Box 279
@@ -197,8 +197,8 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[154] = new ModelRendererTurbo(this, 40, 28, textureX, textureY); // Box 280
 		bodyModel[155] = new ModelRendererTurbo(this, 44, 32, textureX, textureY); // Box 281
 		bodyModel[156] = new ModelRendererTurbo(this, 187, 85, textureX, textureY); // Box 400 D9 AC cube support system
-		bodyModel[157] = new ModelRendererTurbo(this, 27, 96, textureX, textureY, "lamp"); // Box 239 numberboard nose
-		bodyModel[158] = new ModelRendererTurbo(this, 27, 96, textureX, textureY, "lamp"); // Box 240 numberboard nose
+		bodyModel[157] = new ModelRendererTurbo(this, 27, 96, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_157"); // Box 239 numberboard nose
+		bodyModel[158] = new ModelRendererTurbo(this, 27, 96, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_158"); // Box 240 numberboard nose
 		bodyModel[159] = new ModelRendererTurbo(this, 139, 48, textureX, textureY); // Box 114
 		bodyModel[160] = new ModelRendererTurbo(this, 139, 45, textureX, textureY); // Box 74
 		bodyModel[161] = new ModelRendererTurbo(this, 139, 51, textureX, textureY); // Box 78
@@ -295,7 +295,7 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[252] = new ModelRendererTurbo(this, 103, 62, textureX, textureY); // Box 315
 		bodyModel[253] = new ModelRendererTurbo(this, 3, 10, textureX, textureY); // Box 316
 		bodyModel[254] = new ModelRendererTurbo(this, 141, 30, textureX, textureY); // Box 317
-		bodyModel[255] = new ModelRendererTurbo(this, 149, 27, textureX, textureY, "lamp"); // Box 318 numerboard top
+		bodyModel[255] = new ModelRendererTurbo(this, 149, 27, textureX, textureY, "numberboard").setLightFixtureId("numberboard_upper_body_255"); // Box 318 numerboard top
 		bodyModel[256] = new ModelRendererTurbo(this, 167, 28, textureX, textureY); // Box 309
 		bodyModel[257] = new ModelRendererTurbo(this, 178, 24, textureX, textureY); // Box 310
 		bodyModel[258] = new ModelRendererTurbo(this, 121, 28, textureX, textureY); // Box 311
@@ -306,8 +306,8 @@ public class ModelDash944CW extends ModelConverter //Same as Filename
 		bodyModel[263] = new ModelRendererTurbo(this, 190, 4, textureX, textureY); // Box 316
 		bodyModel[264] = new ModelRendererTurbo(this, 181, 5, textureX, textureY); // Box 317
 		bodyModel[265] = new ModelRendererTurbo(this, 215, 4, textureX, textureY); // Box 318
-		bodyModel[266] = new ModelRendererTurbo(this, 35, 103, textureX, textureY, "lamp"); // Box 315 aussy markers
-		bodyModel[267] = new ModelRendererTurbo(this, 42, 103, textureX, textureY, "lamp"); // Box 316 aussy markers
+		bodyModel[266] = new ModelRendererTurbo(this, 35, 103, textureX, textureY, "marker").setLightFixtureId("marker_aussy_body_266"); // Box 315 aussy markers
+		bodyModel[267] = new ModelRendererTurbo(this, 42, 103, textureX, textureY, "marker").setLightFixtureId("marker_aussy_body_267"); // Box 316 aussy markers
 		bodyModel[268] = new ModelRendererTurbo(this, 99, 134, textureX, textureY); // Box 317
 		bodyModel[269] = new ModelRendererTurbo(this, 140, 153, textureX, textureY); // Box 318
 		bodyModel[270] = new ModelRendererTurbo(this, 96, 153, textureX, textureY); // Box 319

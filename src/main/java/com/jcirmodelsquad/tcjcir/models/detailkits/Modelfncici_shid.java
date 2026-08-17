@@ -38,9 +38,9 @@ public class Modelfncici_shid extends ModelConverter //Same as Filename
 		bodyModel[0] = new ModelRendererTurbo(this, 165, 189, textureX, textureY); // Box 53
 		bodyModel[1] = new ModelRendererTurbo(this, 178, 192, textureX, textureY); // Box 54
 		bodyModel[2] = new ModelRendererTurbo(this, 163, 162, textureX, textureY); // Box 55
-		bodyModel[3] = new ModelRendererTurbo(this, 201, 167, textureX, textureY, "lamp"); // Box 71 markerlight cull
+		bodyModel[3] = new ModelRendererTurbo(this, 201, 167, textureX, textureY, "marker").setLightFixtureId("marker_body_3"); // Box 71 markerlight cull
 		bodyModel[4] = new ModelRendererTurbo(this, 185, 189, textureX, textureY); // Box 235
-		bodyModel[5] = new ModelRendererTurbo(this, 201, 167, textureX, textureY, "lamp"); // Box 124 markerlight cull
+		bodyModel[5] = new ModelRendererTurbo(this, 201, 167, textureX, textureY, "marker").setLightFixtureId("marker_body_5"); // Box 124 markerlight cull
 		bodyModel[6] = new ModelRendererTurbo(this, 163, 148, textureX, textureY); // Box 125
 		bodyModel[7] = new ModelRendererTurbo(this, 198, 197, textureX, textureY); // Box 338
 		bodyModel[8] = new ModelRendererTurbo(this, 211, 197, textureX, textureY); // Box 340
@@ -57,8 +57,8 @@ public class Modelfncici_shid extends ModelConverter //Same as Filename
 		bodyModel[19] = new ModelRendererTurbo(this, 179, 140, textureX, textureY); // Box 74
 		bodyModel[20] = new ModelRendererTurbo(this, 190, 137, textureX, textureY); // Box 75
 		bodyModel[21] = new ModelRendererTurbo(this, 164, 137, textureX, textureY); // Box 76
-		bodyModel[22] = new ModelRendererTurbo(this, 178, 127, textureX, textureY, "lamp"); // Box 117 Numberboard
-		bodyModel[23] = new ModelRendererTurbo(this, 178, 127, textureX, textureY, "lamp"); // Box 118 Numberboard
+		bodyModel[22] = new ModelRendererTurbo(this, 178, 127, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_22"); // Box 117 Numberboard
+		bodyModel[23] = new ModelRendererTurbo(this, 178, 127, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_23"); // Box 118 Numberboard
 		bodyModel[24] = new ModelRendererTurbo(this, 181, 135, textureX, textureY, "lamp"); // Box 186 Headlight Front
 		bodyModel[25] = new ModelRendererTurbo(this, 181, 135, textureX, textureY, "lamp"); // Box 187 Headlight Front
 		bodyModel[26] = new ModelRendererTurbo(this, 89, 156, textureX, textureY); // Box 332
@@ -75,7 +75,7 @@ public class Modelfncici_shid extends ModelConverter //Same as Filename
 		bodyModel[37] = new ModelRendererTurbo(this, 42, 197, textureX, textureY); // Box 413 cs
 		bodyModel[38] = new ModelRendererTurbo(this, 28, 189, textureX, textureY); // Box 86 cs
 		bodyModel[39] = new ModelRendererTurbo(this, 23, 210, textureX, textureY); // Box 531 cs
-		bodyModel[40] = new ModelRendererTurbo(this, 17, 194, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[40] = new ModelRendererTurbo(this, 17, 194, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_40"); // Box 71 glow speedometer
 		bodyModel[41] = new ModelRendererTurbo(this, 17, 189, textureX, textureY); // Box 307 spedo
 		bodyModel[42] = new ModelRendererTurbo(this, 267, 156, textureX, textureY); // Box 18 late stack
 		bodyModel[43] = new ModelRendererTurbo(this, 265, 164, textureX, textureY); // Box 21 late stack
@@ -272,7 +272,7 @@ public class Modelfncici_shid extends ModelConverter //Same as Filename
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 
 		for(ModelRendererTurbo m :bodyModel) {
-			if(m.boxName.equals("lamp")){
+			if((m.boxName.equals("lamp") || m.boxName.equals("marker"))){
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				m.render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

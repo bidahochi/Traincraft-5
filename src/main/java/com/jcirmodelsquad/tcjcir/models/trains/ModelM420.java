@@ -146,8 +146,8 @@ public class ModelM420 extends ModelConverter //Same as Filename
 		bodyModel[99] = new ModelRendererTurbo(this, 61, 115, textureX, textureY, "cull"); // Box 360 cull
 		bodyModel[100] = new ModelRendererTurbo(this, 93, 124, textureX, textureY); // Box 277
 		bodyModel[101] = new ModelRendererTurbo(this, 105, 124, textureX, textureY); // Box 280
-		bodyModel[102] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[103] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "lamp"); // Box 298 liveryimg 2
+		bodyModel[102] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_102"); // Box 117 liveryimg 2
+		bodyModel[103] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_103"); // Box 298 liveryimg 2
 		bodyModel[104] = new ModelRendererTurbo(this, 91, 134, textureX, textureY); // Box 302
 		bodyModel[105] = new ModelRendererTurbo(this, 92, 130, textureX, textureY); // Box 303
 		bodyModel[106] = new ModelRendererTurbo(this, 92, 126, textureX, textureY); // Box 305
@@ -316,8 +316,8 @@ public class ModelM420 extends ModelConverter //Same as Filename
 		bodyModel[269] = new ModelRendererTurbo(this, 134, 11, textureX, textureY); // Box 96
 		bodyModel[270] = new ModelRendererTurbo(this, 78, 11, textureX, textureY); // Box 97
 		bodyModel[271] = new ModelRendererTurbo(this, 44, 40, textureX, textureY); // Box 74
-		bodyModel[272] = new ModelRendererTurbo(this, 103, 24, textureX, textureY, "lamp"); // Box 137 numberboard cab
-		bodyModel[273] = new ModelRendererTurbo(this, 119, 24, textureX, textureY, "lamp"); // Box 137 numberboard cab
+		bodyModel[272] = new ModelRendererTurbo(this, 103, 24, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_272"); // Box 137 numberboard cab
+		bodyModel[273] = new ModelRendererTurbo(this, 119, 24, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_273"); // Box 137 numberboard cab
 		bodyModel[274] = new ModelRendererTurbo(this, 166, 48, textureX, textureY); // Box 346 door swing right
 		bodyModel[275] = new ModelRendererTurbo(this, 28, 26, textureX, textureY); // Box 350
 		bodyModel[276] = new ModelRendererTurbo(this, 62, 86, textureX, textureY); // Box 355
@@ -325,8 +325,8 @@ public class ModelM420 extends ModelConverter //Same as Filename
 		bodyModel[278] = new ModelRendererTurbo(this, 46, 26, textureX, textureY); // Box 359
 		bodyModel[279] = new ModelRendererTurbo(this, 132, 25, textureX, textureY); // Box 360
 		bodyModel[280] = new ModelRendererTurbo(this, 26, 54, textureX, textureY); // Box 361
-		bodyModel[281] = new ModelRendererTurbo(this, 119, 19, textureX, textureY, "lamp"); // Box 703 glow marker lights
-		bodyModel[282] = new ModelRendererTurbo(this, 107, 19, textureX, textureY, "lamp"); // Box 704 glow marker lights
+		bodyModel[281] = new ModelRendererTurbo(this, 119, 19, textureX, textureY, "marker").setLightFixtureId("marker_body_281"); // Box 703 glow marker lights
+		bodyModel[282] = new ModelRendererTurbo(this, 107, 19, textureX, textureY, "marker").setLightFixtureId("marker_body_282"); // Box 704 glow marker lights
 		bodyModel[283] = new ModelRendererTurbo(this, 29, 40, textureX, textureY, "lamp"); // Box 448 front headlight N
 		bodyModel[284] = new ModelRendererTurbo(this, 51, 43, textureX, textureY, "lamp"); // Box 74 P&W weird light front
 		bodyModel[285] = new ModelRendererTurbo(this, 51, 39, textureX, textureY, "lamp"); // Box 74 P&W weird light

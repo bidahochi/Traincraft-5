@@ -12,6 +12,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselFAFDL extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:fafdl")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_l_type_1", "marker_l_type_2", "marker_r_type_1",
+            "marker_r_type_2")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_left_body_186", "numberboard_left_body_63", "rear_numberboard_right_body_187",
+            "rear_numberboard_right_body_80")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -53,4 +66,11 @@ public class DieselFAFDL extends DieselTrain {
     public String getInventoryName() {
         return "CEE FA-FDL";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

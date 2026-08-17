@@ -91,9 +91,9 @@ public class ModelTender10k extends ModelConverter //Same as Filename
 		bodyModel[46] = new ModelRendererTurbo(this, 345, 35, textureX, textureY, "cull"); // stepping cull
 		bodyModel[47] = new ModelRendererTurbo(this, 345, 30, textureX, textureY, "cull"); // stepping cull
 		bodyModel[48] = new ModelRendererTurbo(this, 337, 1, textureX, textureY); // Box 2
-		bodyModel[49] = new ModelRendererTurbo(this, 481, 1, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[49] = new ModelRendererTurbo(this, 481, 1, textureX, textureY, "marker").setLightFixtureId("marker_body_49"); // Box 410 glow marker
 		bodyModel[50] = new ModelRendererTurbo(this, 353, 1, textureX, textureY); // Box 594
-		bodyModel[51] = new ModelRendererTurbo(this, 497, 1, textureX, textureY, "lamp"); // Box 595 glow marker
+		bodyModel[51] = new ModelRendererTurbo(this, 497, 1, textureX, textureY, "marker").setLightFixtureId("marker_body_51"); // Box 595 glow marker
 		bodyModel[52] = new ModelRendererTurbo(this, 153, 17, textureX, textureY); // Box 613
 		bodyModel[53] = new ModelRendererTurbo(this, 297, 25, textureX, textureY); // Box 65
 		bodyModel[54] = new ModelRendererTurbo(this, 499, 20, textureX, textureY, "cull"); // Box 175 cull
@@ -114,7 +114,7 @@ public class ModelTender10k extends ModelConverter //Same as Filename
 		bodyModel[69] = new ModelRendererTurbo(this, 84, 43, textureX, textureY); // Box 341 fmsr backing light housing
 		bodyModel[70] = new ModelRendererTurbo(this, 117, 43, textureX, textureY, "lamp"); // Box 342 headlight rear fmsr
 		bodyModel[71] = new ModelRendererTurbo(this, 108, 43, textureX, textureY, "cull"); // Box 343 cull fmsr backing light housing
-		bodyModel[72] = new ModelRendererTurbo(this, 97, 43, textureX, textureY, "lamp"); // Box 345 numberboard glow fmsr
+		bodyModel[72] = new ModelRendererTurbo(this, 97, 43, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_72"); // Box 345 numberboard glow fmsr
 		bodyModel[73] = new ModelRendererTurbo(this, 75, 44, textureX, textureY); // Box 346 fmsr backinglight support
 		bodyModel[74] = new ModelRendererTurbo(this, 127, 43, textureX, textureY); // Box 130 air res
 		bodyModel[75] = new ModelRendererTurbo(this, 128, 44, textureX, textureY); // Box 131 air res
@@ -390,7 +390,7 @@ public class ModelTender10k extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for(ModelRendererTurbo m :bodyModel) {
-			if(m.boxName.equals("lamp")){
+			if((m.boxName.equals("lamp") || m.boxName.equals("marker"))){
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				m.render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

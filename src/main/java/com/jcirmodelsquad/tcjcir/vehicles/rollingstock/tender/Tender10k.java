@@ -7,6 +7,17 @@ import train.common.api.Tender;
 import train.common.enums.LockoutGroup;
 
 public class Tender10k extends Tender  {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:tender10k")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_49", "marker_body_51")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_72")
+        .build();
+
 
     public Tender10k(World world) {
         super(world,  LiquidManager.WATER_FILTER);
@@ -44,6 +55,13 @@ public class Tender10k extends Tender  {
     @Override
     public float getOptimalDistance(EntityMinecart cart) {
         return 1.8F;
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

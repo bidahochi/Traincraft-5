@@ -6,7 +6,9 @@ package train.common.enums;
 public enum BoxName
 {
     cull("cull"),//disable part face culling on advanced models
-    lamp("lamp"),//for headlights, numberboards, markerlights, pretty much anything that needs to be glowey
+    lamp("lamp"),//legacy generic emissive-light discovery
+    interior("interior"),//passenger-compartment emissive surface without beam or halo
+    marker("marker"),//marker/classification lights; entity profiles own their final behavior
     ditch("ditch"),//ditchlights toggle on/off, no blink
     ditch_left("ditch"), // not used for anything special right now but god to document
     ditch_right("ditch"), // not used for anything special right now but god to document

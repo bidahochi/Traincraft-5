@@ -10,6 +10,15 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselPA1 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:alcopa1")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_l_type_1", "marker_l_type_2", "marker_l_type_3",
+            "marker_r_type_1", "marker_r_type_2", "marker_r_type_3")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -108,4 +117,10 @@ public class DieselPA1 extends DieselTrain {
 
 
 
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

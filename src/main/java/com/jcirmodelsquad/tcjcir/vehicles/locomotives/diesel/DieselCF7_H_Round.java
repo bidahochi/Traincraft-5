@@ -10,6 +10,14 @@ import train.common.library.sounds.SoundRecord;
 
 @Deprecated
 public class DieselCF7_H_Round extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:cf7_h_round")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_28", "numberboard_body_29")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -53,5 +61,12 @@ public class DieselCF7_H_Round extends DieselTrain {
 
 
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

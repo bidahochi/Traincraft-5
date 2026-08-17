@@ -180,8 +180,8 @@ public class ModelP32 extends ModelConverter //Same as Filename
 		bodyModel[137] = new ModelRendererTurbo(this, 71, 95, textureX, textureY); // Box 2
 		bodyModel[138] = new ModelRendererTurbo(this, 64, 122, textureX, textureY, BoxName.ditch); // Box 5 ditchlight glow
 		bodyModel[139] = new ModelRendererTurbo(this, 32, 122, textureX, textureY, BoxName.ditch); // Box 5 ditchlight glow
-		bodyModel[140] = new ModelRendererTurbo(this, 24, 124, textureX, textureY, "lamp"); // Box 5 marker light glow
-		bodyModel[141] = new ModelRendererTurbo(this, 74, 122, textureX, textureY, "lamp"); // Box 5 marker light glow
+		bodyModel[140] = new ModelRendererTurbo(this, 24, 124, textureX, textureY, "marker").setLightFixtureId("marker_body_140"); // Box 5 marker light glow
+		bodyModel[141] = new ModelRendererTurbo(this, 74, 122, textureX, textureY, "marker").setLightFixtureId("marker_body_141"); // Box 5 marker light glow
 		bodyModel[142] = new ModelRendererTurbo(this, 53, 92, textureX, textureY, "lamp"); // Box 2 Headlight 2 glow
 		bodyModel[143] = new ModelRendererTurbo(this, 43, 93, textureX, textureY, "cull"); // Box 2 cull
 		bodyModel[144] = new ModelRendererTurbo(this, 43, 93, textureX, textureY, "cull"); // Box 2 cull
@@ -426,8 +426,8 @@ public class ModelP32 extends ModelConverter //Same as Filename
 		bodyModel[383] = new ModelRendererTurbo(this, 481, 78, textureX, textureY, "lamp"); // Box 2 rear headlight glow
 		bodyModel[384] = new ModelRendererTurbo(this, 481, 78, textureX, textureY, "lamp"); // Box 2 rear headlight glow
 		bodyModel[385] = new ModelRendererTurbo(this, 479, 83, textureX, textureY, "cull"); // Box 10 cull
-		bodyModel[386] = new ModelRendererTurbo(this, 469, 94, textureX, textureY, "lamp"); // Box 2 rear marker lightt glow
-		bodyModel[387] = new ModelRendererTurbo(this, 493, 94, textureX, textureY, "lamp"); // Box 2 rear marker lightt glow
+		bodyModel[386] = new ModelRendererTurbo(this, 469, 94, textureX, textureY, "marker").setLightFixtureId("rear_marker_lightt_body_386"); // Box 2 rear marker lightt glow
+		bodyModel[387] = new ModelRendererTurbo(this, 493, 94, textureX, textureY, "marker").setLightFixtureId("rear_marker_lightt_body_387"); // Box 2 rear marker lightt glow
 		bodyModel[388] = new ModelRendererTurbo(this, 243, 117, textureX, textureY); // Box 2 front ladders
 		bodyModel[389] = new ModelRendererTurbo(this, 243, 122, textureX, textureY); // Box 2 front ladders
 		bodyModel[390] = new ModelRendererTurbo(this, 421, 117, textureX, textureY); // Box 2 back ladders
@@ -448,8 +448,8 @@ public class ModelP32 extends ModelConverter //Same as Filename
 		bodyModel[405] = new ModelRendererTurbo(this, 224, 160, textureX, textureY); // Box 4
 		bodyModel[406] = new ModelRendererTurbo(this, 18, 48, textureX, textureY); // Box 2
 		bodyModel[407] = new ModelRendererTurbo(this, 76, 48, textureX, textureY); // Box 2
-		bodyModel[408] = new ModelRendererTurbo(this, 44, 86, textureX, textureY, "lamp"); // Box 2 number board glow
-		bodyModel[409] = new ModelRendererTurbo(this, 52, 86, textureX, textureY, "lamp"); // Box 2 number board glow
+		bodyModel[408] = new ModelRendererTurbo(this, 44, 86, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_408"); // Box 2 number board glow
+		bodyModel[409] = new ModelRendererTurbo(this, 52, 86, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_409"); // Box 2 number board glow
 		bodyModel[410] = new ModelRendererTurbo(this, 43, 74, textureX, textureY, "lamp"); // Box 2 weird ass becon glow
 		bodyModel[411] = new ModelRendererTurbo(this, 48, 75, textureX, textureY, "lamp"); // Box 2 weird ass becon grouped glow
 		bodyModel[412] = new ModelRendererTurbo(this, 55, 74, textureX, textureY, "lamp"); // Box 2 weird ass becon glow

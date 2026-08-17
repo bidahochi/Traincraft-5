@@ -145,11 +145,11 @@ public class ModelM63X_round extends ModelConverter //Same as Filename
 		bodyModel[98] = new ModelRendererTurbo(this, 34, 36, textureX, textureY); // Box 71
 		bodyModel[99] = new ModelRendererTurbo(this, 104, 64, textureX, textureY); // Box 120
 		bodyModel[100] = new ModelRendererTurbo(this, 104, 60, textureX, textureY); // Box 121
-		bodyModel[101] = new ModelRendererTurbo(this, 26, 11, textureX, textureY, "lamp"); // Numberboard f glow
+		bodyModel[101] = new ModelRendererTurbo(this, 26, 11, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_101"); // Numberboard f glow
 		bodyModel[102] = new ModelRendererTurbo(this, 14, 36, textureX, textureY); // Box 205
 		bodyModel[103] = new ModelRendererTurbo(this, 45, 37, textureX, textureY); // Box 206
 		bodyModel[104] = new ModelRendererTurbo(this, 9, 37, textureX, textureY); // Box 207
-		bodyModel[105] = new ModelRendererTurbo(this, 22, 11, textureX, textureY, "lamp"); // Classlights glow
+		bodyModel[105] = new ModelRendererTurbo(this, 22, 11, textureX, textureY, "marker").setLightFixtureId("marker_body_105"); // Classlights glow
 		bodyModel[106] = new ModelRendererTurbo(this, 13, 32, textureX, textureY); // Box 224
 		bodyModel[107] = new ModelRendererTurbo(this, 45, 32, textureX, textureY); // Box 225
 		bodyModel[108] = new ModelRendererTurbo(this, 75, 163, textureX, textureY); // Box 253
@@ -157,10 +157,10 @@ public class ModelM63X_round extends ModelConverter //Same as Filename
 		bodyModel[110] = new ModelRendererTurbo(this, 109, 29, textureX, textureY); // Box 225
 		bodyModel[111] = new ModelRendererTurbo(this, 69, 6, textureX, textureY); // Box 234
 		bodyModel[112] = new ModelRendererTurbo(this, 5, 44, textureX, textureY); // Box 315 door swing left
-		bodyModel[113] = new ModelRendererTurbo(this, 41, 11, textureX, textureY, "lamp"); // Numberboard f glow
+		bodyModel[113] = new ModelRendererTurbo(this, 41, 11, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_113"); // Numberboard f glow
 		bodyModel[114] = new ModelRendererTurbo(this, 104, 34, textureX, textureY); // Box 208
 		bodyModel[115] = new ModelRendererTurbo(this, 104, 29, textureX, textureY); // Box 209 door swing left
-		bodyModel[116] = new ModelRendererTurbo(this, 49, 11, textureX, textureY, "lamp"); // Classlights glow
+		bodyModel[116] = new ModelRendererTurbo(this, 49, 11, textureX, textureY, "marker").setLightFixtureId("marker_body_116"); // Classlights glow
 		bodyModel[117] = new ModelRendererTurbo(this, 1, 35, textureX, textureY); // Box 231
 		bodyModel[118] = new ModelRendererTurbo(this, 53, 35, textureX, textureY); // Box 232
 		bodyModel[119] = new ModelRendererTurbo(this, 62, 3, textureX, textureY); // Box 233
@@ -348,8 +348,8 @@ public class ModelM63X_round extends ModelConverter //Same as Filename
 		bodyModel[301] = new ModelRendererTurbo(this, 468, 13, textureX, textureY); // Box 238 sand cap
 		bodyModel[302] = new ModelRendererTurbo(this, 59, 231, textureX, textureY, "cull"); // Box 133 CP plow cull
 		bodyModel[303] = new ModelRendererTurbo(this, 87, 231, textureX, textureY, "cull"); // Box 133 CP plow cull
-		bodyModel[304] = new ModelRendererTurbo(this, 23, 7, textureX, textureY, "lamp"); // Classlights CN QCM glow
-		bodyModel[305] = new ModelRendererTurbo(this, 50, 7, textureX, textureY, "lamp"); // Classlights CN QCM glow
+		bodyModel[304] = new ModelRendererTurbo(this, 23, 7, textureX, textureY, "marker").setLightFixtureId("marker_cn_qcm_body_304"); // Classlights CN QCM glow
+		bodyModel[305] = new ModelRendererTurbo(this, 50, 7, textureX, textureY, "marker").setLightFixtureId("marker_cn_qcm_body_305"); // Classlights CN QCM glow
 		bodyModel[306] = new ModelRendererTurbo(this, 107, 151, textureX, textureY); // Box 206
 		bodyModel[307] = new ModelRendererTurbo(this, 94, 115, textureX, textureY); // Box 206
 		bodyModel[308] = new ModelRendererTurbo(this, 86, 148, textureX, textureY); // Box 206

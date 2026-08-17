@@ -10,6 +10,21 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselSW8 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sw8")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_crl_body_422", "marker_crl_body_423", "marker_crl_body_424",
+            "marker_crl_body_425")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_double_body_403", "front_numberboard_double_body_404", "front_numberboard_single_body_76",
+            "front_numberboard_single_body_77", "numberboard_body_144", "numberboard_body_145",
+            "numberboard_body_417", "numberboard_body_421", "rear_numberboard_double_body_407",
+            "rear_numberboard_double_body_408", "rear_numberboard_single_body_405", "rear_numberboard_single_body_406")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -60,5 +75,12 @@ public class DieselSW8 extends DieselTrain {
 
 
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

@@ -274,13 +274,13 @@ public class ModelWPShops600Series extends ModelConverter //Same as Filename
 		bodyModel[228] = new ModelRendererTurbo(this, 160, 6, textureX, textureY); // Box 373
 		bodyModel[229] = new ModelRendererTurbo(this, 157, 6, textureX, textureY); // Box 373
 		bodyModel[230] = new ModelRendererTurbo(this, 79, 73, textureX, textureY); // Box 153
-		bodyModel[231] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("front_right_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
+		bodyModel[231] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "marker").setLightFixtureId("front_right_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
 		bodyModel[232] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 170
-		bodyModel[233] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("front_left_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
+		bodyModel[233] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "marker").setLightFixtureId("front_left_marker").setLightSourceFaces(LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
 		bodyModel[234] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 172
-		bodyModel[235] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("rear_right_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
+		bodyModel[235] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "marker").setLightFixtureId("rear_right_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.POSITIVE_Z); // Box 410 glow marker
 		bodyModel[236] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 174
-		bodyModel[237] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "lamp").setLightFixtureId("rear_left_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
+		bodyModel[237] = new ModelRendererTurbo(this, 159, 51, textureX, textureY, "marker").setLightFixtureId("rear_left_marker").setLightSourceFaces(LightSourceFaceDirection.POSITIVE_X, LightSourceFaceDirection.NEGATIVE_X, LightSourceFaceDirection.NEGATIVE_Z); // Box 410 glow marker
 		bodyModel[238] = new ModelRendererTurbo(this, 164, 51, textureX, textureY); // Box 176
 
 		bodyModel[0].addBox(0F, 0F, 0F, 3, 2, 3, 0F); // Box 1 coupler

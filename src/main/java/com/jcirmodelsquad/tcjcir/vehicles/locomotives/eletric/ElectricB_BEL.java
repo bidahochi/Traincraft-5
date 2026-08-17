@@ -9,6 +9,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class ElectricB_BEL extends ElectricTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:b_bel")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_2_body_310", "marker_2_body_311", "marker_body_176",
+            "marker_body_177", "marker_body_86", "marker_body_87")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_132", "numberboard_body_133", "numberboard_early_body_161",
+            "numberboard_early_body_162", "numberboard_late_body_172", "numberboard_late_body_173")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -46,6 +59,13 @@ public class ElectricB_BEL extends ElectricTrain {
     @Override
     public float getOptimalDistance(EntityMinecart cart) {
         return 1.3F;
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }
