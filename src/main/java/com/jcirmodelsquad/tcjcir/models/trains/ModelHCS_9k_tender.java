@@ -116,7 +116,7 @@ public class ModelHCS_9k_tender extends ModelConverter //Same as Filename
 		bodyModel[75] = new ModelRendererTurbo(this, 112, 100, textureX, textureY); // Box 110
 		bodyModel[76] = new ModelRendererTurbo(this, 127, 66, textureX, textureY); // Box 111
 		bodyModel[77] = new ModelRendererTurbo(this, 129, 2, textureX, textureY); // Box 31
-		bodyModel[78] = new ModelRendererTurbo(this, 122, 2, textureX, textureY); // Box 248 headlight rear
+		bodyModel[78] = new ModelRendererTurbo(this, 122, 2, textureX, textureY, "lamp").setLightFixtureId("rear_headlight"); // Box 248 headlight rear
 		bodyModel[79] = new ModelRendererTurbo(this, 3, 113, textureX, textureY); // Box oiltank var2 (upfit)
 		bodyModel[80] = new ModelRendererTurbo(this, 143, 203, textureX, textureY); // Box 112
 		bodyModel[81] = new ModelRendererTurbo(this, 192, 185, textureX, textureY); // Box 277

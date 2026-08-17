@@ -362,8 +362,8 @@ public class ModelFP9A extends ModelConverter //Same as Filename
 		bodyModel[316] = new ModelRendererTurbo(this, 94, 133, textureX, textureY,BoxName.prime4); // Box 9 PRIME1-4
 		bodyModel[317] = new ModelRendererTurbo(this, 118, 167, textureX, textureY,"lamp"); // Box 186 headlight 2beam top B
 		bodyModel[318] = new ModelRendererTurbo(this, 111, 167, textureX, textureY,"lamp"); // Box 187 headlight 2beam top B
-		bodyModel[319] = new ModelRendererTurbo(this, 118, 221, textureX, textureY); // Box 186 headlight 2beam bottom B
-		bodyModel[320] = new ModelRendererTurbo(this, 111, 221, textureX, textureY); // Box 187 headlight 2beam bottom B
+		bodyModel[319] = new ModelRendererTurbo(this, 118, 221, textureX, textureY, "lamp").setLightFixtureId("front_headlight_lower_319"); // Box 186 headlight 2beam bottom B
+		bodyModel[320] = new ModelRendererTurbo(this, 111, 221, textureX, textureY, "lamp").setLightFixtureId("front_headlight_lower_320"); // Box 187 headlight 2beam bottom B
 		bodyModel[321] = new ModelRendererTurbo(this, 111, 172, textureX, textureY,"lamp"); // Box 169 headlight big top
 		bodyModel[322] = new ModelRendererTurbo(this, 134, 240, textureX, textureY,BoxName.ditch); // Box 443 ditchlight front a
 		bodyModel[323] = new ModelRendererTurbo(this, 129, 243, textureX, textureY); // Box 444
@@ -464,7 +464,7 @@ public class ModelFP9A extends ModelConverter //Same as Filename
 		bodyModel[418] = new ModelRendererTurbo(this, 209, 41, textureX, textureY); // M3 Hork
 		bodyModel[419] = new ModelRendererTurbo(this, 165, 43, textureX, textureY); // Box 193
 		bodyModel[420] = new ModelRendererTurbo(this, 167, 37, textureX, textureY); // Box 195
-		bodyModel[421] = new ModelRendererTurbo(this, 146, 40, textureX, textureY,"lamp"); // Box 348 commander beacon
+		bodyModel[421] = new ModelRendererTurbo(this, 146, 40, textureX, textureY,"commander").setLightFixtureId("commander"); // Box 348 commander beacon
 		bodyModel[422] = new ModelRendererTurbo(this, 145, 43, textureX, textureY); // Box 349
 		bodyModel[423] = new ModelRendererTurbo(this, 209, 54, textureX, textureY); // ARR Horn
 		bodyModel[424] = new ModelRendererTurbo(this, 209, 60, textureX, textureY); // ARR Horn

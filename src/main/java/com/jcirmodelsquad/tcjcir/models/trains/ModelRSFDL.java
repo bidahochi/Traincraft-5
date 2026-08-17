@@ -114,7 +114,7 @@ public class ModelRSFDL extends ModelConverter //Same as Filename
 		bodyModel[68] = new ModelRendererTurbo(this, 144, 152, textureX, textureY); // Box 137
 		bodyModel[69] = new ModelRendererTurbo(this, 144, 145, textureX, textureY); // Box 138
 		bodyModel[70] = new ModelRendererTurbo(this, 144, 138, textureX, textureY); // Box 139
-		bodyModel[71] = new ModelRendererTurbo(this, 166, 10, textureX, textureY, "lamp"); // Box 399 commander beacon
+		bodyModel[71] = new ModelRendererTurbo(this, 166, 10, textureX, textureY, "commander").setLightFixtureId("commander"); // Box 399 commander beacon
 		bodyModel[72] = new ModelRendererTurbo(this, 165, 14, textureX, textureY); // Box 400
 		bodyModel[73] = new ModelRendererTurbo(this, 2, 36, textureX, textureY); // Box 216
 		bodyModel[74] = new ModelRendererTurbo(this, 22, 36, textureX, textureY); // Box 217

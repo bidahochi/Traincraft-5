@@ -20,6 +20,9 @@ public class DieselFP7A extends DieselTrain {
         .fixtureType(
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_413", "numberboard_body_414")
+        .fixtureType(
+            train.common.api.LightFixtureType.HEADLIGHT,
+            "front_headlight_lower_319", "front_headlight_lower_320")
         .build();
 
     @Override

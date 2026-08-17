@@ -127,7 +127,7 @@ public class ModelCF7_H_Round extends ModelConverter//Same as Filename
 		bodyModel[89] = new ModelRendererTurbo(this, 23, 106, textureX, textureY); // Box 107
 		bodyModel[90] = new ModelRendererTurbo(this, 1, 106, textureX, textureY); // Box 108
 		bodyModel[91] = new ModelRendererTurbo(this, 23, 106, textureX, textureY); // Box 109
-		bodyModel[92] = new ModelRendererTurbo(this, 24, 144, textureX, textureY, "lamp"); // Box 110 beacon
+		bodyModel[92] = new ModelRendererTurbo(this, 24, 144, textureX, textureY, "commander").setLightFixtureId("roof_commander"); // Box 110 beacon
 		bodyModel[93] = new ModelRendererTurbo(this, 42, 103, textureX, textureY); // Box 111
 		bodyModel[94] = new ModelRendererTurbo(this, 30, 12, textureX, textureY); // Box 4
 		bodyModel[95] = new ModelRendererTurbo(this, 30, 12, textureX, textureY); // Box 102

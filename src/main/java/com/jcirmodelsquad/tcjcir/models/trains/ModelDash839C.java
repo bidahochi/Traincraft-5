@@ -323,7 +323,7 @@ public class ModelDash839C extends ModelConverter //Same as Filename
 		bodyModel[280] = new ModelRendererTurbo(this, 247, 213, textureX, textureY, "cull"); // Box 426 cull
 		bodyModel[281] = new ModelRendererTurbo(this, 280, 227, textureX, textureY); // Box 428
 		bodyModel[282] = new ModelRendererTurbo(this, 87, 123, textureX, textureY); // Box 300
-		bodyModel[283] = new ModelRendererTurbo(this, 291, 204, textureX, textureY, "lamp"); // Box 334 commander beacon
+		bodyModel[283] = new ModelRendererTurbo(this, 291, 204, textureX, textureY, "commander").setLightFixtureId("commander"); // Box 334 commander beacon
 		bodyModel[284] = new ModelRendererTurbo(this, 291, 208, textureX, textureY); // Box 335
 		bodyModel[285] = new ModelRendererTurbo(this, 270, 223, textureX, textureY, BoxName.prime4); // Box 9 PRIME5-4
 		bodyModel[286] = new ModelRendererTurbo(this, 270, 223, textureX, textureY, BoxName.prime2); // Box 8 PRIME5-2

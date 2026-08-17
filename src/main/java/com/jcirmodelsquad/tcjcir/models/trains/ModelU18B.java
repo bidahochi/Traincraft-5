@@ -173,7 +173,7 @@ public class ModelU18B extends ModelConverter //Same as Filename
 		bodyModel[127] = new ModelRendererTurbo(this, 17, 11, textureX, textureY); // Box 267
 		bodyModel[128] = new ModelRendererTurbo(this, 435, 127, textureX, textureY); // Box 270434
 		bodyModel[129] = new ModelRendererTurbo(this, 433, 114, textureX, textureY); // Box 271
-		bodyModel[130] = new ModelRendererTurbo(this, 182, 4, textureX, textureY, "lamp"); // Box 162 commander beacon
+		bodyModel[130] = new ModelRendererTurbo(this, 182, 4, textureX, textureY, "commander").setLightFixtureId("commander"); // Box 162 commander beacon
 		bodyModel[131] = new ModelRendererTurbo(this, 181, 8, textureX, textureY); // Box 165
 		bodyModel[132] = new ModelRendererTurbo(this, 156, 65, textureX, textureY); // Box 279
 		bodyModel[133] = new ModelRendererTurbo(this, 444, 125, textureX, textureY); // Box 280

@@ -2099,9 +2099,9 @@ public class ModelRF16 extends ModelConverter //Same as Filename
 		bodyModel[504] = new ModelRendererTurbo(this, 69, 35, textureX, textureY); // Box 80
 		bodyModel[505] = new ModelRendererTurbo(this, 72, 36, textureX, textureY); // Box 80
 		bodyModel[506] = new ModelRendererTurbo(this, 65, 12, textureX, textureY, "cull"); // Box 0 cull
-		bodyModel[507] = new ModelRendererTurbo(this, 65, 9, textureX, textureY, BoxName.lamp); // beacon 1 R
+		bodyModel[507] = new ModelRendererTurbo(this, 65, 9, textureX, textureY, BoxName.commander).setLightFixtureId("roof_commander_right"); // beacon 1 R
 		bodyModel[508] = new ModelRendererTurbo(this, 66, 47, textureX, textureY, "cull"); // Box 612 cull
-		bodyModel[509] = new ModelRendererTurbo(this, 66, 44, textureX, textureY, BoxName.lamp); // beacon 1 L
+		bodyModel[509] = new ModelRendererTurbo(this, 66, 44, textureX, textureY, BoxName.commander).setLightFixtureId("roof_commander_left"); // beacon 1 L
 		bodyModel[510] = new ModelRendererTurbo(this, 13, 83, textureX, textureY); // Box 0
 		bodyModel[511] = new ModelRendererTurbo(this, 1, 83, textureX, textureY); // Box 537
 		bodyModel[512] = new ModelRendererTurbo(this, 232, 59, textureX, textureY); // Box 0

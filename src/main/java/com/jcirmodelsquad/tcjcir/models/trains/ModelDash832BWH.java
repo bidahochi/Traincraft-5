@@ -431,7 +431,7 @@ public class ModelDash832BWH extends ModelConverter //Same as Filename
 		bodyModel[387] = new ModelRendererTurbo(this, 24, 140, textureX, textureY); // Box plugguis 1 thru 4 son of pluggis0
 		bodyModel[388] = new ModelRendererTurbo(this, 17, 140, textureX, textureY); // Box plugguis 1 thru 4 son of pluggis0
 		bodyModel[389] = new ModelRendererTurbo(this, 17, 135, textureX, textureY); // Box plugguis 1 thru 4 son of pluggis0
-		bodyModel[390] = new ModelRendererTurbo(this, 109, 186, textureX, textureY, "lamp"); // Box 334 commander beacon
+		bodyModel[390] = new ModelRendererTurbo(this, 109, 186, textureX, textureY, "commander").setLightFixtureId("commander"); // Box 334 commander beacon
 		bodyModel[391] = new ModelRendererTurbo(this, 103, 187, textureX, textureY); // Box 335
 		bodyModel[392] = new ModelRendererTurbo(this, 186, 153, textureX, textureY); // Box 431 backpannel bulgy bit
 		bodyModel[393] = new ModelRendererTurbo(this, 176, 126, textureX, textureY); // Box 253

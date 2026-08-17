@@ -15,6 +15,9 @@ public class DieselBeep extends DieselTrain {
         .fixtureType(
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_146", "numberboard_body_147")
+        .fixtureType(
+            train.common.api.LightFixtureType.COMMANDER,
+            "commander_upper", "commander_lower")
         .build();
 
     @Override

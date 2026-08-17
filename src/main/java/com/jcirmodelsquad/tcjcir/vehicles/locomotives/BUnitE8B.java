@@ -15,6 +15,18 @@ import train.common.api.LiquidTank;
 import train.common.library.GuiIDs;
 
 public class BUnitE8B extends LiquidTank implements IFluidHandler {
+	private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+		train.common.api.RollingStockSkinLightingProfiles.builder("bap:bunite8b")
+		.defaults()
+		.fixtureType(train.common.api.LightFixtureType.COMMANDER, "commander")
+		.build();
+
+	@Override
+	protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+	{
+		return LIGHTING_PROFILES;
+	}
+
 	public int freightInventorySize;
 
 	private int update = 8;

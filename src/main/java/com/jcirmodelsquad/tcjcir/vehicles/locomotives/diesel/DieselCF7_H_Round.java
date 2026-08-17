@@ -16,6 +16,7 @@ public class DieselCF7_H_Round extends DieselTrain {
         .fixtureType(
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_28", "numberboard_body_29")
+        .fixtureType(train.common.api.LightFixtureType.COMMANDER, "roof_commander")
         .build();
 
     @Override

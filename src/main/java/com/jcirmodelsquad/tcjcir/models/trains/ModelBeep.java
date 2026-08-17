@@ -196,7 +196,7 @@ public class ModelBeep extends ModelConverter //Same as Filename
 		bodyModel[161] = new ModelRendererTurbo(this, 206, 159, textureX, textureY); // Box 400 socket
 		bodyModel[162] = new ModelRendererTurbo(this, 200, 156, textureX, textureY, "lamp"); // Box 399 glow red
 		bodyModel[163] = new ModelRendererTurbo(this, 199, 159, textureX, textureY); // Box 400 socket
-		bodyModel[164] = new ModelRendererTurbo(this, 193, 156, textureX, textureY, "lamp"); // Box 399 glow beacon
+		bodyModel[164] = new ModelRendererTurbo(this, 193, 156, textureX, textureY, "commander").setLightFixtureId("commander_upper"); // Box 399 glow beacon
 		bodyModel[165] = new ModelRendererTurbo(this, 192, 159, textureX, textureY); // Box 400 socket
 		bodyModel[166] = new ModelRendererTurbo(this, 214, 147, textureX, textureY, "lamp"); // Box 399 glow green
 		bodyModel[167] = new ModelRendererTurbo(this, 213, 150, textureX, textureY); // Box 400 socket
@@ -204,7 +204,7 @@ public class ModelBeep extends ModelConverter //Same as Filename
 		bodyModel[169] = new ModelRendererTurbo(this, 206, 150, textureX, textureY); // Box 400 socket
 		bodyModel[170] = new ModelRendererTurbo(this, 200, 147, textureX, textureY, "lamp"); // Box 399 glow red
 		bodyModel[171] = new ModelRendererTurbo(this, 199, 150, textureX, textureY); // Box 400 socket
-		bodyModel[172] = new ModelRendererTurbo(this, 193, 147, textureX, textureY, "lamp"); // Box 399 glow beacon
+		bodyModel[172] = new ModelRendererTurbo(this, 193, 147, textureX, textureY, "commander").setLightFixtureId("commander_lower"); // Box 399 glow beacon
 		bodyModel[173] = new ModelRendererTurbo(this, 192, 150, textureX, textureY); // Box 400 socket
 
 		bodyModel[0].addBox(0F, 0F, 0F, 59, 1, 22, 0F); // Box 0

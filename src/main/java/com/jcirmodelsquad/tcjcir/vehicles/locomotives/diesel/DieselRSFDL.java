@@ -20,6 +20,7 @@ public class DieselRSFDL extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_186", "numberboard_body_187", "numberboard_body_224",
             "numberboard_body_225")
+        .fixtureType(train.common.api.LightFixtureType.COMMANDER, "commander")
         .build();
 
     @Override

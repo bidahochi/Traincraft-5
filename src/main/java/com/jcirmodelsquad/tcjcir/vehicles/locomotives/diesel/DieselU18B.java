@@ -21,6 +21,7 @@ public class DieselU18B extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_100", "numberboard_body_45", "numberboard_body_46",
             "numberboard_body_99")
+        .fixtureType(train.common.api.LightFixtureType.COMMANDER, "commander")
         .build();
 
     @Override

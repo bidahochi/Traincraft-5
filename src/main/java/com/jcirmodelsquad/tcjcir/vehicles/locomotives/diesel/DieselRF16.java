@@ -18,6 +18,9 @@ public class DieselRF16 extends DieselTrain {
             train.common.api.LightFixtureType.MARKER_LIGHT,
             "marker_body_335", "marker_body_336", "marker_body_531",
             "marker_body_532")
+        .fixtureType(
+            train.common.api.LightFixtureType.COMMANDER,
+            "roof_commander_right", "roof_commander_left")
         .build();
 
     @Override

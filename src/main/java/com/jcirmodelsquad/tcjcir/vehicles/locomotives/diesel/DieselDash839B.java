@@ -22,6 +22,7 @@ public class DieselDash839B extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_256", "numberboard_body_257", "numberboard_body_326",
             "numberboard_body_327")
+        .fixtureType(train.common.api.LightFixtureType.COMMANDER, "commander")
         .build();
 
     @Override

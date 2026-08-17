@@ -201,7 +201,7 @@ public class ModelH1044 extends ModelConverter //Same as Filename
 		bodyModel[158] = new ModelRendererTurbo(this, 105, 65, textureX, textureY); // Box 889
 		bodyModel[159] = new ModelRendererTurbo(this, 409, 57, textureX, textureY); // Box 890
 		bodyModel[160] = new ModelRendererTurbo(this, 233, 17, textureX, textureY); // Box 891
-		bodyModel[161] = new ModelRendererTurbo(this, 441, 57, textureX, textureY, "lamp"); // Box 162 light commander beacon rear
+		bodyModel[161] = new ModelRendererTurbo(this, 441, 57, textureX, textureY, "commander").setLightFixtureId("rear_commander"); // Box 162 light commander beacon rear
 		bodyModel[162] = new ModelRendererTurbo(this, 505, 57, textureX, textureY); // Box 165
 		bodyModel[163] = new ModelRendererTurbo(this, 329, 65, textureX, textureY); // Box 894
 		bodyModel[164] = new ModelRendererTurbo(this, 1, 65, textureX, textureY); // Box 895
