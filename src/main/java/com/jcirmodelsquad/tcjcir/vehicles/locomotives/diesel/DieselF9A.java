@@ -4,6 +4,7 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.api.RollingStockLightColors;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
@@ -22,6 +23,15 @@ public class DieselF9A extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_272", "numberboard_body_280", "numberboard_early_body_268",
             "numberboard_early_body_269")
+
+                .setSkin("Skin20")//fncc
+                .gyralite("HL_U1A")
+                .color(
+                        RollingStockLightColors.RED,
+                        "HL_U1B")
+                .setSkin("Cyan")//fmsr
+                .gyralite("HL_L2A", "HL_L2B")
+
         .build();
 
     @Override

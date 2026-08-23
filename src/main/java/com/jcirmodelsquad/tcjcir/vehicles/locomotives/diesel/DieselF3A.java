@@ -22,6 +22,12 @@ public class DieselF3A extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "numberboard_body_272", "numberboard_body_280", "numberboard_early_body_268",
             "numberboard_early_body_269")
+
+                .setSkin("Skin31")//fncc
+                .gyralite("HL_L1A", "HL_L1B")
+                .setSkin("Cyan")//fmsr
+                .gyralite("HL_L1A", "HL_L1B")
+
         .build();
 
     @Override

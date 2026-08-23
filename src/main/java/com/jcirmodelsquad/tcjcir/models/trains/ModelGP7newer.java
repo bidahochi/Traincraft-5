@@ -474,11 +474,11 @@ public class ModelGP7newer extends ModelConverter //Same as Filename
 		bodyModel[426] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[427] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[428] = new ModelRendererTurbo(this, 19, 93, textureX, textureY); // Box 336
-		bodyModel[429] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam front
-		bodyModel[430] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam front
+		bodyModel[429] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "lamp").setLightFixtureId("GyraFrontANE1"); // Box 337 headlight ane 2 beam front
+		bodyModel[430] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "lamp").setLightFixtureId("GyraFrontANE2"); // Box 338 headlight ane 2 beam front
 		bodyModel[431] = new ModelRendererTurbo(this, 444, 141, textureX, textureY); // Box 336
-		bodyModel[432] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam rear
-		bodyModel[433] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam rear
+		bodyModel[432] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "lamp").setLightFixtureId("GyraRearANE1"); // Box 337 headlight ane 2 beam rear
+		bodyModel[433] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "lamp").setLightFixtureId("GyraRearANE2"); // Box 338 headlight ane 2 beam rear
 		bodyModel[434] = new ModelRendererTurbo(this, 310, 235, textureX, textureY); // Box 452 rear fuel fill
 		bodyModel[435] = new ModelRendererTurbo(this, 310, 235, textureX, textureY); // Box 452 rear fuel fill
 		bodyModel[436] = new ModelRendererTurbo(this, 283, 73, textureX, textureY, "cull"); // Box 3 cull aww
