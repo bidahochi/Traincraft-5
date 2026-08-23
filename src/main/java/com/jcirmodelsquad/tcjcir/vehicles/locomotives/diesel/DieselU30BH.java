@@ -86,13 +86,11 @@ public class DieselU30BH extends DieselTrain {
         InsertTexture(5, "CRL (2006-onwards)");
     }
 
-
     @Override
     protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
     {
         return LIGHTING_PROFILES;
     }
-
 
     @Override
     public String transportCountry()
@@ -103,7 +101,11 @@ public class DieselU30BH extends DieselTrain {
     public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3.2, 0.25, -0.35); }
 
     @Override
-    public float getOptimalDistance(EntityMinecart cart) { return 1.315F;
+    public float getOptimalDistance(EntityMinecart cart) { return 1.315F; }
+
+    @Override
+    public String transportYear() {
+        return "1976-1977";
     }
 
     @Override

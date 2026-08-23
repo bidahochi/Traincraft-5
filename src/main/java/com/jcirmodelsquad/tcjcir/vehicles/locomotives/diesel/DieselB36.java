@@ -26,6 +26,10 @@ public class DieselB36 extends DieselTrain {
             "numberboard_body_223", "numberboard_booster_body_21", "numberboard_booster_body_22",
             "numberboard_early_body_175", "numberboard_early_body_176", "numberboard_late_body_220",
             "numberboard_late_body_221")
+        .setSkin("Lime")//fncc
+                .gyralite("noselightR", "noselightL", "gyralight_rear_l", "gyralight_rear_r")
+        .setSkin("Skin16")//fncc
+                .gyralite("noselightR", "noselightL", "gyralight_rear_l", "gyralight_rear_r")
         .build();
 
 

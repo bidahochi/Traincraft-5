@@ -142,8 +142,8 @@ public class ModelB23 extends ModelConverter //Same as Filename
 		bodyModel[97] = new ModelRendererTurbo(this, 7, 127, textureX, textureY); // Box 557
 		bodyModel[98] = new ModelRendererTurbo(this, 12, 127, textureX, textureY); // Box 558
 		bodyModel[99] = new ModelRendererTurbo(this, 1, 76, textureX, textureY); // Box 185
-		bodyModel[100] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
-		bodyModel[101] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
+		bodyModel[100] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp").setLightFixtureId("noselightR"); // Box 247 Headlight Front nose R
+		bodyModel[101] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp").setLightFixtureId("noselightL"); // Box 248 Headlight Front nose L
 		bodyModel[102] = new ModelRendererTurbo(this, 78, 55, textureX, textureY); // Box 299
 		bodyModel[103] = new ModelRendererTurbo(this, 49, 57, textureX, textureY); // Box 300
 		bodyModel[104] = new ModelRendererTurbo(this, 70, 59, textureX, textureY); // Box 301
@@ -215,8 +215,8 @@ public class ModelB23 extends ModelConverter //Same as Filename
 		bodyModel[170] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 284 Headlight Rear down early
 		bodyModel[171] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 285 Headlight Rear up early
 		bodyModel[172] = new ModelRendererTurbo(this, 461, 104, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[173] = new ModelRendererTurbo(this, 454, 102, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[174] = new ModelRendererTurbo(this, 474, 102, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[173] = new ModelRendererTurbo(this, 454, 102, textureX, textureY, "lamp").setLightFixtureId("gyralight_rear_l"); // Box 289 gyralight rear l
+		bodyModel[174] = new ModelRendererTurbo(this, 474, 102, textureX, textureY, "lamp").setLightFixtureId("gyralight_rear_r"); // Box 290 gyralight rear r
 		bodyModel[175] = new ModelRendererTurbo(this, 481, 109, textureX, textureY, "numberboard").setLightFixtureId("numberboard_early_body_175"); // Box 165 numberboard early
 		bodyModel[176] = new ModelRendererTurbo(this, 481, 109, textureX, textureY, "numberboard").setLightFixtureId("numberboard_early_body_176"); // Box 167 numberboard early
 		bodyModel[177] = new ModelRendererTurbo(this, 474, 92, textureX, textureY, ""); // Box 215 numberboard late HOLDER

@@ -28,7 +28,7 @@ public class ModelH1044 extends ModelConverter //Same as Filename
 
 	public ModelH1044() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[252];
+		bodyModel = new ModelRendererTurbo[271];
 
 		initbodyModel_1();
 
@@ -292,6 +292,25 @@ public class ModelH1044 extends ModelConverter //Same as Filename
 		bodyModel[249] = new ModelRendererTurbo(this, 257, 102, textureX, textureY); // Box 538
 		bodyModel[250] = new ModelRendererTurbo(this, 289, 90, textureX, textureY); // Box 539
 		bodyModel[251] = new ModelRendererTurbo(this, 305, 110, textureX, textureY); // Box 540
+		bodyModel[252] = new ModelRendererTurbo(this, -6, 113, textureX, textureY); // Box 252
+		bodyModel[253] = new ModelRendererTurbo(this, -2, 104, textureX, textureY); // Box 253
+		bodyModel[254] = new ModelRendererTurbo(this, -2, 126, textureX, textureY); // Box 254
+		bodyModel[255] = new ModelRendererTurbo(this, 51, 88, textureX, textureY); // Box 48 ph2 headlight
+		bodyModel[256] = new ModelRendererTurbo(this, 58, 88, textureX, textureY, "lamp"); // Box 186 Headlight Front up ph2
+		bodyModel[257] = new ModelRendererTurbo(this, 58, 88, textureX, textureY, "lamp"); // Box 187 Headlight Front down ph2
+		bodyModel[258] = new ModelRendererTurbo(this, 51, 95, textureX, textureY); // Box 133 ph2 headlight
+		bodyModel[259] = new ModelRendererTurbo(this, 51, 84, textureX, textureY); // Box 187 ph2 headlight
+		bodyModel[260] = new ModelRendererTurbo(this, 44, 88, textureX, textureY); // Box 48 ph2 headlight
+		bodyModel[261] = new ModelRendererTurbo(this, 37, 88, textureX, textureY, "lamp"); // Box 186 Headlight reart up ph2
+		bodyModel[262] = new ModelRendererTurbo(this, 37, 88, textureX, textureY, "lamp"); // Box 187 Headlight rear down ph2
+		bodyModel[263] = new ModelRendererTurbo(this, 44, 95, textureX, textureY); // Box 133 ph2 headlight
+		bodyModel[264] = new ModelRendererTurbo(this, 44, 84, textureX, textureY); // Box 187 ph2 headlight
+		bodyModel[265] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, "prime1"); // Box 6 PRIME3-1
+		bodyModel[266] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, "prime3"); // Box 7 PRIME3-3
+		bodyModel[267] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, "prime2"); // Box 8 PRIME3-2
+		bodyModel[268] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, "prime4"); // Box 9 PRIME3-4
+		bodyModel[269] = new ModelRendererTurbo(this, 142, 55, textureX, textureY); // Box 428
+		bodyModel[270] = new ModelRendererTurbo(this, 133, 55, textureX, textureY, "cull"); // Box 270 cull
 
 		bodyModel[0].addBox(0F, 0F, 0F, 58, 3, 22, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-29F, 1F, -11F);
@@ -1048,6 +1067,63 @@ public class ModelH1044 extends ModelConverter //Same as Filename
 
 		bodyModel[251].addBox(0F, 0F, 0F, 3, 1, 6, 0F); // Box 540
 		bodyModel[251].setRotationPoint(29F, -20F, -3F);
+
+		bodyModel[252].addShapeBox(0F, 0F, 0F, 16, 0, 12, 0F,0F, 0F, 0F, -8F, 0F, 0F, -8F, 0F, -6F, 0F, 0F, -6F, 0F, 0F, 0F, -8F, 0F, 0F, -8F, 0F, -6F, 0F, 0F, -6F); // Box 252
+		bodyModel[252].setRotationPoint(-25F, -20F, -3F);
+
+		bodyModel[253].addShapeBox(0F, 0F, 0F, 16, 0, 8, 0F,0F, 0F, 0F, -8F, 0F, 0F, -8F, -1F, -4F, 0F, -1F, -4F, 0F, 0F, 0F, -8F, 0F, 0F, -8F, 1F, -4F, 0F, 1F, -4F); // Box 253
+		bodyModel[253].setRotationPoint(-25F, -20F, 3F);
+
+		bodyModel[254].addShapeBox(0F, 0F, 0F, 16, 0, 8, 0F,0F, -1F, -4F, -8F, -1F, -4F, -8F, 0F, 0F, 0F, 0F, 0F, 0F, 1F, -4F, -8F, 1F, -4F, -8F, 0F, 0F, 0F, 0F, 0F); // Box 254
+		bodyModel[254].setRotationPoint(-25F, -20F, -11F);
+
+		bodyModel[255].addShapeBox(0F, 0F, 0F, 1, 4, 2, 0F,0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 48 ph2 headlight
+		bodyModel[255].setRotationPoint(-28.75F, -17.75F, -1F);
+
+		bodyModel[256].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F); // Box 186 Headlight Front up ph2
+		bodyModel[256].setRotationPoint(-28.85F, -17.85F, -1F);
+
+		bodyModel[257].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F); // Box 187 Headlight Front down ph2
+		bodyModel[257].setRotationPoint(-28.85F, -15.95F, -1F);
+
+		bodyModel[258].addShapeBox(0F, 0F, 0F, 1, 1, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F); // Box 133 ph2 headlight
+		bodyModel[258].setRotationPoint(-28.75F, -14.25F, -1F);
+
+		bodyModel[259].addShapeBox(0F, 0F, 0F, 1, 1, 2, 0F,0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 187 ph2 headlight
+		bodyModel[259].setRotationPoint(-28.75F, -18.5F, -1F);
+
+		bodyModel[260].addShapeBox(0F, 0F, 0F, 1, 4, 2, 0F,0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 48 ph2 headlight
+		bodyModel[260].setRotationPoint(28.75F, -19.85F, -1F);
+
+		bodyModel[261].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F); // Box 186 Headlight reart up ph2
+		bodyModel[261].setRotationPoint(28.85F, -19.95F, -1F);
+
+		bodyModel[262].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F); // Box 187 Headlight rear down ph2
+		bodyModel[262].setRotationPoint(28.85F, -18.05F, -1F);
+
+		bodyModel[263].addShapeBox(0F, 0F, 0F, 1, 1, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F); // Box 133 ph2 headlight
+		bodyModel[263].setRotationPoint(28.75F, -16.35F, -1F);
+
+		bodyModel[264].addShapeBox(0F, 0F, 0F, 1, 1, 2, 0F,0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 187 ph2 headlight
+		bodyModel[264].setRotationPoint(28.75F, -20.6F, -1F);
+
+		bodyModel[265].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F); // Box 6 PRIME3-1
+		bodyModel[265].setRotationPoint(-29F, -21.5F, -1F);
+
+		bodyModel[266].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F); // Box 7 PRIME3-3
+		bodyModel[266].setRotationPoint(-29F, -21.5F, -1F);
+
+		bodyModel[267].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F); // Box 8 PRIME3-2
+		bodyModel[267].setRotationPoint(-29F, -21.5F, -1F);
+
+		bodyModel[268].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,-0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -1F, 0F, -1F, -1F, 0F, -1F); // Box 9 PRIME3-4
+		bodyModel[268].setRotationPoint(-29F, -21.5F, -1F);
+
+		bodyModel[269].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 428
+		bodyModel[269].setRotationPoint(-29F, -21F, -1F);
+
+		bodyModel[270].addShapeBox(0F, 0F, 0F, 2, 1, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F); // Box 270 cull
+		bodyModel[270].setRotationPoint(-29F, -20F, -1F);
 	}
 	ModelTypeAnew theTypeA = new ModelTypeAnew();
 	@Override
@@ -1064,8 +1140,8 @@ public class ModelH1044 extends ModelConverter //Same as Filename
 			GL11.glTranslated(2.25, 0, 0);
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
-		} else if (GetColor(entity) == 16234) {
-			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_fric.png"));
+		} else if (GetColor(entity) == 17) {
+			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/TypeA_new_Black_rolly.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslated(-1.13, -0.02, 0);
 			theTypeA.render(entity, f, f1, f2, f3, f4, f5);

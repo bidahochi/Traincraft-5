@@ -43,6 +43,7 @@ public class DieselH1044 extends DieselTrain {
         InsertTexture(9, "Chicago Northwestern");
         InsertTexture(10, "Illinois Harbor Belt");
         InsertTexture(11, "Dee Dee Valley Railroad");
+        InsertTexture(12, "DOE");
 
     }
 
