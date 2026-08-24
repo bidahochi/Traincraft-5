@@ -474,7 +474,7 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
-        // Lighting controls are server-authoritative. Refresh legacy text buttons
+        // Lighting controls are server-authoritative. Refresh the existing text buttons
         // from DataWatcher state instead of preserving a client-side prediction.
         if ((loco instanceof DieselTrain) == false)
         {

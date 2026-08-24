@@ -37,6 +37,7 @@ import train.api.client.model.animation.PlacedModelLightProfile;
 import train.common.api.RollingStockLightChannel;
 import train.common.api.RollingStockLightColors;
 import train.common.api.RollingStockLightDefinition;
+import train.common.core.handlers.ConfigHandler;
 
 /**
  * Java 8/fixed-function adapter for placed-model light extraction. A {@code begin/end}
@@ -45,14 +46,38 @@ import train.common.api.RollingStockLightDefinition;
  * animated part pose. Texture alpha classification and reflected model inventories are
  * bounded caches, while tile visibility state is weakly owned. Calls must occur on the
  * client render thread and every successful begin/part token must be closed in {@code finally}.
+ * Three-element geometry arrays use {@code [0] = x}, {@code [1] = y}, and {@code [2] = z}.
+ * Nine-element bases use {@code [0..2] = direction}, {@code [3..5] = right}, and
+ * {@code [6..8] = up}, with x/y/z inside each range. Sixteen-element poses use OpenGL
+ * column-major order: {@code [0..3]}, {@code [4..7]}, {@code [8..11]}, and {@code [12..15]}
+ * are columns 0 through 3 respectively.
  */
 public final class PlacedModelLighting
 {
     static final float MODEL_SCALE = 0.0625F;
     private static final float CLUSTER_DISTANCE = 0.30F;
     private static final float MINIMUM_REAR_OPPOSITION = 0.85F;
+    private static final int MAXIMUM_TEXTURE_CACHE_ENTRIES = 256;
+    private static final int MAXIMUM_METADATA_CACHE_ENTRIES = 128;
+    private static final int MAXIMUM_MODEL_PART_CACHE_ENTRIES = 128;
+    private static final int MAXIMUM_REFLECTED_CLASS_CACHE_ENTRIES = 256;
+    private static final int MAXIMUM_EXTRACTION_DIAGNOSTICS = 1024;
+    private static final float DEFAULT_WARNING_BEAM_LENGTH = 0.75F;
+    private static final float DEFAULT_WARNING_BEAM_WIDTH = 0.35F;
+    private static final float DEFAULT_WARNING_GLOW_INTENSITY = 0.85F;
+    /** Relatively prime axis multipliers make neighboring tile warning phases decorrelate. */
+    private static final int OWNER_PHASE_HASH_X = 73428767;
+    private static final int OWNER_PHASE_HASH_Y = 912367;
+    private static final int OWNER_PHASE_HASH_Z = 438289;
+    private static final float COPLANAR_POLYGON_OFFSET_FACTOR = -0.25F;
+    private static final float COPLANAR_POLYGON_OFFSET_UNITS = -1.0F;
+    private static final float MINIMUM_DIRECTIONAL_NORMAL_COMPONENT = 0.5F;
+    private static final float MINIMUM_END_SEPARATION = 0.25F;
+    private static final float END_REGION_FRACTION = 0.25F;
+    private static final float FACE_SCORE_EPSILON = 1.0E-5F;
     private static final ThreadLocal<Context> ACTIVE = new ThreadLocal<Context>();
     private static final FloatBuffer MODEL_VIEW_BUFFER = BufferUtils.createFloatBuffer(16);
+    /** Retained pose pool; outer position i owns one 16-slot matrix in the documented layout. */
     private static float[][] capturedPoses = new float[32][];
     private static int capturedPoseCount;
     private static final Map<TileEntity, AdaptiveLightTracker> VISIBILITY =
@@ -60,21 +85,21 @@ public final class PlacedModelLighting
             new WeakHashMap<TileEntity, AdaptiveLightTracker>());
     private static final Cache<TextureKey, TextureEntry> TEXTURES =
         CacheBuilder.newBuilder()
-        .maximumSize(256)
+        .maximumSize(MAXIMUM_TEXTURE_CACHE_ENTRIES)
         .expireAfterAccess(10, TimeUnit.MINUTES)
         .build();
     private static final Cache<MetadataKey, StaticMetadata> METADATA =
-        CacheBuilder.newBuilder().maximumSize(128).build();
+        CacheBuilder.newBuilder().maximumSize(MAXIMUM_METADATA_CACHE_ENTRIES).build();
     private static final BoundedIdentityCache<Object, ModelPartInventory> MODEL_PARTS =
-        new BoundedIdentityCache<Object, ModelPartInventory>(128);
+        new BoundedIdentityCache<Object, ModelPartInventory>(MAXIMUM_MODEL_PART_CACHE_ENTRIES);
     private static final Cache<Class<?>, List<Field >> MODEL_PART_FIELDS =
-        CacheBuilder.newBuilder().maximumSize(256).build();
+        CacheBuilder.newBuilder().maximumSize(MAXIMUM_REFLECTED_CLASS_CACHE_ENTRIES).build();
     private static final BoundedSet<String> EXTRACTION_DIAGNOSTICS =
-        new BoundedSet<String>(1024);
+        new BoundedSet<String>(MAXIMUM_EXTRACTION_DIAGNOSTICS);
 
     private PlacedModelLighting() {}
 
-    /** Begins a legacy two-phase warning-light scope using model-unit beam defaults. */
+    /** Begins a two-phase warning-light scope using the default model-unit beam dimensions. */
     public static void begin(
         TileEntity owner,
         ResourceLocation off,
@@ -96,9 +121,9 @@ public final class PlacedModelLighting
             phases,
             1,
             RollingStockLightColors.RED,
-            0.75F,
-            0.35F,
-            0.85F,
+            DEFAULT_WARNING_BEAM_LENGTH,
+            DEFAULT_WARNING_BEAM_WIDTH,
+            DEFAULT_WARNING_GLOW_INTENSITY,
             true);
         begin(owner, profile, active, phase);
     }
@@ -133,7 +158,7 @@ public final class PlacedModelLighting
         int phase,
         float partialTicks)
     {
-        if (train.common.core.handlers.ConfigHandler.ENABLE_ADVANCED_LIGHTING == false)
+        if (ConfigHandler.enhancedLightingEnabled() == false)
         {
             ACTIVE.remove();
             capturedPoseCount = 0;
@@ -258,7 +283,9 @@ public final class PlacedModelLighting
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
         OpenGlHelper.setLightmapTextureCoords(
-            OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+            OpenGlHelper.lightmapTexUnit,
+            RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR,
+            RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR);
         return new PartLight(
                    true,
                    oldX,
@@ -749,13 +776,16 @@ public final class PlacedModelLighting
         }
     }
 
+    /** Copies image pixels into packed ARGB storage for allocation-free texture sampling. */
     private static int[] pixels(BufferedImage image)
     {
+        // Row-major ARGB pixels: position = y * image width + x.
         int[] result = new int[image.getWidth() * image.getHeight()];
         image.getRGB(0, 0, image.getWidth(), image.getHeight(), result, 0, image.getWidth());
         return result;
     }
 
+    /** Groups detected placed-model faces by fixture identity and submits each resolved cluster. */
     private static void submitClusters(Context context)
     {
         if (context.candidates.isEmpty())
@@ -786,9 +816,9 @@ public final class PlacedModelLighting
             }
         });
         int ownerId =
-            (context.owner.xCoord * 73428767)
-            ^ (context.owner.yCoord * 912367)
-            ^ (context.owner.zCoord * 438289);
+            (context.owner.xCoord * OWNER_PHASE_HASH_X)
+            ^ (context.owner.yCoord * OWNER_PHASE_HASH_Y)
+            ^ (context.owner.zCoord * OWNER_PHASE_HASH_Z);
         int phase0 = 0, phase1 = 0, steady = 0;
         for (List<Candidate> cluster : clusters)
         {
@@ -809,6 +839,7 @@ public final class PlacedModelLighting
         }
     }
 
+    /** Resolves and submits one placed-model fixture cluster. */
     private static void submitFixture(
         Context context, int ownerId, String id, List<Candidate> members)
     {
@@ -855,7 +886,7 @@ public final class PlacedModelLighting
             right[2] = -right[2];
             up = cross(right, direction);
         }
-        float radius = Math.max(0.04F, Math.min(0.18F, (float) Math.sqrt(total / Math.PI) * 1.35F));
+        float radius = LightGeometryMetrics.sourceGlowRadius(total);
         RollingStockLightDefinition definition =
             RollingStockLightDefinition.builder(id, RollingStockLightChannel.BEACON)
             .position(0, 0, 0)
@@ -894,6 +925,7 @@ public final class PlacedModelLighting
         }
     }
 
+    /** Submits the rear-facing half of a bidirectional placed-model fixture cluster. */
     private static void submitRear(
         Context context, int ownerId, String id, List<Candidate> members, float total)
     {
@@ -940,7 +972,7 @@ public final class PlacedModelLighting
         z /= area;
         float[] normal = normalize(dx, dy, dz),
                 basis = AnimatedLightDirection.basis(normal[0], normal[1], normal[2]);
-        float radius = Math.max(0.04F, Math.min(0.18F, (float) Math.sqrt(area / Math.PI) * 1.35F));
+        float radius = LightGeometryMetrics.sourceGlowRadius(area);
         RollingStockLightDefinition definition =
             RollingStockLightDefinition.builder(
                 id + "/reverse", RollingStockLightChannel.BEACON)
@@ -1084,6 +1116,7 @@ public final class PlacedModelLighting
                 context.owner.zCoord));
     }
 
+    /** Resolves texture-visible preferred source faces once for the current placed-model context. */
     private static void ensurePreferredFaces(Context context, TextureSet textures)
     {
         if (context.preferredReady)
@@ -1132,7 +1165,8 @@ public final class PlacedModelLighting
             {
                 continue;
             }
-            if (context.reverseDirection && Math.abs(face.modelNormalX) >= 0.5F)
+            if (context.reverseDirection
+                    && Math.abs(face.modelNormalX) >= MINIMUM_DIRECTIONAL_NORMAL_COMPONENT)
             {
                 float desired = face.modelNormalX > 0.0F ? -1.0F : 1.0F;
                 DetectedLightFace reverse = preferredFace(measured, mask, desired);
@@ -1156,8 +1190,8 @@ public final class PlacedModelLighting
             int selected = candidate.faceIndex;
             if (Float.isNaN(span) == false
                     && Float.isInfinite(span) == false
-                    && span >= 0.25F
-                    && Math.abs(candidate.face.modelX - middle) >= span * 0.25F)
+                    && span >= MINIMUM_END_SEPARATION
+                    && Math.abs(candidate.face.modelX - middle) >= span * END_REGION_FRACTION)
             {
                 float desired = candidate.face.modelX > middle ? 1.0F : -1.0F;
                 DetectedLightFace outward =
@@ -1171,11 +1205,12 @@ public final class PlacedModelLighting
         }
     }
 
+    /** Selects the texture-visible face whose direction best matches the requested longitudinal end. */
     private static DetectedLightFace preferredFace(
         DetectedLightSurface surface, boolean[] mask, float desiredX)
     {
         DetectedLightFace selected = null;
-        float score = 0.5F;
+        float score = MINIMUM_DIRECTIONAL_NORMAL_COMPONENT;
         for (DetectedLightFace candidate : surface.faces)
         {
             if (candidate.faceIndex >= mask.length || mask[candidate.faceIndex] == false)
@@ -1183,8 +1218,8 @@ public final class PlacedModelLighting
                 continue;
             }
             float value = candidate.modelNormalX * desiredX;
-            if (value > score + 1.0E-5F
-                    || (Math.abs(value - score) <= 1.0E-5F
+            if (value > score + FACE_SCORE_EPSILON
+                    || (Math.abs(value - score) <= FACE_SCORE_EPSILON
                         && selected != null
                         && candidate.area > selected.area))
             {
@@ -1509,7 +1544,10 @@ public final class PlacedModelLighting
         public void useEffect()
         {
             GL11.glColor4f(red, green, blue, 1.0F);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240, 240);
+            OpenGlHelper.setLightmapTextureCoords(
+                OpenGlHelper.lightmapTexUnit,
+                RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR,
+                RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR);
         }
 
         /**
@@ -1540,7 +1578,8 @@ public final class PlacedModelLighting
                 GL11.glDepthMask(false);
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-                GL11.glPolygonOffset(-0.25F, -1.0F);
+                GL11.glPolygonOffset(
+                    COPLANAR_POLYGON_OFFSET_FACTOR, COPLANAR_POLYGON_OFFSET_UNITS);
                 GL11.glColor4f(red, green, blue, 1.0F);
                 int count = Math.min(faceMask.length, faces.size());
                 for (int index = 0; index < count; index++)
@@ -1831,7 +1870,9 @@ public final class PlacedModelLighting
         static final TextureSet FAILED =
         new TextureSet(0, 0, new int[0], Collections.<int[]>emptyList(), true);
         final int width, height;
+        /** Row-major ARGB pixels; position = y * width + x. */
         final int[] off;
+        /** Each entry is one active texture using the same row-major pixel positions as off. */
         final List<int[]> active;
         final boolean failed;
 

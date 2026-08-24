@@ -15,9 +15,23 @@ public final class RollingStockLightDefinition
 {
     /** Conventional high-beam reach used by automatically discovered headlights. */
     public static final float DEFAULT_HEADLIGHT_BEAM_LENGTH = 5.0F;
+    /** Conventional model-space half-width used by automatically discovered headlights. */
+    public static final float DEFAULT_HEADLIGHT_BEAM_WIDTH = 0.45F;
+    /** Conventional model-space source-glow radius for generated fixture definitions. */
+    public static final float DEFAULT_SOURCE_GLOW_RADIUS = 0.10F;
+    /** Conventional source-glow opacity for generated fixture definitions. */
+    public static final float DEFAULT_SOURCE_GLOW_INTENSITY = 0.85F;
     /** Default ditch-light reach: three quarters of the conventional high headlight beam. */
     public static final float DEFAULT_DITCH_LIGHT_BEAM_LENGTH =
         DEFAULT_HEADLIGHT_BEAM_LENGTH * 0.75F;
+    /** Brightest valid Minecraft lightmap-floor component. */
+    public static final int MAXIMUM_LIGHTMAP_FLOOR = 240;
+    /** Lightmap floor retained for generic illuminated surfaces. */
+    public static final int DEFAULT_LIGHTMAP_FLOOR = 160;
+    /** Brighter default applied to explicit or automatically detected numberboards. */
+    public static final int DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR = 220;
+
+    private static final float MINIMUM_DIRECTION_LENGTH_SQUARED = 1.0E-8F;
 
     /** Selects which visual products a fixture may submit to the client renderer. */
     public enum Effect
@@ -41,6 +55,11 @@ public final class RollingStockLightDefinition
             sourceGlowUpOffset;
     private final List<SourceGlowSurface> sourceGlowSurfaces;
     private final RollingStockLightFunction function;
+    private final RollingStockLightActivationPolicy activationPolicy;
+    private final RollingStockDitchHornMode ditchHornMode;
+    private final RollingStockLightFunction hornFunction;
+    private final Integer hornPhase;
+    private final int lightmapFloor;
     private final boolean hotspotEnabled, clientProjectorEligible, instrument;
     private final List<UvRegion> taggedUvRegions;
 
@@ -123,6 +142,15 @@ public final class RollingStockLightDefinition
             sourceGlowUpOffset,
             sourceGlowSurfaces,
             function,
+            defaultActivationPolicy(channel),
+            channel == RollingStockLightChannel.DITCH
+            ? RollingStockDitchHornMode.ACTIVE_END
+            : RollingStockDitchHornMode.NONE,
+            null,
+            null,
+            channel == RollingStockLightChannel.HEADLIGHT
+            ? MAXIMUM_LIGHTMAP_FLOOR
+            : DEFAULT_LIGHTMAP_FLOOR,
             hotspotEnabled,
             clientProjectorEligible,
             false,
@@ -130,6 +158,7 @@ public final class RollingStockLightDefinition
             taggedUvRegions);
     }
 
+    /** Creates one validated immutable fixture definition from resolved builder values. */
     private RollingStockLightDefinition(
         String id,
         RollingStockLightChannel channel,
@@ -153,6 +182,11 @@ public final class RollingStockLightDefinition
         float sourceGlowUpOffset,
         List<SourceGlowSurface> sourceGlowSurfaces,
         RollingStockLightFunction function,
+        RollingStockLightActivationPolicy activationPolicy,
+        RollingStockDitchHornMode ditchHornMode,
+        RollingStockLightFunction hornFunction,
+        Integer hornPhase,
+        int lightmapFloor,
         boolean hotspotEnabled,
         boolean clientProjectorEligible,
         boolean instrument,
@@ -167,6 +201,8 @@ public final class RollingStockLightDefinition
                 || controlCircuit == null
                 || effect == null
                 || function == null
+                || activationPolicy == null
+                || ditchHornMode == null
                 || beamRotation == null)
         {
             throw new NullPointerException("Light fields must not be null");
@@ -174,7 +210,7 @@ public final class RollingStockLightDefinition
         if (referenceDirectionX * referenceDirectionX
                     + referenceDirectionY * referenceDirectionY
                     + referenceDirectionZ * referenceDirectionZ
-                < 1.0E-8F)
+                < MINIMUM_DIRECTION_LENGTH_SQUARED)
         {
             throw new IllegalArgumentException("Light direction must not be zero");
         }
@@ -196,6 +232,14 @@ public final class RollingStockLightDefinition
                 || sourceGlowHeightScale <= 0)
         {
             throw new IllegalArgumentException("Invalid glow shape");
+        }
+        if (lightmapFloor < 0 || lightmapFloor > MAXIMUM_LIGHTMAP_FLOOR)
+        {
+            throw new IllegalArgumentException("Lightmap floor must be in the range 0..240");
+        }
+        if (hornPhase != null && (hornPhase < 0 || hornPhase > 1))
+        {
+            throw new IllegalArgumentException("Horn phase must be 0, 1, or null");
         }
         this.id = id;
         this.channel = channel;
@@ -225,6 +269,11 @@ public final class RollingStockLightDefinition
         this.sourceGlowUpOffset = sourceGlowUpOffset;
         this.sourceGlowSurfaces = immutable(sourceGlowSurfaces);
         this.function = function;
+        this.activationPolicy = activationPolicy;
+        this.ditchHornMode = ditchHornMode;
+        this.hornFunction = hornFunction;
+        this.hornPhase = hornPhase;
+        this.lightmapFloor = lightmapFloor;
         this.hotspotEnabled = hotspotEnabled;
         this.clientProjectorEligible = clientProjectorEligible;
         this.instrument = instrument;
@@ -235,6 +284,16 @@ public final class RollingStockLightDefinition
     private static boolean finite(float v)
     {
         return Float.isNaN(v) == false && Float.isInfinite(v) == false;
+    }
+
+    /** Selects the standard directional policy for a resolved control circuit. */
+    private static RollingStockLightActivationPolicy defaultActivationPolicy(
+        RollingStockLightChannel channel)
+    {
+        return channel == RollingStockLightChannel.DITCH
+               || channel == RollingStockLightChannel.GYRA
+               ? RollingStockLightActivationPolicy.FACING_HEADLIGHT
+               : RollingStockLightActivationPolicy.CIRCUIT_ONLY;
     }
 
     private static <T> List<T> immutable(List<T> value)
@@ -252,8 +311,8 @@ public final class RollingStockLightDefinition
                .direction(1, 0, 0)
                .color(RollingStockLightColors.WARM_WHITE)
                .effect(Effect.BEAM)
-               .beamDimensions(DEFAULT_HEADLIGHT_BEAM_LENGTH, 0.45F)
-               .sourceGlow(0.10F, 0.85F)
+               .beamDimensions(DEFAULT_HEADLIGHT_BEAM_LENGTH, DEFAULT_HEADLIGHT_BEAM_WIDTH)
+               .sourceGlow(DEFAULT_SOURCE_GLOW_RADIUS, DEFAULT_SOURCE_GLOW_INTENSITY)
                .hotspotEnabled(true)
                .clientProjectorEligible(true)
                .taggedPart("lamp", null)
@@ -286,6 +345,9 @@ public final class RollingStockLightDefinition
                    sourceGlowUpOffset)
                .sourceGlowSurfaces(sourceGlowSurfaces)
                .function(function)
+               .activationPolicy(activationPolicy)
+               .ditchHornResponse(ditchHornMode, hornFunction, hornPhase)
+               .lightmapFloor(lightmapFloor)
                .hotspotEnabled(hotspotEnabled)
                .clientProjectorEligible(clientProjectorEligible)
                .instrument(instrument)
@@ -429,6 +491,36 @@ public final class RollingStockLightDefinition
         return instrument;
     }
 
+    /** @return policy that combines the fixture circuit with its facing headlight end */
+    public RollingStockLightActivationPolicy activationPolicy()
+    {
+        return activationPolicy;
+    }
+
+    /** @return scope of the transient horn-triggered ditch-light response */
+    public RollingStockDitchHornMode ditchHornMode()
+    {
+        return ditchHornMode;
+    }
+
+    /** @return temporary horn function, or {@code null} for the standard derived function */
+    public RollingStockLightFunction hornFunction()
+    {
+        return hornFunction;
+    }
+
+    /** @return explicit alternating phase {@code 0..1}, or {@code null} for position-based phase */
+    public Integer hornPhase()
+    {
+        return hornPhase;
+    }
+
+    /** Minecraft lightmap floor in the validated range {@code 0..240}. */
+    public int lightmapFloor()
+    {
+        return lightmapFloor;
+    }
+
     public String taggedPartName()
     {
         return taggedPartName;
@@ -455,6 +547,7 @@ public final class RollingStockLightDefinition
                && hotspotEnabled == value.hotspotEnabled
                && clientProjectorEligible == value.clientProjectorEligible
                && instrument == value.instrument
+               && lightmapFloor == value.lightmapFloor
                && Float.compare(x, value.x) == 0
                && Float.compare(y, value.y) == 0
                && Float.compare(z, value.z) == 0
@@ -480,6 +573,10 @@ public final class RollingStockLightDefinition
                && Objects.equals(taggedPartName, value.taggedPartName)
                && sourceGlowSurfaces.equals(value.sourceGlowSurfaces)
                && function.equals(value.function)
+               && activationPolicy == value.activationPolicy
+               && ditchHornMode == value.ditchHornMode
+               && Objects.equals(hornFunction, value.hornFunction)
+               && Objects.equals(hornPhase, value.hornPhase)
                && taggedUvRegions.equals(value.taggedUvRegions);
     }
 
@@ -512,6 +609,11 @@ public final class RollingStockLightDefinition
                    sourceGlowUpOffset,
                    sourceGlowSurfaces,
                    function,
+                   activationPolicy,
+                   ditchHornMode,
+                   hornFunction,
+                   hornPhase,
+                   lightmapFloor,
                    hotspotEnabled,
                    clientProjectorEligible,
                    instrument,
@@ -536,8 +638,8 @@ public final class RollingStockLightDefinition
                 dz,
                 beamLength,
                 beamWidth,
-                glowRadius = 0.1F,
-                glowIntensity = 0.85F,
+                glowRadius = DEFAULT_SOURCE_GLOW_RADIUS,
+                glowIntensity = DEFAULT_SOURCE_GLOW_INTENSITY,
                 glowW = 1,
                 glowH = 1,
                 glowRight,
@@ -546,16 +648,30 @@ public final class RollingStockLightDefinition
         private Effect effect = Effect.EMISSIVE_ONLY;
         private List<SourceGlowSurface> surfaces = Collections.emptyList();
         private RollingStockLightFunction function = RollingStockLightFunction.STEADY;
+        private RollingStockLightActivationPolicy activationPolicy;
+        private RollingStockDitchHornMode ditchHornMode;
+        private RollingStockLightFunction hornFunction;
+        private Integer hornPhase;
+        private int lightmapFloor = DEFAULT_LIGHTMAP_FLOOR;
         private LightBeamRotation beamRotation = LightBeamRotation.NONE;
         private boolean hotspot, projector, instrument;
         private String taggedName;
         private List<UvRegion> regions = Collections.emptyList();
 
+        /** Creates a fixture builder with required identity and control-circuit defaults. */
         private Builder(String id, RollingStockLightChannel channel)
         {
             this.id = id;
             this.channel = channel;
             this.circuit = channel;
+            this.activationPolicy = defaultActivationPolicy(channel);
+            this.ditchHornMode = channel == RollingStockLightChannel.DITCH
+                                 ? RollingStockDitchHornMode.ACTIVE_END
+                                 : RollingStockDitchHornMode.NONE;
+            if (channel == RollingStockLightChannel.HEADLIGHT)
+            {
+                lightmapFloor = MAXIMUM_LIGHTMAP_FLOOR;
+            }
             this.hotspot =
                 channel == RollingStockLightChannel.HEADLIGHT
                 || channel == RollingStockLightChannel.DITCH;
@@ -676,6 +792,50 @@ public final class RollingStockLightDefinition
             return this;
         }
 
+        /**
+         * Selects how the fixture circuit is qualified by the facing headlight end.
+         *
+         * @param policy non-null activation policy
+         * @return this builder
+         */
+        public Builder activationPolicy(RollingStockLightActivationPolicy policy)
+        {
+            activationPolicy = policy;
+            return this;
+        }
+
+        /**
+         * Configures temporary ditch-light behavior while the synchronized horn signal is active.
+         *
+         * @param mode affected end or ends
+         * @param temporaryFunction optional response function
+         * @param phase optional explicit alternating phase {@code 0..1}
+         * @return this builder
+         */
+        public Builder ditchHornResponse(
+            RollingStockDitchHornMode mode,
+            RollingStockLightFunction temporaryFunction,
+            Integer phase)
+        {
+            ditchHornMode = mode;
+            hornFunction = temporaryFunction;
+            hornPhase = phase;
+            return this;
+        }
+
+        /**
+         * Sets the minimum lightmap component value for the emissive fixture surface.
+         * Validation occurs when {@link #build()} creates the definition.
+         *
+         * @param value Minecraft lightmap floor in {@code 0..240}
+         * @return this builder
+         */
+        public Builder lightmapFloor(int value)
+        {
+            lightmapFloor = value;
+            return this;
+        }
+
         public Builder taggedPart(String partName, List<UvRegion> ultravioletRegions)
         {
             taggedName = partName;
@@ -709,6 +869,11 @@ public final class RollingStockLightDefinition
                        glowUp,
                        surfaces,
                        function,
+                       activationPolicy,
+                       ditchHornMode,
+                       hornFunction,
+                       hornPhase,
+                       lightmapFloor,
                        hotspot,
                        projector,
                        instrument,
@@ -747,7 +912,7 @@ public final class RollingStockLightDefinition
                     || finite(nz) == false
                     || finite(area) == false
                     || area <= 0
-                    || nx * nx + ny * ny + nz * nz < 1.0E-8F)
+                    || nx * nx + ny * ny + nz * nz < MINIMUM_DIRECTION_LENGTH_SQUARED)
             {
                 throw new IllegalArgumentException("Invalid source glow surface");
             }

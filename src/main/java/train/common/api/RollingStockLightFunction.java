@@ -9,6 +9,15 @@ import java.util.Objects;
  */
 public final class RollingStockLightFunction
 {
+    /** One second at Minecraft's normal 20-tick simulation rate. */
+    private static final float STANDARD_CYCLE_TICKS = 20.0F;
+    private static final float HALF_CYCLE_DUTY = 0.5F;
+    private static final float GYRALITE_SWEEP_DEGREES = 8.0F;
+    private static final float MARS_HORIZONTAL_SWEEP_DEGREES = 10.0F;
+    private static final float MARS_VERTICAL_SWEEP_DEGREES = 4.0F;
+    private static final int DITCH_PHASE_COUNT = 2;
+    private static final int PRIME_PHASE_COUNT = 4;
+
     /** Mathematical pattern used to sample intensity or beam aim over a cycle. */
     public enum Pattern
     {
@@ -97,7 +106,7 @@ public final class RollingStockLightFunction
         new RollingStockLightFunction(
         Pattern.STEADY,
         HeadlightRequirement.ACTIVE,
-        20,
+        STANDARD_CYCLE_TICKS,
         0,
         0,
         1,
@@ -176,10 +185,10 @@ public final class RollingStockLightFunction
     {
         return new RollingStockLightFunction(
                    Pattern.GYRALITE,
-                   HeadlightRequirement.BRIGHT_ONLY,
-                   20,
-                   8,
-                   8,
+                   HeadlightRequirement.ACTIVE,
+                   STANDARD_CYCLE_TICKS,
+                   GYRALITE_SWEEP_DEGREES,
+                   GYRALITE_SWEEP_DEGREES,
                    1,
                    0,
                    1,
@@ -190,10 +199,10 @@ public final class RollingStockLightFunction
     {
         return new RollingStockLightFunction(
                    Pattern.MARS,
-                   HeadlightRequirement.BRIGHT_ONLY,
-                   20,
-                   10,
-                   4,
+                   HeadlightRequirement.ACTIVE,
+                   STANDARD_CYCLE_TICKS,
+                   MARS_HORIZONTAL_SWEEP_DEGREES,
+                   MARS_VERTICAL_SWEEP_DEGREES,
                    1,
                    0,
                    1,
@@ -214,12 +223,12 @@ public final class RollingStockLightFunction
         return new RollingStockLightFunction(
                    Pattern.ALTERNATING,
                    HeadlightRequirement.ACTIVE,
-                   20,
+                   STANDARD_CYCLE_TICKS,
                    0,
                    0,
-                   0.5F,
+                   HALF_CYCLE_DUTY,
                    phase,
-                   2,
+                   DITCH_PHASE_COUNT,
                    response);
     }
 
@@ -228,10 +237,10 @@ public final class RollingStockLightFunction
         return new RollingStockLightFunction(
                    Pattern.FLASH,
                    HeadlightRequirement.ACTIVE,
-                   10,
+                   STANDARD_CYCLE_TICKS,
                    0,
                    0,
-                   0.5F,
+                   HALF_CYCLE_DUTY,
                    0,
                    1,
                    LampResponse.INSTANT);
@@ -239,19 +248,19 @@ public final class RollingStockLightFunction
 
     public static RollingStockLightFunction prime(int phase)
     {
-        if (phase < 1 || phase > 4)
+        if (phase < 1 || phase > PRIME_PHASE_COUNT)
         {
             throw new IllegalArgumentException("Prime phase must be 1..4");
         }
         return new RollingStockLightFunction(
                    Pattern.PHASED,
                    HeadlightRequirement.ACTIVE,
-                   20,
+                   STANDARD_CYCLE_TICKS,
                    0,
                    0,
-                   0.25F,
+                   1.0F / PRIME_PHASE_COUNT,
                    phase - 1,
-                   4,
+                   PRIME_PHASE_COUNT,
                    LampResponse.INSTANT);
     }
 

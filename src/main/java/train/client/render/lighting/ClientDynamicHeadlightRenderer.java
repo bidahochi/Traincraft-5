@@ -36,6 +36,17 @@ final class ClientDynamicHeadlightRenderer
     /** Surface illumination is temporarily disabled while its occlusion path is revised. */
     private static final boolean ENABLED = false;
     private static final Charset UTF_8 = Charset.forName("UTF-8");
+    private static final float MAXIMUM_SCENE_DEPTH = 0.999999F;
+    private static final float MINIMUM_HOMOGENEOUS_DIVISOR = 1.0E-6F;
+    private static final float SOURCE_BACKTRACK_TOLERANCE = 0.001F;
+    private static final float MAXIMUM_LIGHT_LEVEL = 15.0F;
+    private static final float BRIGHTNESS_CURVE_SCALE = 3.0F;
+    private static final float SURFACE_INFLUENCE_SCALE = 0.45F;
+    private static final float OCCUPIED_STOCK_MASK_ALPHA = 0.5F;
+    private static final float SOURCE_DIRECTION_MATCH_DOT = 0.98F;
+    private static final float SOURCE_REUSE_DISTANCE_SQUARED = 9.0F;
+    private static final float BRIGHT_FIXTURE_INTENSITY_THRESHOLD = 0.75F;
+    private static final int SHADER_LOG_CHARACTER_LIMIT = 8192;
     private static final String VERTEX_SOURCE =
         "#version 120\n"
         + "varying vec2 tcScreenUv;\n"
@@ -62,16 +73,16 @@ final class ClientDynamicHeadlightRenderer
         + "    vec4 stockMask = tcHasStockMask != 0"
         + " ? texture2D(tcStockMask, tcScreenUv) : vec4(0.0);\n"
         + "    float depth = texture2D(tcSceneDepth, tcScreenUv).r;\n"
-        + "    if (depth >= 0.999999) discard;\n"
+        + "    if (depth >= " + MAXIMUM_SCENE_DEPTH + ") discard;\n"
         + "    vec4 clip = vec4(tcScreenUv * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);\n"
         + "    vec4 eye = tcInverseProjection * clip;\n"
-        + "    if (abs(eye.w) < 0.000001) discard;\n"
+        + "    if (abs(eye.w) < " + MINIMUM_HOMOGENEOUS_DIVISOR + ") discard;\n"
         + "    vec3 eyePosition = eye.xyz / eye.w;\n"
         + "    vec4 world = tcCapturedEyeToWorld * vec4(eyePosition, 1.0);\n"
         + "    vec3 worldPosition = world.xyz / world.w;\n"
         + "    vec3 offset = worldPosition - tcSourceWorld;\n"
         + "    float rawAlongSource = dot(offset, tcSourceDirectionWorld);\n"
-        + "    if (rawAlongSource < -0.001) discard;\n"
+        + "    if (rawAlongSource < -" + SOURCE_BACKTRACK_TOLERANCE + ") discard;\n"
         + "    float alongSource = clamp(rawAlongSource,"
         + " 0.0, tcSourceForwardReach);\n"
         + "    vec3 sourceOffset = offset - tcSourceDirectionWorld * alongSource;\n"
@@ -80,11 +91,13 @@ final class ClientDynamicHeadlightRenderer
         + "    if (radius <= 0.0 || sourceDistance >= radius) discard;\n"
         + "    float falloff = 1.0 - clamp(sourceDistance / radius, 0.0, 1.0);\n"
         + "    falloff *= falloff;\n"
-        + "    float darkness = 1.0 - clamp(tcSourceLevel / 15.0, 0.0, 1.0);\n"
-        + "    float brightness = (1.0 - darkness) / (darkness * 3.0 + 1.0);\n"
-        + "    float influence = brightness * falloff * 0.45"
+        + "    float darkness = 1.0 - clamp(tcSourceLevel / " + MAXIMUM_LIGHT_LEVEL
+        + ", 0.0, 1.0);\n"
+        + "    float brightness = (1.0 - darkness) / (darkness * "
+        + BRIGHTNESS_CURVE_SCALE + " + 1.0);\n"
+        + "    float influence = brightness * falloff * " + SURFACE_INFLUENCE_SCALE
         + " * (1.0 - clamp(tcDaylight, 0.0, 1.0));\n"
-        + "    if (stockMask.a > 0.5) discard;\n"
+        + "    if (stockMask.a > " + OCCUPIED_STOCK_MASK_ALPHA + ") discard;\n"
         + "    gl_FragColor = vec4(influence * tcSourceColor, influence);\n"
         + "}\n";
 
@@ -480,6 +493,7 @@ final class ClientDynamicHeadlightRenderer
         SOURCE_SURVIVORS = new int[capacity];
     }
 
+    /** Reports whether two submissions may share one dynamic surface-light source. */
     private static boolean sameSourceGroup(
         LightEffectSubmission first, LightEffectSubmission second)
     {
@@ -490,7 +504,7 @@ final class ClientDynamicHeadlightRenderer
             return false;
         }
         float directionDot = normalizedDirectionDot(first, second);
-        if (directionDot < 0.98F)
+        if (directionDot < SOURCE_DIRECTION_MATCH_DOT)
         {
             return false;
         }
@@ -503,7 +517,7 @@ final class ClientDynamicHeadlightRenderer
         float dx = firstX - secondX;
         float dy = firstY - secondY;
         float dz = firstZ - secondZ;
-        return dx * dx + dy * dy + dz * dz <= 9.0F;
+        return dx * dx + dy * dy + dz * dz <= SOURCE_REUSE_DISTANCE_SQUARED;
     }
 
     private static float transformedPoint(
@@ -705,9 +719,10 @@ final class ClientDynamicHeadlightRenderer
         setFloat(daylightUniform, daylight);
     }
 
+    /** Quantizes one submission's projected intensity for source deduplication. */
     private static int sourceLevel(LightEffectSubmission submission)
     {
-        return submission.intensity >= 0.75F
+        return submission.intensity >= BRIGHT_FIXTURE_INTENSITY_THRESHOLD
                ? ClientDynamicHeadlightManager.BRIGHT_LEVEL
                : ClientDynamicHeadlightManager.DIM_LEVEL;
     }
@@ -892,6 +907,7 @@ final class ClientDynamicHeadlightRenderer
         }
     }
 
+    /** Compiles and links the dynamic surface-light accumulation and composition programs. */
     private static void compileAndLink()
     {
         vertexShader = compile(GL20.GL_VERTEX_SHADER, VERTEX_SOURCE, "vertex");
@@ -908,7 +924,7 @@ final class ClientDynamicHeadlightRenderer
         {
             throw new IllegalStateException(
                 "Dynamic-light shader link failed: "
-                + OpenGlHelper.func_153166_e(program, 8192));
+                + OpenGlHelper.func_153166_e(program, SHADER_LOG_CHARACTER_LIMIT));
         }
         depthUniform = requiredUniform("tcSceneDepth");
         stockMaskUniform = requiredUniform("tcStockMask");
@@ -924,6 +940,7 @@ final class ClientDynamicHeadlightRenderer
         daylightUniform = requiredUniform("tcDaylight");
     }
 
+    /** Compiles one shader stage and returns its OpenGL object name. */
     private static int compile(int type, String source, String stage)
     {
         int shader = OpenGlHelper.func_153195_b(type);
@@ -939,7 +956,7 @@ final class ClientDynamicHeadlightRenderer
         OpenGlHelper.func_153170_c(shader);
         if (OpenGlHelper.func_153157_c(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
         {
-            String log = OpenGlHelper.func_153158_d(shader, 8192);
+            String log = OpenGlHelper.func_153158_d(shader, SHADER_LOG_CHARACTER_LIMIT);
             OpenGlHelper.func_153180_a(shader);
             throw new IllegalStateException(
                 "Dynamic-light " + stage + " shader compile failed: " + log);

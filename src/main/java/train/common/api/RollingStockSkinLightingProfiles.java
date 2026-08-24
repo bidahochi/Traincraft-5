@@ -289,6 +289,58 @@ public final class RollingStockSkinLightingProfiles
             return this;
         }
 
+        /**
+         * Applies an activation policy to one or more fixtures for this skin.
+         *
+         * @param policy circuit-only or facing-headlight policy
+         * @param fixtures fixture ids receiving the override
+         * @return this skin builder
+         */
+        public SkinBuilder activationPolicy(
+            RollingStockLightActivationPolicy policy, String... fixtures)
+        {
+            RollingStockLightBehaviorOverride behavior =
+                RollingStockLightBehaviorOverride.builder().activationPolicy(policy).build();
+            return behavior(behavior, fixtures);
+        }
+
+        /**
+         * Configures the temporary horn response for supplied ditch-light fixtures.
+         *
+         * @param mode affected headlight end or ends
+         * @param function optional temporary function; {@code null} preserves an existing
+         *     alternating function and otherwise selects the standard alternator
+         * @param phase optional fixed phase {@code 0..1}; {@code null} derives left/right from position
+         * @param fixtures fixture ids receiving the override
+         * @return this skin builder
+         */
+        public SkinBuilder ditchHornResponse(
+            RollingStockDitchHornMode mode,
+            RollingStockLightFunction function,
+            Integer phase,
+            String... fixtures)
+        {
+            RollingStockLightBehaviorOverride behavior =
+                RollingStockLightBehaviorOverride.builder()
+                .ditchHornResponse(mode, function, phase)
+                .build();
+            return behavior(behavior, fixtures);
+        }
+
+        /**
+         * Overrides the active fixture's Minecraft lightmap floor.
+         *
+         * @param value minimum lightmap component value in {@code 0..240}
+         * @param fixtures fixture ids receiving the override
+         * @return this skin builder
+         */
+        public SkinBuilder lightmapFloor(int value, String... fixtures)
+        {
+            RollingStockLightBehaviorOverride behavior =
+                RollingStockLightBehaviorOverride.builder().lightmapFloor(value).build();
+            return behavior(behavior, fixtures);
+        }
+
         private static String[] required(String[] fixtures)
         {
             if (fixtures == null || fixtures.length == 0)

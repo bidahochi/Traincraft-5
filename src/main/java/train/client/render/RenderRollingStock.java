@@ -36,6 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 @SideOnly(Side.CLIENT)
 public class RenderRollingStock extends Render {
+	/* Smoke and explosion position arrays use [0] = local x, [1] = local y, [2] = local z. */
 	private static Random random = new Random();
 
 	public RenderRollingStock() {
@@ -50,7 +51,20 @@ public class RenderRollingStock extends Render {
 	{
         if (renderModeGUI == false)
         {
-            LightEffectRenderBatch.captureWorldView();
+            // Demand discovery must run before the model is drawn, but most stock can avoid all
+            // occlusion capture when no projected fixture is active anywhere near it.
+            if (cart.modelInstance == null)
+            {
+                // Fixture metadata is model-instance keyed, so resolve the shared model before the
+                // scene-wide scan on a vehicle's first visible frame.
+                cart.modelInstance = cart.getRenderSpec().getModel();
+            }
+            LightEffectRenderBatch.prepareRollingStockOcclusion(
+                cart.worldObj, cart.worldObj.getTotalWorldTime() + time);
+            if (LightEffectRenderBatch.rollingStockOcclusionRequired())
+            {
+                LightEffectRenderBatch.captureWorldView();
+            }
         }
 		GL11.glPushMatrix();
 		long var10 = cart.getEntityId() * 493286711L;
@@ -316,7 +330,7 @@ public class RenderRollingStock extends Render {
 		}
         boolean captureBeamOcclusion =
             renderModeGUI == false
-            && ClientRollingStockLighting.requiresBeamOcclusion(cart, time);
+            && LightEffectRenderBatch.rollingStockOcclusionRequired(cart);
         // World effects are deferred until RenderWorldLast, matching the
         // AFTER_BLOCK_ENTITIES pass. GUI renders must not enter that world queue.
         if (renderModeGUI == false)

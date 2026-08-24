@@ -18,18 +18,26 @@ import train.common.Traincraft;
 import train.common.api.RollingStockLightColors;
 
 /**
- * Lazily compiled GLSL 1.20 adapter for beam falloff and stock self-occlusion.
+ * Lazily compiled GLSL 1.20 adapter for beam falloff and rolling-stock occlusion.
+ *
+ * <p>The screen-space safety mask rejects only closer foreign-stock pixels. A separate light-space
+ * depth map shadows the portion of a cone intercepted by candidate vehicle geometry, allowing the
+ * remaining width to continue around glancing obstructions.
  * The caller owns surrounding fixed-function state and must pair {@code bind} with
  * {@code restore}. Shader/context failures are logged once and permanently select the
  * fixed-function fallback until {@code clear} resets the backend on resource reload.
  */
-final class LegacyBeamShader
+final class BeamProjectionShader
 {
     private static final boolean ENABLED =
         "false".equalsIgnoreCase(System.getProperty("traincraft.lighting.shader", "true")) == false;
     private static final boolean DIAGNOSTICS =
         "true".equalsIgnoreCase(System.getProperty("traincraft.lighting.diagnostics", "false"));
     private static final Charset UTF_8 = Charset.forName("UTF-8");
+    private static final int SHADER_LOG_CHARACTER_LIMIT = 8192;
+    private static final float MINIMUM_ENCODED_OWNER_CHANNEL = 0.5F / 255.0F;
+    private static final int DIAGNOSTIC_PIXEL_COUNT = 4;
+    private static final int RGBA_CHANNEL_COUNT = 4;
     private static final String VERTEX_SOURCE =
         "#version 120\n"
         + "uniform mat4 tcEyeToStockShadow;\n"
@@ -47,6 +55,7 @@ final class LegacyBeamShader
         + "uniform float tcBeamOpacity;\n"
         + "uniform int tcPremultiplied;\n"
         + "uniform sampler2D tcStockMask;\n"
+        + "uniform sampler2D tcStockMaskDepth;\n"
         + "uniform vec2 tcInverseViewport;\n"
         + "uniform vec2 tcViewportOrigin;\n"
         + "uniform vec3 tcBeamOwnerCode;\n"
@@ -60,10 +69,13 @@ final class LegacyBeamShader
         + "        vec2 maskUv = (gl_FragCoord.xy - tcViewportOrigin)"
         + " * tcInverseViewport;\n"
         + "        vec4 stock = texture2D(tcStockMask, maskUv);\n"
+        + "        float stockDepth = texture2D(tcStockMaskDepth, maskUv).r;\n"
         + "        vec3 ownerDifference = abs(stock.rgb - tcBeamOwnerCode);\n"
         + "        if (stock.a > 0.5"
         + " && max(ownerDifference.r, max(ownerDifference.g, ownerDifference.b))"
-        + " > (0.5 / 255.0)) discard;\n"
+        + " > " + MINIMUM_ENCODED_OWNER_CHANNEL
+        + " && stockDepth + " + RollingStockDepthMask.BEAM_DEPTH_BIAS
+        + " < gl_FragCoord.z) discard;\n"
         + "    }\n"
         + "    if (tcHasStockShadow != 0 && tcStockShadowPosition.w > 0.0) {\n"
         + "        vec3 shadow = tcStockShadowPosition.xyz / tcStockShadowPosition.w;\n"
@@ -71,10 +83,11 @@ final class LegacyBeamShader
         + "        float shadowDepth = shadow.z * 0.5 + 0.5;\n"
         + "        if (shadowUv.x >= 0.0 && shadowUv.x <= 1.0"
         + " && shadowUv.y >= 0.0 && shadowUv.y <= 1.0"
-        + " && shadowDepth > texture2D(tcStockShadowDepth, shadowUv).r + 0.0015) discard;\n"
+        + " && shadowDepth > texture2D(tcStockShadowDepth, shadowUv).r + "
+        + RollingStockShadowRenderer.DEPTH_BIAS + ") discard;\n"
         + "    }\n"
         + "    float fade = 1.0 - clamp(tcBeamFraction, 0.0, 1.0);\n"
-        + "    float alpha = (90.0 / 255.0)"
+        + "    float alpha = (" + BeamColorCompositing.SOURCE_ALPHA + ".0 / 255.0)"
         + " * clamp(tcBeamOpacity, 0.0, 1.0) * fade;\n"
         + "    vec3 rgb = tcPremultiplied != 0"
         + " ? tcBeamColor * alpha : tcBeamColor * fade;\n"
@@ -84,6 +97,8 @@ final class LegacyBeamShader
     private static final FloatBuffer COLOR = BufferUtils.createFloatBuffer(3);
     private static final FloatBuffer OPACITY = BufferUtils.createFloatBuffer(1);
     private static final IntBuffer VIEWPORT = BufferUtils.createIntBuffer(16);
+    /** OpenGL viewport: {@code [0] = x}, {@code [1] = y}, {@code [2] = width}, {@code [3] = height}. */
+    private static final int[] CAPTURED_VIEWPORT = new int[4];
     private static int program;
     private static int vertexShader;
     private static int fragmentShader;
@@ -91,6 +106,7 @@ final class LegacyBeamShader
     private static int opacityUniform;
     private static int premultipliedUniform;
     private static int stockMaskUniform;
+    private static int stockMaskDepthUniform;
     private static int inverseViewportUniform;
     private static int viewportOriginUniform;
     private static int beamOwnerCodeUniform;
@@ -104,8 +120,10 @@ final class LegacyBeamShader
     private static boolean loggedFailure;
     private static boolean loggedDiagnostics;
     private static ContextCapabilities compiledContext;
+    private static boolean viewportValid;
 
-    private LegacyBeamShader() {}
+    /** Prevents construction of the static shader backend. */
+    private BeamProjectionShader() {}
 
     static boolean available()
     {
@@ -171,8 +189,20 @@ final class LegacyBeamShader
         OPACITY.put(Math.max(0.0F, Math.min(1.0F, opacity))).flip();
         OpenGlHelper.func_153168_a(opacityUniform, OPACITY);
         OpenGlHelper.func_153163_f(premultipliedUniform, premultiplied ? 1 : 0);
-        VIEWPORT.clear();
-        GL11.glGetInteger(GL11.GL_VIEWPORT, VIEWPORT);
+        if (viewportValid == false)
+        {
+            VIEWPORT.clear();
+            if (LightEffectRenderBatch.copyCapturedViewport(CAPTURED_VIEWPORT))
+            {
+                VIEWPORT.put(CAPTURED_VIEWPORT);
+                VIEWPORT.rewind();
+            }
+            else
+            {
+                GL11.glGetInteger(GL11.GL_VIEWPORT, VIEWPORT);
+            }
+            viewportValid = true;
+        }
         int viewportWidth = VIEWPORT.get(2);
         int viewportHeight = VIEWPORT.get(3);
         boolean hasMask = RollingStockDepthMask.available(viewportWidth, viewportHeight);
@@ -189,11 +219,16 @@ final class LegacyBeamShader
             ((ownerCode >> 8) & 255) / 255.0F,
             (ownerCode & 255) / 255.0F);
         OpenGlHelper.func_153163_f(stockMaskUniform, 1);
+        OpenGlHelper.func_153163_f(stockMaskDepthUniform, 3);
         if (hasMask)
         {
             OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, RollingStockDepthMask.texture());
+            OpenGlHelper.setActiveTexture(GL13.GL_TEXTURE3);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glBindTexture(
+                GL11.GL_TEXTURE_2D, RollingStockDepthMask.depthTexture());
             OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
         }
         boolean hasShadow = RollingStockShadowRenderer.available();
@@ -218,6 +253,11 @@ final class LegacyBeamShader
         OpenGlHelper.func_153161_d(previousProgram);
     }
 
+    static void finishFrame()
+    {
+        viewportValid = false;
+    }
+
     static void clear()
     {
         ContextCapabilities currentContext = currentContextOrNull();
@@ -235,6 +275,7 @@ final class LegacyBeamShader
         loggedFailure = false;
         loggedDiagnostics = false;
         compiledContext = null;
+        viewportValid = false;
     }
 
     private static ContextCapabilities currentContextOrNull()
@@ -249,6 +290,7 @@ final class LegacyBeamShader
         }
     }
 
+    /** Compiles and links the optional fixed-pipeline-compatible beam fade shader. */
     private static void compileAndLink()
     {
         vertexShader = compile(GL20.GL_VERTEX_SHADER, VERTEX_SOURCE, "vertex");
@@ -264,12 +306,14 @@ final class LegacyBeamShader
         if (OpenGlHelper.func_153175_a(program, GL20.GL_LINK_STATUS) == GL11.GL_FALSE)
         {
             throw new IllegalStateException(
-                "Beam shader link failed: " + OpenGlHelper.func_153166_e(program, 8192));
+                "Beam shader link failed: "
+                + OpenGlHelper.func_153166_e(program, SHADER_LOG_CHARACTER_LIMIT));
         }
         colorUniform = requiredUniform("tcBeamColor");
         opacityUniform = requiredUniform("tcBeamOpacity");
         premultipliedUniform = requiredUniform("tcPremultiplied");
         stockMaskUniform = requiredUniform("tcStockMask");
+        stockMaskDepthUniform = requiredUniform("tcStockMaskDepth");
         inverseViewportUniform = requiredUniform("tcInverseViewport");
         viewportOriginUniform = requiredUniform("tcViewportOrigin");
         beamOwnerCodeUniform = requiredUniform("tcBeamOwnerCode");
@@ -279,6 +323,7 @@ final class LegacyBeamShader
         hasStockShadowUniform = requiredUniform("tcHasStockShadow");
     }
 
+    /** Compiles one shader stage and returns its OpenGL object name. */
     private static int compile(int type, String source, String stage)
     {
         int shader = OpenGlHelper.func_153195_b(type);
@@ -293,7 +338,7 @@ final class LegacyBeamShader
         OpenGlHelper.func_153170_c(shader);
         if (OpenGlHelper.func_153157_c(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
         {
-            String log = OpenGlHelper.func_153158_d(shader, 8192);
+            String log = OpenGlHelper.func_153158_d(shader, SHADER_LOG_CHARACTER_LIMIT);
             OpenGlHelper.func_153180_a(shader);
             throw new IllegalStateException("Beam " + stage + " shader compile failed: " + log);
         }
@@ -310,6 +355,7 @@ final class LegacyBeamShader
         return location;
     }
 
+    /** Deletes shader objects owned by the current OpenGL context. */
     private static void deleteObjects()
     {
         if (program != 0)
@@ -331,6 +377,7 @@ final class LegacyBeamShader
         opacityUniform = -1;
         premultipliedUniform = -1;
         stockMaskUniform = -1;
+        stockMaskDepthUniform = -1;
         inverseViewportUniform = -1;
         viewportOriginUniform = -1;
         beamOwnerCodeUniform = -1;
@@ -340,6 +387,7 @@ final class LegacyBeamShader
         hasStockShadowUniform = -1;
     }
 
+    /** Clears shader object names when context replacement makes deletion unsafe. */
     private static void abandonObjects()
     {
         program = 0;
@@ -349,6 +397,7 @@ final class LegacyBeamShader
         opacityUniform = -1;
         premultipliedUniform = -1;
         stockMaskUniform = -1;
+        stockMaskDepthUniform = -1;
         inverseViewportUniform = -1;
         viewportOriginUniform = -1;
         beamOwnerCodeUniform = -1;
@@ -360,6 +409,7 @@ final class LegacyBeamShader
     }
 
 
+    /** Runs the optional one-time shader readback diagnostics used to detect broken drivers. */
     private static void runReadbackDiagnostics()
     {
         int previousFramebuffer =
@@ -389,7 +439,7 @@ final class LegacyBeamShader
                 GL11.GL_TEXTURE_2D,
                 0,
                 GL11.GL_RGBA8,
-                4,
+                DIAGNOSTIC_PIXEL_COUNT,
                 1,
                 0,
                 GL11.GL_RGBA,
@@ -411,7 +461,7 @@ final class LegacyBeamShader
                 throw new IllegalStateException(
                     "Diagnostic framebuffer status 0x" + Integer.toHexString(status));
             }
-            GL11.glViewport(0, 0, 4, 1);
+            GL11.glViewport(0, 0, DIAGNOSTIC_PIXEL_COUNT, 1);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -419,12 +469,14 @@ final class LegacyBeamShader
             GL11.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
             bind(RollingStockLightColors.WHITE, 1.0F, true, -1);
+            // Beam samples: [0] source, [1] midpoint, [2] near-tip fade, [3] terminal tip.
             float[] fractions = {0.0F, 0.5F, 0.95F, 1.0F};
             GL11.glBegin(GL11.GL_QUADS);
             for (int index = 0; index < fractions.length; index++)
             {
-                float x0 = -1.0F + index * 0.5F;
-                float x1 = x0 + 0.5F;
+                float pixelWidth = 2.0F / DIAGNOSTIC_PIXEL_COUNT;
+                float x0 = -1.0F + index * pixelWidth;
+                float x1 = x0 + pixelWidth;
                 GL11.glTexCoord1f(fractions[index]);
                 GL11.glVertex2f(x0, -1.0F);
                 GL11.glVertex2f(x1, -1.0F);
@@ -432,16 +484,19 @@ final class LegacyBeamShader
                 GL11.glVertex2f(x0, 1.0F);
             }
             GL11.glEnd();
-            ByteBuffer pixels = BufferUtils.createByteBuffer(16);
-            GL11.glReadPixels(0, 0, 4, 1, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, pixels);
+            ByteBuffer pixels = BufferUtils.createByteBuffer(
+                DIAGNOSTIC_PIXEL_COUNT * RGBA_CHANNEL_COUNT);
+            GL11.glReadPixels(
+                0, 0, DIAGNOSTIC_PIXEL_COUNT, 1,
+                GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, pixels);
             StringBuilder result = new StringBuilder();
-            for (int index = 0; index < 4; index++)
+            for (int index = 0; index < DIAGNOSTIC_PIXEL_COUNT; index++)
             {
                 if (index > 0)
                 {
                     result.append(", ");
                 }
-                int offset = index * 4;
+                int offset = index * RGBA_CHANNEL_COUNT;
                 result.append('[')
                 .append(pixels.get(offset) & 255)
                 .append(',')

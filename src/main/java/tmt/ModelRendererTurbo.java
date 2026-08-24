@@ -9,6 +9,7 @@ import train.common.enums.BoxName;
 
 import train.client.render.lighting.ClientRollingStockLighting;
 import train.client.render.lighting.PlacedModelLighting;
+import train.client.render.lighting.RollingStockLightOcclusion;
 import train.common.api.LightBeamRotation;
 import train.common.core.handlers.ConfigHandler;
 
@@ -32,6 +33,31 @@ import java.util.*;
  */
 public class ModelRendererTurbo
 {
+    private static final float RADIANS_TO_DEGREES = (float)(180.0D / Math.PI);
+
+    /** Last rolling-stock occlusion capture that consumed this model part. */
+    private long rollingStockOcclusionCaptureToken;
+
+    /**
+     * Marks this part as captured for one rolling-stock occlusion pass.
+     *
+     * <p>The token is stored directly on the long-lived model part so callers can suppress duplicate
+     * geometry without allocating an identity set in the render loop. Capture tokens are scoped to
+     * one stock entry and are never serialized.
+     *
+     * @param token nonzero token assigned to the active stock capture
+     * @return {@code true} when this is the first capture for the token
+     */
+    public boolean markRollingStockOcclusionCapture(long token)
+    {
+        if (rollingStockOcclusionCaptureToken == token)
+        {
+            return false;
+        }
+        rollingStockOcclusionCaptureToken = token;
+        return true;
+    }
+
     public List<TexturedPolygon> faces = new ArrayList<>();
     public float rotationPointX, rotationPointY, rotationPointZ;
     public float rotateAngleX, rotateAngleY, rotateAngleZ;
@@ -48,7 +74,7 @@ public class ModelRendererTurbo
     public boolean showModel;
     public boolean field_1402_i;
     public boolean forcedRecompile;
-    public boolean useLegacyCompiler;
+    public boolean useSingleDisplayListCompiler;
     public List<?> childModels;
     public String boxName;
     /** Stable profile-facing id for this authored light fixture. */
@@ -82,7 +108,7 @@ public class ModelRendererTurbo
     /**
      * Marks this part as a light fixture and assigns its stable model-local key, such as
      * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
-     * Legacy semantic {@link #boxName} values such as {@code lamp} remain supported as a
+     * Recognized {@link #boxName} values such as {@code lamp} remain supported as a
      * discovery fallback, but new fixtures should use an explicit id.
      */
     public ModelRendererTurbo setLightFixtureId(String fixtureId)
@@ -251,7 +277,7 @@ public class ModelRendererTurbo
         currentTextureGroup = textureGroup.get("0");
         boxName = s;
         defaultTexture = "";
-        useLegacyCompiler = true;
+        useSingleDisplayListCompiler = true;
 	}
 
     /** Returns the model instance that created this part for batch ownership classification. */
@@ -1672,14 +1698,14 @@ public class ModelRendererTurbo
      * which are either resources/models or resources/mods/models.
      */
     public ModelRendererTurbo addObj(String file){
-        useLegacyCompiler = false;
+        useSingleDisplayListCompiler = false;
     	addModel(file, ModelPool.OBJ);
     	return this;
     }
     
     public void addObjF(String file){
     	try{
-            useLegacyCompiler = false;
+            useSingleDisplayListCompiler = false;
 			addModelF(file, ModelPool.OBJ);
 		}
     	catch(IOException e) {
@@ -1925,18 +1951,18 @@ public class ModelRendererTurbo
         if(!showModel){
             return;
         }
-        train.client.render.lighting.RollingStockLightOcclusion.capturePart(this, scale, bool);
         /*
          * Every normal MRT render first asks the batch system whether this part
          * has already been emitted. Returning true means this exact part was
          * already drawn by a static body, FVTM runtime, nested submodel, or
          * detail-layout batch and should be skipped now. Returning false leaves
-         * the legacy per-part display-list path below in charge, which is
+         * the per-part display-list path below in charge, which is
          * important for animated, texture-swapped, or unsupported parts.
          */
         if(ModelRendererTurboBatch.capture(this, scale, bool)){
             return;
         }
+        RollingStockLightOcclusion.capturePart(this, scale, bool);
         if(!compiled || forcedRecompile){
             compileDisplayList(scale);
         }
@@ -1945,22 +1971,22 @@ public class ModelRendererTurbo
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
             if(bool){
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
             }
             else{
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
             renderDisplayListWithLighting(scale);
             if(childModels != null){
@@ -1992,9 +2018,10 @@ public class ModelRendererTurbo
     }
     }
 
+    /** Renders compiled model geometry while applying the active per-part lighting mode. */
     private void renderDisplayListWithLighting(float scale)
     {
-        if (ConfigHandler.ENABLE_ADVANCED_LIGHTING == false)
+        if (ConfigHandler.enhancedLightingEnabled() == false)
         {
             callDisplayList();
             return;
@@ -2060,13 +2087,13 @@ public class ModelRendererTurbo
         GL11.glPushMatrix();
         GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
         if(rotateAngleY != 0.0F){
-            GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
         }
         if(rotateAngleX != 0.0F){
-            GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
         }
         if(rotateAngleZ != 0.0F){
-            GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
         }
         callDisplayList();
         GL11.glPopMatrix();
@@ -2085,13 +2112,13 @@ public class ModelRendererTurbo
         if(rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F){
             GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
             if(rotateAngleZ != 0.0F){
-                GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
             }
             if(rotateAngleY != 0.0F){
-                GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
         }
         else
@@ -2102,7 +2129,7 @@ public class ModelRendererTurbo
     }
     
     public void callDisplayList(){
-    	if(useLegacyCompiler){
+		if(useSingleDisplayListCompiler){
     		GL11.glCallList(displayList);
     	}
     	else{
@@ -2125,12 +2152,22 @@ public class ModelRendererTurbo
         {
             compileDisplayList(scale);
         }
-        callDisplayList();
+        if (useSingleDisplayListCompiler)
+        {
+            GL11.glCallList(displayList);
+        }
+        else
+        {
+            for (int list : displayListArray)
+            {
+                GL11.glCallList(list);
+            }
+        }
     }
 
     public void compileDisplayList(float scale){
-    	if(useLegacyCompiler){
-    		compileLegacyDisplayList(scale);
+		if(useSingleDisplayListCompiler){
+			compileSingleDisplayList(scale);
     	}
     	else{
     		Iterator<TextureGroup> itr = textureGroup.values().iterator();
@@ -2260,28 +2297,29 @@ public class ModelRendererTurbo
         return new Vec3f(nextX, y, z);
     }
 
+    /** Renders immediate batch geometry filtered by primitive class and current part transform. */
     private void renderBatchGeometryFiltered(float scale, boolean bool, boolean renderQuadsAndTriangles){
         if(rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F){
             GL11.glPushMatrix();
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
             if(bool){
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
             }
             else{
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
             drawFacesFiltered(scale, renderQuadsAndTriangles);
             GL11.glPopMatrix();
@@ -2326,7 +2364,7 @@ public class ModelRendererTurbo
 
     private void rebuildBatchFaces(){
         /*
-         * Build the batch-safe view of this part's faces. The legacy face normal
+         * Build the batch-safe view of this part's faces. The stored TMT face normal
          * can be zero on some valid shape-box quads when the first three vertices
          * happen to be collinear. In that case we keep the geometry and choose a
          * robust normal from the largest valid triangle in the polygon. Only faces
@@ -2344,7 +2382,7 @@ public class ModelRendererTurbo
             if(faceArea(polygon.vertices) <= BATCH_DEGENERATE_FACE_AREA_EPSILON){
                 continue;
             }
-            Vec3f normal = polygon.getLegacyFaceNormal();
+            Vec3f normal = polygon.getFirstTriangleFaceNormal();
             if(normal == null || isZeroVector(normal)){
                 normal = robustFaceNormal(polygon.vertices);
             }
@@ -2463,7 +2501,8 @@ public class ModelRendererTurbo
         }
     }
     
-    private void compileLegacyDisplayList(float scale){
+    /** Compiles all faces into the single display list used by ordinary TMT model parts. */
+    private void compileSingleDisplayList(float scale){
         displayList = GLAllocation.generateDisplayLists(1);
         GL11.glNewList(displayList, GL11.GL_COMPILE);
         drawFaces(scale);

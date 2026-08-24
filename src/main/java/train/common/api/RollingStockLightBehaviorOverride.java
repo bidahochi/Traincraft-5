@@ -24,6 +24,10 @@ public final class RollingStockLightBehaviorOverride
             glowRight,
             glowUp;
     private final Boolean hotspot, projector;
+    private final RollingStockLightActivationPolicy activationPolicy;
+    private final RollingStockDitchHornMode ditchHornMode;
+    private final RollingStockLightFunction hornFunction;
+    private final Integer hornPhase, lightmapFloor;
 
     /**
      * Creates a partial override; every nullable argument means "inherit from the model."
@@ -61,9 +65,15 @@ public final class RollingStockLightBehaviorOverride
             glowRight,
             glowUp,
             hotspot,
-            projector);
+            projector,
+            null,
+            null,
+            null,
+            null,
+            null);
     }
 
+    /** Creates one immutable partial behavior override from validated optional properties. */
     private RollingStockLightBehaviorOverride(
         RollingStockLightChannel circuit,
         RollingStockLightFunction function,
@@ -79,7 +89,12 @@ public final class RollingStockLightBehaviorOverride
         Float glowRight,
         Float glowUp,
         Boolean hotspot,
-        Boolean projector)
+        Boolean projector,
+        RollingStockLightActivationPolicy activationPolicy,
+        RollingStockDitchHornMode ditchHornMode,
+        RollingStockLightFunction hornFunction,
+        Integer hornPhase,
+        Integer lightmapFloor)
     {
         this.circuit = circuit;
         this.function = function;
@@ -96,6 +111,11 @@ public final class RollingStockLightBehaviorOverride
         this.glowUp = glowUp;
         this.hotspot = hotspot;
         this.projector = projector;
+        this.activationPolicy = activationPolicy;
+        this.ditchHornMode = ditchHornMode;
+        this.hornFunction = hornFunction;
+        this.hornPhase = hornPhase;
+        this.lightmapFloor = lightmapFloor;
     }
 
     /** Starts an empty override that inherits every model-authored property. */
@@ -146,6 +166,7 @@ public final class RollingStockLightBehaviorOverride
     {
         return builder()
                .controlCircuit(RollingStockLightChannel.GYRA)
+               .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
                .function(RollingStockLightFunction.gyralite())
                .hotspotEnabled(true)
                .clientProjectorEligible(false)
@@ -156,6 +177,7 @@ public final class RollingStockLightBehaviorOverride
     {
         return builder()
                .controlCircuit(RollingStockLightChannel.GYRA)
+               .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
                .function(RollingStockLightFunction.mars())
                .hotspotEnabled(true)
                .clientProjectorEligible(false)
@@ -187,6 +209,8 @@ public final class RollingStockLightBehaviorOverride
         }
         return builder()
                .controlCircuit(RollingStockLightChannel.DITCH)
+               .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
+               .ditchHornResponse(RollingStockDitchHornMode.ACTIVE_END, null, null)
                .function(function)
                .hotspotEnabled(true)
                .clientProjectorEligible(true)
@@ -229,7 +253,12 @@ public final class RollingStockLightBehaviorOverride
                    n.glowRight != null ? n.glowRight : glowRight,
                    n.glowUp != null ? n.glowUp : glowUp,
                    n.hotspot != null ? n.hotspot : hotspot,
-                   n.projector != null ? n.projector : projector);
+                   n.projector != null ? n.projector : projector,
+                   n.activationPolicy != null ? n.activationPolicy : activationPolicy,
+                   n.ditchHornMode != null ? n.ditchHornMode : ditchHornMode,
+                   n.hornFunction != null ? n.hornFunction : hornFunction,
+                   n.hornPhase != null ? n.hornPhase : hornPhase,
+                   n.lightmapFloor != null ? n.lightmapFloor : lightmapFloor);
     }
 
     public RollingStockLightDefinition apply(RollingStockLightDefinition base)
@@ -282,6 +311,21 @@ public final class RollingStockLightBehaviorOverride
         if (projector != null)
         {
             b.clientProjectorEligible(projector);
+        }
+        if (activationPolicy != null)
+        {
+            b.activationPolicy(activationPolicy);
+        }
+        if (ditchHornMode != null || hornFunction != null || hornPhase != null)
+        {
+            b.ditchHornResponse(
+                ditchHornMode == null ? base.ditchHornMode() : ditchHornMode,
+                hornFunction == null ? base.hornFunction() : hornFunction,
+                hornPhase == null ? base.hornPhase() : hornPhase);
+        }
+        if (lightmapFloor != null)
+        {
+            b.lightmapFloor(lightmapFloor);
         }
         return b.build();
     }
@@ -362,6 +406,36 @@ public final class RollingStockLightBehaviorOverride
         return projector;
     }
 
+    /** @return activation policy override, or {@code null} when inherited */
+    public RollingStockLightActivationPolicy activationPolicy()
+    {
+        return activationPolicy;
+    }
+
+    /** @return horn-response scope override, or {@code null} when inherited */
+    public RollingStockDitchHornMode ditchHornMode()
+    {
+        return ditchHornMode;
+    }
+
+    /** @return temporary horn function override, or {@code null} when inherited */
+    public RollingStockLightFunction hornFunction()
+    {
+        return hornFunction;
+    }
+
+    /** @return explicit alternating phase {@code 0..1}, or {@code null} when automatic/inherited */
+    public Integer hornPhase()
+    {
+        return hornPhase;
+    }
+
+    /** @return Minecraft lightmap-floor override {@code 0..240}, or {@code null} when inherited */
+    public Integer lightmapFloor()
+    {
+        return lightmapFloor;
+    }
+
     @Override
     public boolean equals(Object other)
     {
@@ -388,7 +462,12 @@ public final class RollingStockLightBehaviorOverride
                && Objects.equals(glowRight, v.glowRight)
                && Objects.equals(glowUp, v.glowUp)
                && Objects.equals(hotspot, v.hotspot)
-               && Objects.equals(projector, v.projector);
+               && Objects.equals(projector, v.projector)
+               && activationPolicy == v.activationPolicy
+               && ditchHornMode == v.ditchHornMode
+               && Objects.equals(hornFunction, v.hornFunction)
+               && Objects.equals(hornPhase, v.hornPhase)
+               && Objects.equals(lightmapFloor, v.lightmapFloor);
     }
 
     @Override
@@ -409,7 +488,12 @@ public final class RollingStockLightBehaviorOverride
                    glowRight,
                    glowUp,
                    hotspot,
-                   projector);
+                   projector,
+                   activationPolicy,
+                   ditchHornMode,
+                   hornFunction,
+                   hornPhase,
+                   lightmapFloor);
     }
 
     /** Fluent builder whose unset fields retain the corresponding model value. */
@@ -422,6 +506,10 @@ public final class RollingStockLightBehaviorOverride
         private LightBeamRotation beamRotation;
         private Float bl, bw, gr, gi, gw, gh, gx, gy;
         private Boolean h, p;
+        private RollingStockLightActivationPolicy activationPolicy;
+        private RollingStockDitchHornMode ditchHornMode;
+        private RollingStockLightFunction hornFunction;
+        private Integer hornPhase, lightmapFloor;
 
         public Builder controlCircuit(RollingStockLightChannel controlCircuit)
         {
@@ -501,6 +589,61 @@ public final class RollingStockLightBehaviorOverride
             return this;
         }
 
+        /**
+         * Overrides how the fixture circuit is qualified by its facing headlight end.
+         *
+         * @param policy activation policy, or {@code null} to inherit
+         * @return this builder
+         */
+        public Builder activationPolicy(RollingStockLightActivationPolicy policy)
+        {
+            activationPolicy = policy;
+            return this;
+        }
+
+        /**
+         * Overrides the temporary horn response for a ditch-light fixture.
+         *
+         * @param mode affected end or ends; {@code null} inherits the model value
+         * @param temporaryFunction function used during the response; {@code null} uses the
+         *     model function when alternating, otherwise the standard alternating function
+         * @param phase explicit alternating phase {@code 0..1}; {@code null} selects phase from
+         *     model-local fixture position
+         * @return this builder
+         * @throws IllegalArgumentException when phase is neither {@code null}, {@code 0}, nor {@code 1}
+         */
+        public Builder ditchHornResponse(
+            RollingStockDitchHornMode mode,
+            RollingStockLightFunction temporaryFunction,
+            Integer phase)
+        {
+            if (phase != null && (phase < 0 || phase > 1))
+            {
+                throw new IllegalArgumentException("Horn phase must be 0, 1, or null");
+            }
+            ditchHornMode = mode;
+            hornFunction = temporaryFunction;
+            hornPhase = phase;
+            return this;
+        }
+
+        /**
+         * Overrides the minimum lightmap component value used for the emissive surface.
+         *
+         * @param value validated Minecraft lightmap floor in {@code 0..240}
+         * @return this builder
+         * @throws IllegalArgumentException when the value lies outside {@code 0..240}
+         */
+        public Builder lightmapFloor(int value)
+        {
+        if (value < 0 || value > RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR)
+            {
+                throw new IllegalArgumentException("Lightmap floor must be 0..240");
+            }
+            lightmapFloor = value;
+            return this;
+        }
+
         /** Creates the immutable partial override. */
         public RollingStockLightBehaviorOverride build()
         {
@@ -519,7 +662,12 @@ public final class RollingStockLightBehaviorOverride
                        gx,
                        gy,
                        h,
-                       p);
+                       p,
+                       activationPolicy,
+                       ditchHornMode,
+                       hornFunction,
+                       hornPhase,
+                       lightmapFloor);
         }
     }
 }

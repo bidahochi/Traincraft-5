@@ -351,7 +351,9 @@ public class ClientProxy extends CommonProxy
 		case (GuiIDs.LOCO_TANKENGINE):
 			return riddenByEntity != null ? new GuiTankEngine(riddenByEntity.inventory, entity) : null;
 		case (GuiIDs.CRAFTING_CART):
-			return riddenByEntity != null ? new GuiCraftingCart(riddenByEntity.inventory, world) : null;
+			return riddenByEntity != null
+				? new GuiCraftingCart(riddenByEntity.inventory, world, entity)
+				: null;
 		case (GuiIDs.FURNACE_CART):
 			return riddenByEntity != null ? new GuiFurnaceCart(riddenByEntity.inventory, entity) : null;
 		case (GuiIDs.ZEPPELIN):

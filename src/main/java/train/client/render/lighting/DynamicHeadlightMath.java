@@ -6,14 +6,19 @@ final class DynamicHeadlightMath
     static final float BRIGHT_RADIUS = 5.0F;
     static final float BRIGHT_LEVEL = 14.0F;
     static final float MAXIMUM_STRENGTH = 0.45F;
+    private static final float MAXIMUM_LIGHT_LEVEL = 15.0F;
+    private static final float BRIGHTNESS_CURVE_SCALE = 3.0F;
+    private static final float MAXIMUM_FORWARD_OFFSET = 2.5F;
+    private static final float FORWARD_OFFSET_RADIUS_FRACTION = 0.5F;
+    private static final float DIRECTIONAL_FADE_END = 0.35F;
 
     private DynamicHeadlightMath() {}
 
     static float brightness(float lightLevel)
     {
-        float level = clamp(lightLevel, 0.0F, 15.0F);
-        float darkness = 1.0F - level / 15.0F;
-        return (1.0F - darkness) / (darkness * 3.0F + 1.0F);
+        float level = clamp(lightLevel, 0.0F, MAXIMUM_LIGHT_LEVEL);
+        float darkness = 1.0F - level / MAXIMUM_LIGHT_LEVEL;
+        return (1.0F - darkness) / (darkness * BRIGHTNESS_CURVE_SCALE + 1.0F);
     }
 
     static float radius(float sourceLevel)
@@ -32,8 +37,9 @@ final class DynamicHeadlightMath
         float configuredLength, float daylightScale, float fixtureReach)
     {
         return Math.min(
-                   2.5F,
-                   radius(configuredLength, daylightScale, fixtureReach) * 0.5F);
+                   MAXIMUM_FORWARD_OFFSET,
+                   radius(configuredLength, daylightScale, fixtureReach)
+                   * FORWARD_OFFSET_RADIUS_FRACTION);
     }
 
     static float influence(float sourceLevel, float distance, float daylight)
@@ -54,7 +60,7 @@ final class DynamicHeadlightMath
         }
         float falloff = 1.0F - clamp(distance / sourceRadius, 0.0F, 1.0F);
         falloff *= falloff;
-        float directional = smoothstep(0.0F, 0.35F, directionDot);
+        float directional = smoothstep(0.0F, DIRECTIONAL_FADE_END, directionDot);
         return brightness(sourceLevel)
                * falloff
                * directional

@@ -1,6 +1,6 @@
 package tmt;
 
-/** Resolves stable face normals from legacy TMT polygon winding. */
+/** Resolves stable face normals from TMT polygon winding. */
 public final class TurboFaceNormal
 {
     private static final float MINIMUM_NORMAL_LENGTH = 1.0E-4F;

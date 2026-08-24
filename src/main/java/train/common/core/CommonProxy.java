@@ -282,7 +282,6 @@ public class CommonProxy implements IGuiHandler {
 			return te instanceof TileTransmitterStopPoint ? new GuiSpeedTransmitter(te) : null;
 		case (GuiIDs.FORTY_FOOT_CONTAINER):
 			return te instanceof TileFortyFootContainer ? new ContainerStorage(player.inventory, (TileFortyFootContainer) te) : null;
-
 			default:
 			return null;
 		}

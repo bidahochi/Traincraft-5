@@ -3,6 +3,8 @@ package train.client.gui;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -66,10 +68,25 @@ public class GuiRecipeBook extends GuiScreen {
 	private GuiButtonNextPage buttonNextPage;
 	private GuiButtonNextPage buttonPreviousPage;
 	private GuiButtonNextPage buttonBack;
+    private GuiButton buttonSettings;
     private GuiButton lightingModeButton;
-    private static final int LIGHTING_MODE_BUTTON_ID = 8;
-    private static final String ENHANCED_LIGHTING_LABEL = "Lighting: Enhanced";
+    private static final int SETTINGS_BUTTON_ID = 8;
+    private static final int LIGHTING_MODE_BUTTON_ID = 9;
+    private static final String FULL_LIGHTING_LABEL = "Lighting: Full";
+    private static final String ENHANCED_LIGHTING_LABEL = "Lighting: Enhanced (No Cones)";
     private static final String ORIGINAL_LIGHTING_LABEL = "Lighting: Original 1.7";
+    private static final int SETTINGS_BUTTON_X_OFFSET = -72;
+    private static final int SETTINGS_BUTTON_TOP_OFFSET = -12;
+    private static final int SETTINGS_BUTTON_WIDTH = 66;
+    private static final int SETTINGS_BUTTON_HEIGHT = 14;
+    private static final int LIGHTING_BUTTON_X_OFFSET = -185;
+    private static final int LIGHTING_BUTTON_Y_OFFSET = -69;
+    private static final int LIGHTING_BUTTON_WIDTH = 145;
+    private static final int LIGHTING_BUTTON_HEIGHT = 14;
+    private static final int SETTINGS_TITLE_X = 16;
+    private static final int SETTINGS_TITLE_Y = 7;
+    private static final int LIGHTING_TITLE_X = 22;
+    private static final int LIGHTING_TITLE_Y = 21;
     private GuiButtonSearch buttonSearchPrevious;
     private GuiButtonSearch buttonSearchNext;
     private GuiButtonSearch buttonSearch;
@@ -395,7 +412,7 @@ public class GuiRecipeBook extends GuiScreen {
 		addPage("this page was intentionally left blank, as a joke.","","right",null);
 		if (rightPage != null && recipeList != null && recipeListWB != null)
         {
-			bookTotalPages = this.rightPage.size() + (recipeList.size() / 2) + (recipeListWB.size() / 2);
+			bookTotalPages = this.rightPage.size() + (recipeList.size() / 2) + (recipeListWB.size() / 2) + 1;
         }
         // Initialize recipe map for searching.
         initializeRecipeSearchMap();
@@ -453,17 +470,25 @@ public class GuiRecipeBook extends GuiScreen {
         this.buttonList.add(this.buttonSearchPrevious = new GuiButtonSearch(5, halfWidth + 160, ((halfHeight - bookImageHeight / 2) - 10), 10, 10, GuiButtonSearch.Type.PREVIOUSRESULT));
         this.buttonList.add(this.buttonSearchNext = new GuiButtonSearch(6, halfWidth + 170, ((halfHeight - bookImageHeight / 2) - 10), 10, 10,  GuiButtonSearch.Type.NEXTRESULT));
         this.buttonList.add(this.buttonSearch = new GuiButtonSearch(7, halfWidth + 7, ((halfHeight - bookImageHeight / 2) - 10), 10, 10, GuiButtonSearch.Type.SEARCH));
-        this.lightingModeButton = new GuiButton(
+        this.buttonList.add(this.buttonSettings = new GuiButton(
+            SETTINGS_BUTTON_ID,
+            halfWidth + SETTINGS_BUTTON_X_OFFSET,
+            (halfHeight - bookImageHeight / 2) + SETTINGS_BUTTON_TOP_OFFSET,
+            SETTINGS_BUTTON_WIDTH,
+            SETTINGS_BUTTON_HEIGHT,
+            "Settings"));
+        this.lightingModeButton = new GuiButtonSettingsOption(
             LIGHTING_MODE_BUTTON_ID,
-            halfWidth + 5,
-            halfHeight + 72,
-            145,
-            20,
+            halfWidth + LIGHTING_BUTTON_X_OFFSET,
+            halfHeight + LIGHTING_BUTTON_Y_OFFSET,
+            LIGHTING_BUTTON_WIDTH,
+            LIGHTING_BUTTON_HEIGHT,
             lightingModeText());
         this.buttonList.add(this.lightingModeButton);
         this.updateButtons();
 	}
 
+	/** Updates guidebook navigation and settings-button visibility for the current page. */
 	private void updateButtons() {
 		this.buttonBack.visible = (this.currPage == bookTotalPages-1);
 		this.buttonBack.showButton = true;
@@ -479,22 +504,32 @@ public class GuiRecipeBook extends GuiScreen {
         this.buttonSearchNext.showButton = this.currPage > 0;
         this.buttonSearch.visible = this.currPage > 0;
         this.buttonSearch.showButton = this.currPage > 0;
-        this.lightingModeButton.visible = this.currPage == 0;
+        boolean settingsPage = this.currPage == getSettingsPageIndex();
+        this.buttonSettings.visible = this.currPage > 0 && settingsPage == false;
+        this.buttonSettings.enabled = settingsPage == false;
+        this.lightingModeButton.visible = settingsPage;
+        this.lightingModeButton.enabled = settingsPage;
+        this.lightingModeButton.displayString = lightingModeText();
 	}
 
-    /** Returns the label for the currently persisted advanced-lighting setting. */
+    /** Returns the label for the currently persisted lighting quality mode. */
     private String lightingModeText()
     {
-        return ConfigHandler.ENABLE_ADVANCED_LIGHTING
-               ? ENHANCED_LIGHTING_LABEL
-               : ORIGINAL_LIGHTING_LABEL;
+        switch (ConfigHandler.LIGHTING_MODE)
+        {
+            case ORIGINAL:
+                return ORIGINAL_LIGHTING_LABEL;
+            case ENHANCED:
+                return ENHANCED_LIGHTING_LABEL;
+            default:
+                return FULL_LIGHTING_LABEL;
+        }
     }
 
-    /** Persists the compatibility mode and clears queued/context-bound lighting resources. */
+    /** Persists the lighting quality mode and clears queued/context-bound lighting resources. */
     private void toggleLightingMode()
     {
-        ConfigHandler.setAdvancedLightingEnabled(
-            ConfigHandler.ENABLE_ADVANCED_LIGHTING == false);
+        ConfigHandler.setLightingMode(ConfigHandler.LIGHTING_MODE.next());
         LightEffectRenderBatch.clear();
         this.lightingModeButton.displayString = lightingModeText();
 	}
@@ -545,6 +580,12 @@ public class GuiRecipeBook extends GuiScreen {
                 case 7: // Search button (if hitting RETURN is too complicated for you).
                     runSearch();
                     break;
+                case SETTINGS_BUTTON_ID:
+                    this.currPage = getSettingsPageIndex();
+                    this.currRecipe = this.currPage * 2;
+                    this.searchQuery = "";
+                    resetSearch();
+                    break;
                 case LIGHTING_MODE_BUTTON_ID:
                     toggleLightingMode();
                     break;
@@ -565,6 +606,7 @@ public class GuiRecipeBook extends GuiScreen {
         int SEARCH_BOX_X = var5;
         int SEARCH_BOX_Y = var6 - 12;
         int SEARCH_BOX_TEXT_MAX_WIDTH = 136;
+		resetGuiRenderState();
 
 		if (this.currPage > 0) {
 			//GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -582,6 +624,7 @@ public class GuiRecipeBook extends GuiScreen {
 			this.drawTexturedModalRect(var5 - 55, var6 - 15, 0, 0, 256, 256);
 		}
 
+		// Translation arguments: [0] = current page number, [1] = total page count.
 		pageIndic = String.format(StatCollector.translateToLocal("book.pageIndicator"), new Object[] {this.currPage + 1, this.bookTotalPages});
 
 		var9 = this.fontRendererObj.getStringWidth(pageIndic);
@@ -590,6 +633,13 @@ public class GuiRecipeBook extends GuiScreen {
             this.fontRendererObj.drawString(fontRendererObj.trimStringToWidth(searchQuery, SEARCH_BOX_TEXT_MAX_WIDTH), SEARCH_BOX_X + 20, SEARCH_BOX_Y + 3, 0);
 		}
 		super.drawScreen(mouseX, mouseY, par3);
+		resetGuiRenderState();
+
+		if (this.currPage == getSettingsPageIndex()) {
+			drawSettingsPage(var5, var6, mouseX, mouseY);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			return;
+		}
 
 		if (this.currPage < rightPage.size()) {
 			this.fontRendererObj.drawSplitString(leftPage.get(this.currPage), var5 + 36, var6 + 16 + 16, 140, 0);
@@ -614,11 +664,11 @@ public class GuiRecipeBook extends GuiScreen {
 			}
 			GL11.glDisable(32826);
 		}
-        // Drawing the non-train recipes...
-		if (this.currPage > rightPage.size() - 1) {
+        // Drawing workbench and assembly-table recipe pages; the final page holds client settings.
+		if (this.currPage > rightPage.size() - 1 && this.currPage < getSettingsPageIndex()) {
 			//System.out.println((rightPage.size()*2) -1);
 			int page = this.currRecipe - (rightPage.size() * 2) + 1;
-			if (!(page > recipeListWB.size() - 1)) {
+			if ((page > recipeListWB.size() - 1) == false) {
 				drawWorkBenchBackground(recipeListWB, var5, var6, 0, var9, "right");
 				drawWorkBenchBackground(recipeListWB, var5, var6, 0, var9, "left");
 				RenderHelper.enableGUIStandardItemLighting();
@@ -637,6 +687,142 @@ public class GuiRecipeBook extends GuiScreen {
 		}
         }
 		GL11.glDisable(GL11.GL_LIGHTING);
+	}
+
+	/** @return the dedicated settings page appended after every recipe page */
+	private int getSettingsPageIndex() {
+		return bookTotalPages - 1;
+	}
+
+	/**
+	 * Draws the final guidebook page and its setting descriptions.
+	 *
+	 * <p>The controls use normal {@link GuiButton} click handling. This class detects their hover
+	 * bounds and renders explanatory text after the buttons, matching the original guidebook
+	 * settings-page implementation.</p>
+	 */
+	private void drawSettingsPage(int pageLeftX, int pageTopY, int mouseX, int mouseY) {
+		this.fontRendererObj.drawString(
+			"Settings", pageLeftX + SETTINGS_TITLE_X, pageTopY + SETTINGS_TITLE_Y, 0);
+		this.fontRendererObj.drawString(
+			"Lighting", pageLeftX + LIGHTING_TITLE_X, pageTopY + LIGHTING_TITLE_Y, 0);
+
+		drawButtonHoverText(
+			lightingModeButton,
+			mouseX,
+			mouseY,
+			"Rolling-stock lighting quality",
+			"Full: fixtures, cones, and hotspots",
+			"Enhanced: fixtures without cones",
+			"Original: Traincraft 1.7 rendering");
+	}
+
+	/** Draws the supplied explanatory lines while the pointer is over a visible setting button. */
+	private void drawButtonHoverText(GuiButton button, int mouseX, int mouseY, String... lines) {
+		if (isMouseOverButton(button, mouseX, mouseY)) {
+			drawHoveringText(Arrays.asList(lines), mouseX, mouseY, fontRendererObj);
+		}
+	}
+
+	/** @return whether the pointer lies within the visible bounds of {@code button} */
+	private boolean isMouseOverButton(GuiButton button, int mouseX, int mouseY) {
+		return button != null
+			&& button.visible
+			&& mouseX >= button.xPosition
+			&& mouseY >= button.yPosition
+			&& mouseX < button.xPosition + button.width
+			&& mouseY < button.yPosition + button.height;
+	}
+
+	/** Restores the neutral OpenGL state expected by guidebook textures, buttons, and text. */
+	private void resetGuiRenderState() {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_BLEND);
+	}
+
+	/**
+	 * Compact settings-page option copied from the guidebook settings implementation.
+	 *
+	 * <p>The narrow status rail communicates the relative lighting tier without depending only on
+	 * the label: green is the complete renderer, amber is the cone-free performance tier, and red
+	 * is the original compatibility renderer.</p>
+	 */
+	private static class GuiButtonSettingsOption extends GuiButton {
+		private static final int BORDER_COLOR = 0xFF1A1A1A;
+		private static final int BODY_COLOR = 0xFF4E4E4E;
+		private static final int HOVERED_BODY_COLOR = 0xFF6A6A6A;
+		private static final int ENABLED_TEXT_COLOR = 0xFFFFFFFF;
+		private static final int DISABLED_TEXT_COLOR = 0xFFAAAAAA;
+		private static final int MARKER_SHADOW_COLOR = 0x66000000;
+		private static final int FULL_MARKER_COLOR = 0xFF2E9D45;
+		private static final int ENHANCED_MARKER_COLOR = 0xFFC28B24;
+		private static final int ORIGINAL_MARKER_COLOR = 0xFFA33A2D;
+		private static final int INNER_BORDER = 1;
+		private static final int MARKER_LEFT = 3;
+		private static final int MARKER_RIGHT = 9;
+		private static final int MARKER_VERTICAL_INSET = 3;
+		private static final int MARKER_SHADOW_LEFT = 10;
+		private static final int MARKER_SHADOW_RIGHT = 11;
+		private static final int LABEL_X = 15;
+		private static final int LABEL_Y = 3;
+
+		/** Creates one compact settings-page button with an authored status rail. */
+		private GuiButtonSettingsOption(int id, int x, int y, int width, int height, String label) {
+			super(id, x, y, width, height, label);
+		}
+
+		@Override
+		public void drawButton(Minecraft minecraft, int mouseX, int mouseY) {
+			if (this.visible == false) {
+				return;
+			}
+
+			FontRenderer font = minecraft.fontRenderer;
+			this.field_146123_n = mouseX >= this.xPosition && mouseY >= this.yPosition
+				&& mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+			int bodyColor = this.field_146123_n ? HOVERED_BODY_COLOR : BODY_COLOR;
+			int markerColor = lightingModeMarkerColor();
+			int textColor = this.enabled ? ENABLED_TEXT_COLOR : DISABLED_TEXT_COLOR;
+
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			drawRect(
+				this.xPosition, this.yPosition,
+				this.xPosition + this.width, this.yPosition + this.height, BORDER_COLOR);
+			drawRect(
+				this.xPosition + INNER_BORDER,
+				this.yPosition + INNER_BORDER,
+				this.xPosition + this.width - INNER_BORDER,
+				this.yPosition + this.height - INNER_BORDER,
+				bodyColor);
+			drawRect(
+				this.xPosition + MARKER_LEFT,
+				this.yPosition + MARKER_VERTICAL_INSET,
+				this.xPosition + MARKER_RIGHT,
+				this.yPosition + this.height - MARKER_VERTICAL_INSET,
+				markerColor);
+			drawRect(
+				this.xPosition + MARKER_SHADOW_LEFT,
+				this.yPosition + MARKER_VERTICAL_INSET,
+				this.xPosition + MARKER_SHADOW_RIGHT,
+				this.yPosition + this.height - MARKER_VERTICAL_INSET,
+				MARKER_SHADOW_COLOR);
+			font.drawString(
+				this.displayString, this.xPosition + LABEL_X, this.yPosition + LABEL_Y, textColor);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		}
+
+		/** Returns the status-rail color assigned to the current lighting quality tier. */
+		private int lightingModeMarkerColor() {
+			switch (ConfigHandler.LIGHTING_MODE) {
+				case FULL:
+					return FULL_MARKER_COLOR;
+				case ENHANCED:
+					return ENHANCED_MARKER_COLOR;
+				default:
+					return ORIGINAL_MARKER_COLOR;
+			}
+		}
 	}
 
 	private void drawAssemblyBackground(List<TierRecipe> recipeList, int var5, int var6, int page, int var9, String side) {
@@ -683,11 +869,13 @@ public class GuiRecipeBook extends GuiScreen {
 	}
     }
 
+	/** Draws one workbench recipe and its item tooltips on the selected book side. */
 	private void drawWorkBenchRecipe(List recipeList, int mouseX, int mouseY, int var5, int var6, int page, int var9, String side) {
 		if (recipeList.get(page) == null)
         {
 			return;
         }
+		// Row-major 3x3 crafting grid: [0..2] top, [3..5] middle, [6..8] bottom.
 		Object[] itemList = new ItemStack[9];
 		ItemStack itemOutput = null;
 		if (recipeList.get(page) instanceof ShapedTrainRecipes) {
@@ -715,6 +903,7 @@ public class GuiRecipeBook extends GuiScreen {
 
 		ItemStack hoveredStack = null;
 
+		// Each recipe slot is [0] = x offset and [1] = y offset within its book page.
 		int[][] positions = {
 				{50, 67}, {68, 67}, {86, 67},
 				{50, 85}, {68, 85}, {86, 85},
@@ -782,7 +971,7 @@ public class GuiRecipeBook extends GuiScreen {
 		if (itemOutput != null && itemOutput.getItem() !=null) {
             this.fontRendererObj.drawString(itemOutput.getItem().getItemStackDisplayName(itemOutput), var5 + 20 + offset, var6 + 40, 0);
             // Draw name of recipe. Highlight in green if it contains the search query.
-            this.fontRendererObj.drawString(itemOutput.getItem().getItemStackDisplayName(itemOutput), var5 + 20 + offset, var6 + 40, (!searchQuery.isEmpty() && itemOutput.getItem().getItemStackDisplayName(itemOutput).toLowerCase().contains(searchQuery.toLowerCase())) ? 0x21d12d : 0);
+            this.fontRendererObj.drawString(itemOutput.getItem().getItemStackDisplayName(itemOutput), var5 + 20 + offset, var6 + 40, (searchQuery.isEmpty() == false && itemOutput.getItem().getItemStackDisplayName(itemOutput).toLowerCase().contains(searchQuery.toLowerCase())) ? 0x21d12d : 0);
         }
 		if (itemOutput != null)
         {
@@ -814,7 +1003,7 @@ public class GuiRecipeBook extends GuiScreen {
 			);
 
 			// Apply aqua color to first line if output is ItemAbstractRollingStock
-			if ( hoveredStack.getItem() instanceof ItemAbstractRollingStock && !tooltip.isEmpty()) {
+			if ( hoveredStack.getItem() instanceof ItemAbstractRollingStock && tooltip.isEmpty() == false) {
 				String firstLine = (String) tooltip.get(0);
 				tooltip.set(0, EnumChatFormatting.AQUA + firstLine);
 			}
@@ -853,6 +1042,7 @@ public class GuiRecipeBook extends GuiScreen {
 		return null;
 	}
 
+	/** Draws one assembly-table recipe and its item tooltips on the selected book side. */
 	private void drawAssemblyRecipe(List<TierRecipe> recipeList, int mouseX, int mouseY, int var5, int var6, int page, int var9, String side) {
 		if (page < 0 || recipeList.get(page) == null)
         { return;
@@ -867,7 +1057,7 @@ public class GuiRecipeBook extends GuiScreen {
 		int offset = side.equals("right") ? 271 : 0;
 		GL11.glEnable(32826); // GL_RESCALE_NORMAL
 
-		// --- Positions for input items ---
+		// Each input slot is [0] = x offset and [1] = y offset within its book page.
 		int[][] positions = {
 				{94, 76},   {113, 143}, {148, 143}, {214, 143},
 				{148, 77},  {184, 77},  {149, 110}, {185, 110},
@@ -921,7 +1111,7 @@ public class GuiRecipeBook extends GuiScreen {
 
 		// --- Draw recipe name and tier (non-hover text) ---
 		String name = (output != null && output.getItem() instanceof ItemAbstractRollingStock) ? output.getDisplayName() : "";
-		boolean drawColorHighlightFlag = !searchQuery.isEmpty() && name.toLowerCase().contains(searchQuery.toLowerCase());
+		boolean drawColorHighlightFlag = searchQuery.isEmpty() == false && name.toLowerCase().contains(searchQuery.toLowerCase());
 
 		int nameColor = drawColorHighlightFlag ? 0x21d12d : 0xffffff; // search match green or default white
 
@@ -951,7 +1141,7 @@ public class GuiRecipeBook extends GuiScreen {
 			List tooltip = hoveredStack.getTooltip(mc.thePlayer, mc.gameSettings.advancedItemTooltips);
 
 			// If hovered item is output and rolling stock, color the first line AQUA
-			if (hoveredStack == output && output.getItem() instanceof ItemAbstractRollingStock && !tooltip.isEmpty()) {
+			if (hoveredStack == output && output.getItem() instanceof ItemAbstractRollingStock && tooltip.isEmpty() == false) {
 				String firstLine = (String) tooltip.get(0);
 				tooltip.set(0, EnumChatFormatting.AQUA + firstLine); // add AQUA color
 			}
@@ -1086,7 +1276,7 @@ public class GuiRecipeBook extends GuiScreen {
 
     public SortedMap<String, ArrayList<Integer>> recipeMapSearch(TreeMap<String, ArrayList<Integer>> fullMap, String searchQuery) {
         // Thank you, Paŭlo Ebermann, for this TreeMap partial search algorithm!
-        if (!searchQuery.isEmpty()) {
+        if (searchQuery.isEmpty() == false) {
             char nextLetter  = (char) (searchQuery.charAt(searchQuery.length() - 1) + 1);
             String end = searchQuery.substring(0, searchQuery.length() - 1) + nextLetter;
             return fullMap.subMap(searchQuery, end);
@@ -1130,7 +1320,7 @@ public class GuiRecipeBook extends GuiScreen {
         Matcher matcher;
 
         // Add raw name to map.
-        if (!recipeIndexMap.containsKey(name)) {
+        if (recipeIndexMap.containsKey(name) == false) {
             indexList = new ArrayList<>();
             indexList.add(index);
             recipeIndexMap.put(name, indexList);
@@ -1143,7 +1333,7 @@ public class GuiRecipeBook extends GuiScreen {
             if (matcher.find()) {
                 if (recipeIndexMap.containsKey(matcher.group(1))) {
                     indexList = recipeIndexMap.get(matcher.group(1));
-                    if (!indexList.contains(index)) {
+                    if (indexList.contains(index) == false) {
                         indexList.add(index);
                         recipeIndexMap.put(matcher.group(1), indexList);
                     }
@@ -1156,7 +1346,7 @@ public class GuiRecipeBook extends GuiScreen {
             // Add raw split name if not exists in map.
             if (recipeIndexMap.containsKey(term)) {
                 indexList = recipeIndexMap.get(term);
-                if (!indexList.contains(index)) {
+                if (indexList.contains(index) == false) {
                     indexList.add(index);
                     recipeIndexMap.put(term, indexList);
                 }

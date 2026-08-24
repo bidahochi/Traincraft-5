@@ -14,6 +14,13 @@ import tmt.ModelRendererTurbo;
 /** Selection of complete four-part Prime top assemblies. */
 final class SpecialBeaconSurfaceExtraction
 {
+    private static final int PRIME_PHASE_COUNT = 4;
+    private static final int ALL_PRIME_PHASES_MASK = (1 << PRIME_PHASE_COUNT) - 1;
+    private static final float MINIMUM_NORMAL_ALIGNMENT = 0.98F;
+    private static final float MAXIMUM_PLANE_SEPARATION = 0.005F;
+    private static final float MAXIMUM_CENTER_SEPARATION_SQUARED = 6.25E-6F;
+    private static final float CONNECTED_RADIUS_SCALE = 1.25F;
+
     private static final BoundedIdentityCache<Object, Map<ModelRendererTurbo, DetectedLightFace>>
     CACHE =
         new BoundedIdentityCache<Object, Map<ModelRendererTurbo, DetectedLightFace>>(128);
@@ -70,6 +77,7 @@ final class SpecialBeaconSurfaceExtraction
         return immutable;
     }
 
+    /** Collects complete four-phase Prime assemblies from one model-owned part collection. */
     private static void collectCompleteAssemblies(
         String collection,
         ModelRendererTurbo[] parts,
@@ -138,7 +146,7 @@ final class SpecialBeaconSurfaceExtraction
             {
                 phases |= 1 << (candidate.phase - 1);
             }
-            if (component.size() == 4 && phases == 15)
+            if (component.size() == PRIME_PHASE_COUNT && phases == ALL_PRIME_PHASES_MASK)
             {
                 for (PrimeCandidate candidate : component)
                 {
@@ -148,6 +156,7 @@ final class SpecialBeaconSurfaceExtraction
         }
     }
 
+    /** Reports whether two Prime candidates share an edge closely enough to form one assembly. */
     private static boolean adjoin(PrimeCandidate first, PrimeCandidate second)
     {
         DetectedLightFace a = first.top;
@@ -155,7 +164,7 @@ final class SpecialBeaconSurfaceExtraction
         float normalDot = a.modelNormalX * b.modelNormalX
                           + a.modelNormalY * b.modelNormalY
                           + a.modelNormalZ * b.modelNormalZ;
-        if (normalDot < 0.98F)
+        if (normalDot < MINIMUM_NORMAL_ALIGNMENT)
         {
             return false;
         }
@@ -165,7 +174,7 @@ final class SpecialBeaconSurfaceExtraction
         float planeDistance = deltaX * a.modelNormalX
                               + deltaY * a.modelNormalY
                               + deltaZ * a.modelNormalZ;
-        if (Math.abs(planeDistance) > 0.005F)
+        if (Math.abs(planeDistance) > MAXIMUM_PLANE_SEPARATION)
         {
             return false;
         }
@@ -177,10 +186,13 @@ final class SpecialBeaconSurfaceExtraction
         {
             for (float[] secondVertex : second.modelVertices)
             {
-                float vx = firstVertex[0] - secondVertex[0];
-                float vy = firstVertex[1] - secondVertex[1];
-                float vz = firstVertex[2] - secondVertex[2];
-                if (vx * vx + vy * vy + vz * vz <= 6.25E-6F)
+                float vertexDeltaX = firstVertex[0] - secondVertex[0];
+                float vertexDeltaY = firstVertex[1] - secondVertex[1];
+                float vertexDeltaZ = firstVertex[2] - secondVertex[2];
+                if (vertexDeltaX * vertexDeltaX
+                            + vertexDeltaY * vertexDeltaY
+                            + vertexDeltaZ * vertexDeltaZ
+                        <= MAXIMUM_CENTER_SEPARATION_SQUARED)
                 {
                     return true;
                 }
@@ -191,7 +203,7 @@ final class SpecialBeaconSurfaceExtraction
         deltaZ -= planeDistance * a.modelNormalZ;
         float firstRadius = (float) Math.sqrt(a.area / Math.PI);
         float secondRadius = (float) Math.sqrt(b.area / Math.PI);
-        float reach = (firstRadius + secondRadius) * 1.25F;
+        float reach = (firstRadius + secondRadius) * CONNECTED_RADIUS_SCALE;
         return deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ <= reach * reach;
     }
 
@@ -266,7 +278,7 @@ final class SpecialBeaconSurfaceExtraction
     static int primePhase(String partName)
     {
         String lower = partName == null ? "" : partName.toLowerCase(Locale.ROOT);
-        for (int phase = 1; phase <= 4; phase++)
+        for (int phase = 1; phase <= PRIME_PHASE_COUNT; phase++)
         {
             if (lower.contains("prime" + phase))
             {

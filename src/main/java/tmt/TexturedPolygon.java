@@ -26,7 +26,8 @@ public class TexturedPolygon {
 		iNormals = individualNormals;
 	}
 
-	Vec3f getLegacyFaceNormal(){
+	/** Calculates a face normal from the polygon's first three vertices. */
+	Vec3f getFirstTriangleFaceNormal(){
 		if(normals.length == 3){
 			return new Vec3f(normals[0], normals[1], normals[2]);
 		}
@@ -37,7 +38,7 @@ public class TexturedPolygon {
         Vec3f faceNormal = null;
         if (iNormals.isEmpty())
         {
-            faceNormal = getLegacyFaceNormal();
+            faceNormal = getFirstTriangleFaceNormal();
             if (faceNormal == null)
             {
                 return;

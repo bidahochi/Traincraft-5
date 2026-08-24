@@ -25,6 +25,13 @@ import train.common.library.Info;
 import train.common.library.sounds.SoundRecord;
 
 public abstract class AbstractControlCar extends EntityRollingStock implements IInventory, IPassenger, IRollingStockLightControls {
+    private static final int FORWARD_PRESS_KEY = 4;
+    private static final int REVERSE_PRESS_KEY = 5;
+    private static final int HORN_KEY = 8;
+    private static final int BRAKE_PRESS_KEY = 12;
+    private static final int FORWARD_RELEASE_KEY = 13;
+    private static final int REVERSE_RELEASE_KEY = 14;
+    private static final int BRAKE_RELEASE_KEY = 15;
 
     public Locomotive connectedLocomotive;
     public int whistleDelay;
@@ -48,6 +55,8 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
     private boolean auxLightsEnabled;
     private boolean gyraLightsEnabled;
+    /** Server-owned countdown; synchronized through the watcher but intentionally omitted from NBT. */
+    private int hornLightResponseTicks;
     
     public AbstractControlCar(World world)
     {
@@ -123,7 +132,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
             }
         catch (JsonParseException ignored)
         {
-                // Missing or malformed legacy lighting state migrates to the documented defaults.
+                // A malformed lightingDetailsJSON value falls back to the documented defaults.
             }
         }
 
@@ -181,6 +190,11 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     @Override
     public void onUpdate()
     {
+
+        if (worldObj.isRemote == false && hornLightResponseTicks > 0)
+        {
+            hornLightResponseTicks = RollingStockTransientLightTimer.tick(hornLightResponseTicks);
+        }
 
         if (worldObj.isRemote == false)
         {
@@ -274,37 +288,37 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
 
                 if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode())
                         && !forwardPressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(4));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_PRESS_KEY));
                     forwardPressed = true;
                 } else
                 { if (Keyboard
                         .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode()) == false
                         && forwardPressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(13));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_RELEASE_KEY));
                     forwardPressed = false;
                 }
                 }
                 if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode())
                         && !backwardPressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(5));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_PRESS_KEY));
                     backwardPressed = true;
                 } else
                 { if (Keyboard
                         .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode()) == false
                         && backwardPressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(14));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_RELEASE_KEY));
                     backwardPressed = false;
                 }
                 }
                 if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode())
                         && !brakePressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(12));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_PRESS_KEY));
                     brakePressed = true;
                 } else
                 { if (Keyboard
                         .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode()) == false
                         && brakePressed) {
-                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(15));
+                    Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_RELEASE_KEY));
                     brakePressed = false;
                 }
             }
@@ -374,34 +388,38 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     }
 
     @Override
-    public void keyHandlerFromPacket(int i) {
+    public void keyHandlerFromPacket(int key) {
         if (this.getTrainLockedFromPacket()) {
             if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer
-                    && !((EntityPlayer) this.riddenByEntity).getDisplayName().toLowerCase()
-                    .equals(this.getTransportOwner().toLowerCase())) {
+                    && ((EntityPlayer) this.riddenByEntity).getDisplayName().toLowerCase()
+                    .equals(this.getTransportOwner().toLowerCase()) == false) {
                 return;
             }
         }
-        pressKey(i);
-        if (i == 8 && ConfigHandler.SOUNDS) {
-            soundHorn();
+        pressKey(key);
+        if (key == HORN_KEY) {
+            hornLightResponseTicks = RollingStockTransientLightTimer.startHorn();
+            synchronizeLightState();
+            if (ConfigHandler.SOUNDS) {
+                soundHorn();
+            }
         }
-        if (i == 4) {
+        if (key == FORWARD_PRESS_KEY) {
             forwardPressed = true;
         }
-        if (i == 5) {
+        if (key == REVERSE_PRESS_KEY) {
             backwardPressed = true;
         }
-        if (i == 12) {
+        if (key == BRAKE_PRESS_KEY) {
             brakePressed = true;
         }
-        if (i == 13) {
+        if (key == FORWARD_RELEASE_KEY) {
             forwardPressed = false;
         }
-        if (i == 14) {
+        if (key == REVERSE_RELEASE_KEY) {
             backwardPressed = false;
         }
-        if (i == 15) {
+        if (key == BRAKE_RELEASE_KEY) {
             brakePressed = false;
         }
     }
@@ -499,7 +517,8 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         return RollingStockLightStateCodec.pack(
                    frontHeadlightLevel, rearHeadlightLevel,
                    ditchLightsEnabled, beaconEnabled,
-                   auxLightsEnabled, gyraLightsEnabled);
+                   auxLightsEnabled, gyraLightsEnabled,
+                   hornLightResponseTicks > 0);
     }
 
     /** Reads the watcher on clients and the authoritative fields on the server. */
@@ -520,6 +539,12 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
             dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
         }
 
+    }
+
+    @Override
+    public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+    {
+        return RollingStockLightStateCodec.transientEnabled(synchronizedLightState(), signal);
     }
 
     private static boolean jsonBoolean(JsonObject object, String key, boolean fallback)

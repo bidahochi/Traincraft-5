@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 import tmt.ModelRendererTurbo;
 import train.client.render.lighting.ClientRollingStockLighting;
 import train.common.api.EntityRollingStock;
-import train.common.api.IRollingStockLightControls;
+import train.common.api.IRollingStockLightState;
 import train.common.api.Locomotive;
 import train.common.api.RollingStockHeadlightLevel;
 import train.common.api.RollingStockLightChannel;
@@ -14,20 +14,26 @@ import train.common.api.RollingStockLightChannel;
 
 public class ModelRenderHelper
 {
+	private static final int COMMANDER_BEACON_PERIOD_TICKS = 20;
+	private static final int COMMANDER_BEACON_ON_TICKS = COMMANDER_BEACON_PERIOD_TICKS / 2;
     /**
-     * Renders a model Coverts Entity -> IRollingStockLightControls Can Render the following Special
-     * items lamp, commander, prime1, prime2, prime3, prime4 cull
+     * Renders rolling-stock model parts through the enhanced lighting adapter when a lighting
+     * scope is active. Otherwise, the compatibility path applies the original lightmap, beacon, and
+     * culling behavior to the recognized part tags: lamp, instrument, numberboard, marker, ditch,
+     * commander, prime1 through prime4, rotary, and cull.
      *
-     * @param bodyModel
-     * @param entity Entity Compatible with IRollingStockLightControls
-     * @param f5
+     * @param bodyModel ordered model parts to render
+     * @param entity rolling-stock entity implementing {@link IRollingStockLightState}
+     * @param f5 TMT model scale passed to each part render
      */
     public static void renderModelWithRollingStockLightControls(ModelRendererTurbo[] bodyModel, Entity entity, float f5)
     {
-        renderModelWithRollingStockLightControls(bodyModel, (IRollingStockLightControls) entity, f5);
+        renderModelWithRollingStockLightState(bodyModel, (IRollingStockLightState) entity, f5);
     }
 
-    private static void renderModelWithRollingStockLightControls(ModelRendererTurbo[] bodyModel, IRollingStockLightControls rollingStock, float f5)
+    /** Renders model parts through the compatibility helper using read-only synchronized light state. */
+    private static void renderModelWithRollingStockLightState(
+        ModelRendererTurbo[] bodyModel, IRollingStockLightState rollingStock, float f5)
     {
         if (ClientRollingStockLighting.isActive())
         {
@@ -82,7 +88,9 @@ public class ModelRenderHelper
                     }
                 break;
                 case "commander":
-                    if (rollingStock.isLightChannelEnabled(RollingStockLightChannel.BEACON) && ((EntityRollingStock)rollingStock).ticksExisted % 10 < 5)
+                    if (rollingStock.isLightChannelEnabled(RollingStockLightChannel.BEACON)
+                            && ((EntityRollingStock)rollingStock).ticksExisted
+                               % COMMANDER_BEACON_PERIOD_TICKS < COMMANDER_BEACON_ON_TICKS)
                     {
                         Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
                         bm.render(f5);
@@ -318,10 +326,11 @@ public class ModelRenderHelper
         }
     }
 
-    private static boolean hasHeadlights(IRollingStockLightControls controls)
+    /** Reports whether either synchronized headlight end is active. */
+    private static boolean hasHeadlights(IRollingStockLightState lightState)
     {
-        return controls.getFrontHeadlightLevel() != RollingStockHeadlightLevel.OFF
-               || controls.getRearHeadlightLevel() != RollingStockHeadlightLevel.OFF;
+        return lightState.getFrontHeadlightLevel() != RollingStockHeadlightLevel.OFF
+               || lightState.getRearHeadlightLevel() != RollingStockHeadlightLevel.OFF;
     }
 
     private static byte beaconPhase(EntityRollingStock stock)
@@ -368,6 +377,7 @@ public class ModelRenderHelper
 
     public static String[] SetupDynamicBallast(String ballast)
     {
+        // Dynamic texture identifier: [0] = resource domain, [1] = resource path.
         String[] ballastTexture = new String[2];
 
         if (ballast.contains(":")) {

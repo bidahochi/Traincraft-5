@@ -7,6 +7,12 @@ final class FrameFixtureQueue<T>
 {
     private static final int INITIAL_CAPACITY = 16;
 
+    /**
+     * Open-addressed fixture records and their insertion order. At hash-table slot {@code i},
+     * {@code owners[i]}, {@code fixtureIds[i]}, and {@code values[i]} describe the same fixture.
+     * At logical queue position {@code j}, {@code insertionOrder[j]} stores the occupied hash-table
+     * slot used to recover that fixture in insertion order.
+     */
     private int[] owners = new int[INITIAL_CAPACITY];
     private String[] fixtureIds = new String[INITIAL_CAPACITY];
     private Object[] values = new Object[INITIAL_CAPACITY];

@@ -3,8 +3,9 @@ package train.common.api;
 /**
  * Stock- or skin-authored operational role for a physical light fixture.
  *
- * <p>The model owns only stable fixture identity. A profile assigns one of these roles, allowing
- * rolling stock that share a model to use the same physical lens differently.</p>
+ * <p>The model owns fixture identity and physical geometry. A profile assigns one of these
+ * operational roles, allowing rolling stock that share a model to use the same physical lens
+ * differently.</p>
  */
 public enum LightFixtureType
 {
@@ -14,18 +15,21 @@ public enum LightFixtureType
     DITCH_LIGHT(
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.DITCH)
+        .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
+        .ditchHornResponse(RollingStockDitchHornMode.ACTIVE_END, null, null)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.BEAM)
         .beamLength(RollingStockLightDefinition.DEFAULT_DITCH_LIGHT_BEAM_LENGTH)
         .hotspotEnabled(true)
         .clientProjectorEligible(true)
         .build(),
-        "A ditch light controlled by the ditch-light circuit; its behavior may be overridden per fixture."),
+        "A ditch light requiring its configured circuit and facing headlight; DIM emits only the source, while BRIGHT also projects."),
     NUMBERBOARD(
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.AUX)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
+        .lightmapFloor(RollingStockLightDefinition.DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR)
         .beamDimensions(0, 0)
         .hotspotEnabled(false)
         .clientProjectorEligible(false)

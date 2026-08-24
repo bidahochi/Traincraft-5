@@ -1,10 +1,9 @@
 package train.client.render.lighting;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -16,31 +15,56 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import train.common.Traincraft;
+import train.common.api.EntityRollingStock;
 import train.common.api.RollingStockLightDefinition;
 import train.common.core.handlers.ConfigHandler;
 
 /**
- * Frame-scoped collector for rolling-stock beams, glows, and emissive geometry.
- * Model renderers submit camera-relative values; the world-last callback captures the world
+ * Frame-scoped collector for rolling-stock and placed-model beams, glows, and emissive geometry.
+ * Fixture renderers submit camera-relative values; the world-last callback captures the world
  * view, drains and de-duplicates queues by owner/fixture, then selects the best supported
- * compositor. All entry points run on the client render thread. {@link #flush()} restores
- * the fixed-function state it changes and always releases frame-owned references.
+ * compositor. All entry points run on the client render thread. {@link #flush()} restores the
+ * fixed-function state it changes and always releases frame-owned references.
+ * Three-element geometry arrays use {@code [0] = x}, {@code [1] = y}, and {@code [2] = z}.
+ * Nine-element bases use {@code [0..2] = direction}, {@code [3..5] = right}, and
+ * {@code [6..8] = up}, with x/y/z within each range. Sixteen-element matrices use OpenGL
+ * column-major order: {@code [0..3]}, {@code [4..7]}, {@code [8..11]}, and {@code [12..15]}
+ * are columns 0 through 3 respectively.
  */
 public final class LightEffectRenderBatch
 {
     private static final int RADIAL_SEGMENTS = 12;
     private static final float HOTSPOT_SURFACE_NUDGE = 0.012F;
     private static final float HOTSPOT_SELF_HIT_NUDGE = 0.01F;
+    private static final float MINIMUM_VISIBLE_BEAM_OPACITY = 1.0E-3F;
+    private static final float MINIMUM_BEAM_LENGTH = 1.0E-5F;
+    private static final float MINIMUM_DIRECTION_LENGTH = 1.0E-6F;
+    private static final float RAY_AXIS_EPSILON = 1.0E-8F;
+    private static final float MATRIX_DETERMINANT_EPSILON = 1.0E-8F;
+    private static final float MINIMUM_VIEWER_FACING_DOT = 1.0E-4F;
+    private static final float HOTSPOT_SOURCE_RADIUS_SCALE = 1.2F;
+    private static final float HOTSPOT_BASE_ALPHA = 210.0F / 255.0F;
+    private static final int MAXIMUM_EXCLUDED_BLOCK_HITS = 8;
+    private static final float BEAM_VERTICAL_HALF_WIDTH_SCALE = 0.6F;
+    private static final float COPLANAR_POLYGON_OFFSET_FACTOR = -0.25F;
+    private static final float COPLANAR_POLYGON_OFFSET_UNITS = -1.0F;
+    private static final float REFERENCE_AXIS_PARALLEL_THRESHOLD = 0.95F;
     private static final FrameFixtureQueue<LightEffectSubmission> QUEUE =
         new FrameFixtureQueue<LightEffectSubmission>();
     private static final FrameFixtureQueue<LightGlowSubmission> GLOWS =
         new FrameFixtureQueue<LightGlowSubmission>();
     private static final FrameFixtureQueue<LightEmissiveSubmission> EMISSIVE =
         new FrameFixtureQueue<LightEmissiveSubmission>();
-    private static final Map<String, CachedHotspot> HOTSPOT_CACHE =
-        new HashMap<String, CachedHotspot>();
     private static final FloatBuffer POSE_BUFFER = BufferUtils.createFloatBuffer(16);
     private static final FloatBuffer VIEW_BUFFER = BufferUtils.createFloatBuffer(16);
+    private static final IntBuffer VIEWPORT_BUFFER = BufferUtils.createIntBuffer(16);
+    /** OpenGL viewport: {@code [0] = x}, {@code [1] = y}, {@code [2] = width}, {@code [3] = height}. */
+    private static final int[] FRAME_VIEWPORT = new int[4];
+    /**
+     * Reusable beam cross-sections. Outer positions are corners in winding order:
+     * {@code [0] = -right/-up}, {@code [1] = -right/+up}, {@code [2] = +right/+up}, and
+     * {@code [3] = +right/-up}; every inner array is {@code [x, y, z]}.
+     */
     private static final float[][] BEAM_NEAR = new float[4][3];
     private static final float[][] BEAM_FAR = new float[4][3];
     private static final List<LightEffectSubmission> FRAME_SUBMISSIONS =
@@ -50,9 +74,11 @@ public final class LightEffectRenderBatch
     private static final List<LightEmissiveSubmission> FRAME_EMISSIVE =
         new ArrayList<LightEmissiveSubmission>();
     private static final ViewTransform VIEW_TRANSFORM = new ViewTransform();
+    private static final BeamOcclusionDemand OCCLUSION_DEMAND = new BeamOcclusionDemand();
     private static boolean loggedDirectFlush;
-    private static World hotspotWorld;
-    private static long hotspotTick = Long.MIN_VALUE;
+    private static boolean frameOcclusionDemandKnown;
+    private static boolean frameOcclusionRequired;
+    private static boolean frameViewportValid;
 
     private LightEffectRenderBatch() {}
 
@@ -85,6 +111,16 @@ public final class LightEffectRenderBatch
         {
             VIEW_TRANSFORM.captureCurrent();
         }
+        if (frameViewportValid == false)
+        {
+            VIEWPORT_BUFFER.clear();
+            GL11.glGetInteger(GL11.GL_VIEWPORT, VIEWPORT_BUFFER);
+            for (int index = 0; index < FRAME_VIEWPORT.length; index++)
+            {
+                FRAME_VIEWPORT[index] = VIEWPORT_BUFFER.get(index);
+            }
+            frameViewportValid = true;
+        }
     }
 
     static synchronized boolean copyCapturedWorldView(float[] destination)
@@ -95,6 +131,26 @@ public final class LightEffectRenderBatch
     static synchronized boolean copyCapturedProjection(float[] destination)
     {
         return VIEW_TRANSFORM.copyProjection(destination);
+    }
+
+    /**
+     * Copies the viewport captured with the frame's world-view transform.
+     *
+     * <p>Mask and shader backends reuse this value to avoid repeated synchronous OpenGL reads.
+     *
+     * @param destination array receiving x, y, width, and height
+     * @return whether a frame viewport was available and copied
+     */
+    static synchronized boolean copyCapturedViewport(int[] destination)
+    {
+        if (frameViewportValid == false
+                || destination == null
+                || destination.length < FRAME_VIEWPORT.length)
+        {
+            return false;
+        }
+        System.arraycopy(FRAME_VIEWPORT, 0, destination, 0, FRAME_VIEWPORT.length);
+        return true;
     }
 
     static synchronized LightEffectSubmission queuedFixtureForTest(int ownerId, String fixtureId)
@@ -141,7 +197,7 @@ public final class LightEffectRenderBatch
     public static synchronized void clear()
     {
         clearWorldState();
-        LegacyBeamShader.clear();
+        BeamProjectionShader.clear();
         MaxOpacityLightCompositor.clear();
         RollingStockDepthMask.clear();
         RollingStockShadowRenderer.clear();
@@ -152,12 +208,11 @@ public final class LightEffectRenderBatch
         QUEUE.clear();
         GLOWS.clear();
         EMISSIVE.clear();
-        HOTSPOT_CACHE.clear();
-        hotspotWorld = null;
-        hotspotTick = Long.MIN_VALUE;
         VIEW_TRANSFORM.clear();
+        BeamImpactResolver.clearAll();
         RollingStockLightOcclusion.clearFrame();
         RollingStockDepthMask.finishFrame();
+        resetOcclusionDemand();
     }
 
     /**
@@ -175,8 +230,10 @@ public final class LightEffectRenderBatch
                 && GLOWS.isEmpty()
                 && EMISSIVE.isEmpty())
         {
+            BeamImpactResolver.clearFrame();
             RollingStockLightOcclusion.clearFrame();
             RollingStockDepthMask.finishFrame();
+            resetOcclusionDemand();
             return;
         }
         QUEUE.addValuesTo(FRAME_SUBMISSIONS);
@@ -193,13 +250,20 @@ public final class LightEffectRenderBatch
             {
                 return;
             }
-            ViewTransform viewTransform = VIEW_TRANSFORM.captured()
-                                          ? VIEW_TRANSFORM
-                                          : ViewTransform.capture();
-            RollingStockShadowRenderer.beginFrame();
-            boolean composited = MaxOpacityLightCompositor.render(FRAME_SUBMISSIONS);
+            boolean visibleBeam = containsVisibleBeam(FRAME_SUBMISSIONS);
+            boolean composited = false;
+            if (visibleBeam)
+            {
+                ViewTransform viewTransform = VIEW_TRANSFORM.captured()
+                                              ? VIEW_TRANSFORM
+                                              : ViewTransform.capture();
+                BeamImpactResolver.beginFrame();
+                resolveFrameImpacts(viewTransform);
+                RollingStockShadowRenderer.beginFrame();
+                composited = MaxOpacityLightCompositor.render(FRAME_SUBMISSIONS);
+            }
             if (composited == false
-                    && containsVisibleBeam(FRAME_SUBMISSIONS)
+                    && visibleBeam
                     && loggedDirectFlush == false)
             {
                 loggedDirectFlush = true;
@@ -211,6 +275,8 @@ public final class LightEffectRenderBatch
             int activeTexture = GL11.glGetInteger(GL13.GL_ACTIVE_TEXTURE);
             OpenGlHelper.setActiveTexture(GL13.GL_TEXTURE2);
             int shadowTexture = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
+            OpenGlHelper.setActiveTexture(GL13.GL_TEXTURE3);
+            int stockDepthTexture = GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D);
             OpenGlHelper.setActiveTexture(activeTexture);
             int matrixMode = GL11.glGetInteger(GL11.GL_MATRIX_MODE);
             int previousProgram = GL11.glGetInteger(org.lwjgl.opengl.GL20.GL_CURRENT_PROGRAM);
@@ -236,7 +302,7 @@ public final class LightEffectRenderBatch
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
                 for (LightEffectSubmission submission : FRAME_SUBMISSIONS)
                 {
-                    drawFixtureDecorations(submission, viewTransform);
+                    drawFixtureDecorations(submission);
                 }
                 for (LightGlowSubmission glow : FRAME_GLOWS)
                 {
@@ -255,6 +321,8 @@ public final class LightEffectRenderBatch
                 GL11.glPopAttrib();
                 OpenGlHelper.setActiveTexture(GL13.GL_TEXTURE2);
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, shadowTexture);
+                OpenGlHelper.setActiveTexture(GL13.GL_TEXTURE3);
+                GL11.glBindTexture(GL11.GL_TEXTURE_2D, stockDepthTexture);
                 OpenGlHelper.setActiveTexture(activeTexture);
             }
         }
@@ -264,25 +332,39 @@ public final class LightEffectRenderBatch
             FRAME_GLOWS.clear();
             FRAME_EMISSIVE.clear();
             VIEW_TRANSFORM.clear();
+            BeamImpactResolver.clearFrame();
             RollingStockLightOcclusion.clearFrame();
             RollingStockDepthMask.finishFrame();
+            resetOcclusionDemand();
         }
     }
 
+    /** Clears frame-local beam demand and ends optional shader state retained from the prior frame. */
+    private static void resetOcclusionDemand()
+    {
+        BeamProjectionShader.finishFrame();
+        frameOcclusionDemandKnown = false;
+        frameOcclusionRequired = false;
+        frameViewportValid = false;
+        OCCLUSION_DEMAND.reset();
+    }
+
+    /** Reports whether the current quality mode permits enhanced fixture rendering. */
     private static boolean enhancedLightingEnabled()
     {
-        return ConfigHandler.ENABLE_ADVANCED_LIGHTING;
+        return ConfigHandler.enhancedLightingEnabled();
     }
 
     static boolean hasVisibleBeam(LightEffectSubmission submission)
     {
         RollingStockLightDefinition definition = submission.definition;
-        return submission.intensity > 0.0F
+        return ConfigHandler.projectedLightingEnabled()
+               && submission.intensity > 0.0F
                && definition.effect() == RollingStockLightDefinition.Effect.BEAM
                && definition.beamLength() > 0.0F
                && definition.beamWidth() > 0.0F
                && BeamColorCompositing.opacity(submission.beamAlpha, submission.intensity)
-               > 1.0E-3F;
+               > MINIMUM_VISIBLE_BEAM_OPACITY;
     }
 
     private static boolean containsVisibleBeam(List<LightEffectSubmission> submissions)
@@ -329,182 +411,128 @@ public final class LightEffectRenderBatch
         drawBeam(submission, definition, premultiplyColor);
     }
 
-    private static void drawFixtureDecorations(
-        LightEffectSubmission submission, ViewTransform viewTransform)
+    /** Draws source glows and impact hotspots independently from projected cone geometry. */
+    private static void drawFixtureDecorations(LightEffectSubmission submission)
     {
         RollingStockLightDefinition definition = submission.definition;
-        if (submission.intensity <= 0.0F
-                || definition.effect() == RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
+        boolean sourceGlowVisible = hasVisibleSourceGlow(submission);
+        boolean hotspotEligible =
+            submission.intensity > 0.0F
+            && definition.effect() == RollingStockLightDefinition.Effect.BEAM
+            && definition.beamLength() > 0.0F
+            && definition.hotspotEnabled()
+            && submission.hotspotAlpha > 0.0F;
+        if (sourceGlowVisible == false && hotspotEligible == false)
         {
             return;
         }
         float red = ((definition.color() >> 16) & 255) / 255.0F;
         float green = ((definition.color() >> 8) & 255) / 255.0F;
         float blue = (definition.color() & 255) / 255.0F;
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        GL11.glPushMatrix();
-        try
+        if (sourceGlowVisible)
         {
-            applyPose(submission);
-            drawGlowOriented(
-                submission.x,
-                submission.y,
-                submission.z,
-                submission.sourceDx,
-                submission.sourceDy,
-                submission.sourceDz,
-                submission.sourceRightX,
-                submission.sourceRightY,
-                submission.sourceRightZ,
-                submission.sourceUpX,
-                submission.sourceUpY,
-                submission.sourceUpZ,
-                definition.sourceGlowRadius(),
-                definition.sourceGlowWidthScale(),
-                definition.sourceGlowHeightScale(),
-                definition.sourceGlowRightOffset(),
-                definition.sourceGlowUpOffset(),
-                red,
-                green,
-                blue,
-                definition.sourceGlowIntensity() * submission.sourceIntensity);
-        }
-        finally
-        {
-            GL11.glPopMatrix();
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+            GL11.glPushMatrix();
+            try
+            {
+                applyPose(submission);
+                drawGlowOriented(
+                    submission.x,
+                    submission.y,
+                    submission.z,
+                    submission.sourceDx,
+                    submission.sourceDy,
+                    submission.sourceDz,
+                    submission.sourceRightX,
+                    submission.sourceRightY,
+                    submission.sourceRightZ,
+                    submission.sourceUpX,
+                    submission.sourceUpY,
+                    submission.sourceUpZ,
+                    definition.sourceGlowRadius(),
+                    definition.sourceGlowWidthScale(),
+                    definition.sourceGlowHeightScale(),
+                    definition.sourceGlowRightOffset(),
+                    definition.sourceGlowUpOffset(),
+                    red,
+                    green,
+                    blue,
+                    definition.sourceGlowIntensity() * submission.sourceIntensity);
+            }
+            finally
+            {
+                GL11.glPopMatrix();
+            }
         }
 
-        if (definition.effect() != RollingStockLightDefinition.Effect.BEAM
-                || definition.beamLength() <= 0.0F
-                || definition.hotspotEnabled() == false
-                || submission.hotspotAlpha <= 0.0F)
+        if (hotspotEligible == false)
         {
             return;
         }
-        drawHotspot(submission, definition, viewTransform, red, green, blue);
+        drawHotspot(submission, definition, red, green, blue);
     }
 
+    /**
+     * Reports whether the fixture has a drawable local source glow.
+     *
+     * <p>Source emission is intentionally independent from projected intensity. In particular, a
+     * DIM headlight has a full-bright lens and source glow while its cone and impact hotspot remain
+     * disabled.
+     */
+    static boolean hasVisibleSourceGlow(LightEffectSubmission submission)
+    {
+        RollingStockLightDefinition definition = submission.definition;
+        return submission.sourceIntensity > 0.0F
+               && definition.effect()
+                  != RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE
+               && definition.sourceGlowRadius() > 0.0F
+               && definition.sourceGlowIntensity() > 0.0F;
+    }
+
+    /** Draws one impact hotspot using its resolved point, normal, falloff, and viewer rejection. */
     private static void drawHotspot(
         LightEffectSubmission submission,
         RollingStockLightDefinition definition,
-        ViewTransform viewTransform,
         float red,
         float green,
         float blue)
     {
-        Minecraft minecraft = Minecraft.getMinecraft();
-        World world = minecraft.theWorld;
-        if (world == null)
+        BeamImpact impact = submission.impactResolution.impact;
+        if (impact == null)
         {
             return;
         }
-        // Raycast the same reach that is visible this frame. A surface beyond
-        // the rendered cone must never receive a detached hotspot.
         float visibleLength =
             FixedFunctionBeamGeometry.effectiveLength(
                 definition.beamLength(), submission.beamScale, submission.fixtureReach);
-        if (visibleLength <= 1.0E-5F)
+        if (visibleLength <= MINIMUM_BEAM_LENGTH)
         {
             return;
         }
-        float configuredWidth = definition.beamWidth();
-        BeamSurfacePlacement.Point rayOrigin =
-            BeamSurfacePlacement.rayOrigin(
-                submission.x,
-                submission.y,
-                submission.z,
-                submission.dx,
-                submission.dy,
-                submission.dz);
-        float[] eyeOrigin = submission.eyePoint(rayOrigin.x(), rayOrigin.y(), rayOrigin.z());
-        float[] eyeDirection = submission.eyeDirection(submission.dx, submission.dy, submission.dz);
-        Vec3 worldOrigin = viewTransform.eyePointToWorld(eyeOrigin[0], eyeOrigin[1], eyeOrigin[2]);
-        float[] worldDirection =
-            viewTransform.eyeDirectionToWorld(
-                eyeDirection[0], eyeDirection[1], eyeDirection[2]);
-        Vec3 worldEnd =
-            Vec3.createVectorHelper(
-                worldOrigin.xCoord + worldDirection[0] * visibleLength,
-                worldOrigin.yCoord + worldDirection[1] * visibleLength,
-                worldOrigin.zCoord + worldDirection[2] * visibleLength);
-        long gameTime = world.getTotalWorldTime();
-        prepareHotspotCache(world, gameTime);
-        String cacheKey =
-            System.identityHashCode(world)
-            + "\n"
-            + submission.ownerId
-            + "\n"
-            + submission.fixtureId;
-        CachedHotspot cached = HOTSPOT_CACHE.get(cacheKey);
-        MovingObjectPosition hit;
-        if (cached != null && cached.gameTime == gameTime)
-        {
-            hit = cached.hit;
-        }
-        else
-        {
-            hit = world.rayTraceBlocks(worldOrigin, worldEnd, false);
-            for (int skipped = 0;
-                    skipped < 8
-                    && hit != null
-                    && (isExcludedOwnerHit(submission, hit)
-                        || isRenderedHotspotTarget(world, hit) == false);
-                    skipped++)
-            {
-                Vec3 resumed =
-                    advancePastBlock(
-                        hit.hitVec,
-                        worldDirection,
-                        hit.blockX,
-                        hit.blockY,
-                        hit.blockZ);
-                if (resumed != null
-                        && resumed.squareDistanceTo(worldOrigin)
-                        < worldEnd.squareDistanceTo(worldOrigin))
-                {
-                    hit = world.rayTraceBlocks(resumed, worldEnd, false);
-                }
-                else
-                {
-                    hit = null;
-                }
-            }
-            HOTSPOT_CACHE.put(cacheKey, new CachedHotspot(gameTime, hit));
-        }
-        if (hit == null
-                || hit.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK
-                || hit.hitVec == null
-                || isRenderedHotspotTarget(world, hit) == false)
-        {
-            return;
-        }
-
-        double distance = worldOrigin.distanceTo(hit.hitVec);
         float distanceFraction =
-            visibleLength <= 1.0E-5F
+            visibleLength <= MINIMUM_BEAM_LENGTH
             ? 0.0F
-            : (float) Math.max(0.0D, Math.min(1.0D, distance / visibleLength));
-        ForgeDirection hitFace = ForgeDirection.getOrientation(hit.sideHit);
-        float[] eyeNormal =
-            viewTransform.worldDirectionToEye(
-                hitFace.offsetX, hitFace.offsetY, hitFace.offsetZ);
-        float[] eyeHit = viewTransform.worldPointToEye(hit.hitVec);
-        float viewerDot = eyeNormal[0] * -eyeHit[0]
-                          + eyeNormal[1] * -eyeHit[1]
-                          + eyeNormal[2] * -eyeHit[2];
-        if (viewerDot <= 1.0E-4F)
+            : Math.max(0.0F, Math.min(1.0F, impact.distance / visibleLength));
+        float viewerDot = impact.normalX * -impact.pointX
+                          + impact.normalY * -impact.pointY
+                          + impact.normalZ * -impact.pointZ;
+        if (viewerDot <= MINIMUM_VIEWER_FACING_DOT)
         {
             return;
         }
         float radius =
-            Math.max(definition.sourceGlowRadius() * 1.2F, configuredWidth * distanceFraction);
+            Math.max(
+                definition.sourceGlowRadius() * HOTSPOT_SOURCE_RADIUS_SCALE,
+                FixedFunctionBeamGeometry.effectiveWidth(
+                    definition.beamWidth(), submission.beamScale, submission.fixtureReach)
+                * distanceFraction);
         drawGlow(
-            eyeHit[0] + eyeNormal[0] * HOTSPOT_SURFACE_NUDGE,
-            eyeHit[1] + eyeNormal[1] * HOTSPOT_SURFACE_NUDGE,
-            eyeHit[2] + eyeNormal[2] * HOTSPOT_SURFACE_NUDGE,
-            eyeNormal[0],
-            eyeNormal[1],
-            eyeNormal[2],
+            impact.pointX + impact.normalX * HOTSPOT_SURFACE_NUDGE,
+            impact.pointY + impact.normalY * HOTSPOT_SURFACE_NUDGE,
+            impact.pointZ + impact.normalZ * HOTSPOT_SURFACE_NUDGE,
+            impact.normalX,
+            impact.normalY,
+            impact.normalZ,
             radius,
             1.0F,
             1.0F,
@@ -513,29 +541,179 @@ public final class LightEffectRenderBatch
             red,
             green,
             blue,
-            (210.0F / 255.0F) * submission.hotspotAlpha * submission.intensity);
+            HOTSPOT_BASE_ALPHA * submission.hotspotAlpha * submission.intensity);
     }
 
-    static synchronized int hotspotCacheSizeForTest()
+    /** Resolves block and captured rolling-stock endpoints once before either beam backend draws. */
+    private static void resolveFrameImpacts(ViewTransform viewTransform)
     {
-        return HOTSPOT_CACHE.size();
+        World world = Minecraft.getMinecraft().theWorld;
+        for (LightEffectSubmission submission : FRAME_SUBMISSIONS)
+        {
+            submission.impactResolution = BeamImpactResolution.NONE;
+            if (world == null || hasVisibleBeam(submission) == false)
+            {
+                continue;
+            }
+            RollingStockLightDefinition definition = submission.definition;
+            float visibleLength = FixedFunctionBeamGeometry.effectiveLength(
+                                      definition.beamLength(),
+                                      submission.beamScale,
+                                      submission.fixtureReach);
+            float visibleWidth = FixedFunctionBeamGeometry.effectiveWidth(
+                                     definition.beamWidth(),
+                                     submission.beamScale,
+                                     submission.fixtureReach);
+            BeamImpactResolution stockResolution =
+                BeamImpactResolver.resolveStock(submission, visibleLength, visibleWidth);
+            BeamImpact blockImpact = resolveBlockImpact(
+                                   world, submission, viewTransform, visibleLength);
+            BeamImpact nearestImpact = BeamImpact.nearest(stockResolution.impact, blockImpact);
+            submission.impactResolution =
+                new BeamImpactResolution(
+                    nearestImpact, stockResolution.conservativeStockDistance);
+        }
     }
 
-    static synchronized void cacheHotspotForTest(World world, long tick, String key)
+    /**
+     * Resolves scene-wide cone demand once; every rolling-stock render reuses this result.
+     *
+     * @param world current client world
+     * @param animationTime world time including the current partial tick
+     */
+    public static synchronized void prepareRollingStockOcclusion(
+        World world, double animationTime)
     {
-        prepareHotspotCache(world, tick);
-        HOTSPOT_CACHE.put(key, new CachedHotspot(tick, null));
-    }
-
-    private static void prepareHotspotCache(World world, long tick)
-    {
-        if (hotspotWorld == world && hotspotTick == tick)
+        if (frameOcclusionDemandKnown)
         {
             return;
         }
-        HOTSPOT_CACHE.clear();
-        hotspotWorld = world;
-        hotspotTick = tick;
+        ClientRollingStockLighting.populateBeamOcclusionDemand(
+            world, animationTime, OCCLUSION_DEMAND);
+        frameOcclusionRequired = OCCLUSION_DEMAND.any();
+        frameOcclusionDemandKnown = true;
+    }
+
+    /**
+     * Reports whether any stock geometry may be needed by projected lights this frame.
+     *
+     * <p>Before demand is prepared the conservative {@code true} result prevents an ordering-dependent
+     * first-frame leak. Callers should prefer the stock-specific overload once an entity is known.
+     *
+     * @return whether rolling-stock occlusion capture should remain enabled
+     */
+    public static synchronized boolean rollingStockOcclusionRequired()
+    {
+        return ConfigHandler.projectedLightingEnabled()
+               && (frameOcclusionDemandKnown == false || frameOcclusionRequired);
+    }
+
+    /**
+     * Reports whether one vehicle lies within the broad-phase reach of any projected beam.
+     *
+     * @param stock vehicle about to render
+     * @return whether its geometry should be captured for beam impact and shadow work
+     */
+    public static synchronized boolean rollingStockOcclusionRequired(
+        EntityRollingStock stock)
+    {
+        if (ConfigHandler.projectedLightingEnabled() == false)
+        {
+            return false;
+        }
+        if (frameOcclusionDemandKnown == false)
+        {
+            return true;
+        }
+        return stock != null
+               && OCCLUSION_DEMAND.reaches(
+                      stock.getEntityId(), stock.posX, stock.posY, stock.posZ,
+                      RollingStockLightOcclusion.stockBoundingRadius(stock));
+    }
+
+    /** Raycasts blocks with owner-exclusion retries and returns the nearest valid block impact. */
+    private static BeamImpact resolveBlockImpact(
+        World world,
+        LightEffectSubmission submission,
+        ViewTransform viewTransform,
+        float visibleLength)
+    {
+        BeamSurfacePlacement.Point rayOrigin = BeamSurfacePlacement.rayOrigin(
+            submission.x, submission.y, submission.z,
+            submission.dx, submission.dy, submission.dz);
+        float[] eyeOrigin = submission.eyePoint(rayOrigin.x(), rayOrigin.y(), rayOrigin.z());
+        float[] eyeDirection = submission.eyeDirection(
+                                   submission.dx, submission.dy, submission.dz);
+        Vec3 worldOrigin = viewTransform.eyePointToWorld(
+                               eyeOrigin[0], eyeOrigin[1], eyeOrigin[2]);
+        float[] worldDirection = viewTransform.eyeDirectionToWorld(
+                                     eyeDirection[0], eyeDirection[1], eyeDirection[2]);
+        normalizeDirection(worldDirection);
+        Vec3 worldEnd = Vec3.createVectorHelper(
+            worldOrigin.xCoord + worldDirection[0] * visibleLength,
+            worldOrigin.yCoord + worldDirection[1] * visibleLength,
+            worldOrigin.zCoord + worldDirection[2] * visibleLength);
+        double maximumDistanceSquared = worldEnd.squareDistanceTo(worldOrigin);
+        /*
+         * World.rayTraceBlocks advances the start Vec3 in place while traversing blocks. Keep the
+         * authoritative source and endpoint immutable: impact length, exclusion resumption, and
+         * cone truncation all depend on the original fixture-to-hit distance rather than the
+         * raycaster's final cursor position.
+         */
+        MovingObjectPosition hit = world.rayTraceBlocks(
+                                       copyVector(worldOrigin), copyVector(worldEnd), false);
+        for (int skipped = 0;
+                skipped < MAXIMUM_EXCLUDED_BLOCK_HITS
+                && hit != null
+                && (isExcludedOwnerHit(submission, hit)
+                    || isRenderedHotspotTarget(world, hit) == false);
+                skipped++)
+        {
+            Vec3 resumed = advancePastBlock(
+                               hit.hitVec, worldDirection,
+                               hit.blockX, hit.blockY, hit.blockZ);
+            hit = resumed != null
+                  && resumed.squareDistanceTo(worldOrigin)
+                     < maximumDistanceSquared
+                  ? world.rayTraceBlocks(resumed, copyVector(worldEnd), false)
+                  : null;
+        }
+        if (hit == null || hit.hitVec == null || isRenderedHotspotTarget(world, hit) == false)
+        {
+            return null;
+        }
+        ForgeDirection face = ForgeDirection.getOrientation(hit.sideHit);
+        float[] eyeNormal = viewTransform.worldDirectionToEye(
+                                face.offsetX, face.offsetY, face.offsetZ);
+        normalizeDirection(eyeNormal);
+        float[] eyeHit = viewTransform.worldPointToEye(hit.hitVec);
+        return new BeamImpact(
+            BeamImpact.Target.BLOCK,
+            (float) worldOrigin.distanceTo(hit.hitVec),
+            eyeHit[0], eyeHit[1], eyeHit[2],
+            eyeNormal[0], eyeNormal[1], eyeNormal[2]);
+    }
+
+    /** Copies a mutable Minecraft vector before passing it to a block raycast. */
+    private static Vec3 copyVector(Vec3 source)
+    {
+        return Vec3.createVectorHelper(source.xCoord, source.yCoord, source.zCoord);
+    }
+
+    /** Normalizes a three-component direction in place, using forward when it is degenerate. */
+    private static void normalizeDirection(float[] direction)
+    {
+        float length = (float)Math.sqrt(
+                           direction[0] * direction[0]
+                           + direction[1] * direction[1]
+                           + direction[2] * direction[2]);
+        if (length <= MINIMUM_DIRECTION_LENGTH)
+        {
+            return;
+        }
+        direction[0] /= length;
+        direction[1] /= length;
+        direction[2] /= length;
     }
 
     private static boolean isExcludedOwnerHit(
@@ -558,6 +736,7 @@ public final class LightEffectRenderBatch
                && world.getBlock(hit.blockX, hit.blockY, hit.blockZ).isOpaqueCube();
     }
 
+    /** Advances a retry ray beyond an excluded block while preserving the original direction. */
     private static Vec3 advancePastBlock(
         Vec3 hit, float[] direction, int blockX, int blockY, int blockZ)
     {
@@ -566,35 +745,35 @@ public final class LightEffectRenderBatch
             return null;
         }
         double distance = Double.POSITIVE_INFINITY;
-        if (direction[0] > 1.0E-8F)
+        if (direction[0] > RAY_AXIS_EPSILON)
         {
             distance = Math.min(distance, (blockX + 1.0D - hit.xCoord) / direction[0]);
         }
         else
         {
-            if (direction[0] < -1.0E-8F)
+            if (direction[0] < -RAY_AXIS_EPSILON)
             {
                 distance = Math.min(distance, (blockX - hit.xCoord) / direction[0]);
             }
         }
-        if (direction[1] > 1.0E-8F)
+        if (direction[1] > RAY_AXIS_EPSILON)
         {
             distance = Math.min(distance, (blockY + 1.0D - hit.yCoord) / direction[1]);
         }
         else
         {
-            if (direction[1] < -1.0E-8F)
+            if (direction[1] < -RAY_AXIS_EPSILON)
             {
                 distance = Math.min(distance, (blockY - hit.yCoord) / direction[1]);
             }
         }
-        if (direction[2] > 1.0E-8F)
+        if (direction[2] > RAY_AXIS_EPSILON)
         {
             distance = Math.min(distance, (blockZ + 1.0D - hit.zCoord) / direction[2]);
         }
         else
         {
-            if (direction[2] < -1.0E-8F)
+            if (direction[2] < -RAY_AXIS_EPSILON)
             {
                 distance = Math.min(distance, (blockZ - hit.zCoord) / direction[2]);
             }
@@ -638,6 +817,7 @@ public final class LightEffectRenderBatch
             submission.intensity);
     }
 
+    /** Draws one queued emissive polygon submission with its authored color and opacity. */
     private static void drawEmissive(LightEmissiveSubmission submission)
     {
         if (submission.vertexOffsets.length < 3 || submission.intensity <= 0.0F)
@@ -647,10 +827,10 @@ public final class LightEffectRenderBatch
         float red = ((submission.color >> 16) & 255) / 255.0F;
         float green = ((submission.color >> 8) & 255) / 255.0F;
         float blue = (submission.color & 255) / 255.0F;
-        // Prime tops use the light-lens glow layer, whose layering
-        // state biases coplanar surfaces by exactly these values. Without the
-        // bias the deferred top overlay loses against the beacon geometry's
-        // existing depth, making one underlying triangle appear stationary.
+        // Prime top overlays are coplanar with the beacon geometry and share the light-lens glow
+        // layer. Apply the same polygon offset used by source glows; otherwise, existing depth
+        // values can hide one overlay triangle and make that section of the rotating top appear
+        // stationary.
         GL11.glPushMatrix();
         try
         {
@@ -660,7 +840,8 @@ public final class LightEffectRenderBatch
             }
             GL11.glTranslatef(submission.originX, submission.originY, submission.originZ);
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-            GL11.glPolygonOffset(-0.25F, -1.0F);
+            GL11.glPolygonOffset(
+                COPLANAR_POLYGON_OFFSET_FACTOR, COPLANAR_POLYGON_OFFSET_UNITS);
             try
             {
                 GL11.glColor4f(red, green, blue, submission.intensity);
@@ -738,6 +919,7 @@ public final class LightEffectRenderBatch
             alpha);
     }
 
+    /** Draws a source glow quad in an explicit right/up plane. */
     private static void drawGlowOriented(
         float x,
         float y,
@@ -771,7 +953,7 @@ public final class LightEffectRenderBatch
         float rightRadius = radius * widthScale;
         float upRadius = radius * heightScale;
         GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-        GL11.glPolygonOffset(-0.25F, -1.0F);
+        GL11.glPolygonOffset(COPLANAR_POLYGON_OFFSET_FACTOR, COPLANAR_POLYGON_OFFSET_UNITS);
         GL11.glBegin(GL11.GL_TRIANGLES);
         for (int index = 0; index < RADIAL_SEGMENTS; index++)
         {
@@ -804,7 +986,7 @@ public final class LightEffectRenderBatch
         boolean premultiplyColor)
     {
         GL11.glPushMatrix();
-        boolean shader = LegacyBeamShader.available();
+        boolean shader = BeamProjectionShader.available();
         try
         {
             if (shader)
@@ -820,7 +1002,7 @@ public final class LightEffectRenderBatch
             {
                 float opacity =
                     BeamColorCompositing.opacity(submission.beamAlpha, submission.intensity);
-                LegacyBeamShader.bind(
+                BeamProjectionShader.bind(
                     definition.color(), opacity, premultiplyColor, submission.ownerId);
                 drawShaderBeamLocal(submission, definition);
             }
@@ -840,13 +1022,19 @@ public final class LightEffectRenderBatch
         LightEffectSubmission submission, RollingStockLightDefinition definition)
     {
         float[] basis = resolvedBeamBasis(submission);
-        float visibleLength =
+        float nominalLength =
             FixedFunctionBeamGeometry.effectiveLength(
                 definition.beamLength(), submission.beamScale, submission.fixtureReach);
-        float right =
+        float visibleLength =
+            submission.impactResolution.visibleLength(nominalLength, true);
+        float nominalHorizontalHalfWidth =
             FixedFunctionBeamGeometry.effectiveWidth(
                 definition.beamWidth(), submission.beamScale, submission.fixtureReach);
-        float up = right * 0.6F;
+        float lengthRatio = nominalLength <= MINIMUM_BEAM_LENGTH
+                            ? 0.0F
+                            : visibleLength / nominalLength;
+        float horizontalHalfWidth = nominalHorizontalHalfWidth * lengthRatio;
+        float verticalHalfWidth = horizontalHalfWidth * BEAM_VERTICAL_HALF_WIDTH_SCALE;
         BeamSurfacePlacement.Placement placement =
             BeamSurfacePlacement.place(
                 submission.x,
@@ -871,24 +1059,27 @@ public final class LightEffectRenderBatch
             basis[7],
             basis[8],
             placement.length(),
-            right,
-            up,
+            horizontalHalfWidth,
+            verticalHalfWidth,
             1.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        float farFadeFraction = BeamImpactResolution.originalDistanceFraction(
+                                    nominalLength, visibleLength, 1.0F);
         GL11.glBegin(GL11.GL_TRIANGLES);
         for (int side = 0; side < 4; side++)
         {
             int next = (side + 1) & 3;
             GL11.glTexCoord1f(0.0F);
             GL11.glVertex3f(placement.startX(), placement.startY(), placement.startZ());
-            GL11.glTexCoord1f(1.0F);
+            GL11.glTexCoord1f(farFadeFraction);
             GL11.glVertex3f(BEAM_FAR[side][0], BEAM_FAR[side][1], BEAM_FAR[side][2]);
-            GL11.glTexCoord1f(1.0F);
+            GL11.glTexCoord1f(farFadeFraction);
             GL11.glVertex3f(BEAM_FAR[next][0], BEAM_FAR[next][1], BEAM_FAR[next][2]);
         }
         GL11.glEnd();
     }
 
+    /** Tessellates the fixed-function beam cone in fixture-local coordinates. */
     private static void drawBeamLocal(
         LightEffectSubmission submission,
         RollingStockLightDefinition definition,
@@ -904,13 +1095,19 @@ public final class LightEffectRenderBatch
         float upX = basis[6];
         float upY = basis[7];
         float upZ = basis[8];
-        float visibleLength =
+        float nominalLength =
             FixedFunctionBeamGeometry.effectiveLength(
                 definition.beamLength(), submission.beamScale, submission.fixtureReach);
-        float right =
+        float visibleLength =
+            submission.impactResolution.visibleLength(nominalLength, false);
+        float nominalHorizontalHalfWidth =
             FixedFunctionBeamGeometry.effectiveWidth(
                 definition.beamWidth(), submission.beamScale, submission.fixtureReach);
-        float up = right * 0.6F;
+        float lengthRatio = nominalLength <= MINIMUM_BEAM_LENGTH
+                            ? 0.0F
+                            : visibleLength / nominalLength;
+        float horizontalHalfWidth = nominalHorizontalHalfWidth * lengthRatio;
+        float verticalHalfWidth = horizontalHalfWidth * BEAM_VERTICAL_HALF_WIDTH_SCALE;
         BeamSurfacePlacement.Placement placement =
             BeamSurfacePlacement.place(
                 submission.x,
@@ -951,8 +1148,8 @@ public final class LightEffectRenderBatch
                 upY,
                 upZ,
                 placement.length(),
-                right,
-                up,
+                horizontalHalfWidth,
+                verticalHalfWidth,
                 nearFraction);
             fillBeamCorners(
                 BEAM_FAR,
@@ -969,11 +1166,17 @@ public final class LightEffectRenderBatch
                 upY,
                 upZ,
                 placement.length(),
-                right,
-                up,
+                horizontalHalfWidth,
+                verticalHalfWidth,
                 farFraction);
-            float nearOpacity = opacity * FixedFunctionBeamGeometry.fadeAt(nearFraction);
-            float farOpacity = opacity * FixedFunctionBeamGeometry.fadeAt(farFraction);
+            float nearOpacity =
+                opacity * FixedFunctionBeamGeometry.fadeAt(
+                    BeamImpactResolution.originalDistanceFraction(
+                        nominalLength, visibleLength, nearFraction));
+            float farOpacity =
+                opacity * FixedFunctionBeamGeometry.fadeAt(
+                    BeamImpactResolution.originalDistanceFraction(
+                        nominalLength, visibleLength, farFraction));
             for (int side = 0; side < 4; side++)
             {
                 int next = (side + 1) & 3;
@@ -1073,7 +1276,7 @@ public final class LightEffectRenderBatch
         rightY -= directionY * projection;
         rightZ -= directionZ * projection;
         float length = (float) Math.sqrt(rightX * rightX + rightY * rightY + rightZ * rightZ);
-        if (length <= 1.0E-5F)
+        if (length <= MINIMUM_BEAM_LENGTH)
         {
             rightX = fallback[3];
             rightY = fallback[4];
@@ -1139,7 +1342,7 @@ public final class LightEffectRenderBatch
         float c21 = c * d - a * f;
         float c22 = a * e - b * d;
         float determinant = a * c00 + b * c01 + c * c02;
-        if (Math.abs(determinant) <= 1.0E-8F)
+        if (Math.abs(determinant) <= MATRIX_DETERMINANT_EPSILON)
         {
             return false;
         }
@@ -1173,6 +1376,7 @@ public final class LightEffectRenderBatch
 
     }
 
+    /** Creates a stable orthonormal direction/right/up basis for one beam direction. */
     private static float[] createBasis(float directionX, float directionY, float directionZ)
     {
         float length =
@@ -1181,14 +1385,15 @@ public final class LightEffectRenderBatch
                 directionX * directionX
                 + directionY * directionY
                 + directionZ * directionZ);
-        if (length < 1.0E-5F)
+        if (length < MINIMUM_BEAM_LENGTH)
         {
             return new float[] {0, 0, 1, 1, 0, 0, 0, 1, 0};
         }
         directionX /= length;
         directionY /= length;
         directionZ /= length;
-        float referenceY = Math.abs(directionY) < 0.95F ? 1.0F : 0.0F;
+        float referenceY =
+            Math.abs(directionY) < REFERENCE_AXIS_PARALLEL_THRESHOLD ? 1.0F : 0.0F;
         float referenceZ = referenceY == 0.0F ? 1.0F : 0.0F;
         float rightX = directionY * referenceZ - directionZ * referenceY;
         float rightY = -directionX * referenceZ;
@@ -1212,6 +1417,10 @@ public final class LightEffectRenderBatch
     /** Converts the eye-space submissions back to world space for block raycasts. */
     private static final class ViewTransform
     {
+        /**
+         * OpenGL column-major transforms: {@code [0..3]} column 0, {@code [4..7]} column 1,
+         * {@code [8..11]} column 2, and {@code [12..15]} the translation/homogeneous column.
+         */
         private final float[] matrix = new float[16];
         private final float[] inverse = new float[16];
         private final float[] projection = new float[16];
@@ -1322,10 +1531,11 @@ public final class LightEffectRenderBatch
                        matrix[2] * x + matrix[6] * y + matrix[10] * z);
         }
 
+        /** Returns a normalized three-component vector for view-transform hotspot calculations. */
         private static float[] normalize(float x, float y, float z)
         {
             float length = (float) Math.sqrt(x * x + y * y + z * z);
-            if (length <= 1.0E-5F)
+            if (length <= MINIMUM_BEAM_LENGTH)
             {
                 return new float[] {0.0F, 0.0F, 1.0F};
             }
@@ -1333,15 +1543,4 @@ public final class LightEffectRenderBatch
         }
     }
 
-    private static final class CachedHotspot
-    {
-        final long gameTime;
-        final MovingObjectPosition hit;
-
-        CachedHotspot(long gameTime, MovingObjectPosition hit)
-        {
-            this.gameTime = gameTime;
-            this.hit = hit;
-        }
-    }
 }

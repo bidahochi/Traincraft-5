@@ -156,7 +156,7 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
             }
         catch (JsonParseException ignored)
         {
-                // Missing or malformed legacy lighting state migrates to the documented defaults.
+                // A malformed lightingDetailsJSON value falls back to the documented defaults.
             }
         }
 

@@ -8,9 +8,18 @@ import train.common.api.RollingStockLightDefinition;
  * <p>All three axes are derived in fixture-local space and then transformed by the same
  * submission-time model-view. The later world-last camera is never used to reconstruct either
  * cross-section from the stored-pose behavior.
+ * Three-element arrays use {@code [0] = x}, {@code [1] = y}, and {@code [2] = z}. Nine-element
+ * optical bases use {@code [0..2] = direction x/y/z}, {@code [3..5] = right x/y/z}, and
+ * {@code [6..8] = up x/y/z}. Sixteen-element poses use OpenGL column-major order:
+ * {@code [0..3]} column 0, {@code [4..7]} column 1, {@code [8..11]} column 2, and
+ * {@code [12..15]} the translation/homogeneous column.
  */
 public final class LightEffectSubmission
 {
+    private static final float DEFAULT_HOTSPOT_ALPHA = 0.85F;
+    private static final float MINIMUM_DIRECTION_LENGTH = 1.0E-5F;
+    private static final float REFERENCE_AXIS_PARALLEL_THRESHOLD = 0.95F;
+
     private static final float[] IDENTITY =
         new float[]
     {
@@ -22,7 +31,7 @@ public final class LightEffectSubmission
     public final int ownerId;
     public final String fixtureId;
     public final RollingStockLightDefinition definition;
-    /** Submission-time OpenGL model-view used as the camera-relative pose. */
+    /** Submission-time OpenGL model-view using the documented 16-slot pose layout. */
     public final float[] cameraRelativePose;
 
     /** True when all spatial fields must be transformed by {@link #cameraRelativePose}. */
@@ -39,6 +48,8 @@ public final class LightEffectSubmission
     /** Normalized effect intensities and multiplicative beam geometry/alpha controls. */
     public float intensity, sourceIntensity;
     public float beamScale, beamAlpha, hotspotAlpha, fixtureReach;
+    /** Frame-local collision result, populated after all rolling-stock poses are captured. */
+    BeamImpactResolution impactResolution = BeamImpactResolution.NONE;
     /** Optional world block omitted by shadow/depth sampling to avoid self-occlusion. */
     public boolean hasExcludedBlock;
     public int excludedBlockX, excludedBlockY, excludedBlockZ;
@@ -75,7 +86,7 @@ public final class LightEffectSubmission
             intensity,
             1.0F,
             1.0F,
-            0.85F,
+            DEFAULT_HOTSPOT_ALPHA,
             1.0F);
     }
 
@@ -352,11 +363,10 @@ public final class LightEffectSubmission
     }
 
     /**
-     * Creates the rolling-stock submission in fixture-local coordinates. The keeps this pose and
-     * transforms the complete cone at world-last; doing the same is important because normalizing
-     * an already transformed direction discards scale from the authored model pose.
+     * Creates a fixture-local submission with an excluded world block for depth sampling. This
+     * factory retains the pose and transforms the complete cone during the world-last pass;
+     * normalizing an already transformed direction would discard scale from the authored pose.
      */
-    /** Creates a fixture-local submission with an excluded world block for depth sampling. */
     public static LightEffectSubmission fixtureLocal(
         float[] cameraRelativePose,
         int ownerId,
@@ -561,17 +571,19 @@ public final class LightEffectSubmission
         return (current * members + next) / count;
     }
 
+    /** Creates a stable orthonormal basis when a submission lacks an authored source-face basis. */
     private static float[] fallbackBasis(float dx, float dy, float dz)
     {
         float length = (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
-        if (length <= 1.0E-5F)
+        if (length <= MINIMUM_DIRECTION_LENGTH)
         {
             return new float[] {0, 0, 1, 1, 0, 0, 0, 1, 0};
         }
         dx /= length;
         dy /= length;
         dz /= length;
-        float referenceY = Math.abs(dy) < 0.95F ? 1.0F : 0.0F;
+        float referenceY =
+            Math.abs(dy) < REFERENCE_AXIS_PARALLEL_THRESHOLD ? 1.0F : 0.0F;
         float referenceZ = referenceY == 0.0F ? 1.0F : 0.0F;
         float rightX = dy * referenceZ - dz * referenceY;
         float rightY = -dx * referenceZ;
@@ -591,6 +603,7 @@ public final class LightEffectSubmission
                };
     }
 
+    /** Returns a newly allocated normalized vector, using forward for a degenerate input. */
     private static float[] normalize(float x, float y, float z)
     {
         float[] destination = new float[3];
@@ -598,10 +611,11 @@ public final class LightEffectSubmission
         return destination;
     }
 
+    /** Writes a normalized vector into reusable destination storage. */
     private static void normalize(float x, float y, float z, float[] destination)
     {
         float length = (float) Math.sqrt(x * x + y * y + z * z);
-        if (length <= 1.0E-5F)
+        if (length <= MINIMUM_DIRECTION_LENGTH)
         {
             destination[0] = 0.0F;
             destination[1] = 0.0F;

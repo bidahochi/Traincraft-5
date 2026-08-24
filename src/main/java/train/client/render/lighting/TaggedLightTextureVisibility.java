@@ -6,6 +6,9 @@ import train.common.api.RollingStockLightDefinition;
 /** UV/alpha visibility calculation used by skin lighting. */
 final class TaggedLightTextureVisibility
 {
+    private static final float MINIMUM_UV_SPAN = 1.0E-7F;
+    private static final float EDGE_TEST_EPSILON = 1.0E-6F;
+
     static final int CUTOUT_ALPHA_THRESHOLD = 26;
 
     private TaggedLightTextureVisibility() {}
@@ -159,6 +162,7 @@ final class TaggedLightTextureVisibility
         return false;
     }
 
+    /** Reports whether a detected face contains enough finite UV geometry for alpha testing. */
     private static boolean hasUsablePolygon(DetectedLightFace face)
     {
         return face != null
@@ -166,8 +170,8 @@ final class TaggedLightTextureVisibility
                && face.textureV != null
                && face.textureU.length >= 3
                && face.textureU.length == face.textureV.length
-               && face.maxU - face.minU > 1.0E-7F
-               && face.maxV - face.minV > 1.0E-7F;
+                && face.maxU - face.minU > MINIMUM_UV_SPAN
+                && face.maxV - face.minV > MINIMUM_UV_SPAN;
     }
 
     private static boolean insidePolygon(float u, float v, float[] polygonU, float[] polygonV)
@@ -199,6 +203,7 @@ final class TaggedLightTextureVisibility
         return inside;
     }
 
+    /** Reports whether a UV sample lies on one polygon edge within the configured tolerance. */
     private static boolean onSegment(
         float u,
         float v,
@@ -212,13 +217,13 @@ final class TaggedLightTextureVisibility
         float pointU = u - startU;
         float pointV = v - startV;
         float cross = edgeU * pointV - edgeV * pointU;
-        if (Math.abs(cross) > 1.0E-6F)
+        if (Math.abs(cross) > EDGE_TEST_EPSILON)
         {
             return false;
         }
         float dot = pointU * edgeU + pointV * edgeV;
         float lengthSquared = edgeU * edgeU + edgeV * edgeV;
-        return dot >= -1.0E-6F && dot <= lengthSquared + 1.0E-6F;
+        return dot >= -EDGE_TEST_EPSILON && dot <= lengthSquared + EDGE_TEST_EPSILON;
     }
 
     private static int lowerPixel(float normalized, int size)

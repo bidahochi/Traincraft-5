@@ -12,7 +12,7 @@ final class FixedFunctionBeamGeometry
     /**
      * The position-color shader interpolates the source-to-edge color over the cone. Long
      * fixed-function triangles can compress that transition against the far clip-space vertex, so
-     * the legacy backend tessellates the identical surface at this world-space precision.
+     * the fixed-function backend tessellates the identical surface at this world-space precision.
      */
     static final float MAX_FADE_SEGMENT_LENGTH = 0.125F;
 

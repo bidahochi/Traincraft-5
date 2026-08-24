@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import tmt.ModelPartLightTable;
@@ -15,18 +16,21 @@ import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
 import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
-import train.common.api.IRollingStockLightControls;
+import train.common.api.IRollingStockLightState;
 import train.common.api.LightBeamRotation;
 import train.common.api.RollingStockLightChannel;
 import train.common.api.RollingStockLightColors;
 import train.common.api.RollingStockLightDefinition;
+import train.common.api.RollingStockLightFunction;
 import train.common.api.RollingStockLightOverride;
+import train.common.api.RollingStockLightOutput;
 import train.common.api.RollingStockLightState;
+import train.common.api.RollingStockHeadlightLevel;
 import train.common.api.RollingStockSkinLighting;
 import train.common.core.handlers.ConfigHandler;
 
 /**
- * Connects legacy TMT model-part rendering to Traincraft's rolling-stock lighting system.
+ * Connects TMT model-part rendering to Traincraft's rolling-stock lighting system.
  *
  * <p>A rendering caller opens one draw scope with {@link #begin(EntityRollingStock, float,
  * ResourceLocation)}, wraps each rendered model part with {@link #beginPart(ModelRendererTurbo,
@@ -34,9 +38,30 @@ import train.common.core.handlers.ConfigHandler;
  */
 public final class ClientRollingStockLighting
 {
+    /*
+     * Positional float-array layouts used by the allocation-sensitive render path:
+     * - vector: [0] = x, [1] = y, [2] = z;
+     * - optical basis: [0..2] = direction x/y/z, [3..5] = right x/y/z,
+     *   [6..8] = up x/y/z;
+     * - OpenGL matrix: [0..3], [4..7], [8..11], and [12..15] are column-major columns 0..3;
+     * - vertexOffsets[i]: [0] = vertex x, [1] = vertex y, [2] = vertex z.
+     */
     private static final FloatBuffer MODEL_VIEW_BUFFER = BufferUtils.createFloatBuffer(16);
     private static final ThreadLocal<Context> ACTIVE = new ThreadLocal<Context>();
     private static final int MAXIMUM_MODEL_CACHE_ENTRIES = 128;
+    private static final float MINIMUM_LONGITUDINAL_DIRECTION = 0.05F;
+    private static final float MINIMUM_GENERATED_GLOW_RADIUS = 0.04F;
+    private static final float MAXIMUM_GENERATED_GLOW_RADIUS = 0.18F;
+    private static final float GENERATED_GLOW_RADIUS_SCALE = 1.35F;
+    private static final float COPLANAR_NORMAL_DOT_THRESHOLD = 0.999F;
+    private static final float COPLANAR_DISTANCE_EPSILON = 1.0E-4F;
+    private static final float GEOMETRY_EPSILON = 1.0E-5F;
+    private static final float MINIMUM_INVERTIBLE_MATRIX_VALUE = 1.0E-8F;
+    private static final float MINIMUM_DIRECTIONAL_NORMAL_COMPONENT = 0.5F;
+    private static final float FACE_SCORE_EPSILON = 1.0E-5F;
+    private static final float PRIME_TOP_GLOW_SCALE = 0.35F;
+    private static final int FIRST_PRIME_PHASE = 1;
+    private static final int LAST_PRIME_PHASE = 4;
     private static final BoundedIdentityCache<Object, Map<ModelRendererTurbo, String>>
     MODEL_LOCATORS =
         new BoundedIdentityCache<Object, Map<ModelRendererTurbo, String>>(
@@ -73,7 +98,7 @@ public final class ClientRollingStockLighting
     public static void begin(
         EntityRollingStock stock, float partialTicks, ResourceLocation texture)
     {
-        if (ConfigHandler.ENABLE_ADVANCED_LIGHTING == false)
+        if (ConfigHandler.enhancedLightingEnabled() == false)
         {
             ACTIVE.remove();
             return;
@@ -106,7 +131,7 @@ public final class ClientRollingStockLighting
      * Reports whether a model part declares a light fixture.
      *
      * @param modelPart model geometry to inspect
-     * @return {@code true} when the part has a stable fixture id or a recognized legacy tag
+     * @return {@code true} when the part has a stable fixture id or recognized light-part name
      */
     public static boolean isSemantic(ModelRendererTurbo modelPart)
     {
@@ -118,7 +143,7 @@ public final class ClientRollingStockLighting
     /**
      * Prepares lightmap and effect state before rendering one model part.
      *
-     * <p>Parts without a fixture id or recognized legacy tag, inactive fixtures, and calls outside
+     * <p>Parts without a fixture id or recognized light-part name, inactive fixtures, and calls outside
      * an active scope return a no-op token. Every returned token must be passed to
      * {@link #endPart(PartLight)} so any changed OpenGL lightmap state is restored.
      *
@@ -147,7 +172,8 @@ public final class ClientRollingStockLighting
         }
         List<DetectedLightSurface> sourceSurfaces =
             selectSourceSurfaces(modelPart, surface, selectedPrime);
-        float intensity = context.sampleIntensity(definition);
+        RollingStockLightOutput output = context.sampleOutput(definition);
+        float intensity = output.sourceIntensity();
         // An inactive fixture is ordinary ambient display-list geometry. Avoid
         // lightmap state traffic, matrix readbacks and Prime immediate drawing
         // when there is no visual lighting work for this part.
@@ -182,20 +208,23 @@ public final class ClientRollingStockLighting
             ModelPartLightTable.Mode lightmapMode = context.partLights.mode(definition.id());
             if (lightmapMode == ModelPartLightTable.Mode.LIGHT_FLOOR)
             {
-                effectX = Math.max(oldX, 160);
+                effectX = Math.max(oldX, definition.lightmapFloor());
             }
             else
             {
                 if (lightmapMode == ModelPartLightTable.Mode.EMISSION_INTENSITY)
                 {
-                    effectX = Math.max(oldX, 240 * intensity);
+                    effectX = Math.max(
+                        oldX, RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR * intensity);
                 }
                 else
                 {
                     if (lightmapMode == ModelPartLightTable.Mode.FULL_BRIGHT)
                     {
-                        effectX = Math.max(oldX, 240);
-                        effectY = Math.max(oldY, 240);
+                        effectX = Math.max(
+                            oldX, RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR);
+                        effectY = Math.max(
+                            oldY, RollingStockLightDefinition.MAXIMUM_LIGHTMAP_FLOOR);
                     }
                 }
             }
@@ -217,6 +246,7 @@ public final class ClientRollingStockLighting
                         sourceSurface,
                         modelScale,
                         intensity,
+                        output.projectedIntensity(),
                         pose);
                 }
                 submitCommanderSurfaceGlows(
@@ -228,7 +258,7 @@ public final class ClientRollingStockLighting
                     pose);
             }
         }
-        DetectedLightFace primeTop = context.primeTopFaces.get(modelPart);
+        DetectedLightFace primeTop = context.primeTopFace(modelPart);
         if (intensity > 0
                 && primeTop != null
                 && (explicitlyAvailable
@@ -313,14 +343,14 @@ public final class ClientRollingStockLighting
     }
 
     /**
-     * Locates each TMT part within a legacy model's public part arrays.
+     * Locates each TMT part within a model's public part arrays.
      *
-     * <p>Legacy model classes do not expose a common part-enumeration contract, so this cold path
+     * <p>Rolling-stock model classes do not expose a common part-enumeration contract, so this cold path
      * reflects over their public {@code ModelRendererTurbo[]} fields once and caches the result.
      * Inaccessible optional arrays are omitted; their parts fall back to geometry-derived fixture
      * identifiers.
      *
-     * @param model legacy rolling-stock model instance
+     * @param model rolling-stock model instance to inspect
      * @return cached mapping from model-part identity to stable array location
      */
     static Map<ModelRendererTurbo, String> modelPartLocators(Object model)
@@ -437,9 +467,11 @@ public final class ClientRollingStockLighting
                     && definition.controlCircuit() == RollingStockLightChannel.HEADLIGHT
                     && definition.effect() == RollingStockLightDefinition.Effect.BEAM
                     && definition.function().pattern()
-                    == train.common.api.RollingStockLightFunction.Pattern.STEADY
-                    && ((longitudinalDirection < 0 && definition.directionX() < -0.05F)
-                        || (longitudinalDirection >= 0 && definition.directionX() > 0.05F)))
+                    == RollingStockLightFunction.Pattern.STEADY
+                && ((longitudinalDirection < 0
+                     && definition.directionX() < -MINIMUM_LONGITUDINAL_DIRECTION)
+                    || (longitudinalDirection >= 0
+                        && definition.directionX() > MINIMUM_LONGITUDINAL_DIRECTION)))
             {
                 return true;
             }
@@ -475,11 +507,18 @@ public final class ClientRollingStockLighting
     }
 
     /**
-     * Reports whether this stock currently needs the beam self-occlusion capture path.
+     * Reports whether this stock currently has a fixture that can require beam occlusion data.
      *
-     * <p>Emission-only stock must not pay for per-part pose readbacks or framebuffer depth copies.
-     * Unknown model metadata is handled conservatively for the first inventory render; the shared
-     * model cache makes subsequent entities immediately use the resolved result.
+     * <p>A stock's own emission-only fixtures do not, by themselves, trigger per-part pose
+     * readbacks or framebuffer depth copies. Separate scene demand may still capture that stock as
+     * a candidate occluder for another vehicle's projected beam. Unknown model metadata is handled
+     * conservatively until the first successful model render resolves shared fixture metadata.
+     * Subsequent entities using that model immediately use the resolved result in every render
+     * context.
+     *
+     * @param stock rolling stock whose resolved fixtures should be sampled
+     * @param animationTime shared world time including the current partial tick
+     * @return whether at least one fixture currently emits a projected beam
      */
     public static boolean requiresBeamOcclusion(EntityRollingStock stock, double animationTime)
     {
@@ -495,9 +534,9 @@ public final class ClientRollingStockLighting
         }
         RollingStockSkinLighting skin = stock.getSkinLighting();
         Map<String, RollingStockLightOverride> overrides = skin.lightOverrides();
-        IRollingStockLightControls controls =
-            stock instanceof IRollingStockLightControls
-            ? (IRollingStockLightControls) stock
+        IRollingStockLightState lightState =
+            stock instanceof IRollingStockLightState
+            ? (IRollingStockLightState) stock
             : null;
         for (FixtureMetadata fixture : metadata.values())
         {
@@ -510,14 +549,201 @@ public final class ClientRollingStockLighting
             }
             RollingStockLightDefinition definition =
                 SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
-            float intensity =
-                RollingStockLightState.intensity(controls, definition, animationTime);
-            if (requiresBeamOcclusion(definition, intensity))
+            float projectedIntensity =
+                RollingStockLightState.outputForState(lightState, definition, animationTime)
+                .projectedIntensity();
+            if (requiresBeamOcclusion(definition, projectedIntensity))
             {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Checks once per rendered frame whether any loaded rolling stock can submit a projected beam.
+     * Unknown light-bearing models are conservative until their shared fixture metadata resolves.
+     *
+     * @param world client world whose loaded rolling stock should be inspected
+     * @param animationTime shared world time, including the current partial tick
+     * @return {@code true} when exact rolling-stock occlusion capture may be needed
+     */
+    public static boolean worldRequiresBeamOcclusion(World world, double animationTime)
+    {
+        BeamOcclusionDemand demand = new BeamOcclusionDemand();
+        populateBeamOcclusionDemand(world, animationTime, demand);
+        return demand.any();
+    }
+
+    /**
+     * Populates the frame-local spatial demand used to gate rolling-stock geometry capture.
+     *
+     * <p>This is intentionally a single world scan. Known fixtures contribute only their longest
+     * currently projected beam; unresolved semantic models request conservative global capture so
+     * their first rendered frame cannot leak through nearby stock.
+     */
+    static void populateBeamOcclusionDemand(
+        World world, double animationTime, BeamOcclusionDemand demand)
+    {
+        demand.reset();
+        if (ConfigHandler.projectedLightingEnabled() == false || world == null)
+        {
+            return;
+        }
+        List entities = world.loadedEntityList;
+        for (int index = 0; index < entities.size(); index++)
+        {
+            Object entityCandidate = entities.get(index);
+            if (entityCandidate instanceof EntityRollingStock == false)
+            {
+                continue;
+            }
+            EntityRollingStock stock = (EntityRollingStock) entityCandidate;
+            if (lightStateMayProject(stock) == false)
+            {
+                continue;
+            }
+            if (stock.modelInstance == null)
+            {
+                // Its fixture capabilities are unknown until the first model render.
+                demand.includeUnknownReach();
+                continue;
+            }
+            Map<ModelRendererTurbo, FixtureMetadata> metadata = MODEL_METADATA.get(stock.modelInstance);
+            if (metadata == null)
+            {
+                boolean hasSemanticPart = false;
+                for (ModelRendererTurbo part : modelPartLocators(stock.modelInstance).keySet())
+                {
+                    if (isSemantic(part))
+                    {
+                        hasSemanticPart = true;
+                        break;
+                    }
+                }
+                if (hasSemanticPart)
+                {
+                    demand.includeUnknownReach();
+                }
+                continue;
+            }
+            int declaredSemanticParts =
+                countSemanticParts(stock.modelInstance, modelPartLocators(stock.modelInstance));
+            if (metadata.size() < declaredSemanticParts)
+            {
+                demand.includeUnknownReach();
+                continue;
+            }
+            float reach = activeBeamReach(stock, metadata, animationTime);
+            if (reach > 0.0F)
+            {
+                demand.add(
+                    stock.getEntityId(), stock.posX, stock.posY, stock.posZ,
+                    reach + RollingStockLightOcclusion.stockBoundingRadius(stock));
+            }
+        }
+    }
+
+    /** Returns the longest currently projected beam reach resolved for one stock model. */
+    private static float activeBeamReach(
+        EntityRollingStock stock,
+        Map<ModelRendererTurbo, FixtureMetadata> metadata,
+        double animationTime)
+    {
+        RollingStockSkinLighting skin = stock.getSkinLighting();
+        Map<String, RollingStockLightOverride> overrides = skin.lightOverrides();
+        IRollingStockLightState lightState =
+            stock instanceof IRollingStockLightState
+            ? (IRollingStockLightState) stock
+            : null;
+        float maximumReach = 0.0F;
+        for (FixtureMetadata fixture : metadata.values())
+        {
+            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (override != null
+                    && override.availabilityOverridden()
+                    && override.enabled() == false)
+            {
+                continue;
+            }
+            RollingStockLightDefinition definition =
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+            float projectedIntensity =
+                RollingStockLightState.outputForState(lightState, definition, animationTime)
+                .projectedIntensity();
+            if (requiresBeamOcclusion(definition, projectedIntensity))
+            {
+                maximumReach = Math.max(maximumReach, definition.beamLength());
+            }
+        }
+        return maximumReach;
+    }
+
+    /**
+     * A state without a BRIGHT headlight or enabled non-headlight circuit can skip cold discovery.
+     */
+    private static boolean lightStateMayProject(EntityRollingStock stock)
+    {
+        if (stock instanceof IRollingStockLightState == false)
+        {
+            return true;
+        }
+        IRollingStockLightState lightState = (IRollingStockLightState) stock;
+        if (lightState.getFrontHeadlightLevel() == RollingStockHeadlightLevel.BRIGHT
+                || lightState.getRearHeadlightLevel() == RollingStockHeadlightLevel.BRIGHT)
+        {
+            return true;
+        }
+        for (RollingStockLightChannel channel : RollingStockLightChannel.values())
+        {
+            if (channel != RollingStockLightChannel.HEADLIGHT
+                    && lightState.isLightChannelEnabled(channel))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns the control circuits exposed by currently resolved fixture metadata.
+     *
+     * <p>The headlight circuit is always returned because front and rear headlight state is part of
+     * the base light-state contract. Optional circuits appear only after model metadata and active
+     * skin overrides resolve; open GUIs periodically query this method so they can add those
+     * controls in place.
+     *
+     * @param stock rolling stock whose resolved fixtures should be inspected
+     * @return a new mutable set containing the available circuits
+     */
+    public static EnumSet<RollingStockLightChannel> availableControlCircuits(
+        EntityRollingStock stock)
+    {
+        EnumSet<RollingStockLightChannel> result =
+            EnumSet.of(RollingStockLightChannel.HEADLIGHT);
+        if (stock == null || stock.modelInstance == null)
+        {
+            return result;
+        }
+        Map<ModelRendererTurbo, FixtureMetadata> metadata = MODEL_METADATA.get(stock.modelInstance);
+        if (metadata == null)
+        {
+            return result;
+        }
+        Map<String, RollingStockLightOverride> overrides =
+            stock.getSkinLighting().lightOverrides();
+        for (FixtureMetadata fixture : metadata.values())
+        {
+            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (override != null && override.availabilityOverridden() && override.enabled() == false)
+            {
+                continue;
+            }
+            RollingStockLightDefinition definition =
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+            result.add(definition.controlCircuit());
+        }
+        return result;
     }
 
     static boolean requiresBeamOcclusion(
@@ -609,7 +835,11 @@ public final class ClientRollingStockLighting
         float glowRadius =
             instrument || interior || illuminated || lower.contains("commander")
             ? 0
-            : Math.max(0.04F, Math.min(0.18F, surface.radius * modelScale * 1.35F));
+            : Math.max(
+                MINIMUM_GENERATED_GLOW_RADIUS,
+                Math.min(
+                    MAXIMUM_GENERATED_GLOW_RADIUS,
+                    surface.radius * modelScale * GENERATED_GLOW_RADIUS_SCALE));
         float beamLength =
             producesBeam
             ? (channel == RollingStockLightChannel.DITCH
@@ -632,14 +862,24 @@ public final class ClientRollingStockLighting
                 : modelPart.lightBeamRotation)
             .color(color)
             .effect(effect)
-            .beamDimensions(beamLength, producesBeam ? 0.45F : 0)
-            .sourceGlow(glowRadius, instrument || interior || illuminated ? 0 : 0.85F)
+            .beamDimensions(
+                beamLength,
+                producesBeam ? RollingStockLightDefinition.DEFAULT_HEADLIGHT_BEAM_WIDTH : 0)
+            .sourceGlow(
+                glowRadius,
+                instrument || interior || illuminated
+                ? 0
+                : RollingStockLightDefinition.DEFAULT_SOURCE_GLOW_INTENSITY)
             .sourceGlowShape(
                 shape == null ? 1 : shape.widthScale(),
                 shape == null ? 1 : shape.heightScale(),
                 shape == null ? 0 : shape.rightOffset(),
                 shape == null ? 0 : shape.upOffset())
             .function(RollingStockLightChannel.defaultFunction(modelPart.boxName))
+            .lightmapFloor(
+                illuminated && lower.contains("numberboard")
+                ? RollingStockLightDefinition.DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR
+                : RollingStockLightDefinition.DEFAULT_LIGHTMAP_FLOOR)
             .hotspotEnabled(producesBeam)
             .clientProjectorEligible(beamChannel && producesBeam)
             .instrument(instrument)
@@ -746,7 +986,7 @@ public final class ClientRollingStockLighting
         return rootTexture == null ? currentlyBoundTexture : rootTexture;
     }
 
-    /** Selects how fixture intensity modifies the legacy lightmap for the current part. */
+    /** Selects how fixture intensity modifies the model-part lightmap for the current part. */
     private static ModelPartLightTable.Mode selectLightmapMode(
         RollingStockLightDefinition definition, float intensity)
     {
@@ -758,10 +998,9 @@ public final class ClientRollingStockLighting
         {
             return ModelPartLightTable.Mode.LIGHT_FLOOR;
         }
-        train.common.api.RollingStockLightFunction.Pattern pattern =
-            definition.function().pattern();
-        if (pattern == train.common.api.RollingStockLightFunction.Pattern.PHASED
-                || pattern == train.common.api.RollingStockLightFunction.Pattern.ALTERNATING)
+        RollingStockLightFunction.Pattern pattern = definition.function().pattern();
+        if (pattern == RollingStockLightFunction.Pattern.PHASED
+                || pattern == RollingStockLightFunction.Pattern.ALTERNATING)
         {
             return ModelPartLightTable.Mode.EMISSION_INTENSITY;
         }
@@ -799,7 +1038,7 @@ public final class ClientRollingStockLighting
         value[2] = -value[2];
         float length =
             (float) Math.sqrt(value[0] * value[0] + value[1] * value[1] + value[2] * value[2]);
-        if (length > 1.0E-5F)
+        if (length > GEOMETRY_EPSILON)
         {
             value[0] /= length;
             value[1] /= length;
@@ -857,7 +1096,8 @@ public final class ClientRollingStockLighting
         String submissionKey,
         DetectedLightSurface surface,
         float modelScale,
-        float intensity,
+        float sourceOutput,
+        float projectedOutput,
         float[] modelViewMatrix)
     {
         float localX = surface.x * modelScale,
@@ -898,28 +1138,40 @@ public final class ClientRollingStockLighting
                 sourceLocal[0], sourceLocal[1], sourceLocal[2], modelViewMatrix);
         float[] beamEye =
             transformOpticalBasis(beamLocal[0], beamLocal[1], beamLocal[2], modelViewMatrix);
-        float sourceDx = sourceEye[0], sourceDy = sourceEye[1], sourceDz = sourceEye[2];
-        float dx = beamEye[0], dy = beamEye[1], dz = beamEye[2], sourceIntensity = intensity;
+        float sourceDirectionX = sourceEye[0],
+              sourceDirectionY = sourceEye[1],
+              sourceDirectionZ = sourceEye[2];
+        float beamDirectionX = beamEye[0],
+              beamDirectionY = beamEye[1],
+              beamDirectionZ = beamEye[2],
+              sourceIntensity = sourceOutput;
         if (definition.function().pattern()
-                    == train.common.api.RollingStockLightFunction.Pattern.GYRALITE
+                    == RollingStockLightFunction.Pattern.GYRALITE
                 || definition.function().pattern()
-                 == train.common.api.RollingStockLightFunction.Pattern.MARS)
+                 == RollingStockLightFunction.Pattern.MARS)
         {
             sourceIntensity *=
-                AnimatedLightDirection.viewerGlowScale(eyeX, eyeY, eyeZ, dx, dy, dz);
+                AnimatedLightDirection.viewerGlowScale(
+                    eyeX, eyeY, eyeZ, beamDirectionX, beamDirectionY, beamDirectionZ);
         }
         else
         {
             if (definition.function().pattern()
-                    == train.common.api.RollingStockLightFunction.Pattern.PHASED)
+                    == RollingStockLightFunction.Pattern.PHASED)
             {
                 sourceIntensity *=
                     AnimatedLightDirection.viewerSurfaceGlowScale(
-                        eyeX, eyeY, eyeZ, sourceDx, sourceDy, sourceDz);
+                        eyeX,
+                        eyeY,
+                        eyeZ,
+                        sourceDirectionX,
+                        sourceDirectionY,
+                        sourceDirectionZ);
             }
         }
         float fixtureReach =
-            BeamVisibilityScaling.fixtureReach(intensity, definition.function().lampResponse());
+            BeamVisibilityScaling.fixtureReach(
+                projectedOutput, definition.function().lampResponse());
         LightEffectRenderBatch.submit(
             LightEffectSubmission.fixtureLocal(
                 modelViewMatrix,
@@ -937,7 +1189,7 @@ public final class ClientRollingStockLighting
                 beamLocal[2],
                 sourceBasis,
                 beamBasis,
-                intensity,
+                projectedOutput,
                 sourceIntensity,
                 context.visibility.beamScale,
                 context.visibility.beamAlpha,
@@ -955,9 +1207,9 @@ public final class ClientRollingStockLighting
                 eyeX,
                 eyeY,
                 eyeZ,
-                dx,
-                dy,
-                dz);
+                beamDirectionX,
+                beamDirectionY,
+                beamDirectionZ);
         }
     }
 
@@ -1021,7 +1273,7 @@ public final class ClientRollingStockLighting
             float[] assembled =
                 context.calculateAssembledDirection(
                     face.modelNormalX, face.modelNormalY, face.modelNormalZ);
-            if (assembled[1] < -0.5F)
+            if (assembled[1] < -MINIMUM_DIRECTIONAL_NORMAL_COMPONENT)
             {
                 continue;
             }
@@ -1098,14 +1350,19 @@ public final class ClientRollingStockLighting
                 face.normalX * face.normalX
                 + face.normalY * face.normalY
                 + face.normalZ * face.normalZ);
-            float nx = face.normalX / length,
-            ny = face.normalY / length,
-            nz = face.normalZ / length;
-            if (normalX * nx + normalY * ny + normalZ * nz < 0.999F)
+            float faceNormalX = face.normalX / length,
+                  faceNormalY = face.normalY / length,
+                  faceNormalZ = face.normalZ / length;
+            if (normalX * faceNormalX + normalY * faceNormalY + normalZ * faceNormalZ
+                    < COPLANAR_NORMAL_DOT_THRESHOLD)
             {
                 return false;
             }
-            return Math.abs(nx * (face.x - x) + ny * (face.y - y) + nz * (face.z - z)) <= 1.0E-4F;
+            return Math.abs(
+                       faceNormalX * (face.x - x)
+                       + faceNormalY * (face.y - y)
+                       + faceNormalZ * (face.z - z))
+                   <= COPLANAR_DISTANCE_EPSILON;
         }
     }
 
@@ -1211,7 +1468,7 @@ public final class ClientRollingStockLighting
                      + modelViewMatrix[6] * localY
                      + modelViewMatrix[10] * localZ,
               length = (float) Math.sqrt(eyeX * eyeX + eyeY * eyeY + eyeZ * eyeZ);
-        return length < 1.0E-5F
+        return length < GEOMETRY_EPSILON
                ? new float[] {0, 1, 0}
                : new float[] {eyeX / length, eyeY / length, eyeZ / length};
     }
@@ -1222,30 +1479,44 @@ public final class ClientRollingStockLighting
     static float[] transformNormal(
         float[] modelViewMatrix, float localX, float localY, float localZ)
     {
-        float a = modelViewMatrix[0],
-              b = modelViewMatrix[4],
-              c = modelViewMatrix[8],
-              d = modelViewMatrix[1],
-              e = modelViewMatrix[5],
-              f = modelViewMatrix[9],
-              g = modelViewMatrix[2],
-              h = modelViewMatrix[6],
-              i = modelViewMatrix[10];
-        float c00 = e * i - f * h, c01 = f * g - d * i, c02 = d * h - e * g;
-        float c10 = c * h - b * i, c11 = a * i - c * g, c12 = b * g - a * h;
-        float c20 = b * f - c * e, c21 = c * d - a * f, c22 = a * e - b * d;
-        float determinant = a * c00 + b * c01 + c * c02;
-        if (Math.abs(determinant) <= 1.0E-8F)
+        float matrix00 = modelViewMatrix[0],
+              matrix01 = modelViewMatrix[4],
+              matrix02 = modelViewMatrix[8],
+              matrix10 = modelViewMatrix[1],
+              matrix11 = modelViewMatrix[5],
+              matrix12 = modelViewMatrix[9],
+              matrix20 = modelViewMatrix[2],
+              matrix21 = modelViewMatrix[6],
+              matrix22 = modelViewMatrix[10];
+        float cofactor00 = matrix11 * matrix22 - matrix12 * matrix21,
+              cofactor01 = matrix12 * matrix20 - matrix10 * matrix22,
+              cofactor02 = matrix10 * matrix21 - matrix11 * matrix20;
+        float cofactor10 = matrix02 * matrix21 - matrix01 * matrix22,
+              cofactor11 = matrix00 * matrix22 - matrix02 * matrix20,
+              cofactor12 = matrix01 * matrix20 - matrix00 * matrix21;
+        float cofactor20 = matrix01 * matrix12 - matrix02 * matrix11,
+              cofactor21 = matrix02 * matrix10 - matrix00 * matrix12,
+              cofactor22 = matrix00 * matrix11 - matrix01 * matrix10;
+        float determinant =
+            matrix00 * cofactor00 + matrix01 * cofactor01 + matrix02 * cofactor02;
+        if (Math.abs(determinant) <= MINIMUM_INVERTIBLE_MATRIX_VALUE)
         {
             return new float[] {0, 0, 0};
         }
-        float nx = (c00 * localX + c01 * localY + c02 * localZ) / determinant;
-        float ny = (c10 * localX + c11 * localY + c12 * localZ) / determinant;
-        float nz = (c20 * localX + c21 * localY + c22 * localZ) / determinant;
-        float length = (float) Math.sqrt(nx * nx + ny * ny + nz * nz);
-        return length <= 1.0E-8F
+        float normalX =
+            (cofactor00 * localX + cofactor01 * localY + cofactor02 * localZ)
+            / determinant;
+        float normalY =
+            (cofactor10 * localX + cofactor11 * localY + cofactor12 * localZ)
+            / determinant;
+        float normalZ =
+            (cofactor20 * localX + cofactor21 * localY + cofactor22 * localZ)
+            / determinant;
+        float length =
+            (float) Math.sqrt(normalX * normalX + normalY * normalY + normalZ * normalZ);
+        return length <= MINIMUM_INVERTIBLE_MATRIX_VALUE
                ? new float[] {0, 0, 0}
-               : new float[] {nx / length, ny / length, nz / length};
+               : new float[] {normalX / length, normalY / length, normalZ / length};
     }
 
     /** Returns the numbered Prime beacon phase encoded in a tagged part name, or zero. */
@@ -1256,11 +1527,11 @@ public final class ClientRollingStockLighting
             return 0;
         }
         String lower = taggedPartName.toLowerCase(Locale.ROOT);
-        for (int i = 1; i <= 4; i++)
+        for (int phase = FIRST_PRIME_PHASE; phase <= LAST_PRIME_PHASE; phase++)
         {
-            if (lower.contains("prime" + i))
+            if (lower.contains("prime" + phase))
             {
-                return i;
+                return phase;
             }
         }
         return 0;
@@ -1270,9 +1541,9 @@ public final class ClientRollingStockLighting
     private static DetectedLightFace selectPrimePhaseFace(
         DetectedLightSurface surface, int phase, Context context)
     {
-        float tx = phase == 1 ? -1 : phase == 3 ? 1 : 0,
-              tz = phase == 2 ? -1 : phase == 4 ? 1 : 0,
-              best = 0.5F;
+        float targetDirectionX = phase == 1 ? -1 : phase == 3 ? 1 : 0,
+              targetDirectionZ = phase == 2 ? -1 : phase == 4 ? 1 : 0,
+              bestAlignmentScore = MINIMUM_DIRECTIONAL_NORMAL_COMPONENT;
         DetectedLightFace result = null;
         for (DetectedLightFace face : surface.faces)
         {
@@ -1280,17 +1551,18 @@ public final class ClientRollingStockLighting
                 context.calculateAssembledDirection(
                     face.modelNormalX, face.modelNormalY, face.modelNormalZ);
             float horizontal = (float) Math.sqrt(normal[0] * normal[0] + normal[2] * normal[2]);
-            if (horizontal < 0.5F)
+            if (horizontal < MINIMUM_DIRECTIONAL_NORMAL_COMPONENT)
             {
                 continue;
             }
-            float score = (normal[0] * tx + normal[2] * tz) / horizontal;
-            if (score > best + 1.0E-5F
-                    || (Math.abs(score - best) <= 1.0E-5F
+            float alignmentScore =
+                (normal[0] * targetDirectionX + normal[2] * targetDirectionZ) / horizontal;
+            if (alignmentScore > bestAlignmentScore + FACE_SCORE_EPSILON
+                    || (Math.abs(alignmentScore - bestAlignmentScore) <= FACE_SCORE_EPSILON
                         && result != null
                         && face.area > result.area))
             {
-                best = score;
+                bestAlignmentScore = alignmentScore;
                 result = face;
             }
         }
@@ -1316,7 +1588,7 @@ public final class ClientRollingStockLighting
         DetectedLightSurface surface, float[] modelScale, float[] modelRotations)
     {
         DetectedLightFace result = null;
-        float best = 0.5F;
+        float best = MINIMUM_DIRECTIONAL_NORMAL_COMPONENT;
         for (DetectedLightFace face : surface.faces)
         {
             float y =
@@ -1326,8 +1598,8 @@ public final class ClientRollingStockLighting
                     face.modelNormalZ,
                     modelScale,
                     modelRotations)[1];
-            if (y > best + 1.0E-5F
-                    || (Math.abs(y - best) <= 1.0E-5F
+            if (y > best + FACE_SCORE_EPSILON
+                    || (Math.abs(y - best) <= FACE_SCORE_EPSILON
                         && result != null
                         && face.area > result.area))
             {
@@ -1365,21 +1637,22 @@ public final class ClientRollingStockLighting
             transformedRight[0] * transformedDirection[0]
             + transformedRight[1] * transformedDirection[1]
             + transformedRight[2] * transformedDirection[2];
-        float rx = transformedRight[0] - transformedDirection[0] * projection,
-              ry = transformedRight[1] - transformedDirection[1] * projection,
-              rz = transformedRight[2] - transformedDirection[2] * projection;
-        float[] right = normalizeDirection(rx, ry, rz);
-        float ux = right[1] * transformedDirection[2] - right[2] * transformedDirection[1],
-              uy = right[2] * transformedDirection[0] - right[0] * transformedDirection[2],
-              uz = right[0] * transformedDirection[1] - right[1] * transformedDirection[0];
-        if (ux * transformedUp[0] + uy * transformedUp[1] + uz * transformedUp[2] < 0)
+        float orthogonalRightX = transformedRight[0] - transformedDirection[0] * projection,
+              orthogonalRightY = transformedRight[1] - transformedDirection[1] * projection,
+              orthogonalRightZ = transformedRight[2] - transformedDirection[2] * projection;
+        float[] right =
+            normalizeDirection(orthogonalRightX, orthogonalRightY, orthogonalRightZ);
+        float upX = right[1] * transformedDirection[2] - right[2] * transformedDirection[1],
+              upY = right[2] * transformedDirection[0] - right[0] * transformedDirection[2],
+              upZ = right[0] * transformedDirection[1] - right[1] * transformedDirection[0];
+        if (upX * transformedUp[0] + upY * transformedUp[1] + upZ * transformedUp[2] < 0)
         {
             right[0] = -right[0];
             right[1] = -right[1];
             right[2] = -right[2];
-            ux = -ux;
-            uy = -uy;
-            uz = -uz;
+            upX = -upX;
+            upY = -upY;
+            upZ = -upZ;
         }
         return new float[]
                {
@@ -1389,12 +1662,13 @@ public final class ClientRollingStockLighting
                    right[0],
                    right[1],
                    right[2],
-                   ux,
-                   uy,
-                   uz
+                   upX,
+                   upY,
+                   upZ
                };
     }
 
+    /** Returns a normalized direction array, using model-forward for a degenerate input. */
     private static float[] normalizeDirection(
         float directionX, float directionY, float directionZ)
     {
@@ -1404,7 +1678,7 @@ public final class ClientRollingStockLighting
                 directionX * directionX
                 + directionY * directionY
                 + directionZ * directionZ);
-        return length <= 1.0E-5F
+        return length <= GEOMETRY_EPSILON
                ? new float[] {0, 0, 1}
                : new float[]
                  {
@@ -1424,8 +1698,8 @@ public final class ClientRollingStockLighting
         float normalY,
         float normalZ)
     {
-        return 0.85F
-               * 0.35F
+        return RollingStockLightDefinition.DEFAULT_SOURCE_GLOW_INTENSITY
+               * PRIME_TOP_GLOW_SCALE
                * fixtureIntensity
                * AnimatedLightDirection.viewerSurfaceGlowScale(
                    eyeX, eyeY, eyeZ, normalX, normalY, normalZ);
@@ -1494,14 +1768,18 @@ public final class ClientRollingStockLighting
     private static final class Context
     {
         final EntityRollingStock stock;
+        final IRollingStockLightState lightState;
         final double animationTime;
         final ResourceLocation modelTexture;
         final String modelScope;
         final Map<ModelRendererTurbo, String> partLocators;
-        final Map<ModelRendererTurbo, DetectedLightFace> primeTopFaces;
+        final Map<ModelRendererTurbo, DetectedLightFace> rootPrimeTopFaces;
         final AdaptiveLightVisibility visibility;
         final ModelPartLightTable partLights;
         final RollingStockRuntimeState runtimeState;
+        Object lastNestedPrimeOwner;
+        Map<ModelRendererTurbo, DetectedLightFace> lastNestedPrimeTopFaces =
+            Collections.emptyMap();
 
         Context(
             EntityRollingStock stock,
@@ -1510,11 +1788,12 @@ public final class ClientRollingStockLighting
             ResourceLocation texture)
         {
             this.stock = stock;
+            lightState = resolveLightState(stock);
             this.animationTime = animationTime;
             modelTexture = texture;
             modelScope = modelScopeIdentifier(stock);
             partLocators = modelPartLocators(stock.modelInstance);
-            primeTopFaces = resolvePrimeTopFaces(stock.modelInstance, this);
+            rootPrimeTopFaces = resolvePrimeTopFaces(stock.modelInstance, this);
             RollingStockRuntimeState state = RUNTIME_STATES.get(stock);
             if (state == null)
             {
@@ -1524,7 +1803,7 @@ public final class ClientRollingStockLighting
             runtimeState = state;
             runtimeState.prepareFor(stock.modelInstance, stock.getSkinLighting());
             partLights = runtimeState.partLights;
-            partLights.reset(countSemanticParts(stock.modelInstance, partLocators));
+            partLights.reset(Math.max(4, countSemanticParts(stock.modelInstance, partLocators)));
             int skyLight =
                 stock.worldObj.getSavedLightValue(
                     EnumSkyBlock.Sky,
@@ -1543,23 +1822,55 @@ public final class ClientRollingStockLighting
             return runtimeState.resolveFixture(fixtureMetadata);
         }
 
-        float sampleIntensity(RollingStockLightDefinition definition)
+        /**
+         * Finds the shared Prime top face in the model object that actually owns this part.
+         *
+         * <p>Most rolling-stock lights live directly in the root model, so that map remains the
+         * allocation-free fast path. Some models render a second model object from their
+         * {@code renderAll} method, however, and its parts are absent from the root model's public
+         * arrays. In that case {@link ModelRendererTurbo#getModelOwner()} identifies the nested
+         * model without recursively inspecting arbitrary model fields. Root and nested Prime
+         * assemblies can therefore be active during the same render.
+         *
+         * <p>Generated model code normally renders one owner's parts contiguously. Retaining the
+         * most recently encountered nested owner avoids another per-frame identity map while the
+         * bounded global metadata cache still makes owner changes inexpensive and correct.
+         */
+        DetectedLightFace primeTopFace(ModelRendererTurbo modelPart)
+        {
+            DetectedLightFace rootFace = rootPrimeTopFaces.get(modelPart);
+            if (rootFace != null || modelPart == null)
+            {
+                return rootFace;
+            }
+            Object modelOwner = modelPart.getModelOwner();
+            if (modelOwner == null || modelOwner == stock.modelInstance)
+            {
+                return null;
+            }
+            if (modelOwner != lastNestedPrimeOwner)
+            {
+                lastNestedPrimeOwner = modelOwner;
+                lastNestedPrimeTopFaces = resolvePrimeTopFaces(modelOwner, this);
+            }
+            return lastNestedPrimeTopFaces.get(modelPart);
+        }
+
+        RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition)
         {
             ModelPartLightTable.Entry cached = partLights.entry(definition.id());
-            if (cached != null)
-            {
-                return cached.intensity();
-            }
-            float intensity =
-                RollingStockLightState.intensity(
-                    stock instanceof IRollingStockLightControls
-                    ? (IRollingStockLightControls) stock
-                    : null,
+            RollingStockLightOutput output =
+                RollingStockLightState.outputForState(
+                    lightState,
                     definition,
                     animationTime);
-            partLights.put(
-                definition.id(), intensity, selectLightmapMode(definition, intensity));
-            return intensity;
+            if (cached == null)
+            {
+                partLights.put(
+                    definition.id(), output.sourceIntensity(),
+                    selectLightmapMode(definition, output.sourceIntensity()));
+            }
+            return output;
         }
 
         float[] calculateDefinitionDirection(DetectedLightSurface surface)
@@ -1643,6 +1954,22 @@ public final class ClientRollingStockLighting
             resolvedFixtures.put(fixtureMetadata, resolvedFixture);
             return resolvedFixture;
         }
+    }
+
+    /**
+     * Selects the synchronized light state that drives the stock currently being rendered.
+     *
+     * <p>Tenders expose a read-only implementation backed by their synchronized mirror watcher.
+     * The server populates that watcher from a directly coupled locomotive and publishes an all-off
+     * state while unlinked. Fixture direction and activation policies then select the appropriate
+     * mirrored front or rear headlight level and named circuit without relying on client-side
+     * coupling references.
+     */
+    private static IRollingStockLightState resolveLightState(EntityRollingStock stock)
+    {
+        return stock instanceof IRollingStockLightState
+            ? (IRollingStockLightState) stock
+            : null;
     }
 
     private static final class ResolvedFixture
@@ -1756,7 +2083,7 @@ public final class ClientRollingStockLighting
         }
         float len =
             (float) Math.sqrt(value[0] * value[0] + value[1] * value[1] + value[2] * value[2]);
-        if (len > 1.0E-5F)
+        if (len > GEOMETRY_EPSILON)
         {
             value[0] /= len;
             value[1] /= len;
@@ -1782,7 +2109,6 @@ public final class ClientRollingStockLighting
                 count++;
             }
         }
-        count = Math.max(4, count);
         if (model != null)
         {
             SEMANTIC_COUNTS.put(model, count);

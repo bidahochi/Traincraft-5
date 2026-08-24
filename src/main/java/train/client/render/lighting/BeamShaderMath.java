@@ -1,6 +1,6 @@
 package train.client.render.lighting;
 
-/** Pure Java counterpart of the legacy beam fragment shader. */
+/** Pure Java counterpart of the beam fragment shader. */
 final class BeamShaderMath
 {
     private BeamShaderMath() {}

@@ -1,5 +1,6 @@
 package train.client.gui;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -11,35 +12,76 @@ import train.common.inventory.InventoryWorkCart;
 import train.common.library.Info;
 
 public class GuiFurnaceCart extends GuiContainer {
-	private AbstractWorkCart furnaceInventory;
+	private static final int BASE_GUI_HEIGHT = 166;
+	private final AbstractWorkCart furnaceInventory;
+	private final RollingStockLightControlPanel lightControls;
 
-	public GuiFurnaceCart(InventoryPlayer par1InventoryPlayer, Entity entityminecart) {
-		super(new InventoryWorkCart(par1InventoryPlayer, entityminecart));
-		this.furnaceInventory = (AbstractWorkCart) entityminecart;
+	public GuiFurnaceCart(InventoryPlayer inventoryPlayer, Entity rollingStock) {
+		super(new InventoryWorkCart(inventoryPlayer, rollingStock));
+		this.furnaceInventory = (AbstractWorkCart) rollingStock;
+		lightControls = RollingStockLightControlPanel.create(rollingStock);
+		if (lightControls != null) {
+			ySize = RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT;
+		}
+	}
+
+	@Override
+	public void initGui() {
+		ySize = lightControls != null
+			? RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT
+			: BASE_GUI_HEIGHT;
+		super.initGui();
+		if (lightControls != null) {
+			guiTop += RollingStockLightControlPanel.GUI_VERTICAL_OFFSET;
+		}
+		buttonList.clear();
+		if (lightControls != null) {
+			lightControls.init(
+				buttonList, guiLeft, guiTop + RollingStockLightControlPanel.GUI_Y);
+		}
+	}
+
+	@Override
+	public void updateScreen() {
+		super.updateScreen();
+		if (lightControls != null) {
+			lightControls.update();
+		}
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button) {
+		if (lightControls != null) {
+			lightControls.actionPerformed(button);
+		}
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.furnace"), 60, 6, 4210752);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(
+			StatCollector.translateToLocal("container.inventory"),
+			8, BASE_GUI_HEIGHT - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-		//int var4 = this.mc.renderEngine.getTexture("/gui/furnace.png");
+	protected void drawGuiContainerBackgroundLayer(
+		float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,Info.guiPrefix +"furnace.png"));
-		int var5 = (this.width - this.xSize) / 2;
-		int var6 = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
-		int var7;
+		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, this.xSize, BASE_GUI_HEIGHT);
 
 		if (this.furnaceInventory.isBurningFurnace()) {
-			var7 = this.furnaceInventory.getBurnTimeRemainingScaled(12);
-			this.drawTexturedModalRect(var5 + 56, var6 + 36 + 12 - var7, 176, 12 - var7, 14, var7 + 2);
+			int burnProgress = this.furnaceInventory.getBurnTimeRemainingScaled(12);
+			this.drawTexturedModalRect(
+				guiLeft + 56, guiTop + 36 + 12 - burnProgress,
+				176, 12 - burnProgress, 14, burnProgress + 2);
 		}
 
-		var7 = this.furnaceInventory.getCookProgressScaled(24);
-		this.drawTexturedModalRect(var5 + 79, var6 + 34, 176, 14, var7 + 1, 16);
+		int cookProgress = this.furnaceInventory.getCookProgressScaled(24);
+		this.drawTexturedModalRect(guiLeft + 79, guiTop + 34, 176, 14, cookProgress + 1, 16);
+		if (lightControls != null) {
+			lightControls.draw(mc, zLevel);
+		}
 	}
 }

@@ -38,15 +38,15 @@ public final class DetectedLightFace
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
+        float normalX,
+        float normalY,
+        float normalZ,
         float modelX,
         float modelY,
         float modelZ,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float minU,
         float minV,
@@ -59,15 +59,15 @@ public final class DetectedLightFace
             x,
             y,
             z,
-            nx,
-            ny,
-            nz,
+            normalX,
+            normalY,
+            normalZ,
             modelX,
             modelY,
             modelZ,
-            modelNx,
-            modelNy,
-            modelNz,
+            modelNormalX,
+            modelNormalY,
+            modelNormalZ,
             area,
             minU,
             minV,
@@ -83,15 +83,15 @@ public final class DetectedLightFace
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
+        float normalX,
+        float normalY,
+        float normalZ,
         float modelX,
         float modelY,
         float modelZ,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float minU,
         float minV,
@@ -105,15 +105,15 @@ public final class DetectedLightFace
         this.x = x;
         this.y = y;
         this.z = z;
-        normalX = nx;
-        normalY = ny;
-        normalZ = nz;
+        this.normalX = normalX;
+        this.normalY = normalY;
+        this.normalZ = normalZ;
         this.modelX = modelX;
         this.modelY = modelY;
         this.modelZ = modelZ;
-        modelNormalX = modelNx;
-        modelNormalY = modelNy;
-        modelNormalZ = modelNz;
+        this.modelNormalX = modelNormalX;
+        this.modelNormalY = modelNormalY;
+        this.modelNormalZ = modelNormalZ;
         this.area = area;
         this.minU = minU;
         this.minV = minV;

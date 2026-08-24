@@ -54,7 +54,7 @@ public final class ResolvedSkinLighting
     /**
      * Reports whether a tagged part should render for this skin.
      *
-     * <p>Null and unknown names remain available so optional metadata cannot hide legacy parts.
+     * <p>Null and unknown names remain available so optional metadata cannot hide model parts.
      * Only a known part absent from the available set is suppressed.</p>
      */
     public boolean isTaggedPartAvailable(String part)

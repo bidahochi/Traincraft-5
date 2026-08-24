@@ -16,15 +16,23 @@ import org.lwjgl.opengl.GLContext;
 import train.common.Traincraft;
 
 /**
- * Builds a frame-scoped screen-space ownership mask from depth written by each stock model.
- * The renderer snapshots depth before and after a model, encodes its entity owner into the
- * changed pixels, and exposes the texture to beam shaders so stock does not illuminate itself.
- * Resources are render-thread and OpenGL-context owned; failures leave the mask unavailable
- * and the lighting pipeline continues without this optional rejection step.
+ * Builds frame-scoped screen-space owner and nearest-depth masks from rolling-stock rendering.
+ *
+ * <p>The renderer snapshots scene depth before and after each vehicle, then accumulates only pixels
+ * whose depth moved closer. A depth attachment on the mask framebuffer ensures that the nearest
+ * overlapping vehicle owns each pixel. The beam shader rejects a foreign owner only when this
+ * stored vehicle depth is also closer than the beam fragment; an owner id alone is insufficient.
+ * Resources belong to the render thread and active OpenGL context. Failure leaves both masks
+ * unavailable so the normal scene-depth path can continue without suppressing an entire cone.
  */
 public final class RollingStockDepthMask
 {
     private static final Charset UTF_8 = Charset.forName("UTF-8");
+    /** Minimum scene-depth change accepted as newly rendered rolling-stock geometry. */
+    static final float CAPTURE_DEPTH_EPSILON = 5.0E-7F;
+    /** Separates a nearer stock surface from a beam fragment at effectively equal depth. */
+    static final float BEAM_DEPTH_BIAS = 1.0E-6F;
+    private static final int SHADER_LOG_CHARACTER_LIMIT = 8192;
     private static final String VERTEX_SOURCE =
         "#version 120\n"
         + "varying vec2 tcUv;\n"
@@ -41,21 +49,26 @@ public final class RollingStockDepthMask
         + "void main() {\n"
         + "    float beforeDepth = texture2D(tcBeforeDepth, tcUv).r;\n"
         + "    float afterDepth = texture2D(tcAfterDepth, tcUv).r;\n"
-        + "    if (afterDepth >= beforeDepth - 0.0000005) discard;\n"
+        + "    if (afterDepth >= beforeDepth - " + CAPTURE_DEPTH_EPSILON + ") discard;\n"
         + "    gl_FragColor = vec4(tcOwnerCode, 1.0);\n"
+        + "    gl_FragDepth = afterDepth;\n"
         + "}\n";
     private static final IntBuffer VIEWPORT = BufferUtils.createIntBuffer(16);
+    /** OpenGL viewport: {@code [0] = x}, {@code [1] = y}, {@code [2] = width}, {@code [3] = height}. */
+    private static final int[] CAPTURED_VIEWPORT = new int[4];
+    /** Active model rectangle: {@code [0] = x}, {@code [1] = y}, {@code [2] = width}, {@code [3] = height}. */
     private static final int[] MODEL_RECTANGLE = new int[4];
 
     private static int beforeDepthTexture;
     private static int afterDepthTexture;
     private static int maskTexture;
+    private static int maskDepthTexture;
     private static int maskFramebuffer;
     private static int program;
     private static int vertexShader;
     private static int fragmentShader;
-    private static int beforeUniform;
-    private static int afterUniform;
+    private static int beforeDepthUniform;
+    private static int afterDepthUniform;
     private static int ownerCodeUniform;
     private static int width;
     private static int height;
@@ -70,6 +83,11 @@ public final class RollingStockDepthMask
 
     private RollingStockDepthMask() {}
 
+    /**
+     * Captures scene depth immediately before one demanded rolling-stock model renders.
+     *
+     * @param ownerId entity id encoded into pixels changed by the matching model render
+     */
     public static void beginModel(int ownerId)
     {
         if (OpenGlHelper.shadersSupported == false || OpenGlHelper.isFramebufferEnabled() == false)
@@ -113,6 +131,7 @@ public final class RollingStockDepthMask
         }
     }
 
+    /** Accumulates pixels changed since the matching {@link #beginModel(int)} call. */
     public static void endModel()
     {
         if (modelActive == false)
@@ -136,6 +155,7 @@ public final class RollingStockDepthMask
         return frameStarted
                && failed == false
                && maskTexture != 0
+               && maskDepthTexture != 0
                && width == requestedWidth
                && height == requestedHeight;
     }
@@ -145,9 +165,23 @@ public final class RollingStockDepthMask
         return maskTexture;
     }
 
+    static int depthTexture()
+    {
+        return maskDepthTexture;
+    }
+
     static boolean depthMovedCloser(float beforeDepth, float afterDepth)
     {
-        return afterDepth < beforeDepth - 0.0000005F;
+        return afterDepth < beforeDepth - CAPTURE_DEPTH_EPSILON;
+    }
+
+    /** Pure counterpart of the beam-shader foreign-stock depth rejection. */
+    static boolean foreignStockOccludes(
+        int beamOwnerId, int stockOwnerId, float stockDepth, float beamDepth, boolean occupied)
+    {
+        return occupied
+               && encodedOwner(beamOwnerId) != encodedOwner(stockOwnerId)
+               && stockDepth + BEAM_DEPTH_BIAS < beamDepth;
     }
 
     static void finishFrame()
@@ -172,12 +206,22 @@ public final class RollingStockDepthMask
         loggedFailure = false;
     }
 
+    /** Captures the current OpenGL viewport used to size and align mask resources. */
     private static void captureViewport()
     {
         VIEWPORT.clear();
-        GL11.glGetInteger(GL11.GL_VIEWPORT, VIEWPORT);
+        if (LightEffectRenderBatch.copyCapturedViewport(CAPTURED_VIEWPORT))
+        {
+            VIEWPORT.put(CAPTURED_VIEWPORT);
+            VIEWPORT.rewind();
+        }
+        else
+        {
+            GL11.glGetInteger(GL11.GL_VIEWPORT, VIEWPORT);
+        }
     }
 
+    /** Creates or resizes context-owned mask programs, textures, and framebuffer targets. */
     private static void ensure(
         int requestedWidth, int requestedHeight, ContextCapabilities context)
     {
@@ -196,6 +240,7 @@ public final class RollingStockDepthMask
         beforeDepthTexture = allocateDepthTexture();
         afterDepthTexture = allocateDepthTexture();
         maskTexture = allocateColorTexture();
+        maskDepthTexture = allocateDepthTexture();
         maskFramebuffer = EXTFramebufferObject.glGenFramebuffersEXT();
         int previousFramebuffer =
             GL11.glGetInteger(EXTFramebufferObject.GL_FRAMEBUFFER_BINDING_EXT);
@@ -208,6 +253,12 @@ public final class RollingStockDepthMask
                 EXTFramebufferObject.GL_COLOR_ATTACHMENT0_EXT,
                 GL11.GL_TEXTURE_2D,
                 maskTexture,
+                0);
+            EXTFramebufferObject.glFramebufferTexture2DEXT(
+                EXTFramebufferObject.GL_FRAMEBUFFER_EXT,
+                EXTFramebufferObject.GL_DEPTH_ATTACHMENT_EXT,
+                GL11.GL_TEXTURE_2D,
+                maskDepthTexture,
                 0);
             int status = EXTFramebufferObject.glCheckFramebufferStatusEXT(
                              EXTFramebufferObject.GL_FRAMEBUFFER_EXT);
@@ -298,19 +349,23 @@ public final class RollingStockDepthMask
         }
     }
 
+    /** Clears accumulated owner and nearest-depth values for the current frame. */
     private static void clearMask()
     {
         int previousFramebuffer =
             GL11.glGetInteger(EXTFramebufferObject.GL_FRAMEBUFFER_BINDING_EXT);
-        GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_VIEWPORT_BIT);
+        GL11.glPushAttrib(
+            GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_VIEWPORT_BIT);
         try
         {
             EXTFramebufferObject.glBindFramebufferEXT(
                 EXTFramebufferObject.GL_FRAMEBUFFER_EXT, maskFramebuffer);
             GL11.glViewport(0, 0, width, height);
             GL11.glColorMask(true, true, true, true);
+            GL11.glDepthMask(true);
             GL11.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+            GL11.glClearDepth(1.0D);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         }
         finally
         {
@@ -320,6 +375,7 @@ public final class RollingStockDepthMask
         }
     }
 
+    /** Accumulates newly rendered stock pixels where captured depth differs from scene depth. */
     private static void accumulateDifference()
     {
         int previousFramebuffer =
@@ -339,8 +395,9 @@ public final class RollingStockDepthMask
             EXTFramebufferObject.glBindFramebufferEXT(
                 EXTFramebufferObject.GL_FRAMEBUFFER_EXT, maskFramebuffer);
             GL11.glViewport(0, 0, width, height);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glDepthMask(false);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glDepthFunc(GL11.GL_LESS);
+            GL11.glDepthMask(true);
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glDisable(GL11.GL_BLEND);
@@ -354,11 +411,11 @@ public final class RollingStockDepthMask
             OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, beforeDepthTexture);
-            OpenGlHelper.func_153163_f(beforeUniform, 0);
+            OpenGlHelper.func_153163_f(beforeDepthUniform, 0);
             OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, afterDepthTexture);
-            OpenGlHelper.func_153163_f(afterUniform, 1);
+            OpenGlHelper.func_153163_f(afterDepthUniform, 1);
             int ownerCode = encodedOwner(activeOwnerId);
             GL20.glUniform3f(
                 ownerCodeUniform,
@@ -395,6 +452,7 @@ public final class RollingStockDepthMask
         GL11.glEnd();
     }
 
+    /** Compiles and links the stock-mask accumulation and sampling shader programs. */
     private static void compileAndLink()
     {
         vertexShader = compile(GL20.GL_VERTEX_SHADER, VERTEX_SOURCE, "vertex");
@@ -407,13 +465,14 @@ public final class RollingStockDepthMask
         {
             throw new IllegalStateException(
                 "Rolling-stock mask shader link failed: "
-                + OpenGlHelper.func_153166_e(program, 8192));
+                + OpenGlHelper.func_153166_e(program, SHADER_LOG_CHARACTER_LIMIT));
         }
-        beforeUniform = requiredUniform("tcBeforeDepth");
-        afterUniform = requiredUniform("tcAfterDepth");
+        beforeDepthUniform = requiredUniform("tcBeforeDepth");
+        afterDepthUniform = requiredUniform("tcAfterDepth");
         ownerCodeUniform = requiredUniform("tcOwnerCode");
     }
 
+    /** Compiles one shader stage and returns its OpenGL object name. */
     private static int compile(int type, String source, String stage)
     {
         int shader = OpenGlHelper.func_153195_b(type);
@@ -424,7 +483,7 @@ public final class RollingStockDepthMask
         OpenGlHelper.func_153170_c(shader);
         if (OpenGlHelper.func_153157_c(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
         {
-            String log = OpenGlHelper.func_153158_d(shader, 8192);
+            String log = OpenGlHelper.func_153158_d(shader, SHADER_LOG_CHARACTER_LIMIT);
             OpenGlHelper.func_153180_a(shader);
             throw new IllegalStateException(
                 "Rolling-stock mask " + stage + " shader compile failed: " + log);
@@ -487,6 +546,7 @@ public final class RollingStockDepthMask
         abandonPrograms();
     }
 
+    /** Deletes framebuffer and texture targets owned by the current OpenGL context. */
     private static void releaseTargets()
     {
         if (beforeDepthTexture != 0)
@@ -501,6 +561,10 @@ public final class RollingStockDepthMask
         {
             GL11.glDeleteTextures(maskTexture);
         }
+        if (maskDepthTexture != 0)
+        {
+            GL11.glDeleteTextures(maskDepthTexture);
+        }
         if (maskFramebuffer != 0)
         {
             EXTFramebufferObject.glDeleteFramebuffersEXT(maskFramebuffer);
@@ -508,17 +572,20 @@ public final class RollingStockDepthMask
         beforeDepthTexture = 0;
         afterDepthTexture = 0;
         maskTexture = 0;
+        maskDepthTexture = 0;
         maskFramebuffer = 0;
         width = 0;
         height = 0;
         frameStarted = false;
     }
 
+    /** Forgets all context-owned state when OpenGL object deletion is no longer safe. */
     private static void abandon()
     {
         beforeDepthTexture = 0;
         afterDepthTexture = 0;
         maskTexture = 0;
+        maskDepthTexture = 0;
         maskFramebuffer = 0;
         width = 0;
         height = 0;
@@ -530,13 +597,14 @@ public final class RollingStockDepthMask
         allocatedContext = null;
     }
 
+    /** Clears shader object names without issuing deletion calls against a replaced context. */
     private static void abandonPrograms()
     {
         program = 0;
         vertexShader = 0;
         fragmentShader = 0;
-        beforeUniform = -1;
-        afterUniform = -1;
+        beforeDepthUniform = -1;
+        afterDepthUniform = -1;
         ownerCodeUniform = -1;
     }
 

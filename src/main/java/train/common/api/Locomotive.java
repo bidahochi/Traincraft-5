@@ -59,12 +59,25 @@ import train.common.utils.devutils.DebugUtil;
 
 
 public abstract class Locomotive extends EntityRollingStock implements IInventory, IRollingStockLightControls {
+    private static final int FORWARD_PRESS_KEY = 4;
+    private static final int REVERSE_PRESS_KEY = 5;
+    private static final int HORN_KEY = 8;
+    private static final int BELL_TOGGLE_KEY = 10;
+    private static final int BRAKE_PRESS_KEY = 12;
+    private static final int FORWARD_RELEASE_KEY = 13;
+    private static final int REVERSE_RELEASE_KEY = 14;
+    private static final int BRAKE_RELEASE_KEY = 15;
+    private static final int AUTOMATIC_TRAIN_OPERATION_KEY = 16;
+    private static final int MTC_OVERRIDE_KEY = 17;
+    private static final int OVERSPEED_OVERRIDE_KEY = 18;
     private boolean beaconEnabled;
     private boolean ditchLightsEnabled;
     private RollingStockHeadlightLevel frontHeadlightLevel = RollingStockHeadlightLevel.OFF;
     private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
     private boolean auxLightsEnabled;
     private boolean gyraLightsEnabled;
+    /** Server-owned countdown; synchronized through the watcher but intentionally omitted from NBT. */
+    private int hornLightResponseTicks;
     public boolean bellPressed;
     public int inventorySize;
 
@@ -572,7 +585,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         }
         catch (JsonParseException ignored)
         {
-                // Missing or malformed legacy lighting state migrates to the documented defaults.
+                // A malformed lightingDetailsJSON value falls back to the documented defaults.
             }
         }
 
@@ -668,45 +681,51 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     }
 
     /**
-     * gets packet from server and distribute for GUI handles motion
+     * Applies an authenticated control packet and updates matching GUI/control state.
      *
-     * @param i
+     * @param key rolling-stock control key identifier received from the validated packet
      */
     @Override
-    public void keyHandlerFromPacket(int i)
+    public void keyHandlerFromPacket(int key)
     {
         if (this.getTrainLockedFromPacket())
         {
             // Allow a player to operate locomotive if they are the owner if they are trusted.
             if (this.riddenByEntity instanceof EntityPlayer
-                    && !((EntityPlayer) this.riddenByEntity).getDisplayName()
-                    .equalsIgnoreCase(this.getTransportOwner()) && !this.isPlayerTrusted(((EntityPlayer) riddenByEntity).getDisplayName())) {
+                    && ((EntityPlayer) this.riddenByEntity).getDisplayName()
+                    .equalsIgnoreCase(this.getTransportOwner()) == false
+                    && this.isPlayerTrusted(
+                        ((EntityPlayer) riddenByEntity).getDisplayName()) == false) {
                 return;
             }
         }
-        pressKey(i);
-        if (i == 8 && ConfigHandler.SOUNDS) {
-            soundHorn();
+        pressKey(key);
+        if (key == HORN_KEY) {
+            hornLightResponseTicks = RollingStockTransientLightTimer.startHorn();
+            synchronizeLightState();
+            if (ConfigHandler.SOUNDS) {
+                soundHorn();
+            }
         }
-        if (i == 4) {
+        if (key == FORWARD_PRESS_KEY) {
             forwardPressed = true;
         }
-        if (i == 5) {
+        if (key == REVERSE_PRESS_KEY) {
             backwardPressed = true;
         }
-        if (i == 12) {
+        if (key == BRAKE_PRESS_KEY) {
             brakePressed = true;
         }
-        if (i == 13) {
+        if (key == FORWARD_RELEASE_KEY) {
             forwardPressed = false;
         }
-        if (i == 14) {
+        if (key == REVERSE_RELEASE_KEY) {
             backwardPressed = false;
         }
-        if (i == 15) {
+        if (key == BRAKE_RELEASE_KEY) {
             brakePressed = false;
         }
-        if (i == 16) {
+        if (key == AUTOMATIC_TRAIN_OPERATION_KEY) {
             if (mtcStatus != 0 && this.mtcType != 1) {
                 if (this instanceof IAT2Compatible) {
                     AutoTrain2 autoTrain2 = ((IAT2Compatible)this).getDriver();
@@ -717,7 +736,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
             }
         }
 
-        if (i == 17) {
+        if (key == MTC_OVERRIDE_KEY) {
 
             if (mtcOverridePressed) {
                 mtcOverridePressed = false;
@@ -732,7 +751,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
 
 
         }
-        if (i == 18) {
+        if (key == OVERSPEED_OVERRIDE_KEY) {
             if (mtcStatus != 0) {
                 if (overspeedOveridePressed) {
                     overspeedOveridePressed = false;
@@ -742,11 +761,11 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
             }
         }
 
-        /*if (i == 48){
+        /*if (key == 48){
             soundBell();
         }*/
 
-        if (i == 10)//BELLPRESSED NEESD TO BE TRUEE
+        if (key == BELL_TOGGLE_KEY)
         {
             bellPressed =bellPressed == false;
             if (bellPressed) {
@@ -846,6 +865,15 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     public void onUpdate()
     {
 
+        if (worldObj.isRemote == false && hornLightResponseTicks > 0)
+        {
+            hornLightResponseTicks = RollingStockTransientLightTimer.tick(hornLightResponseTicks);
+            if (hornLightResponseTicks == 0)
+            {
+                synchronizeLightState();
+            }
+        }
+
         if (trainID.equals("") && !worldObj.isRemote && ticksExisted % 40 == 0) {
             trainID = RandomStringUtils.randomAlphanumeric(5);
             dataWatcher.updateObject(5, trainID);
@@ -856,37 +884,37 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         {
             if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode())
                     && !forwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(4));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_PRESS_KEY));
                 forwardPressed = true;
             } else
             { if (Keyboard
                     .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode()) == false
                     && forwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(13));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_RELEASE_KEY));
                 forwardPressed = false;
             }
             }
             if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode())
                     && !backwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(5));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_PRESS_KEY));
                 backwardPressed = true;
             } else
             { if (Keyboard
                     .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode()) == false
                     && backwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(14));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_RELEASE_KEY));
                 backwardPressed = false;
             }
             }
             if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode())
                     && !brakePressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(12));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_PRESS_KEY));
                 brakePressed = true;
             } else
             { if (Keyboard
                     .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode()) == false
                     && brakePressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(15));
+                Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_RELEASE_KEY));
                 brakePressed = false;
             }
             }
@@ -1672,7 +1700,8 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         return RollingStockLightStateCodec.pack(
                    frontHeadlightLevel, rearHeadlightLevel,
                    ditchLightsEnabled, beaconEnabled,
-                   auxLightsEnabled, gyraLightsEnabled);
+                   auxLightsEnabled, gyraLightsEnabled,
+                   hornLightResponseTicks > 0);
     }
 
     /** Reads the watcher on clients and the authoritative fields on the server. */
@@ -1692,6 +1721,12 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         {
             dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
         }
+    }
+
+    @Override
+    public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+    {
+        return RollingStockLightStateCodec.transientEnabled(synchronizedLightState(), signal);
     }
     // private int placeInSpecialInvent(ItemStack itemstack1, int i, boolean doAdd) {
     // if (locoInvent[i] == null) {

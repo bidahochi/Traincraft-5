@@ -17,12 +17,14 @@ import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import train.common.api.AbstractRotarySnowPlow;
 import train.common.api.EntityRollingStock;
-import train.common.api.IRollingStockLightControls;
+import train.common.api.IRollingStockLightState;
 import train.common.api.RollingStockHeadlightLevel;
 import train.common.api.RollingStockLightChannel;
 import train.common.core.handlers.ConfigHandler;
 
 import train.client.render.lighting.BoundedIdentityCache;
+import train.client.render.lighting.ClientRollingStockLighting;
+import train.client.render.lighting.PlacedModelLighting;
 import train.client.render.lighting.RollingStockLightOcclusion;
 
 /**
@@ -40,6 +42,9 @@ import train.client.render.lighting.RollingStockLightOcclusion;
  * place and keeps custom model code from losing its original texture/light/matrix state.</p>
  */
 public final class ModelRendererTurboBatch {
+	private static final float RADIANS_TO_DEGREES = (float)(180.0D / Math.PI);
+	private static final int COMMANDER_BEACON_PERIOD_TICKS = 20;
+	private static final int COMMANDER_BEACON_ON_TICKS = COMMANDER_BEACON_PERIOD_TICKS / 2;
 
 	private static final int MIN_BATCH_SIZE = 64;
 	private static final int FVTM_RUNTIME_MIN_BATCH_SIZE = 8;
@@ -183,6 +188,7 @@ public final class ModelRendererTurboBatch {
 		if (!isBatchCompatible(turbo)) {
 			return false;
 		}
+		RollingStockLightOcclusion.capturePart(turbo, scale, rotorder);
 		context.entries.add(new Entry(turbo, scale, rotorder, classify(turbo)));
 		return true;
 	}
@@ -254,7 +260,7 @@ public final class ModelRendererTurboBatch {
 			return false;
 		}
 		suppressStaticEntries(context, entries);
-		captureStaticOcclusion(entries);
+		captureStaticOcclusion(entries, true);
 		renderEntries(context, entries);
 		return true;
 	}
@@ -286,7 +292,7 @@ public final class ModelRendererTurboBatch {
 			context.suppressed.add(entry.turbo);
 			runtimeSuppressed.add(entry.turbo);
 		}
-		captureStaticOcclusion(entries);
+		captureStaticOcclusion(entries, false);
 		renderEntries(context, entries, FVTM_RUNTIME_MIN_BATCH_SIZE, sharedSubmodelOwnerId(owner), FVTM_RUNTIME_BATCH_INDEX, true);
 		return runtimeSuppressed;
 	}
@@ -385,6 +391,7 @@ public final class ModelRendererTurboBatch {
 		}
 	}
 
+	/** Attempts the cached static path for one safe nested model owner. */
 	private static boolean tryRenderNestedStaticModel(Context context, ModelRendererTurbo turbo, float scale, boolean rotorder) {
 		/*
 		 * Generated submodels, such as Java bogie classes, are discovered lazily:
@@ -412,7 +419,7 @@ public final class ModelRendererTurboBatch {
 		if (entries.size() < NESTED_RUNTIME_MIN_BATCH_SIZE || !containsTurbo(entries, turbo)) {
 			return false;
 		}
-		captureStaticOcclusion(entries);
+		captureStaticOcclusion(entries, false);
 		renderEntries(context, entries, NESTED_RUNTIME_MIN_BATCH_SIZE, sharedSubmodelOwnerId(nestedOwner), NESTED_RUNTIME_BATCH_INDEX, true);
 		context.scopedSuppressionOwner = nestedOwner;
 		for (Entry entry : entries) {
@@ -461,7 +468,7 @@ public final class ModelRendererTurboBatch {
 				GL11.glPushMatrix();
 				GL11.glTranslatef(turbo.rotationPointX * scale, turbo.rotationPointY * scale, turbo.rotationPointZ * scale);
 				if (plow.isRotaryOn()) {
-					GL11.glRotatef(plow.bladeRenderAngle * 57.29578F, 1F, 0F, 0F);
+					GL11.glRotatef(plow.bladeRenderAngle * RADIANS_TO_DEGREES, 1F, 0F, 0F);
 				}
 				GL11.glTranslatef(-turbo.rotationPointX * scale, -turbo.rotationPointY * scale, -turbo.rotationPointZ * scale);
 				turbo.render(scale, rotorder);
@@ -530,7 +537,7 @@ public final class ModelRendererTurboBatch {
 		List<Entry> entries = staticArrayEntries(model, scale, rotorder);
 		if (entries.size() >= MIN_BATCH_SIZE) {
 			suppressStaticEntries(context, entries);
-			captureStaticOcclusion(entries);
+			captureStaticOcclusion(entries, true);
 			renderEntries(context, entries);
 			context.suppressOnly = true;
 			return true;
@@ -539,9 +546,14 @@ public final class ModelRendererTurboBatch {
 		return false;
 	}
 
-	/** Captures a static batch with one shared GPU matrix readback instead of one per model box. */
-	private static void captureStaticOcclusion(List<Entry> entries) {
-		if (!RollingStockLightOcclusion.beginSharedPartCapture()) {
+	/**
+	 * Captures a static batch with one shared parent matrix instead of one GPU readback per box.
+	 *
+	 * @param entries model parts emitted by the batch
+	 * @param stockRoot whether the batch is directly below the rolling-stock root transform
+	 */
+	private static void captureStaticOcclusion(List<Entry> entries, boolean stockRoot) {
+		if (RollingStockLightOcclusion.beginSharedPartCapture(stockRoot) == false) {
 			return;
 		}
 		try {
@@ -1029,11 +1041,11 @@ public final class ModelRendererTurboBatch {
 	 */
 	private static boolean isBatchCompatible(ModelRendererTurbo turbo) {
 		return turbo != null
-				&& train.client.render.lighting.ClientRollingStockLighting.isSemantic(turbo) == false
-			   && train.client.render.lighting.PlacedModelLighting.requiresImmediateRendering(turbo) == false
+				&& ClientRollingStockLighting.isSemantic(turbo) == false
+			   && PlacedModelLighting.requiresImmediateRendering(turbo) == false
                &&turbo.field_1402_i == false
 				&& turbo.showModel
-				&& turbo.useLegacyCompiler
+				&& turbo.useSingleDisplayListCompiler
 				&& !turbo.forcedRecompile
 				&& turbo.childModels == null;
 	}
@@ -1176,18 +1188,18 @@ public final class ModelRendererTurboBatch {
 	 * Decides whether a light part should glow for this specific entity right now.
 	*
      * <p>The display list only stores the lamp's shape. It does not store "on" or "off". Rolling
-     * stock that implements {@link IRollingStockLightControls} decides that here every frame.
-     * Models without those controls keep the older behavior where lamp-named parts are always
+     * stock that implements {@link IRollingStockLightState} decides that here every frame.
+     * Models without readable light state keep the older behavior where lamp-named parts are always
      * fullbright, which is needed for some decorative passenger lights.
 	 */
 	private static boolean isFullbright(Context context, RenderGroup group) {
-		if (!group.isLightGroup()) {
+		if (group.isLightGroup() == false) {
 			return false;
 		}
-		if (!(context.entity instanceof IRollingStockLightControls)) {
+		if (context.entity instanceof IRollingStockLightState == false) {
 			return true;
 		}
-		IRollingStockLightControls lights = (IRollingStockLightControls)context.entity;
+		IRollingStockLightState lights = (IRollingStockLightState)context.entity;
         int phase = beaconPhase(context.entity);
 		switch (group) {
 			case LAMP:
@@ -1198,7 +1210,8 @@ public final class ModelRendererTurboBatch {
 			case COMMANDER:
 				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON)
 						&& context.entity instanceof EntityRollingStock
-						&& ((EntityRollingStock)context.entity).ticksExisted % 10 < 5;
+						&& ((EntityRollingStock)context.entity).ticksExisted
+						   % COMMANDER_BEACON_PERIOD_TICKS < COMMANDER_BEACON_ON_TICKS;
 			case PRIME1:
 				return lights.isLightChannelEnabled(RollingStockLightChannel.BEACON) && phase == 0;
 			case PRIME2:
@@ -1291,7 +1304,7 @@ public final class ModelRendererTurboBatch {
 	 * <p>Normal quads and triangles are emitted through {@link ModelRendererTurbo#appendBatchGeometry}.
 	 * That path uses cleaned batch faces, including the fix for collapsed shape boxes whose
 	 * old normals caused dark diagonal triangle edges. Odd polygons that are not quads or
-	 * triangles still use the legacy path so unusual model details are not lost.</p>
+     * triangles still use the per-part display-list path so unusual model details are not lost.</p>
 	 */
 	private static CompiledBatch compile(List<Entry> entries, long signature) {
 		int displayList = GLAllocation.generateDisplayLists(1);

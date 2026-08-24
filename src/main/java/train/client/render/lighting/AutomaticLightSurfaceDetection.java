@@ -16,6 +16,17 @@ import tmt.TexturedVertex;
  */
 public final class AutomaticLightSurfaceDetection
 {
+    private static final float MODEL_VERTEX_SCALE = 0.0625F;
+    private static final float MODEL_VERTEX_SCALE_SQUARED = MODEL_VERTEX_SCALE * MODEL_VERTEX_SCALE;
+    private static final float MINIMUM_TRIANGLE_AREA = 1.0E-7F;
+    private static final float MINIMUM_GEOMETRY_LENGTH = 1.0E-5F;
+    private static final float MINIMUM_OUTWARD_ALIGNMENT = 0.25F;
+    private static final float SELECTION_EPSILON = 1.0E-5F;
+    private static final float DEFAULT_EMPTY_SURFACE_RADIUS = 0.1F;
+    private static final float MAXIMUM_CONTRADICTORY_FACE_DISTANCE_SQUARED = 1.0E-4F;
+    private static final float MINIMUM_CONTRADICTORY_AREA_RATIO = 0.5F;
+    private static final float MAXIMUM_CONTRADICTORY_AREA_RATIO = 2.0F;
+    private static final float MAXIMUM_OPPOSING_NORMAL_DOT = -0.9F;
     private static final Map<ModelRendererTurbo, CacheEntry> CACHE =
         new IdentityHashMap<ModelRendererTurbo, CacheEntry>();
 
@@ -53,8 +64,8 @@ public final class AutomaticLightSurfaceDetection
         for (int faceIndex = 0; faceIndex < part.faces.size(); faceIndex++)
         {
             TexturedPolygon polygon = part.faces.get(faceIndex);
-            TexturedVertex[] v = polygon.vertices;
-            if (v == null || v.length < 3)
+            TexturedVertex[] polygonVertices = polygon.vertices;
+            if (polygonVertices == null || polygonVertices.length < 3)
             {
                 continue;
             }
@@ -62,73 +73,100 @@ public final class AutomaticLightSurfaceDetection
             // area-weighted fan center for shape-box handling.
             // Prime tops intentionally contain collapsed corners, so using
             // only vertices 0/1/2 discards the authored top polygon.
-            float nx = 0, ny = 0, nz = 0, bestTriangle = 0, cx = 0, cy = 0, cz = 0, area = 0;
-            for (int ti = 1; ti + 1 < v.length; ti++)
+            float normalX = 0,
+                  normalY = 0,
+                  normalZ = 0,
+                  largestTriangleCrossProductLength = 0,
+                  weightedCenterX = 0,
+                  weightedCenterY = 0,
+                  weightedCenterZ = 0,
+                  area = 0;
+            for (int triangleVertexIndex = 1;
+                 triangleVertexIndex + 1 < polygonVertices.length;
+                 triangleVertexIndex++)
             {
-                float ax = v[ti].vector3F.xCoord - v[0].vector3F.xCoord,
-                      ay = v[ti].vector3F.yCoord - v[0].vector3F.yCoord,
-                      az = v[ti].vector3F.zCoord - v[0].vector3F.zCoord,
-                      bx = v[ti + 1].vector3F.xCoord - v[0].vector3F.xCoord,
-                      by = v[ti + 1].vector3F.yCoord - v[0].vector3F.yCoord,
-                      bz = v[ti + 1].vector3F.zCoord - v[0].vector3F.zCoord,
-                      tx = ay * bz - az * by,
-                      ty = az * bx - ax * bz,
-                      tz = ax * by - ay * bx,
-                      length = (float) Math.sqrt(tx * tx + ty * ty + tz * tz),
-                      triangleArea = length * 0.5F;
-                if (length > bestTriangle)
+                float firstEdgeX =
+                          polygonVertices[triangleVertexIndex].vector3F.xCoord
+                          - polygonVertices[0].vector3F.xCoord,
+                      firstEdgeY =
+                          polygonVertices[triangleVertexIndex].vector3F.yCoord
+                          - polygonVertices[0].vector3F.yCoord,
+                      firstEdgeZ =
+                          polygonVertices[triangleVertexIndex].vector3F.zCoord
+                          - polygonVertices[0].vector3F.zCoord,
+                      secondEdgeX =
+                          polygonVertices[triangleVertexIndex + 1].vector3F.xCoord
+                          - polygonVertices[0].vector3F.xCoord,
+                      secondEdgeY =
+                          polygonVertices[triangleVertexIndex + 1].vector3F.yCoord
+                          - polygonVertices[0].vector3F.yCoord,
+                      secondEdgeZ =
+                          polygonVertices[triangleVertexIndex + 1].vector3F.zCoord
+                          - polygonVertices[0].vector3F.zCoord,
+                      crossProductX = firstEdgeY * secondEdgeZ - firstEdgeZ * secondEdgeY,
+                      crossProductY = firstEdgeZ * secondEdgeX - firstEdgeX * secondEdgeZ,
+                      crossProductZ = firstEdgeX * secondEdgeY - firstEdgeY * secondEdgeX,
+                      crossProductLength =
+                          (float)
+                          Math.sqrt(
+                              crossProductX * crossProductX
+                              + crossProductY * crossProductY
+                              + crossProductZ * crossProductZ),
+                      triangleArea = crossProductLength * 0.5F;
+                if (crossProductLength > largestTriangleCrossProductLength)
                 {
-                    bestTriangle = length;
-                    nx = tx / length;
-                    ny = ty / length;
-                    nz = tz / length;
+                    largestTriangleCrossProductLength = crossProductLength;
+                    normalX = crossProductX / crossProductLength;
+                    normalY = crossProductY / crossProductLength;
+                    normalZ = crossProductZ / crossProductLength;
                 }
-                if (triangleArea > 1.0E-7F)
+                if (triangleArea > MINIMUM_TRIANGLE_AREA)
                 {
-                    cx +=
-                        (v[0].vector3F.xCoord
-                         + v[ti].vector3F.xCoord
-                         + v[ti + 1].vector3F.xCoord)
+                    weightedCenterX +=
+                        (polygonVertices[0].vector3F.xCoord
+                         + polygonVertices[triangleVertexIndex].vector3F.xCoord
+                         + polygonVertices[triangleVertexIndex + 1].vector3F.xCoord)
                         / 3
                         * triangleArea;
-                    cy +=
-                        (v[0].vector3F.yCoord
-                         + v[ti].vector3F.yCoord
-                         + v[ti + 1].vector3F.yCoord)
+                    weightedCenterY +=
+                        (polygonVertices[0].vector3F.yCoord
+                         + polygonVertices[triangleVertexIndex].vector3F.yCoord
+                         + polygonVertices[triangleVertexIndex + 1].vector3F.yCoord)
                         / 3
                         * triangleArea;
-                    cz +=
-                        (v[0].vector3F.zCoord
-                         + v[ti].vector3F.zCoord
-                         + v[ti + 1].vector3F.zCoord)
+                    weightedCenterZ +=
+                        (polygonVertices[0].vector3F.zCoord
+                         + polygonVertices[triangleVertexIndex].vector3F.zCoord
+                         + polygonVertices[triangleVertexIndex + 1].vector3F.zCoord)
                         / 3
                         * triangleArea;
                     area += triangleArea;
                 }
             }
-            if (bestTriangle < 1.0E-5F || area <= 1.0E-7F)
+            if (largestTriangleCrossProductLength < MINIMUM_GEOMETRY_LENGTH
+                    || area <= MINIMUM_TRIANGLE_AREA)
             {
                 continue;
             }
-            cx /= area;
-            cy /= area;
-            cz /= area;
+            float centerX = weightedCenterX / area;
+            float centerY = weightedCenterY / area;
+            float centerZ = weightedCenterZ / area;
             float minU = Float.MAX_VALUE,
                   minV = Float.MAX_VALUE,
                   maxU = -Float.MAX_VALUE,
                   maxV = -Float.MAX_VALUE;
-            for (TexturedVertex p : v)
+            for (TexturedVertex vertex : polygonVertices)
             {
-                minU = Math.min(minU, p.textureX);
-                minV = Math.min(minV, p.textureY);
-                maxU = Math.max(maxU, p.textureX);
-                maxV = Math.max(maxV, p.textureY);
+                minU = Math.min(minU, vertex.textureX);
+                minV = Math.min(minV, vertex.textureY);
+                maxU = Math.max(maxU, vertex.textureX);
+                maxV = Math.max(maxV, vertex.textureY);
             }
             // Match the modern importer: prefer a horizontally outward-facing
             // face relative to the model origin. Using abs(normal.x) can select
             // the back of the lens and project the cone through the locomotive.
-            float[] modelCenter = toModelSpace(part, cx, cy, cz, true),
-                    modelNormal = toModelSpace(part, nx, ny, nz, false);
+            float[] modelCenter = toModelSpace(part, centerX, centerY, centerZ, true),
+                    modelNormal = toModelSpace(part, normalX, normalY, normalZ, false);
             float[] scoringCenter =
                 toRenderedSpace(modelCenter, true, modelOffset, modelRotation, modelScale),
                 scoringNormal =
@@ -144,27 +182,27 @@ public final class AutomaticLightSurfaceDetection
                     scoringNormal[0] * scoringNormal[0]
                     + scoringNormal[2] * scoringNormal[2]);
             float outward =
-                radial > 1.0E-5F && horizontal > 1.0E-5F
+                radial > MINIMUM_GEOMETRY_LENGTH && horizontal > MINIMUM_GEOMETRY_LENGTH
                 ? (scoringNormal[0] * scoringCenter[0]
                    + scoringNormal[2] * scoringCenter[2])
                 / (radial * horizontal)
                 : Float.NEGATIVE_INFINITY;
-            float[][] vertices = new float[v.length][3];
-            float[] textureU = new float[v.length];
-            float[] textureV = new float[v.length];
-            for (int vi = 0; vi < v.length; vi++)
+            float[][] vertices = new float[polygonVertices.length][3];
+            float[] textureU = new float[polygonVertices.length];
+            float[] textureV = new float[polygonVertices.length];
+            for (int vertexIndex = 0; vertexIndex < polygonVertices.length; vertexIndex++)
             {
-                vertices[vi][0] = v[vi].vector3F.xCoord;
-                vertices[vi][1] = v[vi].vector3F.yCoord;
-                vertices[vi][2] = v[vi].vector3F.zCoord;
-                textureU[vi] = v[vi].textureX;
-                textureV[vi] = v[vi].textureY;
+                vertices[vertexIndex][0] = polygonVertices[vertexIndex].vector3F.xCoord;
+                vertices[vertexIndex][1] = polygonVertices[vertexIndex].vector3F.yCoord;
+                vertices[vertexIndex][2] = polygonVertices[vertexIndex].vector3F.zCoord;
+                textureU[vertexIndex] = polygonVertices[vertexIndex].textureX;
+                textureV[vertexIndex] = polygonVertices[vertexIndex].textureY;
                 float[] modelVertex =
                     toModelSpace(
                         part,
-                        v[vi].vector3F.xCoord,
-                        v[vi].vector3F.yCoord,
-                        v[vi].vector3F.zCoord,
+                        polygonVertices[vertexIndex].vector3F.xCoord,
+                        polygonVertices[vertexIndex].vector3F.yCoord,
+                        polygonVertices[vertexIndex].vector3F.zCoord,
                         true);
                 partMinimumX = Math.min(partMinimumX, modelVertex[0]);
                 partMinimumY = Math.min(partMinimumY, modelVertex[1]);
@@ -176,12 +214,12 @@ public final class AutomaticLightSurfaceDetection
             DetectedLightFace candidate =
                 new DetectedLightFace(
                 faceIndex,
-                cx,
-                cy,
-                cz,
-                nx,
-                ny,
-                nz,
+                centerX,
+                centerY,
+                centerZ,
+                normalX,
+                normalY,
+                normalZ,
                 modelCenter[0],
                 modelCenter[1],
                 modelCenter[2],
@@ -205,10 +243,10 @@ public final class AutomaticLightSurfaceDetection
             {
                 fallbackSelection = candidate;
             }
-            if (outward >= 0.25F
+            if (outward >= MINIMUM_OUTWARD_ALIGNMENT
                     && (automaticSelection == null
-                        || outward > bestOutwardScore + 1.0E-5F
-                        || (Math.abs(outward - bestOutwardScore) <= 1.0E-5F
+                        || outward > bestOutwardScore + SELECTION_EPSILON
+                        || (Math.abs(outward - bestOutwardScore) <= SELECTION_EPSILON
                             && area > automaticSelection.area)))
             {
                 automaticSelection = candidate;
@@ -222,7 +260,8 @@ public final class AutomaticLightSurfaceDetection
         DetectedLightSurface best;
         if (selected == null)
         {
-            best = new DetectedLightSurface(0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0.1F, 0, 0, 1, 1);
+            best = new DetectedLightSurface(
+                0, 0, 0, 1, 0, 0, 1, 0, 0, 0, DEFAULT_EMPTY_SURFACE_RADIUS, 0, 0, 1, 1);
         }
         else
         {
@@ -290,10 +329,11 @@ public final class AutomaticLightSurfaceDetection
                               + other.modelNormalY * automaticSelection.modelNormalY
                               + other.modelNormalZ
                               * automaticSelection.modelNormalZ;
-                    if ((px * px + py * py + pz * pz) * 0.00390625F <= 1.0E-4F
-                            && ratio >= 0.5F
-                            && ratio <= 2
-                            && dot < -0.9F)
+                    if ((px * px + py * py + pz * pz) * MODEL_VERTEX_SCALE_SQUARED
+                            <= MAXIMUM_CONTRADICTORY_FACE_DISTANCE_SQUARED
+                            && ratio >= MINIMUM_CONTRADICTORY_AREA_RATIO
+                            && ratio <= MAXIMUM_CONTRADICTORY_AREA_RATIO
+                            && dot < MAXIMUM_OPPOSING_NORMAL_DOT)
                     {
                         contradictory = true;
                         break;
@@ -333,6 +373,7 @@ public final class AutomaticLightSurfaceDetection
         return 31 * result + Arrays.hashCode(modelScale);
     }
 
+    /** Converts one model-space vector through the part's authored TMT transform into rendered space. */
     private static float[] toRenderedSpace(
         float[] value,
         boolean translate,
@@ -343,9 +384,9 @@ public final class AutomaticLightSurfaceDetection
         float[] rendered = value.clone();
         if (translate)
         {
-            rendered[0] *= 0.0625F;
-            rendered[1] *= 0.0625F;
-            rendered[2] *= 0.0625F;
+            rendered[0] *= MODEL_VERTEX_SCALE;
+            rendered[1] *= MODEL_VERTEX_SCALE;
+            rendered[2] *= MODEL_VERTEX_SCALE;
         }
         if (modelScale != null && modelScale.length >= 3)
         {

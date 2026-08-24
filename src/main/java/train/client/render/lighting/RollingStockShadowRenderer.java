@@ -18,51 +18,66 @@ import org.lwjgl.util.vector.Matrix4f;
 import train.common.Traincraft;
 
 /**
- * Renders one fixture's owning rolling stock into a reusable light-space depth map.
- * Occluder geometry captured during model rendering is replayed from the light position;
- * the resulting eye-to-shadow transform and texture remain valid only for the current
- * fixture. OpenGL resources belong to the creating context and failure simply disables
- * self-shadowing while preserving beam rendering.
+ * Renders foreign rolling-stock candidates into a reusable light-space depth map for one fixture.
+ *
+ * <p>Captured model geometry is replayed from the light position only when transformed stock bounds
+ * overlap that cone. The emitting owner is excluded from this cross-stock map, while the
+ * screen-space ownership mask prevents false rejection where the owner is visible. A center-ray
+ * terminating vehicle is also excluded because the cone is already shortened to that surface.
+ * The eye-to-shadow transform and texture remain valid only for the
+ * current fixture. OpenGL resources belong to the creating context. Failure disables this
+ * optional partial-cone shadowing. Exact center-hit truncation still applies. Edge-only overlap
+ * remains unshadowed while the GLSL path stays active; conservative boundary truncation is used
+ * only by the fixed-function path.
+ * Every three-element geometry array uses {@code [0] = x}, {@code [1] = y}, and
+ * {@code [2] = z}.
  */
 final class RollingStockShadowRenderer
 {
     private static final int SHADOW_SIZE = 256;
-    private static final int MAXIMUM_SHADOW_MAPS_PER_FRAME = 4;
     private static final float NEAR_DISTANCE = 0.03F;
+    /** Prevents equal-depth shadow texels from rejecting their own receiving surface. */
+    static final float DEPTH_BIAS = 0.0015F;
+    private static final float MINIMUM_NEAR_HALF_WIDTH = 0.0001F;
+    private static final float VERTICAL_HALF_WIDTH_SCALE = 0.6F;
+    private static final float RADIANS_TO_DEGREES = (float)(180.0D / Math.PI);
+    private static final float MINIMUM_UP_VECTOR_LENGTH = 1.0E-5F;
     private static final FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(16);
     private static final FloatBuffer POSE_BUFFER = BufferUtils.createFloatBuffer(16);
     private static final Matrix4f PROJECTION = new Matrix4f();
     private static final Matrix4f LIGHT_VIEW = new Matrix4f();
     private static final Matrix4f EYE_TO_SHADOW = new Matrix4f();
+    /** Reusable {@code [x, y, z]} light origin, direction, up, and bounds vectors. */
     private static final float[] ORIGIN = new float[3];
     private static final float[] DIRECTION = new float[3];
     private static final float[] UP = new float[3];
+    private static final float[] BOUNDS_MINIMUM = new float[3];
+    private static final float[] BOUNDS_MAXIMUM = new float[3];
 
     private static int framebuffer;
     private static int depthTexture;
     private static boolean availableForCurrentLight;
     private static boolean failed;
     private static boolean loggedFailure;
-    private static int renderedThisFrame;
     private static ContextCapabilities allocatedContext;
 
     private RollingStockShadowRenderer() {}
 
-    /** Resets the optional cross-stock shadow budget before rendering this frame's beams. */
+    /** Clears per-fixture availability before rendering this frame's beams. */
     static void beginFrame()
     {
-        renderedThisFrame = 0;
         availableForCurrentLight = false;
     }
 
+    /**
+     * Builds a light-space depth map when a foreign-stock broad-phase candidate exists.
+     *
+     * @return whether a shadow texture was prepared for this submission
+     */
     static boolean prepare(LightEffectSubmission submission)
     {
         availableForCurrentLight = false;
         if (OpenGlHelper.shadersSupported == false || failed)
-        {
-            return false;
-        }
-        if (renderedThisFrame >= MAXIMUM_SHADOW_MAPS_PER_FRAME)
         {
             return false;
         }
@@ -71,15 +86,16 @@ final class RollingStockShadowRenderer
         {
             return false;
         }
-        float length = FixedFunctionBeamGeometry.effectiveLength(
-                           submission.definition.beamLength(),
-                           submission.beamScale,
-                           submission.fixtureReach);
-        float width = FixedFunctionBeamGeometry.effectiveWidth(
-                          submission.definition.beamWidth(),
-                          submission.beamScale,
-                          submission.fixtureReach);
-        if (length <= NEAR_DISTANCE || width <= 0.0F)
+        float nominalLength = FixedFunctionBeamGeometry.effectiveLength(
+                                  submission.definition.beamLength(),
+                                  submission.beamScale,
+                                  submission.fixtureReach);
+        float visibleLength = submission.impactResolution.visibleLength(nominalLength, true);
+        float beamWidth = FixedFunctionBeamGeometry.effectiveWidth(
+                              submission.definition.beamWidth(),
+                              submission.beamScale,
+                              submission.fixtureReach);
+        if (visibleLength <= NEAR_DISTANCE || beamWidth <= 0.0F)
         {
             return false;
         }
@@ -89,13 +105,19 @@ final class RollingStockShadowRenderer
         makeOrthogonalUp(DIRECTION, UP);
         float[] origin = ORIGIN;
         float[] direction = DIRECTION;
+        BeamImpact impact = submission.impactResolution.impact;
+        int terminatingStockOwnerId =
+            impact != null && impact.target == BeamImpact.Target.ROLLING_STOCK
+            ? impact.targetOwnerId
+            : Integer.MIN_VALUE;
         if (hasCandidate(
                     entries,
                     submission.ownerId,
+                    terminatingStockOwnerId,
                     origin,
                     direction,
-                    length,
-                    width)
+                    visibleLength,
+                    beamWidth)
                 == false)
         {
             return false;
@@ -106,12 +128,12 @@ final class RollingStockShadowRenderer
             render(
                 entries,
                 submission.ownerId,
+                terminatingStockOwnerId,
                 origin,
                 direction,
                 UP,
-                length,
-                width);
-            renderedThisFrame++;
+                visibleLength,
+                beamWidth);
             availableForCurrentLight = true;
             return true;
         }
@@ -156,7 +178,7 @@ final class RollingStockShadowRenderer
 
     static boolean isShadowed(float fragmentDepth, float storedDepth)
     {
-        return fragmentDepth > storedDepth + 0.0015F;
+        return fragmentDepth > storedDepth + DEPTH_BIAS;
     }
 
     static void clear()
@@ -175,12 +197,13 @@ final class RollingStockShadowRenderer
         failed = false;
         loggedFailure = false;
         availableForCurrentLight = false;
-        renderedThisFrame = 0;
     }
 
+    /** Reports whether any captured foreign stock intersects the beam's conservative broad phase. */
     private static boolean hasCandidate(
         List<RollingStockLightOcclusion.Entry> entries,
         int ownerId,
+        int terminatingStockOwnerId,
         float[] origin,
         float[] direction,
         float length,
@@ -189,6 +212,7 @@ final class RollingStockShadowRenderer
         for (RollingStockLightOcclusion.Entry entry : entries)
         {
             if (entry.ownerId == ownerId
+                    || entry.ownerId == terminatingStockOwnerId
                     || isCandidate(entry, origin, direction, length, beamWidth) == false)
             {
                 continue;
@@ -206,40 +230,41 @@ final class RollingStockShadowRenderer
         float length,
         float beamWidth)
     {
-        float centerX = (entry.bounds.minimumX + entry.bounds.maximumX) * 0.5F;
-        float centerY = (entry.bounds.minimumY + entry.bounds.maximumY) * 0.5F;
-        float centerZ = (entry.bounds.minimumZ + entry.bounds.maximumZ) * 0.5F;
-        float eyeX = transformX(entry.pose, centerX, centerY, centerZ);
-        float eyeY = transformY(entry.pose, centerX, centerY, centerZ);
-        float eyeZ = transformZ(entry.pose, centerX, centerY, centerZ);
-        float offsetX = eyeX - origin[0];
-        float offsetY = eyeY - origin[1];
-        float offsetZ = eyeZ - origin[2];
-        float along = offsetX * direction[0]
-                      + offsetY * direction[1]
-                      + offsetZ * direction[2];
-        float radius = transformedRadius(entry);
-        if (along + radius < 0.0F || along - radius > length)
+        if (entry.bounds == null)
         {
             return false;
         }
-        float distanceSquared = offsetX * offsetX + offsetY * offsetY + offsetZ * offsetZ;
-        float perpendicularSquared = Math.max(0.0F, distanceSquared - along * along);
-        float coneRadius = beamWidth * Math.max(0.0F, Math.min(1.0F, along / length));
-        float allowed = radius + coneRadius;
-        return perpendicularSquared <= allowed * allowed;
-    }
-
-    private static float transformedRadius(RollingStockLightOcclusion.Entry entry)
-    {
-        float halfX = (entry.bounds.maximumX - entry.bounds.minimumX) * 0.5F;
-        float halfY = (entry.bounds.maximumY - entry.bounds.minimumY) * 0.5F;
-        float halfZ = (entry.bounds.maximumZ - entry.bounds.minimumZ) * 0.5F;
-        float localRadius = (float) Math.sqrt(halfX * halfX + halfY * halfY + halfZ * halfZ);
-        float scaleX = length(entry.pose[0], entry.pose[1], entry.pose[2]);
-        float scaleY = length(entry.pose[4], entry.pose[5], entry.pose[6]);
-        float scaleZ = length(entry.pose[8], entry.pose[9], entry.pose[10]);
-        return localRadius * Math.max(scaleX, Math.max(scaleY, scaleZ));
+        for (int axis = 0; axis < 3; axis++)
+        {
+            BOUNDS_MINIMUM[axis] = Float.POSITIVE_INFINITY;
+            BOUNDS_MAXIMUM[axis] = Float.NEGATIVE_INFINITY;
+        }
+        for (int corner = 0; corner < 8; corner++)
+        {
+            float x = (corner & 1) == 0
+                      ? entry.bounds.minimumX : entry.bounds.maximumX;
+            float y = (corner & 2) == 0
+                      ? entry.bounds.minimumY : entry.bounds.maximumY;
+            float z = (corner & 4) == 0
+                      ? entry.bounds.minimumZ : entry.bounds.maximumZ;
+            float eyeX = transformX(entry.eyeFromStock, x, y, z);
+            float eyeY = transformY(entry.eyeFromStock, x, y, z);
+            float eyeZ = transformZ(entry.eyeFromStock, x, y, z);
+            BOUNDS_MINIMUM[0] = Math.min(BOUNDS_MINIMUM[0], eyeX);
+            BOUNDS_MINIMUM[1] = Math.min(BOUNDS_MINIMUM[1], eyeY);
+            BOUNDS_MINIMUM[2] = Math.min(BOUNDS_MINIMUM[2], eyeZ);
+            BOUNDS_MAXIMUM[0] = Math.max(BOUNDS_MAXIMUM[0], eyeX);
+            BOUNDS_MAXIMUM[1] = Math.max(BOUNDS_MAXIMUM[1], eyeY);
+            BOUNDS_MAXIMUM[2] = Math.max(BOUNDS_MAXIMUM[2], eyeZ);
+        }
+        for (int axis = 0; axis < 3; axis++)
+        {
+            BOUNDS_MINIMUM[axis] -= beamWidth;
+            BOUNDS_MAXIMUM[axis] += beamWidth;
+        }
+        return BeamImpactResolver.intersectAxisAlignedBounds(
+                   origin, direction, BOUNDS_MINIMUM, BOUNDS_MAXIMUM, length)
+               != Float.POSITIVE_INFINITY;
     }
 
     private static void ensure()
@@ -304,9 +329,11 @@ final class RollingStockShadowRenderer
         allocatedContext = current;
     }
 
+    /** Renders candidate foreign-stock triangles into the current beam's light-space depth target. */
     private static void render(
         List<RollingStockLightOcclusion.Entry> entries,
         int ownerId,
+        int terminatingStockOwnerId,
         float[] origin,
         float[] direction,
         float[] up,
@@ -322,12 +349,12 @@ final class RollingStockShadowRenderer
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glPushMatrix();
         GL11.glLoadIdentity();
-        float nearWidth = Math.max(0.0001F, width * NEAR_DISTANCE / length);
+        float nearWidth = Math.max(MINIMUM_NEAR_HALF_WIDTH, width * NEAR_DISTANCE / length);
         GL11.glFrustum(
             -nearWidth,
             nearWidth,
-            -nearWidth * 0.6F,
-            nearWidth * 0.6F,
+            -nearWidth * VERTICAL_HALF_WIDTH_SCALE,
+            nearWidth * VERTICAL_HALF_WIDTH_SCALE,
             NEAR_DISTANCE,
             length);
         captureCurrentMatrix(PROJECTION);
@@ -365,6 +392,7 @@ final class RollingStockShadowRenderer
             for (RollingStockLightOcclusion.Entry entry : entries)
             {
                 if (entry.ownerId == ownerId
+                        || entry.ownerId == terminatingStockOwnerId
                         || isCandidate(entry, origin, direction, length, width) == false)
                 {
                     continue;
@@ -389,6 +417,7 @@ final class RollingStockShadowRenderer
         }
     }
 
+    /** Draws one captured part's exact triangles using its final eye-space transform. */
     private static void drawPart(RollingStockLightOcclusion.PartPose pose)
     {
         GL11.glPushMatrix();
@@ -403,27 +432,27 @@ final class RollingStockShadowRenderer
         {
             if (pose.rotateAngleZ != 0.0F)
             {
-                GL11.glRotatef(pose.rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(pose.rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
             }
             if (pose.rotateAngleY != 0.0F)
             {
-                GL11.glRotatef(pose.rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(pose.rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
             }
         }
         else
         {
             if (pose.rotateAngleY != 0.0F)
             {
-                GL11.glRotatef(pose.rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(pose.rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
             }
             if (pose.rotateAngleZ != 0.0F)
             {
-                GL11.glRotatef(pose.rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(pose.rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
             }
         }
         if (pose.rotateAngleX != 0.0F)
         {
-            GL11.glRotatef(pose.rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(pose.rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
         }
         pose.part.renderDepthGeometry(pose.scale);
         GL11.glPopMatrix();
@@ -461,6 +490,7 @@ final class RollingStockShadowRenderer
         return (float) Math.sqrt(x * x + y * y + z * z);
     }
 
+    /** Orthogonalizes and normalizes the light-space up vector against the beam direction. */
     private static void makeOrthogonalUp(float[] direction, float[] up)
     {
         float projection = direction[0] * up[0]
@@ -470,7 +500,7 @@ final class RollingStockShadowRenderer
         up[1] -= direction[1] * projection;
         up[2] -= direction[2] * projection;
         float upLength = length(up[0], up[1], up[2]);
-        if (upLength <= 1.0E-5F)
+        if (upLength <= MINIMUM_UP_VECTOR_LENGTH)
         {
             if (Math.abs(direction[1]) < 0.95F)
             {

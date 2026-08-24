@@ -11,6 +11,9 @@ import java.util.List;
  */
 public final class DetectedLightSurface
 {
+    private static final float MINIMUM_DIRECTIONAL_NORMAL_COMPONENT = 0.5F;
+    private static final float FACE_SCORE_EPSILON = 1.0E-5F;
+
     /** Part-local centroid/normal, assembled-model normal, area/radius, and normalized UV bounds. */
     public final float x,
            y,
@@ -38,12 +41,12 @@ public final class DetectedLightSurface
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float normalX,
+        float normalY,
+        float normalZ,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float radius,
         float minU,
@@ -55,12 +58,12 @@ public final class DetectedLightSurface
             x,
             y,
             z,
-            nx,
-            ny,
-            nz,
-            modelNx,
-            modelNy,
-            modelNz,
+            normalX,
+            normalY,
+            normalZ,
+            modelNormalX,
+            modelNormalY,
+            modelNormalZ,
             area,
             radius,
             minU,
@@ -76,12 +79,12 @@ public final class DetectedLightSurface
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float normalX,
+        float normalY,
+        float normalZ,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float radius,
         float minU,
@@ -94,12 +97,12 @@ public final class DetectedLightSurface
             x,
             y,
             z,
-            nx,
-            ny,
-            nz,
-            modelNx,
-            modelNy,
-            modelNz,
+            normalX,
+            normalY,
+            normalZ,
+            modelNormalX,
+            modelNormalY,
+            modelNormalZ,
             area,
             radius,
             minU,
@@ -115,12 +118,12 @@ public final class DetectedLightSurface
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float normalX,
+        float normalY,
+        float normalZ,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float radius,
         float minU,
@@ -134,12 +137,12 @@ public final class DetectedLightSurface
             x,
             y,
             z,
-            nx,
-            ny,
-            nz,
-            modelNx,
-            modelNy,
-            modelNz,
+            normalX,
+            normalY,
+            normalZ,
+            modelNormalX,
+            modelNormalY,
+            modelNormalZ,
             area,
             radius,
             minU,
@@ -159,12 +162,12 @@ public final class DetectedLightSurface
         float x,
         float y,
         float z,
-        float nx,
-        float ny,
-        float nz,
-        float modelNx,
-        float modelNy,
-        float modelNz,
+        float normalX,
+        float normalY,
+        float normalZ,
+        float modelNormalX,
+        float modelNormalY,
+        float modelNormalZ,
         float area,
         float radius,
         float minU,
@@ -178,12 +181,12 @@ public final class DetectedLightSurface
         this.x = x;
         this.y = y;
         this.z = z;
-        normalX = nx;
-        normalY = ny;
-        normalZ = nz;
-        modelNormalX = modelNx;
-        modelNormalY = modelNy;
-        modelNormalZ = modelNz;
+        this.normalX = normalX;
+        this.normalY = normalY;
+        this.normalZ = normalZ;
+        this.modelNormalX = modelNormalX;
+        this.modelNormalY = modelNormalY;
+        this.modelNormalZ = modelNormalZ;
         this.area = area;
         this.radius = radius;
         this.minU = minU;
@@ -224,9 +227,9 @@ public final class DetectedLightSurface
     /** Selects the best horizontal face for Prime phase {@code 1..4}, or null if absent. */
     public DetectedLightFace primeFace(int phase)
     {
-        float tx = phase == 1 ? -1 : phase == 3 ? 1 : 0,
-              tz = phase == 2 ? -1 : phase == 4 ? 1 : 0,
-              best = 0.5F;
+        float targetDirectionX = phase == 1 ? -1 : phase == 3 ? 1 : 0,
+              targetDirectionZ = phase == 2 ? -1 : phase == 4 ? 1 : 0,
+              bestAlignmentScore = MINIMUM_DIRECTIONAL_NORMAL_COMPONENT;
         DetectedLightFace result = null;
         for (DetectedLightFace face : faces)
         {
@@ -235,17 +238,20 @@ public final class DetectedLightSurface
                 Math.sqrt(
                     face.modelNormalX * face.modelNormalX
                     + face.modelNormalZ * face.modelNormalZ);
-            if (horizontal < 0.5F)
+            if (horizontal < MINIMUM_DIRECTIONAL_NORMAL_COMPONENT)
             {
                 continue;
             }
-            float score = (face.modelNormalX * tx + face.modelNormalZ * tz) / horizontal;
-            if (score > best + 1.0E-5F
-                    || (Math.abs(score - best) <= 1.0E-5F
+            float alignmentScore =
+                (face.modelNormalX * targetDirectionX
+                 + face.modelNormalZ * targetDirectionZ)
+                / horizontal;
+            if (alignmentScore > bestAlignmentScore + FACE_SCORE_EPSILON
+                    || (Math.abs(alignmentScore - bestAlignmentScore) <= FACE_SCORE_EPSILON
                         && result != null
                         && face.area > result.area))
             {
-                best = score;
+                bestAlignmentScore = alignmentScore;
                 result = face;
             }
         }
@@ -258,10 +264,11 @@ public final class DetectedLightSurface
         DetectedLightFace result = null;
         for (DetectedLightFace face : faces)
         {
-            if (face.modelNormalY > 0.5F
+            if (face.modelNormalY > MINIMUM_DIRECTIONAL_NORMAL_COMPONENT
                     && (result == null
-                        || face.modelNormalY > result.modelNormalY + 1.0E-5F
-                        || Math.abs(face.modelNormalY - result.modelNormalY) <= 1.0E-5F
+                        || face.modelNormalY > result.modelNormalY + FACE_SCORE_EPSILON
+                        || Math.abs(face.modelNormalY - result.modelNormalY)
+                           <= FACE_SCORE_EPSILON
                         && face.area > result.area))
             {
                 result = face;

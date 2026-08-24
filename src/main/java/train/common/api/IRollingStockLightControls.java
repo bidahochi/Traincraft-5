@@ -3,25 +3,23 @@ package train.common.api;
 /**
  * Defines the synchronized operator controls exposed by rolling stock with configurable lighting.
  *
- * <p>This is the authoritative replacement for the legacy combined-light contract. Fixture identity
- * and behavior remain model/profile concerns; implementations expose only synchronized operator
- * state.
+ * <p>Fixture identity and behavior remain model/profile concerns; implementations expose only
+ * synchronized operator state for the available lighting circuits.
  */
-
-public interface IRollingStockLightControls
+public interface IRollingStockLightControls extends IRollingStockLightState
 {
     /** @return the synchronized front-headlight level */
-    public RollingStockHeadlightLevel getFrontHeadlightLevel();
+    @Override
+    RollingStockHeadlightLevel getFrontHeadlightLevel();
 
     /** @return the synchronized rear-headlight level */
-    public RollingStockHeadlightLevel getRearHeadlightLevel();
+    @Override
+    RollingStockHeadlightLevel getRearHeadlightLevel();
 
     /** @param level new front-headlight level; {@code null} is treated as off */
-    public
     void setFrontHeadlightLevel(RollingStockHeadlightLevel level);
 
     /** @param level new rear-headlight level; {@code null} is treated as off */
-    public
     void setRearHeadlightLevel(RollingStockHeadlightLevel level);
 
     /**
@@ -30,7 +28,8 @@ public interface IRollingStockLightControls
      * @param channel circuit to query
      * @return whether the circuit is enabled
      */
-    public boolean isLightChannelEnabled(RollingStockLightChannel channel);
+    @Override
+    boolean isLightChannelEnabled(RollingStockLightChannel channel);
 
     /**
      * Changes a logical lighting circuit.
@@ -38,9 +37,18 @@ public interface IRollingStockLightControls
      * @param channel circuit to change
      * @param enabled whether the circuit should be enabled
      */
-    public
+    void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled);
 
-    void setLightChannelEnabled(RollingStockLightChannel channel,
-
-    boolean enabled);
+    /**
+     * Reports a synchronized, non-persistent signal such as the active horn response window.
+     * The default keeps existing third-party implementations source compatible.
+     *
+     * @param signal transient signal to query
+     * @return whether that signal is currently active
+     */
+    @Override
+    default boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+    {
+        return false;
+    }
 }
