@@ -218,6 +218,11 @@ public class RecipeHandler extends AbstractRecipeHandler
 		addDictRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);
 		addDictRecipe(new ItemStack(BlockIDs.MILWSwitchStand.block, 1)," RW","BWR","AAA", Character.valueOf('A'), new ItemStack(Items.stick), Character.valueOf('B'), Blocks.iron_bars, Character.valueOf('R'), new ItemStack(Items.dye, 1, 1), Character.valueOf('W'), new ItemStack(Items.dye, 1, 15));
 
+		/* Signal bungalows */
+		addDictRecipe(new ItemStack(BlockIDs.SmallBungalo.block, 1), "SIS", "IFI", "SIS", 'S', itemSteel, 'I', ironingot, 'F', ItemIDs.steelframe.item);
+		addDictRecipe(new ItemStack(BlockIDs.MediumBungalo.block, 1), "   ", "SS ", "   ", 'S', BlockIDs.SmallBungalo.block);
+		addDictRecipe(new ItemStack(BlockIDs.LargeBungalo.block, 1), " M ", " M ", "   ", 'M', BlockIDs.MediumBungalo.block);
+
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 2,3),  "GXG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Items.clay_ball);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 2, 4), "GXG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Items.snowball);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 8, 4), "XGG","GGG","GGG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Blocks.snow);
@@ -559,6 +564,12 @@ public class RecipeHandler extends AbstractRecipeHandler
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.ironFrame.item, 2), "   ", "# #", "AAA", Character.valueOf('A'), ironingot, Character.valueOf('#'), anyPlanks);// iron Frame
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.ironCab.item, 2), "###", "X X", "XXX", Character.valueOf('X'), ironingot, Character.valueOf('#'), anyPlanks);// iron cab
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);//switchstand
+
+		/* Signal bungalows */
+		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.SmallBungalo.block, 1), "SIS", "IFI", "SIS", 'S', itemSteel, 'I', ironingot, 'F', ItemIDs.steelframe.item);
+		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.MediumBungalo.block, 1), "   ", "SS ", "   ", 'S', BlockIDs.SmallBungalo.block);
+		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.LargeBungalo.block, 1), " M ", " M ", "   ", 'M', BlockIDs.MediumBungalo.block);
+
 			/* Wind mill */
 
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.windMill.block, 1), " R ", " G ", "B B", Character.valueOf('G'), ItemIDs.generator.item, Character.valueOf('B'), ironingot, Character.valueOf('R'), ItemIDs.propeller.item);
