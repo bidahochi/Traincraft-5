@@ -57,31 +57,40 @@ public final class TrackAttachmentOperations
 	 */
 	public static TileTCRail resolveRenderOwner(IBlockAccess access, int cellX, int cellY, int cellZ)
 	{
-		if (access == null)
-		{
-			return null;
-		}
-		TileEntity selected = access.getTileEntity(cellX, cellY, cellZ);
-		TileTCRail rail = null;
-		if (selected instanceof TileTCRail)
-		{
-			rail = (TileTCRail)selected;
-		}
-		else if (selected instanceof TileTCRailGag)
-		{
-			TileTCRailGag gag = (TileTCRailGag)selected;
-			TileEntity origin = access.getTileEntity(gag.originX, gag.originY, gag.originZ);
-			if (origin instanceof TileTCRail)
-			{
-				rail = (TileTCRail)origin;
-			}
-		}
+		TileTCRail rail = resolvePathOwner(access, cellX, cellY, cellZ);
 		if (rail == null || rail.getWorldObj() == null)
 		{
 			return rail;
 		}
 		TileTCRail parent = rail.getGreatestParent(rail.getWorldObj());
 		return rail.hasModel || parent == null ? rail : parent;
+	}
+
+	/**
+	 * Resolves the immediate rail whose geometry covers one selected cell. Unlike {@link #resolveRenderOwner}, this
+	 * does not follow compound-track links, because linked switch and parallel-turn sections can have different circle
+	 * centers and radii.
+	 *
+	 * @return local path owner, or {@code null} when the cell has no resolvable rail tile
+	 */
+	public static TileTCRail resolvePathOwner(IBlockAccess access, int cellX, int cellY, int cellZ)
+	{
+		if (access == null)
+		{
+			return null;
+		}
+		TileEntity selected = access.getTileEntity(cellX, cellY, cellZ);
+		if (selected instanceof TileTCRail)
+		{
+			return (TileTCRail)selected;
+		}
+		if (selected instanceof TileTCRailGag)
+		{
+			TileTCRailGag gag = (TileTCRailGag)selected;
+			TileEntity origin = access.getTileEntity(gag.originX, gag.originY, gag.originZ);
+			return origin instanceof TileTCRail ? (TileTCRail)origin : null;
+		}
+		return null;
 	}
 
 	/**
@@ -297,6 +306,45 @@ public final class TrackAttachmentOperations
 	}
 
 	/**
+	 * Expands a rail tile's client render bounds to include every attachment rendered by that tile. Minecraft tests a
+	 * tile renderer's declared box before invoking it, so attachments outside the base model footprint must participate
+	 * in that box or they can disappear near the edge of the camera frustum.
+	 *
+	 * @param owner attachment-owning rail tile
+	 * @param railBounds base rail-model bounds
+	 * @return bounds enclosing the rail model and all rendered attachments
+	 */
+	public static AxisAlignedBB includeAttachmentRenderBounds(TileTCRail owner, AxisAlignedBB railBounds)
+	{
+		if (owner == null || railBounds == null)
+		{
+			return railBounds;
+		}
+		double minimumX = railBounds.minX;
+		double minimumY = railBounds.minY;
+		double minimumZ = railBounds.minZ;
+		double maximumX = railBounds.maxX;
+		double maximumY = railBounds.maxY;
+		double maximumZ = railBounds.maxZ;
+		for (TrackAttachment attachment : owner.getTrackAttachments())
+		{
+			if (attachment.getType().hasBehavior(TrackAttachmentType.RENDERS) == false)
+			{
+				continue;
+			}
+			AxisAlignedBB attachmentBounds = getAttachmentBounds(owner, attachment);
+			minimumX = Math.min(minimumX, attachmentBounds.minX);
+			minimumY = Math.min(minimumY, attachmentBounds.minY);
+			minimumZ = Math.min(minimumZ, attachmentBounds.minZ);
+			maximumX = Math.max(maximumX, attachmentBounds.maxX);
+			maximumY = Math.max(maximumY, attachmentBounds.maxY);
+			maximumZ = Math.max(maximumZ, attachmentBounds.maxZ);
+		}
+		return AxisAlignedBB.getBoundingBox(minimumX, minimumY, minimumZ,
+				maximumX, maximumY, maximumZ);
+	}
+
+	/**
 	 * Applies canonical yaw and optional track-surface pitch to all local bound corners, then returns their world-axis
 	 * envelope because Minecraft 1.7 collision boxes cannot themselves be rotated.
 	 */
@@ -387,8 +435,12 @@ public final class TrackAttachmentOperations
 	public static TrackPathSample getAttachmentPathSample(TileTCRail owner, TrackAttachment attachment)
 	{
 		int cellX = owner.xCoord + attachment.getOffsetX();
+		int cellY = owner.yCoord + attachment.getOffsetY();
 		int cellZ = owner.zCoord + attachment.getOffsetZ();
-		TrackPathSample pathSample = TrackPathGeometry.sampleAttachmentPath(owner, cellX, cellZ);
+		TileTCRail pathOwner = owner.getWorldObj() == null ? owner
+				: resolvePathOwner(owner.getWorldObj(), cellX, cellY, cellZ);
+		TrackPathSample pathSample = TrackPathGeometry.sampleAttachmentPath(
+				pathOwner != null ? pathOwner : owner, cellX, cellZ);
 		return pathSample != null ? pathSample : new TrackPathSample(
 				cellX + CELL_CENTER, cellZ + CELL_CENTER, 0.0D, 1.0D);
 	}

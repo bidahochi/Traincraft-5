@@ -110,8 +110,12 @@ public final class ItemBlockSwitchStand extends ItemBlock
 		{
 			return TileSwitchStand.EmbeddedHostType.SLAB;
 		}
-		return block instanceof BlockStairs && World.doesBlockHaveSolidTopSurface(world, x, y, z)
-				? TileSwitchStand.EmbeddedHostType.STAIR : null;
+		if (block instanceof BlockStairs && World.doesBlockHaveSolidTopSurface(world, x, y, z))
+		{
+			return TileSwitchStand.EmbeddedHostType.STAIR;
+		}
+		return block.isOpaqueCube() && World.doesBlockHaveSolidTopSurface(world, x, y, z)
+				? TileSwitchStand.EmbeddedHostType.FULL : null;
 	}
 
 	/** Returns whether a designated true-embedded switch control occupies a horizontal neighbor cell. */

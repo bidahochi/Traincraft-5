@@ -146,7 +146,10 @@ public class ItemBlockTrackBuffer extends ItemBlock implements ITrackAttachmentI
 	private TrackAttachment createTrackAttachment(TileTCRail owner,
 			int cellX, int cellY, int cellZ, float hitX, float hitZ)
 	{
-		TrackPathSample pathSample = TrackPathGeometry.sampleAttachmentPath(owner, cellX, cellZ);
+		TileTCRail pathOwner = TrackAttachmentOperations.resolvePathOwner(
+				owner.getWorldObj(), cellX, cellY, cellZ);
+		TrackPathSample pathSample = TrackPathGeometry.sampleAttachmentPath(
+				pathOwner != null ? pathOwner : owner, cellX, cellZ);
 		if (pathSample == null)
 		{
 			return null;

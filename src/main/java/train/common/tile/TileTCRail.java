@@ -27,6 +27,7 @@ import train.common.library.track.TrackRenderBounds;
 import train.common.library.track.TrackSlopeParameters;
 import train.common.library.track.placement.TrackHostPlacementTransaction;
 import train.common.track.attachment.TrackAttachment;
+import train.common.track.attachment.TrackAttachmentOperations;
 
 import java.util.Collections;
 import java.util.Collection;
@@ -778,8 +779,9 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		{
 			return super.getRenderBoundingBox();
 		}
-		return TrackCellResolver.isTraincraftRailBlock(getBlockType())
+		AxisAlignedBB railBounds = TrackCellResolver.isTraincraftRailBlock(getBlockType())
 				? TrackRenderBounds.calculate(this, track) : INFINITE_EXTENT_AABB;
+		return TrackAttachmentOperations.includeAttachmentRenderBounds(this, railBounds);
 	}
 
 	private String ownerUUID = "Villager Joe";

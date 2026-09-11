@@ -43,7 +43,8 @@ public abstract class TileSwitchStand extends TileLockable
     public enum EmbeddedHostType
     {
         SLAB(TrackHostConstants.HALF_BLOCK_HEIGHT),
-        STAIR(TrackHostConstants.FULL_BLOCK_SURFACE_HEIGHT);
+        STAIR(TrackHostConstants.FULL_BLOCK_SURFACE_HEIGHT),
+        FULL(TrackHostConstants.FULL_BLOCK_SURFACE_HEIGHT);
 
         private final double surfaceHeight;
 

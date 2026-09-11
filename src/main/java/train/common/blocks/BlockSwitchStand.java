@@ -92,10 +92,10 @@ public abstract class BlockSwitchStand extends BlockLever
 	public abstract TileEntity createTileEntity(World world, int metadata);
 
 	/**
-	 * Returns whether this stand may replace a supported slab or stair beside a true-embedded switch control.
+	 * Returns whether this stand may align with a true-embedded switch control by capturing a full block, slab, or stair.
 	 * Specialized stand blocks may override this capability when they require a different mounting system.
 	 *
-	 * @return whether the shared item may use true-embedded host replacement for this stand
+	 * @return whether the shared item may use true-embedded alignment and host replacement for this stand
 	 */
 	public boolean supportsTrueEmbeddedHostReplacement()
 	{
