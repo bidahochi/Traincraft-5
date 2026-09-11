@@ -49,21 +49,6 @@ public class TileTCRailGag extends TileEntity implements ITileTCRail
 		synchronizeTrackReference();
 	}
 
-	/**
-	 * Reassigns only the authoritative parent while preserving the gag's existing track type.
-	 *
-	 * @param parentX authoritative parent X coordinate
-	 * @param parentY authoritative parent Y coordinate
-	 * @param parentZ authoritative parent Z coordinate
-	 */
-	public void setTrackOrigin(int parentX, int parentY, int parentZ)
-	{
-		originX = parentX;
-		originY = parentY;
-		originZ = parentZ;
-		synchronizeTrackReference();
-	}
-
 	/** Marks the completed tile state dirty and sends it to observing clients. */
 	private void synchronizeTrackReference()
 	{

@@ -33,13 +33,16 @@ import train.common.library.track.TrackHostConstants;
 import train.common.library.track.TrackCellResolver;
 import train.common.library.track.TrackItemIDs;
 import train.common.tile.TileTCRail;
+import train.common.tile.TileTCRailHostData;
 import train.common.tile.TileTrainDetector;
 import train.common.track.attachment.TrackAttachment;
 import train.common.track.attachment.TrackAttachmentOperations;
 import train.common.track.attachment.ITrackAttachmentItem;
 
-import java.util.Random;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class BlockTCRail extends Block {
 	private IIcon texture;
@@ -95,14 +98,11 @@ public class BlockTCRail extends Block {
 	@Override
 	public void breakBlock(World world, int railX, int railY, int railZ, Block removedBlock, int removedMetadata) {
 		TileTCRail tileEntity = (TileTCRail) world.getTileEntity(railX, railY, railZ);
-		if (tileEntity != null && world.isRemote == false)
-		{
-			for (TrackAttachment attachment : tileEntity.removeAllAttachments())
-			{
-				TrackAttachmentOperations.drop(world, railX + attachment.getOffsetX(),
-						railY + attachment.getOffsetY(), railZ + attachment.getOffsetZ(), attachment);
-			}
-		}
+		TileTCRail removalOwner = tileEntity != null
+				? TrackCellResolver.resolveParentForRemoval(world, tileEntity) : null;
+		dropCapturedHostContents(world, railX, railY, railZ, removalOwner);
+		dropLinkedClusterAttachments(world, removalOwner);
+		dropAttachments(world, tileEntity);
 		/*
 		 * Restoring captured host blocks replaces every rail and gag in the
 		 * footprint. Those replacements still invoke breakBlock. They must not
@@ -110,6 +110,7 @@ public class BlockTCRail extends Block {
 		 * destroy a host cell that was restored earlier in the same pass.
 		 */
 		if (TileTCRail.isRestoringCapturedHostBlocksGlobally()) {
+			dropStoredRailItems(world, railX, railY, railZ, tileEntity);
 			world.removeTileEntity(railX, railY, railZ);
 			return;
 		}
@@ -156,15 +157,7 @@ public class BlockTCRail extends Block {
 			}
 		}
 
-		if (tileEntity != null && (tileEntity.idDrop != null) && !world.isRemote)
-		{
-			dropRailItem(world, railX, railY, railZ, tileEntity, new ItemStack(tileEntity.idDrop, 1, 0));
-			if (isLegacyRoadCrossing(tileEntity))
-			{
-				dropRailItem(world, railX, railY, railZ, tileEntity,
-						new ItemStack(TrackItemIDs.tcRailSmallStraight.item));
-			}
-		}
+		dropStoredRailItems(world, railX, railY, railZ, tileEntity);
 
 		for(int x : matrixXZ){
 			for(int z : matrixXZ){
@@ -218,6 +211,134 @@ public class BlockTCRail extends Block {
 	private static boolean isLegacyRoadCrossing(TileTCRail rail)
 	{
 		return rail.getTrackType() != null && rail.getTrackType().getLabel().contains("ROAD_CROSSING");
+	}
+
+	/**
+	 * Drops the captured footprint's stored rail item and attachments before restoration replaces their owning tiles. The
+	 * rail item appears at the initiating break coordinate, while attachments retain their installed world positions.
+	 *
+	 * @param world server world performing the removal
+	 * @param breakX initiating cell X coordinate
+	 * @param breakY initiating cell Y coordinate
+	 * @param breakZ initiating cell Z coordinate
+	 * @param owner authoritative captured-footprint owner
+	 */
+	void dropCapturedHostContents(World world, int breakX, int breakY, int breakZ, TileTCRail owner)
+	{
+		if (owner != null && owner.hasCapturedHostBlocks())
+		{
+			dropStoredRailItems(world, breakX, breakY, breakZ, owner);
+			Set<TileTCRail> drainedRails = new HashSet<TileTCRail>();
+			dropAttachments(world, owner, drainedRails);
+			for (TileTCRailHostData.CapturedHostBlock hostBlock : owner.getOwnedCapturedHostBlocks())
+			{
+				int trackX = owner.xCoord + hostBlock.offsetX;
+				int trackY = owner.yCoord + hostBlock.offsetY;
+				int trackZ = owner.zCoord + hostBlock.offsetZ;
+				world.getChunkFromBlockCoords(trackX, trackZ);
+				TileEntity footprintTile = world.getTileEntity(trackX, trackY, trackZ);
+				if (footprintTile instanceof TileTCRail)
+				{
+					dropAttachments(world, (TileTCRail)footprintTile, drainedRails);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Drops attachments from every loaded model rail linked to the same greatest parent.
+	 *
+	 * Compound tracks store child-to-parent links but no reverse child list, so a switch's straight and turn model tiles
+	 * can independently own attachments even though they share one root. Iterating only attachment-bearing loaded rails
+	 * reconstructs that relationship without a broad coordinate scan or touching adjacent independent tracks.
+	 */
+	void dropLinkedClusterAttachments(World world, TileTCRail root)
+	{
+		if (world == null || world.isRemote || root == null || root.beginAttachmentClusterRemoval() == false)
+		{
+			return;
+		}
+		int[] recordedOwners = root.takeAttachmentOwnerCoordinates();
+		for (int index = 0; index + 2 < recordedOwners.length; index += 3)
+		{
+			int ownerX = recordedOwners[index];
+			int ownerY = recordedOwners[index + 1];
+			int ownerZ = recordedOwners[index + 2];
+			world.getChunkFromBlockCoords(ownerX, ownerZ);
+			TileEntity recordedOwner = world.getTileEntity(ownerX, ownerY, ownerZ);
+			if (recordedOwner instanceof TileTCRail)
+			{
+				dropAttachments(world, (TileTCRail)recordedOwner);
+			}
+		}
+		/*
+		 * This fallback covers attachments installed before the reverse index existed. It only resolves loaded tiles that
+		 * still contain attachments and can be removed after pre-production worlds no longer need that transition.
+		 */
+		Object[] loadedTiles = world.loadedTileEntityList.toArray();
+		for (Object loadedTile : loadedTiles)
+		{
+			if (loadedTile instanceof TileTCRail == false)
+			{
+				continue;
+			}
+			TileTCRail candidate = (TileTCRail)loadedTile;
+			if (candidate.getTrackAttachments().isEmpty())
+			{
+				continue;
+			}
+			TileTCRail candidateRoot = TrackCellResolver.resolveParentForRemoval(world, candidate);
+			if (isSameRail(root, candidateRoot))
+			{
+				dropAttachments(world, candidate);
+			}
+		}
+	}
+
+	/** Returns whether two loaded rail objects identify the same world coordinate. */
+	private static boolean isSameRail(TileTCRail first, TileTCRail second)
+	{
+		return first == second || first != null && second != null
+				&& first.xCoord == second.xCoord && first.yCoord == second.yCoord && first.zCoord == second.zCoord;
+	}
+
+	/** Drains one rail at most once while walking a captured multi-parent footprint. */
+	private void dropAttachments(World world, TileTCRail rail, Set<TileTCRail> drainedRails)
+	{
+		if (rail != null && drainedRails.add(rail))
+		{
+			dropAttachments(world, rail);
+		}
+	}
+
+	/** Drops every attachment stored by one rail tile and clears its collection before linked removal begins. */
+	private void dropAttachments(World world, TileTCRail rail)
+	{
+		if (rail == null || world.isRemote)
+		{
+			return;
+		}
+		for (TrackAttachment attachment : rail.removeAllAttachments())
+		{
+			TrackAttachmentOperations.drop(world, rail.xCoord + attachment.getOffsetX(),
+					rail.yCoord + attachment.getOffsetY(), rail.zCoord + attachment.getOffsetZ(), attachment);
+		}
+	}
+
+	/** Drops and clears the item identity stored by one rail tile so restoration callbacks cannot duplicate it. */
+	private void dropStoredRailItems(World world, int x, int y, int z, TileTCRail rail)
+	{
+		if (rail == null || rail.idDrop == null || world.isRemote)
+		{
+			return;
+		}
+		ItemStack railDrop = new ItemStack(rail.idDrop, 1, 0);
+		rail.idDrop = null;
+		dropRailItem(world, x, y, z, rail, railDrop);
+		if (isLegacyRoadCrossing(rail))
+		{
+			dropRailItem(world, x, y, z, rail, new ItemStack(TrackItemIDs.tcRailSmallStraight.item));
+		}
 	}
 
 	/**

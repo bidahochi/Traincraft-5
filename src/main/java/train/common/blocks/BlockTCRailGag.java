@@ -124,6 +124,13 @@ public class BlockTCRailGag extends Block {
 		if (tileEntity != null) {
 			TileTCRail parent = TrackCellResolver.resolveParentForRemoval(world, tileEntity);
 			if (parent != null) {
+				Block parentBlock = parent.getBlockType();
+				if (parentBlock instanceof BlockTCRail)
+				{
+					BlockTCRail railBlock = (BlockTCRail)parentBlock;
+					railBlock.dropCapturedHostContents(world, gagX, gagY, gagZ, parent);
+					railBlock.dropLinkedClusterAttachments(world, parent);
+				}
 				parent.restoreCapturedHostBlocks(world);
 			}
 			TileEntity originTile = world.getTileEntity(tileEntity.originX, tileEntity.originY, tileEntity.originZ);

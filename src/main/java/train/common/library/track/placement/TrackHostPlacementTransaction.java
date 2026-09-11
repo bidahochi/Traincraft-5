@@ -14,7 +14,6 @@ import train.common.library.track.TrackHostConstants;
 import train.common.library.track.TrackPlacementType;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailHostData;
-import train.common.tile.TileTCRailGag;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -332,10 +331,9 @@ public final class TrackHostPlacementTransaction
 	}
 
 	/**
-	 * Connects every parent and gag created by a replacement placement directly to the tile that owns the captured
-	 * host map. Complex switches contain several model parents whose legacy links do not always share one root; without
-	 * this normalization, those cells render through the owner's aggregate mesh but fall back to ordinary rail-height
-	 * collision because their local tile cannot resolve the captured host.
+	 * Connects every parent created by replacement placement to the tile that owns the captured host map. Gags retain
+	 * their local model parent so attachment path sampling can distinguish separate straight and turn sections; that
+	 * parent then resolves the shared captured-host owner through its normalized link.
 	 *
 	 * @param world world containing the completed placement
 	 * @param owner authoritative parent holding the captured host map
@@ -354,16 +352,6 @@ public final class TrackHostPlacementTransaction
 				rail.linkedZ = owner.zCoord;
 				rail.markDirty();
 				world.markBlockForUpdate(coordinate.x, coordinate.y, coordinate.z);
-			}
-		}
-
-		for (HostCapture capture : captures.values())
-		{
-			TileEntity tile = world.getTileEntity(capture.x, capture.y, capture.z);
-			if (tile instanceof TileTCRailGag)
-			{
-				TileTCRailGag gag = (TileTCRailGag)tile;
-				gag.setTrackOrigin(owner.xCoord, owner.yCoord, owner.zCoord);
 			}
 		}
 	}

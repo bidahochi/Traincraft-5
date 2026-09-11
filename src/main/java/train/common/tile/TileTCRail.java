@@ -37,6 +37,9 @@ import java.util.Map;
 public class TileTCRail extends TileEntity implements ITileTCRail {
 
 	private static final double EMBEDDED_HOST_SURFACE_INSET = 0.0625D;
+	private static final String ATTACHMENT_OWNER_COORDINATES_TAG = "TrackAttachmentOwnerCoordinates";
+	private static final int COORDINATE_COMPONENTS = 3;
+	private static final int[] NO_ATTACHMENT_OWNER_COORDINATES = new int[0];
 	public double r;
 	public double cx;
 	public double cy;
@@ -80,6 +83,8 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	private final LinkedList<TileTrainDetector> pairedDetectors;
 	/** Extensible attachments installed on cells owned and rendered by this rail tile. */
 	private final TileTCRailAttachmentData attachmentData = new TileTCRailAttachmentData(this);
+	private boolean attachmentClusterRemovalStarted;
+	private int[] attachmentOwnerCoordinates = NO_ATTACHMENT_OWNER_COORDINATES;
 	private boolean bridgeSupport;
 
 	public TileTCRail()
@@ -159,7 +164,12 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	 */
 	public boolean addAttachment(TrackAttachment attachment)
 	{
-		return attachmentData.add(attachment);
+		if (attachmentData.add(attachment) == false)
+		{
+			return false;
+		}
+		registerAttachmentOwner();
+		return true;
 	}
 
 	/**
@@ -184,6 +194,70 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public List<TrackAttachment> removeAllAttachments()
 	{
 		return attachmentData.removeAll();
+	}
+
+	/**
+	 * Marks the linked rail cluster as having begun its one destruction-time attachment drain.
+	 *
+	 * The marker is deliberately transient: the root tile is already being destroyed, and it only prevents recursive
+	 * block-removal callbacks from repeatedly scanning the same loaded cluster.
+	 *
+	 * @return {@code true} for the first removal callback reaching this cluster
+	 */
+	public boolean beginAttachmentClusterRemoval()
+	{
+		if (attachmentClusterRemovalStarted)
+		{
+			return false;
+		}
+		attachmentClusterRemovalStarted = true;
+		return true;
+	}
+
+	/** Records this attachment-owning model tile on its greatest parent for exact destruction-time lookup. */
+	private void registerAttachmentOwner()
+	{
+		if (worldObj == null || worldObj.isRemote)
+		{
+			return;
+		}
+		TileTCRail root = TrackCellResolver.resolveParentForRemoval(worldObj, this);
+		if (root == null)
+		{
+			return;
+		}
+		for (int index = 0; index + 2 < root.attachmentOwnerCoordinates.length;
+				index += COORDINATE_COMPONENTS)
+		{
+			if (root.attachmentOwnerCoordinates[index] == xCoord
+					&& root.attachmentOwnerCoordinates[index + 1] == yCoord
+					&& root.attachmentOwnerCoordinates[index + 2] == zCoord)
+			{
+				return;
+			}
+		}
+		int previousLength = root.attachmentOwnerCoordinates.length;
+		int[] expanded = new int[previousLength + COORDINATE_COMPONENTS];
+		System.arraycopy(root.attachmentOwnerCoordinates, 0, expanded, 0, previousLength);
+		expanded[previousLength] = xCoord;
+		expanded[previousLength + 1] = yCoord;
+		expanded[previousLength + 2] = zCoord;
+		root.attachmentOwnerCoordinates = expanded;
+		root.markDirty();
+	}
+
+	/**
+	 * Takes and clears the exact attachment-owner coordinates recorded by this compound-track root.
+	 *
+	 * Clearing before block replacement makes recursive removal callbacks unable to produce duplicate drops.
+	 *
+	 * @return flattened world-coordinate triples in X, Y, Z order
+	 */
+	public int[] takeAttachmentOwnerCoordinates()
+	{
+		int[] coordinates = attachmentOwnerCoordinates;
+		attachmentOwnerCoordinates = NO_ATTACHMENT_OWNER_COORDINATES;
+		return coordinates;
 	}
 
 	/** Replaces only client attachment state, leaving slope, linkage, and captured-host data untouched. */
@@ -249,14 +323,17 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	}
 
 	/**
-	 * Resolves the model-bearing tile recorded for this captured-host footprint.
+	 * Returns the captured cells owned directly by this tile in owner-relative coordinates.
 	 *
-	 * @return captured-host render source, or {@code null} when this track has no captured footprint
+	 * Destruction uses the complete footprint to drain attachment-owning rail tiles before restoration replaces them.
+	 * Render callers should continue using {@link #getTrackHostRenderBlocks()}, which rebases cells to the model tile.
+	 *
+	 * @return immutable captured footprint, or an empty collection when this tile owns no captured hosts
 	 */
-	public TileTCRail getCapturedHostRenderSource()
+	public Collection<TileTCRailHostData.CapturedHostBlock> getOwnedCapturedHostBlocks()
 	{
-		TileTCRail owner = resolveCapturedHostOwner();
-		return owner != null && owner.trackHostData != null ? owner.trackHostData.getRenderSource() : null;
+		return trackHostData != null ? trackHostData.getBlocks()
+				: Collections.<TileTCRailHostData.CapturedHostBlock>emptyList();
 	}
 
 	/**
@@ -727,6 +804,9 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public void readFromNBT(NBTTagCompound nbt)
 	{
 		attachmentData.readFromNBT(nbt);
+		int[] persistedAttachmentOwners = nbt.getIntArray(ATTACHMENT_OWNER_COORDINATES_TAG);
+		attachmentOwnerCoordinates = persistedAttachmentOwners.length % COORDINATE_COMPONENTS == 0
+				? persistedAttachmentOwners : NO_ATTACHMENT_OWNER_COORDINATES;
 		ownerUUID = nbt.hasKey("ownerUUID") ? nbt.getString("ownerUUID") : "Villager Joe";
 		facingMeta = nbt.getByte("Orientation");
 		r = nbt.getDouble("r");
@@ -813,6 +893,10 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		attachmentData.writeToNBT(nbt);
+		if (attachmentOwnerCoordinates.length > 0)
+		{
+			nbt.setIntArray(ATTACHMENT_OWNER_COORDINATES_TAG, attachmentOwnerCoordinates);
+		}
 		nbt.setString("ownerUUID", ownerUUID);
 		nbt.setByte("Orientation", (byte) facingMeta);
 		nbt.setDouble("r", r);

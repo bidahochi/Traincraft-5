@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import train.common.library.track.TrackHostConstants;
@@ -276,22 +275,6 @@ public final class TileTCRailHostData
 	}
 
 	/**
-	 * Resolves the model-bearing tile recorded when this captured footprint was committed.
-	 *
-	 * @return recorded render source, or {@code null} when it is unavailable
-	 */
-	public TileTCRail getRenderSource()
-	{
-		if (owner.getWorldObj() == null)
-		{
-			return null;
-		}
-		TileEntity source = owner.getWorldObj().getTileEntity(owner.xCoord + renderSourceOffsetX,
-				owner.yCoord + renderSourceOffsetY, owner.zCoord + renderSourceOffsetZ);
-		return source instanceof TileTCRail ? (TileTCRail)source : null;
-	}
-
-	/**
 	 * Returns the captured host at one owner-relative coordinate.
 	 *
 	 * @param offsetX owner-relative X coordinate
@@ -312,6 +295,12 @@ public final class TileTCRailHostData
 	public boolean hasBlocks()
 	{
 		return hostBlocks.isEmpty() == false;
+	}
+
+	/** Returns the immutable owner-relative captured footprint for destruction-time cleanup. */
+	Collection<CapturedHostBlock> getBlocks()
+	{
+		return readOnlyHostBlocks.values();
 	}
 
 	/**

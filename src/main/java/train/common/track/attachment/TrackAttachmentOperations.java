@@ -46,8 +46,8 @@ public final class TrackAttachmentOperations
 	}
 
 	/**
-	 * Resolves the authoritative model-bearing owner used by the 1.7.10 multi-cell renderer. Captured-host tracks use
-	 * their recorded render source because their gag origins may instead point at the separate host-data owner.
+	 * Resolves the path/model owner represented by one selected track cell. Gags retain their local model origin while
+	 * linked parent rails independently lead to the compound track's greatest owner.
 	 *
 	 * @param access world or block-access view containing the track
 	 * @param cellX selected world X coordinate
@@ -81,11 +81,6 @@ public final class TrackAttachmentOperations
 			return rail;
 		}
 		TileTCRail parent = rail.getGreatestParent(rail.getWorldObj());
-		TileTCRail capturedHostRenderSource = parent != null ? parent.getCapturedHostRenderSource() : null;
-		if (capturedHostRenderSource != null)
-		{
-			return capturedHostRenderSource;
-		}
 		return rail.hasModel || parent == null ? rail : parent;
 	}
 
