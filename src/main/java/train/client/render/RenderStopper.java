@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2012 Mrbrutal. All rights reserved.
- * 
+ *
  * @name TrainCraft
  * @author Mrbrutal
  ******************************************************************************/
@@ -16,7 +16,7 @@ import train.common.tile.BaseStopperTileEntity;
 
 public class RenderStopper extends TileEntitySpecialRenderer {
 
-	private static final ModelStopper modelStopper = new ModelStopper(1.0F / 16.0F);
+	private static final ModelStopper modelStopper = new ModelStopper();
 
 	EnumTracks EnumTrack;
 

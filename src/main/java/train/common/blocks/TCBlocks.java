@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2012 Mrbrutal. All rights reserved.
- * 
+ *
  * @name TrainCraft
  * @author Mrbrutal
  ******************************************************************************/
@@ -12,22 +12,43 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import train.common.Traincraft;
 import train.common.blocks.assemblytable.BlockAssemblyTableI;
 import train.common.blocks.assemblytable.BlockAssemblyTableII;
 import train.common.blocks.assemblytable.BlockAssemblyTableIII;
 import train.common.blocks.crossers.*;
-import train.common.blocks.stoppers.*;
+import train.common.blocks.stoppers.legacy.*;
 import train.common.library.BlockIDs;
 import train.common.library.Info;
 import train.common.mtc.block.*;
+import train.common.track.attachment.ITrackAttachmentSource;
+import train.common.track.attachment.TrackAttachmentSlopeAlignment;
+import train.common.track.attachment.TrackAttachmentType;
+import train.common.track.attachment.TrackAttachmentTypes;
 
 public class TCBlocks {
 
 	public static void init() {
 		loadBlocks();
 		registerBlocks();
+		registerTrackAttachmentTypes();
 		setHarvestLevels();
+	}
+
+	private static void registerTrackAttachmentTypes()
+	{
+		registerTrackAttachmentType(BlockIDs.stopper.block);
+		registerTrackAttachmentType(BlockIDs.americanstopper.block);
+	}
+
+	private static void registerTrackAttachmentType(Block block)
+	{
+		ITrackAttachmentSource source = (ITrackAttachmentSource)block;
+		TrackAttachmentTypes.register(source.getTrackAttachmentTypeId(),
+				TrackAttachmentType.RENDERS | TrackAttachmentType.BUFFER, new ItemStack(block),
+				source.getTrackAttachmentDesignId(), source.getTrackAttachmentBounds(),
+				TrackAttachmentSlopeAlignment.TRACK_SURFACE);
 	}
 
 	public static void loadBlocks() {
@@ -55,27 +76,31 @@ public class TCBlocks {
 		BlockIDs.stopper.block = new BlockStopper().setHardness(1.7F).setStepSound(Block.soundTypeWood);
 		BlockIDs.americanstopper.block = new BlockAmericanStopper().setHardness(1.7F).setStepSound(Block.soundTypeMetal);
 
-		BlockIDs.embeddedStopper.block = new BlockEmbeddedStopper().setHardness(1.7F).setStepSound(Block.soundTypeWood);
-		BlockIDs.embeddedamericanstopper.block = new BlockAmericanEmbeddedStopper().setHardness(1.7F).setStepSound(Block.soundTypeMetal);
+		BlockIDs.embeddedStopper.block = new BlockEmbeddedStopper().setHardness(1.7F)
+				.setStepSound(Block.soundTypeWood).setCreativeTab(null);
+		BlockIDs.embeddedamericanstopper.block = new BlockAmericanEmbeddedStopper().setHardness(1.7F)
+				.setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 
-		BlockIDs.concrete_type1_stopper.block = new concrete_type1_stopper().setHardness(1.7F).setStepSound(Block.soundTypeWood);
+		BlockIDs.concrete_type1_stopper.block = new concrete_type1_stopper().setHardness(1.7F)
+				.setStepSound(Block.soundTypeWood).setCreativeTab(null);
 
-		BlockIDs.concrete_type1_americanstopper.block = new concrete_type1_americanstopper().setHardness(1.7F).setStepSound(Block.soundTypeMetal);
+		BlockIDs.concrete_type1_americanstopper.block = new concrete_type1_americanstopper().setHardness(1.7F)
+				.setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 
 		BlockIDs.concrete_type2_stopper.block = new concrete_type2_stopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeWood);
+				.setHardness(1.7F).setStepSound(Block.soundTypeWood).setCreativeTab(null);
 		BlockIDs.concrete_type2_americanstopper.block = new concrete_type2_americanstopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeMetal);
+				.setHardness(1.7F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 
 		BlockIDs.wood_type1_stopper.block = new treated_wood_type1_stopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeWood);
+				.setHardness(1.7F).setStepSound(Block.soundTypeWood).setCreativeTab(null);
 		BlockIDs.wood_type1_americanstopper.block = new treated_wood_type1_americanstopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeMetal);
+				.setHardness(1.7F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 
 		BlockIDs.wood_type2_stopper.block = new wood_type2_stopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeWood);
+				.setHardness(1.7F).setStepSound(Block.soundTypeWood).setCreativeTab(null);
 		BlockIDs.wood_type2_americanstopper.block = new wood_type2_americanstopper()
-				.setHardness(1.7F).setStepSound(Block.soundTypeMetal);
+				.setHardness(1.7F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 
 
 
@@ -97,10 +122,16 @@ public class TCBlocks {
 		BlockIDs.waterWheel.block = new BlockWaterWheel().setHardness(1.7F).setStepSound(Block.soundTypeWood);
 		BlockIDs.windMill.block = new BlockWindMill().setHardness(1.7F).setStepSound(Block.soundTypeWood);
 		BlockIDs.generatorDiesel.block = new BlockGeneratorDiesel().setHardness(1.7F).setStepSound(Block.soundTypeMetal);
-		
+
 		BlockIDs.tcRail.block = new BlockTCRail().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
 		BlockIDs.tcRailGag.block = new BlockTCRailGag().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
-		
+		BlockIDs.tcRailEmbedded.block = new BlockTCRailEmbedded().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+		BlockIDs.tcRailGagEmbedded.block = new BlockTCRailGagEmbedded().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+		BlockIDs.tcRailSlabMounted.block = new BlockTCRailSlabMounted().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+		BlockIDs.tcRailGagSlabMounted.block = new BlockTCRailGagSlabMounted().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+		BlockIDs.tcRailStairMounted.block = new BlockTCRailStairMounted().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+		BlockIDs.tcRailGagStairMounted.block = new BlockTCRailGagStairMounted().setHardness(1.0F).setStepSound(Block.soundTypeMetal).setCreativeTab(null);
+
 		BlockIDs.bridgePillar.block = new BlockBridgePillar().setHardness(3.5F).setStepSound(Block.soundTypeWood);
 		//BlockIDs.mtcVBCController.block = new BlockVBCController(Material.rock).setHardness(3.5F).setStepSound(Block.soundTypeMetal).setBlockTextureName("tc:vbcController").setBlockName("vbcController").setCreativeTab(Traincraft.tcTab);
 		//BlockIDs.FortyFootContainer.block = new BlockFortyFootContainer(Material.iron).setHardness(4.5F).setCreativeTab(Traincraft.tcTab).setStepSound(Block.soundTypeMetal);

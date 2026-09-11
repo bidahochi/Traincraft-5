@@ -15,8 +15,33 @@ public class TrackDefinition implements ITrackDefinition
 
     private final RailVariants variant;
     private final TrackItemIDs item;
+    private final TrackPlacementType placementType;
 
+    /**
+     * Creates an unballasted surface track definition.
+     *
+     * @param label unique track label
+     * @param railType logical rail type
+     * @param variant resource variant
+     * @param enumCoreTrack geometry core
+     * @param item backing item identifier
+     */
     public TrackDefinition(String label, TCRailTypes.RailTypes railType, RailVariants variant, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+    {
+        this(label, railType, variant, enumCoreTrack, item, TrackPlacementType.SURFACE);
+    }
+
+    /**
+     * Creates an unballasted track definition with explicit placement behavior.
+     *
+     * @param label unique track label
+     * @param railType logical rail type
+     * @param variant resource variant
+     * @param enumCoreTrack geometry core
+     * @param item backing item identifier
+     * @param placementType placement behavior
+     */
+    public TrackDefinition(String label, TCRailTypes.RailTypes railType, RailVariants variant, EnumCoreTrack enumCoreTrack, TrackItemIDs item, TrackPlacementType placementType)
     {
         this.label = label;
         this.railType = railType;
@@ -25,9 +50,36 @@ public class TrackDefinition implements ITrackDefinition
         this.variant = variant;
         this.ballastType = null;
         this.enumCoreTrack = enumCoreTrack;
+        this.placementType = placementType;
     }
 
+    /**
+     * Creates a ballasted surface track definition.
+     *
+     * @param label unique track label
+     * @param railType logical rail type
+     * @param variant resource variant
+     * @param ballastType ballast material family
+     * @param enumCoreTrack geometry core
+     * @param item backing item identifier
+     */
     public TrackDefinition(String label, TCRailTypes.RailTypes railType, RailVariants variant, BallastTypes ballastType, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+    {
+        this(label, railType, variant, ballastType, enumCoreTrack, item, TrackPlacementType.SURFACE);
+    }
+
+    /**
+     * Creates a ballasted track definition with explicit placement behavior.
+     *
+     * @param label unique track label
+     * @param railType logical rail type
+     * @param variant resource variant
+     * @param ballastType ballast material family
+     * @param enumCoreTrack geometry core
+     * @param item backing item identifier
+     * @param placementType placement behavior
+     */
+    public TrackDefinition(String label, TCRailTypes.RailTypes railType, RailVariants variant, BallastTypes ballastType, EnumCoreTrack enumCoreTrack, TrackItemIDs item, TrackPlacementType placementType)
     {
         this.label = label;
         this.railType = railType;
@@ -36,6 +88,7 @@ public class TrackDefinition implements ITrackDefinition
         this.variant = variant;
         this.ballastType = ballastType;
         this.enumCoreTrack = enumCoreTrack;
+        this.placementType = placementType;
     }
 
     @Override
@@ -72,6 +125,17 @@ public class TrackDefinition implements ITrackDefinition
     public TCRailTypes.RailTypes getRailType()
     {
         return railType;
+    }
+
+    /**
+     * Returns how this generated definition occupies its selected support block.
+     *
+     * @return placement behavior carried by the definition
+     */
+    @Override
+    public TrackPlacementType getPlacementType()
+    {
+        return placementType;
     }
 
     @Override

@@ -14,23 +14,26 @@ import org.lwjgl.opengl.GL11;
 import train.client.render.RenderTCRail;
 import train.common.library.track.EnumTracks;
 import train.common.library.Info;
+import train.common.track.attachment.legacy.TrackBufferOrientation;
+import train.client.render.ITrackAttachmentModelRenderer;
+import train.client.render.TrackAttachmentRenderContext;
 
-public class ModelAmericanStopper
+public class ModelAmericanStopper implements ITrackAttachmentModelRenderer
 {
-    private IModelCustom track;
+    private static final float[] HARDWARE_ROTATION_DEGREES =
+            {90.0F, 0.0F, 270.0F, 180.0F, 135.0F, 45.0F, -45.0F, -135.0F};
     private static int listAmericanBumperPiece = -1;
 
-    protected boolean baked = false;
-    public ModelAmericanStopper(float scale)
+    public ModelAmericanStopper()
     {
-        if (!baked) {
+        if (listAmericanBumperPiece < 0) {
 
             listAmericanBumperPiece = GL11.glGenLists(1);
-            track = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(new ResourceLocation(Info.modelPrefix + "american_bumper.obj"));
+            IModelCustom track = net.minecraftforge.client.model.AdvancedModelLoader.loadModel(
+                    new ResourceLocation(Info.modelPrefix + "american_bumper.obj"));
             GL11.glNewList(listAmericanBumperPiece, GL11.GL_COMPILE);
             track.renderAll();
             GL11.glEndList();
-            baked = true;
         }
     }
 
@@ -88,6 +91,27 @@ public class ModelAmericanStopper
                 break;
         }
     }
+
+    public void renderHardware(int facing)
+    {
+        GL11.glPushMatrix();
+        int orientation = TrackBufferOrientation.normalize(facing);
+        GL11.glRotatef(HARDWARE_ROTATION_DEGREES[orientation], 0.0F, 1.0F, 0.0F);
+        tmt.Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation,
+                Info.modelTexPrefix + "american_stopper.png"));
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glCallList(listAmericanBumperPiece);
+        GL11.glPopMatrix();
+    }
+
+	@Override
+	public void renderTrackAttachment(TrackAttachmentRenderContext context)
+	{
+		tmt.Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation,
+				Info.modelTexPrefix + "american_stopper.png"));
+		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glCallList(listAmericanBumperPiece);
+	}
 
     private void renderBlock()
     {

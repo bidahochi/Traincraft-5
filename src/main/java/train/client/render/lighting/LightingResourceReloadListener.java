@@ -3,6 +3,7 @@ package train.client.render.lighting;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import tmt.ModelRendererTurboBatch;
+import train.client.render.embedded.EmbeddedTrackHostSurfaceRenderer;
 
 /**
  * Invalidates all model-, texture-, world-, and OpenGL-dependent lighting state on resource reload.
@@ -13,8 +14,12 @@ import tmt.ModelRendererTurboBatch;
  */
 public final class LightingResourceReloadListener implements IResourceManagerReloadListener
 {
+    /**
+     * Releases cached lighting metadata and graphics objects for a new resource generation.
+     *
+     * @param manager reloaded resource manager
+     */
     @Override
-    /** Releases cached lighting metadata and graphics objects for the new resource generation. */
     public void onResourceManagerReload(IResourceManager manager)
     {
         AutomaticLightSurfaceDetection.clear();
@@ -27,5 +32,6 @@ public final class LightingResourceReloadListener implements IResourceManagerRel
         LightEffectRenderBatch.clear();
         MaxOpacityLightCompositor.clear();
         ModelRendererTurboBatch.clearLightingCaches();
+        EmbeddedTrackHostSurfaceRenderer.clear();
     }
 }

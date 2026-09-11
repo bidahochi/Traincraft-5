@@ -5,8 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import train.client.gui.GuiInterchangeReport;
+import train.common.Traincraft;
 import train.common.utils.interchangetransferreport.InterchangeTransferReportGenerator.InterchangeReportDraft;
 import train.common.utils.interchangetransferreport.InterchangeTransferReportGenerator.InterchangeReportRow;
 
@@ -94,8 +93,7 @@ public class PacketInterchangeReportGui implements IMessage
         @Override
         public IMessage onMessage(PacketInterchangeReportGui message, MessageContext context)
         {
-            // Opening the screen is client-only; draft creation and row caps happen before this packet.
-            Minecraft.getMinecraft().displayGuiScreen(new GuiInterchangeReport(message.draft));
+            Traincraft.proxy.openInterchangeReport(message.draft);
             return null;
         }
     }

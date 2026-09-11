@@ -11,7 +11,7 @@ import train.common.library.Info;
 public class BaseItemRenderAmericanStopper implements IItemRenderer
 {
     public static final ResourceLocation texture = new ResourceLocation(Info.resourceLocation, Info.modelTexPrefix + "buffer.png");
-    public static final ModelAmericanStopper americanStopper = new ModelAmericanStopper(1F);
+    public static final ModelAmericanStopper americanStopper = new ModelAmericanStopper();
     private EnumTracks baseEnumTrack;
     public BaseItemRenderAmericanStopper(EnumTracks enumTrack)
     {

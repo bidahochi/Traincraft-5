@@ -28,6 +28,7 @@ import train.common.api.Tender;
 import train.common.containers.*;
 import train.common.core.handlers.*;
 import train.common.core.network.ServerLightActionQueue;
+import train.common.core.network.lockout.PacketLockoutBookData;
 import train.common.core.util.ReplacementStreamPlayer;
 import train.common.entity.digger.EntityRotativeDigger;
 import train.common.entity.rollingStock.EntityJukeBoxCart;
@@ -43,17 +44,19 @@ import train.common.mtc.tile.*;
 import train.common.tile.*;
 import train.common.tile.tileStopper.TileAmericanStopper;
 import train.common.tile.tileStopper.TileGenericStopper;
-import train.common.tile.tileStopper.concrete_type1.TileConcreteType1_AmericanStopper;
-import train.common.tile.tileStopper.concrete_type1.TileConcreteType1_Generic_Stopper;
-import train.common.tile.tileStopper.concrete_type2.TileConcreteType2_AmericanStopper;
-import train.common.tile.tileStopper.concrete_type2.TileConcreteType2_Generic_Stopper;
-import train.common.tile.tileStopper.sleeperless.TileEmbeddedAmericanStopper;
-import train.common.tile.tileStopper.sleeperless.TileEmbeddedGenericStopper;
-import train.common.tile.tileStopper.wood_type1.TileWoodType1_AmericanStopper;
-import train.common.tile.tileStopper.wood_type1.TileWoodType1_Generic_Stopper;
-import train.common.tile.tileStopper.wood_type2.TileWoodType2_AmericanStopper;
-import train.common.tile.tileStopper.wood_type2.TileWoodType2_Generic_Stopper;
+import train.common.tile.tileStopper.legacy.concrete_type1.TileConcreteType1_AmericanStopper;
+import train.common.tile.tileStopper.legacy.concrete_type1.TileConcreteType1_Generic_Stopper;
+import train.common.tile.tileStopper.legacy.concrete_type2.TileConcreteType2_AmericanStopper;
+import train.common.tile.tileStopper.legacy.concrete_type2.TileConcreteType2_Generic_Stopper;
+import train.common.tile.tileStopper.legacy.sleeperless.TileEmbeddedAmericanStopper;
+import train.common.tile.tileStopper.legacy.sleeperless.TileEmbeddedGenericStopper;
+import train.common.tile.tileStopper.legacy.wood_type1.TileWoodType1_AmericanStopper;
+import train.common.tile.tileStopper.legacy.wood_type1.TileWoodType1_Generic_Stopper;
+import train.common.tile.tileStopper.legacy.wood_type2.TileWoodType2_AmericanStopper;
+import train.common.tile.tileStopper.legacy.wood_type2.TileWoodType2_Generic_Stopper;
 import train.common.tile.tileSwitch.*;
+import train.common.track.attachment.TrackAttachment;
+import train.common.utils.interchangetransferreport.InterchangeTransferReportGenerator.InterchangeReportDraft;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -331,6 +334,32 @@ public class CommonProxy implements IGuiHandler {
 
 	public void openadmingui(String data){}
 
+	/** Ignores a client-only interchange report request on the logical server. */
+	public void openInterchangeReport(InterchangeReportDraft draft)
+	{
+	}
+
+	/** Ignores a client-only lockout-book update on the logical server. */
+	public void updateLockoutBook(PacketLockoutBookData packet)
+	{
+	}
+
+	/** Ignores a client-only action-bar request on the logical server. */
+	public void displayActionBarMessage(String message, int durationTicks)
+	{
+	}
+
+	/** Ignores a client-only attachment-state update on the logical server. */
+	public void applyTrackAttachmentState(int ownerX, int ownerY, int ownerZ,
+			List<TrackAttachment> attachments)
+	{
+	}
+
+	/** Ignores a client-only track-placement sound request on the logical server. */
+	public void playTrackPlacementSound(double x, double y, double z)
+	{
+	}
+
 	public static boolean checkJukeboxEntity(World world, int id) {
 		return  world.getEntityByID(id)!=null;
 	}
@@ -355,5 +384,5 @@ public class CommonProxy implements IGuiHandler {
 		MinecraftForge.EVENT_BUS.register(new MouseEventListener());
 		Traincraft.channel.register(new PacketHandler());
 	}
-	
+
 }

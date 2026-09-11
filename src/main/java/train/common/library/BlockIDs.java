@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2012 Mrbrutal. All rights reserved.
- * 
+ *
  * @name TrainCraft
  * @author Mrbrutal
  ******************************************************************************/
@@ -20,16 +20,16 @@ public enum BlockIDs implements IBlockIDs {
 	distilIdle(false, null),
 	distilActive(false, null),
 	signal(false, null),
-	
+
 	//book(true, ItemBlockBook.class),
 
 	trainWorkbench(false, null),
 	trainDetector(ItemBlockTrainDetector.class),
 
-	stopper(false, null),
+	stopper(ItemBlockTrackBuffer.class),
 	embeddedStopper(false, null),
 
-	americanstopper(false, null),
+	americanstopper(ItemBlockTrackBuffer.class),
 	embeddedamericanstopper(false, null),
 
 	concrete_type1_stopper(false, null),
@@ -47,7 +47,7 @@ public enum BlockIDs implements IBlockIDs {
 	openFurnaceActive(false, null),
 	oreTC(true, ItemBlockOreTC.class, 4),
 	lantern(false, null),
-	switchStand(false, null),
+	switchStand(ItemBlockSwitchStand.class),
 	waterWheel(true, ItemBlockGeneratorWaterWheel.class),
 	windMill(true, ItemBlockGeneratorWindMill.class),
 	generatorDiesel(true, ItemBlockGeneratorDiesel.class),
@@ -67,20 +67,26 @@ public enum BlockIDs implements IBlockIDs {
 	//Liquids
 	diesel(false, ItemBlockFluid.class),
 	refinedFuel(false, ItemBlockFluid.class),
-	
+
 	tcRailGag(false,null),
 	tcRail(false,null),
+	tcRailGagEmbedded(false,null),
+	tcRailEmbedded(false,null),
+	tcRailGagSlabMounted(false,null),
+	tcRailSlabMounted(false,null),
+	tcRailGagStairMounted(false,null),
+	tcRailStairMounted(false,null),
 	bridgePillar(false,null),
 
-	MILWSwitchStand(false, null),
-	autoSwtichStand(false, null),
-	owoSwitchStand(false,null),
-	circleSwitchStand(false,null),
-	owoYardSwitchStand(false,null),
-	Racor36D_1(false,null),
-	Racor36D_2(false,null),
-	Racor36H(false,null),
-	Racor36H_2(false,null),
+	MILWSwitchStand(ItemBlockSwitchStand.class),
+	autoSwtichStand(ItemBlockSwitchStand.class),
+	owoSwitchStand(ItemBlockSwitchStand.class),
+	circleSwitchStand(ItemBlockSwitchStand.class),
+	owoYardSwitchStand(ItemBlockSwitchStand.class),
+	Racor36D_1(ItemBlockSwitchStand.class),
+	Racor36D_2(ItemBlockSwitchStand.class),
+	Racor36H(ItemBlockSwitchStand.class),
+	Racor36H_2(ItemBlockSwitchStand.class),
 
 	poweredGravel(false,null),
 
@@ -123,19 +129,19 @@ public enum BlockIDs implements IBlockIDs {
 
 	private final int MaxMetaData;
 
-	BlockIDs(Class<? extends ItemBlock> itemBlockClass) {
+	private BlockIDs(Class<? extends ItemBlock> itemBlockClass) {
 		this.hasItemBlock = true;
 		this.itemBlockClass = itemBlockClass;
 		MaxMetaData = -1;
 	}
 
-	BlockIDs(boolean hasItemBlock, Class<? extends ItemBlock> itemBlockClass) {
+	private BlockIDs(boolean hasItemBlock, Class<? extends ItemBlock> itemBlockClass) {
 		this.hasItemBlock = hasItemBlock;
 		this.itemBlockClass = itemBlockClass;
 		MaxMetaData = -1;
 	}
 
-	BlockIDs(boolean hasItemBlock, Class<? extends ItemBlock> itemBlockClass, int maxMetaData) {
+	private BlockIDs(boolean hasItemBlock, Class<? extends ItemBlock> itemBlockClass, int maxMetaData) {
 		this.hasItemBlock = hasItemBlock;
 		this.itemBlockClass = itemBlockClass;
 		MaxMetaData = maxMetaData;

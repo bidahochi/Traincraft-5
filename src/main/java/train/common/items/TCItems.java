@@ -8,12 +8,18 @@
 package train.common.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import train.common.Traincraft;
 import train.common.adminbook.ItemAdminBook;
 import train.common.library.track.EnumTracks;
 import train.common.library.Info;
 import train.common.library.ItemIDs;
 import train.common.library.track.TrackItemIDs;
+import train.common.track.attachment.RoadCrossingAttachmentResolver;
+import train.common.track.attachment.TrackAttachmentSlopeAlignment;
+import train.common.track.attachment.TrackAttachmentType;
+import train.common.track.attachment.TrackAttachmentTypes;
 
 public class TCItems {
 
@@ -94,10 +100,15 @@ public class TCItems {
 
 		TrackItemIDs.tcRailMediumSwitch.item = new ItemTCRail(EnumTracks.MEDIUM_SWITCH);
 		TrackItemIDs.tcRailLargeSwitch.item = new ItemTCRail(EnumTracks.LARGE_SWITCH);
-		TrackItemIDs.tcRailSmallRoadCrossing.item = new ItemTCRail(EnumTracks.SMALL_ROAD_CROSSING);
-		TrackItemIDs.tcRailSmallRoadCrossing1.item = new ItemTCRail(EnumTracks.SMALL_ROAD_CROSSING_1);
-		TrackItemIDs.tcRailSmallRoadCrossing2.item = new ItemTCRail(EnumTracks.SMALL_ROAD_CROSSING_2);
-		TrackItemIDs.tcRailSmallRoadCrossingDynamic.item = new ItemTCRail(EnumTracks.SMALL_ROAD_CROSSING_DYNAMIC);
+		TrackItemIDs.tcRailSmallRoadCrossing.item = new ItemRoadCrossingAttachment(
+				TrackItemIDs.tcRailSmallRoadCrossing.iconName, ItemRoadCrossingAttachment.BLACK_TYPE_ID);
+		TrackItemIDs.tcRailSmallRoadCrossing1.item = new ItemRoadCrossingAttachment(
+				TrackItemIDs.tcRailSmallRoadCrossing1.iconName, ItemRoadCrossingAttachment.CLEAN_TYPE_ID);
+		TrackItemIDs.tcRailSmallRoadCrossing2.item = new ItemRoadCrossingAttachment(
+				TrackItemIDs.tcRailSmallRoadCrossing2.iconName, ItemRoadCrossingAttachment.LIGHT_GRAY_TYPE_ID);
+		TrackItemIDs.tcRailSmallRoadCrossingDynamic.item = new ItemRoadCrossingAttachment(
+				TrackItemIDs.tcRailSmallRoadCrossingDynamic.iconName, ItemRoadCrossingAttachment.DYNAMIC_TYPE_ID);
+		registerRoadCrossingAttachmentTypes();
 
 		TrackItemIDs.tcRailMedium45DegreeSwitch.item = new ItemTCRail(EnumTracks.MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRailLarge45DegreeSwitch.item = new ItemTCRail(EnumTracks.LARGE_45DEGREE_SWITCH);
@@ -118,17 +129,20 @@ public class TCItems {
 		TrackItemIDs.tcRailSlopeDynamic.item = new ItemTCRail(EnumTracks.SLOPE_DYNAMIC);
 		TrackItemIDs.tcRailLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRailVeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRailHalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRailHalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRailHalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 
 		// region Deprecated Slopes
-		TrackItemIDs.tcRailSlopeWood.item = new ItemTCRail(EnumTracks.SLOPE_WOOD);
+		TrackItemIDs.tcRailSlopeWood.item = new ItemTCRail(EnumTracks.SLOPE_WOOD).setCreativeTab(null);
 		TrackItemIDs.tcRailSlopeGravel.item = new ItemTCRail(EnumTracks.SLOPE_GRAVEL);
 		TrackItemIDs.tcRailSlopeBallast.item = new ItemTCRail(EnumTracks.SLOPE_BALLAST);
 
-		TrackItemIDs.tcRailLargeSlopeWood.item = new ItemTCRail(EnumTracks.LARGE_SLOPE_WOOD);
+		TrackItemIDs.tcRailLargeSlopeWood.item = new ItemTCRail(EnumTracks.LARGE_SLOPE_WOOD).setCreativeTab(null);
 		TrackItemIDs.tcRailLargeSlopeGravel.item = new ItemTCRail(EnumTracks.LARGE_SLOPE_GRAVEL);
 		TrackItemIDs.tcRailLargeSlopeBallast.item = new ItemTCRail(EnumTracks.LARGE_SLOPE_BALLAST);
-		TrackItemIDs.tcRailVeryLargeSlopeWood.item = new ItemTCRail(EnumTracks.VERY_LARGE_SLOPE_WOOD);
+		TrackItemIDs.tcRailVeryLargeSlopeWood.item = new ItemTCRail(EnumTracks.VERY_LARGE_SLOPE_WOOD).setCreativeTab(null);
 		TrackItemIDs.tcRailVeryLargeSlopeGravel.item = new ItemTCRail(EnumTracks.VERY_LARGE_SLOPE_GRAVEL);
 		TrackItemIDs.tcRailVeryLargeSlopeBallast.item = new ItemTCRail(EnumTracks.VERY_LARGE_SLOPE_BALLAST);
 
@@ -210,6 +224,9 @@ public class TCItems {
 		TrackItemIDs.tcRailEmbeddedSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRailEmbeddedLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRailEmbeddedVeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRailEmbeddedHalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRailEmbeddedHalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRailEmbeddedHalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.EMBEDDED_HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 		//===================================================Concrete Type 1=============================================================
 		/*CONCRETE_TYPE1 Crossways*/
@@ -264,6 +281,9 @@ public class TCItems {
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_SlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_LargeSlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_VeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 		//===================================================Concrete Type 2=============================================================
 		/*CONCRETE_TYPE2 Crossways*/
@@ -318,6 +338,9 @@ public class TCItems {
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_SlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_LargeSlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_VeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 		//===================================================TREATED_WOOD_TYPE1=============================================================
 		/*TREATED_WOOD_TYPE1 Crossways*/
@@ -372,6 +395,9 @@ public class TCItems {
 		TrackItemIDs.tcRail_WOOD_TYPE1_SlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_WOOD_TYPE1_LargeSlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_WOOD_TYPE1_VeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 		//===================================================WOOD_TYPE2=============================================================
 		/*WOOD_TYPE2 Crossways*/
@@ -426,6 +452,9 @@ public class TCItems {
 		TrackItemIDs.tcRail_WOOD_TYPE2_SlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_WOOD_TYPE2_LargeSlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_LARGE_SLOPE_DYNAMIC);
 		TrackItemIDs.tcRail_WOOD_TYPE2_VeryLargeSlopeDynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_VERY_LARGE_SLOPE_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope3Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope6Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC);
+		TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope9Dynamic.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC);
 
 
 
@@ -437,6 +466,27 @@ public class TCItems {
 		//ItemIDs.signalPairingDevice.item = new ItemSignalPairingDevice();
 		ItemIDs.remoteController.item = new ItemRemoteController();
 		ItemIDs.remoteControllerModule.item = new ItemRemoteControllerModule();
+	}
+
+	/** Registers the four road-surface appearances after their removal-drop items exist. */
+	private static void registerRoadCrossingAttachmentTypes()
+	{
+		registerRoadCrossingAttachmentType(ItemRoadCrossingAttachment.BLACK_TYPE_ID,
+				TrackItemIDs.tcRailSmallRoadCrossing.item);
+		registerRoadCrossingAttachmentType(ItemRoadCrossingAttachment.CLEAN_TYPE_ID,
+				TrackItemIDs.tcRailSmallRoadCrossing1.item);
+		registerRoadCrossingAttachmentType(ItemRoadCrossingAttachment.LIGHT_GRAY_TYPE_ID,
+				TrackItemIDs.tcRailSmallRoadCrossing2.item);
+		registerRoadCrossingAttachmentType(ItemRoadCrossingAttachment.DYNAMIC_TYPE_ID,
+				TrackItemIDs.tcRailSmallRoadCrossingDynamic.item);
+	}
+
+	/** Registers one road-crossing type with its exact item-backed survival drop. */
+	private static void registerRoadCrossingAttachmentType(String typeId, Item item)
+	{
+		TrackAttachmentTypes.register(typeId, TrackAttachmentType.RENDERS, new ItemStack(item),
+				typeId, RoadCrossingAttachmentResolver.INSTANCE.getDefaultBounds(),
+				RoadCrossingAttachmentResolver.INSTANCE, TrackAttachmentSlopeAlignment.WORLD_UPRIGHT);
 	}
 
 	private static void registerItems()

@@ -2,7 +2,7 @@ package train.common.tile;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -15,18 +15,28 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import org.apache.logging.log4j.Level;
 import train.common.Traincraft;
-import train.common.items.ItemTCRail;
+import train.common.blocks.BlockSwitchStand;
 import train.common.items.TCRailTypes;
-import train.common.library.BlockIDs;
+import train.common.library.track.TrackHostConstants;
 import train.common.library.track.EnumCoreTrack;
 import train.common.library.track.EnumTracks;
 import train.common.library.track.ITrackDefinition;
+import train.common.library.track.TrackPlacementType;
+import train.common.library.track.TrackCellResolver;
+import train.common.library.track.TrackRenderBounds;
+import train.common.library.track.TrackSlopeParameters;
+import train.common.library.track.placement.TrackHostPlacementTransaction;
+import train.common.track.attachment.TrackAttachment;
 
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class TileTCRail extends TileEntity implements ITileTCRail {
 
+	private static final double EMBEDDED_HOST_SURFACE_INSET = 0.0625D;
 	public double r;
 	public double cx;
 	public double cy;
@@ -40,8 +50,17 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public int ballastColour;
 	private String type;
 
-	private TCRailTypes.RailTypes railType;
-	private double railLength = 0;
+	private ITrackDefinition trackType = null;
+	private boolean trackTypeResolved = false;
+	/*
+	 * Optional true-embedded payload.
+	 *
+	 * Most rails are normal surface rails and do not need captured host blocks, restore guards, or render-cache
+	 * versioning. Keep that state in a lazy child object so TileTCRail stays compatible with existing saves while
+	 * avoiding a permanent host map allocation on every regular rail tile.
+	 */
+	private TileTCRailHostData trackHostData = null;
+	private int trackHostRenderEventVersion;
 	public int facingMeta;
 	public boolean isLinkedToRail = false;
 	public int linkedX;
@@ -54,17 +73,403 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public boolean canTypeBeModifiedBySwitch = false;
 
 	public Item	idDrop;
-	private static final float f = 0.125F;
 	public boolean hasRotated = false;
 	private int isLeftFlag = -5;
 	public Integer displayList = null;
 	public int exitDirection = -1;
 	private final LinkedList<TileTrainDetector> pairedDetectors;
+	/** Extensible attachments installed on cells owned and rendered by this rail tile. */
+	private final TileTCRailAttachmentData attachmentData = new TileTCRailAttachmentData(this);
+	private boolean bridgeSupport;
 
-	public TileTCRail() {
+	public TileTCRail()
+	{
 		pairedDetectors = new LinkedList<>();
-		if(this.worldObj != null)
+		if (this.worldObj != null)
+		{
 			facingMeta = this.getBlockMetadata();
+		}
+	}
+
+	/**
+	 * Returns the lazily allocated captured-host state for this parent rail.
+	 *
+	 * @return mutable captured-host state owned by this tile
+	 */
+	private TileTCRailHostData getOrCreateTrackHostData()
+	{
+		if (trackHostData == null)
+		{
+			trackHostData = new TileTCRailHostData(this);
+		}
+		return trackHostData;
+	}
+
+	/**
+	 * Atomically replaces the captured-host map and records the tile that renders it.
+	 *
+	 * @param hostBlocks complete replacement host collection
+	 * @param renderSourceOffsetX render-source X offset from this owner
+	 * @param renderSourceOffsetY render-source Y offset from this owner
+	 * @param renderSourceOffsetZ render-source Z offset from this owner
+	 */
+	public void replaceCapturedHostBlocks(Collection<TileTCRailHostData.CapturedHostBlock> hostBlocks,
+			int renderSourceOffsetX, int renderSourceOffsetY, int renderSourceOffsetZ)
+	{
+		getOrCreateTrackHostData().replace(hostBlocks, renderSourceOffsetX, renderSourceOffsetY, renderSourceOffsetZ);
+	}
+
+	/**
+	 * Returns the attachments owned by this rail's render tile.
+	 *
+	 * @return immutable live view of the attachments associated with this rail owner
+	 */
+	public List<TrackAttachment> getTrackAttachments()
+	{
+		return attachmentData.getAttachments();
+	}
+
+	/**
+	 * Returns whether the candidate can be installed without conflicting with an existing attachment.
+	 *
+	 * @param attachment candidate attachment
+	 * @return whether the candidate can be installed
+	 */
+	public boolean canAddAttachment(TrackAttachment attachment)
+	{
+		return attachmentData.canAdd(attachment);
+	}
+
+	/**
+	 * Returns whether an installed attachment supplies the requested behavior.
+	 *
+	 * @param behavior attachment behavior mask
+	 * @return whether the behavior is present
+	 */
+	public boolean hasAttachmentBehavior(int behavior)
+	{
+		return attachmentData.hasBehavior(behavior);
+	}
+
+	/**
+	 * Adds an attachment and synchronizes the changed collection when no conflict exists.
+	 *
+	 * @param attachment attachment to install
+	 * @return {@code true} when the attachment was added
+	 */
+	public boolean addAttachment(TrackAttachment attachment)
+	{
+		return attachmentData.add(attachment);
+	}
+
+	/**
+	 * Removes the attachment occupying one exact owner-relative mounting slot and synchronizes the changed collection.
+	 *
+	 * @param offsetX owner-relative track-cell X coordinate
+	 * @param offsetY owner-relative track-cell Y coordinate
+	 * @param offsetZ owner-relative track-cell Z coordinate
+	 * @param slotId namespaced mounting slot to remove
+	 * @return removed attachment, or {@code null} when the slot is empty
+	 */
+	public TrackAttachment removeAttachmentAtSlot(int offsetX, int offsetY, int offsetZ, String slotId)
+	{
+		return attachmentData.removeAtSlot(offsetX, offsetY, offsetZ, slotId);
+	}
+
+	/**
+	 * Removes every attachment without synchronizing, for use while the owning rail is being destroyed.
+	 *
+	 * @return removed attachments in their stored order
+	 */
+	public List<TrackAttachment> removeAllAttachments()
+	{
+		return attachmentData.removeAll();
+	}
+
+	/** Replaces only client attachment state, leaving slope, linkage, and captured-host data untouched. */
+	public void replaceAttachmentsFromNetwork(List<TrackAttachment> replacement)
+	{
+		attachmentData.replaceFromNetwork(replacement);
+	}
+
+	/**
+	 * Returns captured hosts rebased to the tile that supplies their visible track shape.
+	 *
+	 * @return immutable render-relative host map, or an empty map for a non-rendering tile
+	 */
+	public Map<String, TileTCRailHostData.CapturedHostBlock> getTrackHostRenderBlocks()
+	{
+		if (trackHostData != null)
+		{
+			Map<String, TileTCRailHostData.CapturedHostBlock> local = trackHostData.getRenderBlocks(this);
+			if (local.isEmpty() == false)
+			{
+				return local;
+			}
+		}
+		TileTCRail parent = resolveCapturedHostOwner();
+		return parent != null && parent != this && parent.trackHostData != null
+				? parent.trackHostData.getRenderBlocks(this)
+				: Collections.<String, TileTCRailHostData.CapturedHostBlock>emptyMap();
+	}
+
+	/**
+	 * Returns the captured host stored at an absolute world coordinate.
+	 *
+	 * @param worldX host X coordinate
+	 * @param worldY host Y coordinate
+	 * @param worldZ host Z coordinate
+	 * @return captured host entry, or {@code null} when the coordinate is outside the footprint
+	 */
+	public TileTCRailHostData.CapturedHostBlock getCapturedHostBlockAtWorld(int worldX, int worldY, int worldZ)
+	{
+		if (trackHostData != null)
+		{
+			TileTCRailHostData.CapturedHostBlock hostBlock = trackHostData.getAtLocalOffset(worldX - xCoord, worldY - yCoord, worldZ - zCoord);
+			if (hostBlock != null)
+			{
+				return hostBlock;
+			}
+		}
+
+		TileTCRail parent = resolveCapturedHostOwner();
+		return parent != null && parent != this && parent.trackHostData != null
+				? parent.trackHostData.getAtLocalOffset(worldX - parent.xCoord, worldY - parent.yCoord, worldZ - parent.zCoord)
+				: null;
+	}
+
+	/**
+	 * Returns whether this tile directly owns captured host blocks.
+	 *
+	 * @return whether the local captured-host map is nonempty
+	 */
+	public boolean hasCapturedHostBlocks()
+	{
+		return trackHostData != null && trackHostData.hasBlocks();
+	}
+
+	/**
+	 * Resolves the model-bearing tile recorded for this captured-host footprint.
+	 *
+	 * @return captured-host render source, or {@code null} when this track has no captured footprint
+	 */
+	public TileTCRail getCapturedHostRenderSource()
+	{
+		TileTCRail owner = resolveCapturedHostOwner();
+		return owner != null && owner.trackHostData != null ? owner.trackHostData.getRenderSource() : null;
+	}
+
+	/**
+	 * Returns the render-cache version of the captured or synthetic host surface shown by this tile.
+	 *
+	 * @return stored-host version for captured terrain or transient neighbor-event version for synthetic terrain
+	 */
+	public int getTrackHostRenderVersion()
+	{
+		if (trackHostData != null && trackHostData.getRenderBlocks(this).isEmpty() == false)
+		{
+			return trackHostData.getRenderVersion();
+		}
+		TileTCRail parent = resolveCapturedHostOwner();
+		return parent != null && parent != this && parent.trackHostData != null
+				&& parent.trackHostData.getRenderBlocks(this).isEmpty() == false
+				? parent.trackHostData.getRenderVersion()
+				: trackHostRenderEventVersion;
+	}
+
+	/**
+	 * Returns whether this rail owns renderer-generated terrain that must react to neighboring block and lighting events.
+	 * Captured embedded footprints and regular generated half-height ballast both use this path; ordinary OBJ-only rails
+	 * do not.
+	 *
+	 * @return whether neighbor callbacks must invalidate this rail's host-surface renderer
+	 */
+	public boolean usesDynamicHostSurfaceRendering()
+	{
+		return hasCapturedHostBlocks() || isReplaceTargetTrack() == false && isIntactHostMountedTrack() == false
+				&& getCoreType() != null && getCoreType().isHalfHeightSlope();
+	}
+
+	/**
+	 * Returns whether this tile or its authoritative parent owns captured host blocks.
+	 *
+	 * @return whether the rail belongs to a true-embedded replacement footprint
+	 */
+	private boolean isTrueEmbeddedTrack()
+	{
+		TileTCRail owner = resolveCapturedHostOwner();
+		return owner != null && owner.hasCapturedHostBlocks();
+	}
+
+	/**
+	 * Returns the captured footprint's common surface height.
+	 *
+	 * @return one-half block for bottom slabs, or one block for full and top-slab hosts
+	 */
+	private double getTrackHostSurfaceHeight()
+	{
+		if (trackHostData != null && trackHostData.hasBlocks())
+		{
+			return trackHostData.getSurfaceHeight();
+		}
+		TileTCRail owner = resolveCapturedHostOwner();
+		return owner != null && owner != this && owner.trackHostData != null
+				? owner.trackHostData.getSurfaceHeight()
+				: TrackHostConstants.FULL_BLOCK_SURFACE_HEIGHT;
+	}
+
+	/** Returns this tile or its greatest parent when that rail owns captured host blocks. */
+	private TileTCRail resolveCapturedHostOwner()
+	{
+		return hasCapturedHostBlocks() || worldObj == null
+				? this : TrackCellResolver.resolveGreatestParent(worldObj, this);
+	}
+
+	/**
+	 * Invalidates this tile's captured or synthetic host-surface cache after a neighboring block changes. The transient
+	 * event version covers generated ballast without creating persistent embedded-host data.
+	 */
+	public void markTrackHostRenderDirty()
+	{
+		if (trackHostData != null)
+		{
+			trackHostData.markDirty();
+		}
+		else
+		{
+			trackHostRenderEventVersion++;
+			if (worldObj != null)
+			{
+				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			}
+		}
+	}
+
+	/**
+	 * Restores this tile's captured host blocks into the world.
+	 *
+	 * @param world server world receiving the restored hosts
+	 */
+	public void restoreCapturedHostBlocks(World world)
+	{
+		if (trackHostData != null)
+		{
+			trackHostData.restore(world);
+		}
+	}
+
+	/**
+	 * Returns whether any embedded footprint is currently restoring captured hosts.
+	 *
+	 * @return global captured-host restoration guard
+	 */
+	public static boolean isRestoringCapturedHostBlocksGlobally()
+	{
+		return TileTCRailHostData.isRestoringGlobally();
+	}
+
+	/**
+	 * Returns whether this rail definition replaces its selected support block.
+	 *
+	 * @return whether the rail uses replacement placement
+	 */
+	public boolean isReplaceTargetTrack()
+	{
+		ITrackDefinition track = getTrackType();
+		if (track == null && getType() != null)
+		{
+			track = EnumTracks.GetTrackByLabel(getType());
+		}
+		return track != null && track.getPlacementType().replacesTarget();
+	}
+
+	/**
+	 * Returns the rail-supporting surface height within this tile's block coordinate.
+	 *
+	 * @return zero for surface rails, one-half for bottom-slab embedding, or one for full/top hosts
+	 */
+	public double getTrackSurfaceYOffset()
+	{
+		if (isTrueEmbeddedTrack())
+		{
+			return getTrackHostSurfaceHeight();
+		}
+		TileTCRail parent = worldObj != null ? getGreatestParent(worldObj) : this;
+		return parent != null && parent != this && parent.isReplaceTargetTrack()
+				? parent.getTrackHostSurfaceHeight() : isReplaceTargetTrack()
+				? TrackHostConstants.FULL_BLOCK_SURFACE_HEIGHT : 0.0D;
+	}
+
+	/**
+	 * Returns the absolute world Y coordinate of the rail-supporting surface.
+	 *
+	 * @return world-space surface Y coordinate
+	 */
+	public double getTrackSurfaceY()
+	{
+		return yCoord + getTrackSurfaceYOffset();
+	}
+
+	/**
+	 * Returns the model translation relative to the tile's block coordinate.
+	 *
+	 * @return local model Y translation, including the embedded inset when applicable
+	 */
+	public double getTrackRenderYOffset()
+	{
+		double surfaceOffset = getTrackSurfaceYOffset();
+		if (isIntactHostMountedTrack())
+		{
+			return surfaceOffset;
+		}
+		return isTrueEmbeddedTrack() || isReplaceTargetTrack()
+				? surfaceOffset - TrackHostConstants.EMBEDDED_TRACK_MODEL_INSET : surfaceOffset;
+	}
+
+	/**
+	 * Returns whether this definition uses intact captured slabs beneath normally raised track geometry.
+	 *
+	 * @return whether the definition uses slab-mounted placement
+	 */
+	public boolean isSlabMountedTrack()
+	{
+		ITrackDefinition track = getTrackType();
+		return track != null && track.getPlacementType() == TrackPlacementType.SLAB_MOUNTED;
+	}
+
+	/** Returns whether this definition preserves and reconstructs a captured stair host. */
+	public boolean isStairMountedTrack()
+	{
+		ITrackDefinition track = getTrackType();
+		return track != null && track.getPlacementType() == TrackPlacementType.STAIR_MOUNTED;
+	}
+
+	/** Returns whether this definition mounts normal track geometry over an intact captured host shape. */
+	public boolean isIntactHostMountedTrack()
+	{
+		return isSlabMountedTrack() || isStairMountedTrack();
+	}
+
+	/**
+	 * Returns the captured host's slightly inset rendered top height.
+	 *
+	 * @return local host-surface render height
+	 */
+	public double getTrackHostSurfaceRenderYOffset()
+	{
+		double surfaceOffset = getTrackSurfaceYOffset();
+		return isTrueEmbeddedTrack() || isReplaceTargetTrack()
+				? surfaceOffset - EMBEDDED_HOST_SURFACE_INSET : surfaceOffset;
+	}
+
+	/**
+	 * Returns the vertical offset used by rolling-stock ride calculations.
+	 *
+	 * @return local ride height matching the rendered rail model
+	 */
+	public double getTrackRideYOffset()
+	{
+		return getTrackRenderYOffset();
 	}
 
 	public int getFacing() {
@@ -77,9 +482,25 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		this.facingMeta = facing;
 	}
 
+	/**
+	 * Sets the serialized track label and invalidates cached definition data.
+	 *
+	 * @param type registered track label
+	 */
 	public void setType(String type) {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		if (worldObj != null)
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 		this.type = type;
+		clearTrackTypeCache();
+	}
+
+	/** Clears the cached registry definition after the stored label changes. */
+	private void clearTrackTypeCache()
+	{
+		this.trackType = null;
+		this.trackTypeResolved = false;
 	}
 
 	public String getType() {
@@ -87,53 +508,59 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		return this.type;
 	}
 
+	/**
+	 * Returns the geometry core for this tile's resolved track definition.
+	 *
+	 * @return geometry core, or {@link EnumCoreTrack#NONE} when the definition cannot be resolved
+	 */
 	public EnumCoreTrack getCoreType()
 	{
-		return EnumTracks.GetTrackByLabel(getType()).getCoreTrack();
+		ITrackDefinition track = getTrackType();
+		return track != null ? track.getCoreTrack() : EnumCoreTrack.NONE;
 	}
 
+	/**
+	 * Returns the logical rail type for this tile's resolved definition.
+	 *
+	 * @return logical rail type, or {@code null} when the definition cannot be resolved
+	 */
 	public TCRailTypes.RailTypes getRailType()
 	{
-		if (railType == null)
-		{
-			railType = EnumTracks.GetTrackByLabel(getType()).getRailType();
-		}
-
-		return railType;
-
+		ITrackDefinition track = getTrackType();
+		return track != null ? track.getRailType() : null;
 	}
 
+	/**
+	 * Returns the legacy diagonal-straight path length for the three extended diagonal cores, or one block for every
+	 * other core.
+	 *
+	 * @return rail length in blocks
+	 */
 	public double getRailLength()
 	{
-		if (railLength == 0)
+		switch (getCoreType())
 		{
-			switch (EnumTracks.GetTrackByLabel(getType()).getCoreTrack())
-			{
-				case CORE_VERY_LONG_DIAGONAL_STRAIGHT:
-					railLength = 12;
-					break;
-				case CORE_LONG_DIAGONAL_STRAIGHT:
-					railLength = 6;
-					break;
-
-				case CORE_MEDIUM_DIAGONAL_STRAIGHT:
-					railLength = 3;
-					break;
-				case CORE_SMALL_DIAGONAL_STRAIGHT:
-					railLength = 1;
-					break;
-                default:
-                {
-                    railLength = 1;
-                }
-			}
+			case CORE_VERY_LONG_DIAGONAL_STRAIGHT:
+				return 12;
+			case CORE_LONG_DIAGONAL_STRAIGHT:
+				return 6;
+			case CORE_MEDIUM_DIAGONAL_STRAIGHT:
+				return 3;
+			default:
+				return 1;
 		}
-
-		return this.railLength;
 	}
 
+	/**
+	 * Sets the dynamic ballast block identifier.
+	 *
+	 * @param ballast block identifier used for dynamic ballast rendering
+	 */
 	public void setBallastMaterial(int  ballast) {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		if (worldObj != null)
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 		this.ballastMaterial = ballast;
 	}
 
@@ -148,50 +575,83 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		}
 	}
 
-	private ITrackDefinition renderType = null;
-	public ITrackDefinition getTrackType()
+	/**
+	 * Returns whether this placed slope uses its authored wooden bridge supports.
+	 *
+	 * @return whether bridge-support rendering is selected
+	 */
+	public boolean hasBridgeSupport()
 	{
-		if (renderType == null)
-		{
-			if(hasModel && getType() != null)
-			{
-				ITrackDefinition temp = EnumTracks.GetTrackByLabel(getType());
-
-				if (temp != null)
-				{
-					renderType = temp;
-				}
-			}
-		}
-		return renderType;
+		return bridgeSupport;
 	}
 
-	/** Not meant for main use this is for debug only **/
+	/**
+	 * Selects or clears the authored wooden supports when the current definition supports them.
+	 *
+	 * @param selected whether wooden bridge supports were selected
+	 */
+	public void setBridgeSupport(boolean selected)
+	{
+		boolean supportedSelection = selected && getTrackType() != null
+				&& getTrackType().supportsBridgeSupport();
+		if (bridgeSupport == supportedSelection)
+		{
+			return;
+		}
+		bridgeSupport = supportedSelection;
+		markDirty();
+		if (worldObj != null)
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+
+	/**
+	 * Returns whether a player may alter this track's selectable appearance state.
+	 *
+	 * @param player player attempting the change
+	 * @return whether the player owns the track, has creative privileges, or the track has no assigned owner
+	 */
+	public boolean canUpdateDynamicMaterial(EntityPlayer player)
+	{
+		return player != null && (player.capabilities.isCreativeMode
+				|| ownerUUID == null || "Villager Joe".equals(ownerUUID)
+				|| player.getUniqueID().toString().equals(ownerUUID));
+	}
+
+	/**
+	 * Resolves and caches the registered track definition represented by this tile.
+	 *
+	 * @return resolved track definition, or {@code null} when this tile has no resolvable track definition
+	 */
+	public ITrackDefinition getTrackType()
+	{
+		if (getType() == null)
+		{
+			return null;
+		}
+
+		if (trackTypeResolved == false)
+		{
+			trackType = EnumTracks.GetTrackByLabel(getType());
+			trackTypeResolved = true;
+		}
+		return trackType;
+	}
+
+	/**
+	 * Resolves the current definition by label for diagnostic callers.
+	 *
+	 * @return resolved track definition, or {@code null} when this tile has no resolvable track definition
+	 */
 	public ITrackDefinition getTrackTypeByLabel()
 	{
-			if (getType() != null)
-			{
-				for (ITrackDefinition rail : EnumTracks.getRawTracksList().values())
-				{
-					if (rail.getLabel().equals(getType()))
-					{
-						return renderType;
-
-					}
-				}
-			}
-		return null;
+		return getTrackType();
 	}
 
 	public boolean getSwitchState() {
 
 		return switchActive;
-	}
-
-	public void printInfo() {
-		System.out.println(type);
-		System.out.println(getSwitchState());
-		System.out.println(ItemTCRail.isTCStraightTrack(this));
 	}
 
 	@Override
@@ -200,211 +660,49 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		return false;
 	}
 
-	@Override
-	public void updateEntity()
-	{
-		return;
-	}
-
+	/**
+	 * Returns the legacy switch-size category for a rail tile.
+	 *
+	 * @param tileTCRail rail tile to classify
+	 * @return legacy switch-size category
+	 */
 	public int GetSwitchSize(TileTCRail tileTCRail)
 	{
-		return EnumTracks.GetSwitchSize(tileTCRail.getTrackType().getCoreTrack());
+		ITrackDefinition track = tileTCRail.getTrackType();
+		return track != null ? EnumTracks.GetSwitchSize(track.getCoreTrack()) : 0;
 	}
 
+	/**
+	 * Updates the switch direction. The manual-override argument is retained for call compatibility and is currently
+	 * ignored.
+	 *
+	 * @param state requested switch direction
+	 * @param manualOverride retained compatibility argument; currently ignored
+	 */
 	public void setSwitchState(boolean state, boolean manualOverride) {
 		this.switchActive = state;
 		this.markDirty();
-		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		if (this.worldObj != null)
+		{
+			this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+		}
 	}
 
+	/**
+	 * Returns a client render box large enough for this track's complete model footprint.
+	 *
+	 * @return world-space render bounding box
+	 */
 	@SideOnly(Side.CLIENT)
 	public AxisAlignedBB getRenderBoundingBox()
 	{
 		ITrackDefinition track = getTrackType();
-
-		if (track == null)
+		if ((hasModel == false && attachmentData.isEmpty()) || track == null)
 		{
 			return super.getRenderBoundingBox();
 		}
-
-		AxisAlignedBB bb = INFINITE_EXTENT_AABB;
-		Block type = getBlockType();
-		if (type == BlockIDs.tcRail.block )
-		{
-			EnumCoreTrack coreTrack = track.getCoreTrack();
-			int radius = getRenderBoundsRadius(coreTrack);
-			int maxY = TCRailTypes.RailTypes.SLOPE.equals(coreTrack.getRailType()) ? 4 : 2;
-			bb = getOrientedTurnRenderBoundingBox(coreTrack, radius, maxY);
-			if (bb == null)
-			{
-				bb = AxisAlignedBB.getBoundingBox(xCoord - radius, yCoord - 1, zCoord - radius, xCoord + radius + 1, yCoord + maxY, zCoord + radius + 1);
-			}
-		}
-
-		return bb;
-	}
-
-	@SideOnly(Side.CLIENT)
-	private AxisAlignedBB getOrientedTurnRenderBoundingBox(EnumCoreTrack coreTrack, int radius, int maxY)
-	{
-		if (coreTrack.isOriented90DegreeTurn() == false)
-		{
-			return null;
-		}
-
-		boolean rightTurn = coreTrack.isRight90DegreeTurn();
-		boolean positiveX;
-		boolean positiveZ;
-		switch (getBlockMetadata())
-		{
-			case 0:
-				positiveX = rightTurn == false;
-				positiveZ = true;
-				break;
-			case 1:
-				positiveX = false;
-				positiveZ = rightTurn == false;
-				break;
-			case 2:
-				positiveX = rightTurn;
-				positiveZ = false;
-				break;
-			case 3:
-				positiveX = true;
-				positiveZ = rightTurn;
-				break;
-			default:
-				return null;
-		}
-
-		int pad = 2;
-		int minX = positiveX ? xCoord - pad : xCoord - radius;
-		int maxX = positiveX ? xCoord + radius + 1 : xCoord + pad + 1;
-		int minZ = positiveZ ? zCoord - pad : zCoord - radius;
-		int maxZ = positiveZ ? zCoord + radius + 1 : zCoord + pad + 1;
-		return AxisAlignedBB.getBoundingBox(minX, yCoord - 1, minZ, maxX, yCoord + maxY, maxZ);
-	}
-
-	@SideOnly(Side.CLIENT)
-	private static int getRenderBoundsRadius(EnumCoreTrack coreTrack)
-	{
-		switch (coreTrack)
-		{
-			case CORE_SMALL_STRAIGHT:
-			case CORE_SMALL_DIAGONAL_STRAIGHT:
-			case CORE_TWO_WAYS_CROSSING:
-			case CORE_DIAGONAL_TWO_WAYS_CROSSING:
-			case CORE_1X_TURN:
-			case CORE_1X_TURN_L:
-			case CORE_1X_TURN_R:
-				return 2;
-
-			case CORE_MEDIUM_STRAIGHT:
-			case CORE_MEDIUM_DIAGONAL_STRAIGHT:
-			case CORE_3_SLOPE:
-			case CORE_3_DIAGONAL_SLOPE:
-			case CORE_3X_TURN:
-			case CORE_3X_TURN_L:
-			case CORE_3X_TURN_R:
-				return 4;
-
-			case CORE_LONG_STRAIGHT:
-			case CORE_LONG_DIAGONAL_STRAIGHT:
-			case CORE_6_SLOPE:
-			case CORE_6_DIAGONAL_SLOPE:
-			case CORE_5X_TURN:
-			case CORE_5X_TURN_L:
-			case CORE_5X_TURN_R:
-			case CORE_3X4_45DEGREE_TURN:
-			case CORE_3X4_45DEGREE_TURN_L:
-			case CORE_3X4_45DEGREE_TURN_R:
-			case CORE_3X6_45DEGREE_TURN:
-			case CORE_3X6_45DEGREE_TURN_L:
-			case CORE_3X6_45DEGREE_TURN_R:
-			case CORE_3x5_45DEGREE_SWITCH:
-			case CORE_3x5_45DEGREE_SWITCH_L:
-			case CORE_3x5_45DEGREE_SWITCH_R:
-				return 7;
-
-			case CORE_VERY_LONG_STRAIGHT:
-			case CORE_VERY_LONG_DIAGONAL_STRAIGHT:
-			case CORE_12_SLOPE:
-			case CORE_12_DIAGONAL_SLOPE:
-			case CORE_10X_TURN:
-			case CORE_10X_TURN_L:
-			case CORE_10X_TURN_R:
-			case CORE_4X8_45DEGREE_TURN:
-			case CORE_4X8_45DEGREE_TURN_L:
-			case CORE_4X8_45DEGREE_TURN_R:
-			case CORE_5X11_45DEGREE_TURN:
-			case CORE_5X11_45DEGREE_TURN_L:
-			case CORE_5X11_45DEGREE_TURN_R:
-			case CORE_4x4_SWITCH:
-			case CORE_4x4_SWITCH_L:
-			case CORE_4x4_SWITCH_R:
-			case CORE_6x6_SWITCH:
-			case CORE_6x6_SWITCH_L:
-			case CORE_6x6_SWITCH_R:
-			case CORE_11x11_SWITCH:
-			case CORE_11x11_SWITCH_L:
-			case CORE_11x11_SWITCH_R:
-			case CORE_10x2_CROSSOVER_SWITCH:
-			case CORE_10x2_CROSSOVER_SWITCH_L:
-			case CORE_10x2_CROSSOVER_SWITCH_R:
-			case CORE_4x8_45DEGREE_SWITCH:
-			case CORE_4x8_45DEGREE_SWITCH_L:
-			case CORE_4x8_45DEGREE_SWITCH_R:
-			case CORE_S_CURVE_2x8:
-			case CORE_S_CURVE_2x8_L:
-			case CORE_S_CURVE_2x8_R:
-			case CORE_S_CURVE_3x12:
-			case CORE_S_CURVE_3x12_L:
-			case CORE_S_CURVE_3x12_R:
-			case CORE_DIAMOND_CROSSING:
-			case CORE_DIAMOND_CROSSING_L:
-			case CORE_DIAMOND_CROSSING_R:
-			case CORE_DOUBLE_DIAMOND_CROSSING:
-			case CORE_FOUR_WAYS_CROSSING:
-				return 13;
-
-			case CORE_18_SLOPE:
-			case CORE_18_DIAGONAL_SLOPE:
-			case CORE_16X_TURN:
-			case CORE_16X_TURN_L:
-			case CORE_16X_TURN_R:
-			case CORE_4x11_PARALLEL_SWITCH:
-			case CORE_4x11_PARALLEL_SWITCH_L:
-			case CORE_4x11_PARALLEL_SWITCH_R:
-			case CORE_4x17_PARALLEL_SWITCH:
-			case CORE_4x17_PARALLEL_SWITCH_L:
-			case CORE_4x17_PARALLEL_SWITCH_R:
-			case CORE_S_CURVE_4x16:
-			case CORE_S_CURVE_4x16_L:
-			case CORE_S_CURVE_4x16_R:
-			case CORE_S_CURVE_20x2:
-			case CORE_S_CURVE_20x2_L:
-			case CORE_S_CURVE_20x2_R:
-			case CORE_9X20_45DEGREE_TURN:
-			case CORE_9X20_45DEGREE_TURN_L:
-			case CORE_9X20_45DEGREE_TURN_R:
-			case CORE_10x22_45DEGREE_TURN:
-			case CORE_10x22_45DEGREE_TURN_L:
-			case CORE_10x22_45DEGREE_TURN_R:
-				return 23;
-
-			case CORE_29X_TURN:
-			case CORE_29X_TURN_L:
-			case CORE_29X_TURN_R:
-				return 30;
-
-			case CORE_32X_TURN:
-			case CORE_32X_TURN_L:
-			case CORE_32X_TURN_R:
-				return 33;
-
-			default:
-				return 4;
-		}
+		return TrackCellResolver.isTraincraftRailBlock(getBlockType())
+				? TrackRenderBounds.calculate(this, track) : INFINITE_EXTENT_AABB;
 	}
 
 	private String ownerUUID = "Villager Joe";
@@ -419,16 +717,22 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		this.ownerUUID = ownerUUID;
 	}
 
+	/**
+	 * Loads persisted rail state, normalizes canonical slope parameters, and invalidates transient generated-host
+	 * rendering after a client tile-update packet.
+	 *
+	 * @param nbt compound containing the saved tile data
+	 */
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
+		attachmentData.readFromNBT(nbt);
 		ownerUUID = nbt.hasKey("ownerUUID") ? nbt.getString("ownerUUID") : "Villager Joe";
 		facingMeta = nbt.getByte("Orientation");
 		r = nbt.getDouble("r");
 		cx = nbt.getDouble("cx");
 		cy = nbt.getDouble("cy");
 		cz = nbt.getDouble("cz");
-		cy = nbt.getDouble("cy");
 
 		slopeHeight = nbt.getDouble("slopeHeight");
 		slopeLength = nbt.getDouble("slopeLength");
@@ -438,10 +742,20 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		linkedZ = nbt.getInteger("linkedZ");
 		ballastMetadata = nbt.getInteger("ballastMetadata");
 		ballastColour = nbt.getInteger("ballastColour");
+		bridgeSupport = nbt.getBoolean("bridgeSupport");
 		if(nbt.hasKey("ballastMaterial")) {
 			ballastMaterial = nbt.getInteger("ballastMaterial");
 		} else {
 			ballastMaterial=0;
+		}
+		NBTTagList trackHostTagList = nbt.getTagList("CapturedHostBlocks", Constants.NBT.TAG_COMPOUND);
+		if (trackHostTagList.tagCount() > 0)
+		{
+			getOrCreateTrackHostData().readFromNBT(nbt);
+		}
+		else
+		{
+			trackHostData = null;
 		}
 
 		String tempType = nbt.getString("type");
@@ -450,41 +764,15 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		} else {
 			type = EnumTracks.SMALL_STRAIGHT.getLabel();
 		}
-		/**
-		 * Hacky TC Code to fix already placed slopes
-		 * ETERNAL NOTE: checking if it's a slope before checking what kind of slope, in theory, should improve performance
-		 */
-		if(type.contains("SLOPE"))
+		clearTrackTypeCache();
+		ITrackDefinition track = EnumTracks.GetTrackByLabel(type);
+		if(track != null && type.contains("SLOPE"))
 		{
-			ITrackDefinition track = EnumTracks.GetTrackByLabel(type);
-			switch (track.getCoreTrack())
-			{
-				case CORE_3_SLOPE:
-					slopeAngle = 0.26;
-				break;
-				case CORE_6_SLOPE:
-					slopeAngle = 0.13;
-				break;
-				case CORE_12_SLOPE:
-					slopeAngle = 0.0666;
-				break;
-				case CORE_18_SLOPE:
-					slopeAngle = 0.0444;
-				break;
-
-				case CORE_3_DIAGONAL_SLOPE:
-					slopeAngle = 0.23; //5 decimals of precision for track length, 2 dec for angle
-				break;
-				case CORE_6_DIAGONAL_SLOPE:
-					slopeAngle = 0.12; //5 decimals of precision for track length, 2 dec for angle
-				break;
-				case CORE_12_DIAGONAL_SLOPE:
-					slopeAngle = 0.06; //5 decimals of precision for track length, 2 dec for angle
-				break;
-				case CORE_18_DIAGONAL_SLOPE:
-					slopeAngle = 0.04; //5 decimals of precision for track length, 2 dec for angle
-				break;
-			}
+			TrackSlopeParameters slope = TrackSlopeParameters.normalize(
+					track, slopeHeight, slopeLength, slopeAngle);
+			slopeHeight = slope.getHeight();
+			slopeLength = slope.getLength();
+			slopeAngle = slope.getAngle();
 		}
 		isLinkedToRail = nbt.getBoolean("isLinkedToRail");
 		hasModel = nbt.getBoolean("hasModel");
@@ -510,11 +798,21 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 			}
 		}
 		super.readFromNBT(nbt);
+		if (trackHostData == null && usesDynamicHostSurfaceRendering())
+		{
+			trackHostRenderEventVersion++;
+		}
 	}
 
+	/**
+	 * Writes rail state and captured embedded hosts to persistent NBT.
+	 *
+	 * @param nbt destination compound
+	 */
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{
+		attachmentData.writeToNBT(nbt);
 		nbt.setString("ownerUUID", ownerUUID);
 		nbt.setByte("Orientation", (byte) facingMeta);
 		nbt.setDouble("r", r);
@@ -529,6 +827,7 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		nbt.setInteger("linkedZ", linkedZ);
 		nbt.setInteger("ballastMetadata", ballastMetadata);
 		nbt.setInteger("ballastColour", ballastColour);
+		nbt.setBoolean("bridgeSupport", bridgeSupport);
 		if (type != null)
 		{
 			nbt.setString("type", type);
@@ -536,6 +835,10 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		if (ballastMaterial  != 0)
 		{
 			nbt.setInteger("ballastMaterial", ballastMaterial);
+		}
+		if (trackHostData != null)
+		{
+			trackHostData.writeToNBT(nbt);
 		}
 
 		nbt.setBoolean("isLinkedToRail", isLinkedToRail);
@@ -578,7 +881,11 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		if (tileEntity.getType() != null && (tileEntity.getType().contains("SWITCH")))
 		{
 			boolean newSwitchState;
-			if (checkNonSwitchPieceForRedstonePower() || worldObj.isBlockIndirectlyGettingPowered(x, y, z))
+			boolean receivingPower = tileEntity.isSlabMountedTrack()
+					? isReceivingSwitchPower()
+					: checkNonSwitchPieceForRedstonePower()
+							|| worldObj.isBlockIndirectlyGettingPowered(x, y, z);
+			if (receivingPower)
 			{
 				newSwitchState = true;
 			}
@@ -618,23 +925,26 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 			while (Math.abs(offsetX) < switchSize && Math.abs(offsetY) < switchSize && Math.abs(offsetZ) < switchSize)
 			{
 				te1 = world.getTileEntity(x + offsetX, y + offsetY, z + offsetZ);
-				if (te1 != null && te1 instanceof TileTCRail)
+				if (te1 instanceof TileTCRail)
 				{
+					TileTCRail routeRail = (TileTCRail)te1;
 					if (newSwitchState)
 					{
 						if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("LEFT"))
 						{
-							((TileTCRail) te1).setType("MEDIUM_LEFT_TURN");
-							((TileTCRail) te1).switchActive=true;
+							setSwitchRouteType(routeRail, "MEDIUM_LEFT_TURN");
+							routeRail.switchActive = true;
 						}
 						else if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("RIGHT"))
 						{
-							((TileTCRail) te1).setType("MEDIUM_RIGHT_TURN");
-							((TileTCRail) te1).switchActive=true;
+							setSwitchRouteType(routeRail, "MEDIUM_RIGHT_TURN");
+							routeRail.switchActive = true;
 						}
-					} else {
-						((TileTCRail) te1).setType(EnumTracks.SMALL_STRAIGHT.getLabel());
-						((TileTCRail) te1).switchActive=false;
+					}
+					else
+					{
+						setSwitchRouteType(routeRail, EnumTracks.SMALL_STRAIGHT.getLabel());
+						routeRail.switchActive = false;
 					}
 				}
 				offsetX += a;
@@ -648,28 +958,60 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		}
 	}
 
+	private static void setSwitchRouteType(TileTCRail routeRail, String surfaceLabel)
+	{
+		ITrackDefinition currentRoute = routeRail.getTrackType();
+		TrackPlacementType placementType = currentRoute != null
+				? currentRoute.getPlacementType() : TrackPlacementType.SURFACE;
+		String placedLabel = TrackHostPlacementTransaction.getPlacedTrackLabel(
+				surfaceLabel, placementType);
+		routeRail.setType(placedLabel);
+	}
+
+	/**
+	 * Returns whether this switch rail receives power directly or through its adjacent control cell.
+	 *
+	 * @return whether the switch should use its powered route
+	 */
+	public boolean isReceivingSwitchPower()
+	{
+		return checkNonSwitchPieceForRedstonePower()
+				|| isTrackControlCellPowered(xCoord, yCoord, zCoord);
+	}
+
+	private boolean isTrackControlCellPowered(int controlX, int controlY, int controlZ)
+	{
+		if (worldObj.isBlockIndirectlyGettingPowered(controlX, controlY, controlZ))
+		{
+			return true;
+		}
+		return isSlabMountedTrack()
+				&& BlockSwitchStand.hasPoweredLoweredStandNear(worldObj, controlX, controlY, controlZ);
+	}
+
 	private boolean checkNonSwitchPieceForRedstonePower()
 	{
 		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		switch (meta) {
 
 			case 0: {
-				return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord + 1);
+				return isTrackControlCellPowered(xCoord, yCoord, zCoord + 1);
 			}
 			case 1: {
-				return worldObj.isBlockIndirectlyGettingPowered(xCoord - 1, yCoord, zCoord);
+				return isTrackControlCellPowered(xCoord - 1, yCoord, zCoord);
 			}
 			case 2: {
-				return worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord - 1);
+				return isTrackControlCellPowered(xCoord, yCoord, zCoord - 1);
 			}
 			case 3: {
-				return worldObj.isBlockIndirectlyGettingPowered(xCoord + 1, yCoord, zCoord);
+				return isTrackControlCellPowered(xCoord + 1, yCoord, zCoord);
 			}
 		}
 
 		return false;
 	}
 
+	/** Updates the legacy handedness flag from the current track definition. */
 	private void UpdateLeftFlag()
 	{
 			TileEntity tile1 = null;
@@ -703,15 +1045,21 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 			if (tile1 instanceof TileTCRail && TCRailTypes.isSwitchTrack((TileTCRail) tile1)) {
 
 				TileTCRail tileSwitch = (TileTCRail) tile1;
+				boolean controlRailPowered = isSlabMountedTrack()
+						? isReceivingSwitchPower()
+						: worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+				boolean switchRailPowered = tileSwitch.isSlabMountedTrack()
+						? tileSwitch.isReceivingSwitchPower()
+						: worldObj.isBlockIndirectlyGettingPowered(tile1.xCoord, tile1.yCoord, tile1.zCoord);
 				if (tileSwitch.switchActive)
 				{
-					if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)
-							== worldObj.isBlockIndirectlyGettingPowered(tile1.xCoord, tile1.yCoord, tile1.zCoord))
+					if (controlRailPowered == switchRailPowered)
 					{
 						tileSwitch.changeSwitchState(worldObj, tileSwitch, tile1.xCoord, tile1.yCoord, tile1.zCoord);
 					}
 				}
-				else if (tileSwitch.switchActive != worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+				else if (tileSwitch.switchActive != controlRailPowered)
+				{
 					tileSwitch.changeSwitchState(worldObj, tileSwitch, tile1.xCoord, tile1.yCoord, tile1.zCoord);
 				}
 			}
@@ -721,9 +1069,9 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 
 			/* Right-handed switch types create a value of 1, left-handed switch types a value of type -1. If neither cases match, value is set to 0. */
 			if (isLeftFlag == -5) {
-				if (type.contains("SWITCH") && type.contains("RIGHT")) {
+				if (type != null && type.contains("SWITCH") && type.contains("RIGHT")) {
 					isLeftFlag = 1;
-				} else if (type.contains("SWITCH") && type.contains("LEFT")) {
+				} else if (type != null && type.contains("SWITCH") && type.contains("LEFT")) {
 					isLeftFlag = -1;
 				} else {
 					isLeftFlag = 0;
@@ -751,26 +1099,6 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	 * @return The tile itself, or the tile to which it is linked.
 	 */
 	public TileTCRail getGreatestParent(World worldObj) {
-		return getGreatestParent(worldObj, new HashSet<>());
-	}
-
-	private TileTCRail getGreatestParent(World worldObj, HashSet<TileTCRail> visited) {
-		if (!isLinkedToRail) {
-			return this;
-		}
-		if (!visited.contains(this)) {
-			visited.add(this);
-			TileEntity parent = worldObj.getTileEntity(linkedX, linkedY, linkedZ);
-			if (parent instanceof TileTCRail) {
-				return ((TileTCRail) parent).getGreatestParent(worldObj, visited);
-			} else if (parent instanceof TileTCRailGag) {
-				TileTCRailGag gag = (TileTCRailGag) parent;
-				TileEntity originTile = worldObj.getTileEntity(gag.originX, gag.originY, gag.originZ);
-				if (originTile instanceof TileTCRail) {
-					return ((TileTCRail) originTile).getGreatestParent(worldObj, visited);
-				}
-			}
-		}
-		return this;
+		return TrackCellResolver.resolveGreatestParent(worldObj, this);
 	}
 }

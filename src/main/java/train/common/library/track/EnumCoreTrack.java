@@ -148,6 +148,14 @@ public enum EnumCoreTrack
     CORE_6_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_12_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_18_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_3_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_6_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_9_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_3_DIAGONAL_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_6_DIAGONAL_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_9_DIAGONAL_HALF_HEIGHT_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_EMBEDDED_TRANSITION_SLOPE(TCRailTypes.RailTypes.SLOPE),
+    CORE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_3_DIAGONAL_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_6_DIAGONAL_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_12_DIAGONAL_SLOPE(TCRailTypes.RailTypes.SLOPE),
@@ -162,7 +170,7 @@ public enum EnumCoreTrack
         return this.railType;
     }
 
-    EnumCoreTrack(TCRailTypes.RailTypes railType)
+    private EnumCoreTrack(TCRailTypes.RailTypes railType)
     {
         this.railType = railType;
     }
@@ -177,6 +185,22 @@ public enum EnumCoreTrack
         return TCRailTypes.RailTypes.TURN.equals(railType) && name().endsWith("_R");
     }
 
+    /**
+     * Determines whether this core climbs exactly one half block while retaining
+     * the pitch of its corresponding full-height slope.
+     *
+	 * @return {@code true} for a cardinal or diagonal half-height slope core
+     */
+    public boolean isHalfHeightSlope()
+    {
+        return this == CORE_3_HALF_HEIGHT_SLOPE
+                || this == CORE_6_HALF_HEIGHT_SLOPE
+                || this == CORE_9_HALF_HEIGHT_SLOPE
+                || this == CORE_3_DIAGONAL_HALF_HEIGHT_SLOPE
+                || this == CORE_6_DIAGONAL_HALF_HEIGHT_SLOPE
+                || this == CORE_9_DIAGONAL_HALF_HEIGHT_SLOPE;
+    }
+
     public boolean isLeftRightCore()
     {
         return name().endsWith("_L") || name().endsWith("_R");
@@ -185,6 +209,17 @@ public enum EnumCoreTrack
     public EnumCoreTrack getLeftRightVariant(boolean renderLeft)
     {
         return EnumCoreTrack.valueOf(name() + (renderLeft ? "_L" : "_R"));
+    }
+
+    /**
+     * Returns whether this core connects an embedded track surface to the regular rail surface across the
+     * embedded model inset.
+     *
+     * @return whether this is a cardinal or diagonal embedded transition core
+     */
+    public boolean isEmbeddedTransitionSlope()
+    {
+        return this == CORE_EMBEDDED_TRANSITION_SLOPE || this == CORE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE;
     }
 
     public boolean isCoreTrackValidForRollingStockPlaceable()

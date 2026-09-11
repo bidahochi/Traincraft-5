@@ -16,7 +16,7 @@ import train.common.tile.BaseStopperTileEntity;
 
 public class RenderAmericanStopper extends TileEntitySpecialRenderer
 {
-    private static final ModelAmericanStopper modelAmericanStopper = new ModelAmericanStopper(1.0F / 16.0F);
+    private static final ModelAmericanStopper modelAmericanStopper = new ModelAmericanStopper();
     private EnumTracks EnumTrack;
 
     public RenderAmericanStopper(EnumTracks enumTrack)

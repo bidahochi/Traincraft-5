@@ -95,6 +95,11 @@ public enum TrackItemIDs
     tcRailVeryLargeSlopePeaGravel("item_rail_straight_slope_pea_gravel", 3),
     tcRailVeryLargeSlopeDynamic("item_rail_straight_slope_dynamic", 3),
 
+    // Half-height slopes retain the 1x6, 1x12, and 1x18 full-slope pitches.
+    tcRailHalfHeightSlope3Dynamic("item_rail_straight_slope_dynamic", 3),
+    tcRailHalfHeightSlope6Dynamic("item_rail_straight_slope_dynamic", 3),
+    tcRailHalfHeightSlope9Dynamic("item_rail_straight_slope_dynamic", 3),
+
 
     /** Sleeperless Tracks **/
     //straights
@@ -149,6 +154,9 @@ public enum TrackItemIDs
     tcRailEmbeddedSlopeDynamic("item_rail_embedded_slope_dynamic", 5),
     tcRailEmbeddedLargeSlopeDynamic("item_rail_embedded_slope_dynamic", 5),
     tcRailEmbeddedVeryLargeSlopeDynamic("item_rail_embedded_slope_dynamic", 5),
+    tcRailEmbeddedHalfHeightSlope3Dynamic("item_rail_embedded_slope_dynamic", 5),
+    tcRailEmbeddedHalfHeightSlope6Dynamic("item_rail_embedded_slope_dynamic", 5),
+    tcRailEmbeddedHalfHeightSlope9Dynamic("item_rail_embedded_slope_dynamic", 5),
 
     /**
      * Concrete Type1
@@ -205,6 +213,9 @@ public enum TrackItemIDs
     tcRail_CONCRETE_TYPE1_SlopeDynamic("concrete/item_rail_straight_slope_dynamic", 5),
     tcRail_CONCRETE_TYPE1_LargeSlopeDynamic("concrete/item_rail_straight_slope_dynamic", 5),
     tcRail_CONCRETE_TYPE1_VeryLargeSlopeDynamic("concrete/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE1_HalfHeightSlope3Dynamic("concrete/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE1_HalfHeightSlope6Dynamic("concrete/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE1_HalfHeightSlope9Dynamic("concrete/item_rail_straight_slope_dynamic", 5),
 
 
     /**
@@ -262,6 +273,9 @@ public enum TrackItemIDs
     tcRail_CONCRETE_TYPE2_SlopeDynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
     tcRail_CONCRETE_TYPE2_LargeSlopeDynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
     tcRail_CONCRETE_TYPE2_VeryLargeSlopeDynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE2_HalfHeightSlope3Dynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE2_HalfHeightSlope6Dynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
+    tcRail_CONCRETE_TYPE2_HalfHeightSlope9Dynamic("concrete_2/item_rail_straight_slope_dynamic", 5),
 
     /**
      * TREATED_WOOD_TYPE1
@@ -318,6 +332,9 @@ public enum TrackItemIDs
     tcRail_WOOD_TYPE1_SlopeDynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
     tcRail_WOOD_TYPE1_LargeSlopeDynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
     tcRail_WOOD_TYPE1_VeryLargeSlopeDynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
+    tcRail_WOOD_TYPE1_HalfHeightSlope3Dynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
+    tcRail_WOOD_TYPE1_HalfHeightSlope6Dynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
+    tcRail_WOOD_TYPE1_HalfHeightSlope9Dynamic("wood_treated/item_rail_straight_slope_dynamic", 5),
 
     /**
      * WOOD_TYPE2
@@ -374,7 +391,10 @@ public enum TrackItemIDs
     tcRail_WOOD_TYPE2_SlopeDynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
     tcRail_WOOD_TYPE2_LargeSlopeDynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
     tcRail_WOOD_TYPE2_VeryLargeSlopeDynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
-    
+    tcRail_WOOD_TYPE2_HalfHeightSlope3Dynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
+    tcRail_WOOD_TYPE2_HalfHeightSlope6Dynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
+    tcRail_WOOD_TYPE2_HalfHeightSlope9Dynamic("wood_spurce/item_rail_straight_slope_dynamic", 5),
+
     /**
      * NON STANDARD
      */
@@ -397,7 +417,7 @@ public enum TrackItemIDs
      * @param iconName
      * @param amountForEmerald for one emerald. For ItemRollingStock, it is the price for one train
      */
-    TrackItemIDs(String iconName, int amountForEmerald) {
+    private TrackItemIDs(String iconName, int amountForEmerald) {
         this.iconName = iconName;
         this.amountForEmerald = amountForEmerald;
     }

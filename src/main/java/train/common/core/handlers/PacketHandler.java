@@ -139,6 +139,9 @@ public class PacketHandler
 		Traincraft.BannedItems_CHANNEL.registerMessage(PacketSyncBannedItems.Handler.class, PacketSyncBannedItems.class, 29, Side.CLIENT);
 		Traincraft.tcCraftingBenchChannel.registerMessage(PacketUpdateTCBenchPage.Handler.class, PacketUpdateTCBenchPage.class, 30, Side.SERVER);
 		Traincraft.modChannel.registerMessage(PacketTenderStorageMode.Handler.class, PacketTenderStorageMode.class, 31, Side.SERVER);
+		Traincraft.modChannel.registerMessage(PacketTrackPlacementSound.Handler.class, PacketTrackPlacementSound.class, 38, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketActionBarMessage.Handler.class, PacketActionBarMessage.class, 39, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketTrackAttachmentState.Handler.class, PacketTrackAttachmentState.class, 40, Side.CLIENT);
 	}
 
 	private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

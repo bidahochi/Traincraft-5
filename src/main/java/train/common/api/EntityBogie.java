@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import train.common.api.pathfinding.PathFindingHelper;
 import train.common.blocks.BlockTCRail;
 import train.common.blocks.BlockTCRailGag;
+import train.common.library.track.TrackCellResolver;
 import train.common.items.ItemTCRail;
 import train.common.items.TCRailTypes;
 import train.common.library.BlockIDs;
@@ -138,6 +139,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		}
 	}
 
+	/** Updates the bogie's target motion and derail state relative to its owning rolling stock. */
 	public void updateDistance() {
 		float dx = (float) (this.posX - entityMainTrain.posX);
 		float dz = (float) (this.posZ - entityMainTrain.posZ);
@@ -156,17 +158,26 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		//this.setPosition(bogieX1, this.posY, bogieZ1);
 		//pathFindingHelper.checkIfPathIsCorrect(this);
 
-		if(!pathFindingHelper.isOnRail(this, worldObj)){
+		if (isOnRail() == false) {
 			this.isDerail = true;
 		} else if (isDerail) {
 			this.isDerail = false;
 		}
 	}
-	
+
 	private boolean isDerail = false;
+
+	/**
+	 * Returns whether the bogie resolves an ordinary rail or the raised end of a slab-mounted slope.
+	 *
+	 * @return whether a supporting rail cell exists beneath the bogie
+	 */
 	public boolean isOnRail()
 	{
-		return pathFindingHelper.isOnRail(this, worldObj);
+		return pathFindingHelper.isOnRail(this, worldObj)
+				|| SlabMountedSlopeRailLookup.isSlabMountedSlopeCell(worldObj,
+						MathHelper.floor_double(posX), MathHelper.floor_double(posY) - 2,
+						MathHelper.floor_double(posZ));
 		//if(isDerail) {
 		//	return false;
 		//}
@@ -305,11 +316,14 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		int k = MathHelper.floor_double(this.posZ);
 		Block block = this.worldObj.getBlock(i, j - 1, k);
 
-		if (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
+		if (BlockRailBase.func_150051_a(block) || TrackCellResolver.isTraincraftRailBlock(block)) {
 			j--;
+		} else if (SlabMountedSlopeRailLookup.isSlabMountedSlopeCell(this.worldObj, i, j - 2, k)) {
+			j -= 2;
+			block = this.worldObj.getBlock(i, j, k);
 		} else {
 			Block block2 = this.worldObj.getBlock(i, j + 1, k);
-			if(BlockRailBase.func_150051_a(block2) || block2 == BlockIDs.tcRail.block || block2 == BlockIDs.tcRailGag.block){
+			if(BlockRailBase.func_150051_a(block2) || TrackCellResolver.isTraincraftRailBlock(block2)){
 				j++;
 			}
 			block = this.worldObj.getBlock(i, j, k);
@@ -347,7 +361,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 				TileEntity tileEntity = this.worldObj.getTileEntity(i, j, k);
 				TileTCRail tileRail;
 
-				if (block == BlockIDs.tcRailGag.block) {
+				if (TrackCellResolver.isTraincraftGagBlock(block)) {
 
 					if (tileEntity instanceof TileTCRailGag) {
 
@@ -366,7 +380,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 				}
 				else { // If we are not on a rail…
 					// Remove any active detectors if derailed.
-					if (!activeDetectors.isEmpty()) {
+					if (activeDetectors.isEmpty() == false) {
 						removeObsoleteDetectors(new LinkedList<>());
 					}
 					super.onUpdate();
@@ -382,41 +396,41 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 				{
 					int meta = tileRail.getBlockMetadata();
 					if (pathFindingHelper.shouldIgnoreSwitch(this,tileRail, i, j, k, meta)) {
-						pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+						pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 					} else {
-						moveOnTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+						moveOnTC90TurnRail(tileRail, j, tileRail.r, tileRail.cx, tileRail.cz);
 					}
 
 				}
-				else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
+				else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState() == false))
 				{
-					pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+					pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 					//moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 				}
 				else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
 				{
 					if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
-						pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+						pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
 					}
 					else {
-						moveOnNewTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+						moveOnNewTC90TurnRail(tileRail, j, tileRail.r, tileRail.cx, tileRail.cz);
 					}
 				}
 				else if (TCRailTypes.isCrossingTrack(tileRail))
 				{
-					moveOnTCTwoWaysCrossing();
+					moveOnTCTwoWaysCrossing(tileRail, j);
 				}
 				else if (TCRailTypes.isDiagonalCrossingTrack(tileRail))
 				{
-					moveOnTCDiamondCrossing(i, j, k, tileRail.xCoord,  tileRail.zCoord);
+					moveOnTCDiamondCrossing(tileRail, i, j, k, tileRail.xCoord,  tileRail.zCoord);
 				}
 				else if (TCRailTypes.isDiagonalTrack(tileRail))
 				{
-					pathFindingHelper.moveOnTCDiagonal(this,i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
+					pathFindingHelper.moveOnTCDiagonal(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
 				}
 				else if (TCRailTypes.isSlopeTrack(tileRail)) {
 
-					moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.slopeLength, tileRail.getBlockMetadata());
+					moveOnTCSlope(tileRail, j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.slopeLength, tileRail.getBlockMetadata());
 				}
 			}
 		}
@@ -502,7 +516,9 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			}
 			// Remove and mark as obsolete any old detectors.
 			removeObsoleteDetectors(trackPairedDetectors);
-		} else if (!activeDetectors.isEmpty()){ // Remove all active detectors when we move to a track that doesn't have any detectors.
+		}
+		// Remove all active detectors when we move to a track that does not have any detectors.
+		else if (activeDetectors.isEmpty() == false) {
 			removeObsoleteDetectors(trackPairedDetectors);
         }
 	}
@@ -519,11 +535,11 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		}
 	}
 
-	private boolean shouldIgnoreSwitch(TileTCRail tile, int i, int j, int k, int meta) {
+	private boolean shouldIgnoreSwitch(TileTCRail tile, int railX, int railY, int railZ, int meta) {
 		if (tile != null && TCRailTypes.isTurnTrack(tile) && tile.canTypeBeModifiedBySwitch) {
 			if (meta == 2) {
 				if (motionZ > 0 && Math.abs(motionX) < 0.01) {
-					TileEntity tile2 = worldObj.getTileEntity(i, j, k + 1);
+					TileEntity tile2 = worldObj.getTileEntity(railX, railY, railZ + 1);
 					if (tile2 != null && tile2 instanceof TileTCRail) {
 					//	((TileTCRail) tile2).setSwitchState(false, true);
 					}
@@ -532,7 +548,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			}
 			if (meta == 0) {
 				if (motionZ < 0 && Math.abs(motionX) < 0.01) {
-					TileEntity tile2 = worldObj.getTileEntity(i, j, k - 1);
+					TileEntity tile2 = worldObj.getTileEntity(railX, railY, railZ - 1);
 					if (tile2 != null && tile2 instanceof TileTCRail) {
 					//	((TileTCRail) tile2).setSwitchState(false, true);
 					}
@@ -541,7 +557,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			}
 			if (meta == 1) {
 				if (Math.abs(motionZ) < 0.002 && motionX > 0) { //allow a little more off-axis motion
-					TileEntity tile2 = worldObj.getTileEntity(i + 1, j, k);
+					TileEntity tile2 = worldObj.getTileEntity(railX + 1, railY, railZ);
 					if (tile2 != null && tile2 instanceof TileTCRail) {
 					//	((TileTCRail) tile2).setSwitchState(false, true);
 					}
@@ -550,7 +566,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			}
 			if (meta == 3) {
 				if (Math.abs(motionZ) < 0.01 && motionX < 0) {
-					TileEntity tile2 = worldObj.getTileEntity(i - 1, j, k);
+					TileEntity tile2 = worldObj.getTileEntity(railX - 1, railY, railZ);
 					if (tile2 != null && tile2 instanceof TileTCRail) {
 					//	((TileTCRail) tile2).setSwitchState(false, true);
 					}
@@ -561,7 +577,14 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		return false;
 	}
 
-	private void moveOnTCTwoWaysCrossing() {
+	/**
+	 * Moves this bogie straight across a two-way crossing at the rail's ride height.
+	 *
+	 * @param rail resolved crossing parent rail
+	 * @param j crossing block Y coordinate
+	 */
+	private void moveOnTCTwoWaysCrossing(TileTCRail rail, int j) {
+		this.posY = j + rail.getTrackRideYOffset() + 0.2;
 		/*
 		 * Nitro-Note: Do we need all those shitty motionX and Z? We don't even
 		 * need something to parse to this function. setPosition is superflous since you can't place
@@ -573,9 +596,9 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		//if(l==1||l==3)moveEntity(0.0D, 0.0D, motionZ);
 		//if(Math.abs(motionX)>Math.abs(motionZ))System.out.println("X");
 		//if(Math.abs(motionZ)>Math.abs(motionX))System.out.println("Z");
-		
+
 		double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-		
+
 		if (Math.abs(motionZ) > Math.abs(motionX)) {
 
 			// this.setPosition(this.posX, this.posY + this.yOffset, cz + 0.5D);
@@ -585,9 +608,9 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			// this.motionZ = Math.copySign(norm, this.motionZ);
 		}
 		else {
-			
+
 			// double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-			
+
 			// this.setPosition(cx + 0.5D, this.posY + this.yOffset, this.posZ);
 			this.moveEntity(Math.copySign(norm, this.motionX), 0.0D, 0.0D);
 
@@ -597,8 +620,20 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 	}
 
-	protected void moveOnTCDiamondCrossing(int i, int j, int k, double cx, double cz) {
+	/**
+	 * Moves this bogie through a diamond crossing along its dominant approach direction.
+	 *
+	 * @param rail resolved crossing parent rail
+	 * @param railX crossing block X coordinate
+	 * @param railY crossing block Y coordinate
+	 * @param railZ crossing block Z coordinate
+	 * @param centerX crossing center X coordinate
+	 * @param centerZ crossing center Z coordinate
+	 */
+	protected void moveOnTCDiamondCrossing(TileTCRail rail, int railX, int railY, int railZ,
+			double centerX, double centerZ) {
 
+		this.posY = railY + rail.getTrackRideYOffset() + 0.2;
 
 
 		double norm = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -624,22 +659,38 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 			moveEntity(0.0D, 0.0D, motionZ);
 		}
 		else if (l == 1) {
-			moveOnTCDiagonal(i, j, k, cx, cz, 5, 1);
+			moveOnTCDiagonal(railX, railY, railZ, centerX, centerZ, 5, 1);
 		}
 		else if (l == 3){
-			moveOnTCDiagonal(i, j, k, cx, cz, 6, 1);
+			moveOnTCDiagonal(railX, railY, railZ, centerX, centerZ, 6, 1);
 		}
 		else if (l == 5) {
-			moveOnTCDiagonal(i, j, k, cx, cz, 7, 1);
+			moveOnTCDiagonal(railX, railY, railZ, centerX, centerZ, 7, 1);
 		}
 		else if (l == 7) {
-			moveOnTCDiagonal(i, j, k, cx, cz, 4, 1);
+			moveOnTCDiagonal(railX, railY, railZ, centerX, centerZ, 4, 1);
 		}*/
 	}
 
-	private void moveOnTCSlope(int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
+	/**
+	 * Moves this bogie along one cardinal Traincraft slope.
+	 *
+	 * @param rail authoritative parent rail
+	 * @param j parent rail block Y coordinate
+	 * @param cx parent rail block X coordinate
+	 * @param cz parent rail block Z coordinate
+	 * @param slopeAngle stored slope angle in radians
+	 * @param slopeHeight total vertical rise of the slope
+	 * @param slopeLength horizontal slope length in blocks
+	 * @param meta cardinal rail direction metadata
+	 */
+	private void moveOnTCSlope(TileTCRail rail, int j, double cx, double cz, double slopeAngle, double slopeHeight, double slopeLength, int meta) {
+		if (PathFindingHelper.isEmbeddedTransitionSlope(rail)) {
+			pathFindingHelper.moveOnTCEmbeddedTransitionSlope(this, rail, j, cx, cz, meta, slopeLength);
+			return;
+		}
 		if (meta > 3) {
-			pathFindingHelper.moveOnTCDiagonalSlope(this, j, cx, cz, slopeAngle, slopeHeight, meta, slopeLength);
+			pathFindingHelper.moveOnTCDiagonalSlope(this, rail, j, cx, cz, slopeAngle, slopeHeight, meta, slopeLength);
 			return;
 		}
 		boolean alongZ = meta == 0 || meta == 2;
@@ -649,7 +700,11 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		else if (meta == 1) cx += 1;
 
 		double delta = alongZ ? Math.abs(cz - this.posZ) : Math.abs(cx - this.posX);
-		double newPosY = Math.abs(j + (Math.tan(slopeAngle * delta)) + this.yOffset + 0.3);
+		boolean halfHeightSlope = rail.getTrackType() != null
+				&& rail.getTrackType().getCoreTrack().isHalfHeightSlope();
+		double rise = halfHeightSlope ? Math.tan(slopeAngle) * delta : Math.tan(slopeAngle * delta);
+		double newPosY = Math.abs(j + rail.getTrackRideYOffset()
+				+ rise + this.yOffset + 0.3);
 
 		newPosY = derailCheck(cx, newPosY, cz, alongZ);
 
@@ -670,9 +725,18 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 		this.motionZ = alongZ ? Math.copySign(norm, this.motionZ) : 0.0D;
 	}
 
-	private void moveOnNewTC90TurnRail(int j,double r, double cx, double cz){
+	/**
+	 * Moves this bogie around a newer radial 90-degree turn at the rail's ride height.
+	 *
+	 * @param rail resolved turn parent rail
+	 * @param j turn block Y coordinate
+	 * @param r authored turn radius
+	 * @param cx turn center X coordinate
+	 * @param cz turn center Z coordinate
+	 */
+	private void moveOnNewTC90TurnRail(TileTCRail rail, int j,double r, double cx, double cz){
 
-		posY = j + 0.2;
+		posY = j + rail.getTrackRideYOffset() + 0.2;
 		double cpx = posX - cx;
 		double cpz = posZ - cz;
 		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
@@ -716,8 +780,17 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 	}
 
-	private void moveOnTC90TurnRail(int j,double r, double cx, double cz){
-		posY = j + 0.2;
+	/**
+	 * Moves this bogie around a legacy radial 90-degree turn at the rail's ride height.
+	 *
+	 * @param rail resolved turn parent rail
+	 * @param j turn block Y coordinate
+	 * @param r authored turn radius
+	 * @param cx turn center X coordinate
+	 * @param cz turn center Z coordinate
+	 */
+	private void moveOnTC90TurnRail(TileTCRail rail, int j,double r, double cx, double cz){
+		posY = j + rail.getTrackRideYOffset() + 0.2;
 		double cpx = posX - cx;
 		double cpz = posZ - cz;
 		double cp_norm = Math.sqrt(cpx * cpx + cpz * cpz);
@@ -836,7 +909,7 @@ public class EntityBogie extends EntityMinecart implements IMinecart, IRoutableC
 
 		return  this.entityMainTrain.getOwner();
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_,

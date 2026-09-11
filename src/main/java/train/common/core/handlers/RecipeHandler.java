@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2012 Mrbrutal. All rights reserved.
- * 
+ *
  * @name TrainCraft
  * @author Mrbrutal
  ******************************************************************************/
@@ -79,7 +79,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		/* Lantern */
 		addDictRecipe(new ItemStack(BlockIDs.lantern.block, 4), "III", "PTP", "III", Character.valueOf('I'), ironingot, Character.valueOf('P'), Blocks.glass_pane, Character.valueOf('T'), Blocks.torch);
 
-		
+
 		/* Clothes */
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.overalls.item, 1),  " # ", "X$X", "X$X", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('$'), Items.leather_leggings, Character.valueOf('#'), new ItemStack(Items.dye, 1, 1) );
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.jacket.item, 1),  "X X", "X$X", "X#X", Character.valueOf('X'), new ItemStack(Items.dye, 1, 14), Character.valueOf('$'), Items.leather_chestplate, Character.valueOf('#'), Items.string );
@@ -89,7 +89,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.pants_driver_paintable.item, 1),  "XXX", "XLX", "X$X", Character.valueOf('L'), Items.leather_leggings,Character.valueOf('$'), new ItemStack(Items.dye, 1, 4), Character.valueOf('X'), Items.string);
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.jacket_driver_paintable.item, 1),  "X X", "XRX", "XPX", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('P'), Items.leather_chestplate,Character.valueOf('R'),  new ItemStack(Items.dye, 1, 1) );
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.hat_driver_paintable.item, 1), "#$#", "# #", Character.valueOf('$'), new ItemStack(Items.dye, 1, 4), Character.valueOf('#'), Items.string );
-		
+
 		/* Ticket Man Clothes */
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.pants_ticketMan_paintable.item, 1),  "XXX", "XLX", "X$X", Character.valueOf('L'), Items.leather_leggings,Character.valueOf('$'), new ItemStack(Items.dye, 1, 8), Character.valueOf('X'), Items.string);
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.jacket_ticketMan_paintable.item, 1),  "X X", "XPX", "X#X", Character.valueOf('P'), Items.leather_chestplate, Character.valueOf('#'), new ItemStack(Items.dye, 1, 4), Character.valueOf('X'), Items.string);
@@ -169,51 +169,33 @@ public class RecipeHandler extends AbstractRecipeHandler
 		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailLargeSlopeBallast.item, 1), "   ","  T"," T ", 'T', TrackItemIDs.tcRailSlopeBallast.item);
 		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeSlopeBallast.item, 1), "   ","  M"," T ", 'T', TrackItemIDs.tcRailLargeSlopeBallast.item, 'M', TrackItemIDs.tcRailSlopeBallast.item);
 
-		//wood slopes regular
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSlopeWood.item, 1), " TG","TGG","GGG", 'T', TrackItemIDs.tcRailMediumStraight.item, 'G', Blocks.planks);
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailLargeSlopeWood.item,1), "   ","  S"," S ", 'S', TrackItemIDs.tcRailSlopeWood.item);
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeSlopeWood.item,1), "   ","  M"," S ", 'S', TrackItemIDs.tcRailLargeSlopeWood.item, 'M', TrackItemIDs.tcRailSlopeWood.item);
-
 		//dynamic slopes regulah
 		//todo have clay be the fallback recipe if foxblocks isnt present, switch to rainbonite in foxblocks if present
 
 		//railroad crossings
 		if (ingotRainbontrium.isEmpty())
 		{
-			GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossingDynamic.item, 8), "TTT", "TBT", "TTT", 'T', TrackItemIDs.tcRailSmallStraight.item, 'B', Items.clay_ball);
+			GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossingDynamic.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', Items.clay_ball);
 		}
 		else
 		{
 			for (ItemStack rainbowItem : ingotRainbontrium)
 			{
 				Traincraft.tcLog.info("MMMMM T A S T E THE RAINBOW!");
-				GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossingDynamic.item, 8), "TTT", "TBT", "TTT", 'T', TrackItemIDs.tcRailSmallStraight.item, 'B', rainbowItem.getItem());
+				GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossingDynamic.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', rainbowItem.getItem());
 			}
 		}
 
 
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing.item, 8), "TTT", "TBT", "TTT", 'T', TrackItemIDs.tcRailSmallStraight.item, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 15));
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing1.item, 8), "TTT", "TBT", "TTT", 'T', TrackItemIDs.tcRailSmallStraight.item, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 7));
-		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing2.item, 8), "TTT", "TBT", "TTT", 'T', TrackItemIDs.tcRailSmallStraight.item, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 8));
+		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 15));
+		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing1.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 7));
+		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing2.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 8));
 
 		//buffers
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.stopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRailSmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.americanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRailSmallStraight.item);
-
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.embeddedStopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRailEmbeddedSmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.embeddedamericanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRailEmbeddedSmallStraight.item);
-
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.concrete_type1_stopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_CONCRETE_TYPE1_SmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.concrete_type1_americanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_CONCRETE_TYPE1_SmallStraight.item);
-
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.concrete_type2_stopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_CONCRETE_TYPE2_SmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.concrete_type2_americanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_CONCRETE_TYPE2_SmallStraight.item);
-
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.wood_type1_stopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_WOOD_TYPE1_SmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.wood_type1_americanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_WOOD_TYPE1_SmallStraight.item);
-
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.wood_type2_stopper.block, 1), "PPP", "I I", " T ", 'P', Blocks.planks, 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_WOOD_TYPE2_SmallStraight.item);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.wood_type2_americanstopper.block, 1), "III", "I I", " T ", 'I', Items.iron_ingot, 'T', TrackItemIDs.tcRail_WOOD_TYPE2_SmallStraight.item);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.stopper.block, 1),
+				"PPP", "I I", 'P', Blocks.planks, 'I', Items.iron_ingot);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.americanstopper.block, 1),
+				"III", "I I", 'I', Items.iron_ingot);
 
 		//paintbrush
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.paintbrushThing.item,1),"GB ","RIS"," ST", Character.valueOf('G'), new ItemStack(Items.dye,1,2), Character.valueOf('B'), new ItemStack(Items.dye,1,4), Character.valueOf('R'), new ItemStack(Items.dye,1,1), Character.valueOf('I'), new ItemStack(Items.iron_ingot), Character.valueOf('S'), new ItemStack(Items.string), Character.valueOf('T'), new ItemStack(Items.stick));
@@ -235,10 +217,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 
 		addDictRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);
 		addDictRecipe(new ItemStack(BlockIDs.MILWSwitchStand.block, 1)," RW","BWR","AAA", Character.valueOf('A'), new ItemStack(Items.stick), Character.valueOf('B'), Blocks.iron_bars, Character.valueOf('R'), new ItemStack(Items.dye, 1, 1), Character.valueOf('W'), new ItemStack(Items.dye, 1, 15));
-		/*Buffer*/
-		//addDictRecipe(new ItemStack(BlockIDs.stopper.block, 1), "WWW", "I I", "RRR", Character.valueOf('W'), "plankWood", Character.valueOf('R'), Blocks.rail, Character.valueOf('I'), ironingot);
 
-		
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 2,3),  "GXG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Items.clay_ball);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 2, 4), "GXG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Items.snowball);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.oreTC.block, 8, 4), "XGG","GGG","GGG", Character.valueOf('G'), Blocks.gravel, Character.valueOf('X'), Blocks.snow);
@@ -272,6 +251,11 @@ public class RecipeHandler extends AbstractRecipeHandler
 			GameRegistry.addRecipe(new ItemStack(straight6X.item, 1),  "G  ", "G  ", "   ", 'G', straight3X.item);
 			GameRegistry.addRecipe(new ItemStack(straight12X.item, 1),  "G  ", "G  ", "   ", 'G', straight6X.item);
 
+			TrackItemIDs halfHeightSlope9 = tracks.get(CORE_9_HALF_HEIGHT_SLOPE)
+					.get(BallastTypes.DYNAMIC.name()).getItem();
+			GameRegistry.addRecipe(new ItemStack(halfHeightSlope9.item, 1),
+					"  M", " M ", "M  ", 'M', straight3X.item);
+
 			if (FOXBLOCKS_BolsterChisel != null)
 			{
 				GameRegistry.addRecipe(new ItemStack(straight1X.item, 3),  " X ", " G ", "   ", 'G', straight3X.item, 'X', FOXBLOCKS_BolsterChisel);
@@ -287,7 +271,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 			TrackItemIDs turn16X = tracks.get(EnumCoreTrack.CORE_16X_TURN).get("").getItem();
 			TrackItemIDs turn29x = tracks.get(EnumCoreTrack.CORE_29X_TURN).get("").getItem();
 			TrackItemIDs turn32x = tracks.get(EnumCoreTrack.CORE_32X_TURN).get("").getItem();
-			
+
 			GameRegistry.addShapelessRecipe(new ItemStack(turn1X.item, 1), straight1X.item);
 			GameRegistry.addShapelessRecipe(new ItemStack(straight1X.item, 1), turn1X.item);//convert 1x1 turn back to straight
 
@@ -314,7 +298,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 			TrackItemIDs CORE_9X20_45DEGREE_TURN = tracks.get(EnumCoreTrack.CORE_9X20_45DEGREE_TURN).get("").getItem();
 			TrackItemIDs CORE_10x22_45DEGREE_TURN = tracks.get(EnumCoreTrack.CORE_10x22_45DEGREE_TURN).get("").getItem();
 			//TrackItemIDs turn32x = tracks.get(EnumCoreTrack.CORE_32X_TURN).getItem();
-			
+
 			GameRegistry.addRecipe(new ItemStack(CORE_3X4_45DEGREE_TURN.item,1), "S  "," S "," S ", 'S', straight1X.item);
 			GameRegistry.addRecipe(new ItemStack(CORE_3X6_45DEGREE_TURN.item,1), "SS "," S "," M ", 'S', straight1X.item, 'M', straight3X.item);
 			GameRegistry.addRecipe(new ItemStack(CORE_4X8_45DEGREE_TURN.item,1), "MS "," S "," M ", 'S', straight1X.item, 'M', straight3X.item);
@@ -409,7 +393,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 
 		/* I placed it here because workbench should be one of the first recipe shown in the recipe book */
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.trainWorkbench.block, 1), "###", "IFI", "###", Character.valueOf('#'), anyPlankType, Character.valueOf('F'), Blocks.furnace, Character.valueOf('I'), ironingot);
-		
+
 		/* Recipe book */
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.recipeBook.item, 1),  "TTT", "TBT", "TTT", Character.valueOf('T'), Blocks.rail, Character.valueOf('B'), Items.book );
 
@@ -435,18 +419,18 @@ public class RecipeHandler extends AbstractRecipeHandler
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.overalls.item, 1),  " # ", "X$X", "X X", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('$'), Items.leather_leggings, Character.valueOf('#'), new ItemStack(Items.dye, 1, 1) );
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.jacket.item, 1),  "X X", "X$X", "X#X", Character.valueOf('X'), new ItemStack(Items.dye, 1, 14), Character.valueOf('$'), Items.leather_chestplate, Character.valueOf('#'), Items.string );
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.hat.item, 1),  " X ", "X$X", "#X#", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('$'), Items.leather_helmet, Character.valueOf('#'), Items.string );
-		
+
 		/* Driver Clothes*/
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.pants_driver_paintable.item, 1),  "XXX", "XLX", "X$X", Character.valueOf('L'), Items.leather_leggings,Character.valueOf('$'), new ItemStack(Items.dye, 1, 4), Character.valueOf('X'), Items.string);
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.jacket_driver_paintable.item, 1),  "X X", "XRX", "XPX", Character.valueOf('X'), new ItemStack(Items.dye, 1, 4), Character.valueOf('P'), Items.leather_chestplate,Character.valueOf('R'),  new ItemStack(Items.dye, 1, 1) );
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.hat_driver_paintable.item, 1), "#$#", "# #", Character.valueOf('$'), new ItemStack(Items.dye, 1, 4), Character.valueOf('#'), Items.string );
-		
+
 		/* Ticket Man Clothes */
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.pants_ticketMan_paintable.item, 1),  "XXX", "XLX", "X$X", Character.valueOf('L'), Items.leather_leggings,Character.valueOf('$'), new ItemStack(Items.dye, 1, 8), Character.valueOf('X'), Items.string);
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.jacket_ticketMan_paintable.item, 1),  "X X", "XPX", "X#X", Character.valueOf('P'), Items.leather_chestplate, Character.valueOf('#'), new ItemStack(Items.dye, 1, 4), Character.valueOf('X'), Items.string);
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.hat_ticketMan_paintable.item, 1), "#$#", "# #", Character.valueOf('$'), new ItemStack(Items.dye, 1, 0), Character.valueOf('#'), Items.string );
-		
-		
+
+
 
 		if (plastics != null && plastics.size() >= 0) {
 			for (ItemStack plastic : plastics) {
@@ -463,7 +447,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.copperWireFine.item, 6),  "XXX", "XPX", "XXX", Character.valueOf('X'), ingotCopper, Character.valueOf('P'), plastic );
 			}
 		}
-		
+
 		/* Composite Suit */
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.boots_suit_paintable.item, 1), " D ","X X", "XFX", Character.valueOf('F'), Items.feather, Character.valueOf('D'), Items.diamond, Character.valueOf('X'), ItemIDs.reinforcedPlates.item);
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.pants_suit_paintable.item, 1),  "XDX", "X$X", "X X", Character.valueOf('$'), Items.fire_charge, Character.valueOf('X'), ItemIDs.reinforcedPlates.item,Character.valueOf('D'), Items.diamond);
@@ -488,7 +472,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.graphite.item, 2),  "###", "#X#", "###", Character.valueOf('#'), DustCoal, Character.valueOf('X'), Items.clay_ball );// Graphite
 
-		
+
 		if (!ConfigHandler.MAKE_MODPACKS_GREAT_AGAIN) {
 			for (ItemStack c : coal) {
 				TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.coaldust.item, 3),
@@ -499,9 +483,9 @@ public class RecipeHandler extends AbstractRecipeHandler
 						"   ", "   ", "###", Character.valueOf('#'), c.getItem());
 			}
 		}
-		
+
 		//TrainCraftingManager.instance.addShapelessRecipe(new ItemStack(ItemIDs.coaldust.item, 4),  c.getItem(), c.getItem(), c.getItem(), c.getItem() );// coal dust
-		
+
 		//TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.signal.item, 2),  "#", "X", "X", Character.valueOf('X'), ItemIDs.steel.item, Character.valueOf('#'), rs );
 		/* diesel generator */
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.generatorDiesel.block, 1),  "C  ", "DE ", Character.valueOf('C'), ItemIDs.steelchimney.item, Character.valueOf('D'), ItemIDs.dieselengine.item, Character.valueOf('E'), circuitBasic);
@@ -574,13 +558,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.ironFrame.item, 2), "# #", "AAA", Character.valueOf('A'), ironingot, Character.valueOf('#'), anyPlanks);// iron Frame
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.ironFrame.item, 2), "   ", "# #", "AAA", Character.valueOf('A'), ironingot, Character.valueOf('#'), anyPlanks);// iron Frame
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.ironCab.item, 2), "###", "X X", "XXX", Character.valueOf('X'), ironingot, Character.valueOf('#'), anyPlanks);// iron cab
-		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.stopper.block, 1), "WWW", "I I", "RRR", Character.valueOf('W'), anyPlanks, Character.valueOf('R'), Blocks.rail, Character.valueOf('I'), ironingot);// stopper
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);//switchstand
-		// Short Wood Slope
-		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSlopeWood.item, 1),
-				 " MW", "MWW", "WWW", Character.valueOf('M'), TrackItemIDs.tcRailMediumStraight.item,
-						Character.valueOf('W'), anyPlanks );
-
 			/* Wind mill */
 
 		TrainCraftingManager.instance.addRecipe(new ItemStack(BlockIDs.windMill.block, 1), " R ", " G ", "B B", Character.valueOf('G'), ItemIDs.generator.item, Character.valueOf('B'), ironingot, Character.valueOf('R'), ItemIDs.propeller.item);
@@ -669,13 +647,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 
 
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallStraight.item, 1),  "   ", " R ", "   ", Character.valueOf('R'), Item.getItemFromBlock(Blocks.rail));// small straight track
-		/*TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing.item, 1),  "   ", "SRS", "   ", Character.valueOf('S'), new ItemStack(Blocks.stained_hardened_clay, 1, 15), Character.valueOf('R'), Item.getItemFromBlock(Blocks.rail) );
-		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing1.item, 1),  "   ", "SRS", "   ", Character.valueOf('S'), new ItemStack(Blocks.stained_hardened_clay, 1, 7), Character.valueOf('R'), Item.getItemFromBlock(Blocks.rail) );
-		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing2.item, 1),  "   ", "SRS", "   ", Character.valueOf('S'), new ItemStack(Blocks.stained_hardened_clay, 1, 3), Character.valueOf('R'), Item.getItemFromBlock(Blocks.rail) );*/
 		TrainCraftingManager.instance.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.rail), 1),  "   ", " R ", "   ", Character.valueOf('R'), TrackItemIDs.tcRailSmallStraight.item);
-		TrainCraftingManager.instance.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.rail), 1),  "   ", " R ", "   ", Character.valueOf('R'), TrackItemIDs.tcRailSmallRoadCrossing.item);
-		TrainCraftingManager.instance.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.rail), 1),  "   ", " R ", "   ", Character.valueOf('R'), TrackItemIDs.tcRailSmallRoadCrossing1.item);
-		TrainCraftingManager.instance.addRecipe(new ItemStack(Item.getItemFromBlock(Blocks.rail), 1),  "   ", " R ", "   ", Character.valueOf('R'), TrackItemIDs.tcRailSmallRoadCrossing2.item);
 		// Short Slope Gravel
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailSlopeGravel.item, 1),
 				 " MG", "MGG", "GGG", Character.valueOf('M'), TrackItemIDs.tcRailMediumStraight.item,
@@ -700,25 +672,19 @@ public class RecipeHandler extends AbstractRecipeHandler
 				"   ", " S ", " B ", 'S', TrackItemIDs.tcRailVeryLargeSlopeWood.item, 'B', Blocks.gravel );
 
 
-		// Large Slope Wood
-		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailLargeSlopeWood.item, 1),
-				 "   ", "  S", " S ", 'S', TrackItemIDs.tcRailSlopeWood.item );
 		// Large Slope Gravel
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailLargeSlopeGravel.item, 1),
 				 "   ", "  S", " S ", 'S', TrackItemIDs.tcRailSlopeGravel.item );
 		// Large Slope Ballast
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailLargeSlopeBallast.item, 1),
 				 "   ", "  S", " S ", 'S', TrackItemIDs.tcRailSlopeBallast.item );
-		// VeryLarge Slope Wood
-		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeSlopeWood.item, 1),
-				 "  S", " S ", "S  ", 'S', TrackItemIDs.tcRailSlopeWood.item );
 		// VeryLarge Slope Gravel
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeSlopeGravel.item, 1),
 				 "  S", " S ", "S  ", 'S', TrackItemIDs.tcRailSlopeGravel.item );
 		// VeryLarge Slope Ballast
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeSlopeBallast.item, 1),
 				 "  S", " S ", "S  ", 'S', TrackItemIDs.tcRailSlopeBallast.item );
-		
+
 		// Medium Straight (3 Recipes? Really?)
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailMediumStraight.item, 1),
 				 "S  ", "S  ", "S  ", Character.valueOf('S'), TrackItemIDs.tcRailSmallStraight.item );
@@ -733,7 +699,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 				 "   ", "M  ", "M  ", Character.valueOf('M'), TrackItemIDs.tcRailMediumStraight.item );
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailLongStraight.item, 1),
 				 "   ", "  M", "  M", Character.valueOf('M'), TrackItemIDs.tcRailMediumStraight.item );
-		
+
 		// Medium Turn
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailMediumTurn.item, 1),
 				 "SS ", "S  ", Character.valueOf('S'), TrackItemIDs.tcRailSmallStraight.item );
@@ -743,7 +709,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		// Very Large Turn
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailVeryLargeTurn.item, 1),
 				 "MM ", "M  ", "   ", Character.valueOf('M'), TrackItemIDs.tcRailMediumTurn.item );
-		
+
 		// Medium Switch
 		TrainCraftingManager.instance.addRecipe(new ItemStack(TrackItemIDs.tcRailMediumSwitch.item, 1),
 				 "S  ", "SRS", "S  ", Character.valueOf('S'), TrackItemIDs.tcRailSmallStraight.item,
@@ -807,7 +773,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		//old model u18b to new model u18b
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.minecartU18Balt.item, 1),  "   ", " R ", "   ", 'R', new ItemStack(ItemIDs.minecartU18B.item));
 	}
-	
+
 	public void initSmeltingRecipes(){
 
 		/* OpenHearthFurnace recipes */
@@ -824,7 +790,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 				}
 			}
 		}
-		
+
 		/* Vanilla Furnace recipes */
 		GameRegistry.addSmelting(new ItemStack(Item.getItemFromBlock(BlockIDs.oreTC.block), 0), OreDictionary.getOres("ingotCopper").get(0), 0.7f);
 	}

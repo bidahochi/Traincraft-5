@@ -6,12 +6,14 @@ import train.common.items.RailVariants;
 import train.common.items.TCRailTypes;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static train.common.items.BallastTypes.*;
 import static train.common.items.RailVariants.*;
 import static train.common.items.TCRailTypes.RailTypes.*;
 import static train.common.library.track.EnumCoreTrack.*;
+import static train.common.library.track.TrackPlacementType.*;
 
 public enum EnumTracks implements ITrackDefinition
 {
@@ -32,7 +34,7 @@ public enum EnumTracks implements ITrackDefinition
     SUPER_LARGE_TURN("SUPER_LARGE_TURN", NORMAL, CORE_16X_TURN, TrackItemIDs.tcRailSuperLargeTurn),
     TURN_29X29("TURN_29X29", NORMAL, CORE_29X_TURN, TrackItemIDs.tcRail29X29Turn),
     TURN_32X32("TURN_32X32", NORMAL, CORE_32X_TURN, TrackItemIDs.tcRail32X32Turn),
-    
+
     MEDIUM_SWITCH("MEDIUM_SWITCH", NORMAL, CORE_4x4_SWITCH, TrackItemIDs.tcRailMediumSwitch),
 
     LARGE_SWITCH("LARGE_SWITCH", NORMAL, CORE_6x6_SWITCH, TrackItemIDs.tcRailLargeSwitch),
@@ -94,6 +96,9 @@ public enum EnumTracks implements ITrackDefinition
     SLOPE_DYNAMIC("SLOPE_DYNAMIC", NORMAL, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRailSlopeDynamic),
     LARGE_SLOPE_DYNAMIC("LARGE_SLOPE_DYNAMIC",  NORMAL, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRailLargeSlopeDynamic ),
     VERY_LARGE_SLOPE_DYNAMIC("VERY_LARGE_SLOPE_DYNAMIC", NORMAL, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRailVeryLargeSlopeDynamic),
+    HALF_HEIGHT_SLOPE_1X3_DYNAMIC("HALF_HEIGHT_SLOPE_1X3_DYNAMIC", NORMAL, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailHalfHeightSlope3Dynamic),
+    HALF_HEIGHT_SLOPE_1X6_DYNAMIC("HALF_HEIGHT_SLOPE_1X6_DYNAMIC", NORMAL, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailHalfHeightSlope6Dynamic),
+    HALF_HEIGHT_SLOPE_1X9_DYNAMIC("HALF_HEIGHT_SLOPE_1X9_DYNAMIC", NORMAL, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailHalfHeightSlope9Dynamic),
 
     SMALL_PARALLEL_CURVE("SMALL_PARALLEL_CURVE", NORMAL, CORE_S_CURVE_2x8, TrackItemIDs.tcRailSmallParallelCurve),
 
@@ -172,6 +177,10 @@ public enum EnumTracks implements ITrackDefinition
     EMBEDDED_SLOPE_DYNAMIC("EMBEDDED_SLOPE_DYNAMIC", EMBEDDED, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRailEmbeddedSlopeDynamic),
     EMBEDDED_LARGE_SLOPE_DYNAMIC("EMBEDDED_LARGE_SLOPE_DYNAMIC", EMBEDDED, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRailEmbeddedLargeSlopeDynamic),
     EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC("EMBEDDED_VERY_LARGE_SLOPE_DYNAMIC", EMBEDDED, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRailEmbeddedVeryLargeSlopeDynamic),
+    EMBEDDED_HALF_HEIGHT_SLOPE_1X3_DYNAMIC("EMBEDDED_HALF_HEIGHT_SLOPE_1X3_DYNAMIC", EMBEDDED, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailEmbeddedHalfHeightSlope3Dynamic),
+    EMBEDDED_HALF_HEIGHT_SLOPE_1X6_DYNAMIC("EMBEDDED_HALF_HEIGHT_SLOPE_1X6_DYNAMIC", EMBEDDED, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailEmbeddedHalfHeightSlope6Dynamic),
+    EMBEDDED_HALF_HEIGHT_SLOPE_1X9_DYNAMIC("EMBEDDED_HALF_HEIGHT_SLOPE_1X9_DYNAMIC", EMBEDDED, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRailEmbeddedHalfHeightSlope9Dynamic),
+
     EMBEDDED_CROSSOVER_SWITCH_10X2("EMBEDDED_CROSSOVER_SWITCH_10X2", EMBEDDED, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRailEmbeddedCrossoverSwitch10x2),
 
     //EMBEDDED_LARGE_CURVED_SLOPE_DYNAMIC("EMBEDDED_LARGE_CURVED_SLOPE_DYNAMIC", CURVED_SLOPE, TrackItemIDs.tcRailEmbeddedLargeCurvedSlopeDynamic),
@@ -256,6 +265,9 @@ public enum EnumTracks implements ITrackDefinition
     CONCRETE_TYPE1_SLOPE_DYNAMIC("CONCRETE_TYPE1_SLOPE_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_SlopeDynamic),
     CONCRETE_TYPE1_LARGE_SLOPE_DYNAMIC("CONCRETE_TYPE1_LARGE_SLOPE_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_LargeSlopeDynamic),
     CONCRETE_TYPE1_VERY_LARGE_SLOPE_DYNAMIC("CONCRETE_TYPE1_VERY_LARGE_SLOPE_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_VeryLargeSlopeDynamic),
+    CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC("CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope3Dynamic),
+    CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC("CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope6Dynamic),
+    CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC("CONCRETE_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_HalfHeightSlope9Dynamic),
     CONCRETE_TYPE1_CROSSOVER_SWITCH_10X2("CONCRETE_TYPE1_CROSSOVER_SWITCH_10X2", CONCRETE_TYPE1, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE1_CrossoverSwitch10x2),
 
     /**
@@ -328,6 +340,9 @@ public enum EnumTracks implements ITrackDefinition
     CONCRETE_TYPE2_SLOPE_DYNAMIC("CONCRETE_TYPE2_SLOPE_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_SlopeDynamic),
     CONCRETE_TYPE2_LARGE_SLOPE_DYNAMIC("CONCRETE_TYPE2_LARGE_SLOPE_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_LargeSlopeDynamic),
     CONCRETE_TYPE2_VERY_LARGE_SLOPE_DYNAMIC("CONCRETE_TYPE2_VERY_LARGE_SLOPE_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_VeryLargeSlopeDynamic),
+    CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC("CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope3Dynamic),
+    CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC("CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope6Dynamic),
+    CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC("CONCRETE_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_HalfHeightSlope9Dynamic),
     CONCRETE_TYPE2_CROSSOVER_SWITCH_10X2("CONCRETE_TYPE2_CROSSOVER_SWITCH_10X2", CONCRETE_TYPE2, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE2_CrossoverSwitch10x2),
 //
 
@@ -365,28 +380,28 @@ public enum EnumTracks implements ITrackDefinition
     WOOD_TYPE1_MEDIUM_PARALLEL_CURVE("WOOD_TYPE1_MEDIUM_PARALLEL_CURVE", TREATED_WOOD_TYPE1, CORE_S_CURVE_3x12, TrackItemIDs.tcRail_WOOD_TYPE1_MediumParallelCurve),
 
     WOOD_TYPE1_LARGE_PARALLEL_CURVE("WOOD_TYPE1_LARGE_PARALLEL_CURVE", TREATED_WOOD_TYPE1, CORE_S_CURVE_4x16, TrackItemIDs.tcRail_WOOD_TYPE1_LargeParallelCurve),
-    
+
     WOOD_TYPE1_S_CURVE_20x2("WOOD_TYPE1_20x2_S_CURVE", TREATED_WOOD_TYPE1,  CORE_S_CURVE_20x2, TrackItemIDs.tcRail_WOOD_TYPE1_20x2SCurve),
-    
+
     WOOD_TYPE1_TWO_WAYS_CROSSING("WOOD_TYPE1_TWO_WAYS_CROSSING", TREATED_WOOD_TYPE1, CORE_TWO_WAYS_CROSSING, TrackItemIDs.tcRail_WOOD_TYPE1_TwoWaysCrossing),
     WOOD_TYPE1_DIAGONAL_TWO_WAYS_CROSSING("WOOD_TYPE1_DIAGONAL_TWO_WAYS_CROSSING", TREATED_WOOD_TYPE1, CORE_DIAGONAL_TWO_WAYS_CROSSING, TrackItemIDs.tcRail_WOOD_TYPE1_TwoWaysCrossing),
-    
+
     WOOD_TYPE1_FOUR_WAYS_CROSSING("WOOD_TYPE1_FOUR_WAYS_CROSSING", TREATED_WOOD_TYPE1, CORE_FOUR_WAYS_CROSSING, TrackItemIDs.tcRail_WOOD_TYPE1_FourWaysCrossing),
-    
+
     WOOD_TYPE1_DIAMOND_CROSSING("WOOD_TYPE1_DIAMOND_CROSSING", TREATED_WOOD_TYPE1, CORE_DIAMOND_CROSSING, TrackItemIDs.tcRail_WOOD_TYPE1_DiamondCrossing),
     WOOD_TYPE1_DOUBLE_DIAMOND_CROSSING("WOOD_TYPE1_DOUBLE_DIAMOND_CROSSING", TREATED_WOOD_TYPE1, CORE_DOUBLE_DIAMOND_CROSSING, TrackItemIDs.tcRail_WOOD_TYPE1_DoubleDiamondCrossing),
-    
+
 //
     WOOD_TYPE1_MEDIUM_SWITCH("WOOD_TYPE1_MEDIUM_SWITCH", TREATED_WOOD_TYPE1, CORE_4x4_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_MediumSwitch),
-    
+
     WOOD_TYPE1_LARGE_SWITCH("WOOD_TYPE1_LARGE_SWITCH", TREATED_WOOD_TYPE1, CORE_6x6_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_LargeSwitch),
-    
+
     WOOD_TYPE1_VERY_LARGE_SWITCH("WOOD_TYPE1_VERY_LARGE_SWITCH", TREATED_WOOD_TYPE1, CORE_11x11_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_VeryLargeSwitch),
-    
+
     WOOD_TYPE1_MEDIUM_PARALLEL_SWITCH("WOOD_TYPE1_MEDIUM_PARALLEL_SWITCH", TREATED_WOOD_TYPE1, CORE_4x11_PARALLEL_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_MediumParallelSwitch),
-    
+
     WOOD_TYPE1_LARGE_PARALLEL_SWITCH("WOOD_TYPE1_LARGE_PARALLEL_SWITCH", TREATED_WOOD_TYPE1, CORE_4x17_PARALLEL_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_LargeParallelSwitch),
-    
+
     WOOD_TYPE1_MEDIUM_45DEGREE_SWITCH("WOOD_TYPE1_MEDIUM_45DEGREE_SWITCH", TREATED_WOOD_TYPE1, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_Medium45DegreeSwitch),
     WOOD_TYPE1_LARGE_45DEGREE_SWITCH("WOOD_TYPE1_LARGE_45DEGREE_SWITCH", TREATED_WOOD_TYPE1, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_Large45DegreeSwitch),
     //
@@ -394,6 +409,9 @@ public enum EnumTracks implements ITrackDefinition
     WOOD_TYPE1_SLOPE_DYNAMIC("WOOD_TYPE1_SLOPE_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_SlopeDynamic),
     WOOD_TYPE1_LARGE_SLOPE_DYNAMIC("WOOD_TYPE1_LARGE_SLOPE_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_LargeSlopeDynamic),
     WOOD_TYPE1_VERY_LARGE_SLOPE_DYNAMIC("WOOD_TYPE1_VERY_LARGE_SLOPE_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_VeryLargeSlopeDynamic),
+    WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC("WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X3_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope3Dynamic),
+    WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC("WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X6_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope6Dynamic),
+    WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC("WOOD_TYPE1_HALF_HEIGHT_SLOPE_1X9_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_HalfHeightSlope9Dynamic),
     WOOD_TYPE1_CROSSOVER_SWITCH_10X2("WOOD_TYPE1_CROSSOVER_SWITCH_10X2", TREATED_WOOD_TYPE1, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_CrossoverSwitch10x2),
 
     /**
@@ -458,6 +476,9 @@ public enum EnumTracks implements ITrackDefinition
     WOOD_TYPE2_SLOPE_DYNAMIC("WOOD_TYPE2_SLOPE_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_SlopeDynamic),
     WOOD_TYPE2_LARGE_SLOPE_DYNAMIC("WOOD_TYPE2_LARGE_SLOPE_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_12_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_LargeSlopeDynamic),
     WOOD_TYPE2_VERY_LARGE_SLOPE_DYNAMIC("WOOD_TYPE2_VERY_LARGE_SLOPE_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_18_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_VeryLargeSlopeDynamic),
+    WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC("WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X3_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_3_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope3Dynamic),
+    WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC("WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X6_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_6_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope6Dynamic),
+    WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC("WOOD_TYPE2_HALF_HEIGHT_SLOPE_1X9_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_9_HALF_HEIGHT_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_HalfHeightSlope9Dynamic),
     WOOD_TYPE2_CROSSOVER_SWITCH_10X2("WOOD_TYPE2_CROSSOVER_SWITCH_10X2", WOOD_TYPE2, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE2_CrossoverSwitch10x2),
 
     /**
@@ -477,8 +498,31 @@ public enum EnumTracks implements ITrackDefinition
 
     private final RailVariants variant;
     private final TrackItemIDs item;
+    private final TrackPlacementType placementType;
 
-    EnumTracks(String label, RailVariants variant, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+    /**
+     * Creates an ordinary surface definition without a ballast material.
+     *
+     * @param label unique definition label
+     * @param variant resource variant used by the track model
+     * @param enumCoreTrack core geometry represented by the definition
+     * @param item inventory item backing the definition
+     */
+    private EnumTracks(String label, RailVariants variant, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+    {
+        this(label, variant, enumCoreTrack, item, SURFACE);
+    }
+
+    /**
+     * Creates an unballasted definition with an explicit placement behavior.
+     *
+     * @param label unique definition label
+     * @param variant resource variant used by the track model
+     * @param enumCoreTrack core geometry represented by the definition
+     * @param item inventory item backing the definition
+     * @param placementType placement behavior applied to the footprint
+     */
+    private EnumTracks(String label, RailVariants variant, EnumCoreTrack enumCoreTrack, TrackItemIDs item, TrackPlacementType placementType)
     {
         this.label = label;
         this.type = enumCoreTrack.getRailType().toString();
@@ -486,9 +530,34 @@ public enum EnumTracks implements ITrackDefinition
         this.variant = variant;
         this.ballastType = null;
         this.enumCoreTrack = enumCoreTrack;
+        this.placementType = placementType;
     }
-    
-    EnumTracks(String label, RailVariants variant, BallastTypes ballastType, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+
+    /**
+     * Creates an ordinary surface definition with a ballast material.
+     *
+     * @param label unique definition label
+     * @param variant resource variant used by the track model
+     * @param ballastType ballast material selector
+     * @param enumCoreTrack core geometry represented by the definition
+     * @param item inventory item backing the definition
+     */
+    private EnumTracks(String label, RailVariants variant, BallastTypes ballastType, EnumCoreTrack enumCoreTrack, TrackItemIDs item)
+    {
+        this(label, variant, ballastType, enumCoreTrack, item, SURFACE);
+    }
+
+    /**
+     * Creates a ballasted definition with an explicit placement behavior.
+     *
+     * @param label unique definition label
+     * @param variant resource variant used by the track model
+     * @param ballastType ballast material selector
+     * @param enumCoreTrack core geometry represented by the definition
+     * @param item inventory item backing the definition
+     * @param placementType placement behavior applied to the footprint
+     */
+    private EnumTracks(String label, RailVariants variant, BallastTypes ballastType, EnumCoreTrack enumCoreTrack, TrackItemIDs item, TrackPlacementType placementType)
     {
         this.label = label;
         this.type = enumCoreTrack.getRailType().toString();
@@ -496,6 +565,7 @@ public enum EnumTracks implements ITrackDefinition
         this.variant = variant;
         this.ballastType = ballastType;
         this.enumCoreTrack = enumCoreTrack;
+        this.placementType = placementType;
     }
 
     public static ITrackDefinition GetTrackByLabel(String label)
@@ -510,6 +580,12 @@ public enum EnumTracks implements ITrackDefinition
 
     private final static HashMap<String, ITrackDefinition> ENUM_TRACKS_HASHMAP = SetupsHashMap();
 
+    /**
+     * Builds the complete definition registry, including generated handed,
+     * diagonal, and slab-mounted variants.
+     *
+     * @return definitions keyed by their stable labels
+     */
     private static HashMap<String, ITrackDefinition> SetupsHashMap()
     {
         HashMap<String, ITrackDefinition> tracksHashMap = new HashMap<>();
@@ -523,16 +599,16 @@ public enum EnumTracks implements ITrackDefinition
                 switch (track.getCoreTrack())
                 {
                     case CORE_SMALL_STRAIGHT:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SMALL_", "SMALL_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_SMALL_DIAGONAL_STRAIGHT, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SMALL_", "SMALL_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_SMALL_DIAGONAL_STRAIGHT, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_MEDIUM_STRAIGHT:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("MEDIUM_", "MEDIUM_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_MEDIUM_DIAGONAL_STRAIGHT, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("MEDIUM_", "MEDIUM_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_MEDIUM_DIAGONAL_STRAIGHT, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_LONG_STRAIGHT:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("LONG_", "LONG_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_LONG_DIAGONAL_STRAIGHT, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("LONG_", "LONG_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_LONG_DIAGONAL_STRAIGHT, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_VERY_LONG_STRAIGHT:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("VERY_LONG_", "VERY_LONG_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_VERY_LONG_DIAGONAL_STRAIGHT, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("VERY_LONG_", "VERY_LONG_DIAGONAL_"), DIAGONAL, track.getVariant(), CORE_VERY_LONG_DIAGONAL_STRAIGHT, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_1X_TURN:
                     case CORE_3X_TURN:
@@ -543,59 +619,68 @@ public enum EnumTracks implements ITrackDefinition
                     case CORE_32X_TURN:
                     case CORE_9X20_45DEGREE_TURN:
                     case CORE_10x22_45DEGREE_TURN:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("TURN", "RIGHT_TURN"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("TURN", "LEFT_TURN"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("TURN", "RIGHT_TURN"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("TURN", "LEFT_TURN"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_3X4_45DEGREE_TURN:
                     case CORE_3X6_45DEGREE_TURN:
                     case CORE_4X8_45DEGREE_TURN:
                     case CORE_5X11_45DEGREE_TURN:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("45DEGREE", "RIGHT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("45DEGREE", "LEFT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("45DEGREE", "RIGHT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("45DEGREE", "LEFT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_3_SLOPE:
                         // Don't need to a text replacement for SLOPE_1X3_ since its name already has this for both straight and diagonal.
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_3_DIAGONAL_SLOPE, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_3_DIAGONAL_SLOPE, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_6_SLOPE:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SLOPE_", "SLOPE_1X6_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_6_DIAGONAL_SLOPE, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SLOPE_", "SLOPE_1X6_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_6_DIAGONAL_SLOPE, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_12_SLOPE:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("LARGE_SLOPE_", "SLOPE_1X12_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_12_DIAGONAL_SLOPE, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("LARGE_SLOPE_", "SLOPE_1X12_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_12_DIAGONAL_SLOPE, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_18_SLOPE:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("VERY_LARGE_SLOPE_", "SLOPE_1X18_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC,  CORE_18_DIAGONAL_SLOPE, track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("VERY_LARGE_SLOPE_", "SLOPE_1X18_") + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC,  CORE_18_DIAGONAL_SLOPE, track.getItem(), track.getPlacementType());
+                        break;
+                    case CORE_3_HALF_HEIGHT_SLOPE:
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_3_DIAGONAL_HALF_HEIGHT_SLOPE, track.getItem(), track.getPlacementType());
+                        break;
+                    case CORE_6_HALF_HEIGHT_SLOPE:
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_6_DIAGONAL_HALF_HEIGHT_SLOPE, track.getItem(), track.getPlacementType());
+                        break;
+                    case CORE_9_HALF_HEIGHT_SLOPE:
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_DIAGONAL", SLOPE, track.getVariant(), DYNAMIC, CORE_9_DIAGONAL_HALF_HEIGHT_SLOPE, track.getItem(), track.getPlacementType());
                         break;
                     case CORE_4x4_SWITCH:
                     case CORE_6x6_SWITCH:
                     case CORE_11x11_SWITCH:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SWITCH", "LEFT_SWITCH"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("SWITCH", "RIGHT_SWITCH"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("SWITCH", "LEFT_SWITCH"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("SWITCH", "RIGHT_SWITCH"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_3x5_45DEGREE_SWITCH:
                     case CORE_4x8_45DEGREE_SWITCH:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("45DEGREE", "LEFT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("45DEGREE", "RIGHT_45DEGREE"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("45DEGREE", "LEFT_45DEGREE"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("45DEGREE", "RIGHT_45DEGREE"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_4x11_PARALLEL_SWITCH:
                     case CORE_4x17_PARALLEL_SWITCH:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("PARALLEL_SWITCH", "LEFT_PARALLEL_SWITCH"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("PARALLEL_SWITCH", "RIGHT_PARALLEL_SWITCH"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("PARALLEL_SWITCH", "LEFT_PARALLEL_SWITCH"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("PARALLEL_SWITCH", "RIGHT_PARALLEL_SWITCH"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_S_CURVE_2x8:
                     case CORE_S_CURVE_3x12:
                     case CORE_S_CURVE_4x16:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("PARALLEL", "LEFT_PARALLEL"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("PARALLEL", "RIGHT_PARALLEL"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("PARALLEL", "LEFT_PARALLEL"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("PARALLEL", "RIGHT_PARALLEL"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_S_CURVE_20x2:
                     case CORE_10x2_CROSSOVER_SWITCH:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_LEFT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel() + "_RIGHT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_LEFT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel() + "_RIGHT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     case CORE_DIAMOND_CROSSING:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("DIAMOND", "LEFT_DIAMOND"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("DIAMOND", "RIGHT_DIAMOND"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("DIAMOND", "LEFT_DIAMOND"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel().replace("DIAMOND", "RIGHT_DIAMOND"),track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
                         break;
                     default:
                         //    SLOPE_1X3_DYNAMIC("SLOPE_1X3_DYNAMIC", NORMAL, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRail1X3SlopeDynamic),
@@ -622,37 +707,121 @@ public enum EnumTracks implements ITrackDefinition
             }
         }
 
+        ITrackDefinition transition = new TrackDefinition("TRUE_EMBEDDED_TRANSITION_SLOPE", SLOPE,
+                EMBEDDED, DYNAMIC, CORE_EMBEDDED_TRANSITION_SLOPE,
+                TrackItemIDs.tcRailEmbeddedMediumStraight, REPLACE_TARGET);
+        tracksHashMap.put(transition.getLabel(), transition);
+        ITrackDefinition diagonalTransition = new TrackDefinition("TRUE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE",
+                SLOPE, EMBEDDED, DYNAMIC, CORE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE,
+                TrackItemIDs.tcRailEmbeddedMediumStraight, REPLACE_TARGET);
+        tracksHashMap.put(diagonalTransition.getLabel(), diagonalTransition);
+
+        for (ITrackDefinition source : new ArrayList<ITrackDefinition>(tracksHashMap.values()))
+        {
+            if (supportsGeneratedTrueEmbeddedPlacement(source))
+            {
+                ITrackDefinition trueEmbedded = source.getBallastType() == null
+                        ? new TrackDefinition("TRUE_" + source.getLabel(), source.getRailType(),
+                                source.getVariant(), source.getCoreTrack(), source.getItem(), REPLACE_TARGET)
+                        : new TrackDefinition("TRUE_" + source.getLabel(), source.getRailType(),
+                                source.getVariant(), source.getBallastType(), source.getCoreTrack(),
+                                source.getItem(), REPLACE_TARGET);
+                tracksHashMap.put(trueEmbedded.getLabel(), trueEmbedded);
+            }
+        }
+
+		for (ITrackDefinition source : new ArrayList<ITrackDefinition>(tracksHashMap.values()))
+		{
+			if (supportsInjectedHostMountedPlacement(source))
+			{
+				ITrackDefinition slabMounted = source.getBallastType() == null
+						? new TrackDefinition("SLAB_MOUNTED_" + source.getLabel(), source.getRailType(),
+								source.getVariant(), source.getCoreTrack(), source.getItem(), SLAB_MOUNTED)
+						: new TrackDefinition("SLAB_MOUNTED_" + source.getLabel(), source.getRailType(),
+								source.getVariant(), source.getBallastType(), source.getCoreTrack(),
+								source.getItem(), SLAB_MOUNTED);
+				tracksHashMap.put(slabMounted.getLabel(), slabMounted);
+				ITrackDefinition stairMounted = source.getBallastType() == null
+						? new TrackDefinition("STAIR_MOUNTED_" + source.getLabel(), source.getRailType(),
+								source.getVariant(), source.getCoreTrack(), source.getItem(), STAIR_MOUNTED)
+						: new TrackDefinition("STAIR_MOUNTED_" + source.getLabel(), source.getRailType(),
+								source.getVariant(), source.getBallastType(), source.getCoreTrack(),
+								source.getItem(), STAIR_MOUNTED);
+				tracksHashMap.put(stairMounted.getLabel(), stairMounted);
+			}
+		}
+
         return tracksHashMap;
     }
 
+    /** Returns whether a sleeperless definition exposes a host-replacing placement mode. */
+    private static boolean supportsGeneratedTrueEmbeddedPlacement(ITrackDefinition definition)
+    {
+        if (definition == null || definition.getPlacementType() != SURFACE
+                || definition.getVariant() != EMBEDDED
+                || definition.getLabel().contains("ROAD_CROSSING"))
+        {
+            return false;
+        }
+        return definition.getBallastType() == null
+                || definition.getBallastType() == DYNAMIC && definition.getCoreTrack().isHalfHeightSlope();
+    }
+
+	/**
+	 * Returns whether a generated resource definition should receive automatically injected host-mounted records.
+	 *
+	 * @param definition generated or declared source definition
+	 * @return whether the registry should add slab-mounted and stair-mounted placement counterparts
+	 */
+	private static boolean supportsInjectedHostMountedPlacement(ITrackDefinition definition)
+	{
+		return definition != null && definition.getPlacementType() == SURFACE
+				&& definition.getLabel().contains("ROAD_CROSSING") == false
+				&& (definition.getBallastType() == null || definition.getBallastType() == DYNAMIC);
+	}
+
     /**
-     * Grabs every track piece and logically sorts them into groups to be able to pull the unique piece for the variant
-     * @param railVariants
-     * @return
+     * Groups surface definitions for one resource variant by core and ballast.
+     *
+     * @param railVariants resource variant to collect
+     * @return surface definitions grouped by core and ballast name
      */
     public static HashMap<EnumCoreTrack, HashMap<String, ITrackDefinition>> GetTracksByGroup(RailVariants railVariants)
+    {
+        return GetTracksByGroup(railVariants, SURFACE);
+    }
+
+    /**
+     * Groups definitions for one resource and placement variant by core and ballast.
+     *
+     * <p>Placement type is part of the lookup identity so surface and host-replacing
+     * forms may share the same rail model family without overwriting one another.</p>
+     *
+     * @param railVariants resource variant to collect
+     * @param placementType placement behavior to collect
+     * @return matching definitions grouped by core and ballast name
+     */
+    public static HashMap<EnumCoreTrack, HashMap<String, ITrackDefinition>> GetTracksByGroup(
+            RailVariants railVariants, TrackPlacementType placementType)
     {
         HashMap<EnumCoreTrack,  HashMap<String, ITrackDefinition>> tracks = new HashMap<>();
 
         for (final ITrackDefinition track : ENUM_TRACKS_HASHMAP.values())
         {
-            if (railVariants.equals(track.getVariant()) && !track.getLabel().contains("ROAD_CROSSING"))
+            if (railVariants.equals(track.getVariant()) && placementType == track.getPlacementType()
+					&& track.getLabel().contains("ROAD_CROSSING") == false)
             {
+				String ballastKey = track.getBallastType() == null ? "" : track.getBallastType().name();
                 if (tracks.containsKey(track.getCoreTrack()))
                 {
                     HashMap<String, ITrackDefinition> trackList = tracks.get(track.getCoreTrack());
-                    trackList.put(track.getBallastType().name(), track);
+					trackList.put(ballastKey, track);
                 }
                 else
                 {
-                    if (track.getBallastType() == null)
-                    {
-                        tracks.put(track.getCoreTrack(), new HashMap<String, ITrackDefinition>() {{ put("", track); }});
-                    }
-                    else
-                    {
-                        tracks.put(track.getCoreTrack(), new HashMap<String, ITrackDefinition>() {{ put(track.getBallastType().name(), track); }});
-                    }
+					HashMap<String, ITrackDefinition> trackList = new HashMap<String, ITrackDefinition>();
+					trackList.put(ballastKey, track);
+					tracks.put(track.getCoreTrack(), trackList);
                 }
             }
         }
@@ -674,6 +843,16 @@ public enum EnumTracks implements ITrackDefinition
         return this.enumCoreTrack.getRailType();
     }
 
+    /**
+     * Returns how this declared definition occupies its selected support block.
+     *
+     * @return placement behavior carried by the definition
+     */
+    public TrackPlacementType getPlacementType()
+    {
+        return placementType;
+    }
+
     public BallastTypes getBallastType()
     {
         return this.ballastType;
@@ -683,8 +862,20 @@ public enum EnumTracks implements ITrackDefinition
         return this.item;
     }
 
+    /**
+     * Returns the geometry core used by this registered track definition.
+     *
+     * @return geometry core
+     */
     public EnumCoreTrack getCoreTrack() { return enumCoreTrack; }
 
+    /**
+     * Returns the unrotated block footprint occupied by a track definition.
+     *
+     * @param trackDefinition definition whose footprint is requested
+	 * @param player placing player, used by legacy diagonal sneak variants; {@code null} selects the non-sneaking shape
+     * @return relative X/Z coordinates occupied by the track, or {@code null} for an unsupported core
+     */
     public static int[][] getUsedSpaceFromType(ITrackDefinition trackDefinition, @Nullable EntityPlayer player)
     {
         switch (trackDefinition.getCoreTrack())
@@ -694,22 +885,22 @@ public enum EnumTracks implements ITrackDefinition
                 return new int[][]{ {0,0} };
 
             case CORE_SMALL_DIAGONAL_STRAIGHT:
-                if (player.isSneaking()) {
+                if (player != null && player.isSneaking()) {
                     return new int[][]{ {0,0} };
                 }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}};
             case CORE_MEDIUM_DIAGONAL_STRAIGHT:
-                if (player.isSneaking()) {
+                if (player != null && player.isSneaking()) {
                     return new int[][]{ {0,0}, {1,0}, {0,1}, {1,1}, {2,1}, {1,2}, {2,2} };
                 }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}};
             case CORE_LONG_DIAGONAL_STRAIGHT:
-                if (player.isSneaking()) {
+                if (player != null && player.isSneaking()) {
                     return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}};
                 }
                 return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}, {6, 5}, {5, 6}};
             case CORE_VERY_LONG_DIAGONAL_STRAIGHT:
-                if (player.isSneaking()) {
+                if (player != null && player.isSneaking()) {
                     return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}, {3, 3}, {4, 3}, {3, 4}, {4, 4}, {4, 5}, {5, 4}, {5, 5}, {6, 5}, {5, 6},
                             {6, 6}, {6, 7}, {7, 6}, {7, 7}, {8, 7}, {7, 8}, {8, 8}, {9, 8}, {8, 9}, {9, 9}, {10, 9}, {9, 10}, {10, 10}, {11, 10}, {10, 11}, {11, 11}};
                 }
@@ -721,15 +912,28 @@ public enum EnumTracks implements ITrackDefinition
                 return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0} };
             case CORE_VERY_LONG_STRAIGHT:
                 return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0}, {8,0}, {9,0}, {10,0}, {11,0}};
+            case CORE_EMBEDDED_TRANSITION_SLOPE:
+                return new int[][]{ {0,0}, {1,0}, {2,0} };
+            case CORE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE:
+                if (player != null && player.isSneaking()) {
+                    return new int[][]{ {0,0}, {1,0}, {0,1}, {1,1}, {2,1}, {1,2}, {2,2} };
+                }
+                return new int[][]{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}, {2, 2}, {3, 2}, {2, 3}};
             case CORE_3_SLOPE:
+            case CORE_3_HALF_HEIGHT_SLOPE:
                 return new int[][]{ {0,0}, {1,0}, {2,0} };
             case CORE_3_DIAGONAL_SLOPE:
                 //return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2} }; //in case the pure diagonal doesn't work
                 return new int[][] { {0,0}, {1,1}, {2,2} };
+            case CORE_3_DIAGONAL_HALF_HEIGHT_SLOPE:
+                return new int[][] { {0,0}, {1,1}, {2,2} };
             case CORE_6_SLOPE:
+            case CORE_6_HALF_HEIGHT_SLOPE:
                 return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0} };
             case CORE_6_DIAGONAL_SLOPE:
                 //return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2}, {3,3}, {3,4}, {4,3}, {4,4}, {4,5}, {5,4}, {5,5}, {5,6}, {6,5} };
+                return new int[][]{ {0,0}, {1,1}, {2,2}, {3,3}, {4,4}, {5,5} };
+            case CORE_6_DIAGONAL_HALF_HEIGHT_SLOPE:
                 return new int[][]{ {0,0}, {1,1}, {2,2}, {3,3}, {4,4}, {5,5} };
             case CORE_12_SLOPE:
                 return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0}, {8,0}, {9,0}, {10,0}, {11,0} };
@@ -739,6 +943,10 @@ public enum EnumTracks implements ITrackDefinition
             case CORE_18_SLOPE:
                 return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0}, {8,0}, {9,0}, {10,0}, {11,0},
                         {12,0}, {13,0}, {14,0}, {15,0}, {16,0}, {17,0}};
+            case CORE_9_HALF_HEIGHT_SLOPE:
+                return new int[][]{ {0,0}, {1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {6,0}, {7,0}, {8,0} };
+            case CORE_9_DIAGONAL_HALF_HEIGHT_SLOPE:
+                return new int[][]{ {0,0}, {1,1}, {2,2}, {3,3}, {4,4}, {5,5}, {6,6}, {7,7}, {8,8} };
             case CORE_18_DIAGONAL_SLOPE:
                 //return new int[][]{ {0,0}, {0,1}, {1,0}, {1,1}, {1,2}, {2,1}, {2,2}, {2,3}, {3,2}, {3,3}, {3,4}, {4,3}, {4,4}, {4,5}, {5,4}, {5,5}, {5,6}, {6,5}, {6,6}, {6,7}, {7,6}, {7,7}, {7,8}, {8,7}, {8,8}, {8,9}, {9,8}, {9,9}, {9,10}, {10,9}, {10,10}, {10,11}, {11,10}, {11,11}, {11,12}, {12,11}, {12,12}, {12,13}, {13,12}, {13,13}, {13,14}, {14,13}, {14,14}, {14,15}, {15,14}, {15,15}, {15,16}, {16,15}, {16,16}, {16,17}, {17,16}, {17,17}, {17,18}, {18,17} };
                 return new int[][]{ {0,0}, {1,1}, {2,2}, {3,3}, {4,4}, {5,5}, {6,6}, {7,7}, {8,8}, {9,9}, {10,10}, {11,11}, {12,12}, {13,13}, {14,14}, {15,15}, {16,16}, {17,17} };
@@ -806,7 +1014,7 @@ public enum EnumTracks implements ITrackDefinition
 
             /** 45 Degree Turns */
             case CORE_3X4_45DEGREE_TURN:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {1, 1}, {2, 1}};
                 }
@@ -815,7 +1023,7 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {1, 1}, {2, 1}, {3, 1}, {2, 2}};
                 }
             case CORE_3X6_45DEGREE_TURN:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {4, 2}, {5, 2}};
                 }
@@ -824,7 +1032,7 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {4, 2}, {5, 2}, {6, 2}, {5, 3}};
                 }
             case CORE_4X8_45DEGREE_TURN:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {4, 2}, {5, 2}, {6, 2}, {7, 2}, {6, 3}, {7, 3}};
                 }
@@ -833,7 +1041,7 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {4, 2}, {5, 2}, {6, 2}, {7, 2}, {6, 3}, {7, 3}, {8, 3}, {7, 4}};
                 }
             case CORE_5X11_45DEGREE_TURN:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {5, 2}, {6, 2}, {7, 2}, {8, 2}, {9, 2}, {7, 3}, {8, 3}, {9, 3}, {10, 3}, {9, 4}, {10, 4}};
                 }
@@ -842,7 +1050,7 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {5, 2}, {6, 2}, {7, 2}, {8, 2}, {9, 2}, {7, 3}, {8, 3}, {9, 3}, {10, 3}, {9, 4}, {10, 4}, {11, 4}, {10, 5}};
                 }
             case CORE_9X20_45DEGREE_TURN:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1},{8,1},{9,1},{10,1},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{10,3},{11,3},{12,3},{13,3},{14,3},{12,4},{13,4},{14,4},{15,4},{14,5},{15,5},{16,5},{17,5},{15,6},{16,6},{17,6},{18,6},{16,7},{17,7},{18,7},{19,7},{18,8},{19,8}};
                 }
@@ -851,14 +1059,14 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{1,1},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1},{8,1},{9,1},{10,1},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{10,3},{11,3},{12,3},{13,3},{14,3},{12,4},{13,4},{14,4},{15,4},{14,5},{15,5},{16,5},{17,5},{15,6},{16,6},{17,6},{18,6},{16,7},{17,7},{18,7},{19,7},{18,8},{19,8},{20,8},{19,9}};
                 }
             case CORE_10x22_45DEGREE_TURN:
-                if (player.isSneaking()) {
+                if (player != null && player.isSneaking()) {
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1},{8,1},{9,1},{10,1},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{13,2},{10,3},{11,3},{12,3},{13,3},{14,3},{13,4},{14,4},{15,4},{16,4},{15,5},{16,5},{17,5},{18,5},{16,6},{17,6},{18,6},{19,6},{17,7},{18,7},{19,7},{20,7},{19,8},{20,8},{21,8},{20,9},{21,9}};
                 } else {
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{7,0},{2,1},{3,1},{4,1},{5,1},{6,1},{7,1},{8,1},{9,1},{10,1},{7,2},{8,2},{9,2},{10,2},{11,2},{12,2},{13,2},{10,3},{11,3},{12,3},{13,3},{14,3},{13,4},{14,4},{15,4},{16,4},{15,5},{16,5},{17,5},{18,5},{16,6},{17,6},{18,6},{19,6},{17,7},{18,7},{19,7},{20,7},{19,8},{20,8},{21,8},{20,9},{21,9},{22,9},{21,10}};
                 }
                 /** 45 Degree Switches */
             case CORE_3x5_45DEGREE_SWITCH:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {2, 1}, {3, 1}};
                 }
@@ -867,7 +1075,7 @@ public enum EnumTracks implements ITrackDefinition
                     return new int[][]{{0, 0}, {1, 0}, {2, 0}, {3, 0}, {2, 1}, {3, 1}, {4, 1}, {3, 2}};
                 }
             case CORE_4x8_45DEGREE_SWITCH:
-                if (player.isSneaking())
+                if (player != null && player.isSneaking())
                 {
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0}, {3, 1}, {4, 1}, {5, 1}, {6, 1}, {5, 2}, {6, 2}};
                 }
