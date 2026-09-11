@@ -25,10 +25,10 @@ public class DieselF9A extends DieselTrain {
             "numberboard_early_body_269")
 
                 .setSkin("Skin20")//fncc
-                .gyralite("HL_U1A")
                 .color(
                         RollingStockLightColors.RED,
                         "HL_U1B")
+                .gyralite("HL_U1A", "HL_U1B")
                 .setSkin("Cyan")//fmsr
                 .gyralite("HL_L2A", "HL_L2B")
 

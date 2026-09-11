@@ -27,6 +27,8 @@ public class DieselF3A extends DieselTrain {
                 .gyralite("HL_L1A", "HL_L1B")
                 .setSkin("Cyan")//fmsr
                 .gyralite("HL_L1A", "HL_L1B")
+                .setSkin("Skin34")//ep&n
+                .gyralite("HL_L1A", "HL_L1B")
 
         .build();
 
@@ -70,6 +72,7 @@ public class DieselF3A extends DieselTrain {
         InsertTexture(29, "WM (Fireball)");
         InsertTexture(30, "SP Black Widow");
         InsertTexture(31, "KTR (scrap heap, formerly FNCC 625A)"/*, LockoutGroup.BIDA*/);
+        InsertTexture(32, "EP&N");
     }
 
     @Override
