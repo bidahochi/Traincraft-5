@@ -87,6 +87,12 @@ public enum BlockIDs implements IBlockIDs {
 	Racor36D_2(ItemBlockSwitchStand.class),
 	Racor36H(ItemBlockSwitchStand.class),
 	Racor36H_2(ItemBlockSwitchStand.class),
+	USSM22(ItemBlockSwitchStand.class),
+	Racor36D_3(ItemBlockSwitchStand.class),
+	USSTL21NL(ItemBlockSwitchStand.class),
+	USST20WL(ItemBlockSwitchStand.class),
+	Racor36D_B(ItemBlockSwitchStand.class),
+	Racor36H_B(ItemBlockSwitchStand.class),
 
 	poweredGravel(false,null),
 

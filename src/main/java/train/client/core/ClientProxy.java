@@ -207,6 +207,30 @@ public class ClientProxy extends CommonProxy
 				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.automatic()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.autoSwtichStand.block), new ItemRenderautoSwitchStand());
 
+		ClientRegistry.bindTileEntitySpecialRenderer(TileUSSM22.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.ussm22()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.USSM22.block), new ItemRenderUSSM22());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileRacor36D_3.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.racor36D_sl21lock()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.Racor36D_3.block), new ItemRenderRacor36D_3());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileUSSTL21NL.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.usstl21nl()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.USSTL21NL.block), new ItemRenderUSSTL21NL());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileUSST20WL.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.usst20wl()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.USST20WL.block), new ItemRenderUSST20WL());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileRacor36D_B.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.racor36d_b()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.Racor36D_B.block), new ItemRenderRacor36D_B());
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileRacor36H_B.class,
+				new RenderOnOffSwitchStand(OnOffSwitchStandRenderDefinitions.racor36h_b()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.Racor36H_B.block), new ItemRenderRacor36H_B());
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileGenericStopper.class, new RenderStopper(EnumTracks.SMALL_STRAIGHT));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockIDs.stopper.block), new ItemRenderStopper(EnumTracks.SMALL_STRAIGHT));
 

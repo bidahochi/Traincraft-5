@@ -69,6 +69,13 @@ public class TCBlocks {
 		BlockIDs.Racor36D_2.block = new BlockRacor36D_2().setHardness(4F).setStepSound(Block.soundTypeWood);
 		BlockIDs.Racor36H.block = new BlockRacor36H().setHardness(4F).setStepSound(Block.soundTypeWood);
 		BlockIDs.Racor36H_2.block = new BlockRacor36H_2().setHardness(4F).setStepSound(Block.soundTypeWood);
+		//switches by Messi
+		BlockIDs.USSM22.block = new BlockUSSM22().setHardness(4F).setStepSound(Block.soundTypeWood);
+		BlockIDs.Racor36D_3.block = new BlockRacor36D_3().setHardness(4F).setStepSound(Block.soundTypeWood);
+		BlockIDs.USSTL21NL.block = new BlockUSST21NL().setHardness(4F).setStepSound(Block.soundTypeWood);
+		BlockIDs.USST20WL.block = new BlockUSST20WL().setHardness(4F).setStepSound(Block.soundTypeWood);
+		BlockIDs.Racor36D_B.block = new BlockRacor36D_B().setHardness(4F).setStepSound(Block.soundTypeWood);
+		BlockIDs.Racor36H_B.block = new BlockRacor36H_B().setHardness(4F).setStepSound(Block.soundTypeWood);
 
 		BlockIDs.trainWorkbench.block = new BlockTrainWorkbench(16).setHardness(1.7F).setStepSound(Block.soundTypeWood);
 		BlockIDs.trainDetector.block = new BlockTrainDetector(16).setHardness(1.7F).setStepSound(Block.soundTypeStone);
