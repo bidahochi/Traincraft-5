@@ -237,10 +237,11 @@ public final class RollingStockLightFunction
         return new RollingStockLightFunction(
                    Pattern.FLASH,
                    HeadlightRequirement.ACTIVE,
-                   STANDARD_CYCLE_TICKS,
+                   40,//how many blink per centimeter or somthin idk
+                //higher the cycleticks the longer the delay or smthn
                    0,
                    0,
-                   HALF_CYCLE_DUTY,
+                   0.05f,//closer to 0 is more off // 0.05f
                    0,
                    1,
                    LampResponse.INSTANT);
