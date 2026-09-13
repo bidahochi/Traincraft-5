@@ -47,7 +47,8 @@ public class DieselF3B extends DieselTrain {
         InsertTexture(17, "NYC (Late)");
         InsertTexture(18, "EMD Passenger Demo");
         InsertTexture(19, "SP Black Widow");
-        InsertTexture(20, "EP&N");
+        InsertTexture(20, "Mister Too Poor to Buy a B-Unit");
+        InsertTexture(21, "EP&N");
     }
 
     @Override
