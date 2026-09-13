@@ -4756,7 +4756,7 @@ public class RegisterBAPTrains
                     new TrainRecord("FMCWoodchip", FMCWoodchip.class, ItemIDs.minecartFMCWoodchip.item)
                             .setTrainType(EnumTrainType.OpenTopHopper)
                             .setMass(3)
-                            .setColors(new String[] {"LightGrey", "Cyan", "Skin16", "Skin17"})
+                            .setColors(new String[] {"LightGrey", "Cyan", "Skin16", "Skin17", "Black", "Lime", "Blue", "Yellow", "Skin23", "Skin18", "Green", "Skin20", "Skin21", "Skin24", "Skin25", "Skin27", "Skin26"})
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
             );
