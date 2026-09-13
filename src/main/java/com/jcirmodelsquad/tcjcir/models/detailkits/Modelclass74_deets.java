@@ -40,8 +40,8 @@ public class Modelclass74_deets extends ModelConverter //Same as Filename
 		bodyModel[0] = new ModelRendererTurbo(this, 4, 10, textureX, textureY); // Box 336 americano headlight cube
 		bodyModel[1] = new ModelRendererTurbo(this, 17, 12, textureX, textureY, BoxName.lamp); // Box 337 Front headlight
 		bodyModel[2] = new ModelRendererTurbo(this, 17, 12, textureX, textureY, BoxName.lamp); // Box 338 Front headlight
-		bodyModel[3] = new ModelRendererTurbo(this, 40, 12, textureX, textureY, BoxName.lamp); // Box 479 markerlight
-		bodyModel[4] = new ModelRendererTurbo(this, 40, 12, textureX, textureY, BoxName.lamp); // Box 480 markerlight
+		bodyModel[3] = new ModelRendererTurbo(this, 40, 12, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_3"); // Box 479 markerlight
+		bodyModel[4] = new ModelRendererTurbo(this, 40, 12, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_4"); // Box 480 markerlight
 		bodyModel[5] = new ModelRendererTurbo(this, 6, 6, textureX, textureY); // Box 364 prime base
 		bodyModel[6] = new ModelRendererTurbo(this, 6, 2, textureX, textureY, BoxName.prime1); // Box 6 PRIME2-1
 		bodyModel[7] = new ModelRendererTurbo(this, 6, 2, textureX, textureY, BoxName.prime3); // Box 7 PRIME2-3
@@ -59,8 +59,8 @@ public class Modelclass74_deets extends ModelConverter //Same as Filename
 		bodyModel[19] = new ModelRendererTurbo(this, 4, 17, textureX, textureY); // Box 336 americano headlight cube
 		bodyModel[20] = new ModelRendererTurbo(this, 17, 19, textureX, textureY, BoxName.lamp); // Box 337 Front headlight
 		bodyModel[21] = new ModelRendererTurbo(this, 17, 19, textureX, textureY, BoxName.lamp); // Box 338 Front headlight
-		bodyModel[22] = new ModelRendererTurbo(this, 40, 19, textureX, textureY, BoxName.lamp); // Box 479 markerlight
-		bodyModel[23] = new ModelRendererTurbo(this, 40, 19, textureX, textureY, BoxName.lamp); // Box 480 markerlight
+		bodyModel[22] = new ModelRendererTurbo(this, 40, 19, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_22"); // Box 479 markerlight
+		bodyModel[23] = new ModelRendererTurbo(this, 40, 19, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_23"); // Box 480 markerlight
 		bodyModel[24] = new ModelRendererTurbo(this, 33, 19, textureX, textureY, BoxName.ditch); // Box 359 ditchlight f down3
 		bodyModel[25] = new ModelRendererTurbo(this, 24, 19, textureX, textureY, BoxName.ditch); // Box 360 ditchlight cull
 		bodyModel[26] = new ModelRendererTurbo(this, 24, 19, textureX, textureY, BoxName.ditch); // Box 361 ditchlight cull

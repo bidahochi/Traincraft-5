@@ -11,6 +11,21 @@ import train.common.library.sounds.SoundRecord;
 
 //haha sw1 go brrrr
 public class DieselTR4B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:tr4b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_crl_body_314", "marker_crl_body_315", "marker_crl_body_370",
+            "marker_crl_body_371")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_double_body_246", "front_numberboard_double_body_247", "front_numberboard_single_body_57",
+            "front_numberboard_single_body_58", "numberboard_body_103", "numberboard_body_104",
+            "numberboard_body_253", "numberboard_body_257", "rear_numberboard_double_body_250",
+            "rear_numberboard_double_body_251", "rear_numberboard_single_body_248", "rear_numberboard_single_body_249")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -58,5 +73,12 @@ public class DieselTR4B extends DieselTrain {
 
     
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

@@ -198,7 +198,7 @@ public class BOBRollingStockModel extends FVTMFormatBase {
          * This is the single-detail fallback and also the per-placement path used
          * when a layout batch is being built. The push/pop pair keeps the detail's
          * placement transform local so the next detail, bogie, or body section
-         * starts from the same GL matrix state as legacy rendering.
+         * starts from the same GL matrix state as the per-part renderer.
          */
         GL11.glPushMatrix();
         if (!useLayoutBatch) {
@@ -236,7 +236,7 @@ public class BOBRollingStockModel extends FVTMFormatBase {
 
     public static boolean shouldSkipRender(Entity entity, ModelDetailInformation info, int index) {
         /*
-         * These legacy render-method values are visibility filters for details
+         * These render-method values are visibility filters for details
          * that should appear only in first person, third person, while riding, or
          * while not riding. The batching code must respect the same result before
          * grouping repeated details, or hidden detail models would be drawn.

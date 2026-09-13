@@ -63,8 +63,8 @@ public class ModelCF7_H_Round extends ModelConverter//Same as Filename
 		bodyModel[25] = new ModelRendererTurbo(this, 22, 150, textureX, textureY); // Box 134
 		bodyModel[26] = new ModelRendererTurbo(this, 32, 133, textureX, textureY); // Box 135
 		bodyModel[27] = new ModelRendererTurbo(this, 4, 155, textureX, textureY, "lamp"); // Box 136 headlight front
-		bodyModel[28] = new ModelRendererTurbo(this, 2, 147, textureX, textureY, "lamp"); // Box 137 numberboard
-		bodyModel[29] = new ModelRendererTurbo(this, 2, 140, textureX, textureY, "lamp"); // Box 138 numberboard
+		bodyModel[28] = new ModelRendererTurbo(this, 2, 147, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_28"); // Box 137 numberboard
+		bodyModel[29] = new ModelRendererTurbo(this, 2, 140, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_29"); // Box 138 numberboard
 		bodyModel[30] = new ModelRendererTurbo(this, 33, 125, textureX, textureY); // Box 140
 		bodyModel[31] = new ModelRendererTurbo(this, 70, 192, textureX, textureY); // Box 141
 		bodyModel[32] = new ModelRendererTurbo(this, 151, 197, textureX, textureY); // Box 262
@@ -127,7 +127,7 @@ public class ModelCF7_H_Round extends ModelConverter//Same as Filename
 		bodyModel[89] = new ModelRendererTurbo(this, 23, 106, textureX, textureY); // Box 107
 		bodyModel[90] = new ModelRendererTurbo(this, 1, 106, textureX, textureY); // Box 108
 		bodyModel[91] = new ModelRendererTurbo(this, 23, 106, textureX, textureY); // Box 109
-		bodyModel[92] = new ModelRendererTurbo(this, 24, 144, textureX, textureY, "lamp"); // Box 110 beacon
+		bodyModel[92] = new ModelRendererTurbo(this, 24, 144, textureX, textureY, "commander").setLightFixtureId("roof_commander"); // Box 110 beacon
 		bodyModel[93] = new ModelRendererTurbo(this, 42, 103, textureX, textureY); // Box 111
 		bodyModel[94] = new ModelRendererTurbo(this, 30, 12, textureX, textureY); // Box 4
 		bodyModel[95] = new ModelRendererTurbo(this, 30, 12, textureX, textureY); // Box 102

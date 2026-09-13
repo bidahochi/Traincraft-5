@@ -4,6 +4,7 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.api.RollingStockLightFunction;
 import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
@@ -11,6 +12,32 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselSD50 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd50")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_marker", "front_marker_bugeye_body_345", "front_marker_bugeye_body_346",
+            "rear_marker_bugeye_body_347", "rear_marker_bugeye_body_348", "rear_marker_high",
+            "rear_marker_low", "rear_marker_high2", "front_marker2", "rear_marker_low2")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_147", "front_numberboard_body_148", "rear_numberboard_body_166",
+            "rear_numberboard_body_167")
+        .setSkin("Cyan")//fncc
+                .gyralite("frontHighbeamF", "frontHighbeamE")
+        .setSkin("Skin16")//fncc
+                .gyralite("frontHighbeamF", "frontHighbeamE")//FrontDitchHigh1
+                .alternatingDitch(
+                        0,
+                        RollingStockLightFunction.LampResponse.INCANDESCENT,
+                        "FrontDitchHigh1", "RearDitchHigh1")
+                .alternatingDitch(
+                        1,
+                        RollingStockLightFunction.LampResponse.INCANDESCENT,
+                        "FrontDitchHigh2", "RearDitchHigh2")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -55,4 +82,11 @@ public class DieselSD50 extends DieselTrain {
     public String getInventoryName() {
         return "EMD SD50";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

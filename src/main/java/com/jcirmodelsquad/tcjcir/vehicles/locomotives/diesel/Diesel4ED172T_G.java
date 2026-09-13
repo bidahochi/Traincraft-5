@@ -10,6 +10,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class Diesel4ED172T_G extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:cee4ed172t_g")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_208", "marker_body_209", "marker_body_210",
+            "marker_body_211", "marker_body_213", "marker_body_214")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_130", "numberboard_body_131", "numberboard_body_160",
+            "numberboard_body_161", "numberboard_body_177", "numberboard_body_178")
+        .build();
+
 
     @Override
     public SoundRecord getSoundRecord() { return EnumSounds.Diesel4ED172_G; }
@@ -41,4 +54,11 @@ public class Diesel4ED172T_G extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -244,7 +244,7 @@ public class ModelAlco460 extends ModelConverter //Same as Filename
 		bodyModel[206] = new ModelRendererTurbo(this, 83, 185, textureX, textureY); // Box 135
 		bodyModel[207] = new ModelRendererTurbo(this, 24, 142, textureX, textureY); // Box 89
 		bodyModel[208] = new ModelRendererTurbo(this, 46, 141, textureX, textureY, "lamp"); // bulb2
-		bodyModel[209] = new ModelRendererTurbo(this, 33, 140, textureX, textureY, "lamp"); // numberboard
+		bodyModel[209] = new ModelRendererTurbo(this, 33, 140, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_209"); // numberboard
 		bodyModel[210] = new ModelRendererTurbo(this, 0, 38, textureX, textureY); // Box 88
 		bodyModel[211] = new ModelRendererTurbo(this, 2, 62, textureX, textureY); // Box 88
 		bodyModel[212] = new ModelRendererTurbo(this, 81, 141, textureX, textureY); // Box 203
@@ -273,7 +273,7 @@ public class ModelAlco460 extends ModelConverter //Same as Filename
 		bodyModel[235] = new ModelRendererTurbo(this, 195, 92, textureX, textureY); // Box 287
 		bodyModel[236] = new ModelRendererTurbo(this, 188, 89, textureX, textureY); // Box 288
 		bodyModel[237] = new ModelRendererTurbo(this, 200, 87, textureX, textureY, "lamp"); // bulb
-		bodyModel[238] = new ModelRendererTurbo(this, 188, 99, textureX, textureY, "lamp"); // numberboard2
+		bodyModel[238] = new ModelRendererTurbo(this, 188, 99, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_238"); // numberboard2
 		bodyModel[239] = new ModelRendererTurbo(this, 188, 93, textureX, textureY); // Box 291
 		bodyModel[240] = new ModelRendererTurbo(this, 61, 207, textureX, textureY); // Box 292
 		bodyModel[241] = new ModelRendererTurbo(this, 61, 213, textureX, textureY); // Box 293
@@ -297,10 +297,10 @@ public class ModelAlco460 extends ModelConverter //Same as Filename
 		bodyModel[259] = new ModelRendererTurbo(this, 172, 71, textureX, textureY); // Box 317
 		bodyModel[260] = new ModelRendererTurbo(this, 186, 71, textureX, textureY); // Box 318
 		bodyModel[261] = new ModelRendererTurbo(this, 186, 71, textureX, textureY); // Box 319
-		bodyModel[262] = new ModelRendererTurbo(this, 33, 146, textureX, textureY, "lamp"); // marker3
-		bodyModel[263] = new ModelRendererTurbo(this, 33, 146, textureX, textureY, "lamp"); // marker4
-		bodyModel[264] = new ModelRendererTurbo(this, 40, 146, textureX, textureY, "lamp"); // marker2
-		bodyModel[265] = new ModelRendererTurbo(this, 40, 146, textureX, textureY, "lamp"); // marker1
+		bodyModel[262] = new ModelRendererTurbo(this, 33, 146, textureX, textureY, "marker").setLightFixtureId("marker_position_3"); // marker3
+		bodyModel[263] = new ModelRendererTurbo(this, 33, 146, textureX, textureY, "marker").setLightFixtureId("marker_position_4"); // marker4
+		bodyModel[264] = new ModelRendererTurbo(this, 40, 146, textureX, textureY, "marker").setLightFixtureId("marker_position_2"); // marker2
+		bodyModel[265] = new ModelRendererTurbo(this, 40, 146, textureX, textureY, "marker").setLightFixtureId("marker_position_1"); // marker1
 		bodyModel[266] = new ModelRendererTurbo(this, 56, 121, textureX, textureY); // Box 323
 		bodyModel[267] = new ModelRendererTurbo(this, 56, 124, textureX, textureY); // Box 324
 		bodyModel[268] = new ModelRendererTurbo(this, 201, 21, textureX, textureY); // Box 321

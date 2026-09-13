@@ -5,6 +5,22 @@ import train.common.api.AbstractPassengerCar;
 
 public class BuddCN68SeatCoach_Observation extends AbstractPassengerCar
 {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:buddcn68seatcoach_observation")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_green_body_448", "marker_green_body_450", "marker_red_body_104",
+            "marker_red_body_415", "marker_red_body_421", "marker_red_body_424")
+        .color(
+            train.common.api.RollingStockLightColors.GREEN,
+            "marker_green_body_448", "marker_green_body_450")
+        .color(
+            train.common.api.RollingStockLightColors.RED,
+            "marker_red_body_104", "marker_red_body_415",
+            "marker_red_body_421", "marker_red_body_424")
+        .build();
+
 	public BuddCN68SeatCoach_Observation(World world)
 	{
 		super(world);
@@ -34,4 +50,10 @@ public class BuddCN68SeatCoach_Observation extends AbstractPassengerCar
 	public String transportYear() {
 		return "(Rebuilt) 1964";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

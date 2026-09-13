@@ -30,6 +30,35 @@ public class TileTCRailGag extends TileEntity implements ITileTCRail
 		return this.type;
 	}
 
+	/**
+	 * Assigns the authoritative rail origin and synchronizes the completed gag state.
+	 * Gag fields are populated after the block itself is placed, so the initial block
+	 * update cannot carry these values to clients.
+	 *
+	 * @param parentX authoritative parent X coordinate
+	 * @param parentY authoritative parent Y coordinate
+	 * @param parentZ authoritative parent Z coordinate
+	 * @param trackType registry label used by this gag cell
+	 */
+	public void initializeTrackReference(int parentX, int parentY, int parentZ, String trackType)
+	{
+		originX = parentX;
+		originY = parentY;
+		originZ = parentZ;
+		type = trackType;
+		synchronizeTrackReference();
+	}
+
+	/** Marks the completed tile state dirty and sends it to observing clients. */
+	private void synchronizeTrackReference()
+	{
+		markDirty();
+		if (worldObj != null && worldObj.isRemote == false)
+		{
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+
 	public float bbHeight = 0.125f;
 
 	/**
@@ -112,7 +141,7 @@ public class TileTCRailGag extends TileEntity implements ITileTCRail
 
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbt);
 	}
-	
+
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt){
 		this.readFromNBT(pkt.func_148857_g());

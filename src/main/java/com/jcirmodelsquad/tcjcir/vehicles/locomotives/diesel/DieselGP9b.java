@@ -9,6 +9,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP9b extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp9b")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_437", "marker_body_438", "marker_body_439",
+            "marker_body_440")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_127", "front_numberboard_body_128", "rear_numberboard_body_206",
+            "rear_numberboard_body_207")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -75,4 +88,11 @@ public class DieselGP9b extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP9b";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

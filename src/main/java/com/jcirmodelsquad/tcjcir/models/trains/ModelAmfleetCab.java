@@ -145,8 +145,8 @@ public class ModelAmfleetCab extends ModelConverter //Same as Filename
 		bodyModel[106] = new ModelRendererTurbo(this, 177, 33, textureX, textureY); // Box 203
 		bodyModel[107] = new ModelRendererTurbo(this, 161, 41, textureX, textureY); // Box 204
 		bodyModel[108] = new ModelRendererTurbo(this, 505, 33, textureX, textureY); // Box 205
-		bodyModel[109] = new ModelRendererTurbo(this, 22, 27, textureX, textureY, BoxName.lamp); // Box 193 markerlight
-		bodyModel[110] = new ModelRendererTurbo(this, 22, 27, textureX, textureY, BoxName.lamp); // Box 194 markerlight
+		bodyModel[109] = new ModelRendererTurbo(this, 22, 27, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_109"); // Box 193 markerlight
+		bodyModel[110] = new ModelRendererTurbo(this, 22, 27, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_110"); // Box 194 markerlight
 		bodyModel[111] = new ModelRendererTurbo(this, 22, 27, textureX, textureY); // Box 195
 		bodyModel[112] = new ModelRendererTurbo(this, 22, 27, textureX, textureY); // Box 196
 		bodyModel[113] = new ModelRendererTurbo(this, 207, 132, textureX, textureY); // Box 197

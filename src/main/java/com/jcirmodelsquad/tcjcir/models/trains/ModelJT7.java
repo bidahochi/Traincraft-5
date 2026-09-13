@@ -480,10 +480,10 @@ public class ModelJT7 extends ModelConverter //Same as Filename
 		bodyModel[440] = new ModelRendererTurbo(this, 105, 177, textureX, textureY); // Box 449
 		bodyModel[441] = new ModelRendererTurbo(this, 481, 137, textureX, textureY); // Box 111
 		bodyModel[442] = new ModelRendererTurbo(this, 409, 145, textureX, textureY); // Box 144
-		bodyModel[443] = new ModelRendererTurbo(this, 73, 49, textureX, textureY, "lamp"); // Box 184 numberboard glow
-		bodyModel[444] = new ModelRendererTurbo(this, 113, 49, textureX, textureY, "lamp"); // Box 185 numberboard glow
-		bodyModel[445] = new ModelRendererTurbo(this, 97, 89, textureX, textureY, "lamp"); // Box 352 markerlight
-		bodyModel[446] = new ModelRendererTurbo(this, 145, 89, textureX, textureY, "lamp"); // Box 353 markerlight
+		bodyModel[443] = new ModelRendererTurbo(this, 73, 49, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_443"); // Box 184 numberboard glow
+		bodyModel[444] = new ModelRendererTurbo(this, 113, 49, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_444"); // Box 185 numberboard glow
+		bodyModel[445] = new ModelRendererTurbo(this, 97, 89, textureX, textureY, "marker").setLightFixtureId("marker_body_445"); // Box 352 markerlight
+		bodyModel[446] = new ModelRendererTurbo(this, 145, 89, textureX, textureY, "marker").setLightFixtureId("marker_body_446"); // Box 353 markerlight
 		bodyModel[447] = new ModelRendererTurbo(this, 1, 137, textureX, textureY); // Box 187
 		bodyModel[448] = new ModelRendererTurbo(this, 265, 137, textureX, textureY); // Box 188
 		bodyModel[449] = new ModelRendererTurbo(this, 473, 169, textureX, textureY); // Box 67

@@ -5,6 +5,15 @@ import train.common.api.AbstractPassengerCar;
 import train.common.enums.LockoutGroup;
 
 public class PSCEI1DR_28SeatParlor_Observation extends AbstractPassengerCar {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:pscei1dr_28seatparlor_observation")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_lense_lf", "marker_lense_lr", "marker_lense_rf",
+            "marker_lense_rr")
+        .build();
+
 
 	public PSCEI1DR_28SeatParlor_Observation(World world)
 	{
@@ -32,4 +41,10 @@ public class PSCEI1DR_28SeatParlor_Observation extends AbstractPassengerCar {
 	public String transportYear() {
 		return "1946";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

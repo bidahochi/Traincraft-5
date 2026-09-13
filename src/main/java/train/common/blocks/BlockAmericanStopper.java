@@ -13,85 +13,132 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import train.common.Traincraft;
-import train.common.enums.TCTrackDirection;
+import train.common.library.BlockIDs;
 import train.common.library.Info;
 import train.common.tile.tileStopper.TileAmericanStopper;
+import train.common.track.attachment.ITrackAttachmentSource;
+import train.common.track.attachment.TrackAttachmentBounds;
+import train.common.track.attachment.legacy.TrackBufferOrientation;
+
+import java.util.ArrayList;
 
 import static net.minecraftforge.common.util.ForgeDirection.UP;
 
-public class BlockAmericanStopper extends BlockContainer {
+/** Hayes-style buffer stop that can exist as a standalone block or as hardware attached to a track cell. */
+public class BlockAmericanStopper extends BlockContainer implements ITrackAttachmentSource
+{
+	private static final int CUSTOM_RENDER_TYPE = -1;
 
-    private IIcon texture;
+	/** Stable attachment design inherited by every Hayes-style buffer block. */
+	public static final String ATTACHMENT_DESIGN_ID = "tc:hayes_buffer";
+	/** Stable attachment identity used by the original Hayes buffer item. */
+	public static final String ATTACHMENT_TYPE_ID = "tc:hayes_buffer";
+	private static final TrackAttachmentBounds ATTACHMENT_BOUNDS =
+			new TrackAttachmentBounds(-0.375D, 0.125D, -0.375D, 0.375D, 0.55D, 0.375D);
 
-    public BlockAmericanStopper() {
-        super(Material.iron);
-        setCreativeTab(Traincraft.tcTab);
-    }
+	private IIcon texture;
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	/** Creates the standalone Hayes-style buffer block and exposes it in Traincraft's creative tab. */
+	public BlockAmericanStopper()
+	{
+		super(Material.iron);
+		setCreativeTab(Traincraft.tcTab);
+	}
 
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public String getTrackAttachmentTypeId()
+	{
+		return ATTACHMENT_TYPE_ID;
+	}
 
-    @Override
-    public int getRenderType() {
-        return -1; //RenderingRegistry.getNextAvailableRenderId();
-    }
+	/** {@inheritDoc} */
+	@Override
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 
-    @Override
-    public IIcon getIcon(int i, int j) {
-        return texture;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public boolean isOpaqueCube()
+	{
+		return false;
+	}
 
-    @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return (world.isSideSolid(x, y-1, z, UP));
-    }
+	/** {@inheritDoc} */
+	@Override
+	public int getRenderType()
+	{
+		return CUSTOM_RENDER_TYPE;
+	}
 
-    @Override
-    public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLivingBase living, ItemStack stack) {
-        TileAmericanStopper te = (TileAmericanStopper) world.getTileEntity(par2, par3, par4);
-        byte dir = TCTrackDirection.ConvertDiagonalDirectionInput(MathHelper.floor_double(((living.rotationYaw) * 8.0F / 360.0F + 0.5D)) & 7);
+	/** {@inheritDoc} */
+	@Override
+	public IIcon getIcon(int side, int metadata)
+	{
+		return texture;
+	}
 
-        if (te !=  null)
-        {
-            // Have to do this because buffer metadata was off by 1
-            switch (dir)
-            {
-                case 0:
-                    dir = 3;
-                break;
-                case 1:
-                case 2:
-                case 3:
-                    dir--;
-                break;
-            }
+	/** {@inheritDoc} */
+	@Override
+	public boolean canPlaceBlockAt(World world, int x, int y, int z)
+	{
+		return world.isSideSolid(x, y - 1, z, UP);
+	}
 
+	/** {@inheritDoc} */
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack)
+	{
+		TileAmericanStopper tile = (TileAmericanStopper)world.getTileEntity(x, y, z);
+		if (tile != null)
+		{
+			tile.setFacing(TrackBufferOrientation.fromPlayerYaw(placer.rotationYaw));
+		}
+	}
 
-            te.setFacing(dir);
-        }
-    }
+	/** {@inheritDoc} */
+	@Override
+	public TileEntity createNewTileEntity(World world, int metadata)
+	{
+		return new TileAmericanStopper(metadata);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileAmericanStopper(meta);
-    }
+	/** {@inheritDoc} */
+	@Override
+	public String getTrackAttachmentDesignId()
+	{
+		return ATTACHMENT_DESIGN_ID;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        texture = iconRegister.registerIcon(Info.modID.toLowerCase() + ":stopper");
-    }
+	/** {@inheritDoc} */
+	@Override
+	public TrackAttachmentBounds getTrackAttachmentBounds()
+	{
+		return ATTACHMENT_BOUNDS;
+	}
+
+	/** Returns the fixed components represented by a deprecated American combined-buffer block. */
+	protected ArrayList<ItemStack> getDeprecatedDrops(Item originalTrack)
+	{
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		drops.add(new ItemStack(originalTrack));
+		drops.add(new ItemStack(BlockIDs.americanstopper.block));
+		return drops;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerBlockIcons(IIconRegister iconRegister)
+	{
+		texture = iconRegister.registerIcon(Info.modID.toLowerCase() + ":stopper");
+	}
 }

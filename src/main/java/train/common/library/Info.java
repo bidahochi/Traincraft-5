@@ -12,7 +12,7 @@ public class Info {
 	/* Mod relevant information */
 	public static final String modID = "tc";
 	public static final String modName = "Fox-Traincraft";
-	public static final String modVersion = "3.2.0";
+	public static final String modVersion = "3.2.1.3";
 	public static final String channel = "Traincraft";
 	public static final String keyChannel = "TraincraftKey";
 	public static final String rotationChannel = "TraincraftRotation";

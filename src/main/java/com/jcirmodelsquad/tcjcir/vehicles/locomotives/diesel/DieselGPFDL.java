@@ -10,6 +10,20 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGPFDL extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gpfdl")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_326", "marker_body_327", "marker_body_328",
+            "marker_body_329")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_88", "front_numberboard_body_89", "numberboard_chop_body_195",
+            "numberboard_chop_body_196", "numberboard_chop_body_333", "numberboard_chop_body_334",
+            "rear_numberboard_body_163", "rear_numberboard_body_164")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -76,4 +90,11 @@ public class DieselGPFDL extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

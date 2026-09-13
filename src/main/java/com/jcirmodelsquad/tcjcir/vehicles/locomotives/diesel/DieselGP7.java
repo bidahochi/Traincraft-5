@@ -11,6 +11,30 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP7 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp7")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_534", "marker_body_535", "marker_body_536",
+            "marker_body_537", "marker_body_538", "marker_body_539",
+            "marker_wm_chop_body_11", "marker_wm_chop_body_12")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_127", "front_numberboard_body_128", "front_numberboard_body_532",
+            "front_numberboard_body_533", "front_numberboard_chop_body_5", "front_numberboard_chop_body_6",
+            "numberboard_chop_body_2", "numberboard_chop_body_297", "numberboard_chop_body_298",
+            "numberboard_chop_body_3", "numberboard_chop_body_317", "numberboard_chop_body_318",
+            "numberboard_chop_body_545", "numberboard_chop_body_546", "rear_numberboard_body_231",
+            "rear_numberboard_body_232")
+
+                .setSkin("Skin32")//fncc
+                .gyralite("GyraFrontANE1", "GyraFrontANE2", "GyraRearANE1", "GyraRearANE2")
+                .setSkin("Skin60")//fmsr
+                .gyralite("GyraFrontANE1", "GyraFrontANE2", "GyraRearANE1", "GyraRearANE2")
+
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -52,7 +76,7 @@ public class DieselGP7 extends DieselTrain {
         InsertTexture(30, "New York Central (Lightning Bolt)");
         InsertTexture(31, "New York Central (Late)");
         InsertTexture(32, "New York Central (Grey Lighting Bolt)");
-        InsertTexture(33, "FNCC (KIT-L)", LockoutGroup.FNCC);
+        InsertTexture(33, "FNCC (KIT-L)", LockoutGroup.FNCC);//Skin32
         InsertTexture(34, "ATSF (Pinstripe)");
         InsertTexture(35, "ATSF (Zebrastripe)");
         InsertTexture(36, "MKT");
@@ -77,7 +101,7 @@ public class DieselGP7 extends DieselTrain {
         InsertTexture(55, "Seaboard System");
         InsertTexture(56, "Seaboard System (Chop Nose)");
         InsertTexture(57, "Chessie System");
-        InsertTexture(58, "FMSR", LockoutGroup.FMSR);
+        InsertTexture(58, "FMSR", LockoutGroup.FMSR);//Skin60
         InsertTexture(59, "C&O (Early)");
         InsertTexture(60, "C&O 5704 (Early)");
         InsertTexture(61, "Coyote & Fort Woods (Bida Fictional)");
@@ -106,4 +130,11 @@ public class DieselGP7 extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP7";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

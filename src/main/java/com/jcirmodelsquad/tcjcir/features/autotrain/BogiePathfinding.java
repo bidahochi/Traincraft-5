@@ -25,9 +25,8 @@ import train.common.blocks.BlockTCRail;
 import train.common.blocks.BlockTCRailGag;
 import train.common.items.ItemTCRail;
 import train.common.items.TCRailTypes;
-import train.common.library.BlockIDs;
+import train.common.library.track.TrackCellResolver;
 import train.common.tile.TileTCRail;
-import train.common.tile.TileTCRailGag;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -274,7 +273,7 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
             j--;
         }
         Block block = this.worldObj.getBlock(i, j, k);
-        return (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block);
+        return TrackCellResolver.isRailBlock(block);
     }
 
     @Override
@@ -379,11 +378,11 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
         int k = MathHelper.floor_double(this.posZ);
         Block block = this.worldObj.getBlock(i, j - 1, k);
 
-        if (BlockRailBase.func_150051_a(block) || block == BlockIDs.tcRail.block || block == BlockIDs.tcRailGag.block) {
+        if (TrackCellResolver.isRailBlock(block)) {
             j--;
         } else {
             Block block2 = this.worldObj.getBlock(i, j + 1, k);
-            if(BlockRailBase.func_150051_a(block2) || block2 == BlockIDs.tcRail.block || block2 == BlockIDs.tcRailGag.block){
+            if(TrackCellResolver.isRailBlock(block2)){
                 j++;
             }
             block = this.worldObj.getBlock(i, j, k);
@@ -417,27 +416,8 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
                 }
             }
             else{
-                TileEntity tileEntity = this.worldObj.getTileEntity(i, j, k);
-                TileTCRail tileRail;
-
-                if (block == BlockIDs.tcRailGag.block) {
-
-                    if (tileEntity instanceof TileTCRailGag) {
-
-                        TileTCRailGag tileGag = (TileTCRailGag) tileEntity;
-                        tileEntity = this.worldObj.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
-                    }
-                    else {
-
-                        return;
-                    }
-                }
-
-                if (tileEntity instanceof TileTCRail) {
-
-                    tileRail = (TileTCRail) tileEntity;
-                }
-                else {
+                TileTCRail tileRail = TrackCellResolver.resolveParent(this.worldObj, i, j, k);
+                if (tileRail == null) {
                     super.onUpdate();
                     return;
                 }
@@ -450,9 +430,9 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
                     int meta = tileRail.getBlockMetadata();
 
                     if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
-                        moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+                        pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
                     } else {
-                        if (ItemTCRail.isTCTurnTrack(tileRail)) moveOnTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+                        if (ItemTCRail.isTCTurnTrack(tileRail)) moveOnTC90TurnRail(j + tileRail.getTrackRideYOffset(), tileRail.r, tileRail.cx, tileRail.cz);
                     }
 
                     // shouldIgnoreSwitch(tileRail, i, j, k, meta);
@@ -461,17 +441,17 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
                 }
                 else if (ItemTCRail.isTCStraightTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && !tileRail.getSwitchState()))
                 {
-                    pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+                    pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
                     //moveOnTCStraight(j, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
                 }
                 else if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState()))
                 {
                     if (shouldIgnoreSwitch(tileRail, i, j, k, meta)) {
-                        pathFindingHelper.moveOnTCStraight(this, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
+                        pathFindingHelper.moveOnTCStraight(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata());
                     }
                     else {
                         if (TCRailTypes.isTurnTrack(tileRail) || (TCRailTypes.isSwitchTrack(tileRail) && tileRail.getSwitchState())) {
-                            moveOnNewTC90TurnRail(j, tileRail.r, tileRail.cx, tileRail.cz);
+                            moveOnNewTC90TurnRail(j + tileRail.getTrackRideYOffset(), tileRail.r, tileRail.cx, tileRail.cz);
                         }
                     }
                 }
@@ -485,11 +465,12 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
                 }
                 else if (TCRailTypes.isDiagonalTrack(tileRail))
                 {
-                    pathFindingHelper.moveOnTCDiagonal(this,i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
+                    pathFindingHelper.moveOnTCDiagonal(this, tileRail, i, j, k, tileRail.xCoord, tileRail.zCoord, tileRail.getBlockMetadata(), tileRail.getRailLength());
                 }
                 else if ((TCRailTypes.isSlopeTrack(tileRail))) {
 
-                    moveOnTCSlope(j, tileRail.xCoord, tileRail.zCoord, tileRail.slopeAngle, tileRail.slopeHeight, tileRail.getBlockMetadata());
+                    pathFindingHelper.moveOnTCSlope(this, tileRail, j, tileRail.xCoord, tileRail.zCoord,
+                            tileRail.slopeAngle, tileRail.slopeHeight, tileRail.getBlockMetadata(), tileRail.slopeLength);
                 }
             }
         }
@@ -535,21 +516,7 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
                 this.requestTicket();
             }
 
-                TileEntity tileEntity = this.worldObj.getTileEntity(i, j, k);
-                TileTCRail tileRail = null;
-
-                if (block == BlockIDs.tcRailGag.block) {
-
-                    if (tileEntity instanceof TileTCRailGag) {
-
-                        TileTCRailGag tileGag = (TileTCRailGag) tileEntity;
-                        tileEntity = this.worldObj.getTileEntity(tileGag.originX, tileGag.originY, tileGag.originZ);
-                    }
-                }
-
-                if (tileEntity instanceof TileTCRail) {
-                    tileRail = (TileTCRail) tileEntity;
-                }
+                TileTCRail tileRail = TrackCellResolver.resolveParent(this.worldObj, i, j, k);
 
             if (tileRail != null && TCRailTypes.isSwitchTrack(tileRail)  && doSummon)  {
 
@@ -742,7 +709,7 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
         }
     }
 
-    private void moveOnTC90TurnRail(int j,double r, double cx, double cz){
+    private void moveOnTC90TurnRail(double j,double r, double cx, double cz){
         posY = j + 0.2;
         double cpx = posX - cx;
         double cpz = posZ - cz;
@@ -829,7 +796,7 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
         return false;
     }
 
-    private void moveOnNewTC90TurnRail(int j,double r, double cx, double cz){
+    private void moveOnNewTC90TurnRail(double j,double r, double cx, double cz){
 
         posY = j + 0.2;
         double cpx = posX - cx;

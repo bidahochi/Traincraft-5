@@ -409,8 +409,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[363] = new ModelRendererTurbo(this, 176, 9, textureX, textureY, BoxName.prime2); // Box 8 PRIME1-2
 		bodyModel[364] = new ModelRendererTurbo(this, 176, 9, textureX, textureY, BoxName.prime4); // Box 9 PRIME1-4
 		bodyModel[365] = new ModelRendererTurbo(this, 2, 28, textureX, textureY); // Steam gen exhast 1
-		bodyModel[366] = new ModelRendererTurbo(this, 227, 18, textureX, textureY, "lamp"); // Alaska number boards glow
-		bodyModel[367] = new ModelRendererTurbo(this, 227, 18, textureX, textureY, "lamp"); // Alaska number boards glow
+		bodyModel[366] = new ModelRendererTurbo(this, 227, 18, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_366"); // Alaska number boards glow
+		bodyModel[367] = new ModelRendererTurbo(this, 227, 18, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_367"); // Alaska number boards glow
 		bodyModel[368] = new ModelRendererTurbo(this, 186, 9, textureX, textureY, BoxName.prime1); // Box 6 PRIME3-1
 		bodyModel[369] = new ModelRendererTurbo(this, 186, 9, textureX, textureY, BoxName.prime3); // Box 7 PRIME3-3
 		bodyModel[370] = new ModelRendererTurbo(this, 186, 9, textureX, textureY, BoxName.prime2); // Box 8 PRIME3-2

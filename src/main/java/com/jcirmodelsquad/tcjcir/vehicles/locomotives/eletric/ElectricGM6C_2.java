@@ -15,6 +15,18 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class ElectricGM6C_2 extends ElectricTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gm6c")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_marker", "rear_marker")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_109", "numberboard_body_110", "numberboard_body_92",
+            "numberboard_body_93")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -54,6 +66,13 @@ public class ElectricGM6C_2 extends ElectricTrain {
     @Override
     public float getOptimalDistance(EntityMinecart cart) {
         return 1.45F;
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

@@ -1,9 +1,7 @@
 package train.common.core.util;
 
-import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -111,10 +109,6 @@ public class TraincraftUtil{
 
         oreDictionaryCache.put(stack, result);
         return result;
-    }
-
-    public static boolean isRailBlockAt(World world, int x, int y, int z){
-        return world.getBlock(x,y,z) instanceof BlockRailBase;
     }
 
     public static final double degrees = (180d / Math.PI);

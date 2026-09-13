@@ -12,6 +12,17 @@ import train.common.library.sounds.SoundRecord;
 
 //haha sw1 go brrrr
 public class DieselSW1 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sw1")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_202", "front_numberboard_body_203", "front_numberboard_body_215",
+            "front_numberboard_body_216", "front_numberboard_single_body_208", "front_numberboard_single_body_209",
+            "front_numberboard_single_body_221", "front_numberboard_single_body_222", "numberboard_body_196",
+            "numberboard_body_197")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -69,4 +80,11 @@ public class DieselSW1 extends DieselTrain {
     public String getInventoryName() {
         return "EMD SW1";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -35,9 +35,9 @@ public class FMCWoodchip extends AbstractStandardFreightCar
     public void setupTextureDescription()
     {
         InsertTexture(0, "Blandsville & Blankerston");
-        InsertTexture(1, "");
-        InsertTexture(2, "");
-        InsertTexture(3, "");
+        InsertTexture(1, "FNCC (Big Wording)");
+        InsertTexture(2, "FNCC (Herald)");
+        InsertTexture(3, "FNCC (Herald Black)");
         InsertTexture(4, "");
         InsertTexture(5, "");
         InsertTexture(6, "");

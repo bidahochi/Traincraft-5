@@ -1,29 +1,54 @@
 package train.common.api;
 
-import com.google.gson.JsonObject;
-
-public interface IRollingStockLightControls
+/**
+ * Defines the synchronized operator controls exposed by rolling stock with configurable lighting.
+ *
+ * <p>Fixture identity and behavior remain model/profile concerns; implementations expose only
+ * synchronized operator state for the available lighting circuits.
+ */
+public interface IRollingStockLightControls extends IRollingStockLightState
 {
-    String lightingDetailsJSON();
+    /** @return the synchronized front-headlight level */
+    @Override
+    RollingStockHeadlightLevel getFrontHeadlightLevel();
 
-    JsonObject lightingDetailsAsJSON();
+    /** @return the synchronized rear-headlight level */
+    @Override
+    RollingStockHeadlightLevel getRearHeadlightLevel();
+
+    /** @param level new front-headlight level; {@code null} is treated as off */
+    void setFrontHeadlightLevel(RollingStockHeadlightLevel level);
+
+    /** @param level new rear-headlight level; {@code null} is treated as off */
+    void setRearHeadlightLevel(RollingStockHeadlightLevel level);
 
     /**
+     * Reports whether a logical lighting circuit is active.
      *
-     * @param isLightsOn set 0 if loco lights is false, 1 if true
+     * @param channel circuit to query
+     * @return whether the circuit is enabled
      */
-    void setPacketLights(boolean isLightsOn);
+    @Override
+    boolean isLightChannelEnabled(RollingStockLightChannel channel);
 
     /**
+     * Changes a logical lighting circuit.
      *
-     * @param isBeaconOn set 0 if loco beacon is false, 1 if true
+     * @param channel circuit to change
+     * @param enabled whether the circuit should be enabled
      */
-    void setPacketBeacon(boolean isBeaconOn);
+    void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled);
 
-    void setPacketDitchLightsMode(byte ditchLightMode);
-
-    boolean isBeaconEnabled();
-    boolean isLightsEnabled();
-    byte getBeaconCycleIndex();
-    boolean isDitchLightsEnabled();
+    /**
+     * Reports a synchronized, non-persistent signal such as the active horn response window.
+     * The default keeps existing third-party implementations source compatible.
+     *
+     * @param signal transient signal to query
+     * @return whether that signal is currently active
+     */
+    @Override
+    default boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+    {
+        return false;
+    }
 }

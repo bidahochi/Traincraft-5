@@ -287,10 +287,10 @@ public class ModelC855a extends ModelConverter //Same as Filename
 		bodyModel[240] = new ModelRendererTurbo(this, 41, 97, textureX, textureY); // Box 294
 		bodyModel[241] = new ModelRendererTurbo(this, 305, 97, textureX, textureY); // Box 295
 		bodyModel[242] = new ModelRendererTurbo(this, 49, 105, textureX, textureY); // Box 296
-		bodyModel[243] = new ModelRendererTurbo(this, 417, 81, textureX, textureY, "lamp"); // Box 117 numberboard f
-		bodyModel[244] = new ModelRendererTurbo(this, 225, 9, textureX, textureY, "lamp"); // Box 216 classlights
-		bodyModel[245] = new ModelRendererTurbo(this, 401, 97, textureX, textureY, "lamp"); // Box 268 numberboard f
-		bodyModel[246] = new ModelRendererTurbo(this, 57, 105, textureX, textureY, "lamp"); // Box 269 classlights
+		bodyModel[243] = new ModelRendererTurbo(this, 417, 81, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_243"); // Box 117 numberboard f
+		bodyModel[244] = new ModelRendererTurbo(this, 225, 9, textureX, textureY, "marker").setLightFixtureId("marker_body_244"); // Box 216 classlights
+		bodyModel[245] = new ModelRendererTurbo(this, 401, 97, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_245"); // Box 268 numberboard f
+		bodyModel[246] = new ModelRendererTurbo(this, 57, 105, textureX, textureY, "marker").setLightFixtureId("marker_body_246"); // Box 269 classlights
 		bodyModel[247] = new ModelRendererTurbo(this, 457, 105, textureX, textureY, "lamp"); // Box 448 headlight front n
 		bodyModel[248] = new ModelRendererTurbo(this, 497, 105, textureX, textureY, "lamp"); // Box 449 headlight front n
 		bodyModel[249] = new ModelRendererTurbo(this, 105, 105, textureX, textureY); // Box 364 prime base

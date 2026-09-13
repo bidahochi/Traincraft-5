@@ -11,6 +11,22 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP15 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp15")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "rear_marker_body_391", "rear_marker_body_392")
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_178", "marker_body_179", "marker_body_189",
+            "marker_body_190", "marker_nose")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_24", "numberboard_body_25", "numberboard_body_91",
+            "numberboard_body_92")
+        .build();
+
 	@Override
 	public SoundRecord getSoundRecord()
 	{
@@ -87,4 +103,11 @@ public class DieselGP15 extends DieselTrain {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (1.0F);
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

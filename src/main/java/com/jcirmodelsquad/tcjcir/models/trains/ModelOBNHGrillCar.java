@@ -226,9 +226,9 @@ public class ModelOBNHGrillCar extends ModelConverter //Same as Filename
 		bodyModel[183] = new ModelRendererTurbo(this, 305, 4, textureX, textureY); // Box 286
 		bodyModel[184] = new ModelRendererTurbo(this, 305, 20, textureX, textureY); // Box 285
 		bodyModel[185] = new ModelRendererTurbo(this, 305, 1, textureX, textureY); // Box 286
-		bodyModel[186] = new ModelRendererTurbo(this, 90, 243, textureX, textureY, "lamp"); // Box 384 glow
-		bodyModel[187] = new ModelRendererTurbo(this, 90, 250, textureX, textureY, "lamp"); // Box 386 glow
-		bodyModel[188] = new ModelRendererTurbo(this, 89, 245, textureX, textureY, "lamp"); // Box 384 glow
+		bodyModel[186] = new ModelRendererTurbo(this, 90, 243, textureX, textureY, "interior").setLightFixtureId("interior_body_186"); // Box 384 glow
+		bodyModel[187] = new ModelRendererTurbo(this, 90, 250, textureX, textureY, "interior").setLightFixtureId("interior_body_187"); // Box 386 glow
+		bodyModel[188] = new ModelRendererTurbo(this, 89, 245, textureX, textureY, "interior").setLightFixtureId("interior_body_188"); // Box 384 glow
 		bodyModel[189] = new ModelRendererTurbo(this, 102, 372, textureX, textureY); // Box 128
 		bodyModel[190] = new ModelRendererTurbo(this, 102, 365, textureX, textureY); // Box 1083
 		bodyModel[191] = new ModelRendererTurbo(this, 113, 353, textureX, textureY); // Box 38
@@ -247,7 +247,7 @@ public class ModelOBNHGrillCar extends ModelConverter //Same as Filename
 		bodyModel[204] = new ModelRendererTurbo(this, 226, 311, textureX, textureY, "cull"); // Box 128 cull
 		bodyModel[205] = new ModelRendererTurbo(this, 186, 305, textureX, textureY); // Box 95
 		bodyModel[206] = new ModelRendererTurbo(this, 209, 285, textureX, textureY); // Box 128
-		bodyModel[207] = new ModelRendererTurbo(this, 168, 245, textureX, textureY, "lamp"); // Box 384 glow
+		bodyModel[207] = new ModelRendererTurbo(this, 168, 245, textureX, textureY, "interior").setLightFixtureId("interior_body_207"); // Box 384 glow
 		bodyModel[208] = new ModelRendererTurbo(this, 226, 300, textureX, textureY); // Box 128
 		bodyModel[209] = new ModelRendererTurbo(this, 292, 20, textureX, textureY); // Box 199
 		bodyModel[210] = new ModelRendererTurbo(this, 294, 17, textureX, textureY); // Box 199
@@ -352,10 +352,10 @@ public class ModelOBNHGrillCar extends ModelConverter //Same as Filename
 		bodyModel[309] = new ModelRendererTurbo(this, 497, 389, textureX, textureY); // Box 87
 		bodyModel[310] = new ModelRendererTurbo(this, 495, 365, textureX, textureY); // Box 128
 		bodyModel[311] = new ModelRendererTurbo(this, 330, 64, textureX, textureY); // Box 128
-		bodyModel[312] = new ModelRendererTurbo(this, 465, 392, textureX, textureY, "lamp"); // Box 86 glow
-		bodyModel[313] = new ModelRendererTurbo(this, 465, 361, textureX, textureY, "lamp"); // Box 384 glow
-		bodyModel[314] = new ModelRendererTurbo(this, 506, 331, textureX, textureY, "lamp"); // Box 384 glow
-		bodyModel[315] = new ModelRendererTurbo(this, 27, 313, textureX, textureY, "lamp"); // Box 384 glow
+		bodyModel[312] = new ModelRendererTurbo(this, 465, 392, textureX, textureY, "interior").setLightFixtureId("interior_body_312"); // Box 86 glow
+		bodyModel[313] = new ModelRendererTurbo(this, 465, 361, textureX, textureY, "interior").setLightFixtureId("interior_body_313"); // Box 384 glow
+		bodyModel[314] = new ModelRendererTurbo(this, 506, 331, textureX, textureY, "interior").setLightFixtureId("interior_body_314"); // Box 384 glow
+		bodyModel[315] = new ModelRendererTurbo(this, 27, 313, textureX, textureY, "interior").setLightFixtureId("interior_body_315"); // Box 384 glow
 		bodyModel[316] = new ModelRendererTurbo(this, 385, 310, textureX, textureY); // Box 128
 		bodyModel[317] = new ModelRendererTurbo(this, 41, 264, textureX, textureY); // Box 319
 		bodyModel[318] = new ModelRendererTurbo(this, 41, 310, textureX, textureY); // Box 128
@@ -488,7 +488,7 @@ public class ModelOBNHGrillCar extends ModelConverter //Same as Filename
 		bodyModel[445] = new ModelRendererTurbo(this, 232, 331, textureX, textureY); // Box 128
 		bodyModel[446] = new ModelRendererTurbo(this, 282, 275, textureX, textureY); // Box 128
 		bodyModel[447] = new ModelRendererTurbo(this, 280, 269, textureX, textureY); // Box 128
-		bodyModel[448] = new ModelRendererTurbo(this, 230, 280, textureX, textureY, "lamp"); // Box 128 glow
+		bodyModel[448] = new ModelRendererTurbo(this, 230, 280, textureX, textureY, "interior").setLightFixtureId("interior_body_448"); // Box 128 glow
 		bodyModel[449] = new ModelRendererTurbo(this, 197, 320, textureX, textureY); // Box 128
 		bodyModel[450] = new ModelRendererTurbo(this, 455, 386, textureX, textureY); // Box 128
 		bodyModel[451] = new ModelRendererTurbo(this, 455, 355, textureX, textureY); // Box 461

@@ -50,4 +50,9 @@ public class GATC4180Airslide extends AbstractStandardFreightCar
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 2.4F;
 	}
+
+	@Override
+	public String transportYear() {
+		return "1963-1980";
+	}
 }

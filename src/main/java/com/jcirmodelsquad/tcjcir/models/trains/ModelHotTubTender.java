@@ -56,12 +56,12 @@ public class ModelHotTubTender extends ModelConverter //Same as Filename
 		bodyModel[14] = new ModelRendererTurbo(this, 79, 43, textureX, textureY); // Box 341 fmsr backing light housing
 		bodyModel[15] = new ModelRendererTurbo(this, 84, 36, textureX, textureY, "lamp"); // Box 342 headlight rear fmsr
 		bodyModel[16] = new ModelRendererTurbo(this, 93, 38, textureX, textureY, "cull"); // Box 343 cull fmsr backing light housing
-		bodyModel[17] = new ModelRendererTurbo(this, 92, 44, textureX, textureY, "lamp"); // Box 345 numberboard glow fmsr
+		bodyModel[17] = new ModelRendererTurbo(this, 92, 44, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_17"); // Box 345 numberboard glow fmsr
 		bodyModel[18] = new ModelRendererTurbo(this, 84, 50, textureX, textureY); // Box 346 fmsr backinglight support
 		bodyModel[19] = new ModelRendererTurbo(this, 161, 85, textureX, textureY); // Box 2
-		bodyModel[20] = new ModelRendererTurbo(this, 164, 84, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[20] = new ModelRendererTurbo(this, 164, 84, textureX, textureY, "marker").setLightFixtureId("marker_body_20"); // Box 410 glow marker
 		bodyModel[21] = new ModelRendererTurbo(this, 161, 85, textureX, textureY); // Box 594
-		bodyModel[22] = new ModelRendererTurbo(this, 164, 84, textureX, textureY, "lamp"); // Box 595 glow marker
+		bodyModel[22] = new ModelRendererTurbo(this, 164, 84, textureX, textureY, "marker").setLightFixtureId("marker_body_22"); // Box 595 glow marker
 		bodyModel[23] = new ModelRendererTurbo(this, 230, 93, textureX, textureY, "cull"); // Box cull pipos
 		bodyModel[24] = new ModelRendererTurbo(this, 230, 86, textureX, textureY); // Box stokerbit
 		bodyModel[25] = new ModelRendererTurbo(this, 13, 45, textureX, textureY); // Box 553
@@ -351,7 +351,7 @@ public class ModelHotTubTender extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for(ModelRendererTurbo m :bodyModel) {
-			if(m.boxName.equals("lamp")){
+			if((m.boxName.equals("lamp") || m.boxName.equals("marker"))){
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				m.render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

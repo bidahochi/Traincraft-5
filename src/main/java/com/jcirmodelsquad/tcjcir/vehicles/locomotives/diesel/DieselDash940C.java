@@ -12,6 +12,18 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselDash940C extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dash940c")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_310")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_246", "numberboard_body_247", "numberboard_body_278",
+            "numberboard_body_279")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -43,6 +55,13 @@ public class DieselDash940C extends DieselTrain {
     @Override
     public String getInventoryName() {
         return "GE Dash 9-40C";
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

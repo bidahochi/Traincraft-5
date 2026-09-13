@@ -9,6 +9,15 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class ElectricClass74 extends ElectricTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:class74")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_22", "marker_body_23", "marker_body_3",
+            "marker_body_4")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -53,4 +62,10 @@ public class ElectricClass74 extends ElectricTrain {
 
 
     
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

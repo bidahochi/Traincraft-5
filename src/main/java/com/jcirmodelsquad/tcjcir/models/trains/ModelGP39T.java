@@ -79,8 +79,8 @@ public class ModelGP39T extends ModelConverter //Same as Filename
 		bodyModel[37] = new ModelRendererTurbo(this, 78, 47, textureX, textureY); // Box 48
 		bodyModel[38] = new ModelRendererTurbo(this, 82, 49, textureX, textureY); // Box 43
 		bodyModel[39] = new ModelRendererTurbo(this, 62, 44, textureX, textureY); // Box 44
-		bodyModel[40] = new ModelRendererTurbo(this, 104, 37, textureX, textureY, "lamp"); // Box 117 numberboard front
-		bodyModel[41] = new ModelRendererTurbo(this, 93, 45, textureX, textureY, "lamp"); // Box 118 numberboard front
+		bodyModel[40] = new ModelRendererTurbo(this, 104, 37, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_40"); // Box 117 numberboard front
+		bodyModel[41] = new ModelRendererTurbo(this, 93, 45, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_41"); // Box 118 numberboard front
 		bodyModel[42] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp"); // Box 186 headlight front up 1
 		bodyModel[43] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp"); // Box 187 headlight front up 2
 		bodyModel[44] = new ModelRendererTurbo(this, 104, 12, textureX, textureY); // Box 221
@@ -207,7 +207,7 @@ public class ModelGP39T extends ModelConverter //Same as Filename
 		bodyModel[165] = new ModelRendererTurbo(this, 119, 162, textureX, textureY); // Box 412 cs
 		bodyModel[166] = new ModelRendererTurbo(this, 96, 164, textureX, textureY); // Box 413 cs
 		bodyModel[167] = new ModelRendererTurbo(this, 96, 157, textureX, textureY); // Box 86 cs
-		bodyModel[168] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[168] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_168"); // Box 71 glow speedometer
 		bodyModel[169] = new ModelRendererTurbo(this, 98, 151, textureX, textureY); // Box 307 spedo
 		bodyModel[170] = new ModelRendererTurbo(this, 184, 9, textureX, textureY); // Box 114
 		bodyModel[171] = new ModelRendererTurbo(this, 184, 6, textureX, textureY); // Box 74
@@ -232,9 +232,9 @@ public class ModelGP39T extends ModelConverter //Same as Filename
 		bodyModel[190] = new ModelRendererTurbo(this, 161, 91, textureX, textureY); // Box 282 antenna plate cull
 		bodyModel[191] = new ModelRendererTurbo(this, 149, 30, textureX, textureY); // Box 450
 		bodyModel[192] = new ModelRendererTurbo(this, 111, 113, textureX, textureY); // Box 1203
-		bodyModel[193] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[193] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker").setLightFixtureId("marker_two_body_193"); // Box 71 markerlight twO
 		bodyModel[194] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
-		bodyModel[195] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[195] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "marker").setLightFixtureId("marker_two_body_195"); // Box 71 markerlight twO
 		bodyModel[196] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[197] = new ModelRendererTurbo(this, 18, 41, textureX, textureY); // Box 1251
 		bodyModel[198] = new ModelRendererTurbo(this, 264, 38, textureX, textureY); // Box 1252

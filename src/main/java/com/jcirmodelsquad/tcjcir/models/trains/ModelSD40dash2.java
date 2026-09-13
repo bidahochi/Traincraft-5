@@ -58,7 +58,7 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[10] = new ModelRendererTurbo(this, 403, 135, textureX, textureY); // Box 395
 		bodyModel[11] = new ModelRendererTurbo(this, 403, 132, textureX, textureY); // Box 394
 		bodyModel[12] = new ModelRendererTurbo(this, 98, 151, textureX, textureY); // Box 307
-		bodyModel[13] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[13] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_13"); // Box 71 glow speedometer
 		bodyModel[14] = new ModelRendererTurbo(this, 430, 128, textureX, textureY); // Box 389 sp mount
 		bodyModel[15] = new ModelRendererTurbo(this, 423, 128, textureX, textureY, "lamp"); // Box 388 light red gyralight rear
 		bodyModel[16] = new ModelRendererTurbo(this, 423, 133, textureX, textureY, "lamp"); // Box 248 lamp gyralight rear
@@ -154,8 +154,8 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[106] = new ModelRendererTurbo(this, 156, 29, textureX, textureY); // Box 355
 		bodyModel[107] = new ModelRendererTurbo(this, 154, 32, textureX, textureY); // Box 354
 		bodyModel[108] = new ModelRendererTurbo(this, 96, 76, textureX, textureY); // Box 352
-		bodyModel[109] = new ModelRendererTurbo(this, 109, 85, textureX, textureY, "lamp"); // Box 351 numberboard hh
-		bodyModel[110] = new ModelRendererTurbo(this, 109, 85, textureX, textureY, "lamp"); // Box 350 numberboard hh
+		bodyModel[109] = new ModelRendererTurbo(this, 109, 85, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_109"); // Box 351 numberboard hh
+		bodyModel[110] = new ModelRendererTurbo(this, 109, 85, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_110"); // Box 350 numberboard hh
 		bodyModel[111] = new ModelRendererTurbo(this, 109, 78, textureX, textureY); // Box 387
 		bodyModel[112] = new ModelRendererTurbo(this, 118, 85, textureX, textureY, "lamp"); // Box 386 headlight f hh
 		bodyModel[113] = new ModelRendererTurbo(this, 118, 85, textureX, textureY, "lamp"); // Box 385 headlight f hh
@@ -336,8 +336,8 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[288] = new ModelRendererTurbo(this, 434, 2, textureX, textureY); // Box 276
 		bodyModel[289] = new ModelRendererTurbo(this, 415, 5, textureX, textureY); // Box 277
 		bodyModel[290] = new ModelRendererTurbo(this, 396, 2, textureX, textureY); // Box 279
-		bodyModel[291] = new ModelRendererTurbo(this, 133, 90, textureX, textureY, "lamp"); // Box 117 numberboard front
-		bodyModel[292] = new ModelRendererTurbo(this, 125, 87, textureX, textureY, "lamp"); // Box 118 numberboard front
+		bodyModel[291] = new ModelRendererTurbo(this, 133, 90, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_291"); // Box 117 numberboard front
+		bodyModel[292] = new ModelRendererTurbo(this, 125, 87, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_292"); // Box 118 numberboard front
 		bodyModel[293] = new ModelRendererTurbo(this, 173, 57, textureX, textureY); // Box 184 o2 generator
 		bodyModel[294] = new ModelRendererTurbo(this, 170, 25, textureX, textureY); // Box 361
 		bodyModel[295] = new ModelRendererTurbo(this, 175, 22, textureX, textureY); // Box 362
@@ -434,11 +434,11 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[386] = new ModelRendererTurbo(this, 362, 155, textureX, textureY); // Box 250
 		bodyModel[387] = new ModelRendererTurbo(this, 370, 160, textureX, textureY); // Box 542
 		bodyModel[388] = new ModelRendererTurbo(this, 404, 160, textureX, textureY); // Box 543
-		bodyModel[389] = new ModelRendererTurbo(this, 465, 76, textureX, textureY, "lamp"); // Box 115 numberboard rear
-		bodyModel[390] = new ModelRendererTurbo(this, 491, 76, textureX, textureY, "lamp"); // Box 116 numberboard rear
-		bodyModel[391] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[389] = new ModelRendererTurbo(this, 465, 76, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_body_389"); // Box 115 numberboard rear
+		bodyModel[390] = new ModelRendererTurbo(this, 491, 76, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_body_390"); // Box 116 numberboard rear
+		bodyModel[391] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "marker").setLightFixtureId("marker_two_body_391"); // Box 71 markerlight twO
 		bodyModel[392] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
-		bodyModel[393] = new ModelRendererTurbo(this, 450, 84, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[393] = new ModelRendererTurbo(this, 450, 84, textureX, textureY, "marker").setLightFixtureId("marker_two_body_393"); // Box 71 markerlight twO
 		bodyModel[394] = new ModelRendererTurbo(this, 450, 84, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[395] = new ModelRendererTurbo(this, 17, 101, textureX, textureY); // Box 352
 		bodyModel[396] = new ModelRendererTurbo(this, 23, 92, textureX, textureY); // Box 353
@@ -451,7 +451,7 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[403] = new ModelRendererTurbo(this, 27, 82, textureX, textureY); // Box 299 nose cover
 		bodyModel[404] = new ModelRendererTurbo(this, 44, 46, textureX, textureY); // Box 43
 		bodyModel[405] = new ModelRendererTurbo(this, 75, 54, textureX, textureY); // Box 43
-		bodyModel[406] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[406] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker").setLightFixtureId("marker_two_body_406"); // Box 71 markerlight twO
 		bodyModel[407] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[408] = new ModelRendererTurbo(this, 18, 41, textureX, textureY); // Box 1251
 		bodyModel[409] = new ModelRendererTurbo(this, 84, 45, textureX, textureY); // Box 43
@@ -515,7 +515,7 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[467] = new ModelRendererTurbo(this, 36, 220, textureX, textureY); // Box 391
 		bodyModel[468] = new ModelRendererTurbo(this, 45, 228, textureX, textureY); // Box 392
 		bodyModel[469] = new ModelRendererTurbo(this, 31, 228, textureX, textureY); // Box 393
-		bodyModel[470] = new ModelRendererTurbo(this, 32, 83, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[470] = new ModelRendererTurbo(this, 32, 83, textureX, textureY, "marker").setLightFixtureId("marker_two_body_470"); // Box 71 markerlight twO
 		bodyModel[471] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[472] = new ModelRendererTurbo(this, 456, 102, textureX, textureY); // Box 444
 		bodyModel[473] = new ModelRendererTurbo(this, 449, 101, textureX, textureY); // Box 445

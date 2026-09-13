@@ -62,5 +62,8 @@ public class gsco67millgon extends AbstractStandardFreightCar
         return 3.3F;
     }
 
-
+    @Override
+    public String transportYear() {
+        return "1940-1953";
+    }
 }

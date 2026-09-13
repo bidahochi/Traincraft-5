@@ -15,6 +15,17 @@ import java.awt.*;
 
 
 public class DieselSD40T2 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd40t2")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_two_body_320", "marker_two_body_322")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_318", "front_numberboard_body_319")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -72,4 +83,11 @@ public class DieselSD40T2 extends DieselTrain {
     public String getInventoryName() {
         return "EMD SD40T-2";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

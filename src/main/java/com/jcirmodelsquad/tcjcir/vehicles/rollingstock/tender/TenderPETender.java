@@ -6,6 +6,15 @@ import train.common.api.LiquidManager;
 import train.common.api.Tender;
 
 public class TenderPETender extends Tender  {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:petender")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_red")
+        .color(train.common.api.RollingStockLightColors.RED, "marker_red")
+        .build();
+
 
 	public TenderPETender(World world) {
 		super(world,  LiquidManager.WATER_FILTER);
@@ -32,4 +41,10 @@ public class TenderPETender extends Tender  {
 	{
 		return "US";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

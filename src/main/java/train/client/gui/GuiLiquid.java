@@ -20,27 +20,36 @@ import train.common.inventory.InventoryLiquid;
 import train.common.library.Info;
 
 public class GuiLiquid extends GuiContainer {
+	private static final int BASE_GUI_HEIGHT = 166;
 
-	private LiquidTank liquid;
-	private EntityPlayer player;
+	private final LiquidTank liquid;
+	private final EntityPlayer player;
 	private GuiTCTextField trainNote;
+	private final RollingStockLightControlPanel lightControls;
 
-	public GuiLiquid(EntityPlayer player, InventoryPlayer inventoryplayer, Entity entityminecart) {
-		super(new InventoryLiquid(inventoryplayer, (LiquidTank) entityminecart));
-		liquid = (LiquidTank) entityminecart;
+	public GuiLiquid(EntityPlayer player, InventoryPlayer inventoryPlayer, Entity rollingStock) {
+		super(new InventoryLiquid(inventoryPlayer, (LiquidTank) rollingStock));
+		liquid = (LiquidTank) rollingStock;
 		this.player = player;
+		lightControls = RollingStockLightControlPanel.create(rollingStock);
+		if (lightControls != null) {
+			ySize = RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT;
+		}
 	}
 
 	@Override
-	public void drawScreen(int t, int g, float par3) {
-		drawGuiContainerBackgroundLayer(par3, t, g);
-		super.drawScreen(t, g, par3);
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+		super.drawScreen(mouseX, mouseY, partialTicks);
 
-		if (intersectsWith(t, g)) {
+		if (intersectsWith(mouseX, mouseY)) {
 			if (liquid.getLiquidName()!= null && !liquid.getLiquidName().equals("")) {
-				drawCreativeTabHoveringText(StatCollector.translateToLocal(liquid.getLiquidName()) + ": " + liquid.getAmount() + "mb/" + liquid.getCapacity() + "mb", t, g);
+				drawCreativeTabHoveringText(
+					StatCollector.translateToLocal(liquid.getLiquidName())
+					+ ": " + liquid.getAmount() + "mb/" + liquid.getCapacity() + "mb",
+					mouseX, mouseY);
 			} else {
-				drawCreativeTabHoveringText( "0mb/" + liquid.getCapacity() + "mb", t, g);
+				drawCreativeTabHoveringText( "0mb/" + liquid.getCapacity() + "mb", mouseX, mouseY);
 			}
 		}
 		trainNote.drawTextBox();
@@ -50,6 +59,9 @@ public class GuiLiquid extends GuiContainer {
 	@Override
 	public void updateScreen() {
 		super.updateScreen();
+		if (lightControls != null) {
+			lightControls.update();
+		}
 		if (trainNote.isFocused()) {
 			trainNote.updateCursorCounter();
 		}
@@ -57,16 +69,19 @@ public class GuiLiquid extends GuiContainer {
 
 	@Override
 	public void initGui() {
+		ySize = lightControls != null
+			? RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT
+			: BASE_GUI_HEIGHT;
 		super.initGui();
+		if (lightControls != null) {
+			guiTop += RollingStockLightControlPanel.GUI_VERTICAL_OFFSET;
+		}
 		buttonList.clear();
-		int var1 = (this.width-xSize) / 2;
-		int var2 = (this.height-ySize) / 2;
-
 		GuiButton lockButton = TransportLockGuiHandler.createLockButton(
 				liquid,
 				player,
-				var1,
-				var2,
+				guiLeft,
+				guiTop,
 				124,
 				-10,
 				51
@@ -76,14 +91,21 @@ public class GuiLiquid extends GuiContainer {
 		{
 			this.buttonList.add(lockButton);
 		}
+		if (lightControls != null) {
+			lightControls.init(
+				buttonList, guiLeft, guiTop + RollingStockLightControlPanel.GUI_Y);
+		}
 
-		trainNote = new GuiTCTextField(fontRendererObj, width/2 - 85, height/2 - 110, 170,15);
+		trainNote = new GuiTCTextField(fontRendererObj, width / 2 - 85, guiTop - 27, 170, 15);
 		trainNote.setText(liquid.getTrainNote());
 
 	}
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
+		if (lightControls != null && lightControls.actionPerformed(guibutton)) {
+			return;
+		}
 		switch (guibutton.id)
 		{
 			case 3:
@@ -170,21 +192,22 @@ public class GuiLiquid extends GuiContainer {
 	}
 	public boolean intersectsWithLockButton(int mouseX, int mouseY) {
 		//System.out.println(mouseX+" "+mouseY);
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		return (mouseX >= j + 124 && mouseX <= j + 174 && mouseY >= k-10 && mouseY <= k);
+		return (mouseX >= guiLeft + 124 && mouseX <= guiLeft + 174
+			&& mouseY >= guiTop - 10 && mouseY <= guiTop);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float f, int t, int g) {
+	protected void drawGuiContainerBackgroundLayer(
+		float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,Info.guiPrefix + "gui_liquid.png"));
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		drawTexturedModalRect(j, k, 0, 0, xSize, ySize);
+		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, BASE_GUI_HEIGHT);
+		if (lightControls != null) {
+			lightControls.draw(mc, zLevel);
+		}
 
 
-		int l = (liquid.getAmount() * 50) / liquid.getCapacity();
+		int liquidHeight = (liquid.getAmount() * 50) / liquid.getCapacity();
 
 		Fluid theLiquid = FluidRegistry.getFluid(liquid.getLiquidItemID());
 		/** Don't render anything if the cart is empty */
@@ -197,30 +220,32 @@ public class GuiLiquid extends GuiContainer {
 			mc.renderEngine.bindTexture(FluidRenderHelper.getFluidSheet(theLiquid));
 			//func_110628_a(FluidRenderHelper.getFluidSheet(new FluidStack(theLiquid,1)));
 			/** Drawing 16*16 icons side by side, extending them gives bad results */
-			for (int col = 0; col < 66 / 16; col++) {
-				for (int row = 0; row <= (l) / 16; row++) {
+			for (int column = 0; column < 66 / 16; column++) {
+				for (int row = 0; row <= liquidHeight / 16; row++) {
 					//System.out.println(ItemIDs.bogie.item.getIconFromDamage(0));
-					drawTexturedModelRectFromIcon(j + 58 + col * 16, k + 52 + -row * 16,FluidRenderHelper.getFluidTexture(theLiquid,false), 16, 16);
+					drawTexturedModelRectFromIcon(
+						guiLeft + 58 + column * 16, guiTop + 52 - row * 16,
+						FluidRenderHelper.getFluidTexture(theLiquid, false), 16, 16);
 				}
 			}
 			/** Bind again to render a black overlay. The icon is rendered in 16*16 square and therefore not adapted to a 50 pixels high tank */
 			mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,Info.guiPrefix + "gui_liquid.png"));
 			/** Drawing black overlay over the liquid */
-			drawTexturedModalRect(j + 58, (k + 1), 4, 168, 64, 50 - l + 15);
+			drawTexturedModalRect(
+				guiLeft + 58, guiTop + 1, 4, 168, 64, 50 - liquidHeight + 15);
 		}
 		/** Drawing the red scale over the liquid */
-		drawTexturedModalRect(j + 58, (k + 67 - 50), 72, 167, 64, 50);
+		drawTexturedModalRect(guiLeft + 58, guiTop + 17, 72, 167, 64, 50);
 	}
 
 	public boolean intersectsWith(int mouseX, int mouseY) {
-		int j = (width - xSize) / 2;
-		int k = (height - ySize) / 2;
-		return (mouseX >= j + 57 && mouseX <= j + 123 && mouseY >= k + 16 && mouseY <= k + 68);
+		return (mouseX >= guiLeft + 57 && mouseX <= guiLeft + 123
+			&& mouseY >= guiTop + 16 && mouseY <= guiTop + 68);
 	}
 
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
-		trainNote.mouseClicked(par1, par2, par3);
-		super.mouseClicked(par1, par2, par3);
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+		trainNote.mouseClicked(mouseX, mouseY, mouseButton);
+		super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 }

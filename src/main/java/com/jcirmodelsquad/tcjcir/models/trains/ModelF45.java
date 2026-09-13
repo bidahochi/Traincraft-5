@@ -97,8 +97,8 @@ public class ModelF45 extends ModelConverter //Same as Filename
 		bodyModel[54] = new ModelRendererTurbo(this, 169, 9, textureX, textureY); // Box 48
 		bodyModel[55] = new ModelRendererTurbo(this, 473, 41, textureX, textureY); // Box 43
 		bodyModel[56] = new ModelRendererTurbo(this, 25, 57, textureX, textureY); // Box 44
-		bodyModel[57] = new ModelRendererTurbo(this, 489, 25, textureX, textureY, "lamp"); // Box 117 liveryimg 2 glow
-		bodyModel[58] = new ModelRendererTurbo(this, 217, 33, textureX, textureY, "lamp"); // Box 118 liveryimg 2 glow
+		bodyModel[57] = new ModelRendererTurbo(this, 489, 25, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_57"); // Box 117 liveryimg 2 glow
+		bodyModel[58] = new ModelRendererTurbo(this, 217, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_58"); // Box 118 liveryimg 2 glow
 		bodyModel[59] = new ModelRendererTurbo(this, 489, 9, textureX, textureY, "lamp"); // Box 186 lamp
 		bodyModel[60] = new ModelRendererTurbo(this, 153, 17, textureX, textureY, "lamp"); // Box 187 lamp
 		bodyModel[61] = new ModelRendererTurbo(this, 41, 57, textureX, textureY); // Box 219

@@ -8,6 +8,18 @@ import train.common.enums.LockoutGroup;
 
 public class SBMS extends AbstractTankSlug
 {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sbms")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_168", "marker_body_169")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_151", "numberboard_body_152", "numberboard_body_177",
+            "numberboard_body_178")
+        .build();
+
     public SBMS(World world)
     {
         super(world);
@@ -42,4 +54,11 @@ public class SBMS extends AbstractTankSlug
     public boolean isFictional(){
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

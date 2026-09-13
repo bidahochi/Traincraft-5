@@ -15,9 +15,8 @@ import net.minecraft.world.World;
 import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
 import train.common.core.network.AdminBook.PacketAdminBookClient;
-import train.common.core.util.TraincraftUtil;
+import train.common.library.track.TrackCellResolver;
 import train.common.items.ItemAbstractRollingStock;
-import train.common.library.BlockIDs;
 import train.common.library.Info;
 
 import java.io.File;
@@ -152,8 +151,17 @@ public class ItemAdminBook extends Item {
         }
     }
 
+    /**
+     * Tests whether a world cell can serve as a rail placement target.
+     *
+     * @param world world containing the candidate cell
+     * @param x candidate X coordinate
+     * @param y candidate Y coordinate
+     * @param z candidate Z coordinate
+     * @return whether the cell is replaceable or contains a supported embedded host
+     */
     private boolean isRailPlacementTarget(World world, int x, int y, int z) {
-        return TraincraftUtil.isRailBlockAt(world, x, y, z) || world.getBlock(x, y, z) == BlockIDs.tcRail.block || world.getBlock(x, y, z) == BlockIDs.tcRailGag.block;
+        return TrackCellResolver.isRailBlockAt(world, x, y, z);
     }
 
     private void restoreOwnerFromCartTag(ItemStack cartStack, EntityRollingStock stock) {

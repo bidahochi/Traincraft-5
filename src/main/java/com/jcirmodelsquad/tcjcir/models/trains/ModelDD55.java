@@ -158,7 +158,7 @@ public class ModelDD55 extends ModelConverter //Same as Filename
 		bodyModel[112] = new ModelRendererTurbo(this, 233, 145, textureX, textureY); // Box 128
 		bodyModel[113] = new ModelRendererTurbo(this, 153, 145, textureX, textureY); // Box 120
 		bodyModel[114] = new ModelRendererTurbo(this, 193, 121, textureX, textureY); // Box 111
-		bodyModel[115] = new ModelRendererTurbo(this, 241, 1, textureX, textureY, "lamp"); // Box 184 numberboard glow
+		bodyModel[115] = new ModelRendererTurbo(this, 241, 1, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_115"); // Box 184 numberboard glow
 		bodyModel[116] = new ModelRendererTurbo(this, 233, 137, textureX, textureY); // Box 125
 		bodyModel[117] = new ModelRendererTurbo(this, 121, 41, textureX, textureY, "lamp"); // Box 126 numberbruh
 		bodyModel[118] = new ModelRendererTurbo(this, 193, 145, textureX, textureY, "lamp"); // Box 127 numberbruh

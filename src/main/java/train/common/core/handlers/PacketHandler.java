@@ -58,8 +58,6 @@ public class PacketHandler
 		Traincraft.ignitionChannel = NetworkRegistry.INSTANCE.newSimpleChannel("ignition");
 		Traincraft.brakeChannel = NetworkRegistry.INSTANCE.newSimpleChannel("brake");
 		Traincraft.rollingStockLightsChannel = NetworkRegistry.INSTANCE.newSimpleChannel("rollingStockLights");
-		Traincraft.rollingStockBeaconChannel = NetworkRegistry.INSTANCE.newSimpleChannel("rollingStockBeacon");
-		Traincraft.rollingStockDitchLightsChannel = NetworkRegistry.INSTANCE.newSimpleChannel("ditchLights");
 		Traincraft.lockChannel = NetworkRegistry.INSTANCE.newSimpleChannel("lock");
 		Traincraft.builderChannel = NetworkRegistry.INSTANCE.newSimpleChannel("builder");
 		Traincraft.paintbrushColorChannel = NetworkRegistry.INSTANCE.newSimpleChannel("paintbrushColor");
@@ -87,13 +85,9 @@ public class PacketHandler
 				3, Side.CLIENT);
 		Traincraft.brakeChannel.registerMessage(PacketParkingBrake.Handler.class, PacketParkingBrake.class,
 				4, Side.SERVER);
-		Traincraft.rollingStockLightsChannel.registerMessage(PacketRollingStockLights.Handler.class, PacketRollingStockLights.class,
+		Traincraft.rollingStockLightsChannel.registerMessage(PacketRollingStockLightState.Handler.class,
+                PacketRollingStockLightState.class,
 				19, Side.SERVER);
-		Traincraft.rollingStockBeaconChannel.registerMessage(PacketRollingStockBeacon.Handler.class, PacketRollingStockBeacon.class,
-				20, Side.SERVER);
-		Traincraft.rollingStockDitchLightsChannel.registerMessage(PacketRollingStockDitchLights.Handler.class, PacketRollingStockDitchLights.class,
-				21, Side.SERVER);
-
 		Traincraft.lockChannel.registerMessage(PacketSetTrainLockedToClient.Handler.class,
 				PacketSetTrainLockedToClient.class, 6, Side.SERVER);
 		Traincraft.lockChannel.registerMessage(PacketSetTrainLockedToClient.Handler.class,
@@ -145,6 +139,9 @@ public class PacketHandler
 		Traincraft.BannedItems_CHANNEL.registerMessage(PacketSyncBannedItems.Handler.class, PacketSyncBannedItems.class, 29, Side.CLIENT);
 		Traincraft.tcCraftingBenchChannel.registerMessage(PacketUpdateTCBenchPage.Handler.class, PacketUpdateTCBenchPage.class, 30, Side.SERVER);
 		Traincraft.modChannel.registerMessage(PacketTenderStorageMode.Handler.class, PacketTenderStorageMode.class, 31, Side.SERVER);
+		Traincraft.modChannel.registerMessage(PacketTrackPlacementSound.Handler.class, PacketTrackPlacementSound.class, 38, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketActionBarMessage.Handler.class, PacketActionBarMessage.class, 39, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketTrackAttachmentState.Handler.class, PacketTrackAttachmentState.class, 40, Side.CLIENT);
 	}
 
 	private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

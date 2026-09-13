@@ -9,6 +9,15 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP38dash9W extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp38dash9w")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_223", "numberboard_body_224", "numberboard_body_24",
+            "numberboard_body_25")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -76,4 +85,11 @@ public class DieselGP38dash9W extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -1,7 +1,10 @@
 package train.client.render;
 
+import train.client.render.embedded.EmbeddedSlopeRenderPolicy;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import train.client.render.models.blocks.track.ModelEmbeddedTransitionSlopeTCTrack;
 import train.client.render.models.blocks.track.ModelSlopeTCTrack;
 import train.common.items.BallastTypes;
 import train.common.library.track.EnumCoreTrack;
@@ -54,6 +57,13 @@ public final class TrackRenderRouteCache
         return route;
     }
 
+    /**
+     * Builds the immutable renderer route for one definition and effective core.
+     *
+     * @param track material and resource definition being rendered
+     * @param effectiveCore geometry core selected for this render
+     * @return renderer route for the requested combination
+     */
     private static TrackRenderRoute buildRoute(ITrackDefinition track, EnumCoreTrack effectiveCore)
     {
         switch (effectiveCore)
@@ -126,6 +136,10 @@ public final class TrackRenderRouteCache
                 return left32xTurnRoute();
 
             // Slopes
+            case CORE_EMBEDDED_TRANSITION_SLOPE:
+                return embeddedTransitionSlopeRoute(RenderTCRail.model1x3EmbeddedTransitionSlope);
+            case CORE_EMBEDDED_DIAGONAL_TRANSITION_SLOPE:
+                return embeddedDiagonalTransitionSlopeRoute(RenderTCRail.model1x3DiagonalEmbeddedTransitionSlope);
             case CORE_3_SLOPE:
                 return slopeRoute(RenderTCRail.model1X3Slope);
             case CORE_3_DIAGONAL_SLOPE:
@@ -142,6 +156,18 @@ public final class TrackRenderRouteCache
                 return slopeRoute(RenderTCRail.model1x18Slope);
             case CORE_18_DIAGONAL_SLOPE:
                 return slopeRoute(RenderTCRail.model1x18DiagonalSlope);
+            case CORE_3_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x3HalfHeightSlope);
+            case CORE_6_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x6HalfHeightSlope);
+            case CORE_9_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x9HalfHeightSlope);
+            case CORE_3_DIAGONAL_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x3DiagonalHalfHeightSlope);
+            case CORE_6_DIAGONAL_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x6DiagonalHalfHeightSlope);
+            case CORE_9_DIAGONAL_HALF_HEIGHT_SLOPE:
+                return regularHalfHeightSlopeRoute(RenderTCRail.model1x9DiagonalHalfHeightSlope);
 
             // Switches
             case CORE_4x11_PARALLEL_SWITCH:
@@ -312,6 +338,12 @@ public final class TrackRenderRouteCache
     {
         return context ->
         {
+			if (context.railTile != null && context.railTile.hasBridgeSupport())
+			{
+				model.render(context.variant, BallastTypes.WOODSUPPORT, context.facing,
+						context.x, context.y, context.z, context.r, context.g, context.b, context.a);
+				return;
+			}
             if (BallastTypes.DYNAMIC.equals(context.track.getBallastType()) && context.railTile != null)
             {
                 model.renderDynamic(context.variant, context.railTile, context.facing, context.x, context.y, context.z);
@@ -321,6 +353,64 @@ public final class TrackRenderRouteCache
                 model.render(context.variant, context.track.getBallastType(), context.facing, context.x, context.y, context.z, context.r, context.g, context.b, context.a);
             }
         };
+    }
+
+    /**
+     * Creates a half-height slope route that pairs the authored rail mesh with generated cardinal or diagonal ballast.
+     * Host-mounted tracks receive their generated wedge from the captured-host renderer, replacement tracks retain
+     * their trench renderer, and wood-support tracks retain their authored support mesh.
+     *
+     * @param model half-height slope model supplying the authored rail and optional wood-support meshes
+     * @return route selecting generated ballast, embedded trench rendering, or authored wood supports
+     */
+    private static TrackRenderRoute regularHalfHeightSlopeRoute(final ModelSlopeTCTrack model)
+    {
+        return context ->
+        {
+			if (context.railTile != null && context.railTile.isReplaceTargetTrack()
+					&& context.railTile.isIntactHostMountedTrack() == false)
+			{
+				model.renderRailOnly(context.variant, context.facing, context.x, context.y, context.z);
+				return;
+			}
+            if (context.railTile != null
+                    && EmbeddedSlopeRenderPolicy.usesGeneratedHalfHeightBallast(context.railTile))
+            {
+                model.renderRailOnly(context.variant, context.facing, context.x, context.y, context.z);
+                return;
+            }
+            if (BallastTypes.DYNAMIC.equals(context.track.getBallastType()) && context.railTile != null)
+            {
+                model.renderDynamic(context.variant, context.railTile, context.facing, context.x, context.y, context.z);
+            }
+            else
+            {
+                model.render(context.variant, context.track.getBallastType(), context.facing,
+                        context.x, context.y, context.z, context.r, context.g, context.b, context.a);
+            }
+        };
+    }
+
+    /**
+     * Creates the cardinal embedded-transition render route.
+     *
+     * @param model transition model rendered by the route
+     * @return route that renders the cardinal transition mesh
+     */
+    private static TrackRenderRoute embeddedTransitionSlopeRoute(final ModelEmbeddedTransitionSlopeTCTrack model)
+    {
+        return context -> model.render(context.variant, context.facing, context.x, context.y, context.z, context.r, context.g, context.b, context.a);
+    }
+
+    /**
+     * Creates the diagonal embedded-transition render route.
+     *
+     * @param model transition model rendered by the route
+     * @return route that renders the diagonal transition mesh
+     */
+    private static TrackRenderRoute embeddedDiagonalTransitionSlopeRoute(final ModelEmbeddedTransitionSlopeTCTrack model)
+    {
+        return context -> model.renderDiagonal(context.variant, context.facing, context.x, context.y, context.z, context.r, context.g, context.b, context.a);
     }
 
     private static boolean active(TrackRenderContext context)

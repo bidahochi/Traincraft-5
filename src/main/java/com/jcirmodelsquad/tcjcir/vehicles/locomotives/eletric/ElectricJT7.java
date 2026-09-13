@@ -7,6 +7,17 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class ElectricJT7 extends ElectricTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:jt7")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_445", "marker_body_446")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_443", "numberboard_body_444")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -70,4 +81,11 @@ public class ElectricJT7 extends ElectricTrain {
     public String transportYear() {
         return "1948, 1952-1960";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -45,4 +45,9 @@ public class ACF3500 extends AbstractStandardFreightCar
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 2.5F;
 	}
+
+	@Override
+	public String transportYear() {
+		return "1961-1966";
+	}
 }

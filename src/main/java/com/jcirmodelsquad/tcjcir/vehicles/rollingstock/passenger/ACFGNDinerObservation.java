@@ -5,6 +5,14 @@ import train.common.api.AbstractPassengerCar;
 
 public class ACFGNDinerObservation extends AbstractPassengerCar
 {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:acfgndinerobservation")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_224", "marker_body_227")
+        .build();
+
 
 	public ACFGNDinerObservation(World world) {
 		super(world);
@@ -30,4 +38,10 @@ public class ACFGNDinerObservation extends AbstractPassengerCar
 	public String transportYear() {
 		return "1950";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 }

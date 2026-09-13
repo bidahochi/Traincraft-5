@@ -8,7 +8,6 @@ import org.lwjgl.opengl.GL11;
 import train.common.enums.TrackResourceLocations;
 import train.common.items.BallastTypes;
 import train.common.items.RailVariants;
-import train.common.library.Info;
 import train.common.tile.TileTCRail;
 
 
@@ -19,17 +18,47 @@ public class ModelSlopeTCTrack extends AbstractTrackModel
     private int listSlopeWood = -1;
     private int listSlopeBallast = -1;
 
+    /**
+     * Loads a rail-only slope whose non-wood ballast is supplied by generated geometry.
+     *
+     * @param trackOBJ authored rail OBJ path
+     */
+    public ModelSlopeTCTrack(String trackOBJ)
+    {
+        listTrack = getDisplayList(trackOBJ);
+    }
+
+    /**
+     * Loads a slope with authored rail and ballast meshes.
+     *
+     * @param trackOBJ authored rail OBJ path
+     * @param slopeBallastOBJ authored ballast OBJ path
+     */
     public ModelSlopeTCTrack(String trackOBJ, String slopeBallastOBJ)
     {
         listTrack = getDisplayList(trackOBJ);
         listSlopeBallast = getDisplayList(slopeBallastOBJ);
     }
 
+    /**
+     * Loads a slope with an authored rail mesh, an optional wood-support mesh, and an optional ballast mesh.
+     * A {@code null} ballast path is used by half-height slopes whose ballast is generated at runtime.
+     *
+     * @param trackOBJ authored rail OBJ path
+     * @param slopeWoodSupportOBJ authored wood-support OBJ path, or {@code null} when unsupported
+     * @param slopeBallastOBJ authored ballast OBJ path, or {@code null} when ballast is generated
+     */
     public ModelSlopeTCTrack(String trackOBJ, String slopeWoodSupportOBJ, String slopeBallastOBJ)
     {
         listTrack = getDisplayList(trackOBJ);
-        listSlopeWood = getDisplayList(slopeWoodSupportOBJ);
-        listSlopeBallast = getDisplayList(slopeBallastOBJ);
+        if (slopeWoodSupportOBJ != null)
+        {
+            listSlopeWood = getDisplayList(slopeWoodSupportOBJ);
+        }
+        if (slopeBallastOBJ != null)
+        {
+            listSlopeBallast = getDisplayList(slopeBallastOBJ);
+        }
     }
 
     protected void SetupDynamicBallastColour(int ballastColour)
@@ -40,29 +69,52 @@ public class ModelSlopeTCTrack extends AbstractTrackModel
         GL11.glColor4f(r,g,b,1);
     }
 
+    /**
+     * Renders the shared rail mesh and its dynamic ballast geometry. Placement-aware routes call
+     * {@link #renderRailOnly(RailVariants, int, double, double, double)} when an embedded host supplies the terrain.
+     *
+     * @param variants rail texture family
+     * @param ballastTextureInput captured ballast texture name
+     * @param ballastColour captured ballast tint
+     */
     public void renderDynamic(RailVariants variants, String ballastTextureInput, int ballastColour)
     {
         tmt.Tessellator.bindTexture(TrackResourceLocations.GetResourceLocation(variants));
         GL11.glCallList(listTrack);
         tmt.Tessellator.bindTexture(DynamicBallastTextureCache.get(ballastTextureInput));
         SetupDynamicBallastColour(ballastColour);
-        GL11.glCallList(listSlopeBallast);
+        if (listSlopeBallast != -1)
+        {
+            GL11.glCallList(listSlopeBallast);
+        }
         GL11.glColor4f(1, 1, 1, 1);
     }
 
+    /**
+     * Renders the shared rail mesh and its selected ballast geometry. Placement-aware routes call
+     * {@link #renderRailOnly(RailVariants, int, double, double, double)} when an embedded host supplies the terrain.
+     *
+     * @param variants rail texture family
+     * @param ballast selected fixed ballast type
+     */
     public void render(RailVariants variants, BallastTypes ballast)
     {
         tmt.Tessellator.bindTexture(TrackResourceLocations.GetResourceLocation(variants));
         GL11.glCallList(listTrack);
-
         tmt.Tessellator.bindTexture(TrackResourceLocations.GetBallasetResourceLocation(ballast));
         if (BallastTypes.WOODSUPPORT.equals(ballast))
         {
-            GL11.glCallList(listSlopeWood);
+            if (listSlopeWood != -1)
+            {
+                GL11.glCallList(listSlopeWood);
+            }
         }
         else
         {
-            GL11.glCallList(listSlopeBallast);
+            if (listSlopeBallast != -1)
+            {
+                GL11.glCallList(listSlopeBallast);
+            }
         }
         GL11.glColor4f(1, 1, 1, 1);
     }
@@ -86,6 +138,43 @@ public class ModelSlopeTCTrack extends AbstractTrackModel
             colour = 16777215;
         }
         renderDynamic(variants, facing, x, y, z, 1, 1, 1, 1, iconName, colour);
+    }
+
+    /**
+     * Renders only the fixed rail mesh when in-world ballast is supplied by the embedded host drawing path.
+     *
+     * @param variants rail texture family
+     * @param facing placed rail direction
+     * @param x camera-relative render X
+     * @param y camera-relative render Y
+     * @param z camera-relative render Z
+     */
+    public void renderRailOnly(RailVariants variants, int facing, double x, double y, double z)
+    {
+        renderRailOnly(variants, facing, x, y, z, 1, 1, 1, 1);
+    }
+
+    /**
+     * Renders only the authored rail mesh with the supplied preview tint and opacity.
+     *
+     * @param variants rail texture family
+     * @param facing rendered rail direction
+     * @param x camera-relative render X
+     * @param y camera-relative render Y
+     * @param z camera-relative render Z
+     * @param red red color multiplier
+     * @param green green color multiplier
+     * @param blue blue color multiplier
+     * @param alpha alpha color multiplier
+     */
+    public void renderRailOnly(RailVariants variants, int facing, double x, double y, double z,
+            float red, float green, float blue, float alpha)
+    {
+        setupRender(facing, x, y, z, red, green, blue, alpha);
+        tmt.Tessellator.bindTexture(TrackResourceLocations.GetResourceLocation(variants));
+        GL11.glCallList(listTrack);
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glPopMatrix();
     }
 
     public void render(TileTCRail tcRail, double x, double y, double z)

@@ -19,6 +19,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DieselGP40 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp40")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_10", "marker_body_11", "marker_body_444",
+            "marker_body_445", "marker_two_body_440", "marker_two_body_442",
+            "marker_two_body_446")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_73", "front_numberboard_body_74", "numberboard_body_379",
+            "numberboard_body_380", "rear_numberboard_body_536", "rear_numberboard_body_537",
+            "rear_numberboard_body_95", "rear_numberboard_body_96")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -92,4 +107,11 @@ public class DieselGP40 extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP40";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

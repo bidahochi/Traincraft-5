@@ -12,8 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
-import train.common.library.BlockIDs;
 import train.common.library.Info;
+import train.common.library.track.TrackCellResolver;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 
@@ -27,6 +27,21 @@ public class ItemTrackDebugger extends Item
         setCreativeTab(null);
     }
 
+    /**
+     * Inspects the clicked rail cell and reports its resolved parent and placement state.
+     *
+     * @param itemstack held debugger stack
+     * @param player using player
+     * @param world target world
+     * @param x clicked X coordinate
+     * @param y clicked Y coordinate
+     * @param z clicked Z coordinate
+     * @param par7 clicked side
+     * @param par8 hit X within the block
+     * @param par9 hit Y within the block
+     * @param par10 hit Z within the block
+     * @return whether the click was handled
+     */
     @Override
     public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, int x, int y, int z, int par7, float par8, float par9, float par10) {
 
@@ -40,12 +55,16 @@ public class ItemTrackDebugger extends Item
             //}
 
             Block block = world.getBlock(x, y, z);
-            if (block == BlockIDs.tcRail.block){
-                TileTCRail tile = (TileTCRail) world.getTileEntity(x, y, z);
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
+            if (TrackCellResolver.isTraincraftRailBlock(block)
+                    && TrackCellResolver.isTraincraftGagBlock(block) == false){
+                TileTCRail tile = TrackCellResolver.resolveParent(world, x, y, z);
 
-                if (tile != null)
-                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "TileTCRail"));
-                assert tile != null;
+                if (tile == null) {
+                    player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Traincraft rail has no resolvable parent tile"));
+                    return false;
+                }
+                player.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "TileTCRail"));
                 player.addChatMessage(new ChatComponentText( EnumChatFormatting.GOLD + "Name: " +  EnumChatFormatting.WHITE + tile.getType() + EnumChatFormatting.GOLD + " ItemID " + EnumChatFormatting.WHITE + (tile.getTrackTypeByLabel() == null ? "NULL" : tile.getTrackTypeByLabel().getItem())));
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "x: "    +  EnumChatFormatting.WHITE +  tile.xCoord + EnumChatFormatting.GOLD +  " y: " +  EnumChatFormatting.WHITE +tile.yCoord +  EnumChatFormatting.GOLD + " z: "+  EnumChatFormatting.WHITE + tile.zCoord));
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Meta: " +  EnumChatFormatting.WHITE + tile.getBlockMetadata()));
@@ -60,8 +79,8 @@ public class ItemTrackDebugger extends Item
                 player.addChatMessage(new ChatComponentText(EnumChatFormatting.GOLD + "Track Owner: " + EnumChatFormatting.WHITE + tile.getOwnerUUID()));
                 player.addChatMessage(new ChatComponentText(" "));
             }
-            else  if (block == BlockIDs.tcRailGag.block){
-                TileTCRailGag tile = (TileTCRailGag) world.getTileEntity(x, y, z);
+            else if (TrackCellResolver.isTraincraftGagBlock(block)){
+                TileTCRailGag tile = tileEntity instanceof TileTCRailGag ? (TileTCRailGag) tileEntity : null;
                 if (tile != null) {
                     player.addChatMessage(new ChatComponentText(EnumChatFormatting.GREEN + "TileTCGag"));
                     player.addChatMessage(new ChatComponentText( EnumChatFormatting.GOLD + "Name: " +  EnumChatFormatting.WHITE + tile.type));
@@ -106,6 +125,7 @@ public class ItemTrackDebugger extends Item
     }
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
-        par3List.add("\u00a77" + "Gets TileEntityData for current track");
+		par3List.add("\u00a77Inspects track tile data");
+		par3List.add("\u00a77Hold and aim at track to show its attachment path");
     }
 }

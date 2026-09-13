@@ -50,4 +50,9 @@ public class PCF6033 extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.85F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1966-1967";
+    }
 }

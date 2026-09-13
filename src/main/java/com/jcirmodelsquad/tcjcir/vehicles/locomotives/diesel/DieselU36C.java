@@ -13,6 +13,18 @@ import train.common.overlaytexture.OTSpecificationDynamic;
 import java.awt.*;
 
 public class DieselU36C extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:u36c")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_3", "marker_body_5")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_22", "numberboard_body_23", "numberboard_body_25",
+            "numberboard_body_26", "numberboard_body_90", "numberboard_body_91")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -100,5 +112,12 @@ public class DieselU36C extends DieselTrain {
 
 
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

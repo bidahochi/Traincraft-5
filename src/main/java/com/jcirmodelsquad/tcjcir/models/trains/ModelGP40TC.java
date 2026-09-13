@@ -202,8 +202,8 @@ public class ModelGP40TC extends ModelConverter //Same as Filename
 		bodyModel[156] = new ModelRendererTurbo(this, 256, 152, textureX, textureY); // Box 256
 		bodyModel[157] = new ModelRendererTurbo(this, 314, 125, textureX, textureY); // Box 247
 		bodyModel[158] = new ModelRendererTurbo(this, 23, 92, textureX, textureY); // Box 189
-		bodyModel[159] = new ModelRendererTurbo(this, 463, 88, textureX, textureY, BoxName.lamp); // Box 384 markerlight glow
-		bodyModel[160] = new ModelRendererTurbo(this, 501, 88, textureX, textureY, BoxName.lamp); // Box 385 markerlight glow
+		bodyModel[159] = new ModelRendererTurbo(this, 463, 88, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_159"); // Box 384 markerlight glow
+		bodyModel[160] = new ModelRendererTurbo(this, 501, 88, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_160"); // Box 385 markerlight glow
 		bodyModel[161] = new ModelRendererTurbo(this, 101, 50, textureX, textureY); // Box 193
 		bodyModel[162] = new ModelRendererTurbo(this, 105, 37, textureX, textureY, BoxName.lamp); // Box 117 numberboard front
 		bodyModel[163] = new ModelRendererTurbo(this, 105, 34, textureX, textureY, BoxName.lamp); // Box 118 numberboard front
@@ -217,8 +217,8 @@ public class ModelGP40TC extends ModelConverter //Same as Filename
 		bodyModel[171] = new ModelRendererTurbo(this, 75, 149, textureX, textureY); // Box 203
 		bodyModel[172] = new ModelRendererTurbo(this, 71, 149, textureX, textureY); // Box 204
 		bodyModel[173] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, BoxName.lamp); // emergency light
-		bodyModel[174] = new ModelRendererTurbo(this, 103, 56, textureX, textureY, BoxName.lamp); // markerlight glow
-		bodyModel[175] = new ModelRendererTurbo(this, 108, 56, textureX, textureY, BoxName.lamp); // markerlight glow
+		bodyModel[174] = new ModelRendererTurbo(this, 103, 56, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_174"); // markerlight glow
+		bodyModel[175] = new ModelRendererTurbo(this, 108, 56, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_175"); // markerlight glow
 		bodyModel[176] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, BoxName.lamp); // Box 294 lamp canada front
 		bodyModel[177] = new ModelRendererTurbo(this, 1, 46, textureX, textureY, BoxName.lamp); // Box 295 lamp canada front
 		bodyModel[178] = new ModelRendererTurbo(this, 282, 51, textureX, textureY); // Box 271

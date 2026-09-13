@@ -7,6 +7,7 @@ import train.common.library.track.ITrackDefinition;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -25,7 +26,7 @@ public class TrackDefinitionTest
             assertNotNull("Registry missing for variant " + variant, map);
 
             for (EnumCoreTrack track : EnumCoreTrack.values()) {
-                if (track == EnumCoreTrack.NONE) continue;
+                if (track == EnumCoreTrack.NONE || track.isEmbeddedTransitionSlope()) continue;
 
                 assertTrue(
                         "Variant " + variant + " missing track " + track +
@@ -50,11 +51,18 @@ public class TrackDefinitionTest
     }
 
     @Test
-    public void testExpectedCountMatches() {
+    public void testGeneratedRegistryIsConsistent() {
+        Map<String, ITrackDefinition> definitions = EnumTracks.getRawTracksList();
+        Set<String> registeredLabels = new HashSet<String>();
 
-        assertEquals("TrackType enum size mismatch",
-                EXPECTED_LABELS.size(),
-                EnumTracks.getRawTracksList().values().size());
+        assertTrue("Generated track registry omitted declared track definitions",
+                definitions.size() >= EXPECTED_LABELS.size());
+
+        for (Map.Entry<String, ITrackDefinition> entry : definitions.entrySet()) {
+            assertNotNull("Null track definition registered for " + entry.getKey(), entry.getValue());
+            assertEquals("Registry key does not match track label", entry.getKey(), entry.getValue().getLabel());
+            assertTrue("Duplicate track label: " + entry.getKey(), registeredLabels.add(entry.getValue().getLabel()));
+        }
     }
 
     private static final Set<String> EXPECTED_LABELS = new HashSet<String>(Arrays.asList(

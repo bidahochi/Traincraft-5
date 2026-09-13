@@ -12,6 +12,14 @@ import train.common.library.GuiIDs;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamOnion extends SteamTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:onion")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_95", "numberboard_body_96")
+        .build();
+
 	@Override
 	public SoundRecord getSoundRecord()
 	{
@@ -73,4 +81,11 @@ public class SteamOnion extends SteamTrain {
 	{
 		return "Moon";
 	}
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

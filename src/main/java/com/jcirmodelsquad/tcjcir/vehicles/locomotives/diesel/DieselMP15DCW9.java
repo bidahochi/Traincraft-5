@@ -10,6 +10,14 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselMP15DCW9 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:mp15dcw9")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_82", "numberboard_body_83")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -78,4 +86,11 @@ public class DieselMP15DCW9 extends DieselTrain {
     public boolean isFictional() {
         return true;
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

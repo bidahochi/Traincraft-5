@@ -271,7 +271,7 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[227] = new ModelRendererTurbo(this, 1, 221, textureX, textureY); // Box 38
 		bodyModel[228] = new ModelRendererTurbo(this, 1, 197, textureX, textureY); // Box 363
 		bodyModel[229] = new ModelRendererTurbo(this, 192, 325, textureX, textureY); // Box 38
-		bodyModel[230] = new ModelRendererTurbo(this, 195, 331, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[230] = new ModelRendererTurbo(this, 195, 331, textureX, textureY, "interior").setLightFixtureId("interior_body_230"); // Box 38 glow
 		bodyModel[231] = new ModelRendererTurbo(this, 181, 274, textureX, textureY); // Right seat part
 		bodyModel[232] = new ModelRendererTurbo(this, 181, 284, textureX, textureY); // Right seat part
 		bodyModel[233] = new ModelRendererTurbo(this, 172, 267, textureX, textureY); // Right seat part
@@ -295,7 +295,7 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[251] = new ModelRendererTurbo(this, 163, 262, textureX, textureY); // Box 333
 		bodyModel[252] = new ModelRendererTurbo(this, 169, 343, textureX, textureY); // Box 334
 		bodyModel[253] = new ModelRendererTurbo(this, 160, 325, textureX, textureY); // Box 38
-		bodyModel[254] = new ModelRendererTurbo(this, 169, 331, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[254] = new ModelRendererTurbo(this, 169, 331, textureX, textureY, "interior").setLightFixtureId("interior_body_254"); // Box 38 glow
 		bodyModel[255] = new ModelRendererTurbo(this, 141, 267, textureX, textureY); // Box 38
 		bodyModel[256] = new ModelRendererTurbo(this, 141, 293, textureX, textureY); // Box 38
 		bodyModel[257] = new ModelRendererTurbo(this, 118, 245, textureX, textureY); // Box 128
@@ -319,18 +319,18 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[275] = new ModelRendererTurbo(this, 13, 269, textureX, textureY); // Box 416
 		bodyModel[276] = new ModelRendererTurbo(this, 1, 249, textureX, textureY); // Box 414
 		bodyModel[277] = new ModelRendererTurbo(this, 1, 241, textureX, textureY); // Box 414
-		bodyModel[278] = new ModelRendererTurbo(this, 81, 294, textureX, textureY, "lamp"); // Box 38 glow
-		bodyModel[279] = new ModelRendererTurbo(this, 72, 294, textureX, textureY, "lamp"); // Box 38 glow
-		bodyModel[280] = new ModelRendererTurbo(this, 63, 294, textureX, textureY, "lamp"); // Box 38 glow
-		bodyModel[281] = new ModelRendererTurbo(this, 15, 306, textureX, textureY, "lamp"); // Box 38 glow
-		bodyModel[282] = new ModelRendererTurbo(this, 6, 309, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[278] = new ModelRendererTurbo(this, 81, 294, textureX, textureY, "interior").setLightFixtureId("interior_body_278"); // Box 38 glow
+		bodyModel[279] = new ModelRendererTurbo(this, 72, 294, textureX, textureY, "interior").setLightFixtureId("interior_body_279"); // Box 38 glow
+		bodyModel[280] = new ModelRendererTurbo(this, 63, 294, textureX, textureY, "interior").setLightFixtureId("interior_body_280"); // Box 38 glow
+		bodyModel[281] = new ModelRendererTurbo(this, 15, 306, textureX, textureY, "interior").setLightFixtureId("interior_body_281"); // Box 38 glow
+		bodyModel[282] = new ModelRendererTurbo(this, 6, 309, textureX, textureY, "interior").setLightFixtureId("interior_body_282"); // Box 38 glow
 		bodyModel[283] = new ModelRendererTurbo(this, 46, 292, textureX, textureY); // Box 38
 		bodyModel[284] = new ModelRendererTurbo(this, 17, 311, textureX, textureY); // Box 38
 		bodyModel[285] = new ModelRendererTurbo(this, 17, 316, textureX, textureY); // Box 38
-		bodyModel[286] = new ModelRendererTurbo(this, 15, 320, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[286] = new ModelRendererTurbo(this, 15, 320, textureX, textureY, "interior").setLightFixtureId("interior_body_286"); // Box 38 glow
 		bodyModel[287] = new ModelRendererTurbo(this, 17, 292, textureX, textureY); // Box 429
 		bodyModel[288] = new ModelRendererTurbo(this, 17, 297, textureX, textureY); // Box 430
-		bodyModel[289] = new ModelRendererTurbo(this, 15, 301, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[289] = new ModelRendererTurbo(this, 15, 301, textureX, textureY, "interior").setLightFixtureId("interior_body_289"); // Box 38 glow
 		bodyModel[290] = new ModelRendererTurbo(this, 5, 292, textureX, textureY); // Box 414
 		bodyModel[291] = new ModelRendererTurbo(this, 6, 300, textureX, textureY); // Box 414
 		bodyModel[292] = new ModelRendererTurbo(this, 5, 304, textureX, textureY); // Box 414
@@ -383,8 +383,8 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[339] = new ModelRendererTurbo(this, 29, 387, textureX, textureY); // Box 38
 		bodyModel[340] = new ModelRendererTurbo(this, 1, 394, textureX, textureY); // Box 38
 		bodyModel[341] = new ModelRendererTurbo(this, 27, 385, textureX, textureY); // Box 38
-		bodyModel[342] = new ModelRendererTurbo(this, 43, 457, textureX, textureY, "lamp"); // Box 128 glow
-		bodyModel[343] = new ModelRendererTurbo(this, 2, 354, textureX, textureY, "lamp"); // Box 128 glow
+		bodyModel[342] = new ModelRendererTurbo(this, 43, 457, textureX, textureY, "interior").setLightFixtureId("interior_body_342"); // Box 128 glow
+		bodyModel[343] = new ModelRendererTurbo(this, 2, 354, textureX, textureY, "interior").setLightFixtureId("interior_body_343"); // Box 128 glow
 		bodyModel[344] = new ModelRendererTurbo(this, 98, 359, textureX, textureY); // Box 128
 		bodyModel[345] = new ModelRendererTurbo(this, 100, 356, textureX, textureY); // Box 176
 		bodyModel[346] = new ModelRendererTurbo(this, 64, 87, textureX, textureY); // Box 128
@@ -405,7 +405,7 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[361] = new ModelRendererTurbo(this, 152, 226, textureX, textureY); // Box 349
 		bodyModel[362] = new ModelRendererTurbo(this, 159, 205, textureX, textureY); // Conductor's seat
 		bodyModel[363] = new ModelRendererTurbo(this, 143, 221, textureX, textureY); // Box 349
-		bodyModel[364] = new ModelRendererTurbo(this, 167, 203, textureX, textureY, "lamp"); // Box 38 glow
+		bodyModel[364] = new ModelRendererTurbo(this, 167, 203, textureX, textureY, "interior").setLightFixtureId("interior_body_364"); // Box 38 glow
 		bodyModel[365] = new ModelRendererTurbo(this, 144, 236, textureX, textureY); // Box 38
 		bodyModel[366] = new ModelRendererTurbo(this, 144, 247, textureX, textureY, "cull"); // Box 38 cull
 		bodyModel[367] = new ModelRendererTurbo(this, 144, 242, textureX, textureY); // Box 38
@@ -2179,10 +2179,10 @@ public class ModelPSCombine extends ModelConverter //Same as Filename
 		bodyModel[534] = new ModelRendererTurbo(this, 88, 440, textureX, textureY); // Box 38
 		bodyModel[535] = new ModelRendererTurbo(this, 125, 356, textureX, textureY); // Box 128
 		bodyModel[536] = new ModelRendererTurbo(this, 125, 357, textureX, textureY); // Box 128
-		bodyModel[537] = new ModelRendererTurbo(this, 195, 260, textureX, textureY, "lamp"); // Box 275 glow
-		bodyModel[538] = new ModelRendererTurbo(this, 195, 248, textureX, textureY, "lamp"); // Box 285 glow
-		bodyModel[539] = new ModelRendererTurbo(this, 165, 260, textureX, textureY, "lamp"); // Box 275 glow
-		bodyModel[540] = new ModelRendererTurbo(this, 165, 248, textureX, textureY, "lamp"); // Box 285 glow
+		bodyModel[537] = new ModelRendererTurbo(this, 195, 260, textureX, textureY, "interior").setLightFixtureId("interior_body_537"); // Box 275 glow
+		bodyModel[538] = new ModelRendererTurbo(this, 195, 248, textureX, textureY, "interior").setLightFixtureId("interior_body_538"); // Box 285 glow
+		bodyModel[539] = new ModelRendererTurbo(this, 165, 260, textureX, textureY, "interior").setLightFixtureId("interior_body_539"); // Box 275 glow
+		bodyModel[540] = new ModelRendererTurbo(this, 165, 248, textureX, textureY, "interior").setLightFixtureId("interior_body_540"); // Box 285 glow
 
 		bodyModel[500].addShapeBox(0F, 0F, 0F, 2, 2, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 27
 		bodyModel[500].setRotationPoint(54.5F, 4F, -11F);

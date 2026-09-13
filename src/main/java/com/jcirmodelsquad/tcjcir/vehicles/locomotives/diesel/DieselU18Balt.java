@@ -11,6 +11,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselU18Balt extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:u18balt")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_137", "marker_body_138", "marker_body_149",
+            "marker_body_150", "marker_body_82", "marker_body_83")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_117", "numberboard_body_126", "numberboard_body_158",
+            "numberboard_body_159")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -64,6 +77,13 @@ public class DieselU18Balt extends DieselTrain {
     @Override
     public String getInventoryName() {
         return "GE U18B";
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

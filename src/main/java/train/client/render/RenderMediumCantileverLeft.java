@@ -1,9 +1,12 @@
 package train.client.render;
 
+import train.client.render.lighting.PlacedModelLighting;
+
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import train.api.client.model.animation.PlacedModelLightProfile;
 import train.client.render.models.blocks.Crossings.ModelMediumCantileverLeft;
 import train.common.library.Info;
 import train.common.tile.tileSwitch.TileMediumCantileverLeft;
@@ -15,6 +18,10 @@ public class RenderMediumCantileverLeft extends TileEntitySpecialRenderer {
     private static final ResourceLocation textureOn = new ResourceLocation(Info.resourceLocation, Info.modelTexPrefix + "Crossings/MediumCantileverLeft.png");
     private static final ResourceLocation textureOn1 = new ResourceLocation(Info.resourceLocation, Info.modelTexPrefix + "Crossings/MediumCantileverRight.png");
     private static final ResourceLocation textureOff = new ResourceLocation(Info.resourceLocation, Info.modelTexPrefix + "Crossings/MediumCantileverOff.png");
+
+    private static final PlacedModelLightProfile lightProfile = PlacedModelLightProfile.alternatingWarning("warning",
+
+        textureOff, textureOn, textureOn1, 8);
 
 
     @Override
@@ -56,41 +63,69 @@ public class RenderMediumCantileverLeft extends TileEntitySpecialRenderer {
             }
         }
 
-        if (!skipRender) {
-            updateTicks++;
+        if (skipRender == false) {
+            updateTicks = tileEntity.getWorldObj().getTotalWorldTime();
+            flip = ((updateTicks / 8L) & 1L) == 0L;
             if(tile.powered) {
                 if(updateTicks % 30 == 0) {
                     if (flip)
+                    {
                         tmt.Tessellator.bindTexture(textureOn);
+                    }
                     else
+                    {
                         tmt.Tessellator.bindTexture(textureOn1);
-                    flip = !flip;
+                    }
                 }
                 else
+                {
                 if (flip)
+                    {
                     tmt.Tessellator.bindTexture(textureOn);
+                    }
                 else
+                    {
                     tmt.Tessellator.bindTexture(textureOn1);
+            }
+                }
             }
             else {
                 if (tile.rotation < -5 || tile.rotation > 5) {
                     if(updateTicks % 30 == 0) {
                         if (flip)
+                        {
                             tmt.Tessellator.bindTexture(textureOn);
+                        }
                         else
+                        {
                             tmt.Tessellator.bindTexture(textureOn1);
-                        flip = !flip;
+                        }
                     }
                     else {
                         if (flip)
+                        {
                             tmt.Tessellator.bindTexture(textureOn);
+                        }
                         else
+                        {
                             tmt.Tessellator.bindTexture(textureOn1);
                     }
+                }
                 } else
+                {
                     tmt.Tessellator.bindTexture(textureOff);
             }
+            }
+            PlacedModelLighting.begin(
+                tileEntity, modelSwitch, lightProfile, tile.powered, flip ? 0 : 1, tick);
+            try
+            {
             modelSwitch.render(null, tile.rotation, 0, 0, 0, 0, 0.0625f);
+        }
+            finally
+            {
+                PlacedModelLighting.end();
+            }
         }
         GL11.glPopMatrix();
     }

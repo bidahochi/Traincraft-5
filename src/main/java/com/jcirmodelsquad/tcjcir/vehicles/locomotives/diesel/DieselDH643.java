@@ -11,6 +11,18 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselDH643 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dh643")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_285", "marker_body_286", "marker_bullshit_stupid_body_254",
+            "marker_bullshit_stupid_body_255")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_103", "numberboard_body_104")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -38,4 +50,11 @@ public class DieselDH643 extends DieselTrain {
     public String getInventoryName() {
         return "ALCo DH643";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

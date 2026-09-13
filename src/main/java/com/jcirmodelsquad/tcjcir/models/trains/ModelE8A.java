@@ -237,8 +237,8 @@ public class ModelE8A extends ModelConverter //Same as Filename
 		bodyModel[190] = new ModelRendererTurbo(this, 490, 83, textureX, textureY); // Box 604
 		bodyModel[191] = new ModelRendererTurbo(this, 490, 91, textureX, textureY); // Box 605
 		bodyModel[192] = new ModelRendererTurbo(this, 499, 95, textureX, textureY); // Box 606
-		bodyModel[193] = new ModelRendererTurbo(this, 125, 177, textureX, textureY, BoxName.lamp); // Box 352 markerlight
-		bodyModel[194] = new ModelRendererTurbo(this, 51, 177, textureX, textureY, BoxName.lamp); // Box 353 markerlight
+		bodyModel[193] = new ModelRendererTurbo(this, 125, 177, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_193"); // Box 352 markerlight
+		bodyModel[194] = new ModelRendererTurbo(this, 51, 177, textureX, textureY, BoxName.marker).setLightFixtureId("marker_body_194"); // Box 353 markerlight
 		bodyModel[195] = new ModelRendererTurbo(this, 475, 125, textureX, textureY); // Box 356
 		bodyModel[196] = new ModelRendererTurbo(this, 494, 103, textureX, textureY); // Box 357
 		bodyModel[197] = new ModelRendererTurbo(this, 489, 101, textureX, textureY); // Box 358

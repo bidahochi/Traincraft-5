@@ -52,4 +52,9 @@ public class PCF_RBL_Smooth extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.85F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1965-1977";
+    }
 }

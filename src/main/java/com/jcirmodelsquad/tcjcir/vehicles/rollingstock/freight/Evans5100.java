@@ -58,4 +58,9 @@ public class Evans5100 extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.875F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1969-1977";
+    }
 }

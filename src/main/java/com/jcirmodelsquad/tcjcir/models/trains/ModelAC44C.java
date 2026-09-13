@@ -287,8 +287,8 @@ public class ModelAC44C extends ModelConverter //Same as Filename
 		bodyModel[243] = new ModelRendererTurbo(this, 120, 137, textureX, textureY); // Box 354
 		bodyModel[244] = new ModelRendererTurbo(this, 87, 123, textureX, textureY); // Box 300
 		bodyModel[245] = new ModelRendererTurbo(this, 82, 123, textureX, textureY); // Box 369
-		bodyModel[246] = new ModelRendererTurbo(this, 86, 177, textureX, textureY, "lamp"); // Box 117 numberboard
-		bodyModel[247] = new ModelRendererTurbo(this, 78, 180, textureX, textureY, "lamp"); // Box 118 numberboard
+		bodyModel[246] = new ModelRendererTurbo(this, 86, 177, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_246"); // Box 117 numberboard
+		bodyModel[247] = new ModelRendererTurbo(this, 78, 180, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_247"); // Box 118 numberboard
 		bodyModel[248] = new ModelRendererTurbo(this, 17, 150, textureX, textureY); // Box 314
 		bodyModel[249] = new ModelRendererTurbo(this, 133, 66, textureX, textureY); // Box 184 o2 generator
 		bodyModel[250] = new ModelRendererTurbo(this, 120, 64, textureX, textureY, BoxName.prime4); // Box 9 PRIME5-4
@@ -319,8 +319,8 @@ public class ModelAC44C extends ModelConverter //Same as Filename
 		bodyModel[275] = new ModelRendererTurbo(this, 32, 125, textureX, textureY); // Box 343
 		bodyModel[276] = new ModelRendererTurbo(this, 26, 131, textureX, textureY); // Box 344
 		bodyModel[277] = new ModelRendererTurbo(this, 23, 131, textureX, textureY); // Box 346
-		bodyModel[278] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "lamp"); // Box 393 numberboard
-		bodyModel[279] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "lamp"); // Box 395 numberboard
+		bodyModel[278] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_278"); // Box 393 numberboard
+		bodyModel[279] = new ModelRendererTurbo(this, 386, 43, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_279"); // Box 395 numberboard
 		bodyModel[280] = new ModelRendererTurbo(this, 487, 119, textureX, textureY); // Box 318
 		bodyModel[281] = new ModelRendererTurbo(this, 407, 165, textureX, textureY); // Box 547 an exact science
 		bodyModel[282] = new ModelRendererTurbo(this, 407, 144, textureX, textureY); // Box 345 an exact science
@@ -351,7 +351,7 @@ public class ModelAC44C extends ModelConverter //Same as Filename
 		bodyModel[307] = new ModelRendererTurbo(this, 4, 5, textureX, textureY); // Box 377
 		bodyModel[308] = new ModelRendererTurbo(this, 67, 4, textureX, textureY); // Box 378
 		bodyModel[309] = new ModelRendererTurbo(this, 7, 11, textureX, textureY); // Box 379
-		bodyModel[310] = new ModelRendererTurbo(this, 115, 39, textureX, textureY, "lamp"); // Box 301 markerlight glow
+		bodyModel[310] = new ModelRendererTurbo(this, 115, 39, textureX, textureY, "marker").setLightFixtureId("marker_body_310"); // Box 301 markerlight glow
 		bodyModel[311] = new ModelRendererTurbo(this, 115, 42, textureX, textureY, "lamp"); // Box 344
 		bodyModel[312] = new ModelRendererTurbo(this, 4, 110, textureX, textureY); // Box 280
 		bodyModel[313] = new ModelRendererTurbo(this, 15, 112, textureX, textureY); // Box 285
@@ -415,8 +415,8 @@ public class ModelAC44C extends ModelConverter //Same as Filename
 		bodyModel[371] = new ModelRendererTurbo(this, 65, 75, textureX, textureY); // Box 413 cs
 		bodyModel[372] = new ModelRendererTurbo(this, 65, 83, textureX, textureY); // Box 531 cs
 		bodyModel[373] = new ModelRendererTurbo(this, 65, 68, textureX, textureY); // Box 86 cs
-		bodyModel[374] = new ModelRendererTurbo(this, 85, 79, textureX, textureY, "lamp"); // Box 412 cs glow
-		bodyModel[375] = new ModelRendererTurbo(this, 85, 75, textureX, textureY, "lamp"); // Box 413 cs glow
+		bodyModel[374] = new ModelRendererTurbo(this, 85, 79, textureX, textureY, "instrument").setLightFixtureId("cab_signal_body_374"); // Box 412 cs glow
+		bodyModel[375] = new ModelRendererTurbo(this, 85, 75, textureX, textureY, "instrument").setLightFixtureId("cab_signal_body_375"); // Box 413 cs glow
 		bodyModel[376] = new ModelRendererTurbo(this, 28, 69, textureX, textureY, BoxName.ditch); // Box 551 ditchlight f mccloud
 		bodyModel[377] = new ModelRendererTurbo(this, 28, 69, textureX, textureY, BoxName.ditch); // Box 550 ditchlight f mccloud
 		bodyModel[378] = new ModelRendererTurbo(this, 19, 69, textureX, textureY); // Box 549

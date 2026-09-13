@@ -10,6 +10,20 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselSD60 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd60")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_marker", "front_marker_bugeye_body_345", "front_marker_bugeye_body_346",
+            "rear_marker_bugeye_body_347", "rear_marker_bugeye_body_348", "rear_marker_high",
+            "rear_marker_low")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_147", "front_numberboard_body_148", "rear_numberboard_body_166",
+            "rear_numberboard_body_167")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -55,4 +69,11 @@ public class DieselSD60 extends DieselTrain {
     public String getInventoryName() {
         return "EMD SD60";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

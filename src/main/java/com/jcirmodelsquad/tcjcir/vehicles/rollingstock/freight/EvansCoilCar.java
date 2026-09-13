@@ -179,4 +179,9 @@ public class EvansCoilCar extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.88F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1964-1990";
+    }
 }

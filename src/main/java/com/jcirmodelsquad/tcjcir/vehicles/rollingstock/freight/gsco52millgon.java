@@ -66,4 +66,9 @@ public class gsco52millgon extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.6F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1940-1953";
+    }
 }

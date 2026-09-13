@@ -9,6 +9,18 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselE9B extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:e9b")
+        .defaults()
+        .fixtureType(train.common.api.LightFixtureType.COMMANDER, "commander")
+        .build();
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
     @Override
     public SoundRecord getSoundRecord()
     {

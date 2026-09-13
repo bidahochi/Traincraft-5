@@ -186,11 +186,11 @@ public class ModelWVcaboose extends ModelConverter //Same as Filename
 		bodyModel[144] = new ModelRendererTurbo(this, 241, 1, textureX, textureY); // Box 40
 		bodyModel[145] = new ModelRendererTurbo(this, 281, 17, textureX, textureY); // Box 40
 		bodyModel[146] = new ModelRendererTurbo(this, 369, 73, textureX, textureY); // Box 40
-		bodyModel[147] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "lamp"); // glow
-		bodyModel[148] = new ModelRendererTurbo(this, 281, 9, textureX, textureY, "lamp"); // glow
-		bodyModel[149] = new ModelRendererTurbo(this, 401, 17, textureX, textureY, "lamp"); // glow
-		bodyModel[150] = new ModelRendererTurbo(this, 1, 25, textureX, textureY, "lamp"); // glow
-		bodyModel[151] = new ModelRendererTurbo(this, 57, 25, textureX, textureY, "lamp"); // glow
+		bodyModel[147] = new ModelRendererTurbo(this, 425, 9, textureX, textureY, "lamp").setLightFixtureId("rear_center"); // glow
+		bodyModel[148] = new ModelRendererTurbo(this, 281, 9, textureX, textureY, "lamp").setLightFixtureId("rear_left"); // glow
+		bodyModel[149] = new ModelRendererTurbo(this, 401, 17, textureX, textureY, "lamp").setLightFixtureId("rear_right"); // glow
+		bodyModel[150] = new ModelRendererTurbo(this, 1, 25, textureX, textureY, "lamp").setLightFixtureId("front_right"); // glow
+		bodyModel[151] = new ModelRendererTurbo(this, 57, 25, textureX, textureY, "lamp").setLightFixtureId("front_left"); // glow
 		bodyModel[152] = new ModelRendererTurbo(this, 2, 42, textureX, textureY); // Box 40
 		bodyModel[153] = new ModelRendererTurbo(this, 2, 59, textureX, textureY); // Box 40
 

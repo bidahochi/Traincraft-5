@@ -72,9 +72,9 @@ public class ModelTenderDeseret extends ModelConverter //Same as Filename
 		bodyModel[31] = new ModelRendererTurbo(this, 217, 9, textureX, textureY); // Box 560
 		bodyModel[32] = new ModelRendererTurbo(this, 401, 9, textureX, textureY); // Box 561
 		bodyModel[33] = new ModelRendererTurbo(this, 337, 1, textureX, textureY); // Box 2
-		bodyModel[34] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[34] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "marker").setLightFixtureId("marker_body_34"); // Box 410 glow marker
 		bodyModel[35] = new ModelRendererTurbo(this, 345, 1, textureX, textureY); // Box 594
-		bodyModel[36] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "lamp"); // Box 595 glow marker
+		bodyModel[36] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "marker").setLightFixtureId("marker_body_36"); // Box 595 glow marker
 		bodyModel[37] = new ModelRendererTurbo(this, 497, 9, textureX, textureY); // Box 659
 		bodyModel[38] = new ModelRendererTurbo(this, 505, 9, textureX, textureY, "cull"); // Box 660
 		bodyModel[39] = new ModelRendererTurbo(this, 297, 25, textureX, textureY); // Box 670
@@ -280,7 +280,7 @@ public class ModelTenderDeseret extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for(ModelRendererTurbo m :bodyModel) {
-			if(m.boxName.equals("lamp")){
+			if((m.boxName.equals("lamp") || m.boxName.equals("marker"))){
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				m.render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

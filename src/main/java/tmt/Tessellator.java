@@ -39,6 +39,12 @@ public class Tessellator{
 		return INSTANCE;
 	}
 	
+    /** Returns the texture most recently bound through the TMT rendering path. */
+    public static ResourceLocation getLastTextureUri()
+    {
+        return lastTextureUri;
+    }
+
 	public Tessellator(){
 		super();
 	}

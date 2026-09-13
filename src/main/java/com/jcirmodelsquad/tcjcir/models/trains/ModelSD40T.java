@@ -360,11 +360,11 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[315] = new ModelRendererTurbo(this, 183, 2, textureX, textureY, "cull"); // Box 1007 cull
 		bodyModel[316] = new ModelRendererTurbo(this, 245, 73, textureX, textureY); // Box 4
 		bodyModel[317] = new ModelRendererTurbo(this, 452, 73, textureX, textureY); // Box 203
-		bodyModel[318] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "lamp"); // Box 117 numberboard front
-		bodyModel[319] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "lamp"); // Box 118 numberboard front
-		bodyModel[320] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[318] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_318"); // Box 117 numberboard front
+		bodyModel[319] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_319"); // Box 118 numberboard front
+		bodyModel[320] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker").setLightFixtureId("marker_two_body_320"); // Box 71 markerlight twO
 		bodyModel[321] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
-		bodyModel[322] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 71 markerlight twO
+		bodyModel[322] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "marker").setLightFixtureId("marker_two_body_322"); // Box 71 markerlight twO
 		bodyModel[323] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
 		bodyModel[324] = new ModelRendererTurbo(this, 335, 123, textureX, textureY); // Box 489
 		bodyModel[325] = new ModelRendererTurbo(this, 310, 153, textureX, textureY); // Box 278
@@ -422,7 +422,7 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[377] = new ModelRendererTurbo(this, 35, 172, textureX, textureY, "cull"); // Box 160 cull crossover
 		bodyModel[378] = new ModelRendererTurbo(this, 32, 166, textureX, textureY, "cull"); // Box 161 cull crossover
 		bodyModel[379] = new ModelRendererTurbo(this, 48, 136, textureX, textureY); // Box 143
-		bodyModel[380] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[380] = new ModelRendererTurbo(this, 107, 149, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_380"); // Box 71 glow speedometer
 		bodyModel[381] = new ModelRendererTurbo(this, 98, 151, textureX, textureY); // Box 307
 		bodyModel[382] = new ModelRendererTurbo(this, 173, 57, textureX, textureY); // Box 184 o2 generator
 		bodyModel[383] = new ModelRendererTurbo(this, 269, 12, textureX, textureY); // Box 421 prime base

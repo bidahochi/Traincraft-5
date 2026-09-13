@@ -674,7 +674,7 @@ public class ModelFMCwoodchip extends ModelConverter //Same as Filename
 	{
 		ModelRenderHelper.renderModelWithStandardFreightRollingStock(bodyModel, entity, f5);
 
-		if(((AbstractTrains) entity).getColor() == 2135 || ((AbstractTrains) entity).getColor() == 16){
+		if(((AbstractTrains) entity).getColor() == 17 || ((AbstractTrains) entity).getColor() == 16 || ((AbstractTrains) entity).getColor() == 6){
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Greyish.png"));
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/70Ton_Black.png"));

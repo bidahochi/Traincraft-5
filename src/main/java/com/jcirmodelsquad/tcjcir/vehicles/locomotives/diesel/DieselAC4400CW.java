@@ -11,6 +11,19 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselAC4400CW extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:ac4400cw")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_aussy_body_266", "marker_aussy_body_267", "marker_body_135",
+            "marker_body_136")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_157", "numberboard_body_158", "numberboard_body_63",
+            "numberboard_body_65", "numberboard_upper_body_120", "numberboard_upper_body_255")
+        .build();
+
 
     @Override
     public SoundRecord getSoundRecord() { return EnumSounds.DieselAC4400CW; }
@@ -42,6 +55,13 @@ public class DieselAC4400CW extends DieselTrain {
     @Override
     public String transportYear() {
         return "1993-2004";
+    }
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
     }
 
 }

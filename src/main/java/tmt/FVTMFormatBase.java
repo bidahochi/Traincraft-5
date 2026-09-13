@@ -74,7 +74,7 @@ public class FVTMFormatBase extends ModelBase {
 		 * called now.
 		 *
 		 * Suppression is scoped to this one render pass. The batch renderer returns the exact
-		 * ModelRendererTurbo parts it drew, the legacy loop skips those parts, and finally
+		 * ModelRendererTurbo parts it drew, the per-part loop skips those parts, and finally
 		 * removes the suppression. Without that release, shared models such as front/rear
 		 * bogies could disappear on their next render.
 		 */

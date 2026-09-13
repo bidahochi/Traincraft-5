@@ -42,4 +42,9 @@ public class ACFRailbox extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.75F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1974-1980";
+    }
 }

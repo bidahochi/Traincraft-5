@@ -19,6 +19,19 @@ import train.common.library.sounds.SoundRecord;
 import java.util.Random;
 
 public class DieselGP49 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp49")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_164", "marker_body_165", "marker_body_189",
+            "marker_body_190")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_19", "numberboard_body_20", "numberboard_body_81",
+            "numberboard_body_82")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -151,4 +164,11 @@ public class DieselGP49 extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP49";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

@@ -23,7 +23,18 @@ import train.common.slots.IFluidContainerSlotValidator;
 
 import javax.annotation.Nullable;
 
-public abstract class Tender extends Freight implements IFluidHandler, IInventory, IFluidContainerSlotValidator
+/**
+ * Tender rolling stock whose lighting is a read-only mirror of a directly coupled locomotive.
+ *
+ * <p>A tender implements {@link IRollingStockLightState} so the shared model and effect renderers
+ * can query its synchronized light state. It does not own operator-adjustable switches:
+ * the server copies the coupled locomotive's complete packed state into the tender watcher, and
+ * publishes an all-off state while no locomotive is directly coupled. Because it does not
+ * implement {@link IRollingStockLightControls}, mutable lighting panels and lighting-control
+ * packets reject it through their normal interface checks.
+ */
+public abstract class Tender extends Freight implements IFluidHandler, IInventory,
+		IFluidContainerSlotValidator, IRollingStockLightState
 {
 	public static final String NBT_TENDER_STORAGE_MODE = "TenderStorageMode";
 	public static final String NBT_PRIMARY_TANK = "PrimaryTank";
@@ -94,6 +105,10 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 		tankArray = setupTanks(filter);
 
 		this.dataWatcher.addObject(DW_TENDER_TANK_SYNC, buildTankSyncString());
+		// Initialize the synchronized mirror to all-off so client and server reads are valid before
+		// the first server-side coupling update. Tenders never use uncontrolled-preview semantics.
+		this.dataWatcher.addObject(
+			RollingStockLightStateCodec.WATCHER_SLOT, RollingStockLightStateCodec.ALL_OFF);
 	}
 
 	protected TenderRecord getTenderRecordOrNull()
@@ -505,7 +520,7 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 		nbttagcompound.setInteger(NBT_TENDER_STORAGE_MODE, storageMode.getId());
 
 		/*
-		 * Legacy primary tank save.
+		 * Primary-tank compatibility save.
 		 *
 		 * Keep this so old single-tank behavior remains compatible with older
 		 * code paths that expect the primary tank directly in the root compound.
@@ -612,6 +627,89 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 
 		checkInvent(null, this);
 		updateTankWatcher();
+		updateMirroredLightState();
+	}
+
+	/**
+	 * Publishes the complete light state of a directly coupled locomotive to this tender's clients.
+	 *
+	 * <p>The watcher is deliberately transient and is never saved by the tender. An unlinked tender
+	 * publishes the packed all-off value, so newly placed tenders and tenders whose locomotive is
+	 * detached cannot retain an illuminated lens, beam, beacon, or auxiliary fixture. If locomotives
+	 * are coupled at both ends, link one wins the otherwise ambiguous selection.
+	 */
+	private void updateMirroredLightState()
+	{
+		IRollingStockLightState locomotiveState = locomotiveLightState(cartLinked1);
+		if (locomotiveState == null)
+		{
+			locomotiveState = locomotiveLightState(cartLinked2);
+		}
+
+		int mirroredState = packMirroredLightState(locomotiveState);
+		boolean stateUnchanged =
+				dataWatcher.getWatchableObjectInt(RollingStockLightStateCodec.WATCHER_SLOT)
+				== mirroredState;
+		if (stateUnchanged == false)
+		{
+			dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, mirroredState);
+		}
+	}
+
+	/** Returns readable light state only for a directly coupled locomotive. */
+	private static IRollingStockLightState locomotiveLightState(EntityRollingStock linkedStock)
+	{
+		return linkedStock instanceof Locomotive
+				? (IRollingStockLightState) linkedStock
+				: null;
+	}
+
+	/** Packs all stable light channels plus the transient horn response, or all-off when unlinked. */
+	static int packMirroredLightState(IRollingStockLightState locomotiveState)
+	{
+		if (locomotiveState == null)
+		{
+			return RollingStockLightStateCodec.ALL_OFF;
+		}
+		return RollingStockLightStateCodec.pack(
+				locomotiveState.getFrontHeadlightLevel(),
+				locomotiveState.getRearHeadlightLevel(),
+				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.DITCH),
+				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.BEACON),
+				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.AUX),
+				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.GYRA),
+				locomotiveState.isTransientLightSignalEnabled(
+						RollingStockTransientLightSignal.HORN));
+	}
+
+	/** Reads the server-authored mirror used by every tender fixture. */
+	private int mirroredLightState()
+	{
+		return dataWatcher.getWatchableObjectInt(RollingStockLightStateCodec.WATCHER_SLOT);
+	}
+
+	@Override
+	public RollingStockHeadlightLevel getFrontHeadlightLevel()
+	{
+		return RollingStockLightStateCodec.front(mirroredLightState());
+	}
+
+	@Override
+	public RollingStockHeadlightLevel getRearHeadlightLevel()
+	{
+		return RollingStockLightStateCodec.rear(mirroredLightState());
+	}
+
+	@Override
+	public boolean isLightChannelEnabled(RollingStockLightChannel channel)
+	{
+		return RollingStockLightStateCodec.enabled(mirroredLightState(), channel);
+	}
+
+	@Override
+	public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+	{
+		return RollingStockLightStateCodec.transientEnabled(mirroredLightState(), signal);
 	}
 
 	private void updateTankWatcher()
@@ -1209,7 +1307,7 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 		}
 
 		/*
-		 * Legacy unloaders use the untyped Forge drain method. Drain one tank
+		 * Older unloaders use the untyped Forge drain method. Drain one tank
 		 * at a time, primary first, so both chambers can eventually unload
 		 * without ever mixing fluids in a single FluidStack.
 		 */

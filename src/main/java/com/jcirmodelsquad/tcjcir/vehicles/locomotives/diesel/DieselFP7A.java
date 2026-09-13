@@ -11,6 +11,20 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselFP7A extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:fp7a")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_body_461", "marker_body_462")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "numberboard_body_413", "numberboard_body_414")
+        .fixtureType(
+            train.common.api.LightFixtureType.HEADLIGHT,
+            "front_headlight_lower_319", "front_headlight_lower_320")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -60,5 +74,12 @@ public class DieselFP7A extends DieselTrain {
 
     
     
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

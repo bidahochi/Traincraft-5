@@ -237,8 +237,8 @@ public class ModelAlcoS2 extends ModelConverter //Same as Filename
 		bodyModel[194] = new ModelRendererTurbo(this, 225, 57, textureX, textureY); // Box 231
 		bodyModel[195] = new ModelRendererTurbo(this, 489, 41, textureX, textureY); // Box 232
 		bodyModel[196] = new ModelRendererTurbo(this, 241, 57, textureX, textureY); // Box 233
-		bodyModel[197] = new ModelRendererTurbo(this, 233, 73, textureX, textureY, "lamp"); // Box 234 glow numberboard
-		bodyModel[198] = new ModelRendererTurbo(this, 281, 73, textureX, textureY, "lamp"); // Box 235 glow numberboard
+		bodyModel[197] = new ModelRendererTurbo(this, 233, 73, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_197"); // Box 234 glow numberboard
+		bodyModel[198] = new ModelRendererTurbo(this, 281, 73, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_198"); // Box 235 glow numberboard
 		bodyModel[199] = new ModelRendererTurbo(this, 169, 57, textureX, textureY); // Box 236
 		bodyModel[200] = new ModelRendererTurbo(this, 489, 49, textureX, textureY); // Box 237
 		bodyModel[201] = new ModelRendererTurbo(this, 185, 57, textureX, textureY); // Box 238

@@ -36,8 +36,8 @@ public class Modelane_slab_antenna extends ModelConverter //Same as Filename
 	{
 		bodyModel[0] = new ModelRendererTurbo(this, 5, 4, textureX, textureY); // Box 631 ane radio slab
 		bodyModel[1] = new ModelRendererTurbo(this, 5, 7, textureX, textureY); // Box 632 ane slab support
-		bodyModel[2] = new ModelRendererTurbo(this, 47, 21, textureX, textureY, "lamp"); // Box 633 ane chop numberboard
-		bodyModel[3] = new ModelRendererTurbo(this, 47, 21, textureX, textureY, "lamp"); // Box 634 ane chop numberboard
+		bodyModel[2] = new ModelRendererTurbo(this, 47, 21, textureX, textureY, "numberboard").setLightFixtureId("numberboard_chop_body_2"); // Box 633 ane chop numberboard
+		bodyModel[3] = new ModelRendererTurbo(this, 47, 21, textureX, textureY, "numberboard").setLightFixtureId("numberboard_chop_body_3"); // Box 634 ane chop numberboard
 		bodyModel[4] = new ModelRendererTurbo(this, 28, 22, textureX, textureY, "cull"); // Box 635 cull ane antenna extras
 
 		bodyModel[0].addBox(0F, 0F, 0F, 9, 1, 14, 0F); // Box 631 ane radio slab

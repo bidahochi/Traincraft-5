@@ -46,4 +46,9 @@ public class PCF_RBL_Ribbed extends AbstractStandardFreightCar
     public float getOptimalDistance(EntityMinecart cart) {
         return 2.85F;
     }
+
+    @Override
+    public String transportYear() {
+        return "1968-1977";
+    }
 }

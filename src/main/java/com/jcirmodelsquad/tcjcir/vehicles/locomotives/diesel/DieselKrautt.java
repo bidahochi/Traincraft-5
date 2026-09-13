@@ -11,6 +11,19 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselKrautt extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:krautt")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "front_marker_l_body_193", "front_marker_l_body_194", "rear_marker_l",
+            "rear_marker_r")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_left_body_191", "front_numberboard_left_body_386", "front_numberboard_left_body_388",
+            "front_numberboard_right_body_192", "front_numberboard_right_body_387", "front_numberboard_right_body_389")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -52,5 +65,12 @@ public class DieselKrautt extends DieselTrain {
 
     
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

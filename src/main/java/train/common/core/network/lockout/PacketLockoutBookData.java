@@ -4,10 +4,8 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
-import train.client.gui.GuiLockoutBook;
+import train.common.Traincraft;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -145,12 +143,9 @@ public class PacketLockoutBookData implements IMessage
     public static class Handler implements IMessageHandler<PacketLockoutBookData, IMessage>
     {
         @Override
-        public IMessage onMessage(PacketLockoutBookData message, MessageContext ctx)
+        public IMessage onMessage(PacketLockoutBookData message, MessageContext context)
         {
-            if (ctx.side == Side.CLIENT && Minecraft.getMinecraft().currentScreen instanceof GuiLockoutBook)
-            {
-                ((GuiLockoutBook) Minecraft.getMinecraft().currentScreen).loadData(message);
-            }
+            Traincraft.proxy.updateLockoutBook(message);
             return null;
         }
     }

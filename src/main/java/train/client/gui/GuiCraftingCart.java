@@ -1,6 +1,8 @@
 package train.client.gui;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -10,8 +12,47 @@ import train.common.containers.ContainerWorkbenchCart;
 import train.common.library.Info;
 
 public class GuiCraftingCart extends GuiContainer {
-	public GuiCraftingCart(InventoryPlayer par1InventoryPlayer, World par2World) {
-		super(new ContainerWorkbenchCart(par1InventoryPlayer, par2World));
+	private static final int BASE_GUI_HEIGHT = 166;
+	private final RollingStockLightControlPanel lightControls;
+
+	public GuiCraftingCart(
+		InventoryPlayer inventoryPlayer, World world, Entity rollingStock) {
+		super(new ContainerWorkbenchCart(inventoryPlayer, world));
+		lightControls = RollingStockLightControlPanel.create(rollingStock);
+		if (lightControls != null) {
+			ySize = RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT;
+		}
+	}
+
+	@Override
+	public void initGui() {
+		ySize = lightControls != null
+			? RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT
+			: BASE_GUI_HEIGHT;
+		super.initGui();
+		if (lightControls != null) {
+			guiTop += RollingStockLightControlPanel.GUI_VERTICAL_OFFSET;
+		}
+		buttonList.clear();
+		if (lightControls != null) {
+			lightControls.init(
+				buttonList, guiLeft, guiTop + RollingStockLightControlPanel.GUI_Y);
+		}
+	}
+
+	@Override
+	public void updateScreen() {
+		super.updateScreen();
+		if (lightControls != null) {
+			lightControls.update();
+		}
+	}
+
+	@Override
+	protected void actionPerformed(GuiButton button) {
+		if (lightControls != null) {
+			lightControls.actionPerformed(button);
+		}
 	}
 
 	@Override
@@ -22,15 +63,19 @@ public class GuiCraftingCart extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int i, int j) {
 		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.crafting"), 28, 6, 4210752);
-		this.fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+		this.fontRendererObj.drawString(
+			StatCollector.translateToLocal("container.inventory"),
+			8, BASE_GUI_HEIGHT - 96 + 2, 4210752);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+	protected void drawGuiContainerBackgroundLayer(
+		float partialTicks, int mouseX, int mouseY) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation,Info.guiPrefix + "crafting_table.png"));
-		int var5 = (this.width - this.xSize) / 2;
-		int var6 = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
+		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, this.xSize, BASE_GUI_HEIGHT);
+		if (lightControls != null) {
+			lightControls.draw(mc, zLevel);
+		}
 	}
 }

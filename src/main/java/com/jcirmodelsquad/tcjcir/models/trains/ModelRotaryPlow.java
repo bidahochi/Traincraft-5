@@ -308,7 +308,7 @@ public class ModelRotaryPlow extends ModelConverter //Same as Filename
 		bodyModel[265] = new ModelRendererTurbo(this, 187, 195, textureX, textureY); // Box 315
 		bodyModel[266] = new ModelRendererTurbo(this, 219, 207, textureX, textureY); // Box 131 cs an shit
 		bodyModel[267] = new ModelRendererTurbo(this, 210, 207, textureX, textureY); // Box 131 cs ab shit
-		bodyModel[268] = new ModelRendererTurbo(this, 201, 207, textureX, textureY, "lamp"); // Box 71 glow speedometer
+		bodyModel[268] = new ModelRendererTurbo(this, 201, 207, textureX, textureY, "instrument").setLightFixtureId("cab_speedometer_body_268"); // Box 71 glow speedometer
 		bodyModel[269] = new ModelRendererTurbo(this, 192, 208, textureX, textureY); // Box 307 spedo dont glow it stoopid
 		bodyModel[270] = new ModelRendererTurbo(this, 1, 136, textureX, textureY); // Box 320
 		bodyModel[271] = new ModelRendererTurbo(this, 76, 144, textureX, textureY); // Box 321

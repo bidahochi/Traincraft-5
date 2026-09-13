@@ -293,7 +293,7 @@ public class ModelE8B extends ModelConverter //Same as Filename
 		bodyModel[249] = new ModelRendererTurbo(this, 341, 65, textureX, textureY); // Box 455
 		bodyModel[250] = new ModelRendererTurbo(this, 366, 156, textureX, textureY); // Box 13
 		bodyModel[251] = new ModelRendererTurbo(this, 335, 147, textureX, textureY); // Box 13
-		bodyModel[252] = new ModelRendererTurbo(this, 146, 40, textureX, textureY,"lamp"); // Box 348 commander beacon
+		bodyModel[252] = new ModelRendererTurbo(this, 146, 40, textureX, textureY,"commander").setLightFixtureId("commander"); // Box 348 commander beacon
 		bodyModel[253] = new ModelRendererTurbo(this, 145, 43, textureX, textureY); // Box 349
 		bodyModel[254] = new ModelRendererTurbo(this, 168, 48, textureX, textureY); // Box 194
 		bodyModel[255] = new ModelRendererTurbo(this, 154, 40, textureX, textureY); // Early CP horns

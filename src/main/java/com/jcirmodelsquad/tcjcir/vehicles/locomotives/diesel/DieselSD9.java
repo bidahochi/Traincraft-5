@@ -12,6 +12,20 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselSD9 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd9")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_sd7_body_264", "marker_sd7_body_265", "marker_sd7_body_266",
+            "marker_sd7_body_267", "marker_sd9_body_223", "marker_sd9_body_225",
+            "marker_sd9_body_97", "marker_sd9_body_98", "marker_two")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_35", "front_numberboard_body_36", "numberboard_chop_body_356",
+            "numberboard_chop_body_357", "rear_numberboard_body_91", "rear_numberboard_body_92")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -60,4 +74,11 @@ public class DieselSD9 extends DieselTrain {
     public String getInventoryName() {
         return "EMD SD9";
     }
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
+
 }

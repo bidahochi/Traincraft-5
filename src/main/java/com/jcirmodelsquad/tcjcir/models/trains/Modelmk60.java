@@ -57,8 +57,8 @@ public class Modelmk60 extends ModelConverter //Same as Filename
 		bodyModel[17] = new ModelRendererTurbo(this, 340, 216, textureX, textureY, "cull"); // Box 355 cull
 		bodyModel[18] = new ModelRendererTurbo(this, 355, 215, textureX, textureY, "cull"); // Box 354 cull
 		bodyModel[19] = new ModelRendererTurbo(this, 351, 225, textureX, textureY); // Box 627
-		bodyModel[20] = new ModelRendererTurbo(this, 337, 221, textureX, textureY, "lamp"); // Box 626 numberboard
-		bodyModel[21] = new ModelRendererTurbo(this, 352, 221, textureX, textureY, "lamp"); // Box 625 numerbboard
+		bodyModel[20] = new ModelRendererTurbo(this, 337, 221, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_20"); // Box 626 numberboard
+		bodyModel[21] = new ModelRendererTurbo(this, 352, 221, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_21"); // Box 625 numerbboard
 		bodyModel[22] = new ModelRendererTurbo(this, 336, 225, textureX, textureY); // Box 623
 		bodyModel[23] = new ModelRendererTurbo(this, 241, 232, textureX, textureY); // Box 576
 		bodyModel[24] = new ModelRendererTurbo(this, 233, 241, textureX, textureY); // Box 575
@@ -107,9 +107,9 @@ public class Modelmk60 extends ModelConverter //Same as Filename
 		bodyModel[67] = new ModelRendererTurbo(this, 361, 193, textureX, textureY); // Box 562
 		bodyModel[68] = new ModelRendererTurbo(this, 17, 169, textureX, textureY); // Box 560
 		bodyModel[69] = new ModelRendererTurbo(this, 433, 161, textureX, textureY); // Box 558
-		bodyModel[70] = new ModelRendererTurbo(this, 353, 193, textureX, textureY, "lamp"); // Box 595 glow marker
+		bodyModel[70] = new ModelRendererTurbo(this, 353, 193, textureX, textureY, "marker").setLightFixtureId("marker_body_70"); // Box 595 glow marker
 		bodyModel[71] = new ModelRendererTurbo(this, 369, 17, textureX, textureY); // Box 594
-		bodyModel[72] = new ModelRendererTurbo(this, 345, 193, textureX, textureY, "lamp"); // Box 410 glow marker
+		bodyModel[72] = new ModelRendererTurbo(this, 345, 193, textureX, textureY, "marker").setLightFixtureId("marker_body_72"); // Box 410 glow marker
 		bodyModel[73] = new ModelRendererTurbo(this, 289, 161, textureX, textureY); // Box 589
 		bodyModel[74] = new ModelRendererTurbo(this, 321, 193, textureX, textureY); // Box 583
 		bodyModel[75] = new ModelRendererTurbo(this, 305, 193, textureX, textureY); // Box 577
@@ -154,8 +154,8 @@ public class Modelmk60 extends ModelConverter //Same as Filename
 		bodyModel[114] = new ModelRendererTurbo(this, 51, 229, textureX, textureY); // Box 587
 		bodyModel[115] = new ModelRendererTurbo(this, 5, 229, textureX, textureY); // Box 586
 		bodyModel[116] = new ModelRendererTurbo(this, 474, 172, textureX, textureY, "cull"); // Box 586 CULL
-		bodyModel[117] = new ModelRendererTurbo(this, 473, 161, textureX, textureY, "lamp"); // Box 585 numberboard glow
-		bodyModel[118] = new ModelRendererTurbo(this, 457, 161, textureX, textureY, "lamp"); // Box 584 numberboard glow
+		bodyModel[117] = new ModelRendererTurbo(this, 473, 161, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_117"); // Box 585 numberboard glow
+		bodyModel[118] = new ModelRendererTurbo(this, 457, 161, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_118"); // Box 584 numberboard glow
 		bodyModel[119] = new ModelRendererTurbo(this, 441, 161, textureX, textureY); // Box 584
 		bodyModel[120] = new ModelRendererTurbo(this, 425, 161, textureX, textureY); // Box 583
 		bodyModel[121] = new ModelRendererTurbo(this, 177, 161, textureX, textureY); // Box 605

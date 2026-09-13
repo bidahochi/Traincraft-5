@@ -7,6 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import train.common.enums.BoxName;
 
+import train.client.render.lighting.ClientRollingStockLighting;
+import train.client.render.lighting.PlacedModelLighting;
+import train.client.render.lighting.RollingStockLightOcclusion;
+import train.common.api.LightBeamRotation;
+import train.common.core.handlers.ConfigHandler;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -27,6 +33,31 @@ import java.util.*;
  */
 public class ModelRendererTurbo
 {
+    private static final float RADIANS_TO_DEGREES = (float)(180.0D / Math.PI);
+
+    /** Last rolling-stock occlusion capture that consumed this model part. */
+    private long rollingStockOcclusionCaptureToken;
+
+    /**
+     * Marks this part as captured for one rolling-stock occlusion pass.
+     *
+     * <p>The token is stored directly on the long-lived model part so callers can suppress duplicate
+     * geometry without allocating an identity set in the render loop. Capture tokens are scoped to
+     * one stock entry and are never serialized.
+     *
+     * @param token nonzero token assigned to the active stock capture
+     * @return {@code true} when this is the first capture for the token
+     */
+    public boolean markRollingStockOcclusionCapture(long token)
+    {
+        if (rollingStockOcclusionCaptureToken == token)
+        {
+            return false;
+        }
+        rollingStockOcclusionCaptureToken = token;
+        return true;
+    }
+
     public List<TexturedPolygon> faces = new ArrayList<>();
     public float rotationPointX, rotationPointY, rotationPointZ;
     public float rotateAngleX, rotateAngleY, rotateAngleZ;
@@ -43,11 +74,157 @@ public class ModelRendererTurbo
     public boolean showModel;
     public boolean field_1402_i;
     public boolean forcedRecompile;
-    public boolean useLegacyCompiler;
+    public boolean useSingleDisplayListCompiler;
     public List<?> childModels;
     public String boxName;
+    /** Stable profile-facing id for this authored light fixture. */
+    public String lightFixtureId;
+    /** Optional identity shared by multiple geometry parts forming one fixture. */
+    public String lightFixtureGroup;
+    /** Optional lens-plane shaping for additive source glow. */
+    public LightSourceGlowShape lightSourceGlowShape;
+    /** Optional beam-only aim that does not alter the visible source face. */
+    public LightBeamRotation lightBeamRotation;
+    /** Draw-time definition alias assigned by automatic lighting metadata. */
+    public String lightDefinitionId;
+    /** Prime parts illuminate only the authored exterior phase face. */
+    public boolean lightExteriorFaceOnly;
+    public int lightExteriorFaceIndex = -1;
+    /** Optional source polygons that emit from more than one side of the same fixture. */
+    public int[] lightSourceFaceIndices;
     public boolean isShape = false;
     public boolean isBatchUnsafeShape = false;
+
+    /**
+     * Assigns an optional model-scoped group key so multiple geometry parts submit one fixture.
+     * Group names are authoring metadata and need only be unique within the model.
+     */
+    public ModelRendererTurbo setLightFixtureGroup(String fixtureGroup)
+    {
+        lightFixtureGroup = fixtureGroup;
+        return this;
+    }
+
+    /**
+     * Marks this part as a light fixture and assigns its stable model-local key, such as
+     * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
+     * Recognized {@link #boxName} values such as {@code lamp} remain supported as a
+     * discovery fallback, but new fixtures should use an explicit id.
+     */
+    public ModelRendererTurbo setLightFixtureId(String fixtureId)
+    {
+        if (fixtureId == null || fixtureId.trim().isEmpty())
+        {
+            throw new IllegalArgumentException("Light fixture id must not be blank");
+        }
+        lightFixtureId = fixtureId;
+        return this;
+    }
+
+    /** Sets lens-plane width/height scales and right/up offsets in model units. */
+    public ModelRendererTurbo setLightSourceGlowShape(float widthScale, float heightScale,
+            float rightOffset, float upOffset)
+    {
+        lightSourceGlowShape = new LightSourceGlowShape(widthScale, heightScale, rightOffset, upOffset);
+        return this;
+    }
+
+    /**
+     * Angles only the projected beam relative to the automatically detected source direction.
+     *
+     * <p>The selected source face, texture-alpha mask, source glow, and model geometry remain
+     * unchanged. A skin may replace this model default for the same fixture id.
+     */
+    public ModelRendererTurbo setLightBeamRotation(float pitchDegrees, float yawDegrees)
+    {
+        lightBeamRotation = new LightBeamRotation(pitchDegrees, yawDegrees);
+        return this;
+    }
+
+    /**
+     * Selects a source polygon by its part-local axis when automatic detection is ambiguous.
+     * Model rotation is applied later, so these names remain independent of locomotive ends.
+     */
+    public ModelRendererTurbo setLightSourceFace(LightSourceFaceDirection direction)
+    {
+        return setLightSourceFaces(direction);
+    }
+
+    /**
+     * Selects every polygon side that visibly emits for a multi-sided lens. All selected sides
+     * retain this part's single fixture id and therefore share one entity-profile definition.
+     */
+    public ModelRendererTurbo setLightSourceFaces(LightSourceFaceDirection... directions)
+    {
+        if (directions == null || directions.length == 0)
+        {
+            throw new IllegalArgumentException("At least one light source face is required");
+        }
+        LinkedHashSet<Integer> faceIndices = new LinkedHashSet<Integer>();
+        for (LightSourceFaceDirection direction : directions)
+        {
+            if (direction == null)
+            {
+                throw new NullPointerException("direction");
+            }
+            faceIndices.add(direction.faceIndex());
+        }
+        lightSourceFaceIndices = new int[faceIndices.size()];
+        int index = 0;
+        for (Integer faceIndex : faceIndices)
+        {
+            lightSourceFaceIndices[index++] = faceIndex;
+        }
+        lightExteriorFaceIndex = lightSourceFaceIndices[0];
+        return this;
+    }
+
+    /** Immutable lens-plane shaping authored on a TMT fixture part. */
+    public static final class LightSourceGlowShape
+    {
+        private final float widthScale;
+        private final float heightScale;
+        private final float rightOffset;
+        private final float upOffset;
+
+        /** Creates positive finite scales with right/up offsets measured in model units. */
+        public LightSourceGlowShape(float widthScale, float heightScale,
+                                    float rightOffset, float upOffset)
+        {
+            if (isFinite(widthScale) == false || isFinite(heightScale) == false
+                    || isFinite(rightOffset) == false || isFinite(upOffset) == false
+                    || widthScale <= 0.0F || heightScale <= 0.0F)
+            {
+                throw new IllegalArgumentException("Light glow scales must be positive and finite");
+            }
+            this.widthScale = widthScale;
+            this.heightScale = heightScale;
+            this.rightOffset = rightOffset;
+            this.upOffset = upOffset;
+        }
+
+        private static boolean isFinite(float value)
+        {
+            return Float.isNaN(value) == false && Float.isInfinite(value) == false;
+        }
+
+        public float widthScale()
+        {
+            return widthScale;
+        }
+        public float heightScale()
+        {
+            return heightScale;
+        }
+        public float rightOffset()
+        {
+            return rightOffset;
+        }
+        public float upOffset()
+        {
+            return upOffset;
+        }
+    }
 
     /*
      * The batch renderer does not emit raw TexturedPolygon data directly. It
@@ -59,6 +236,7 @@ public class ModelRendererTurbo
     private static final float BATCH_DEGENERATE_FACE_AREA_EPSILON = 1.0E-5F;
     private List<BatchFace> batchFaces = new ArrayList<BatchFace>();
     private boolean batchFacesDirty = true;
+    private long batchFaceSignature;
 
     /*
      * The owner is the model object that created this part. ModelRendererTurboBatch
@@ -99,10 +277,11 @@ public class ModelRendererTurbo
         currentTextureGroup = textureGroup.get("0");
         boxName = s;
         defaultTexture = "";
-        useLegacyCompiler = true;
+        useSingleDisplayListCompiler = true;
 	}
 
-    Object getModelOwner(){
+    /** Returns the model instance that created this part for batch ownership classification. */
+    public Object getModelOwner(){
         return modelOwner;
     }
 	
@@ -291,9 +470,15 @@ public class ModelRendererTurbo
         TexturedVertex tv5 = new TexturedVertex(v5[0], v5[1], v5[2], 0.0F, 8.0F);
         TexturedVertex tv6 = new TexturedVertex(v6[0], v6[1], v6[2], 8.0F, 8.0F);
         TexturedVertex tv7 = new TexturedVertex(v7[0], v7[1], v7[2], 8.0F, 0.0F);
-        if(w % 1 != 0) w = w < 1 ? (w < 0.5 ? 0 : 1) : (int)w + (w % 1 >= 0.5f ? 1 : 0);
-        if(h % 1 != 0) h = h < 1 ? (h < 0.5 ? 0 : 1) : (int)h + (h % 1 >= 0.5f ? 1 : 0);
-        if(d % 1 != 0) d = d < 1 ? (d < 0.5 ? 0 : 1) : (int)d + (d % 1 >= 0.5f ? 1 : 0);
+        if(w % 1 != 0)
+        { w = w < 1 ? (w < 0.5 ? 0 : 1) : (int)w + (w % 1 >= 0.5f ? 1 : 0);
+        }
+        if(h % 1 != 0)
+        { h = h < 1 ? (h < 0.5 ? 0 : 1) : (int)h + (h % 1 >= 0.5f ? 1 : 0);
+        }
+        if(d % 1 != 0)
+        { d = d < 1 ? (d < 0.5 ? 0 : 1) : (int)d + (d % 1 >= 0.5f ? 1 : 0);
+        }
         if(sides == null){
             poly[0] = addPolygonReturn(new TexturedVertex[] { tv5, tv1, tv2, tv6 }, textureOffsetX + d + w, textureOffsetY + d, textureOffsetX + d + w + d, textureOffsetY + d + h);
             poly[1] = addPolygonReturn(new TexturedVertex[] { tv0, tv4, tv7, tv3 }, textureOffsetX + 0, textureOffsetY + d, textureOffsetX + d, textureOffsetY + d + h);
@@ -308,12 +493,24 @@ public class ModelRendererTurbo
             float x1 = sides[2] ? 0 : w;
             float x2 = sides[4] ? 0 : w;
             float x3 = sides[0] ? 0 : d;
-            if(sides.length > 0 && !sides[0]) poly[0] = addPolygonReturn(new TexturedVertex[] { tv5, tv1, tv2, tv6 }, textureOffsetX + x0 + x2, textureOffsetY + yp, textureOffsetX + x0 + x2 + d, textureOffsetY + yp + h);
-            if(sides.length > 1 && !sides[1]) poly[1] = addPolygonReturn(new TexturedVertex[] { tv0, tv4, tv7, tv3 }, textureOffsetX + 0, textureOffsetY + yp, textureOffsetX + d, textureOffsetY + yp + h);
-            if(sides.length > 2 && !sides[2]) poly[2] = addPolygonReturn(new TexturedVertex[] { tv5, tv4, tv0, tv1 }, textureOffsetX + x0, textureOffsetY + 0, textureOffsetX + x0 + w, textureOffsetY + d);
-            if(sides.length > 3 && !sides[3]) poly[3] = addPolygonReturn(new TexturedVertex[] { tv2, tv3, tv7, tv6 }, textureOffsetX + x0 + x1, textureOffsetY + 0, textureOffsetX + x0 + x1 + w, textureOffsetY + d);
-            if(sides.length > 4 && !sides[4]) poly[4] = addPolygonReturn(new TexturedVertex[] { tv1, tv0, tv3, tv2 }, textureOffsetX + x0, textureOffsetY + yp, textureOffsetX + x0 + w, textureOffsetY + yp + h);
-            if(sides.length > 5 && !sides[5]) poly[5] = addPolygonReturn(new TexturedVertex[] { tv4, tv5, tv6, tv7 }, textureOffsetX + x0 + x2 + x3, textureOffsetY + yp, textureOffsetX + x0 + x2 + x3 + w, textureOffsetY + yp + h);
+            if(sides.length > 0 &&sides[0] == false)
+            { poly[0] = addPolygonReturn(new TexturedVertex[] { tv5, tv1, tv2, tv6 }, textureOffsetX + x0 + x2, textureOffsetY + yp, textureOffsetX + x0 + x2 + d, textureOffsetY + yp + h);
+            }
+            if(sides.length > 1 &&sides[1] == false)
+            { poly[1] = addPolygonReturn(new TexturedVertex[] { tv0, tv4, tv7, tv3 }, textureOffsetX + 0, textureOffsetY + yp, textureOffsetX + d, textureOffsetY + yp + h);
+            }
+            if(sides.length > 2 &&sides[2] == false)
+            { poly[2] = addPolygonReturn(new TexturedVertex[] { tv5, tv4, tv0, tv1 }, textureOffsetX + x0, textureOffsetY + 0, textureOffsetX + x0 + w, textureOffsetY + d);
+            }
+            if(sides.length > 3 &&sides[3] == false)
+            { poly[3] = addPolygonReturn(new TexturedVertex[] { tv2, tv3, tv7, tv6 }, textureOffsetX + x0 + x1, textureOffsetY + 0, textureOffsetX + x0 + x1 + w, textureOffsetY + d);
+            }
+            if(sides.length > 4 &&sides[4] == false)
+            { poly[4] = addPolygonReturn(new TexturedVertex[] { tv1, tv0, tv3, tv2 }, textureOffsetX + x0, textureOffsetY + yp, textureOffsetX + x0 + w, textureOffsetY + yp + h);
+            }
+            if(sides.length > 5 &&sides[5] == false)
+            { poly[5] = addPolygonReturn(new TexturedVertex[] { tv4, tv5, tv6, tv7 }, textureOffsetX + x0 + x2 + x3, textureOffsetY + yp, textureOffsetX + x0 + x2 + x3 + w, textureOffsetY + yp + h);
+        }
         }
         if(mirror ^ flip){
             for(int l = 0; l < poly.length; l++){
@@ -322,7 +519,11 @@ public class ModelRendererTurbo
         }
         if(sides != null){
             int polis = 0, processed = 0;
-            for(int i = 0; i < poly.length; i++) if(poly[i] != null) polis++;
+            for(int i = 0; i < poly.length; i++)
+            { if(poly[i] != null)
+                { polis++;
+                }
+            }
             TexturedPolygon[] polygons = new TexturedPolygon[polis];
             for(int i = 0; i < poly.length; i++){
                 if(poly[i] != null){
@@ -1393,13 +1594,21 @@ public class ModelRendererTurbo
 	public ModelRendererTurbo addCylinder(float x, float y, float z, float radius, float length, int segments, float baseScale, float topScale, int baseDirection, int textureCircleDiameterW, int textureCircleDiameterH, int textureH, Vec3f topoff){
 		if(radius < 1){
 			int rad = radius < 0.5 ? 1 : 2;
-			if(textureCircleDiameterW < rad) textureCircleDiameterW = rad;
-			if(textureCircleDiameterH < rad) textureCircleDiameterH = rad;
+			if(textureCircleDiameterW < rad)
+            { textureCircleDiameterW = rad;
+            }
+			if(textureCircleDiameterH < rad)
+            { textureCircleDiameterH = rad;
 		}
-		if(length < 1) textureH = 1;
-		else if(length % 1 != 0){
+        }
+		if(length < 1)
+        { textureH = 1;
+        }
+		else
+        { if(length % 1 != 0){
 			textureH = (int)length + (length % 1 > 0.5f ? 1 : 0);
 		}
+        }
 		boolean dirTop = (baseDirection == MR_TOP || baseDirection == MR_BOTTOM);
 		boolean dirSide = (baseDirection == MR_RIGHT || baseDirection == MR_LEFT);
 		boolean dirFront = (baseDirection == MR_FRONT || baseDirection == MR_BACK);
@@ -1489,14 +1698,14 @@ public class ModelRendererTurbo
      * which are either resources/models or resources/mods/models.
      */
     public ModelRendererTurbo addObj(String file){
-        useLegacyCompiler = false;
+        useSingleDisplayListCompiler = false;
     	addModel(file, ModelPool.OBJ);
     	return this;
     }
     
     public void addObjF(String file){
     	try{
-            useLegacyCompiler = false;
+            useSingleDisplayListCompiler = false;
 			addModelF(file, ModelPool.OBJ);
 		}
     	catch(IOException e) {
@@ -1585,6 +1794,7 @@ public class ModelRendererTurbo
     			face.flipFace();
     		}
     	}
+        invalidateBatchFaces();
     }
     
     /**
@@ -1678,8 +1888,10 @@ public class ModelRendererTurbo
      * @return a TextureGroup object.
      */
     public TextureGroup getTextureGroup(String groupName){
-    	if(!textureGroup.containsKey(groupName))
+        if(textureGroup.containsKey(groupName) == false)
+        {
     		return null;
+        }
     	return textureGroup.get(groupName);
     }
     
@@ -1744,12 +1956,13 @@ public class ModelRendererTurbo
          * has already been emitted. Returning true means this exact part was
          * already drawn by a static body, FVTM runtime, nested submodel, or
          * detail-layout batch and should be skipped now. Returning false leaves
-         * the legacy per-part display-list path below in charge, which is
+         * the per-part display-list path below in charge, which is
          * important for animated, texture-swapped, or unsupported parts.
          */
         if(ModelRendererTurboBatch.capture(this, scale, bool)){
             return;
         }
+        RollingStockLightOcclusion.capturePart(this, scale, bool);
         if(!compiled || forcedRecompile){
             compileDisplayList(scale);
         }
@@ -1758,24 +1971,24 @@ public class ModelRendererTurbo
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
             if(bool){
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
             }
             else{
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
-            callDisplayList();
+            renderDisplayListWithLighting(scale);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -1783,9 +1996,10 @@ public class ModelRendererTurbo
             }
             GL11.glPopMatrix();
         } else
+        {
         if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
-            callDisplayList();
+                renderDisplayListWithLighting(scale);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -1794,12 +2008,69 @@ public class ModelRendererTurbo
             GL11.glTranslatef(-rotationPointX * scale, -rotationPointY * scale, -rotationPointZ * scale);
         }
         else{
-        	callDisplayList();
+                renderDisplayListWithLighting(scale);
         	if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
                 }
             }
+        }
+    }
+    }
+
+    /** Renders compiled model geometry while applying the active per-part lighting mode. */
+    private void renderDisplayListWithLighting(float scale)
+    {
+        if (ConfigHandler.enhancedLightingEnabled() == false)
+        {
+            callDisplayList();
+            return;
+        }
+        ClientRollingStockLighting.PartLight light = ClientRollingStockLighting.beginPart(this, scale);
+        PlacedModelLighting.PartLight placed = PlacedModelLighting.beginPart(this, scale);
+        try
+        {
+            int exterior = light.exteriorFaceIndex();
+            boolean placedFaces = placed.hasEmissiveFaces();
+            // Prime parts are deliberately immediate and face-selective in
+            // the lighting backend. Shape-box/compiler choice must not cause the complete
+            // wedge (including its top and internal seam) to become lit.
+            if (exterior >= 0 && exterior < faces.size())
+            {
+                light.useAmbient();
+                Tessellator tessellator = Tessellator.getInstance();
+                for (int index = 0; index < faces.size(); index++)
+                {
+                    if (index != exterior)
+                    {
+                        faces.get(index).draw(tessellator, scale);
+                    }
+                }
+                light.useEffect();
+                faces.get(exterior).draw(tessellator, scale);
+            }
+            else
+            {
+                if (placedFaces)
+                {
+                    placed.useAmbient();
+                    Tessellator tessellator = Tessellator.getInstance();
+                    for (TexturedPolygon face : faces)
+                    {
+                        face.draw(tessellator, scale);
+                    }
+                    placed.drawEmissiveFaces(faces, scale);
+                }
+                else
+                {
+                    callDisplayList();
+                }
+            }
+        }
+        finally
+        {
+            PlacedModelLighting.endPart(placed);
+            ClientRollingStockLighting.endPart(light);
         }
     }
     
@@ -1816,13 +2087,13 @@ public class ModelRendererTurbo
         GL11.glPushMatrix();
         GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
         if(rotateAngleY != 0.0F){
-            GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
         }
         if(rotateAngleX != 0.0F){
-            GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+            GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
         }
         if(rotateAngleZ != 0.0F){
-            GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+            GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
         }
         callDisplayList();
         GL11.glPopMatrix();
@@ -1841,22 +2112,24 @@ public class ModelRendererTurbo
         if(rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F){
             GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
             if(rotateAngleZ != 0.0F){
-                GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
             }
             if(rotateAngleY != 0.0F){
-                GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
         }
-        else if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
+        else
+        { if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
             GL11.glTranslatef(rotationPointX * f, rotationPointY * f, rotationPointZ * f);
         }
     }
+    }
     
     public void callDisplayList(){
-    	if(useLegacyCompiler){
+		if(useSingleDisplayListCompiler){
     		GL11.glCallList(displayList);
     	}
     	else{
@@ -1872,9 +2145,29 @@ public class ModelRendererTurbo
     	}
     }
 
+    /** Reuses compiled TMT geometry for a depth-only lighting shadow replay. */
+    public void renderDepthGeometry(float scale)
+    {
+        if (compiled == false || forcedRecompile)
+        {
+            compileDisplayList(scale);
+        }
+        if (useSingleDisplayListCompiler)
+        {
+            GL11.glCallList(displayList);
+        }
+        else
+        {
+            for (int list : displayListArray)
+            {
+                GL11.glCallList(list);
+            }
+        }
+    }
+
     public void compileDisplayList(float scale){
-    	if(useLegacyCompiler){
-    		compileLegacyDisplayList(scale);
+		if(useSingleDisplayListCompiler){
+			compileSingleDisplayList(scale);
     	}
     	else{
     		Iterator<TextureGroup> itr = textureGroup.values().iterator();
@@ -2004,33 +2297,35 @@ public class ModelRendererTurbo
         return new Vec3f(nextX, y, z);
     }
 
+    /** Renders immediate batch geometry filtered by primitive class and current part transform. */
     private void renderBatchGeometryFiltered(float scale, boolean bool, boolean renderQuadsAndTriangles){
         if(rotateAngleX != 0.0F || rotateAngleY != 0.0F || rotateAngleZ != 0.0F){
             GL11.glPushMatrix();
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
             if(bool){
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
             }
             else{
                 if(rotateAngleY != 0.0F){
-                    GL11.glRotatef(rotateAngleY * 57.29578F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(rotateAngleY * RADIANS_TO_DEGREES, 0.0F, 1.0F, 0.0F);
                 }
                 if(rotateAngleZ != 0.0F){
-                    GL11.glRotatef(rotateAngleZ * 57.29578F, 0.0F, 0.0F, 1.0F);
+                    GL11.glRotatef(rotateAngleZ * RADIANS_TO_DEGREES, 0.0F, 0.0F, 1.0F);
                 }
             }
             if(rotateAngleX != 0.0F){
-                GL11.glRotatef(rotateAngleX * 57.29578F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
             drawFacesFiltered(scale, renderQuadsAndTriangles);
             GL11.glPopMatrix();
         }
-        else if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
+        else
+        { if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
             drawFacesFiltered(scale, renderQuadsAndTriangles);
             GL11.glTranslatef(-rotationPointX * scale, -rotationPointY * scale, -rotationPointZ * scale);
@@ -2038,6 +2333,7 @@ public class ModelRendererTurbo
         else{
             drawFacesFiltered(scale, renderQuadsAndTriangles);
         }
+    }
     }
 
     long batchTransformHash(){
@@ -2068,7 +2364,7 @@ public class ModelRendererTurbo
 
     private void rebuildBatchFaces(){
         /*
-         * Build the batch-safe view of this part's faces. The legacy face normal
+         * Build the batch-safe view of this part's faces. The stored TMT face normal
          * can be zero on some valid shape-box quads when the first three vertices
          * happen to be collinear. In that case we keep the geometry and choose a
          * robust normal from the largest valid triangle in the polygon. Only faces
@@ -2086,7 +2382,7 @@ public class ModelRendererTurbo
             if(faceArea(polygon.vertices) <= BATCH_DEGENERATE_FACE_AREA_EPSILON){
                 continue;
             }
-            Vec3f normal = polygon.getLegacyFaceNormal();
+            Vec3f normal = polygon.getFirstTriangleFaceNormal();
             if(normal == null || isZeroVector(normal)){
                 normal = robustFaceNormal(polygon.vertices);
             }
@@ -2096,11 +2392,16 @@ public class ModelRendererTurbo
             rebuilt.add(new BatchFace(copyVertices(polygon.vertices), normal));
         }
         batchFaces = rebuilt;
+        batchFaceSignature = calculateBatchFaceSignature(rebuilt);
         batchFacesDirty = false;
     }
 
     private long getBatchFaceSignature(){
-        List<BatchFace> batchFaces = getBatchFaces();
+        getBatchFaces();
+        return batchFaceSignature;
+    }
+
+    private static long calculateBatchFaceSignature(List<BatchFace> batchFaces){
         long result = 1469598103934665603L;
         result = 31L * result + batchFaces.size();
         for(BatchFace face : batchFaces){
@@ -2200,7 +2501,8 @@ public class ModelRendererTurbo
         }
     }
     
-    private void compileLegacyDisplayList(float scale){
+    /** Compiles all faces into the single display list used by ordinary TMT model parts. */
+    private void compileSingleDisplayList(float scale){
         displayList = GLAllocation.generateDisplayLists(1);
         GL11.glNewList(displayList, GL11.GL_COMPILE);
         drawFaces(scale);

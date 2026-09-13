@@ -10,6 +10,18 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselSDL39 extends DieselTrain {
+    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sdl39")
+        .defaults()
+        .fixtureType(
+            train.common.api.LightFixtureType.MARKER_LIGHT,
+            "marker_two_body_261", "marker_two_body_263")
+        .fixtureType(
+            train.common.api.LightFixtureType.NUMBERBOARD,
+            "front_numberboard_body_62", "front_numberboard_body_63", "rear_numberboard_body_82",
+            "rear_numberboard_body_83")
+        .build();
+
     @Override
     public SoundRecord getSoundRecord()
     {
@@ -94,5 +106,12 @@ public class DieselSDL39 extends DieselTrain {
 
 
 
+
+
+    @Override
+    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
+    {
+        return LIGHTING_PROFILES;
+    }
 
 }

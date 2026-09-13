@@ -185,10 +185,10 @@ public class ModelPA extends ModelConverter //Same as Filename
 		bodyModel[141] = new ModelRendererTurbo(this, 10, 99, textureX, textureY); // Box 223
 		bodyModel[142] = new ModelRendererTurbo(this, 10, 82, textureX, textureY); // Box 224
 		bodyModel[143] = new ModelRendererTurbo(this, 1, 252, textureX, textureY); // Box 120
-		bodyModel[144] = new ModelRendererTurbo(this, 86, 87, textureX, textureY,BoxName.lamp); // Markerlight R type 1
+		bodyModel[144] = new ModelRendererTurbo(this, 86, 87, textureX, textureY,BoxName.marker).setLightFixtureId("marker_r_type_1"); // Markerlight R type 1
 		bodyModel[145] = new ModelRendererTurbo(this, 86, 90, textureX, textureY); // Box 216
 		bodyModel[146] = new ModelRendererTurbo(this, 86, 130, textureX, textureY); // Box 228
-		bodyModel[147] = new ModelRendererTurbo(this, 86, 127, textureX, textureY,BoxName.lamp); // Markerlight L type 1
+		bodyModel[147] = new ModelRendererTurbo(this, 86, 127, textureX, textureY,BoxName.marker).setLightFixtureId("marker_l_type_1"); // Markerlight L type 1
 		bodyModel[148] = new ModelRendererTurbo(this, 58, 109, textureX, textureY); // Box 0
 		bodyModel[149] = new ModelRendererTurbo(this, 23, 109, textureX, textureY); // Box 247
 		bodyModel[150] = new ModelRendererTurbo(this, 43, 94, textureX, textureY); // Box 245
@@ -501,8 +501,8 @@ public class ModelPA extends ModelConverter //Same as Filename
 		bodyModel[457] = new ModelRendererTurbo(this, 81, 44, textureX, textureY,BoxName.lamp); // Numberboard R type 2
 		bodyModel[458] = new ModelRendererTurbo(this, 92, 127, textureX, textureY,BoxName.lamp); // Numberboard L type 1
 		bodyModel[459] = new ModelRendererTurbo(this, 92, 87, textureX, textureY,BoxName.lamp); // Numberboard R type 1
-		bodyModel[460] = new ModelRendererTurbo(this, 84, 63, textureX, textureY,BoxName.lamp); // Markerlight L type 2
-		bodyModel[461] = new ModelRendererTurbo(this, 84, 60, textureX, textureY,BoxName.lamp); // Markerlight R type 2
+		bodyModel[460] = new ModelRendererTurbo(this, 84, 63, textureX, textureY,BoxName.marker).setLightFixtureId("marker_l_type_2"); // Markerlight L type 2
+		bodyModel[461] = new ModelRendererTurbo(this, 84, 60, textureX, textureY,BoxName.marker).setLightFixtureId("marker_r_type_2"); // Markerlight R type 2
 		bodyModel[462] = new ModelRendererTurbo(this, 217, 363, textureX, textureY); // Box 0
 		bodyModel[463] = new ModelRendererTurbo(this, 223, 352, textureX, textureY); // Box 0
 		bodyModel[464] = new ModelRendererTurbo(this, 223, 322, textureX, textureY); // Box 0
@@ -536,10 +536,10 @@ public class ModelPA extends ModelConverter //Same as Filename
 		bodyModel[492] = new ModelRendererTurbo(this, 223, 383, textureX, textureY); // Box 0
 		bodyModel[493] = new ModelRendererTurbo(this, 223, 298, textureX, textureY); // Box 513
 		bodyModel[494] = new ModelRendererTurbo(this, 223, 302, textureX, textureY); // Box 516
-		bodyModel[495] = new ModelRendererTurbo(this, 95, 70, textureX, textureY,BoxName.lamp); // Markerlight L type 3
+		bodyModel[495] = new ModelRendererTurbo(this, 95, 70, textureX, textureY,BoxName.marker).setLightFixtureId("marker_l_type_3"); // Markerlight L type 3
 		bodyModel[496] = new ModelRendererTurbo(this, 93, 73, textureX, textureY); // Box 228
 		bodyModel[497] = new ModelRendererTurbo(this, 93, 58, textureX, textureY); // Box 525
-		bodyModel[498] = new ModelRendererTurbo(this, 95, 67, textureX, textureY,BoxName.lamp); // Markerlight R type 3
+		bodyModel[498] = new ModelRendererTurbo(this, 95, 67, textureX, textureY,BoxName.marker).setLightFixtureId("marker_r_type_3"); // Markerlight R type 3
 		bodyModel[499] = new ModelRendererTurbo(this, 94, 76, textureX, textureY, BoxName.lamp); // Numberboard L type 3
 
 		bodyModel[0].addBox(0F, 0F, 0F, 79, 1, 22, 0F); // Box 0

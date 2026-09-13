@@ -52,39 +52,58 @@ public class RenderSmallBungalo extends TileEntitySpecialRenderer {
             }
         }
 
-        if (!skipRender) {
-            updateTicks++;
+        if (skipRender == false) {
+            updateTicks = tileEntity.getWorldObj().getTotalWorldTime();
+            flip = ((updateTicks / 30L) & 1L) == 0L;
             if(tile.powered) {
                 if(updateTicks % 30 == 0) {
                     if (flip)
+                    {
                         tmt.Tessellator.bindTexture(textureOn);
+                    }
                     else
+                    {
                         tmt.Tessellator.bindTexture(textureOn1);
-                    flip = !flip;
+                    }
                 }
                 else
+                {
                 if (flip)
+                    {
                     tmt.Tessellator.bindTexture(textureOn);
+                    }
                 else
+                    {
                     tmt.Tessellator.bindTexture(textureOn1);
+            }
+                }
             }
             else {
                 if (tile.rotation < -5 || tile.rotation > 5) {
                     if(updateTicks % 30 == 0) {
                         if (flip)
+                        {
                             tmt.Tessellator.bindTexture(textureOn);
+                        }
                         else
+                        {
                             tmt.Tessellator.bindTexture(textureOn1);
-                        flip = !flip;
+                        }
                     }
                     else {
                         if (flip)
+                        {
                             tmt.Tessellator.bindTexture(textureOn);
+                        }
                         else
+                        {
                             tmt.Tessellator.bindTexture(textureOn1);
                     }
+                }
                 } else
+                {
                     tmt.Tessellator.bindTexture(textureOff);
+            }
             }
             modelSwitch.render(null, tile.rotation, 0, 0, 0, 0, 0.0625f);
         }

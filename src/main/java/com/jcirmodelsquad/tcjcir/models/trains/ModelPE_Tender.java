@@ -81,7 +81,7 @@ public class ModelPE_Tender extends ModelConverter //Same as Filename
 		bodyModel[40] = new ModelRendererTurbo(this, 209, 1, textureX, textureY); // Box 43
 		bodyModel[41] = new ModelRendererTurbo(this, 233, 1, textureX, textureY); // Box 43
 		bodyModel[42] = new ModelRendererTurbo(this, 33, 9, textureX, textureY); // Box 43
-		bodyModel[43] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "lamp"); // Red Marker light
+		bodyModel[43] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "marker").setLightFixtureId("marker_red"); // Red Marker light
 		bodyModel[44] = new ModelRendererTurbo(this, 9, 89, textureX, textureY); // Box 3
 		bodyModel[45] = new ModelRendererTurbo(this, 17, 97, textureX, textureY); // Box 3
 		bodyModel[46] = new ModelRendererTurbo(this, 129, 25, textureX, textureY); // Box 8
@@ -328,7 +328,7 @@ public class ModelPE_Tender extends ModelConverter //Same as Filename
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		for (int i = 0; i < 70; i++) {
-			if (bodyModel[i].boxName != null && bodyModel[i].boxName.contains("lamp")) {
+			if (bodyModel[i].boxName != null && (bodyModel[i].boxName.contains("lamp") || bodyModel[i].boxName.contains("marker"))) {
 				Minecraft.getMinecraft().entityRenderer.disableLightmap(1D);
 				bodyModel[i].render(f5);
 				Minecraft.getMinecraft().entityRenderer.enableLightmap(1D);

@@ -347,12 +347,12 @@ public class ModelM420B extends ModelConverter //Same as Filename
 		bodyModel[301] = new ModelRendererTurbo(this, 93, 131, textureX, textureY); // Box 20
 		bodyModel[302] = new ModelRendererTurbo(this, 105, 127, textureX, textureY); // Box 85
 		bodyModel[303] = new ModelRendererTurbo(this, 105, 131, textureX, textureY); // Box 87
-		bodyModel[304] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[305] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "lamp"); // Box 298 liveryimg 2
+		bodyModel[304] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_304"); // Box 117 liveryimg 2
+		bodyModel[305] = new ModelRendererTurbo(this, 461, 0, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_305"); // Box 298 liveryimg 2
 		bodyModel[306] = new ModelRendererTurbo(this, 461, 8, textureX, textureY, "lamp"); // Box 298 rear morker lights
 		bodyModel[307] = new ModelRendererTurbo(this, 503, 3, textureX, textureY, "lamp"); // Box 298 rear morker lights
-		bodyModel[308] = new ModelRendererTurbo(this, 206, 33, textureX, textureY, "lamp"); // Box 117 liveryimg 2
-		bodyModel[309] = new ModelRendererTurbo(this, 206, 33, textureX, textureY, "lamp"); // Box 298 liveryimg 2
+		bodyModel[308] = new ModelRendererTurbo(this, 206, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_308"); // Box 117 liveryimg 2
+		bodyModel[309] = new ModelRendererTurbo(this, 206, 33, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_309"); // Box 298 liveryimg 2
 		bodyModel[310] = new ModelRendererTurbo(this, 208, 28, textureX, textureY, "lamp"); // Box 298 rear morker lights
 		bodyModel[311] = new ModelRendererTurbo(this, 214, 33, textureX, textureY, "lamp"); // Box 298 rear morker lights
 		bodyModel[312] = new ModelRendererTurbo(this, 222, 21, textureX, textureY); // Box 327

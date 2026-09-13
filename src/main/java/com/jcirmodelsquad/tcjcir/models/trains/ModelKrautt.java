@@ -111,8 +111,8 @@ public class ModelKrautt extends ModelConverter //Same as Filename
 		bodyModel[65] = new ModelRendererTurbo(this, 481, 41, textureX, textureY); // Box 78
 		bodyModel[66] = new ModelRendererTurbo(this, 1, 9, textureX, textureY, "lamp"); // Rear lamp U
 		bodyModel[67] = new ModelRendererTurbo(this, 249, 9, textureX, textureY, "lamp"); // Rear lamp L
-		bodyModel[68] = new ModelRendererTurbo(this, 17, 9, textureX, textureY, "lamp"); // Rear marker light R
-		bodyModel[69] = new ModelRendererTurbo(this, 201, 9, textureX, textureY, "lamp"); // Rear marker light L
+		bodyModel[68] = new ModelRendererTurbo(this, 17, 9, textureX, textureY, "marker").setLightFixtureId("rear_marker_r"); // Rear marker light R
+		bodyModel[69] = new ModelRendererTurbo(this, 201, 9, textureX, textureY, "marker").setLightFixtureId("rear_marker_l"); // Rear marker light L
 		bodyModel[70] = new ModelRendererTurbo(this, 241, 9, textureX, textureY, "lamp"); // Rear lamp U
 		bodyModel[71] = new ModelRendererTurbo(this, 153, 65, textureX, textureY); // Box 0
 		bodyModel[72] = new ModelRendererTurbo(this, 153, 73, textureX, textureY); // Box 0
@@ -234,10 +234,10 @@ public class ModelKrautt extends ModelConverter //Same as Filename
 		bodyModel[188] = new ModelRendererTurbo(this, 497, 33, textureX, textureY); // Box 0
 		bodyModel[189] = new ModelRendererTurbo(this, 313, 41, textureX, textureY); // Box 0
 		bodyModel[190] = new ModelRendererTurbo(this, 505, 33, textureX, textureY); // Box 216
-		bodyModel[191] = new ModelRendererTurbo(this, 481, 9, textureX, textureY, "lamp"); // Front numberboard L
-		bodyModel[192] = new ModelRendererTurbo(this, 385, 33, textureX, textureY, "lamp"); // Front numberboard R
-		bodyModel[193] = new ModelRendererTurbo(this, 369, 17, textureX, textureY, "lamp"); // Front marker light L
-		bodyModel[194] = new ModelRendererTurbo(this, 377, 17, textureX, textureY, "lamp"); // Front marker light L
+		bodyModel[191] = new ModelRendererTurbo(this, 481, 9, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_left_body_191"); // Front numberboard L
+		bodyModel[192] = new ModelRendererTurbo(this, 385, 33, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_right_body_192"); // Front numberboard R
+		bodyModel[193] = new ModelRendererTurbo(this, 369, 17, textureX, textureY, "marker").setLightFixtureId("front_marker_l_body_193"); // Front marker light L
+		bodyModel[194] = new ModelRendererTurbo(this, 377, 17, textureX, textureY, "marker").setLightFixtureId("front_marker_l_body_194"); // Front marker light L
 		bodyModel[195] = new ModelRendererTurbo(this, 241, 49, textureX, textureY); // Box 0
 		bodyModel[196] = new ModelRendererTurbo(this, 313, 49, textureX, textureY); // Box 0
 		bodyModel[197] = new ModelRendererTurbo(this, 345, 105, textureX, textureY); // Box 0
@@ -429,10 +429,10 @@ public class ModelKrautt extends ModelConverter //Same as Filename
 		bodyModel[383] = new ModelRendererTurbo(this, 42, 154, textureX, textureY, "lamp"); // SP emergency light
 		bodyModel[384] = new ModelRendererTurbo(this, 33, 145, textureX, textureY); // Front numberboard L
 		bodyModel[385] = new ModelRendererTurbo(this, 77, 145, textureX, textureY); // Front numberboard R
-		bodyModel[386] = new ModelRendererTurbo(this, 46, 145, textureX, textureY, "lamp"); // Front numberboard L
-		bodyModel[387] = new ModelRendererTurbo(this, 66, 145, textureX, textureY, "lamp"); // Front numberboard R
-		bodyModel[388] = new ModelRendererTurbo(this, 490, 13, textureX, textureY, "lamp"); // Front numberboard L
-		bodyModel[389] = new ModelRendererTurbo(this, 374, 33, textureX, textureY, "lamp"); // Front numberboard R
+		bodyModel[386] = new ModelRendererTurbo(this, 46, 145, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_left_body_386"); // Front numberboard L
+		bodyModel[387] = new ModelRendererTurbo(this, 66, 145, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_right_body_387"); // Front numberboard R
+		bodyModel[388] = new ModelRendererTurbo(this, 490, 13, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_left_body_388"); // Front numberboard L
+		bodyModel[389] = new ModelRendererTurbo(this, 374, 33, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_right_body_389"); // Front numberboard R
 
 		bodyModel[0].addShapeBox(0F, 0F, 0F, 85, 3, 22, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-42.5F, -0.75F, -11F);

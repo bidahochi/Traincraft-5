@@ -171,8 +171,8 @@ public class ModelGP7b extends ModelConverter //Same as Filename
 		bodyModel[124] = new ModelRendererTurbo(this, 92, 101, textureX, textureY); // Box 352
 		bodyModel[125] = new ModelRendererTurbo(this, 73, 97, textureX, textureY); // Box 353
 		bodyModel[126] = new ModelRendererTurbo(this, 108, 97, textureX, textureY); // Box 357
-		bodyModel[127] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "lamp"); // Box 117 numberboard front high
-		bodyModel[128] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "lamp"); // Box 118 numberboard front high
+		bodyModel[127] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_127"); // Box 117 numberboard front high
+		bodyModel[128] = new ModelRendererTurbo(this, 91, 93, textureX, textureY, "numberboard").setLightFixtureId("front_numberboard_body_128"); // Box 118 numberboard front high
 		bodyModel[129] = new ModelRendererTurbo(this, 32, 120, textureX, textureY, "lamp"); // Box 215 headlight front 1
 		bodyModel[130] = new ModelRendererTurbo(this, 25, 120, textureX, textureY); // Box 216
 		bodyModel[131] = new ModelRendererTurbo(this, 32, 125, textureX, textureY, "lamp"); // Box 217 headlight front 2
@@ -250,8 +250,8 @@ public class ModelGP7b extends ModelConverter //Same as Filename
 		bodyModel[203] = new ModelRendererTurbo(this, 433, 170, textureX, textureY, "lamp"); // Box 221 headlight rear 3
 		bodyModel[204] = new ModelRendererTurbo(this, 426, 165, textureX, textureY); // Box 222
 		bodyModel[205] = new ModelRendererTurbo(this, 433, 165, textureX, textureY, "lamp"); // Box 223 headlight rear 2
-		bodyModel[206] = new ModelRendererTurbo(this, 398, 121, textureX, textureY, "lamp"); // Box 115 numberboard rear
-		bodyModel[207] = new ModelRendererTurbo(this, 398, 121, textureX, textureY, "lamp"); // Box 116 numberboard rear
+		bodyModel[206] = new ModelRendererTurbo(this, 398, 121, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_body_206"); // Box 115 numberboard rear
+		bodyModel[207] = new ModelRendererTurbo(this, 398, 121, textureX, textureY, "numberboard").setLightFixtureId("rear_numberboard_body_207"); // Box 116 numberboard rear
 		bodyModel[208] = new ModelRendererTurbo(this, 426, 170, textureX, textureY); // Box 312
 		bodyModel[209] = new ModelRendererTurbo(this, 426, 175, textureX, textureY); // Box 488
 		bodyModel[210] = new ModelRendererTurbo(this, 433, 175, textureX, textureY, "lamp"); // Box 489 headlight rear 4
@@ -481,10 +481,10 @@ public class ModelGP7b extends ModelConverter //Same as Filename
 		bodyModel[434] = new ModelRendererTurbo(this, 18, 183, textureX, textureY); // Box 580
 		bodyModel[435] = new ModelRendererTurbo(this, 316, 200, textureX, textureY); // Box 581
 		bodyModel[436] = new ModelRendererTurbo(this, 295, 237, textureX, textureY); // Box 582
-		bodyModel[437] = new ModelRendererTurbo(this, 122, 95, textureX, textureY, "lamp"); // Box 559 markerlight
-		bodyModel[438] = new ModelRendererTurbo(this, 122, 95, textureX, textureY, "lamp"); // Box 559 markerlight
-		bodyModel[439] = new ModelRendererTurbo(this, 395, 124, textureX, textureY, "lamp"); // Box 559 markerlight
-		bodyModel[440] = new ModelRendererTurbo(this, 395, 124, textureX, textureY, "lamp"); // Box 559 markerlight
+		bodyModel[437] = new ModelRendererTurbo(this, 122, 95, textureX, textureY, "marker").setLightFixtureId("marker_body_437"); // Box 559 markerlight
+		bodyModel[438] = new ModelRendererTurbo(this, 122, 95, textureX, textureY, "marker").setLightFixtureId("marker_body_438"); // Box 559 markerlight
+		bodyModel[439] = new ModelRendererTurbo(this, 395, 124, textureX, textureY, "marker").setLightFixtureId("marker_body_439"); // Box 559 markerlight
+		bodyModel[440] = new ModelRendererTurbo(this, 395, 124, textureX, textureY, "marker").setLightFixtureId("marker_body_440"); // Box 559 markerlight
 		bodyModel[441] = new ModelRendererTurbo(this, 93, 112, textureX, textureY); // Box 565
 		bodyModel[442] = new ModelRendererTurbo(this, 32, 100, textureX, textureY, "lamp"); // Box 169 headlight front big
 		bodyModel[443] = new ModelRendererTurbo(this, 433, 141, textureX, textureY, "lamp"); // Box 170 headlight rear big

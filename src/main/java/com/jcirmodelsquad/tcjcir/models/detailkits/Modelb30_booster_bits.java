@@ -55,12 +55,12 @@ public class Modelb30_booster_bits extends ModelConverter //Same as Filename
 		bodyModel[18] = new ModelRendererTurbo(this, 308, 223, textureX, textureY); // Box 43 booster ratchet brake
 		bodyModel[19] = new ModelRendererTurbo(this, 231, 219, textureX, textureY); // Box 388 numberboard booster HOLDER
 		bodyModel[20] = new ModelRendererTurbo(this, 231, 219, textureX, textureY); // Box 389 numberboard booster HOLDER
-		bodyModel[21] = new ModelRendererTurbo(this, 231, 227, textureX, textureY, "lamp"); // Box 388 numberboard booster
-		bodyModel[22] = new ModelRendererTurbo(this, 231, 227, textureX, textureY, "lamp"); // Box 389 numberboard booster
-		bodyModel[23] = new ModelRendererTurbo(this, 224, 222, textureX, textureY, "lamp"); // Box 307 glowey marker booster
-		bodyModel[24] = new ModelRendererTurbo(this, 224, 222, textureX, textureY, "lamp"); // Box 308 glowey marker booster
-		bodyModel[25] = new ModelRendererTurbo(this, 224, 227, textureX, textureY, "lamp"); // Box 307 glowey marker booster ssw
-		bodyModel[26] = new ModelRendererTurbo(this, 224, 227, textureX, textureY, "lamp"); // Box 308 glowey marker booster ssw
+		bodyModel[21] = new ModelRendererTurbo(this, 231, 227, textureX, textureY, "numberboard").setLightFixtureId("numberboard_booster_body_21"); // Box 388 numberboard booster
+		bodyModel[22] = new ModelRendererTurbo(this, 231, 227, textureX, textureY, "numberboard").setLightFixtureId("numberboard_booster_body_22"); // Box 389 numberboard booster
+		bodyModel[23] = new ModelRendererTurbo(this, 224, 222, textureX, textureY, "marker").setLightFixtureId("marker_booster_body_23"); // Box 307 glowey marker booster
+		bodyModel[24] = new ModelRendererTurbo(this, 224, 222, textureX, textureY, "marker").setLightFixtureId("marker_booster_body_24"); // Box 308 glowey marker booster
+		bodyModel[25] = new ModelRendererTurbo(this, 224, 227, textureX, textureY, "marker").setLightFixtureId("marker_booster_ssw_body_25"); // Box 307 glowey marker booster ssw
+		bodyModel[26] = new ModelRendererTurbo(this, 224, 227, textureX, textureY, "marker").setLightFixtureId("marker_booster_ssw_body_26"); // Box 308 glowey marker booster ssw
 
 		bodyModel[0].addShapeBox(0F, 0F, 0F, 13, 1, 4, 0F,0F, -1F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 455 booster roof
 		bodyModel[0].setRotationPoint(-33F, -21F, -7F);

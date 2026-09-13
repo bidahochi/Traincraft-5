@@ -127,8 +127,8 @@ public class ModelOnion extends ModelConverter //Same as Filename
 		bodyModel[92] = new ModelRendererTurbo(this, 209, 1, textureX, textureY); // Box 74
 		bodyModel[93] = new ModelRendererTurbo(this, 137, 9, textureX, textureY); // Box 78
 		bodyModel[94] = new ModelRendererTurbo(this, 489, 33, textureX, textureY); // Box 94
-		bodyModel[95] = new ModelRendererTurbo(this, 505, 9, textureX, textureY, "lamp"); // Box 95 liveryimg 1
-		bodyModel[96] = new ModelRendererTurbo(this, 57, 17, textureX, textureY, "lamp"); // Box 96 liveryimg 1
+		bodyModel[95] = new ModelRendererTurbo(this, 505, 9, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_95"); // Box 95 liveryimg 1
+		bodyModel[96] = new ModelRendererTurbo(this, 57, 17, textureX, textureY, "numberboard").setLightFixtureId("numberboard_body_96"); // Box 96 liveryimg 1
 		bodyModel[97] = new ModelRendererTurbo(this, 33, 41, textureX, textureY); // Box 97 liveryimg 2
 		bodyModel[98] = new ModelRendererTurbo(this, 1, 49, textureX, textureY); // Box 98 liveryimg 2
 
