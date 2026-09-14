@@ -3243,6 +3243,45 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				new TargetPoint(worldObj.provider.dimensionId, posX, posY, posZ, 300.0D));
 	}
 
+    /**
+     * Supplies the horn-light response policy for this rolling stock.
+     *
+     * @return an explicit policy, or {@code null} to retain the unrestricted default timer
+     */
+    protected RollingStockHornLightResponsePolicy getHornLightResponsePolicy()
+    {
+        return null;
+    }
+
+    /**
+     * Calculates the current configuration-adjusted horizontal speed without HUD truncation.
+     *
+     * @return absolute horizontal speed in km/h
+     */
+    protected final double getExactSpeedKmh()
+    {
+        double horizontalMotion = Math.sqrt(motionX * motionX + motionZ * motionZ);
+        return Math.abs(convertSpeed(horizontalMotion));
+    }
+
+    /**
+     * Applies this stock's horn policy to its current transient response countdown.
+     *
+     * @param remainingTicks current response time remaining in ticks
+     * @return the updated non-negative response duration
+     */
+    protected final int startHornLightResponse(int remainingTicks)
+    {
+        RollingStockHornLightResponsePolicy policy = getHornLightResponsePolicy();
+        if (policy == null)
+        {
+            return RollingStockTransientLightTimer.startHorn();
+        }
+        return RollingStockTransientLightTimer.startHorn(
+                   remainingTicks, policy, getExactSpeedKmh());
+    }
+
+
 	public double convertSpeed(double speed)
 	{
 		//System.out.println("X "+motionX +" Z "+motionZ);

@@ -398,8 +398,12 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         }
         pressKey(key);
         if (key == HORN_KEY) {
-            hornLightResponseTicks = RollingStockTransientLightTimer.startHorn();
-            synchronizeLightState();
+            int previousHornLightResponseTicks = hornLightResponseTicks;
+            hornLightResponseTicks = startHornLightResponse(hornLightResponseTicks);
+            if (hornLightResponseTicks != previousHornLightResponseTicks)
+            {
+                synchronizeLightState();
+            }
             if (ConfigHandler.SOUNDS) {
                 soundHorn();
             }

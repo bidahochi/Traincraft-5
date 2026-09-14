@@ -143,8 +143,8 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[95] = new ModelRendererTurbo(this, 76, 117, textureX, textureY); // Box 408
 		bodyModel[96] = new ModelRendererTurbo(this, 53, 2, textureX, textureY); // Box 394 awvr window
 		bodyModel[97] = new ModelRendererTurbo(this, 63, 7, textureX, textureY); // Box 394 awvr window
-		bodyModel[98] = new ModelRendererTurbo(this, 360, 184, textureX, textureY, "ditch"); // Box 389 ditchlight r 3
-		bodyModel[99] = new ModelRendererTurbo(this, 360, 184, textureX, textureY, "ditch"); // Box 388 ditchlight r 3
+		bodyModel[98] = new ModelRendererTurbo(this, 360, 184, textureX, textureY, "ditch").setLightFixtureId("rear_ditch_variant_3_right"); // Box 389 ditchlight r 3
+		bodyModel[99] = new ModelRendererTurbo(this, 360, 184, textureX, textureY, "ditch").setLightFixtureId("rear_ditch_variant_3_left"); // Box 388 ditchlight r 3
 		bodyModel[100] = new ModelRendererTurbo(this, 360, 189, textureX, textureY, "cull"); // Box 387 cull
 		bodyModel[101] = new ModelRendererTurbo(this, 360, 189, textureX, textureY, "cull"); // Box 386 cull
 		bodyModel[102] = new ModelRendererTurbo(this, 234, 43, textureX, textureY); // Box 372
@@ -183,9 +183,9 @@ public class ModelSD40dash2 extends ModelConverter //Same as Filename
 		bodyModel[135] = new ModelRendererTurbo(this, 33, 2, textureX, textureY); // box65
 		bodyModel[136] = new ModelRendererTurbo(this, 81, 2, textureX, textureY); // box64
 		bodyModel[137] = new ModelRendererTurbo(this, 19, 163, textureX, textureY, "cull"); // Box 419 cull
-		bodyModel[138] = new ModelRendererTurbo(this, 19, 157, textureX, textureY, "ditch"); // Box 418 ditchlight f 3
+		bodyModel[138] = new ModelRendererTurbo(this, 19, 157, textureX, textureY, "ditch").setLightFixtureId("front_ditch_variant_3_left"); // Box 418 ditchlight f 3
 		bodyModel[139] = new ModelRendererTurbo(this, 19, 163, textureX, textureY, "cull"); // Box 417 cull
-		bodyModel[140] = new ModelRendererTurbo(this, 19, 157, textureX, textureY, "ditch"); // Box 416 ditchlight f 3
+		bodyModel[140] = new ModelRendererTurbo(this, 19, 157, textureX, textureY, "ditch").setLightFixtureId("front_ditch_variant_3_right"); // Box 416 ditchlight f 3
 		bodyModel[141] = new ModelRendererTurbo(this, 225, 40, textureX, textureY); // Box 415
 		bodyModel[142] = new ModelRendererTurbo(this, 168, 5, textureX, textureY); // Box 245
 		bodyModel[143] = new ModelRendererTurbo(this, 169, 15, textureX, textureY); // Box 78

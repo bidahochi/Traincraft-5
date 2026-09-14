@@ -701,8 +701,12 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         }
         pressKey(key);
         if (key == HORN_KEY) {
-            hornLightResponseTicks = RollingStockTransientLightTimer.startHorn();
-            synchronizeLightState();
+            int previousHornLightResponseTicks = hornLightResponseTicks;
+            hornLightResponseTicks = startHornLightResponse(hornLightResponseTicks);
+            if (hornLightResponseTicks != previousHornLightResponseTicks)
+            {
+                synchronizeLightState();
+            }
             if (ConfigHandler.SOUNDS) {
                 soundHorn();
             }
@@ -2156,6 +2160,12 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
             }
 
             case 4: {
+                int previousHornLightResponseTicks = hornLightResponseTicks;
+                hornLightResponseTicks = startHornLightResponse(hornLightResponseTicks);
+                if (hornLightResponseTicks != previousHornLightResponseTicks)
+                {
+                    synchronizeLightState();
+                }
                 soundHorn();
                 break;
             }
