@@ -194,7 +194,12 @@ public class BlockTCRailGag extends Block {
 			TileTCRail parentRail = null;
 			TileEntity originTile = world.getTileEntity(((TileTCRailGag) tileEntity).originX, ((TileTCRailGag) tileEntity).originY, ((TileTCRailGag) tileEntity).originZ);
 			if (originTile instanceof TileTCRail) {
-				parentRail = ((TileTCRail) originTile).getGreatestParent(world);
+				TileTCRail originRail = (TileTCRail)originTile;
+				parentRail = TrackCellResolver.resolveCapturedHostOwner(world, originRail);
+				if (parentRail == null)
+				{
+					parentRail = originRail.getGreatestParent(world);
+				}
 			}
 			if (parentRail != null && parentRail.usesDynamicHostSurfaceRendering()) {
 				parentRail.markTrackHostRenderDirty();

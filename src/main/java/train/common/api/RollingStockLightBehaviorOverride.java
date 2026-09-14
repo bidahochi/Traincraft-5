@@ -217,6 +217,29 @@ public final class RollingStockLightBehaviorOverride
                .build();
     }
 
+    /**
+     * Creates a temporary active-end alternating response without changing normal operation.
+     *
+     * @param phase alternating phase, either {@code 0} or {@code 1}
+     * @param response lamp transition model used by the temporary function
+     * @return a ditch-light horn-response override, or an empty override for invalid input
+     */
+    public static RollingStockLightBehaviorOverride hornAlternatingDitch(
+        int phase, RollingStockLightFunction.LampResponse response)
+    {
+        if ((phase != 0 && phase != 1) || response == null)
+        {
+            return builder().build();
+        }
+        RollingStockLightFunction function =
+            RollingStockLightFunction.alternatingDitch(phase, response);
+        return builder()
+               .controlCircuit(RollingStockLightChannel.DITCH)
+               .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
+               .ditchHornResponse(RollingStockDitchHornMode.ACTIVE_END, function, phase)
+               .build();
+    }
+
     public static RollingStockLightBehaviorOverride beacon(RollingStockLightFunction f)
     {
         if (f == null

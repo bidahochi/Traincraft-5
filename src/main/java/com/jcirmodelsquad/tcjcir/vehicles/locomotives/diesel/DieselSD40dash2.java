@@ -4,6 +4,9 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
+import train.common.api.RollingStockHornLightResponsePolicy;
+import train.common.api.RollingStockSkinLightingProfiles;
+import train.common.api.RollingStockLightFunction;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
@@ -14,8 +17,11 @@ import java.awt.*;
 
 
 public class DieselSD40dash2 extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd40dash2")
+    private static final double MINIMUM_HORN_RESPONSE_SPEED_KMH = 24.14016D;
+    static final RollingStockHornLightResponsePolicy CSX_HORN_LIGHT_RESPONSE =
+        RollingStockHornLightResponsePolicy.fixedSeconds(15, MINIMUM_HORN_RESPONSE_SPEED_KMH);
+    static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
+        RollingStockSkinLightingProfiles.builder("bap:sd40dash2")
         .defaults()
         .fixtureType(
             train.common.api.LightFixtureType.MARKER_LIGHT,
@@ -25,6 +31,27 @@ public class DieselSD40dash2 extends DieselTrain {
             train.common.api.LightFixtureType.NUMBERBOARD,
             "front_numberboard_body_291", "front_numberboard_body_292", "numberboard_body_109",
             "numberboard_body_110", "rear_numberboard_body_389", "rear_numberboard_body_390")
+        .setSkin("skin19")
+        .hornAlternatingDitch(
+            0, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_left", "rear_ditch_variant_3_right")
+        .hornAlternatingDitch(
+            1, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_right", "rear_ditch_variant_3_left")
+        .setSkin("skin33")
+        .hornAlternatingDitch(
+            0, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_left", "rear_ditch_variant_3_right")
+        .hornAlternatingDitch(
+            1, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_right", "rear_ditch_variant_3_left")
+        .setSkin("skin38")
+        .hornAlternatingDitch(
+            0, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_left", "rear_ditch_variant_3_right")
+        .hornAlternatingDitch(
+            1, RollingStockLightFunction.LampResponse.INCANDESCENT,
+            "front_ditch_variant_3_right", "rear_ditch_variant_3_left")
         .build();
 
     @Override
@@ -143,6 +170,25 @@ public class DieselSD40dash2 extends DieselTrain {
     protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
     {
         return LIGHTING_PROFILES;
+    }
+
+    @Override
+    protected RollingStockHornLightResponsePolicy getHornLightResponsePolicy()
+    {
+        return isCsxHornLightSkin(getColor())
+               ? CSX_HORN_LIGHT_RESPONSE
+               : RollingStockHornLightResponsePolicy.DISABLED;
+    }
+
+    /**
+     * Reports whether a skin uses the CSX speed-gated horn-light behavior.
+     *
+     * @param color rolling-stock skin index
+     * @return whether the skin enables the CSX horn-light policy
+     */
+    static boolean isCsxHornLightSkin(int color)
+    {
+        return color == 19 || color == 33 || color == 38;
     }
 
 }

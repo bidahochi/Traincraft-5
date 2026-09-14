@@ -103,7 +103,8 @@ public final class RollingStockLightState
         }
         else
         {
-            if (stock.isLightChannelEnabled(definition.controlCircuit()) == false)
+            if (stock.isLightChannelEnabled(definition.controlCircuit()) == false
+                    && hornResponseActive == false)
             {
                 return RollingStockLightOutput.OFF;
             }

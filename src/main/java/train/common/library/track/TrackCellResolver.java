@@ -106,6 +106,33 @@ public final class TrackCellResolver
         return null;
     }
 
+	/**
+	 * Resolves captured-host ownership independently from the route-parent graph. New replacement placements carry an
+	 * explicit owner reference. Route-parent links are never consulted for captured-host ownership.
+	 *
+	 * @param world world containing the rail footprint
+	 * @param rail parent rail whose captured host owner is required
+	 * @return loaded captured-host owner, or {@code null} when an explicit owner is unavailable
+	 */
+	public static TileTCRail resolveCapturedHostOwner(World world, TileTCRail rail)
+	{
+		if (world == null || rail == null)
+		{
+			return null;
+		}
+		if (rail.hasCapturedHostBlocks())
+		{
+			return rail;
+		}
+		if (rail.hasCapturedHostOwnerReference())
+		{
+			TileEntity owner = world.getTileEntity(rail.getCapturedHostOwnerX(),
+					rail.getCapturedHostOwnerY(), rail.getCapturedHostOwnerZ());
+			return owner instanceof TileTCRail ? (TileTCRail)owner : null;
+		}
+		return null;
+	}
+
     /**
      * Finds the owner needed while removing a track, loading only chunks named by saved rail and gag coordinates.
      * Normal rendering must not load chunks, but removal must reach the one tile that owns the captured host blocks.
@@ -154,6 +181,15 @@ public final class TrackCellResolver
         if (tileEntity instanceof TileTCRail)
         {
             TileTCRail rail = (TileTCRail) tileEntity;
+			if (rail.hasCapturedHostBlocks())
+			{
+				return rail;
+			}
+			if (rail.hasCapturedHostOwnerReference())
+			{
+				return resolveLoadedParentForRemoval(world, rail.getCapturedHostOwnerX(),
+						rail.getCapturedHostOwnerY(), rail.getCapturedHostOwnerZ(), visited);
+			}
             if (rail.isLinkedToRail == false)
             {
                 return rail;

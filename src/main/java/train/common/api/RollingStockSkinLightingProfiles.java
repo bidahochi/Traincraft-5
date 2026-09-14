@@ -278,6 +278,39 @@ public final class RollingStockSkinLightingProfiles
             return this;
         }
 
+        /**
+         * Assigns a temporary active-end alternating horn response to steady ditch fixtures.
+         *
+         * @param phase alternating phase, either {@code 0} or {@code 1}
+         * @param response lamp transition model used by the temporary function
+         * @param fixtures fixture ids receiving the horn-response override
+         * @return this skin builder
+         */
+        public SkinBuilder hornAlternatingDitch(
+            int phase,
+            RollingStockLightFunction.LampResponse response,
+            String... fixtures)
+        {
+            if ((phase != 0 && phase != 1)
+                    || response == null
+                    || fixtures == null
+                    || fixtures.length == 0)
+            {
+                return this;
+            }
+            RollingStockLightBehaviorOverride behavior =
+                RollingStockLightBehaviorOverride.hornAlternatingDitch(phase, response);
+            for (String fixture : fixtures)
+            {
+                if (fixture == null || fixture.trim().isEmpty())
+                {
+                    continue;
+                }
+                lighting.setLightBehavior(parent.fixtureId(fixture), behavior);
+            }
+            return this;
+        }
+
         /** Applies an advanced partial behavior override to every supplied fixture. */
         public SkinBuilder behavior(
             RollingStockLightBehaviorOverride behavior, String... fixtures)
