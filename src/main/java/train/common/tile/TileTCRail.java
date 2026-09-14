@@ -39,6 +39,7 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 
 	private static final double EMBEDDED_HOST_SURFACE_INSET = 0.0625D;
 	private static final String ATTACHMENT_OWNER_COORDINATES_TAG = "TrackAttachmentOwnerCoordinates";
+	private static final String CAPTURED_HOST_OWNER_COORDINATES_TAG = "CapturedHostOwnerCoordinates";
 	private static final int COORDINATE_COMPONENTS = 3;
 	private static final int[] NO_ATTACHMENT_OWNER_COORDINATES = new int[0];
 	public double r;
@@ -65,6 +66,10 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	 */
 	private TileTCRailHostData trackHostData = null;
 	private int trackHostRenderEventVersion;
+	private boolean capturedHostOwnerAssigned;
+	private int capturedHostOwnerX;
+	private int capturedHostOwnerY;
+	private int capturedHostOwnerZ;
 	public int facingMeta;
 	public boolean isLinkedToRail = false;
 	public int linkedX;
@@ -123,6 +128,48 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 			int renderSourceOffsetX, int renderSourceOffsetY, int renderSourceOffsetZ)
 	{
 		getOrCreateTrackHostData().replace(hostBlocks, renderSourceOffsetX, renderSourceOffsetY, renderSourceOffsetZ);
+	}
+
+	/**
+	 * Records the rail that owns this replacement footprint's captured host data without changing the route-parent link.
+	 * The owner itself clears the reference because it stores the host data locally.
+	 *
+	 * @param owner authoritative captured-host owner
+	 */
+	public void setCapturedHostOwner(TileTCRail owner)
+	{
+		capturedHostOwnerAssigned = owner != null
+				&& (owner.xCoord != xCoord || owner.yCoord != yCoord || owner.zCoord != zCoord);
+		if (capturedHostOwnerAssigned)
+		{
+			capturedHostOwnerX = owner.xCoord;
+			capturedHostOwnerY = owner.yCoord;
+			capturedHostOwnerZ = owner.zCoord;
+		}
+	}
+
+	/** @return whether this rail has a dedicated captured-host owner distinct from its route parent */
+	public boolean hasCapturedHostOwnerReference()
+	{
+		return capturedHostOwnerAssigned;
+	}
+
+	/** @return captured-host owner X coordinate; meaningful only when a reference is present */
+	public int getCapturedHostOwnerX()
+	{
+		return capturedHostOwnerX;
+	}
+
+	/** @return captured-host owner Y coordinate; meaningful only when a reference is present */
+	public int getCapturedHostOwnerY()
+	{
+		return capturedHostOwnerY;
+	}
+
+	/** @return captured-host owner Z coordinate; meaningful only when a reference is present */
+	public int getCapturedHostOwnerZ()
+	{
+		return capturedHostOwnerZ;
 	}
 
 	/**
@@ -400,7 +447,7 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	private TileTCRail resolveCapturedHostOwner()
 	{
 		return hasCapturedHostBlocks() || worldObj == null
-				? this : TrackCellResolver.resolveGreatestParent(worldObj, this);
+				? this : TrackCellResolver.resolveCapturedHostOwner(worldObj, this);
 	}
 
 	/**
@@ -809,6 +856,14 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		int[] persistedAttachmentOwners = nbt.getIntArray(ATTACHMENT_OWNER_COORDINATES_TAG);
 		attachmentOwnerCoordinates = persistedAttachmentOwners.length % COORDINATE_COMPONENTS == 0
 				? persistedAttachmentOwners : NO_ATTACHMENT_OWNER_COORDINATES;
+		int[] persistedHostOwner = nbt.getIntArray(CAPTURED_HOST_OWNER_COORDINATES_TAG);
+		capturedHostOwnerAssigned = persistedHostOwner.length == COORDINATE_COMPONENTS;
+		if (capturedHostOwnerAssigned)
+		{
+			capturedHostOwnerX = persistedHostOwner[0];
+			capturedHostOwnerY = persistedHostOwner[1];
+			capturedHostOwnerZ = persistedHostOwner[2];
+		}
 		ownerUUID = nbt.hasKey("ownerUUID") ? nbt.getString("ownerUUID") : "Villager Joe";
 		facingMeta = nbt.getByte("Orientation");
 		r = nbt.getDouble("r");
@@ -898,6 +953,11 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		if (attachmentOwnerCoordinates.length > 0)
 		{
 			nbt.setIntArray(ATTACHMENT_OWNER_COORDINATES_TAG, attachmentOwnerCoordinates);
+		}
+		if (capturedHostOwnerAssigned)
+		{
+			nbt.setIntArray(CAPTURED_HOST_OWNER_COORDINATES_TAG, new int[]{
+					capturedHostOwnerX, capturedHostOwnerY, capturedHostOwnerZ});
 		}
 		nbt.setString("ownerUUID", ownerUUID);
 		nbt.setByte("Orientation", (byte) facingMeta);

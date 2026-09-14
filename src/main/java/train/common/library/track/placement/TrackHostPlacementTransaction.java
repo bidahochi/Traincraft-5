@@ -304,7 +304,7 @@ public final class TrackHostPlacementTransaction
 		TileTCRail renderSource = findRenderSource(world, parent);
 		parent.replaceCapturedHostBlocks(replacement, renderSource.xCoord - parent.xCoord,
 				renderSource.yCoord - parent.yCoord, renderSource.zCoord - parent.zCoord);
-		normalizePlacedFootprintOwnership(world, parent);
+		assignCapturedHostOwnership(world, parent);
 		for (ParentCoordinate coordinate : parentCoordinates.values())
 		{
 			TileEntity placedTile = world.getTileEntity(coordinate.x, coordinate.y, coordinate.z);
@@ -331,28 +331,38 @@ public final class TrackHostPlacementTransaction
 	}
 
 	/**
-	 * Connects every parent created by replacement placement to the tile that owns the captured host map. Gags retain
-	 * their local model parent so attachment path sampling can distinguish separate straight and turn sections; that
-	 * parent then resolves the shared captured-host owner through its normalized link.
+	 * Records the captured-host owner on every parent created by replacement placement. Route-parent links are authored
+	 * by the placement routines and must remain untouched because switch movement uses them to distinguish its straight
+	 * and curved sections.
 	 *
 	 * @param world world containing the completed placement
 	 * @param owner authoritative parent holding the captured host map
 	 */
-	private void normalizePlacedFootprintOwnership(World world, TileTCRail owner)
+	private void assignCapturedHostOwnership(World world, TileTCRail owner)
 	{
+		List<TileTCRail> placedParents = new ArrayList<TileTCRail>();
 		for (ParentCoordinate coordinate : parentCoordinates.values())
 		{
 			TileEntity tile = world.getTileEntity(coordinate.x, coordinate.y, coordinate.z);
-			if (tile instanceof TileTCRail && tile != owner)
+			if (tile instanceof TileTCRail)
 			{
-				TileTCRail rail = (TileTCRail)tile;
-				rail.isLinkedToRail = true;
-				rail.linkedX = owner.xCoord;
-				rail.linkedY = owner.yCoord;
-				rail.linkedZ = owner.zCoord;
-				rail.markDirty();
-				world.markBlockForUpdate(coordinate.x, coordinate.y, coordinate.z);
+				placedParents.add((TileTCRail)tile);
 			}
+		}
+		assignCapturedHostOwnership(placedParents, owner);
+		for (TileTCRail rail : placedParents)
+		{
+				rail.markDirty();
+			world.markBlockForUpdate(rail.xCoord, rail.yCoord, rail.zCoord);
+		}
+	}
+
+	/** Assigns one host-data owner without modifying any parent's independently authored route link. */
+	static void assignCapturedHostOwnership(Iterable<TileTCRail> placedParents, TileTCRail owner)
+	{
+		for (TileTCRail rail : placedParents)
+		{
+			rail.setCapturedHostOwner(owner);
 		}
 	}
 

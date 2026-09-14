@@ -357,7 +357,9 @@ public class BlockTCRail extends Block {
 			return;
 
 		TileTCRail tileEntity = (TileTCRail) world.getTileEntity(railX, railY, railZ);
-		TileTCRail parentRail = tileEntity.getGreatestParent(world);
+		TileTCRail capturedHostOwner = TrackCellResolver.resolveCapturedHostOwner(world, tileEntity);
+		TileTCRail parentRail = capturedHostOwner != null
+				? capturedHostOwner : tileEntity.getGreatestParent(world);
 		if (parentRail != null && parentRail.usesDynamicHostSurfaceRendering()) {
 			parentRail.markTrackHostRenderDirty();
 		}
