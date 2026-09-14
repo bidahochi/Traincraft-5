@@ -94,7 +94,7 @@ public class PathFindingHelper
 
             //System.out.println("straight z "+Math.copySign(norm, motionZ));
         }
-        if (meta == 1 || meta == 3) {
+        else if (meta == 1 || meta == 3) {
 
             entityMinecart.setPosition(entityMinecart.posX, entityMinecart.posY + entityMinecart.yOffset, trackCenterZ + 0.5);
             //setPosition(posX, posY + yOffset, posZ);
@@ -114,6 +114,9 @@ public class PathFindingHelper
             entityMinecart.posZ = (entityMinecart.boundingBox.minZ + entityMinecart.boundingBox.maxZ) / 2.0D;
 
             //System.out.println("straight x "+Math.copySign(norm, motionX));
+        }
+        else if (meta > 3) {
+            moveOnTCDiagonal(entityMinecart, rail, railX, railY, railZ, trackCenterX, trackCenterZ, rail.getBlockMetadata(), rail.getRailLength() == 0 ? 1 : rail.getRailLength());
         }
     }
 

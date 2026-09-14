@@ -1088,7 +1088,7 @@ public enum EnumTracks implements ITrackDefinition
                 }
             /** Diagonal 45 Degree Switches */
             case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
-                return new int[][]{{0,0}, {1, 0}, {1,1}, {2,1}, {3,1}, {2,2}};
+                return new int[][]{{0,0}, {1, 0}, {2, 0}, {1,1}, {2,1}, {3,1}, {2,2}};
             /** Crossing */
             case CORE_TWO_WAYS_CROSSING:
                 return new int[][] { {0,0}, {1,0}, {2,0}, {1,1}, {1,-1} };

@@ -998,6 +998,22 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 				case 3:
 					a = 1;
 					break;
+				case 4:
+					a = -1;
+					c = 1;
+					break;
+				case 5:
+					a = -1;
+					c = -1;
+					break;
+				case 6:
+					a = 1;
+					c = -1;
+					break;
+				case 7:
+					a = 1;
+					c = 1;
+					break;
 				default:
 					Traincraft.tcLog.log(Level.WARN, "Unsupported block meta for switch state.");
 					return;

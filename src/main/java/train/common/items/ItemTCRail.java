@@ -4321,8 +4321,8 @@ public class ItemTCRail extends ItemPart {
 		int[] xArray, zArray, tArray;
 
 		//the following arrays are for the switch branch.
-		xArray = new int[]{0, 1, 1};
-		zArray = new int[]{1, 2, 3};
+		xArray = new int[]{0, 0, 1, 1};
+		zArray = new int[]{1, 2, 2, 3};
 
 		double worldCenterX = 0, worldCenterZ = 0, circCenterX = 4, circCenterZ = -5.58;
 		double radius = 6.08;
@@ -4370,7 +4370,7 @@ public class ItemTCRail extends ItemPart {
 			return false;
 
 		int originShiftX = 0, originShiftZ = 0;
-		System.out.println(facing + " and " + isRight);
+		System.out.println(facing + " and " + isRight + " and " + tempType.getLabel());
 		switch (facing) {
 			case 1:
 				originShiftX = -1;
@@ -4401,10 +4401,10 @@ public class ItemTCRail extends ItemPart {
 				return false;
 			}
 		}
-		
-		putDownSingleRail(context, world, x, y + 1, z, diagFacing, x + worldCenterX,y + 1, z + worldCenterZ, radius, tempType.getLabel(), true, x + originShiftX, y + 1, z + originShiftZ, true, false); //#!#
+
+		putDownSingleRail(context, world, x, y + 1, z, diagFacing, x + worldCenterX,y + 1, z + worldCenterZ, radius, tempType.getLabel(), true, x + originShiftX, y + 1, z + originShiftZ, true, false);
 		for (int i = 1; i < EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i++) {
-			putDownSingleRail(context, world, x + (dx*i), y + 1, z + (dz*i), diagFacing, x + worldCenterX, y + 1, z + worldCenterZ, radius, typeVariantStraight, false, x + originShiftX, y + 1, z + originShiftZ, true, false);
+			putDownSingleRail(context, world, x + (dx*i), y + 1, z + (dz*i), diagFacing, x + worldCenterX, y + 1, z + worldCenterZ, radius, tempType.getLabel(), false, x + originShiftX, y + 1, z + originShiftZ, true, false);
 		}
 		for (int i = EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i < 3; i++) {
 			putDownSingleRail(context, world, x + (i * dx), y + 1, z + (i * dz), diagFacing, x + 1 , y + 1, z - 7.99, 8.49, typeVariantStraight, false, x + originShiftX, y + 1, z + originShiftZ, false, false);
