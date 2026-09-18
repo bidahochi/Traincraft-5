@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cei60seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u18balt",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_82": {
+          "preset": "marker_light"
+        },
+        "marker_body_83": {
+          "preset": "marker_light"
+        },
+        "marker_body_137": {
+          "preset": "marker_light"
+        },
+        "marker_body_138": {
+          "preset": "marker_light"
+        },
+        "marker_body_149": {
+          "preset": "marker_light"
+        },
+        "marker_body_150": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_236": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

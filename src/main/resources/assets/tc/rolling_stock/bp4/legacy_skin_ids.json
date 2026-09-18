@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:bp4",
+  "legacyColors": {
+    "2": "tc:green",
+    "5": "tc:purple",
+    "6": "tc:cyan",
+    "8": "tc:grey",
+    "4": "tc:blue"
+  }
+}

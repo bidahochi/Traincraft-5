@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cei1dr_28seatparlor_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_lense_rr": {
+          "preset": "marker_light"
+        },
+        "marker_lense_rf": {
+          "preset": "marker_light"
+        },
+        "marker_lense_lr": {
+          "preset": "marker_light"
+        },
+        "marker_lense_lf": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

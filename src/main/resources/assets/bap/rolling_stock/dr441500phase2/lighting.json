@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dr441500phase2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_r_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_body_483": {
+          "preset": "marker_light"
+        },
+        "marker_body_484": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

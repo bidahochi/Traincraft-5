@@ -41,7 +41,9 @@ public final class RollingStockSkinLighting
         lightOverrides.put(
             emitterId,
             new RollingStockLightOverride(
-                enabled, true, current == null ? null : current.behavior()));
+                enabled, true, current == null ? null : current.behavior(),
+                current == null ? null : current.group(),
+                current == null ? null : current.fixtureType()));
         lightingRevision++;
         return this;
     }
@@ -65,7 +67,23 @@ public final class RollingStockSkinLighting
             new RollingStockLightOverride(
                 current == null || current.enabled(),
                 current != null && current.availabilityOverridden(),
-                combined));
+                combined, current == null ? null : current.group(),
+                current == null ? null : current.fixtureType()));
+        lightingRevision++;
+        return this;
+    }
+
+    /** Sets shared lighting-effect identity; null inherits and an empty string clears grouping. */
+    public RollingStockSkinLighting setLightGroup(String emitterId, String group)
+    {
+        checkMutable();
+        RollingStockLightOverride current = lightOverrides.get(emitterId);
+        RollingStockLightOverride next = new RollingStockLightOverride(true, false, null, group);
+        if (current != null)
+        {
+            next = current.merge(next);
+        }
+        lightOverrides.put(emitterId, next);
         lightingRevision++;
         return this;
     }
@@ -78,7 +96,26 @@ public final class RollingStockSkinLighting
         {
             throw new NullPointerException("fixtureType");
         }
-        return setLightBehavior(emitterId, fixtureType.behavior());
+        setLightBehavior(emitterId, fixtureType.behavior());
+        RollingStockLightOverride current = lightOverrides.get(emitterId);
+        lightOverrides.put(emitterId, new RollingStockLightOverride(current.enabled(),
+            current.availabilityOverridden(), current.behavior(), current.group(), fixtureType));
+        return this;
+    }
+
+    /** Applies shared preset defaults while retaining lower-layer properties the preset does not own. */
+    public RollingStockSkinLighting setLightPreset(String emitterId, String preset)
+    {
+        checkMutable();
+        RollingStockLightOverride next = LightPresets.named(preset);
+        RollingStockLightOverride current = lightOverrides.get(emitterId);
+        if (current != null)
+        {
+            next = current.merge(next);
+        }
+        lightOverrides.put(emitterId, next);
+        lightingRevision++;
+        return this;
     }
 
     /** Overrides the default fixture, source-glow, hotspot, and beam color. */
@@ -188,7 +225,7 @@ public final class RollingStockSkinLighting
     }
 
     /** Creates a sealed profile by composing skin-specific values over shared defaults. */
-    static RollingStockSkinLighting immutableComposite(
+    public static RollingStockSkinLighting immutableComposite(
         RollingStockSkinLighting defaults, RollingStockSkinLighting skin)
     {
         RollingStockSkinLighting result = new RollingStockSkinLighting(true);
@@ -205,25 +242,12 @@ public final class RollingStockSkinLighting
                 String id = entry.getKey();
                 RollingStockLightOverride next = entry.getValue();
                 RollingStockLightOverride previous = result.lightOverrides.get(id);
-                RollingStockLightBehaviorOverride behavior =
-                    previous == null || previous.behavior() == null
-                    ? next.behavior()
-                    : next.behavior() == null
-                      ? previous.behavior()
-                      : previous.behavior().merge(next.behavior());
-                boolean availabilityOverridden =
-                    next.availabilityOverridden()
-                    || previous != null && previous.availabilityOverridden();
-                boolean enabled =
-                    next.availabilityOverridden()
-                    ? next.enabled()
-                    : previous == null || previous.availabilityOverridden() == false
-                      ? true
-                      : previous.enabled();
-                result.lightOverrides.put(
-                    id,
-                    new RollingStockLightOverride(
-                        enabled, availabilityOverridden, behavior));
+                RollingStockLightOverride combined = next;
+                if (previous != null)
+                {
+                    combined = previous.merge(next);
+                }
+                result.lightOverrides.put(id, combined);
             }
             result.lightingRevision += skin.lightingRevision;
         }

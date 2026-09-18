@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_lightweight_atsf52seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

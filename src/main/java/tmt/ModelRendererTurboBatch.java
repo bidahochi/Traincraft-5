@@ -599,6 +599,11 @@ public final class ModelRendererTurboBatch {
         {
             return cached.entries;
         }
+        if (cached != null)
+        {
+            STATIC_ENTRY_GROUPS.remove(cached.entries);
+            STATIC_SIGNATURES.remove(cached.entries);
+        }
         List<Entry> entries = new ArrayList<Entry>(model.length);
         for (ModelRendererTurbo turbo : model)
         {
@@ -620,6 +625,11 @@ public final class ModelRendererTurboBatch {
         if (cached != null && cached.matches(scale, rotorder))
         {
             return cached.entries;
+        }
+        if (cached != null)
+        {
+            STATIC_ENTRY_GROUPS.remove(cached.entries);
+            STATIC_SIGNATURES.remove(cached.entries);
         }
         List<Entry> entries = new ArrayList<Entry>();
         for (FVTMFormatBase.TurboList group : model.groups)
@@ -1031,6 +1041,16 @@ public final class ModelRendererTurboBatch {
 		}
 	}
 
+    /**
+     * Uses the same all-skin declarations in world and inventory passes, even when no lighting
+     * effect scope is open. This prevents alternating GUI/world draws from rebuilding layouts.
+     */
+    private static Set<String> lightingLayoutKey()
+    {
+        Context context = ACTIVE.get();
+        return context == null ? Collections.<String>emptySet() : context.declaredFixtureIds;
+    }
+
 	/**
 	 * Checks whether a part is safe enough to put in a batch.
 	*
@@ -1039,9 +1059,10 @@ public final class ModelRendererTurboBatch {
 	 * shape-box edge cases are handled inside {@link ModelRendererTurbo} by skipping only faces
 	 * with no real area and by fixing bad normals on collapsed wedge faces.</p>
 	 */
-	private static boolean isBatchCompatible(ModelRendererTurbo turbo) {
+    private static boolean isBatchCompatible(ModelRendererTurbo turbo)
+    {
 		return turbo != null
-				&& ClientRollingStockLighting.isSemantic(turbo) == false
+				&& ClientRollingStockLighting.isSemantic(turbo, lightingLayoutKey()) == false
 			   && PlacedModelLighting.requiresImmediateRendering(turbo) == false
                &&turbo.field_1402_i == false
 				&& turbo.showModel
@@ -1068,6 +1089,8 @@ public final class ModelRendererTurboBatch {
 			GROUP_CACHE.put(turbo, RenderGroup.CULL);
 			return RenderGroup.CULL;
 		}
+        String legacyName = turbo.legacyLightName();
+        name = legacyName == null ? "" : legacyName.toLowerCase();
 		if (name.contains("lamp")) {
 			GROUP_CACHE.put(turbo, RenderGroup.LAMP);
 			return RenderGroup.LAMP;
@@ -1462,6 +1485,7 @@ public final class ModelRendererTurboBatch {
 	private static final class Context {
 		private Object owner;
 		private Entity entity;
+        private Set<String> declaredFixtureIds = Collections.emptySet();
 		private int flushIndex;
 		private boolean suppressOnly;
 		private boolean captureEnabled;
@@ -1476,6 +1500,11 @@ public final class ModelRendererTurboBatch {
 		private void reset(Object owner, Entity entity) {
 			this.owner = owner;
 			this.entity = entity;
+            declaredFixtureIds = Collections.emptySet();
+            if (entity instanceof EntityRollingStock)
+            {
+                declaredFixtureIds = ClientRollingStockLighting.declaredFixtureIds((EntityRollingStock) entity);
+            }
             flushIndex = 0;
             suppressOnly = false;
             captureEnabled = false;
@@ -1512,12 +1541,14 @@ public final class ModelRendererTurboBatch {
 
     private static final class StaticBatchLayout
     {
+        private final Set<String> lightingLayoutKey;
         private final int scaleBits;
         private final boolean rotorder;
         private final List<Entry> entries;
 
         private StaticBatchLayout(float scale, boolean rotorder, List<Entry> entries)
         {
+            this.lightingLayoutKey = lightingLayoutKey();
             this.scaleBits = Float.floatToIntBits(scale);
             this.rotorder = rotorder;
             this.entries = Collections.unmodifiableList(entries);
@@ -1525,7 +1556,8 @@ public final class ModelRendererTurboBatch {
 
         private boolean matches(float scale, boolean currentRotorder)
         {
-            return scaleBits == Float.floatToIntBits(scale) && rotorder == currentRotorder;
+            return scaleBits == Float.floatToIntBits(scale) && rotorder == currentRotorder
+                && lightingLayoutKey == lightingLayoutKey();
         }
     }
 

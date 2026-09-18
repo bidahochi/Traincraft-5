@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:4-cor_trailer_composite",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

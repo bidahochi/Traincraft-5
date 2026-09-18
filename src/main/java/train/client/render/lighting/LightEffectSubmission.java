@@ -55,6 +55,14 @@ public final class LightEffectSubmission
     public int excludedBlockX, excludedBlockY, excludedBlockZ;
     /** Number of compatible fixture submissions folded into this batch entry. */
     public int members = 1;
+    /** True for a complete physical aperture; duplicate submissions must not re-average its geometry. */
+    private boolean assembledFixture;
+
+    /** Marks a geometry-resolved physical light before it enters the shared effect queue. */
+    public void markAssembledFixture()
+    {
+        assembledFixture = true;
+    }
 
     /** Creates an already-transformed submission using one direction for source and beam. */
     public LightEffectSubmission(
@@ -528,6 +536,10 @@ public final class LightEffectSubmission
 
     void merge(LightEffectSubmission other)
     {
+        if (assembledFixture || other.assembledFixture)
+        {
+            return;
+        }
         float count = members + 1.0F;
         x = average(x, other.x, count);
         y = average(y, other.y, count);

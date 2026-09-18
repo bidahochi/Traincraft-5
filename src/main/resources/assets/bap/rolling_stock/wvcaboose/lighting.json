@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:wvcaboose",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_center": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        }
+      }
+    }
+  }
+}

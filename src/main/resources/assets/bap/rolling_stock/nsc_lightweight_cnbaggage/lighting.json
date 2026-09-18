@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:nsc_lightweight_cnbaggage",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

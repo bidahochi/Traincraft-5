@@ -328,7 +328,13 @@ public final class RollingStockLightDefinition
     /** Returns a mutable copy builder that preserves every authored property. */
     public Builder toBuilder()
     {
-        return new Builder(id, channel)
+        return toBuilder(channel);
+    }
+
+    /** Reclassifies a declared source role while retaining its detected geometry and authored effects. */
+    public Builder toBuilder(RollingStockLightChannel sourceChannel)
+    {
+        return new Builder(id, sourceChannel)
                .controlCircuit(controlCircuit)
                .position(x, y, z)
                .direction(

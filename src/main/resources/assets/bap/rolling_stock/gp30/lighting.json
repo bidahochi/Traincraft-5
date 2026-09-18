@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp30",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "marker_nose": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

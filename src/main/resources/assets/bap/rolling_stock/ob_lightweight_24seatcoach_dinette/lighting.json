@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_24seatcoach_dinette",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

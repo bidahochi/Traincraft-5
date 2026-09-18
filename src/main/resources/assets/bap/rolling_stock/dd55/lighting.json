@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dd55",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

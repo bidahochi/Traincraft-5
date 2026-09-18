@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cf7_highhood",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_39": {
+          "preset": "marker_light"
+        },
+        "marker_body_41": {
+          "preset": "marker_light"
+        },
+        "marker_body_334": {
+          "preset": "marker_light"
+        },
+        "marker_body_335": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

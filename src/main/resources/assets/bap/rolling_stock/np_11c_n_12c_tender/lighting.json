@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:np_11c_n_12c_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

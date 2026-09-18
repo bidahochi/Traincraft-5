@@ -8,14 +8,6 @@ import train.common.enums.LockoutGroup;
 
 public class SMSC1 extends AbstractTankSlug
 {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:smsc1")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_189", "numberboard_body_190", "rear_numberboard_right_body_144",
-            "rear_numberboard_right_body_145")
-        .build();
 
     public SMSC1(World world)
     {
@@ -38,10 +30,5 @@ public class SMSC1 extends AbstractTankSlug
         return true;
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

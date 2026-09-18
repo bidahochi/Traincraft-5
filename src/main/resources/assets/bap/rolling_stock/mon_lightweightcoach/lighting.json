@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mon_lightweightcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

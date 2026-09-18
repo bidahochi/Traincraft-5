@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd60",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_marker": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_345": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_346": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_347": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_348": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_383": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

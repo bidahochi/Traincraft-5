@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_01400",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_left_marker": {
+          "preset": "marker_light"
+        },
+        "front_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_left_marker": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

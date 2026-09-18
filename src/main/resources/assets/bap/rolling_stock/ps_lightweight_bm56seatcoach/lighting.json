@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_bm56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

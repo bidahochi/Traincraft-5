@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_84seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_676": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_678": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

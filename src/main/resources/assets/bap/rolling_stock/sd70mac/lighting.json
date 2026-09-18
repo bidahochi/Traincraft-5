@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd70mac",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_196": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_197": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_257": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_258": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

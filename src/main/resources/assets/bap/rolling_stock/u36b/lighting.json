@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u36b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_115": {
+          "preset": "marker_light"
+        },
+        "marker_body_116": {
+          "preset": "marker_light"
+        },
+        "marker_body_175": {
+          "preset": "marker_light"
+        },
+        "marker_body_176": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_294": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

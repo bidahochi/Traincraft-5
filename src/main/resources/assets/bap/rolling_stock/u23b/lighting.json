@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u23b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_140": {
+          "preset": "marker_light"
+        },
+        "marker_body_141": {
+          "preset": "marker_light"
+        },
+        "marker_body_149": {
+          "preset": "marker_light"
+        },
+        "marker_body_150": {
+          "preset": "marker_light"
+        },
+        "marker_body_228": {
+          "preset": "marker_light"
+        },
+        "marker_body_229": {
+          "preset": "marker_light"
+        },
+        "marker_body_305": {
+          "preset": "marker_light"
+        },
+        "marker_body_306": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_366": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

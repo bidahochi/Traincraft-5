@@ -11,18 +11,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselGP35 extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:gp35")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_two_body_103", "marker_two_body_105", "marker_two_body_61")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "front_numberboard_body_90", "front_numberboard_body_91", "numberboard_body_173",
-            "numberboard_body_174", "numberboard_body_323", "rear_numberboard_body_100",
-            "rear_numberboard_body_99")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -97,10 +85,5 @@ public class DieselGP35 extends DieselTrain {
         return "EMD GP35 (Phase 1)";
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

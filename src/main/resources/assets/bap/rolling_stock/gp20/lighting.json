@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp20",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_234": {
+          "preset": "instrument"
+        },
+        "marker_sd9_body_259": {
+          "preset": "marker_light"
+        },
+        "marker_sd9_body_261": {
+          "preset": "marker_light"
+        },
+        "marker_box_chop_body_263": {
+          "preset": "marker_light"
+        },
+        "marker_box_chop_body_265": {
+          "preset": "marker_light"
+        },
+        "marker_box_lownose_body_266": {
+          "preset": "marker_light"
+        },
+        "marker_box_lownose_body_267": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

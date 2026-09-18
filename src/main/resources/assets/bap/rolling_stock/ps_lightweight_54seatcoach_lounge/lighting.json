@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_54seatcoach_lounge",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

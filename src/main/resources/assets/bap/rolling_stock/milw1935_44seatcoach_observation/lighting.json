@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935_44seatcoach_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_441": {
+          "preset": "marker_light"
+        },
+        "marker_body_442": {
+          "preset": "marker_light"
+        },
+        "marker_body_445": {
+          "preset": "marker_light"
+        },
+        "marker_body_446": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

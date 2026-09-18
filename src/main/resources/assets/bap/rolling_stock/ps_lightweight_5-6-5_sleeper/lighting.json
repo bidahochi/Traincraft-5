@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_5-6-5_sleeper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sbms",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_168": {
+          "preset": "marker_light"
+        },
+        "marker_body_169": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

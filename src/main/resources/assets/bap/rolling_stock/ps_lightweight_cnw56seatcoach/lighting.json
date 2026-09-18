@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_634": {
+          "preset": "marker_light"
+        },
+        "marker_body_635": {
+          "preset": "marker_light"
+        },
+        "marker_body_639": {
+          "preset": "marker_light"
+        },
+        "marker_body_640": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

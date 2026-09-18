@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp35",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_61": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_103": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_105": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_207": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

@@ -22,6 +22,7 @@ public final class LightingResourceReloadListener implements IResourceManagerRel
     @Override
     public void onResourceManagerReload(IResourceManager manager)
     {
+        ClientRollingStockAppearanceLoader.INSTANCE.clear();
         AutomaticLightSurfaceDetection.clear();
         ClientRollingStockLighting.clearCaches();
         RollingStockLightOcclusion.clearAll();

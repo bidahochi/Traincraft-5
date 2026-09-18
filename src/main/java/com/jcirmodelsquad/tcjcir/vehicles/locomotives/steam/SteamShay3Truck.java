@@ -10,13 +10,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamShay3Truck extends SteamTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:shay3truck")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_317", "marker_body_318")
-        .build();
 
 	@Override
 	public SoundRecord getSoundRecord()
@@ -53,9 +46,4 @@ public class SteamShay3Truck extends SteamTrain {
 		return "US";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

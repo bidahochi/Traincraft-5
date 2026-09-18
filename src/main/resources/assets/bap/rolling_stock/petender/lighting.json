@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:petender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_red": {
+          "color": 16719904,
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

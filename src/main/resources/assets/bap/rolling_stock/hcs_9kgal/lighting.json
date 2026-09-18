@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hcs_9kgal",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_headlight": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

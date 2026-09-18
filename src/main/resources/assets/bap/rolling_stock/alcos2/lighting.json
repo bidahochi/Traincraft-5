@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:alcos2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

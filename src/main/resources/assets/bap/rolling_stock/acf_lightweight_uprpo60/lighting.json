@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_uprpo60",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

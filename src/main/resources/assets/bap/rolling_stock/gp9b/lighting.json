@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp9b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_437": {
+          "preset": "marker_light"
+        },
+        "marker_body_438": {
+          "preset": "marker_light"
+        },
+        "marker_body_439": {
+          "preset": "marker_light"
+        },
+        "marker_body_440": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

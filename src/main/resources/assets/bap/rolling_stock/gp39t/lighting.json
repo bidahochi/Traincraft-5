@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp39t",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_168": {
+          "preset": "instrument"
+        },
+        "marker_two_body_193": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_195": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

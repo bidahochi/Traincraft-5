@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:emde7a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_176": {
+          "preset": "marker_light"
+        },
+        "marker_body_177": {
+          "preset": "marker_light"
+        },
+        "marker_fireman_number_b_body_430": {
+          "preset": "marker_light"
+        },
+        "marker_engneer_number_b_body_431": {
+          "preset": "marker_light"
+        },
+        "marker_engneer_number_b_body_551": {
+          "preset": "marker_light"
+        },
+        "marker_fireman_number_b_body_553": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

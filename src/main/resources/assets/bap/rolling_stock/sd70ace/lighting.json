@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd70ace",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_cn_body_273": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_274": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_279": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_281": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

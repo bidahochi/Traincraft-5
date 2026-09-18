@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935tap_dinette",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

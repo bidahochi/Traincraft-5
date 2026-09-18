@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw_prewar_baggage",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

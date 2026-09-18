@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mp900",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_61": {
+          "preset": "instrument"
+        },
+        "marker_body_136": {
+          "preset": "marker_light"
+        },
+        "marker_body_137": {
+          "preset": "marker_light"
+        },
+        "marker_body_151": {
+          "preset": "marker_light"
+        },
+        "marker_body_152": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

@@ -77,6 +77,52 @@ public class ModelRendererTurbo
     public boolean useSingleDisplayListCompiler;
     public List<?> childModels;
     public String boxName;
+    private String partIdentifier;
+
+    /**
+     * Sets the box name before model/render caches are built. Names matching [a-z][a-z0-9_]*
+     * become plain model-local identifiers unless they are built-in preset tags.
+     * Plain identifiers carry no lighting role; built-in tags select lighting presets.
+     * Stock-specific lighting behavior belongs in JSON. Explicit legacy fixture setters
+     * remain independent of the part name.
+     */
+    public ModelRendererTurbo setPartName(String name)
+    {
+        partIdentifier = null;
+        if (name != null && name.matches("[a-z][a-z0-9_]*") && isLegacyLightPreset(name) == false)
+        {
+            partIdentifier = name;
+        }
+        boxName = name;
+        return this;
+    }
+
+    /** Returns a plain model-local identifier, independent of lighting and other part consumers. */
+    public String partIdentifier()
+    {
+        return partIdentifier;
+    }
+
+    /** Returns the box name for preset or legacy fixture handling, excluding plain IDs without an explicit fixture ID. */
+    public String legacyLightName()
+    {
+        if (partIdentifier != null && lightFixtureId == null)
+        {
+            return null;
+        }
+        return boxName;
+    }
+
+    /** Built-in preset tags are exact-name shortcuts; substrings in identifiers are not presets. */
+    private static boolean isLegacyLightPreset(String name)
+    {
+        return "lamp".equals(name) || "ditch".equals(name) || "marker".equals(name)
+            || "numberboard".equals(name) || "instrument".equals(name) || "interior".equals(name)
+            || "commander".equals(name) || "prime1".equals(name) || "prime2".equals(name)
+            || "prime3".equals(name) || "prime4".equals(name)
+            || "ditch_left".equals(name) || "ditch_right".equals(name)
+            || "ditchlight_left".equals(name) || "ditchlight_right".equals(name);
+    }
     /** Stable profile-facing id for this authored light fixture. */
     public String lightFixtureId;
     /** Optional identity shared by multiple geometry parts forming one fixture. */
@@ -109,7 +155,8 @@ public class ModelRendererTurbo
      * Marks this part as a light fixture and assigns its stable model-local key, such as
      * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
      * Recognized {@link #boxName} values such as {@code lamp} remain supported as a
-     * discovery fallback, but new fixtures should use an explicit id.
+     * discovery fallback. New fixtures should use a plain part name and a stock JSON declaration;
+     * this setter remains a compatibility boundary for existing external models.
      */
     public ModelRendererTurbo setLightFixtureId(String fixtureId)
     {
@@ -275,7 +322,7 @@ public class ModelRendererTurbo
         textureGroup = new HashMap<String, TextureGroup>();
         textureGroup.put("0", new TextureGroup());
         currentTextureGroup = textureGroup.get("0");
-        boxName = s;
+        setPartName(s);
         defaultTexture = "";
         useSingleDisplayListCompiler = true;
 	}
@@ -2073,6 +2120,7 @@ public class ModelRendererTurbo
             ClientRollingStockLighting.endPart(light);
         }
     }
+
     
     public void renderWithRotation(float f){
         if(field_1402_i){
@@ -2608,7 +2656,7 @@ public class ModelRendererTurbo
 
     public ModelRendererTurbo setName(BoxName boxName)
     {
-        this.boxName = boxName.BoxName;
+        setPartName(boxName.BoxName);
         return this;
     }
 
@@ -2618,11 +2666,11 @@ public class ModelRendererTurbo
         {
             case "ditchlight_right":
             case "ditchlight_left":
-                this.boxName = BoxName.ditch.BoxName;
+                setPartName(BoxName.ditch.BoxName);
             break;
             default:
             {
-                this.boxName = string;
+                setPartName(string);
             }
         }
 		return this;

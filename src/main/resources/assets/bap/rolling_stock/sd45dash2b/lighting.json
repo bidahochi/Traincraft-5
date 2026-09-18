@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd45dash2b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

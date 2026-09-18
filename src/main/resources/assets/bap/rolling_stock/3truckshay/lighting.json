@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:3truckshay",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_317": {
+          "preset": "marker_light"
+        },
+        "marker_body_318": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

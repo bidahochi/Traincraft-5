@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u36c",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_3": {
+          "preset": "marker_light"
+        },
+        "marker_body_5": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_40": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:es44_h",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_120": {
+          "preset": "marker_light"
+        },
+        "marker_body_121": {
+          "preset": "marker_light"
+        },
+        "marker_aussy_body_214": {
+          "preset": "marker_light"
+        },
+        "marker_aussy_body_215": {
+          "preset": "marker_light"
+        },
+        "cab_signal_body_367": {
+          "preset": "instrument"
+        },
+        "cab_signal_body_368": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

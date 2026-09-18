@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdp40f",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

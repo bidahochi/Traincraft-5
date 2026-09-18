@@ -1,6 +1,9 @@
 package train.common.library;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.ModContainer;
+import train.common.appearance.StockLightingIdentity;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
@@ -46,17 +49,32 @@ public class TraincraftRegistry
 
     public void RegisterRollingStockEntities(Map<Item, ITrainRecord> entries, Object mod)
     {
+        RegisterRollingStockEntities(entries, mod, null);
+    }
+
+    /** Registers a content group under one namespace without changing entity registry names. */
+    public void RegisterRollingStockEntities(Map<Item, ITrainRecord> entries, Object mod, String contentNamespace)
+    {
         trainRecordsByItem.putAll(entries);
 
         for (Map.Entry<Item, ITrainRecord> entry : entries.entrySet())
         {
             int id = incrementTrainID();
+            if (contentNamespace != null)
+            {
+                StockLightingIdentity.register(entry.getValue(), contentNamespace);
+            }
             registerModEntity(entry.getValue(), id, mod);
         }
     }
 
     private void registerModEntity(ITrainRecord trainRecord, int entityID, Object mod)
     {
+        ModContainer container = FMLCommonHandler.instance().findContainerFor(mod);
+        if (container != null)
+        {
+            StockLightingIdentity.registerIfAbsent(trainRecord, container.getModId());
+        }
         EntityRegistry.registerModEntity(trainRecord.getEntityClass(), trainRecord.getInternalName(), entityID, mod, 512, 1, true);
     }
 

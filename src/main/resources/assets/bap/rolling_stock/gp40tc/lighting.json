@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp40tc",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_159": {
+          "preset": "marker_light"
+        },
+        "marker_body_160": {
+          "preset": "marker_light"
+        },
+        "marker_body_174": {
+          "preset": "marker_light"
+        },
+        "marker_body_175": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

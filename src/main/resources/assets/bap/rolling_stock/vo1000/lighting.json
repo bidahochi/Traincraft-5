@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:vo1000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

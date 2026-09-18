@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:2-bil_tail",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

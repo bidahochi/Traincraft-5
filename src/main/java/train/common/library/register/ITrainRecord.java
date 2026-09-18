@@ -4,6 +4,9 @@ import net.minecraft.item.Item;
 
 public interface ITrainRecord
 {
+    /** Returns the explicit stable local resource ID, or null to use the normalized internal name. */
+    public String getStockId();
+
     String getInternalName();
 
     Item getItem();

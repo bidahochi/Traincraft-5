@@ -1,5 +1,7 @@
 package train.common.api;
 
+import train.common.appearance.StockLightingIdentity;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
@@ -43,6 +45,7 @@ import tmt.ModelBase;
 import train.client.core.handlers.SoundUpdaterRollingStock;
 import train.common.Traincraft;
 import train.common.adminbook.ServerLogger;
+import train.common.appearance.RollingStockAppearanceResolver;
 import train.common.api.pathfinding.PathFindingHelper;
 import train.common.core.HandleOverheating;
 import train.common.core.handlers.*;
@@ -85,16 +88,25 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	@SideOnly(Side.CLIENT)
 	public ModelBase modelInstance;
 
-    /** Returns the immutable Java-authored profile collection for this rolling-stock type. */
-    protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return RollingStockSkinLightingProfiles.EMPTY;
-    }
-
-    /** Resolves skin-authored lighting exceptions from the stock's canonical skin key. */
+    /** Resolves lighting after translating the existing integer selection through its dictionary. */
     public RollingStockSkinLighting getSkinLighting()
     {
-        return getSkinLightingProfiles().forSkin(getColorAsString());
+        String stockId = getRollingStockAppearanceId();
+        String skinIdentity = RollingStockAppearanceResolver.resolveLegacySkin(
+            stockId, getColor());
+        return RollingStockAppearanceResolver.resolve(stockId, skinIdentity);
+    }
+
+    /**
+     * Returns the stable namespaced appearance id used by JSON resources and fixture scoping.
+     * Identity comes from the registration namespace and explicit record stock ID, falling
+     * back to the normalized internal train name only when no stock ID was provided.
+     * Lighting profile scopes do not change which stock resource directory is selected.
+     */
+    public String getRollingStockAppearanceId()
+    {
+        return StockLightingIdentity.resolve(
+            Traincraft.traincraftRegistry.getTrainRecord(getClass()));
     }
 
 	public float maxSpeed;

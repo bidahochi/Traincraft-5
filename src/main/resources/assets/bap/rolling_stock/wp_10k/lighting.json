@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:wp_10k",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_49": {
+          "preset": "marker_light"
+        },
+        "marker_body_51": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

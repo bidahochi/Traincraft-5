@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw1500",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_159": {
+          "preset": "instrument"
+        },
+        "marker_body_177": {
+          "preset": "marker_light"
+        },
+        "marker_body_178": {
+          "preset": "marker_light"
+        },
+        "marker_body_216": {
+          "preset": "marker_light"
+        },
+        "marker_body_222": {
+          "preset": "marker_light"
+        },
+        "marker_body_376": {
+          "preset": "marker_light"
+        },
+        "marker_body_377": {
+          "preset": "marker_light"
+        },
+        "marker_body_402": {
+          "preset": "marker_light"
+        },
+        "marker_body_404": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_429": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

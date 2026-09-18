@@ -72,9 +72,9 @@ public class ModelTenderDeseret extends ModelConverter //Same as Filename
 		bodyModel[31] = new ModelRendererTurbo(this, 217, 9, textureX, textureY); // Box 560
 		bodyModel[32] = new ModelRendererTurbo(this, 401, 9, textureX, textureY); // Box 561
 		bodyModel[33] = new ModelRendererTurbo(this, 337, 1, textureX, textureY); // Box 2
-		bodyModel[34] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "marker").setLightFixtureId("marker_body_34"); // Box 410 glow marker
+		bodyModel[34] = new ModelRendererTurbo(this, 409, 9, textureX, textureY, "marker_body_34"); // Box 410 glow marker
 		bodyModel[35] = new ModelRendererTurbo(this, 345, 1, textureX, textureY); // Box 594
-		bodyModel[36] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "marker").setLightFixtureId("marker_body_36"); // Box 595 glow marker
+		bodyModel[36] = new ModelRendererTurbo(this, 441, 9, textureX, textureY, "marker_body_36"); // Box 595 glow marker
 		bodyModel[37] = new ModelRendererTurbo(this, 497, 9, textureX, textureY); // Box 659
 		bodyModel[38] = new ModelRendererTurbo(this, 505, 9, textureX, textureY, "cull"); // Box 660
 		bodyModel[39] = new ModelRendererTurbo(this, 297, 25, textureX, textureY); // Box 670

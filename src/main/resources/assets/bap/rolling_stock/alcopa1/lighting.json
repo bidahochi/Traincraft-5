@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:alcopa1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_r_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_3": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_3": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

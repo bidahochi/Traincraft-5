@@ -10,13 +10,6 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselE9A extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:e9a")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_193", "marker_body_194")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -99,9 +92,4 @@ public class DieselE9A extends DieselTrain {
     
 
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

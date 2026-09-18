@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp9",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_wm_chop_body_11": {
+          "preset": "marker_light"
+        },
+        "marker_wm_chop_body_12": {
+          "preset": "marker_light"
+        },
+        "marker_body_534": {
+          "preset": "marker_light"
+        },
+        "marker_body_535": {
+          "preset": "marker_light"
+        },
+        "marker_body_536": {
+          "preset": "marker_light"
+        },
+        "marker_body_537": {
+          "preset": "marker_light"
+        },
+        "marker_body_538": {
+          "preset": "marker_light"
+        },
+        "marker_body_539": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_567": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_gndiner_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_224": {
+          "preset": "marker_light"
+        },
+        "marker_body_227": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

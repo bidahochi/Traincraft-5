@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_gn60seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

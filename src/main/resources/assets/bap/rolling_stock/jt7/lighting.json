@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:jt7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_445": {
+          "preset": "marker_light"
+        },
+        "marker_body_446": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:rotaryplow",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_268": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

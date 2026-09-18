@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:berk1225_locomotive",
+  "legacyColors": {
+    "0": "tc:black",
+    "7": "tc:lightgrey"
+  }
+}

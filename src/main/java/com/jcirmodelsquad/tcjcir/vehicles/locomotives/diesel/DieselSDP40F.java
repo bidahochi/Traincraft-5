@@ -10,13 +10,6 @@ import train.common.library.sounds.SoundRecord;
 
 
 public class DieselSDP40F extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sdp40f")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_54", "numberboard_body_55")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -101,10 +94,5 @@ public class DieselSDP40F extends DieselTrain {
     
 
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

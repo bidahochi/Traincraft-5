@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:4-6-0",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_position_3": {
+          "preset": "marker_light"
+        },
+        "marker_position_4": {
+          "preset": "marker_light"
+        },
+        "marker_position_2": {
+          "preset": "marker_light"
+        },
+        "marker_position_1": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

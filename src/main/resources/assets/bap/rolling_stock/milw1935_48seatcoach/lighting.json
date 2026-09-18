@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935_48seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

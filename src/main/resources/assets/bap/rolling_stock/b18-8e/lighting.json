@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:b18-8e",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_180": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_181": {
+          "preset": "instrument"
+        },
+        "cab_signal_body_184": {
+          "preset": "instrument"
+        },
+        "marker_body_226": {
+          "preset": "marker_light"
+        },
+        "marker_body_227": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_282": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_283": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_284": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_285": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

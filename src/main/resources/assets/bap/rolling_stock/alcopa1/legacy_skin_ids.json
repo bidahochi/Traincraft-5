@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "9": "bap:pink",
+    "24": "bap:skin24",
+    "6": "bap:cyan",
+    "4": "bap:blue",
+    "5": "bap:purple",
+    "13": "bap:magenta",
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "23": "bap:skin23",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "3": "bap:brown",
+    "7": "bap:lightgrey",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "12": "bap:lightblue",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "22": "bap:skin22",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "0": "bap:black"
+  },
+  "stock": "bap:alcopa1"
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:icc_ca11",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_center": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_center": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "prime_1": {
+          "preset": "prime_1"
+        },
+        "prime_3": {
+          "preset": "prime_3"
+        },
+        "prime_2": {
+          "preset": "prime_2"
+        },
+        "prime_4": {
+          "preset": "prime_4"
+        },
+        "front_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_headlight_upper": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_headlight_lower": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "left_side_upper": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "left_side_lower": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        }
+      }
+    }
+  }
+}

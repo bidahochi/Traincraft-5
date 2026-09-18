@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd9",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_sd9_body_97": {
+          "preset": "marker_light"
+        },
+        "marker_sd9_body_98": {
+          "preset": "marker_light"
+        },
+        "marker_sd9_body_223": {
+          "preset": "marker_light"
+        },
+        "marker_sd9_body_225": {
+          "preset": "marker_light"
+        },
+        "marker_sd7_body_264": {
+          "preset": "marker_light"
+        },
+        "marker_sd7_body_265": {
+          "preset": "marker_light"
+        },
+        "marker_sd7_body_266": {
+          "preset": "marker_light"
+        },
+        "marker_sd7_body_267": {
+          "preset": "marker_light"
+        },
+        "marker_two": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_497": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

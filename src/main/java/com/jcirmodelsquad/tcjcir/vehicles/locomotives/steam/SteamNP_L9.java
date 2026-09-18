@@ -10,14 +10,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamNP_L9 extends SteamTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:np_l9")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_276", "numberboard_body_277", "numberboard_body_278",
-            "numberboard_body_286", "numberboard_body_288")
-        .build();
 
 	@Override
 	public SoundRecord getSoundRecord()
@@ -49,10 +41,5 @@ public class SteamNP_L9 extends SteamTrain {
 	}
 
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

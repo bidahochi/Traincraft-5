@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:wpshops600series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_gyralite": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_gyralite": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_right_marker": {
+          "preset": "marker_light"
+        },
+        "front_left_marker": {
+          "preset": "marker_light"
+        },
+        "rear_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_left_marker": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

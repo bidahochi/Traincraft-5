@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u30c",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_93": {
+          "preset": "marker_light"
+        },
+        "marker_body_94": {
+          "preset": "marker_light"
+        },
+        "marker_body_136": {
+          "preset": "marker_light"
+        },
+        "marker_body_137": {
+          "preset": "marker_light"
+        },
+        "marker_body_148": {
+          "preset": "marker_light"
+        },
+        "marker_body_149": {
+          "preset": "marker_light"
+        },
+        "marker_highhood_bit_body_268": {
+          "preset": "marker_light"
+        },
+        "marker_highhood_bit_body_269": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_362": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

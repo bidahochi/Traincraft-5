@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:preco_lightweight_pendulumcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

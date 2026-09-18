@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_lightweight_atsf34seatparlor_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_222": {
+          "preset": "marker_light"
+        },
+        "marker_body_223": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnwbaggage_lc_lounge",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_lf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_254": {
+          "preset": "marker_light"
+        },
+        "marker_rf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_257": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

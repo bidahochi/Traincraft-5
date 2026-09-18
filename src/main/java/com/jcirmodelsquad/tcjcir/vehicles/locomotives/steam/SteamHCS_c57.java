@@ -11,17 +11,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class SteamHCS_c57 extends SteamTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:hcs_c57")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_243", "marker_body_245", "marker_body_27",
-            "marker_body_313", "marker_body_315", "marker_box")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_318", "numberboard_body_319")
-        .build();
 
 	@Override
 	public SoundRecord getSoundRecord()
@@ -65,10 +54,5 @@ public class SteamHCS_c57 extends SteamTrain {
 		return "US";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

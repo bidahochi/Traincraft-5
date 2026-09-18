@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_baggage_740_series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

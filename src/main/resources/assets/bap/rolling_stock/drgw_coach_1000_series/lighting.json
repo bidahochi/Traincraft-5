@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_coach_1000_series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdp45",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

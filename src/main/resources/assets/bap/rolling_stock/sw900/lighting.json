@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw900",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_324": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_401": {
+          "preset": "instrument"
+        },
+        "marker_crl_body_422": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_423": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_424": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_425": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

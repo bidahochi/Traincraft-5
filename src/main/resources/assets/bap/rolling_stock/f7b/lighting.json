@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f7b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

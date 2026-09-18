@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_102": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_126": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_247": {
+          "preset": "instrument"
+        }
+      }
+    }
+  }
+}

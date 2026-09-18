@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u18bb",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_94": {
+          "preset": "marker_light"
+        },
+        "marker_body_95": {
+          "preset": "marker_light"
+        },
+        "marker_body_103": {
+          "preset": "marker_light"
+        },
+        "marker_body_104": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

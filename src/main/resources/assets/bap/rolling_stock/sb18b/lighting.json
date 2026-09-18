@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sb18b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_81": {
+          "preset": "marker_light"
+        },
+        "marker_body_82": {
+          "preset": "marker_light"
+        },
+        "marker_body_231": {
+          "preset": "marker_light"
+        },
+        "marker_body_232": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

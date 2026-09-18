@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_sp_72_c_1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

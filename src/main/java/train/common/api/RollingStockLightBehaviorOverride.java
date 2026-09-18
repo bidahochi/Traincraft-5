@@ -11,7 +11,7 @@ import java.util.Objects;
 public final class RollingStockLightBehaviorOverride
 {
     private final RollingStockLightChannel circuit;
-    private final RollingStockLightFunction function;
+    private final LightFunctionOverride function;
     private final Integer color;
     private final RollingStockLightDefinition.Effect effect;
     private final LightBeamRotation beamRotation;
@@ -26,7 +26,7 @@ public final class RollingStockLightBehaviorOverride
     private final Boolean hotspot, projector;
     private final RollingStockLightActivationPolicy activationPolicy;
     private final RollingStockDitchHornMode ditchHornMode;
-    private final RollingStockLightFunction hornFunction;
+    private final LightFunctionOverride hornFunction;
     private final Integer hornPhase, lightmapFloor;
 
     /**
@@ -52,7 +52,7 @@ public final class RollingStockLightBehaviorOverride
     {
         this(
             circuit,
-            function,
+            LightFunctionOverride.replacing(function),
             color,
             effect,
             null,
@@ -76,7 +76,7 @@ public final class RollingStockLightBehaviorOverride
     /** Creates one immutable partial behavior override from validated optional properties. */
     private RollingStockLightBehaviorOverride(
         RollingStockLightChannel circuit,
-        RollingStockLightFunction function,
+        LightFunctionOverride function,
         Integer color,
         RollingStockLightDefinition.Effect effect,
         LightBeamRotation beamRotation,
@@ -92,7 +92,7 @@ public final class RollingStockLightBehaviorOverride
         Boolean projector,
         RollingStockLightActivationPolicy activationPolicy,
         RollingStockDitchHornMode ditchHornMode,
-        RollingStockLightFunction hornFunction,
+        LightFunctionOverride hornFunction,
         Integer hornPhase,
         Integer lightmapFloor)
     {
@@ -263,7 +263,7 @@ public final class RollingStockLightBehaviorOverride
     {
         return new RollingStockLightBehaviorOverride(
                    n.circuit != null ? n.circuit : circuit,
-                   n.function != null ? n.function : function,
+                   function == null ? n.function : function.merge(n.function),
                    n.color != null ? n.color : color,
                    n.effect != null ? n.effect : effect,
                    n.beamRotation != null ? n.beamRotation : beamRotation,
@@ -279,7 +279,7 @@ public final class RollingStockLightBehaviorOverride
                    n.projector != null ? n.projector : projector,
                    n.activationPolicy != null ? n.activationPolicy : activationPolicy,
                    n.ditchHornMode != null ? n.ditchHornMode : ditchHornMode,
-                   n.hornFunction != null ? n.hornFunction : hornFunction,
+                   hornFunction == null ? n.hornFunction : hornFunction.merge(n.hornFunction),
                    n.hornPhase != null ? n.hornPhase : hornPhase,
                    n.lightmapFloor != null ? n.lightmapFloor : lightmapFloor);
     }
@@ -293,7 +293,7 @@ public final class RollingStockLightBehaviorOverride
         }
         if (function != null)
         {
-            b.function(function);
+            b.function(function.apply(base.function()));
         }
         if (color != null)
         {
@@ -343,7 +343,7 @@ public final class RollingStockLightBehaviorOverride
         {
             b.ditchHornResponse(
                 ditchHornMode == null ? base.ditchHornMode() : ditchHornMode,
-                hornFunction == null ? base.hornFunction() : hornFunction,
+                resolvedHornFunction(base),
                 hornPhase == null ? base.hornPhase() : hornPhase);
         }
         if (lightmapFloor != null)
@@ -358,9 +358,10 @@ public final class RollingStockLightBehaviorOverride
         return circuit;
     }
 
+    /** Returns a complete override, or null when absent or awaiting an inherited baseline. */
     public RollingStockLightFunction function()
     {
-        return function;
+        return function == null ? null : function.completeFunction();
     }
 
     public Integer color()
@@ -441,10 +442,42 @@ public final class RollingStockLightBehaviorOverride
         return ditchHornMode;
     }
 
-    /** @return temporary horn function override, or {@code null} when inherited */
+    /** Returns a complete horn override, or null when absent or awaiting an inherited baseline. */
     public RollingStockLightFunction hornFunction()
     {
-        return hornFunction;
+        return hornFunction == null ? null : hornFunction.completeFunction();
+    }
+
+    /** Uses the same inherited alternating fallback as the runtime horn sampler. */
+    private RollingStockLightFunction resolvedHornFunction(RollingStockLightDefinition base)
+    {
+        if (hornFunction == null)
+        {
+            return base.hornFunction();
+        }
+        if (hornFunction.completeFunction() != null)
+        {
+            return hornFunction.completeFunction();
+        }
+        RollingStockLightFunction baseline = base.hornFunction();
+        if (baseline == null)
+        {
+            baseline = function == null ? base.function() : function.apply(base.function());
+            if (baseline.pattern() != RollingStockLightFunction.Pattern.ALTERNATING)
+            {
+                int phase = base.z() < 0 ? 0 : 1;
+                if (base.hornPhase() != null)
+                {
+                    phase = base.hornPhase();
+                }
+                if (hornPhase != null)
+                {
+                    phase = hornPhase;
+                }
+                baseline = RollingStockLightFunction.alternatingDitch(phase);
+            }
+        }
+        return hornFunction.apply(baseline);
     }
 
     /** @return explicit alternating phase {@code 0..1}, or {@code null} when automatic/inherited */
@@ -523,7 +556,7 @@ public final class RollingStockLightBehaviorOverride
     public static final class Builder
     {
         private RollingStockLightChannel c;
-        private RollingStockLightFunction f;
+        private LightFunctionOverride f;
         private Integer color;
         private RollingStockLightDefinition.Effect e;
         private LightBeamRotation beamRotation;
@@ -531,7 +564,7 @@ public final class RollingStockLightBehaviorOverride
         private Boolean h, p;
         private RollingStockLightActivationPolicy activationPolicy;
         private RollingStockDitchHornMode ditchHornMode;
-        private RollingStockLightFunction hornFunction;
+        private LightFunctionOverride hornFunction;
         private Integer hornPhase, lightmapFloor;
 
         public Builder controlCircuit(RollingStockLightChannel controlCircuit)
@@ -542,7 +575,21 @@ public final class RollingStockLightBehaviorOverride
 
         public Builder function(RollingStockLightFunction lightFunction)
         {
-            f = lightFunction;
+            f = LightFunctionOverride.replacing(lightFunction);
+            return this;
+        }
+
+        /** Retains a partial function until lower-priority layers or model defaults are available. */
+        public Builder functionOverride(LightFunctionOverride patch)
+        {
+            f = patch;
+            return this;
+        }
+
+        /** Retains selective horn-function edits without resetting its scope or phase. */
+        public Builder hornFunctionOverride(LightFunctionOverride patch)
+        {
+            hornFunction = patch;
             return this;
         }
 
@@ -581,10 +628,31 @@ public final class RollingStockLightBehaviorOverride
             return this;
         }
 
+        /** Overrides beam width while preserving the inherited beam reach. */
+        public Builder beamWidth(float width)
+        {
+            bw = width;
+            return this;
+        }
+
         /** Overrides source radius in model units and opacity in {@code [0,1]}. */
         public Builder sourceGlow(float radius, float intensity)
         {
             gr = radius;
+            gi = intensity;
+            return this;
+        }
+
+        /** Overrides source-glow radius while preserving inherited intensity. */
+        public Builder sourceGlowRadius(float radius)
+        {
+            gr = radius;
+            return this;
+        }
+
+        /** Overrides source-glow intensity while preserving inherited radius. */
+        public Builder sourceGlowIntensity(float intensity)
+        {
             gi = intensity;
             return this;
         }
@@ -596,6 +664,34 @@ public final class RollingStockLightBehaviorOverride
             gw = widthScale;
             gh = heightScale;
             gx = rightOffset;
+            gy = upOffset;
+            return this;
+        }
+
+        /** Overrides the horizontal source-glow scale. */
+        public Builder sourceGlowWidthScale(float widthScale)
+        {
+            gw = widthScale;
+            return this;
+        }
+
+        /** Overrides the vertical source-glow scale. */
+        public Builder sourceGlowHeightScale(float heightScale)
+        {
+            gh = heightScale;
+            return this;
+        }
+
+        /** Overrides the rightward source-glow offset in model units. */
+        public Builder sourceGlowRightOffset(float rightOffset)
+        {
+            gx = rightOffset;
+            return this;
+        }
+
+        /** Overrides the upward source-glow offset in model units. */
+        public Builder sourceGlowUpOffset(float upOffset)
+        {
             gy = upOffset;
             return this;
         }
@@ -645,7 +741,7 @@ public final class RollingStockLightBehaviorOverride
                 throw new IllegalArgumentException("Horn phase must be 0, 1, or null");
             }
             ditchHornMode = mode;
-            hornFunction = temporaryFunction;
+            hornFunction = LightFunctionOverride.replacing(temporaryFunction);
             hornPhase = phase;
             return this;
         }

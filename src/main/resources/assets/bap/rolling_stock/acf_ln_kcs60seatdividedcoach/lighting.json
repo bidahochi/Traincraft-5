@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_ln_kcs60seatdividedcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_579": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_583": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

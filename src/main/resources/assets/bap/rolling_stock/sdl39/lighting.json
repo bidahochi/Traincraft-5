@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdl39",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_193": {
+          "preset": "instrument"
+        },
+        "marker_two_body_261": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_263": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

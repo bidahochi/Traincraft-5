@@ -5,13 +5,6 @@ import train.common.api.AbstractPassengerCar;
 
 public class ACF_LN_KCS60SeatDividedCoach extends AbstractPassengerCar
 {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:acf_ln_kcs60seatdividedcoach")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_two_body_579", "marker_two_body_583")
-        .build();
 
 	public ACF_LN_KCS60SeatDividedCoach(World world) {
 		super(world);
@@ -40,9 +33,4 @@ public class ACF_LN_KCS60SeatDividedCoach extends AbstractPassengerCar
 		return "1955-1956";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

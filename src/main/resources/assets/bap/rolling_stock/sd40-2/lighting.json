@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40-2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_391": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_393": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_406": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_470": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_13": {
+          "preset": "instrument"
+        },
+        "rear_gyralight_center": {
+          "preset": "headlight"
+        },
+        "rear_gyralight_right": {
+          "preset": "headlight"
+        },
+        "rear_gyralight_left": {
+          "preset": "headlight"
+        },
+        "prime_variant_4_phase_4": {
+          "preset": "prime_4"
+        },
+        "prime_variant_4_phase_2": {
+          "preset": "prime_2"
+        },
+        "prime_variant_4_phase_3": {
+          "preset": "prime_3"
+        },
+        "prime_variant_4_phase_1": {
+          "preset": "prime_1"
+        },
+        "prime_variant_3_phase_4": {
+          "preset": "prime_4"
+        },
+        "prime_variant_3_phase_2": {
+          "preset": "prime_2"
+        },
+        "prime_variant_3_phase_3": {
+          "preset": "prime_3"
+        },
+        "prime_variant_3_phase_1": {
+          "preset": "prime_1"
+        },
+        "prime_variant_2_phase_4": {
+          "preset": "prime_4"
+        },
+        "prime_variant_2_phase_2": {
+          "preset": "prime_2"
+        },
+        "prime_variant_2_phase_3": {
+          "preset": "prime_3"
+        },
+        "prime_variant_2_phase_1": {
+          "preset": "prime_1"
+        },
+        "prime_variant_1_phase_4": {
+          "preset": "prime_4"
+        },
+        "prime_variant_1_phase_2": {
+          "preset": "prime_2"
+        },
+        "prime_variant_1_phase_3": {
+          "preset": "prime_3"
+        },
+        "prime_variant_1_phase_1": {
+          "preset": "prime_1"
+        },
+        "rear_ditch_variant_1_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_variant_1_left": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_variant_1_left": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_variant_1_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_variant_3_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_variant_3_left": {
+          "preset": "ditch_light"
+        },
+        "front_headlight_variant_1_right": {
+          "preset": "headlight"
+        },
+        "front_headlight_variant_1_left": {
+          "preset": "headlight"
+        },
+        "rear_headlight_variant_1_center": {
+          "preset": "headlight"
+        },
+        "front_lamp_variant_1_right": {
+          "preset": "headlight"
+        },
+        "front_lamp_variant_1_left": {
+          "preset": "headlight"
+        },
+        "front_ditch_variant_3_left": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_variant_3_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_variant_2_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_variant_2_left": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_variant_2_right": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_variant_2_left": {
+          "preset": "ditch_light"
+        },
+        "rear_headlight_variant_2_right": {
+          "preset": "headlight"
+        },
+        "rear_headlight_variant_2_left": {
+          "preset": "headlight"
+        },
+        "front_headlight_variant_2_element_1": {
+          "preset": "headlight"
+        },
+        "front_headlight_variant_2_element_2": {
+          "preset": "headlight"
+        },
+        "marker_two_lamp_392": {
+          "preset": "headlight"
+        },
+        "marker_two_lamp_394": {
+          "preset": "headlight"
+        },
+        "marker_two_lamp_407": {
+          "preset": "headlight"
+        },
+        "front_headlight_variant_3_right": {
+          "preset": "headlight"
+        },
+        "front_headlight_variant_3_left": {
+          "preset": "headlight"
+        },
+        "front_gyralight_center": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_1_high_b": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_1_high_a": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_1_low_a": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_1_low_b": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_2_high_b": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_2_high_a": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_2_low_a": {
+          "preset": "headlight"
+        },
+        "front_headlight_nose_variant_2_low_b": {
+          "preset": "headlight"
+        },
+        "marker_two_lamp_471": {
+          "preset": "headlight"
+        },
+        "commander_variant_1": {
+          "preset": "commander"
+        },
+        "commander_variant_2": {
+          "preset": "commander"
+        },
+        "prime_variant_5_phase_4": {
+          "preset": "prime_4"
+        },
+        "prime_variant_5_phase_2": {
+          "preset": "prime_2"
+        },
+        "prime_variant_5_phase_3": {
+          "preset": "prime_3"
+        },
+        "prime_variant_5_phase_1": {
+          "preset": "prime_1"
+        },
+        "front_ditch_right": {
+          "preset": "ditch_light"
+        },
+        "front_ditch_left": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_right": {
+          "preset": "ditch_light"
+        },
+        "rear_ditch_left": {
+          "preset": "ditch_light"
+        },
+        "commander_variant_3_right": {
+          "preset": "commander"
+        },
+        "commander_variant_3_left": {
+          "preset": "commander"
+        }
+      }
+    },
+    "profiles": {
+      "bap:sd40dash2/csx_horn_ditch": {
+        "fixtures": {
+          "front_ditch_variant_3_left": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "rear_ditch_variant_3_right": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "front_ditch_variant_3_right": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "rear_ditch_variant_3_left": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:csx_yn3_rco": {
+      "lighting": {
+        "profile": "bap:sd40dash2/csx_horn_ditch"
+      }
+    },
+    "bap:csxt_yn2": {
+      "lighting": {
+        "profile": "bap:sd40dash2/csx_horn_ditch"
+      }
+    },
+    "bap:csx_yn3_non_rco": {
+      "lighting": {
+        "profile": "bap:sd40dash2/csx_horn_ditch"
+      }
+    }
+  }
+}

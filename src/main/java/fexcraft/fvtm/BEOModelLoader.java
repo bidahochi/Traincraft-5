@@ -128,7 +128,7 @@ public class BEOModelLoader {
                 }
                 switch(r){
                     case NAME:{
-                        mrt.boxName = readString(stream);
+                        mrt.setPartName(readString(stream));
                         continue;
                     }
                     case POSITION:{

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:onion",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

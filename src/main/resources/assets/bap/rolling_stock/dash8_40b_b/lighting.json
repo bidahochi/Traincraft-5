@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dash8_40b_b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_145": {
+          "preset": "marker_light"
+        },
+        "marker_body_146": {
+          "preset": "marker_light"
+        },
+        "marker_body_200": {
+          "preset": "marker_light"
+        },
+        "marker_body_201": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

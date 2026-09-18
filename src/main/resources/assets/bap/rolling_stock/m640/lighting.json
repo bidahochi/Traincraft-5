@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m640",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_105": {
+          "preset": "marker_light"
+        },
+        "marker_body_117": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

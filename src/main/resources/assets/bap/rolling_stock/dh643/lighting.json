@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dh643",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_bullshit_stupid_body_254": {
+          "preset": "marker_light"
+        },
+        "marker_bullshit_stupid_body_255": {
+          "preset": "marker_light"
+        },
+        "marker_body_285": {
+          "preset": "marker_light"
+        },
+        "marker_body_286": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

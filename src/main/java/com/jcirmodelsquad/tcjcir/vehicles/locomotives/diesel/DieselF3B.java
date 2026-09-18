@@ -11,13 +11,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselF3B extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:f3b")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_307", "numberboard_body_308")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -72,10 +65,5 @@ public class DieselF3B extends DieselTrain {
         return "EMD F3b";
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd50",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_marker": {
+          "preset": "marker_light"
+        },
+        "front_marker2": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low2": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high2": {
+          "preset": "marker_light"
+        },
+        "frontHighbeamF": {
+          "preset": "headlight"
+        },
+        "frontHighbeamE": {
+          "preset": "headlight"
+        },
+        "FrontDitchLow1": {
+          "preset": "ditch_light"
+        },
+        "FrontDitchLow2": {
+          "preset": "ditch_light"
+        },
+        "RearDitchLow1": {
+          "preset": "ditch_light"
+        },
+        "RearDitchLow2": {
+          "preset": "ditch_light"
+        },
+        "FrontDitch1": {
+          "preset": "ditch_light"
+        },
+        "FrontDitch2": {
+          "preset": "ditch_light"
+        },
+        "front_marker_bugeye_body_345": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_346": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_347": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_348": {
+          "preset": "marker_light"
+        },
+        "RearDitch1": {
+          "preset": "ditch_light"
+        },
+        "RearDitch2": {
+          "preset": "ditch_light"
+        },
+        "cab_speedometer_body_383": {
+          "preset": "instrument"
+        },
+        "FrontDitchHigh1": {
+          "preset": "ditch_light"
+        },
+        "FrontDitchHigh2": {
+          "preset": "ditch_light"
+        },
+        "RearDitchHigh1": {
+          "preset": "ditch_light"
+        },
+        "RearDitchHigh2": {
+          "preset": "ditch_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamF": {
+            "preset": "gyralite"
+          },
+          "frontHighbeamE": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamF": {
+            "preset": "gyralite"
+          },
+          "frontHighbeamE": {
+            "preset": "gyralite"
+          },
+          "FrontDitchHigh1": {
+            "preset": "alternating_ditch"
+          },
+          "RearDitchHigh1": {
+            "preset": "alternating_ditch"
+          },
+          "FrontDitchHigh2": {
+            "function": {
+              "phaseIndex": 1
+            },
+            "preset": "alternating_ditch"
+          },
+          "RearDitchHigh2": {
+            "function": {
+              "phaseIndex": 1
+            },
+            "preset": "alternating_ditch"
+          }
+        }
+      }
+    }
+  }
+}

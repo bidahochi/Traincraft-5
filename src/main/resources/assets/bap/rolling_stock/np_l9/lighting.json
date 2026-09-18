@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:np_l9",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

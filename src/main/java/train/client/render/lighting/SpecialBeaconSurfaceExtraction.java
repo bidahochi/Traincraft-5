@@ -10,10 +10,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import tmt.ModelRendererTurbo;
+import train.common.api.LightFixtureType;
+import train.common.api.RollingStockLightOverride;
+import train.common.api.RollingStockSkinLighting;
 
 /** Selection of complete four-part Prime top assemblies. */
 final class SpecialBeaconSurfaceExtraction
 {
+    /** Retains simultaneous skin variants without letting a shared model evict its previous draw's role map. */
+    public static final int MAXIMUM_SKIN_CACHE_ENTRIES = 32;
     private static final int PRIME_PHASE_COUNT = 4;
     private static final int ALL_PRIME_PHASES_MASK = (1 << PRIME_PHASE_COUNT) - 1;
     private static final float MINIMUM_NORMAL_ALIGNMENT = 0.98F;
@@ -21,9 +26,9 @@ final class SpecialBeaconSurfaceExtraction
     private static final float MAXIMUM_CENTER_SEPARATION_SQUARED = 6.25E-6F;
     private static final float CONNECTED_RADIUS_SCALE = 1.25F;
 
-    private static final BoundedIdentityCache<Object, Map<ModelRendererTurbo, DetectedLightFace>>
+    private static final BoundedIdentityCache<Object, BoundedIdentityCache<RollingStockSkinLighting, PrimeCache>>
     CACHE =
-        new BoundedIdentityCache<Object, Map<ModelRendererTurbo, DetectedLightFace>>(128);
+        new BoundedIdentityCache<Object, BoundedIdentityCache<RollingStockSkinLighting, PrimeCache>>(128);
 
     private SpecialBeaconSurfaceExtraction()
     {
@@ -31,14 +36,27 @@ final class SpecialBeaconSurfaceExtraction
 
     static Map<ModelRendererTurbo, DetectedLightFace> completePrimeTopFaces(Object model)
     {
+        return completePrimeTopFaces(model, RollingStockSkinLighting.EMPTY);
+    }
+
+    /** Resolves declared roles before examining geometry; caches also track skin revisions. */
+    public static Map<ModelRendererTurbo, DetectedLightFace> completePrimeTopFaces(
+        Object model, RollingStockSkinLighting skin)
+    {
         if (model == null)
         {
             return Collections.emptyMap();
         }
-        Map<ModelRendererTurbo, DetectedLightFace> cached = CACHE.get(model);
-        if (cached != null)
+        BoundedIdentityCache<RollingStockSkinLighting, PrimeCache> variants = CACHE.get(model);
+        if (variants == null)
         {
-            return cached;
+            variants = new BoundedIdentityCache<RollingStockSkinLighting, PrimeCache>(MAXIMUM_SKIN_CACHE_ENTRIES);
+            CACHE.put(model, variants);
+        }
+        PrimeCache cached = variants.get(skin);
+        if (cached != null && cached.skin == skin && cached.revision == skin.lightingRevision())
+        {
+            return cached.faces;
         }
 
         IdentityHashMap<ModelRendererTurbo, DetectedLightFace> result =
@@ -65,7 +83,7 @@ final class SpecialBeaconSurfaceExtraction
             try
             {
                 collectCompleteAssemblies(
-                    field.getName(), (ModelRendererTurbo[]) field.get(model), result);
+                    field.getName(), (ModelRendererTurbo[]) field.get(model), result, skin);
             }
             catch (IllegalAccessException ignored)
             {
@@ -73,7 +91,7 @@ final class SpecialBeaconSurfaceExtraction
         }
         Map<ModelRendererTurbo, DetectedLightFace> immutable =
             Collections.unmodifiableMap(result);
-        CACHE.put(model, immutable);
+        variants.put(skin, new PrimeCache(skin, immutable));
         return immutable;
     }
 
@@ -81,7 +99,7 @@ final class SpecialBeaconSurfaceExtraction
     private static void collectCompleteAssemblies(
         String collection,
         ModelRendererTurbo[] parts,
-        IdentityHashMap<ModelRendererTurbo, DetectedLightFace> result)
+        IdentityHashMap<ModelRendererTurbo, DetectedLightFace> result, RollingStockSkinLighting skin)
     {
         if (parts == null)
         {
@@ -91,7 +109,8 @@ final class SpecialBeaconSurfaceExtraction
         for (int index = 0; index < parts.length; index++)
         {
             ModelRendererTurbo part = parts[index];
-            int phase = primePhase(part == null ? null : part.boxName);
+            LightFixtureType type = sourceType(part, skin);
+            int phase = type == null ? 0 : type.primePhase();
             if (phase == 0)
             {
                 continue;
@@ -153,6 +172,59 @@ final class SpecialBeaconSurfaceExtraction
                     result.put(candidate.part, candidate.top);
                 }
             }
+        }
+    }
+
+    /** JSON declarations own source roles; unconverted parts retain exact legacy presets. */
+    public static LightFixtureType sourceType(ModelRendererTurbo part, RollingStockSkinLighting skin)
+    {
+        if (part == null)
+        {
+            return null;
+        }
+        String id = part.lightFixtureId == null ? part.partIdentifier() : part.lightFixtureId;
+        if (id == null)
+        {
+            id = part.boxName;
+        }
+        RollingStockLightOverride override = SkinLightingResolver.physicalOverride(skin.lightOverrides(), id,
+            SkinLightingResolver.physicalGroup(skin.lightOverrides(), id, part.lightFixtureGroup));
+        if (override != null && override.fixtureType() != null)
+        {
+            return override.fixtureType();
+        }
+        String legacy = part.legacyLightName();
+        int phase = primePhase(legacy);
+        switch (phase)
+        {
+            case 1: return LightFixtureType.PRIME_1;
+            case 2: return LightFixtureType.PRIME_2;
+            case 3: return LightFixtureType.PRIME_3;
+            case 4: return LightFixtureType.PRIME_4;
+            default: break;
+        }
+        if (legacy != null && legacy.toLowerCase(Locale.ROOT).contains("commander"))
+        {
+            return LightFixtureType.COMMANDER;
+        }
+        if (legacy != null && legacy.toLowerCase(Locale.ROOT).contains("interior"))
+        {
+            return LightFixtureType.INTERIOR_LIGHT;
+        }
+        return null;
+    }
+
+    private static final class PrimeCache
+    {
+        private final RollingStockSkinLighting skin;
+        private final int revision;
+        private final Map<ModelRendererTurbo, DetectedLightFace> faces;
+
+        private PrimeCache(RollingStockSkinLighting skin, Map<ModelRendererTurbo, DetectedLightFace> faces)
+        {
+            this.skin = skin;
+            this.revision = skin.lightingRevision();
+            this.faces = faces;
         }
     }
 

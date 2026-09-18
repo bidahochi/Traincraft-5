@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fm_h10-44",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_commander": {
+          "preset": "commander"
+        }
+      }
+    }
+  }
+}

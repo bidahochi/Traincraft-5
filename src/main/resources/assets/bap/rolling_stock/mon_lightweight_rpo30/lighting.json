@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mon_lightweight_rpo30",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

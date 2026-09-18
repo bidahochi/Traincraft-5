@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hcs_c57",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_box": {
+          "preset": "marker_light"
+        },
+        "marker_body_27": {
+          "preset": "marker_light"
+        },
+        "marker_body_243": {
+          "preset": "marker_light"
+        },
+        "marker_body_245": {
+          "preset": "marker_light"
+        },
+        "marker_body_313": {
+          "preset": "marker_light"
+        },
+        "marker_body_315": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

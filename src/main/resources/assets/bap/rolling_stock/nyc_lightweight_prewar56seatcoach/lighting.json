@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:nyc_lightweight_prewar56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

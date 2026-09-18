@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:alco_2-10-2st",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_330": {
+          "preset": "marker_light"
+        },
+        "marker_body_332": {
+          "preset": "marker_light"
+        },
+        "marker_box": {
+          "preset": "marker_light"
+        },
+        "marker_body_335": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

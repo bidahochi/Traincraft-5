@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:3gs21b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

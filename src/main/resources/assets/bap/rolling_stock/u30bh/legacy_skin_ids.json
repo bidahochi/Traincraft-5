@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u30bh",
+  "legacyColors": {
+    "5": "bap:purple",
+    "3": "bap:brown",
+    "7": "bap:lightgrey",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19"
+  }
+}

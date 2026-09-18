@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m420b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

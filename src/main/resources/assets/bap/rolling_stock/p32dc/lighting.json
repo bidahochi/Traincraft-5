@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:p32dc",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_140": {
+          "preset": "marker_light"
+        },
+        "marker_body_141": {
+          "preset": "marker_light"
+        },
+        "rear_marker_lightt_body_386": {
+          "preset": "marker_light"
+        },
+        "rear_marker_lightt_body_387": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

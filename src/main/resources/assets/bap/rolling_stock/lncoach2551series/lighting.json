@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:lncoach2551series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+      }
+    }
+  }
+}

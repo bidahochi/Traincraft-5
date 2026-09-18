@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdp40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_1": {
+          "preset": "instrument"
+        },
+        "marker_two": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

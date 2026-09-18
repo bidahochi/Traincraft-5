@@ -4147,11 +4147,11 @@ public class Model1225 extends ModelConverter //Same as Filename
 		bodyModel[1074] = new ModelRendererTurbo(this, 209, 337, textureX, textureY); // Box 1162
 		bodyModel[1075] = new ModelRendererTurbo(this, 297, 17, textureX, textureY); // Box 1163
 		bodyModel[1076] = new ModelRendererTurbo(this, 233, 337, textureX, textureY,
-            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1161
+            "center_headlight_lens_1"); // Box 1161
 		bodyModel[1077] = new ModelRendererTurbo(this, 241, 337, textureX, textureY,
-            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1162
+            "center_headlight_lens_2"); // Box 1162
 		bodyModel[1078] = new ModelRendererTurbo(this, 249, 337, textureX, textureY,
-            "lamp").setLightFixtureGroup("center_headlight").setLightSourceGlowShape(0.75F, 0.75F, 0.0F, 0.0F); // Box 1163
+            "center_headlight_lens_3"); // Box 1163
 		bodyModel[1079] = new ModelRendererTurbo(this, 257, 337, textureX, textureY); // Box 1164
 		bodyModel[1080] = new ModelRendererTurbo(this, 265, 337, textureX, textureY); // Box 1165
 		bodyModel[1081] = new ModelRendererTurbo(this, 33, 153, textureX, textureY); // Box 1166

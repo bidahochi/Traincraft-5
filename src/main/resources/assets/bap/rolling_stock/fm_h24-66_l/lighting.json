@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fm_h24-66_l",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_fl": {
+          "preset": "marker_light"
+        },
+        "marker_fr": {
+          "preset": "marker_light"
+        },
+        "marker_rl": {
+          "preset": "marker_light"
+        },
+        "marker_rr": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}

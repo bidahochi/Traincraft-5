@@ -4,14 +4,6 @@ import net.minecraft.world.World;
 import train.common.api.AbstractPassengerCar;
 
 public class PS58SeatCoach_Observation extends AbstractPassengerCar {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:ps58seatcoach_observation")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_lense_lf", "marker_lense_lr_body_279", "marker_lense_lr_body_282",
-            "marker_lense_rf")
-        .build();
 
 
 	public PS58SeatCoach_Observation(World world)
@@ -55,9 +47,4 @@ public class PS58SeatCoach_Observation extends AbstractPassengerCar {
 		return "1946";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

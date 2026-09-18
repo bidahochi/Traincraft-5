@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sma",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_157": {
+          "preset": "marker_light"
+        },
+        "marker_body_158": {
+          "preset": "marker_light"
+        },
+        "marker_body_159": {
+          "preset": "marker_light"
+        },
+        "marker_body_160": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  }
+}
