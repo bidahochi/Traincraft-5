@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "3": "bap:brown",
+    "16": "bap:skin16",
+    "8": "bap:grey",
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:pcf_b_100_40"
+}

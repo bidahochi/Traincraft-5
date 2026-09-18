@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pcf_6033",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "4": "bap:blue",
+    "12": "bap:lightblue",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "25": "bap:skin25",
+    "26": "bap:skin26",
+    "0": "bap:black",
+    "27": "bap:skin27",
+    "28": "bap:skin28",
+    "29": "bap:skin29"
+  },
+  "stock": "bap:sd70ace"
+}

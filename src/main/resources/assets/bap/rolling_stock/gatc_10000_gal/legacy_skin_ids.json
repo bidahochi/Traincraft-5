@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "18": "bap:skin18",
+    "19": "bap:skin19"
+  },
+  "stock": "bap:gatc_10000_gal"
+}

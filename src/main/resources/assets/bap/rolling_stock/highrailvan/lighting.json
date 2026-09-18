@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:highrailvan",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

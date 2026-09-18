@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:lssp7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "2": "tc:green",
+    "6": "tc:cyan",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:flatcarrails_db"
+}

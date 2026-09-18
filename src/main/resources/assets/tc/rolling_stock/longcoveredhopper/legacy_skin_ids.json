@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "tc:lightgrey",
+    "8": "tc:grey",
+    "9": "tc:pink",
+    "15": "tc:white",
+    "2": "tc:green",
+    "14": "tc:orange",
+    "10": "tc:lime",
+    "6": "tc:cyan"
+  },
+  "stock": "tc:longcoveredhopper"
+}

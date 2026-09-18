@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:depressed_flatbed",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

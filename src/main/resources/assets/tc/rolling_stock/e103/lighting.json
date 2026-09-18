@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:e103",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

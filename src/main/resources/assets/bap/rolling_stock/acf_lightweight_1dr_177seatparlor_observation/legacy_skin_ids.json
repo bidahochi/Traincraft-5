@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "2": "bap:green",
+    "4": "bap:blue",
+    "15": "bap:white"
+  },
+  "stock": "bap:acf_lightweight_1dr_177seatparlor_observation"
+}

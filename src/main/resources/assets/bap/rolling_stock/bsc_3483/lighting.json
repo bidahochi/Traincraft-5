@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:bsc_3483",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

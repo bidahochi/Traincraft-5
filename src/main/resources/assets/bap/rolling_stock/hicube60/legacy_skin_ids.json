@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "10": "bap:lime",
+    "15": "bap:white",
+    "6": "bap:cyan",
+    "2": "bap:green",
+    "5": "bap:purple",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:hicube60"
+}

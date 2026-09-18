@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pcf_b_100_40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

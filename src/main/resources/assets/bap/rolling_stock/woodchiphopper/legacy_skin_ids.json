@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "4": "bap:blue",
+    "2": "bap:green",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "15": "bap:white",
+    "6": "bap:cyan",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "16": "bap:skin16",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:woodchiphopper"
+}

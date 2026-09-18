@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "0": "bap:black",
+    "8": "bap:grey",
+    "3": "bap:brown",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:acf_41-6_gon"
+}

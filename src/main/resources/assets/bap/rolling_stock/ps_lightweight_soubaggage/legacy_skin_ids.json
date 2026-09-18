@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "0": "bap:black",
+    "3": "bap:brown",
+    "13": "bap:magenta"
+  },
+  "stock": "bap:ps_lightweight_soubaggage"
+}

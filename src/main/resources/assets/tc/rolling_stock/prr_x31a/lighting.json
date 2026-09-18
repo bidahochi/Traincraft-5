@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:prr_x31a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

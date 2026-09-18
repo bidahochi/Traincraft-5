@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "tc:orange",
+    "15": "tc:white",
+    "11": "tc:yellow",
+    "3": "tc:brown",
+    "10": "tc:lime",
+    "1": "tc:red",
+    "8": "tc:grey",
+    "2": "tc:green",
+    "7": "tc:lightgrey",
+    "0": "tc:black",
+    "12": "tc:lightblue",
+    "17": "tc:skin17",
+    "18": "tc:skin18",
+    "19": "tc:skin19"
+  },
+  "stock": "tc:gs4_tavern"
+}

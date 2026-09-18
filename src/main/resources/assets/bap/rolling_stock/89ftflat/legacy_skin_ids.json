@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "4": "bap:blue",
+    "5": "bap:purple"
+  },
+  "stock": "bap:89ftflat"
+}

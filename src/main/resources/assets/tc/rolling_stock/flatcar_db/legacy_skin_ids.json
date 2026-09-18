@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "2": "tc:green"
+  },
+  "stock": "tc:flatcar_db"
+}

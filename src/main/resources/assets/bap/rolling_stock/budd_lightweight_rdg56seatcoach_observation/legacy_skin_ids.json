@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "12": "bap:lightblue",
+    "15": "bap:white"
+  },
+  "stock": "bap:budd_lightweight_rdg56seatcoach_observation"
+}

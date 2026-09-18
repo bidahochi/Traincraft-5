@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "tc:green",
+    "1": "tc:red",
+    "10": "tc:lime"
+  },
+  "stock": "tc:hall_class_locomotive"
+}

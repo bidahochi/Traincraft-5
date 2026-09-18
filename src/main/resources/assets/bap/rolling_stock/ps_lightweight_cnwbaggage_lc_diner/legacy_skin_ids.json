@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "8": "bap:grey"
+  },
+  "stock": "bap:ps_lightweight_cnwbaggage_lc_diner"
+}

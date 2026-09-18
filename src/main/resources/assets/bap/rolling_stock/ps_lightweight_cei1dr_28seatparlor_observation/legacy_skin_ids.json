@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_cei1dr_28seatparlor_observation"
+}

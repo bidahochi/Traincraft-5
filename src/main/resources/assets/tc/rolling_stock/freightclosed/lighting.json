@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightclosed",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

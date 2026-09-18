@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gatx_2800_pdh",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

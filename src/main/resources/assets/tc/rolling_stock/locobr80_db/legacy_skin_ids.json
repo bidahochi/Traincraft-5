@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "tc:black",
+    "2": "tc:green"
+  },
+  "stock": "tc:locobr80_db"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:0-4-2-loco-glyn",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

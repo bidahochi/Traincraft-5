@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "25": "bap:skin25",
+    "33": "bap:skin33",
+    "26": "bap:skin26",
+    "27": "bap:skin27",
+    "28": "bap:skin28",
+    "29": "bap:skin29",
+    "30": "bap:skin30",
+    "31": "bap:skin31",
+    "34": "bap:skin34",
+    "32": "bap:skin32",
+    "35": "bap:skin35"
+  },
+  "stock": "bap:sp_b_50_28"
+}

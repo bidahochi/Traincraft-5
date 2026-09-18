@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "tc:grey",
+    "4": "tc:blue",
+    "0": "tc:black"
+  },
+  "stock": "tc:fol_m1"
+}

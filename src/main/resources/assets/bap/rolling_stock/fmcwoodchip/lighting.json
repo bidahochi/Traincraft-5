@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fmcwoodchip",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

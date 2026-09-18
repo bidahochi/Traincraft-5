@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "12": "bap:lightblue",
+    "15": "bap:white",
+    "7": "bap:lightgrey",
+    "13": "bap:magenta",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "5": "bap:purple",
+    "18": "bap:skin18",
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "19": "bap:skin19",
+    "9": "bap:pink"
+  },
+  "stock": "bap:sw900"
+}

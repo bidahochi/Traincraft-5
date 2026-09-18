@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "19": "bap:skin19",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "20": "bap:skin20",
+    "15": "bap:white",
+    "3": "bap:brown",
+    "21": "bap:skin21",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "22": "bap:skin22",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "5": "bap:purple",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "4": "bap:blue",
+    "23": "bap:skin23",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "9": "bap:pink",
+    "13": "bap:magenta"
+  },
+  "stock": "bap:ps_lightweight_cnw56seatcoach"
+}

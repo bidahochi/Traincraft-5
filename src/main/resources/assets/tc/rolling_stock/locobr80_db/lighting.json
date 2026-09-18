@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locobr80_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

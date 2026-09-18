@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:workday_hyrail",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "commander": {
+          "preset": "commander"
+        },
+        "ditch": {
+          "preset": "ditch_light"
+        },
+        "lamp": {
+          "preset": "headlight"
+        },
+        "prime1": {
+          "preset": "prime_1"
+        },
+        "prime2": {
+          "preset": "prime_2"
+        },
+        "prime3": {
+          "preset": "prime_3"
+        },
+        "prime4": {
+          "preset": "prime_4"
+        }
+      }
+    }
+  }
+}

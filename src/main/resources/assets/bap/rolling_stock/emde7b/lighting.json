@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:emde7b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

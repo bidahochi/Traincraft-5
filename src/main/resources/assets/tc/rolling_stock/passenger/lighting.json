@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:passenger",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

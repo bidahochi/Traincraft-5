@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:builder2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

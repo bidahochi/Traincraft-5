@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:heavyweight_mailcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

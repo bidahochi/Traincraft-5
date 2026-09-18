@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:chme3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

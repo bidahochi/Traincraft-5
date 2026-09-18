@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "1": "bap:red"
+  },
+  "stock": "bap:lima2_8_0"
+}

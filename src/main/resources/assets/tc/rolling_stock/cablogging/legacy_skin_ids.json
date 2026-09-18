@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "6": "tc:cyan",
+    "8": "tc:grey"
+  },
+  "stock": "tc:cablogging"
+}

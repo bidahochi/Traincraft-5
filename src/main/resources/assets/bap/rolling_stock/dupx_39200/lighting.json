@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dupx_39200",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

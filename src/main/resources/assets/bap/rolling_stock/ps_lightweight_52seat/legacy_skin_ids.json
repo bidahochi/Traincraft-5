@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "12": "bap:lightblue",
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "6": "bap:cyan",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "5": "bap:purple",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "15": "bap:white",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_52seat"
+}

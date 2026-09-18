@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "16": "bap:skin16",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "14": "bap:orange",
+    "13": "bap:magenta",
+    "17": "bap:skin17",
+    "9": "bap:pink",
+    "2": "bap:green",
+    "15": "bap:white",
+    "27": "bap:skin27",
+    "18": "bap:skin18",
+    "1": "bap:red",
+    "19": "bap:skin19",
+    "12": "bap:lightblue",
+    "28": "bap:skin28"
+  },
+  "stock": "bap:dash9_44cw"
+}

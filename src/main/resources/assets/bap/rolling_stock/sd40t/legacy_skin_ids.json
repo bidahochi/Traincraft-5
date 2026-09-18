@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "8": "bap:grey",
+    "1": "bap:red",
+    "17": "bap:skin17",
+    "11": "bap:yellow",
+    "13": "bap:magenta",
+    "4": "bap:blue",
+    "7": "bap:lightgrey",
+    "12": "bap:lightblue",
+    "16": "bap:skin16",
+    "18": "bap:skin18",
+    "2": "bap:green",
+    "15": "bap:white",
+    "6": "bap:cyan",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24"
+  },
+  "stock": "bap:sd40t"
+}

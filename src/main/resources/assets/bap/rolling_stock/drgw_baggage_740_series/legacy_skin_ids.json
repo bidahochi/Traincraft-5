@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "0": "bap:black",
+    "3": "bap:brown",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "13": "bap:magenta",
+    "7": "bap:lightgrey",
+    "15": "bap:white"
+  },
+  "stock": "bap:drgw_baggage_740_series"
+}

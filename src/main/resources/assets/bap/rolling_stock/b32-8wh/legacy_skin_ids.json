@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:b32-8wh"
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "7": "bap:lightgrey",
+    "18": "bap:skin18",
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "9": "bap:pink",
+    "2": "bap:green",
+    "16": "bap:skin16",
+    "1": "bap:red",
+    "17": "bap:skin17",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "3": "bap:brown"
+  },
+  "stock": "bap:u25b"
+}

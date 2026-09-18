@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch100h",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

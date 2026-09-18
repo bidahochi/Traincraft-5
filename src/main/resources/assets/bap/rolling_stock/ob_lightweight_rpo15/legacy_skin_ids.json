@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "6": "bap:cyan",
+    "7": "bap:lightgrey",
+    "4": "bap:blue"
+  },
+  "stock": "bap:ob_lightweight_rpo15"
+}

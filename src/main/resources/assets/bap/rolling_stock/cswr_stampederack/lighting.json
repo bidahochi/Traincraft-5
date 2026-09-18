@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cswr_stampederack",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch120commute",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "light": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "1": "bap:red",
+    "15": "bap:white",
+    "9": "bap:pink"
+  },
+  "stock": "bap:ob_lightweight_lv82_92seatcoach"
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "1": "tc:red",
+    "2": "tc:green",
+    "12": "tc:lightblue",
+    "13": "tc:magenta",
+    "10": "tc:lime"
+  },
+  "stock": "tc:rheingold_passenger_dining2"
+}

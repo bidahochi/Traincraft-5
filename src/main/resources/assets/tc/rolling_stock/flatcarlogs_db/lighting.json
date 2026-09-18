@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:flatcarlogs_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

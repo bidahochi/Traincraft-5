@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:aipkit_explorer",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "4": "bap:blue"
+  },
+  "stock": "bap:ac4400c"
+}

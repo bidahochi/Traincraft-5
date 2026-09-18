@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "3": "tc:brown",
+    "9": "tc:pink"
+  },
+  "stock": "tc:openwagon"
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "1": "tc:red",
+    "8": "tc:grey",
+    "3": "tc:brown",
+    "2": "tc:green",
+    "7": "tc:lightgrey",
+    "10": "tc:lime",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "6": "tc:cyan"
+  },
+  "stock": "tc:locoe10_db"
+}

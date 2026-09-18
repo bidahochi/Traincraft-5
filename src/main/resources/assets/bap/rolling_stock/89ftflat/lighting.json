@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:89ftflat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

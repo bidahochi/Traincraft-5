@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "8": "bap:grey",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "7": "bap:lightgrey",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:sd70mac"
+}

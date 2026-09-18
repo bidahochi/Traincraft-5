@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_2980",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

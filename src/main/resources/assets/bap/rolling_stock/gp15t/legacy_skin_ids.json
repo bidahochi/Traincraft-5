@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "27": "bap:skin27",
+    "28": "bap:skin28",
+    "29": "bap:skin29",
+    "30": "bap:skin30",
+    "31": "bap:skin31",
+    "32": "bap:skin32"
+  },
+  "stock": "bap:gp15t"
+}

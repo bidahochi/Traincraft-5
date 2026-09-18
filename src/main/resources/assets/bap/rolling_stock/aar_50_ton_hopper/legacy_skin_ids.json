@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "5": "bap:purple",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:aar_50_ton_hopper"
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "10": "bap:lime",
+    "0": "bap:black",
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "7": "bap:lightgrey",
+    "1": "bap:red",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:ob_lightweight_76seatdividedcoach"
+}

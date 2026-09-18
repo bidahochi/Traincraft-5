@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:p01a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

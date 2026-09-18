@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps160",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

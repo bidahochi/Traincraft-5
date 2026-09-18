@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "tc:green",
+    "6": "tc:cyan"
+  },
+  "stock": "tc:passenger_2class_db"
+}

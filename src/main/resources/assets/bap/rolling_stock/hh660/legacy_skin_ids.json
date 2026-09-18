@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "0": "bap:black",
+    "1": "bap:red",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21"
+  },
+  "stock": "bap:hh660"
+}

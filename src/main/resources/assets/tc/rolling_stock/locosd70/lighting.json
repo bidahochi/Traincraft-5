@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locosd70",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

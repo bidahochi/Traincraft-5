@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:wls40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

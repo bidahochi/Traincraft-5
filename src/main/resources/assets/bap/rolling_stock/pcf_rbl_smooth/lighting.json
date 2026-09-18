@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pcf_rbl_smooth",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

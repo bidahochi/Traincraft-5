@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "2": "bap:green",
+    "9": "bap:pink",
+    "4": "bap:blue",
+    "10": "bap:lime",
+    "5": "bap:purple",
+    "3": "bap:brown",
+    "8": "bap:grey"
+  },
+  "stock": "bap:budd_lightweight_atsf52seatcoach"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:loco3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

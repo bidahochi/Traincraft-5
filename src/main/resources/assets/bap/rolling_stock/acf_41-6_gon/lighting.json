@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_41-6_gon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

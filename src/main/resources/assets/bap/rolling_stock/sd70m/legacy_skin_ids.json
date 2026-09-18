@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "0": "bap:black",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:sd70m"
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:2truckclimax",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

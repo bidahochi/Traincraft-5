@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "12": "bap:lightblue",
+    "15": "bap:white",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19"
+  },
+  "stock": "bap:amfleetcab"
+}

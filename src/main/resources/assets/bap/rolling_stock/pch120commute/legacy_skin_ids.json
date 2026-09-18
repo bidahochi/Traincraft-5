@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "15": "bap:white",
+    "4": "bap:blue",
+    "1": "bap:red",
+    "2": "bap:green",
+    "10": "bap:lime"
+  },
+  "stock": "bap:pch120commute"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:usatcus",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

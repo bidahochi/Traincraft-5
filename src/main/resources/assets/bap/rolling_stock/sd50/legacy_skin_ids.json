@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "5": "bap:purple",
+    "9": "bap:pink",
+    "4": "bap:blue",
+    "12": "bap:lightblue",
+    "3": "bap:brown",
+    "0": "bap:black",
+    "15": "bap:white",
+    "7": "bap:lightgrey",
+    "2": "bap:green",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "8": "bap:grey",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:sd50"
+}

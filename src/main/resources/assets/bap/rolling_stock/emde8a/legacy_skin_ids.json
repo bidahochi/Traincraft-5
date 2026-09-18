@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "5": "bap:purple",
+    "6": "bap:cyan",
+    "4": "bap:blue",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "21": "bap:skin21",
+    "11": "bap:yellow",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "2": "bap:green",
+    "12": "bap:lightblue",
+    "0": "bap:black",
+    "13": "bap:magenta",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20"
+  },
+  "stock": "bap:emde8a"
+}

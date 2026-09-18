@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:german_post",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

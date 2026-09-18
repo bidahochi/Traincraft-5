@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "2": "bap:green",
+    "6": "bap:cyan",
+    "14": "bap:orange",
+    "8": "bap:grey",
+    "1": "bap:red",
+    "10": "bap:lime",
+    "7": "bap:lightgrey",
+    "9": "bap:pink",
+    "5": "bap:purple",
+    "4": "bap:blue",
+    "0": "bap:black",
+    "15": "bap:white",
+    "13": "bap:magenta",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:40highcube"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:rheingold_passenger_dining1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

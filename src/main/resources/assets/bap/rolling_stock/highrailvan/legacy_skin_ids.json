@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "14": "bap:orange",
+    "2": "bap:green",
+    "1": "bap:red"
+  },
+  "stock": "bap:highrailvan"
+}

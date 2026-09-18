@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:propaganda_britain",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:6260",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

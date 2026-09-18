@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "tc:black",
+    "8": "tc:grey",
+    "11": "tc:yellow",
+    "15": "tc:white",
+    "7": "tc:lightgrey",
+    "2": "tc:green",
+    "4": "tc:blue",
+    "10": "tc:lime",
+    "14": "tc:orange",
+    "6": "tc:cyan",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "12": "tc:lightblue",
+    "13": "tc:magenta",
+    "1": "tc:red",
+    "3": "tc:brown"
+  },
+  "stock": "tc:tankwagonus"
+}

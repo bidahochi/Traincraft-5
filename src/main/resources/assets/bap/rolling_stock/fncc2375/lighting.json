@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fncc2375",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

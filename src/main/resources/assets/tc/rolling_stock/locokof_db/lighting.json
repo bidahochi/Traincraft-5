@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locokof_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

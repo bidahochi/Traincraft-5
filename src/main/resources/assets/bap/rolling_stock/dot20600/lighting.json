@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dot20600",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

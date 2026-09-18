@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pfer_40_23reefer",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

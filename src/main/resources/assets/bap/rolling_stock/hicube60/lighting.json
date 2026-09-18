@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hicube60",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

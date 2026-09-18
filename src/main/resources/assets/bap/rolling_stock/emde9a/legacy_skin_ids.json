@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:emde9a"
+}

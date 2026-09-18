@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:prr_gla_hopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "load": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}

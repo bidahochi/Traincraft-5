@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:bethgon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "load": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}

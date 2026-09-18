@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freighthopperus",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

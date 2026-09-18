@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "4": "bap:blue",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "12": "bap:lightblue",
+    "6": "bap:cyan",
+    "7": "bap:lightgrey",
+    "3": "bap:brown",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "13": "bap:magenta",
+    "5": "bap:purple",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:ps_lightweight_cnw1dr_22seatparlor"
+}

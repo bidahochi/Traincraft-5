@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps2cd_4750",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

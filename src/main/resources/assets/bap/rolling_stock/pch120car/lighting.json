@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch120car",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

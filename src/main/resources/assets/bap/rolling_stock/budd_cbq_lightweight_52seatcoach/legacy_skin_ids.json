@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "3": "bap:brown",
+    "5": "bap:purple"
+  },
+  "stock": "bap:budd_cbq_lightweight_52seatcoach"
+}

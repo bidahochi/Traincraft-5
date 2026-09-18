@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "10": "tc:lime",
+    "0": "tc:black",
+    "2": "tc:green",
+    "15": "tc:white"
+  },
+  "stock": "tc:tendera4_uk"
+}

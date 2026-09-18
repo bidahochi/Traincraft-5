@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "0": "bap:black",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:cq_310_pa"
+}

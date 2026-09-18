@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "6": "bap:cyan",
+    "2": "bap:green",
+    "11": "bap:yellow",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "10": "bap:lime",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22"
+  },
+  "stock": "bap:fncc60footbulk"
+}

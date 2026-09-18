@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:lima_tender2_8_0",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

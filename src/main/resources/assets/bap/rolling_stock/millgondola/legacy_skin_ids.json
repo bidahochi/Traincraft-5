@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "0": "bap:black",
+    "14": "bap:orange",
+    "2": "bap:green",
+    "8": "bap:grey",
+    "16": "bap:skin16",
+    "18": "bap:skin18",
+    "4": "bap:blue",
+    "10": "bap:lime",
+    "17": "bap:skin17",
+    "3": "bap:brown",
+    "9": "bap:pink",
+    "7": "bap:lightgrey",
+    "19": "bap:skin19",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:millgondola"
+}

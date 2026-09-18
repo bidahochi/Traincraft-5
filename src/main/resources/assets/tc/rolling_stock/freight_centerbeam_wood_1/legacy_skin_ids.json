@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "tc:brown",
+    "4": "tc:blue",
+    "15": "tc:white"
+  },
+  "stock": "tc:freight_centerbeam_wood_1"
+}

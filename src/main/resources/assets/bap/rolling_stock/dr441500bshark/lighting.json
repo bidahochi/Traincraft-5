@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dr441500bshark",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

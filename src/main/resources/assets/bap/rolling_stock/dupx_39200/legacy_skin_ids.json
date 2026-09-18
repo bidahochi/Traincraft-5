@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "15": "bap:white",
+    "2": "bap:green",
+    "0": "bap:black"
+  },
+  "stock": "bap:dupx_39200"
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:onion_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

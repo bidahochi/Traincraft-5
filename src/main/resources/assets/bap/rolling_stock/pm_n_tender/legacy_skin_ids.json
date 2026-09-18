@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "15": "bap:white"
+  },
+  "stock": "bap:pm_n_tender"
+}

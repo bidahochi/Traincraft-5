@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:aem-7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "16": "bap:skin16",
+    "5": "bap:purple",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "2": "bap:green",
+    "14": "bap:orange",
+    "15": "bap:white",
+    "4": "bap:blue",
+    "10": "bap:lime",
+    "0": "bap:black",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:sd70ace_h"
+}

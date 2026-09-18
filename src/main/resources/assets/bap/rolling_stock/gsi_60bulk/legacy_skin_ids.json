@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "2": "bap:green",
+    "0": "bap:black",
+    "17": "bap:skin17",
+    "3": "bap:brown",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:gsi_60bulk"
+}

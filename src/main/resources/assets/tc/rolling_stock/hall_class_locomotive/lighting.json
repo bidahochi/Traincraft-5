@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:hall_class_locomotive",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

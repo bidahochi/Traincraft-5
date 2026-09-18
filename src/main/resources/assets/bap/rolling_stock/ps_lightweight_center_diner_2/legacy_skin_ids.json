@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "4": "bap:blue",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:ps_lightweight_center_diner_2"
+}

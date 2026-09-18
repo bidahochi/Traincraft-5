@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:c62_engine",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

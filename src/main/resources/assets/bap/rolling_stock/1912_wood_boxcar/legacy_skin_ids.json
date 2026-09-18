@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "13": "bap:magenta",
+    "1": "bap:red",
+    "11": "bap:yellow",
+    "2": "bap:green"
+  },
+  "stock": "bap:1912_wood_boxcar"
+}

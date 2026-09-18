@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "1": "bap:red",
+    "11": "bap:yellow",
+    "3": "bap:brown",
+    "12": "bap:lightblue",
+    "7": "bap:lightgrey",
+    "5": "bap:purple",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "15": "bap:white",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:sd60"
+}

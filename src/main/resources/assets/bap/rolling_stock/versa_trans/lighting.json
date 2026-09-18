@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:versa_trans",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "aaa": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}

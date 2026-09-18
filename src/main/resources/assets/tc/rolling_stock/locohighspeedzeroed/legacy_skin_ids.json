@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "15": "tc:white",
+    "7": "tc:lightgrey",
+    "8": "tc:grey"
+  },
+  "stock": "tc:locohighspeedzeroed"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

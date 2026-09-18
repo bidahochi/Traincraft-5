@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "2": "bap:green",
+    "16": "bap:skin16",
+    "0": "bap:black",
+    "17": "bap:skin17",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "14": "bap:orange",
+    "25": "bap:skin25",
+    "29": "bap:skin29",
+    "30": "bap:skin30",
+    "31": "bap:skin31",
+    "4": "bap:blue",
+    "12": "bap:lightblue"
+  },
+  "stock": "bap:gp38dash2"
+}

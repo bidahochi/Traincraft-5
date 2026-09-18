@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:skookum",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

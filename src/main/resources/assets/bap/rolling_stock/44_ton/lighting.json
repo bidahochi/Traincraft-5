@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:44_ton",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        },
+        "prime1": {
+          "preset": "prime_1"
+        },
+        "prime2": {
+          "preset": "prime_2"
+        },
+        "prime3": {
+          "preset": "prime_3"
+        },
+        "prime4": {
+          "preset": "prime_4"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:cd742",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

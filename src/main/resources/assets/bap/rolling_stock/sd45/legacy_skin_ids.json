@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "2": "bap:green",
+    "9": "bap:pink",
+    "8": "bap:grey",
+    "0": "bap:black",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "14": "bap:orange",
+    "19": "bap:skin19",
+    "11": "bap:yellow",
+    "20": "bap:skin20",
+    "1": "bap:red",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "25": "bap:skin25",
+    "26": "bap:skin26",
+    "7": "bap:lightgrey",
+    "27": "bap:skin27",
+    "28": "bap:skin28",
+    "29": "bap:skin29",
+    "30": "bap:skin30",
+    "5": "bap:purple",
+    "31": "bap:skin31",
+    "32": "bap:skin32"
+  },
+  "stock": "bap:sd45"
+}

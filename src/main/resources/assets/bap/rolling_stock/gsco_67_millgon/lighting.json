@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gsco_67_millgon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

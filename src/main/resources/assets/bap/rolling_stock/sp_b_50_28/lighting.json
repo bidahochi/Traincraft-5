@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sp_b_50_28",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

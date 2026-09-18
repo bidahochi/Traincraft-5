@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:train_snowplow",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

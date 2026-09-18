@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "5": "bap:purple",
+    "7": "bap:lightgrey",
+    "14": "bap:orange"
+  },
+  "stock": "bap:4ed-172t_e"
+}

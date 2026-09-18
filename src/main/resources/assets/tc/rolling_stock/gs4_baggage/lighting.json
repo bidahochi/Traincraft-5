@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:gs4_baggage",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

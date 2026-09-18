@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "13": "bap:magenta",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "5": "bap:purple",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:drgw_rpo_620_series"
+}

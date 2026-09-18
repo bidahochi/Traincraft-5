@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:bamboo_freight",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

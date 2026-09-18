@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "4": "bap:blue",
+    "0": "bap:black",
+    "14": "bap:orange",
+    "9": "bap:pink",
+    "12": "bap:lightblue",
+    "15": "bap:white",
+    "13": "bap:magenta",
+    "6": "bap:cyan",
+    "8": "bap:grey"
+  },
+  "stock": "bap:acfrailbox"
+}

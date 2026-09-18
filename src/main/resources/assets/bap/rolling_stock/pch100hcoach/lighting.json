@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch100hcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

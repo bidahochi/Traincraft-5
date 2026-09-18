@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "4": "tc:blue",
+    "0": "tc:black",
+    "11": "tc:yellow",
+    "13": "tc:magenta",
+    "6": "tc:cyan",
+    "9": "tc:pink",
+    "7": "tc:lightgrey",
+    "2": "tc:green",
+    "15": "tc:white",
+    "12": "tc:lightblue",
+    "10": "tc:lime",
+    "3": "tc:brown",
+    "5": "tc:purple",
+    "14": "tc:orange",
+    "8": "tc:grey",
+    "16": "tc:skin16",
+    "17": "tc:skin17",
+    "18": "tc:skin18",
+    "19": "tc:skin19",
+    "20": "tc:skin20",
+    "21": "tc:skin21"
+  },
+  "stock": "tc:gp7"
+}

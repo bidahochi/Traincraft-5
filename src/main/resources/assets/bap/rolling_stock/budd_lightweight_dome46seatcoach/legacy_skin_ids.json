@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "3": "bap:brown",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "14": "bap:orange",
+    "4": "bap:blue",
+    "0": "bap:black",
+    "13": "bap:magenta",
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "5": "bap:purple",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21"
+  },
+  "stock": "bap:budd_lightweight_dome46seatcoach"
+}

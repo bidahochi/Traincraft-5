@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:propaganda_ussr",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

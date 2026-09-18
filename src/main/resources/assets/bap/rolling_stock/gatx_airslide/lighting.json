@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gatx_airslide",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

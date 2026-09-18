@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "6": "bap:cyan",
+    "13": "bap:magenta",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:sb23r"
+}

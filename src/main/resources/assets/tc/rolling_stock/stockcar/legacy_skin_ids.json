@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "1": "tc:red",
+    "11": "tc:yellow",
+    "15": "tc:white"
+  },
+  "stock": "tc:stockcar"
+}

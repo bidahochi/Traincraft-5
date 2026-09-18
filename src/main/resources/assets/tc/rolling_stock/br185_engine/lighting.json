@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:br185_engine",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

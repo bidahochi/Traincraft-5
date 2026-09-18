@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "5": "bap:purple",
+    "11": "bap:yellow",
+    "16": "bap:skin16",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "13": "bap:magenta",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "3": "bap:brown"
+  },
+  "stock": "bap:sw1000"
+}

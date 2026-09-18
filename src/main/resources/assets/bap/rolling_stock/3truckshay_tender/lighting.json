@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:3truckshay_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

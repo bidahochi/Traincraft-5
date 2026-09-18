@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:thrall63centerbeam",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

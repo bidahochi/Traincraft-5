@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:gwr_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

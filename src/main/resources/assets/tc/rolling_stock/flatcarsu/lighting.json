@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:flatcarsu",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

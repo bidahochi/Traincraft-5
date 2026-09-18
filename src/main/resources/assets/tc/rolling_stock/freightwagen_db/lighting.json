@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightwagen_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

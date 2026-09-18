@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "0": "bap:black",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "3": "bap:brown",
+    "1": "bap:red"
+  },
+  "stock": "bap:drgw_coach_1005_series"
+}

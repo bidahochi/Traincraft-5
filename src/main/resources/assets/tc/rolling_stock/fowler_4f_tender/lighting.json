@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:fowler_4f_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "tc:yellow",
+    "4": "tc:blue",
+    "15": "tc:white"
+  },
+  "stock": "tc:passenger_db_oriental"
+}

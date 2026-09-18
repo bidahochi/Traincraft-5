@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "16": "bap:skin16",
+    "8": "bap:grey",
+    "9": "bap:pink",
+    "12": "bap:lightblue",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:versa_longi"
+}

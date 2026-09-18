@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "14": "bap:orange",
+    "15": "bap:white"
+  },
+  "stock": "bap:pm_n_locomotive"
+}

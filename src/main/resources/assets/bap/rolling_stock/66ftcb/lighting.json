@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:66ftcb",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

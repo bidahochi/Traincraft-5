@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:40ft_husky",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

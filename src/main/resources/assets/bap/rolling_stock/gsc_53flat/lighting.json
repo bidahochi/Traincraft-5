@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gsc_53flat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

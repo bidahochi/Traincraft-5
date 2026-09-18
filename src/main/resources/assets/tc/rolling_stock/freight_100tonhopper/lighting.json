@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freight_100tonhopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

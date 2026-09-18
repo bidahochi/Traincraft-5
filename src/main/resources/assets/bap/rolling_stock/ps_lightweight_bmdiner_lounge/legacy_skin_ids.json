@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "13": "bap:magenta",
+    "3": "bap:brown",
+    "2": "bap:green",
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:ps_lightweight_bmdiner_lounge"
+}

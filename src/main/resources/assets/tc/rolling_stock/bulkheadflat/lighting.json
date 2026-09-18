@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:bulkheadflat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

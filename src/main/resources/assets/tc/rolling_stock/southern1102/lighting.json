@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:southern1102",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

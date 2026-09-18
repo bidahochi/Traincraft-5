@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gatc_10000_gal",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

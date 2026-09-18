@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "2": "bap:green",
+    "4": "bap:blue",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "15": "bap:white"
+  },
+  "stock": "bap:acf_lightweight_uprpo60"
+}

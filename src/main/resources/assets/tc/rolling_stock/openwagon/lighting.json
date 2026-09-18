@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:openwagon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

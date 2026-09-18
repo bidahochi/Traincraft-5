@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "0": "tc:black",
+    "4": "tc:blue",
+    "8": "tc:grey",
+    "7": "tc:lightgrey",
+    "3": "tc:brown"
+  },
+  "stock": "tc:freight_100tonhopper"
+}

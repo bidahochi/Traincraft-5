@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:evans_5100",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

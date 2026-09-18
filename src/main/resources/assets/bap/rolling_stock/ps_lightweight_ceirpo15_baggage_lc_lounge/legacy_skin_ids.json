@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "6": "bap:cyan",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_ceirpo15_baggage_lc_lounge"
+}

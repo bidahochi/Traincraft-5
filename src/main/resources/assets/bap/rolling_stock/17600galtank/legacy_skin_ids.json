@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "15": "bap:white",
+    "0": "bap:black",
+    "4": "bap:blue",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "3": "bap:brown",
+    "5": "bap:purple",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:17600galtank"
+}

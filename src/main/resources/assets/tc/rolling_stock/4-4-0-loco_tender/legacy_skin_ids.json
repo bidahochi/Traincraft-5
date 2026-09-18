@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "tc:black",
+    "15": "tc:white",
+    "3": "tc:brown",
+    "4": "tc:blue",
+    "2": "tc:green",
+    "1": "tc:red",
+    "5": "tc:purple"
+  },
+  "stock": "tc:4-4-0-loco_tender"
+}

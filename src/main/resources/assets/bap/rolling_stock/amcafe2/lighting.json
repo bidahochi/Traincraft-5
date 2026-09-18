@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:amcafe2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

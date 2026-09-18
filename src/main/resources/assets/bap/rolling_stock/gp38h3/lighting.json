@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp38h3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "commander": {
+          "preset": "commander"
+        },
+        "ditch": {
+          "preset": "ditch_light"
+        }
+      }
+    }
+  }
+}

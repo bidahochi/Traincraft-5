@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:lavacar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

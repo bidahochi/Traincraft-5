@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:d51_long",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

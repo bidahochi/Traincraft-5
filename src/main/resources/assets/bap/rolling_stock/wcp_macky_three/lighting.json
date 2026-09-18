@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:wcp_macky_three",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

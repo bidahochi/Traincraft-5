@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "13": "bap:magenta",
+    "3": "bap:brown",
+    "14": "bap:orange",
+    "2": "bap:green",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20"
+  },
+  "stock": "bap:sp_b_50"
+}

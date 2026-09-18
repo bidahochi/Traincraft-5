@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:1912_wood_boxcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

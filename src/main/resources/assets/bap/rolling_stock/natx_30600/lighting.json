@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:natx_30600",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

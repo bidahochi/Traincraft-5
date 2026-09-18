@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "12": "bap:lightblue",
+    "5": "bap:purple",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "15": "bap:white",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_lunchcounter_lounge"
+}

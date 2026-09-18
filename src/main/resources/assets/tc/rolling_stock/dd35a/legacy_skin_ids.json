@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "tc:orange",
+    "0": "tc:black",
+    "9": "tc:pink"
+  },
+  "stock": "tc:dd35a"
+}

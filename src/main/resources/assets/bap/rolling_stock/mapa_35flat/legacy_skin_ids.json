@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "8": "bap:grey",
+    "13": "bap:magenta",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "14": "bap:orange",
+    "5": "bap:purple",
+    "1": "bap:red"
+  },
+  "stock": "bap:mapa_35flat"
+}

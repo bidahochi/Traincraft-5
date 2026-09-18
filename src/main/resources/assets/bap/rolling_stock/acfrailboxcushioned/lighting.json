@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acfrailboxcushioned",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "16": "bap:skin16",
+    "5": "bap:purple"
+  },
+  "stock": "bap:pecoach"
+}

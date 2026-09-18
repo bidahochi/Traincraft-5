@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:versa_longi",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "aaa": {
+          "enabled": false
+        }
+      }
+    }
+  }
+}

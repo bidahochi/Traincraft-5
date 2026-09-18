@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:4-6-0_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

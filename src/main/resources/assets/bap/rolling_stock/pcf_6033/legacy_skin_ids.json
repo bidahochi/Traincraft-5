@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "16": "bap:skin16",
+    "9": "bap:pink",
+    "4": "bap:blue",
+    "1": "bap:red",
+    "17": "bap:skin17",
+    "11": "bap:yellow",
+    "13": "bap:magenta",
+    "6": "bap:cyan",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "7": "bap:lightgrey",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22"
+  },
+  "stock": "bap:pcf_6033"
+}

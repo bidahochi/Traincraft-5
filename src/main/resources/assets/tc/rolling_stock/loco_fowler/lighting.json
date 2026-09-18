@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:loco_fowler",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_40t_ss_box",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

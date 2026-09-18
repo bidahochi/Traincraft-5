@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "1": "bap:red"
+  },
+  "stock": "bap:ob_heavyweight_nh5570_5589baggage"
+}

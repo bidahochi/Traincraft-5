@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:r70reefer",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

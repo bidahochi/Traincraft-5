@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "14": "bap:orange",
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "13": "bap:magenta"
+  },
+  "stock": "bap:fb2"
+}

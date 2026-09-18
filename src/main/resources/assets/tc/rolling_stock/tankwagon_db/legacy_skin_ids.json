@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "2": "tc:green"
+  },
+  "stock": "tc:tankwagon_db"
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "6": "bap:cyan",
+    "11": "bap:yellow",
+    "17": "bap:skin17",
+    "14": "bap:orange",
+    "18": "bap:skin18",
+    "1": "bap:red"
+  },
+  "stock": "bap:workday_hyrail"
+}

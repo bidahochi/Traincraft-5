@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "13": "bap:magenta",
+    "8": "bap:grey",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:fm_h24-66_c"
+}

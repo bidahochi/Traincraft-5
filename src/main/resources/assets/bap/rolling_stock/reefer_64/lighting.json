@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:reefer_64",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

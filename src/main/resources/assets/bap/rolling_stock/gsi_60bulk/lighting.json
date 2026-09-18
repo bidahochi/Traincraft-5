@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gsi_60bulk",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

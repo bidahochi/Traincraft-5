@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "8": "bap:grey",
+    "17": "bap:skin17",
+    "7": "bap:lightgrey",
+    "18": "bap:skin18",
+    "21": "bap:skin21",
+    "19": "bap:skin19",
+    "2": "bap:green",
+    "14": "bap:orange",
+    "11": "bap:yellow",
+    "20": "bap:skin20",
+    "9": "bap:pink",
+    "13": "bap:magenta",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "25": "bap:skin25",
+    "26": "bap:skin26",
+    "27": "bap:skin27"
+  },
+  "stock": "bap:gatx_airslide"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:class66",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

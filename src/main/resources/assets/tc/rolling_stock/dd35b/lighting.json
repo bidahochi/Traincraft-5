@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:dd35b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "lamp": {
+          "preset": "headlight"
+        }
+      }
+    }
+  }
+}

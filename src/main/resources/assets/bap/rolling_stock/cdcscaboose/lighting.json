@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cdcscaboose",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

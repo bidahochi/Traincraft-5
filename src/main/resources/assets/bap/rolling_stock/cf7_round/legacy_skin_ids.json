@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "11": "bap:yellow",
+    "18": "bap:skin18",
+    "8": "bap:grey"
+  },
+  "stock": "bap:cf7_round"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:262t",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  }
+}

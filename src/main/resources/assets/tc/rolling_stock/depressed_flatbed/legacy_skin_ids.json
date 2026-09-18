@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "tc:lightgrey",
+    "4": "tc:blue",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:depressed_flatbed"
+}

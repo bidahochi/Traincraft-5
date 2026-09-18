@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "2": "tc:green",
+    "11": "tc:yellow",
+    "14": "tc:orange",
+    "9": "tc:pink"
+  },
+  "stock": "tc:freightwagen_db"
+}

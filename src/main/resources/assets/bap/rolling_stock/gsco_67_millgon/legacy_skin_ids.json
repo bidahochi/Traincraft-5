@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "2": "bap:green",
+    "3": "bap:brown",
+    "4": "bap:blue",
+    "8": "bap:grey",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "5": "bap:purple",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:gsco_67_millgon"
+}

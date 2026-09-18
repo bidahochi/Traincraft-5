@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "15": "bap:white",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:budd_crip_lightweight_52seatcoach"
+}
