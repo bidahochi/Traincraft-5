@@ -4,9 +4,6 @@
   "lighting": {
     "defaults": {
       "fixtures": {
-        "lamp": {
-          "preset": "headlight"
-        }
       }
     }
   }

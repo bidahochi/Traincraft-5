@@ -3,11 +3,7 @@
   "stock": "bap:b39-8",
   "lighting": {
     "defaults": {
-      "fixtures": {
-        "commander": {
-          "preset": "commander"
-        },
-        "cab_speedometer_body_215": {
+      "fixtures": {        "cab_speedometer_body_215": {
           "preset": "instrument"
         },
         "cab_speedometer_body_216": {

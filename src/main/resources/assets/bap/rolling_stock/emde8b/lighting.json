@@ -4,9 +4,6 @@
   "lighting": {
     "defaults": {
       "fixtures": {
-        "commander": {
-          "preset": "commander"
-        }
       }
     }
   }

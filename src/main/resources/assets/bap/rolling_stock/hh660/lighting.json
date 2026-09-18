@@ -4,15 +4,6 @@
   "lighting": {
     "defaults": {
       "fixtures": {
-        "commander": {
-          "preset": "commander"
-        },
-        "ditch": {
-          "preset": "ditch_light"
-        },
-        "lamp": {
-          "preset": "headlight"
-        }
       }
     }
   }

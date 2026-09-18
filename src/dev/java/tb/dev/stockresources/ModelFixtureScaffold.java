@@ -138,11 +138,7 @@ public final class ModelFixtureScaffold
         {
             id = part.partIdentifier();
         }
-        if (id == null && preset != null)
-        {
-            id = part.boxName;
-        }
-        if (id == null || "cull".equals(id))
+        if (id == null || "cull".equals(id) || preset(id) != null)
         {
             return;
         }

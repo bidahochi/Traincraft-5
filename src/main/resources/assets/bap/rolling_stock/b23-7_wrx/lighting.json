@@ -4,18 +4,6 @@
   "lighting": {
     "defaults": {
       "fixtures": {
-        "ditch": {
-          "preset": "ditch_light"
-        },
-        "lamp": {
-          "preset": "headlight"
-        },
-        "prime1": {
-          "preset": "prime_1"
-        },
-        "prime3": {
-          "preset": "prime_3"
-        }
       }
     }
   }

@@ -10,9 +10,6 @@
         "front_headlight_lower_320": {
           "preset": "headlight"
         },
-        "commander": {
-          "preset": "commander"
-        },
         "cab_speedometer_body_455": {
           "preset": "instrument"
         },

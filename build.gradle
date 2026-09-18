@@ -55,6 +55,10 @@ sourceSets {
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
         runtimeClasspath += output + compileClasspath
     }
+    test {
+        compileClasspath += sourceSets.dev.output
+        runtimeClasspath += sourceSets.dev.output
+    }
 }
 
 compileDevJava {

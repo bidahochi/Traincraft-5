@@ -3,14 +3,7 @@
   "stock": "bap:4ed-172t",
   "lighting": {
     "defaults": {
-      "fixtures": {
-        "commander": {
-          "preset": "commander"
-        },
-        "lamp": {
-          "preset": "headlight"
-        },
-        "marker_body_208": {
+      "fixtures": {        "marker_body_208": {
           "enabled": false
         },
         "marker_body_209": {
@@ -27,21 +20,6 @@
         },
         "marker_body_214": {
           "enabled": false
-        },
-        "numberboard": {
-          "preset": "numberboard"
-        },
-        "prime1": {
-          "preset": "prime_1"
-        },
-        "prime2": {
-          "preset": "prime_2"
-        },
-        "prime3": {
-          "preset": "prime_3"
-        },
-        "prime4": {
-          "preset": "prime_4"
         }
       }
     }

@@ -3,11 +3,7 @@
   "stock": "bap:rsfdl",
   "lighting": {
     "defaults": {
-      "fixtures": {
-        "commander": {
-          "preset": "commander"
-        },
-        "marker_body_197": {
+      "fixtures": {        "marker_body_197": {
           "preset": "marker_light"
         },
         "marker_body_199": {

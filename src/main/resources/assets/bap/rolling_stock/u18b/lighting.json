@@ -3,11 +3,7 @@
   "stock": "bap:u18b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-        "commander": {
-          "preset": "commander"
-        },
-        "marker_body_150": {
+      "fixtures": {        "marker_body_150": {
           "preset": "marker_light"
         },
         "marker_body_151": {
