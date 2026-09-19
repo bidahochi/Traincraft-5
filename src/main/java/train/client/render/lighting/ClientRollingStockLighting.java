@@ -210,7 +210,7 @@ public final class ClientRollingStockLighting
         }
         List<DetectedLightSurface> sourceSurfaces =
             selectSourceSurfaces(modelPart, surface, selectedPrime);
-        RollingStockLightOutput output = context.sampleOutput(definition);
+        RollingStockLightOutput output = context.sampleOutput(definition, resolvedFixture.partIdentity);
         float intensity = output.sourceIntensity();
         // An inactive fixture is ordinary ambient display-list geometry. Avoid
         // lightmap state traffic, matrix readbacks and Prime immediate drawing
@@ -243,7 +243,7 @@ public final class ClientRollingStockLighting
         float[] pose = null;
         if (available)
         {
-            ModelPartLightTable.Mode lightmapMode = context.partLights.mode(definition.id());
+            ModelPartLightTable.Mode lightmapMode = context.partLights.mode(resolvedFixture.partIdentity);
             if (lightmapMode == ModelPartLightTable.Mode.LIGHT_FLOOR)
             {
                 effectX = Math.max(oldX, definition.lightmapFloor());
@@ -980,6 +980,7 @@ public final class ClientRollingStockLighting
         }
         FixtureMetadata created =
             new FixtureMetadata(
+            values.size(),
             modelPart,
             surface,
             definition,
@@ -1983,7 +1984,7 @@ public final class ClientRollingStockLighting
                     continue;
                 }
                 RollingStockLightDefinition definition = geometry.definition();
-                RollingStockLightOutput output = sampleOutput(definition);
+                RollingStockLightOutput output = sampleOutput(definition, entry.getKey());
                 submitFixtureEffects(this, definition, entry.getKey(), geometry.surface(), 1,
                     output.sourceIntensity(), output.projectedIntensity(), groupPose, true);
             }
@@ -2023,9 +2024,9 @@ public final class ClientRollingStockLighting
             return lastNestedPrimeTopFaces.get(modelPart);
         }
 
-        RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition)
+        private RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition, String partIdentity)
         {
-            ModelPartLightTable.Entry cached = partLights.entry(definition.id());
+            ModelPartLightTable.Mode cached = partLights.mode(partIdentity);
             RollingStockLightOutput output =
                 RollingStockLightState.outputForState(
                     lightState,
@@ -2034,7 +2035,7 @@ public final class ClientRollingStockLighting
             if (cached == null)
             {
                 partLights.put(
-                    definition.id(), output.sourceIntensity(),
+                    partIdentity, output.sourceIntensity(),
                     selectLightmapMode(definition, output.sourceIntensity()));
             }
             return output;
@@ -2133,7 +2134,7 @@ public final class ClientRollingStockLighting
                 overrides, fixtureMetadata.definition, fixtureMetadata.legacyGroup);
             resolvedFixture =
                 new ResolvedFixture(
-                definition, override, group);
+                definition, override, group, fixtureMetadata.partIndex);
             resolvedFixture.sourceType = SpecialBeaconSurfaceExtraction.sourceType(fixtureMetadata.modelPart, skin);
             resolvedFixtures.put(fixtureMetadata, resolvedFixture);
             return resolvedFixture;
@@ -2165,6 +2166,7 @@ public final class ClientRollingStockLighting
         final RollingStockLightDefinition definition;
         final RollingStockLightOverride override;
         final String effectIdentity;
+        private final String partIdentity;
         ResourceLocation sourceTexture;
         ResourceLocation primeTexture;
         int sourceGeneration = Integer.MIN_VALUE;
@@ -2175,13 +2177,15 @@ public final class ClientRollingStockLighting
         boolean primeAvailable;
         boolean primeAvailableCached;
 
-        ResolvedFixture(
-            RollingStockLightDefinition definition, RollingStockLightOverride override, String group)
+        private ResolvedFixture(
+            RollingStockLightDefinition definition, RollingStockLightOverride override, String group,
+            int partIndex)
         {
             this.group = group;
             this.definition = definition;
             this.override = override;
-            String identity = definition.id();
+            partIdentity = "part:" + partIndex + ":" + definition.id();
+            String identity = partIdentity;
             if (group != null)
             {
                 identity = group;
@@ -2404,6 +2408,7 @@ public final class ClientRollingStockLighting
 
     private static final class FixtureMetadata
     {
+        private final int partIndex;
         private final ModelRendererTurbo modelPart;
         private List<CommanderSurface> commanderSurfaces;
         final DetectedLightSurface surface;
@@ -2411,12 +2416,14 @@ public final class ClientRollingStockLighting
         private final boolean requiresDeclaration;
         private final String legacyGroup;
 
-        FixtureMetadata(
+        private FixtureMetadata(
+            int partIndex,
             ModelRendererTurbo modelPart,
             DetectedLightSurface surface,
             RollingStockLightDefinition definition,
             boolean requiresDeclaration, String legacyGroup)
         {
+            this.partIndex = partIndex;
             this.modelPart = modelPart;
             this.legacyGroup = legacyGroup;
             this.requiresDeclaration = requiresDeclaration;
