@@ -83,13 +83,12 @@ public class ModelRendererTurbo
      * Sets the box name before model/render caches are built. Names matching [A-Za-z][A-Za-z0-9_]*
      * become plain model-local identifiers unless they are built-in preset tags.
      * Plain identifiers carry no lighting role; built-in tags select lighting presets.
-     * Stock-specific lighting behavior belongs in JSON. Explicit legacy fixture setters
-     * remain independent of the part name.
+     * Stock-specific lighting behavior belongs in JSON.
      */
     public ModelRendererTurbo setPartName(String name)
     {
         partIdentifier = null;
-        if (name != null && name.matches("[A-Za-z][A-Za-z0-9_]*") && isLegacyLightPreset(name.toLowerCase(Locale.ROOT)) == false)
+        if (name != null && name.matches("[A-Za-z][A-Za-z0-9_]*") && isBuiltInLightPreset(name.toLowerCase(Locale.ROOT)) == false)
         {
             partIdentifier = name;
         }
@@ -103,10 +102,10 @@ public class ModelRendererTurbo
         return partIdentifier;
     }
 
-    /** Returns the box name for preset or legacy fixture handling, excluding plain IDs without an explicit fixture ID. */
-    public String legacyLightName()
+    /** Returns built-in preset tags, excluding plain part identifiers configured through JSON. */
+    public String presetTagName()
     {
-        if (partIdentifier != null && lightFixtureId == null)
+        if (partIdentifier != null)
         {
             return null;
         }
@@ -114,7 +113,7 @@ public class ModelRendererTurbo
     }
 
     /** Built-in preset tags are exact-name shortcuts; substrings in identifiers are not presets. */
-    private static boolean isLegacyLightPreset(String name)
+    private static boolean isBuiltInLightPreset(String name)
     {
         return "lamp".equals(name) || "ditch".equals(name) || "marker".equals(name)
             || "numberboard".equals(name) || "instrument".equals(name) || "interior".equals(name)
@@ -123,8 +122,6 @@ public class ModelRendererTurbo
             || "ditch_left".equals(name) || "ditch_right".equals(name)
             || "ditchlight_left".equals(name) || "ditchlight_right".equals(name);
     }
-    /** Stable profile-facing id for this authored light fixture. */
-    public String lightFixtureId;
     /** Optional identity shared by multiple geometry parts forming one fixture. */
     public String lightFixtureGroup;
     /** Optional lens-plane shaping for additive source glow. */
@@ -148,23 +145,6 @@ public class ModelRendererTurbo
     public ModelRendererTurbo setLightFixtureGroup(String fixtureGroup)
     {
         lightFixtureGroup = fixtureGroup;
-        return this;
-    }
-
-    /**
-     * Marks this part as a light fixture and assigns its stable model-local key, such as
-     * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
-     * Recognized {@link #boxName} values such as {@code lamp} remain supported as a
-     * discovery fallback. New fixtures should use a plain part name and a stock JSON declaration;
-     * this setter remains a compatibility boundary for existing external models.
-     */
-    public ModelRendererTurbo setLightFixtureId(String fixtureId)
-    {
-        if (fixtureId == null || fixtureId.trim().isEmpty())
-        {
-            throw new IllegalArgumentException("Light fixture id must not be blank");
-        }
-        lightFixtureId = fixtureId;
         return this;
     }
 

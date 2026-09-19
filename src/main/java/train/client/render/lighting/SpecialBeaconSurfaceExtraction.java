@@ -175,14 +175,14 @@ final class SpecialBeaconSurfaceExtraction
         }
     }
 
-    /** JSON declarations own source roles; unconverted parts retain exact legacy presets. */
+    /** JSON declarations configure named parts; built-in preset tags remain supported independently. */
     public static LightFixtureType sourceType(ModelRendererTurbo part, RollingStockSkinLighting skin)
     {
         if (part == null)
         {
             return null;
         }
-        String id = part.lightFixtureId == null ? part.partIdentifier() : part.lightFixtureId;
+        String id = part.partIdentifier();
         if (id == null)
         {
             id = part.boxName;
@@ -193,8 +193,8 @@ final class SpecialBeaconSurfaceExtraction
         {
             return override.fixtureType();
         }
-        String legacy = part.legacyLightName();
-        int phase = primePhase(legacy);
+        String presetTag = part.presetTagName();
+        int phase = primePhase(presetTag);
         switch (phase)
         {
             case 1: return LightFixtureType.PRIME_1;
@@ -203,11 +203,11 @@ final class SpecialBeaconSurfaceExtraction
             case 4: return LightFixtureType.PRIME_4;
             default: break;
         }
-        if (legacy != null && legacy.toLowerCase(Locale.ROOT).contains("commander"))
+        if (presetTag != null && presetTag.toLowerCase(Locale.ROOT).contains("commander"))
         {
             return LightFixtureType.COMMANDER;
         }
-        if (legacy != null && legacy.toLowerCase(Locale.ROOT).contains("interior"))
+        if (presetTag != null && presetTag.toLowerCase(Locale.ROOT).contains("interior"))
         {
             return LightFixtureType.INTERIOR_LIGHT;
         }

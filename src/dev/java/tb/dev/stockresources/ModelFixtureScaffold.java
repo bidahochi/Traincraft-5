@@ -28,7 +28,7 @@ public final class ModelFixtureScaffold
     }
 
     /**
-     * Collects explicit fixture IDs, recognized plain identifiers and built-in preset tags from
+     * Collects plain part identifiers, excluding built-in preset tags, from
      * supported model containers and child parts without changing shared models. Plain identifiers
      * must match [A-Za-z][A-Za-z0-9_]*; arbitrary box names are not included.
      * Repeated IDs share one entry. Conflicting defaults abort generation instead of picking
@@ -36,7 +36,7 @@ public final class ModelFixtureScaffold
      */
     public JsonObject discover(ModelBase model) throws IllegalAccessException
     {
-        Map<String, JsonObject> fixtures = new TreeMap<String, JsonObject>();
+        Map<String, JsonObject> fixtures = new TreeMap<String, JsonObject>(String.CASE_INSENSITIVE_ORDER);
         Set<Object> visited = Collections.newSetFromMap(new IdentityHashMap<Object, Boolean>());
         collect(model, fixtures, visited);
         JsonObject result = new JsonObject();
@@ -129,28 +129,16 @@ public final class ModelFixtureScaffold
         return discovered;
     }
 
-    /** Bare preset tags are shared defaults; an independent ID takes precedence when present. */
+    /** Named parts start disabled until configured; bare preset tags need no JSON entry. */
     private static void addPart(ModelRendererTurbo part, Map<String, JsonObject> fixtures)
     {
-        String preset = preset(part.legacyLightName());
-        String id = part.lightFixtureId;
-        if (id == null)
-        {
-            id = part.partIdentifier();
-        }
+        String id = part.partIdentifier();
         if (id == null || "cull".equals(id) || preset(id) != null)
         {
             return;
         }
         JsonObject settings = new JsonObject();
-        if (preset != null)
-        {
-            settings.addProperty("preset", preset);
-        }
-        else if (part.lightFixtureId == null)
-        {
-            settings.addProperty("enabled", false);
-        }
+        settings.addProperty("enabled", false);
         JsonObject previous = fixtures.put(id, settings);
         if (previous != null && previous.equals(settings) == false)
         {

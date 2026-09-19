@@ -152,13 +152,12 @@ public final class ClientRollingStockLighting
         return isSemantic(modelPart, fixtureLayoutKey());
     }
 
-    /** Matches declared names without treating identifier substrings as legacy presets. */
+    /** Matches declared names without treating identifier substrings as built-in presets. */
     public static boolean isSemantic(ModelRendererTurbo modelPart, Set<String> declaredFixtureIds)
     {
         return modelPart != null
                && "cull".equalsIgnoreCase(modelPart.boxName) == false
-               && (modelPart.lightFixtureId != null
-                   || RollingStockLightChannel.fromTaggedPartName(modelPart.legacyLightName()) != null
+               && (RollingStockLightChannel.fromTaggedPartName(modelPart.presetTagName()) != null
                    || declaredFixtureIds.contains(modelPart.partIdentifier()));
     }
 
@@ -192,7 +191,7 @@ public final class ClientRollingStockLighting
         {
             return PartLight.NONE;
         }
-        if (modelPart.lightFixtureId == null && modelPart.partIdentifier() != null
+        if (modelPart.partIdentifier() != null
             && context.runtimeState.skin.lightOverrides().containsKey(modelPart.partIdentifier()) == false)
         {
             return PartLight.NONE;
@@ -855,7 +854,7 @@ public final class ClientRollingStockLighting
                 context.stock.modelRotations(),
                 context.stock.getRenderScale());
         RollingStockLightChannel channel =
-            RollingStockLightChannel.fromTaggedPartName(modelPart.legacyLightName());
+            RollingStockLightChannel.fromTaggedPartName(modelPart.presetTagName());
         // ID-only fixtures use stock lighting JSON. HEADLIGHT supplies the steady
         // baseline to which the resolved JSON overrides are applied.
         if (channel == null)
@@ -863,11 +862,7 @@ public final class ClientRollingStockLighting
             channel = RollingStockLightChannel.HEADLIGHT;
         }
         String fixtureId;
-        if (modelPart.lightFixtureId != null)
-        {
-            fixtureId = modelPart.lightFixtureId;
-        }
-        else if (modelPart.partIdentifier() != null)
+        if (modelPart.partIdentifier() != null)
         {
             fixtureId = modelPart.partIdentifier();
         }
@@ -880,11 +875,11 @@ public final class ClientRollingStockLighting
             fixtureId = createFallbackFixtureId(context, modelPart, channel);
         }
         boolean instrument =
-                    RollingStockLightChannel.taggedPartIsInstrument(modelPart.legacyLightName()),
+                    RollingStockLightChannel.taggedPartIsInstrument(modelPart.presetTagName()),
                 interior =
-                    RollingStockLightChannel.taggedPartIsInterior(modelPart.legacyLightName()),
+                    RollingStockLightChannel.taggedPartIsInterior(modelPart.presetTagName()),
                 illuminated =
-                    RollingStockLightChannel.taggedPartIsIlluminatedSurface(modelPart.legacyLightName()),
+                    RollingStockLightChannel.taggedPartIsIlluminatedSurface(modelPart.presetTagName()),
                 beamChannel =
                     instrument == false
                     && interior == false
@@ -899,8 +894,8 @@ public final class ClientRollingStockLighting
             : producesBeam
             ? RollingStockLightDefinition.Effect.BEAM
             : RollingStockLightDefinition.Effect.EMISSIVE_ONLY;
-        String legacyName = modelPart.legacyLightName();
-        String lower = legacyName == null ? "" : legacyName.toLowerCase(Locale.ROOT);
+        String presetName = modelPart.presetTagName();
+        String lower = presetName == null ? "" : presetName.toLowerCase(Locale.ROOT);
         boolean orange = lower.contains("commander") || lower.contains("prime");
         int color = orange
                     ? RollingStockLightColors.AMBER
@@ -952,7 +947,7 @@ public final class ClientRollingStockLighting
                 shape == null ? 1 : shape.heightScale(),
                 shape == null ? 0 : shape.rightOffset(),
                 shape == null ? 0 : shape.upOffset())
-            .function(RollingStockLightChannel.defaultFunction(modelPart.legacyLightName()))
+            .function(RollingStockLightChannel.defaultFunction(modelPart.presetTagName()))
             .lightmapFloor(
                 illuminated && lower.contains("numberboard")
                 ? RollingStockLightDefinition.DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR
@@ -963,11 +958,11 @@ public final class ClientRollingStockLighting
             .taggedPart(fixtureId, uvRegions)
             .build();
         modelPart.lightDefinitionId = fixtureId;
-        if (primePhase(modelPart.legacyLightName()) > 0)
+        if (primePhase(modelPart.presetTagName()) > 0)
         {
             modelPart.lightExteriorFaceOnly = true;
             DetectedLightFace selected =
-                selectPrimePhaseFace(surface, primePhase(modelPart.legacyLightName()), context);
+                selectPrimePhaseFace(surface, primePhase(modelPart.presetTagName()), context);
             modelPart.lightExteriorFaceIndex = selected == null ? -1 : selected.faceIndex;
         }
         if (uvRegions.isEmpty()
@@ -984,7 +979,7 @@ public final class ClientRollingStockLighting
             modelPart,
             surface,
             definition,
-            modelPart.lightFixtureId == null && modelPart.partIdentifier() != null,
+            modelPart.partIdentifier() != null,
             modelPart.lightFixtureGroup == null ? null
                 : "auto:" + context.modelScope + ":" + channel.name().toLowerCase(Locale.ROOT)
                     + ":group:" + normalizeIdentifier(modelPart.lightFixtureGroup));
@@ -2024,6 +2019,7 @@ public final class ClientRollingStockLighting
             return lastNestedPrimeTopFaces.get(modelPart);
         }
 
+        /** Keeps per-part illumination independent even when parts share authored settings. */
         private RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition, String partIdentity)
         {
             ModelPartLightTable.Mode cached = partLights.mode(partIdentity);
@@ -2177,6 +2173,11 @@ public final class ClientRollingStockLighting
         boolean primeAvailable;
         boolean primeAvailableCached;
 
+        /**
+         * Authored names select settings and may be reused. The cached model-part index
+         * separates their effects and lightmap state; only an explicit group shares effects.
+         * The queue additionally scopes these identities by entity, so shared models are safe.
+         */
         private ResolvedFixture(
             RollingStockLightDefinition definition, RollingStockLightOverride override, String group,
             int partIndex)

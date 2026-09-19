@@ -24,24 +24,25 @@ public class ModelFixtureScaffoldTest
         {
             model.base[index] = new ModelRendererTurbo(model).setPartName(tags[index]);
         }
-        //assertTrue(new ModelFixtureScaffold().discover(model).entrySet().isEmpty());
+        assertTrue(new ModelFixtureScaffold().discover(model).entrySet().isEmpty());
     }
 
     @Test
-    public void independentIdsRetainDefaultsWithoutExportingReservedIds() throws IllegalAccessException
+    public void namedPartsStartDisabledWithoutExportingReservedTags() throws IllegalAccessException
     {
         ModelBase model = new ModelBase();
         model.base = new ModelRendererTurbo[] {
-                new ModelRendererTurbo(model).setPartName("lamp").setLightFixtureId("front_lamp"),
-                new ModelRendererTurbo(model).setPartName("prime1").setLightFixtureId("roof_beacon"),
+                new ModelRendererTurbo(model).setPartName("front_lamp"),
+                new ModelRendererTurbo(model).setPartName("roof_beacon"),
                 new ModelRendererTurbo(model).setPartName("custom_lens"),
-                new ModelRendererTurbo(model).setPartName("lamp").setLightFixtureId("lamp")
+                new ModelRendererTurbo(model).setPartName("lamp"),
+                new ModelRendererTurbo(model).setPartName("FRONT_LAMP")
         };
-        /*JsonObject fixtures = new ModelFixtureScaffold().discover(model);
+        JsonObject fixtures = new ModelFixtureScaffold().discover(model);
         assertEquals(3, fixtures.entrySet().size());
-        assertEquals("headlight", fixtures.getAsJsonObject("front_lamp").get("preset").getAsString());
-        assertEquals("prime_1", fixtures.getAsJsonObject("roof_beacon").get("preset").getAsString());
+        assertFalse(fixtures.getAsJsonObject("front_lamp").get("enabled").getAsBoolean());
+        assertFalse(fixtures.getAsJsonObject("roof_beacon").get("enabled").getAsBoolean());
         assertFalse(fixtures.getAsJsonObject("custom_lens").get("enabled").getAsBoolean());
-        assertFalse(fixtures.has("lamp"));*/
+        assertFalse(fixtures.has("lamp"));
     }
 }

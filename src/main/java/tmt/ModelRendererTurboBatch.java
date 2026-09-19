@@ -1089,8 +1089,8 @@ public final class ModelRendererTurboBatch {
 			GROUP_CACHE.put(turbo, RenderGroup.CULL);
 			return RenderGroup.CULL;
 		}
-        String legacyName = turbo.legacyLightName();
-        name = legacyName == null ? "" : legacyName.toLowerCase();
+        String presetName = turbo.presetTagName();
+        name = presetName == null ? "" : presetName.toLowerCase();
 		if (name.contains("lamp")) {
 			GROUP_CACHE.put(turbo, RenderGroup.LAMP);
 			return RenderGroup.LAMP;
