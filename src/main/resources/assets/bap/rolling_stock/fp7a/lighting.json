@@ -21,5 +21,14 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:orange": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:purple": {}
   }
 }

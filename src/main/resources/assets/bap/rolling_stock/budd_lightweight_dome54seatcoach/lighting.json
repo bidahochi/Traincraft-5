@@ -3,8 +3,16 @@
   "stock": "bap:budd_lightweight_dome54seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:red": {}
   }
 }

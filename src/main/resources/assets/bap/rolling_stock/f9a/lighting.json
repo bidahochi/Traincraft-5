@@ -74,6 +74,15 @@
           }
         }
       }
-    }
+    },
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:black": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
   }
 }

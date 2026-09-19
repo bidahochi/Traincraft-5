@@ -3,8 +3,15 @@
   "stock": "bap:3gs21b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:blue": {}
   }
 }

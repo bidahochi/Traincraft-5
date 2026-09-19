@@ -3,8 +3,11 @@
   "stock": "bap:boothkelly_no2b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:orange": {}
   }
 }

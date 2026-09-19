@@ -3,8 +3,10 @@
   "stock": "bap:budd_lightweight_cbqdome50seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {}
   }
 }

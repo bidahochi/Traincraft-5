@@ -3,8 +3,14 @@
   "stock": "bap:25ton",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:orange": {},
+    "bap:green": {}
   }
 }

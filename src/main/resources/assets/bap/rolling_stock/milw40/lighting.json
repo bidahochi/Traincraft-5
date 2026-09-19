@@ -5,5 +5,15 @@
     "defaults": {
       "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:brown": {},
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:orange": {},
+    "bap:lime": {}
   }
 }

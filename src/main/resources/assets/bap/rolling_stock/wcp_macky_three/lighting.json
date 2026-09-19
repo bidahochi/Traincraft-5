@@ -3,8 +3,10 @@
   "stock": "bap:wcp_macky_three",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

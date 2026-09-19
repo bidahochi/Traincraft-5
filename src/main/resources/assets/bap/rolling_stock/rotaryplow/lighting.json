@@ -9,5 +9,9 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin16": {}
   }
 }

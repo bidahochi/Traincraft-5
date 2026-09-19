@@ -3,8 +3,15 @@
   "stock": "bap:mon_lightweightdeluxecoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {}
   }
 }

@@ -3,8 +3,19 @@
   "stock": "bap:ps_lightweight_lunchcounter_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:lightblue": {},
+    "bap:purple": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:white": {},
+    "bap:red": {}
   }
 }

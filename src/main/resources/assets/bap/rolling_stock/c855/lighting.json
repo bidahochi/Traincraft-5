@@ -12,5 +12,10 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:cyan": {},
+    "bap:skin16": {}
   }
 }

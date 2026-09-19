@@ -3,8 +3,14 @@
   "stock": "bap:ps_lightweight_30seatparlor",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:orange": {},
+    "bap:red": {}
   }
 }

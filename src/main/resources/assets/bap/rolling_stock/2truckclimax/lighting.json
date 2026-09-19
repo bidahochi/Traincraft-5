@@ -3,8 +3,10 @@
   "stock": "bap:2truckclimax",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

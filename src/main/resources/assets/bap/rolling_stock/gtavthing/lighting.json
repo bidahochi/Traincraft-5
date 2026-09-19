@@ -3,8 +3,10 @@
   "stock": "bap:gtavthing",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {}
   }
 }

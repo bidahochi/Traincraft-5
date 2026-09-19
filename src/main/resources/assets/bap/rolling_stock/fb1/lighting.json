@@ -3,8 +3,16 @@
   "stock": "bap:fb1",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:green": {},
+    "bap:magenta": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:lime": {},
+    "bap:white": {}
   }
 }

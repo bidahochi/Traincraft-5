@@ -3,8 +3,14 @@
   "stock": "bap:budd_crip_lightweight_52seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:blue": {},
+    "bap:white": {},
+    "bap:cyan": {}
   }
 }

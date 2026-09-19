@@ -3,8 +3,35 @@
   "stock": "bap:sw1",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:skin22": {},
+    "bap:lightblue": {},
+    "bap:skin16": {},
+    "bap:black": {},
+    "bap:skin17": {},
+    "bap:pink": {},
+    "bap:purple": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:lime": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:cyan": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:red": {},
+    "bap:magenta": {}
   }
 }

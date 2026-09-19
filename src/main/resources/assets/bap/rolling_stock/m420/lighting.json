@@ -12,5 +12,12 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:lime": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:purple": {}
   }
 }

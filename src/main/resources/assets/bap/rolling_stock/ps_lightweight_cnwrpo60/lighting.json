@@ -3,8 +3,19 @@
   "stock": "bap:ps_lightweight_cnwrpo60",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:magenta": {},
+    "bap:brown": {},
+    "bap:lime": {}
   }
 }

@@ -124,6 +124,17 @@
           }
         }
       }
-    }
+    },
+    "bap:purple": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:brown": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:lightgrey": {},
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:yellow": {}
   }
 }

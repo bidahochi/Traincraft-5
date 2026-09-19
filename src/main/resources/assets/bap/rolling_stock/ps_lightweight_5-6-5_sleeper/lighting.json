@@ -3,8 +3,17 @@
   "stock": "bap:ps_lightweight_5-6-5_sleeper",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:brown": {},
+    "bap:orange": {},
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:lightgrey": {}
   }
 }

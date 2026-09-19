@@ -3,8 +3,10 @@
   "stock": "bap:fred",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

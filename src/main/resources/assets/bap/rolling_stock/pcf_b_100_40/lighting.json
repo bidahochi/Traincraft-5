@@ -3,8 +3,16 @@
   "stock": "bap:pcf_b_100_40",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:grey": {},
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {}
   }
 }

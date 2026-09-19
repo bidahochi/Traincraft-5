@@ -3,8 +3,11 @@
   "stock": "bap:ob_lightweight_nhlounge5107",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:red": {}
   }
 }

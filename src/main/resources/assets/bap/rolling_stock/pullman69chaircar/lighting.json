@@ -3,8 +3,16 @@
   "stock": "bap:pullman69chaircar",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:red": {}
   }
 }

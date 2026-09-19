@@ -27,5 +27,24 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:skin25": {},
+    "bap:red": {},
+    "bap:skin24": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:green": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:lightblue": {},
+    "bap:skin23": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {}
   }
 }

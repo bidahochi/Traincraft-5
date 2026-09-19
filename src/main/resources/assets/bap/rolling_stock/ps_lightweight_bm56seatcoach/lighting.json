@@ -3,8 +3,24 @@
   "stock": "bap:ps_lightweight_bm56seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:magenta": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:purple": {},
+    "bap:white": {},
+    "bap:black": {}
   }
 }

@@ -3,8 +3,18 @@
   "stock": "bap:drgw_baggage_740_series",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:brown": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:lightgrey": {},
+    "bap:white": {}
   }
 }

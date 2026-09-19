@@ -3,8 +3,19 @@
   "stock": "tc:locoe10_db",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:grey": {},
+    "tc:brown": {},
+    "tc:green": {},
+    "tc:lightgrey": {},
+    "tc:lime": {},
+    "tc:pink": {},
+    "tc:purple": {},
+    "tc:cyan": {}
   }
 }

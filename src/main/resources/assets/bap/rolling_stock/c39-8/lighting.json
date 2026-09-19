@@ -33,5 +33,20 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:skin19": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:brown": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:skin20": {}
   }
 }

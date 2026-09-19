@@ -3,8 +3,13 @@
   "stock": "bap:ps_lightweight_ceirpo15_baggage_lc_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:red": {}
   }
 }

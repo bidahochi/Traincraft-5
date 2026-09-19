@@ -3,8 +3,18 @@
   "stock": "bap:dr441500bphase2",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:red": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:purple": {}
   }
 }

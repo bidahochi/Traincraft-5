@@ -3,8 +3,19 @@
   "stock": "bap:onion_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:red": {},
+    "bap:yellow": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:pink": {}
   }
 }

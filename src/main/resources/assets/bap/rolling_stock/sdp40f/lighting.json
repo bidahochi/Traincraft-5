@@ -3,8 +3,14 @@
   "stock": "bap:sdp40f",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:white": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:yellow": {}
   }
 }

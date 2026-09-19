@@ -3,8 +3,12 @@
   "stock": "bap:m420b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:lime": {},
+    "bap:pink": {},
+    "bap:cyan": {}
   }
 }

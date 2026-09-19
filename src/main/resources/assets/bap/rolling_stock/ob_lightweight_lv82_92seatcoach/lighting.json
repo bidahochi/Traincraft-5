@@ -3,8 +3,13 @@
   "stock": "bap:ob_lightweight_lv82_92seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:white": {},
+    "bap:pink": {}
   }
 }

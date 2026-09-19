@@ -3,8 +3,10 @@
   "stock": "bap:hhgregg",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

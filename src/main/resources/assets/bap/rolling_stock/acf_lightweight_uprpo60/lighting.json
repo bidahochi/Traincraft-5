@@ -3,8 +3,20 @@
   "stock": "bap:acf_lightweight_uprpo60",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:red": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:white": {}
   }
 }

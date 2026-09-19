@@ -3,8 +3,12 @@
   "stock": "tc:dd35a",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:black": {},
+    "tc:pink": {}
   }
 }

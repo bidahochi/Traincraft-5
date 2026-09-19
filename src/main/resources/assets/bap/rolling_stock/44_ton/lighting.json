@@ -3,8 +3,25 @@
   "stock": "bap:44_ton",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:pink": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:black": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:magenta": {},
+    "bap:purple": {},
+    "bap:skin19": {},
+    "bap:red": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:brown": {},
+    "bap:skin23": {}
   }
 }

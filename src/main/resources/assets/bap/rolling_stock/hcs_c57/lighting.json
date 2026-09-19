@@ -24,5 +24,20 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:cyan": {},
+    "bap:skin25": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin26": {},
+    "bap:skin27": {}
   }
 }

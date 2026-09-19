@@ -3,8 +3,15 @@
   "stock": "bap:ob_lightweight_24seatcoach_dinette",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:pink": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:blue": {}
   }
 }

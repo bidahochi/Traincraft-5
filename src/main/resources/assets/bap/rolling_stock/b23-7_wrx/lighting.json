@@ -3,8 +3,11 @@
   "stock": "bap:b23-7_wrx",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:skin16": {},
+    "bap:skin17": {}
   }
 }

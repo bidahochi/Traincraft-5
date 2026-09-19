@@ -3,8 +3,12 @@
   "stock": "bap:fol_m1b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:black": {}
   }
 }

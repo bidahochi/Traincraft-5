@@ -3,8 +3,14 @@
   "stock": "bap:dr441500bshark",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:grey": {}
   }
 }

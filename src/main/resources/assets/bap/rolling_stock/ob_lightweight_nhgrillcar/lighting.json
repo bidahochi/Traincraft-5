@@ -3,8 +3,12 @@
   "stock": "bap:ob_lightweight_nhgrillcar",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:lime": {}
   }
 }

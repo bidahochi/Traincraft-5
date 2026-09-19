@@ -9,5 +9,12 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:lime": {}
   }
 }

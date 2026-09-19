@@ -3,8 +3,11 @@
   "stock": "bap:budd_nyc_lightweight_52seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {}
   }
 }

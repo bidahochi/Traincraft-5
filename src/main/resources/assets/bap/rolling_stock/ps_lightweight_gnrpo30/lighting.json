@@ -3,8 +3,13 @@
   "stock": "bap:ps_lightweight_gnrpo30",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:lime": {}
   }
 }

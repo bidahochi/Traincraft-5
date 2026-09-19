@@ -3,8 +3,11 @@
   "stock": "tc:gs4_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:white": {}
   }
 }

@@ -3,8 +3,12 @@
   "stock": "bap:fbfdl",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:grey": {}
   }
 }

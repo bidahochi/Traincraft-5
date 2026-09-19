@@ -3,8 +3,13 @@
   "stock": "bap:ps_lightweight_bmcombine",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:magenta": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:blue": {}
   }
 }

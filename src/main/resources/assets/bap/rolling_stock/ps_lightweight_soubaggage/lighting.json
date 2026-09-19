@@ -3,8 +3,15 @@
   "stock": "bap:ps_lightweight_soubaggage",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:black": {},
+    "bap:brown": {},
+    "bap:magenta": {}
   }
 }

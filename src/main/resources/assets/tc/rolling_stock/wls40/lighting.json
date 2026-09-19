@@ -3,8 +3,10 @@
   "stock": "tc:wls40",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:black": {}
   }
 }

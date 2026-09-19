@@ -9,5 +9,11 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:black": {}
   }
 }

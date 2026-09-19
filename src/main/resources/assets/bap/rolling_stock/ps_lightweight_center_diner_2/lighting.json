@@ -3,8 +3,13 @@
   "stock": "bap:ps_lightweight_center_diner_2",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:cyan": {}
   }
 }

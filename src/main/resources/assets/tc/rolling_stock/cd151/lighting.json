@@ -3,8 +3,12 @@
   "stock": "tc:cd151",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:yellow": {},
+    "tc:red": {}
   }
 }

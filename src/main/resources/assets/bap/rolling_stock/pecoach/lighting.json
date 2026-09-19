@@ -3,8 +3,15 @@
   "stock": "bap:pecoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:skin16": {},
+    "bap:purple": {}
   }
 }

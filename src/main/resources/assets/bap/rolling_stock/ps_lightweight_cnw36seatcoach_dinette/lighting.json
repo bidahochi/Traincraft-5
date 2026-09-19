@@ -3,8 +3,11 @@
   "stock": "bap:ps_lightweight_cnw36seatcoach_dinette",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:green": {}
   }
 }

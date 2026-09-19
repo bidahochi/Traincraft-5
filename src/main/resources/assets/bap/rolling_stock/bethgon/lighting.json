@@ -9,5 +9,17 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:pink": {},
+    "bap:purple": {},
+    "bap:skin16": {},
+    "bap:skin17": {}
   }
 }

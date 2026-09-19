@@ -3,8 +3,22 @@
   "stock": "bap:alcos2",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
   }
 }

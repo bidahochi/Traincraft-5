@@ -3,8 +3,15 @@
   "stock": "bap:budd_lightweight_prewar_baggage",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:red": {},
+    "bap:yellow": {},
+    "bap:black": {}
   }
 }

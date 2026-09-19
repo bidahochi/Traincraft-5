@@ -3,8 +3,11 @@
   "stock": "bap:ps_lightweight_cnwrpo15",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:green": {}
   }
 }

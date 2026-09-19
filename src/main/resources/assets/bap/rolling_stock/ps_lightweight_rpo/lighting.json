@@ -3,8 +3,13 @@
   "stock": "bap:ps_lightweight_rpo",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:orange": {}
   }
 }

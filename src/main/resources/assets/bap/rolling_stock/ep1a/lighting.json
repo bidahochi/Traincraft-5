@@ -3,8 +3,11 @@
   "stock": "bap:ep1a",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {}
   }
 }

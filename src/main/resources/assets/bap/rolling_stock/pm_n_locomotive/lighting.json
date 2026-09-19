@@ -3,8 +3,14 @@
   "stock": "bap:pm_n_locomotive",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:white": {}
   }
 }

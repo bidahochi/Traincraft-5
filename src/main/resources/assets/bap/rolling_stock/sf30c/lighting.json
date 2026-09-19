@@ -3,8 +3,11 @@
   "stock": "bap:sf30c",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:red": {}
   }
 }

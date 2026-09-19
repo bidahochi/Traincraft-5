@@ -51,5 +51,16 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin34": {},
+    "bap:skin31": {},
+    "bap:blue": {},
+    "bap:skin38": {},
+    "bap:skin36": {},
+    "bap:skin35": {},
+    "bap:skin37": {},
+    "bap:skin42": {}
   }
 }

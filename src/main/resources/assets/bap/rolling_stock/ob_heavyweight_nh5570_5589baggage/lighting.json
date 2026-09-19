@@ -3,8 +3,16 @@
   "stock": "bap:ob_heavyweight_nh5570_5589baggage",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:red": {}
   }
 }

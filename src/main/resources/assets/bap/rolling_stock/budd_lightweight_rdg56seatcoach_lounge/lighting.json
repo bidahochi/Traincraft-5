@@ -3,8 +3,13 @@
   "stock": "bap:budd_lightweight_rdg56seatcoach_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
   }
 }

@@ -3,8 +3,17 @@
   "stock": "bap:fpb4",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:green": {},
+    "bap:red": {},
+    "bap:purple": {},
+    "bap:brown": {},
+    "bap:lime": {},
+    "bap:white": {},
+    "bap:yellow": {}
   }
 }

@@ -3,8 +3,11 @@
   "stock": "tc:e103",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:blue": {}
   }
 }

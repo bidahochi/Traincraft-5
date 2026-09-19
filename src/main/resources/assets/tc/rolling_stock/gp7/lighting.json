@@ -3,8 +3,31 @@
   "stock": "tc:gp7",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:blue": {},
+    "tc:black": {},
+    "tc:yellow": {},
+    "tc:magenta": {},
+    "tc:cyan": {},
+    "tc:pink": {},
+    "tc:lightgrey": {},
+    "tc:green": {},
+    "tc:white": {},
+    "tc:lightblue": {},
+    "tc:lime": {},
+    "tc:brown": {},
+    "tc:purple": {},
+    "tc:orange": {},
+    "tc:grey": {},
+    "tc:skin16": {},
+    "tc:skin17": {},
+    "tc:skin18": {},
+    "tc:skin19": {},
+    "tc:skin20": {},
+    "tc:skin21": {}
   }
 }

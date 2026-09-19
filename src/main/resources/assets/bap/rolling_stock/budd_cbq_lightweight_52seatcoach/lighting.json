@@ -3,8 +3,12 @@
   "stock": "bap:budd_cbq_lightweight_52seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:brown": {},
+    "bap:purple": {}
   }
 }

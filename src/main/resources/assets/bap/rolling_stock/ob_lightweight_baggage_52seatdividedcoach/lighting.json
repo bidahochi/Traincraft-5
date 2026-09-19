@@ -3,8 +3,14 @@
   "stock": "bap:ob_lightweight_baggage_52seatdividedcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:yellow": {}
   }
 }

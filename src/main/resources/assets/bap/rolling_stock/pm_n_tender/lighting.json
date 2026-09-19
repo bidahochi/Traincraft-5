@@ -3,8 +3,13 @@
   "stock": "bap:pm_n_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:white": {}
   }
 }

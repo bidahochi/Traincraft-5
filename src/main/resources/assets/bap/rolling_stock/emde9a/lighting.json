@@ -12,5 +12,10 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:skin16": {}
   }
 }

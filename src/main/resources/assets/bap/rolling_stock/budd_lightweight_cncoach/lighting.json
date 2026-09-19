@@ -3,8 +3,15 @@
   "stock": "bap:budd_lightweight_cncoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:white": {}
   }
 }

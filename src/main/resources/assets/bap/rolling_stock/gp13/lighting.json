@@ -3,8 +3,21 @@
   "stock": "bap:gp13",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:white": {},
+    "bap:yellow": {},
+    "bap:cyan": {}
   }
 }

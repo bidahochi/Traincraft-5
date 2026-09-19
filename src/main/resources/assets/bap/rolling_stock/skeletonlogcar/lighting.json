@@ -5,5 +5,10 @@
     "defaults": {
       "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
   }
 }

@@ -15,5 +15,36 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:skin17": {},
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:skin18": {},
+    "bap:skin16": {},
+    "bap:purple": {},
+    "bap:pink": {},
+    "bap:red": {},
+    "bap:skin19": {},
+    "bap:lightgrey": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:magenta": {},
+    "bap:lime": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {}
   }
 }

@@ -3,8 +3,10 @@
   "stock": "bap:w_a55_combine",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

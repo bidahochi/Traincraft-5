@@ -3,8 +3,11 @@
   "stock": "bap:budd_lightweight_rdgdiner_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {}
   }
 }

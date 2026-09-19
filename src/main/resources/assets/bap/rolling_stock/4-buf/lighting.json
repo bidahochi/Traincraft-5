@@ -3,8 +3,15 @@
   "stock": "bap:4-buf",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:purple": {},
+    "bap:lightgrey": {},
+    "bap:grey": {}
   }
 }

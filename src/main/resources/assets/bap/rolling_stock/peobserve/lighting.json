@@ -3,8 +3,11 @@
   "stock": "bap:peobserve",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {}
   }
 }

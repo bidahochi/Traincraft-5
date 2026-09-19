@@ -3,8 +3,14 @@
   "stock": "bap:emde8b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
   }
 }

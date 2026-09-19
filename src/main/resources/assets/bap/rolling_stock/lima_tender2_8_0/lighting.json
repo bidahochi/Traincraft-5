@@ -3,8 +3,13 @@
   "stock": "bap:lima_tender2_8_0",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:red": {}
   }
 }

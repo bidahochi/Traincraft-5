@@ -85,6 +85,37 @@
       "lighting": {
         "profile": "bap:b23-7/shared_1"
       }
-    }
+    },
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:skin17": {},
+    "bap:magenta": {},
+    "bap:purple": {},
+    "bap:skin20": {},
+    "bap:pink": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:skin18": {},
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:skin19": {},
+    "bap:skin21": {},
+    "bap:green": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin29": {},
+    "bap:orange": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin32": {},
+    "bap:skin33": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {}
   }
 }

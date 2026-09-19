@@ -3,8 +3,15 @@
   "stock": "bap:drgw_rpo_620_series",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:magenta": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:purple": {},
+    "bap:yellow": {}
   }
 }

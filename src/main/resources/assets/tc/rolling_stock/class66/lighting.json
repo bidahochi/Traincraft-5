@@ -5,5 +5,10 @@
     "defaults": {
       "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:pink": {},
+    "tc:green": {},
+    "tc:red": {}
   }
 }

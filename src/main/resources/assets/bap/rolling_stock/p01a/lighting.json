@@ -3,8 +3,12 @@
   "stock": "bap:p01a",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:green": {}
   }
 }

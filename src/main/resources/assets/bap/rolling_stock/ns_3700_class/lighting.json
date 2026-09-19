@@ -3,8 +3,10 @@
   "stock": "bap:ns_3700_class",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

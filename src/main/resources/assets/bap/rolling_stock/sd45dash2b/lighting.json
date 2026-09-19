@@ -3,8 +3,13 @@
   "stock": "bap:sd45dash2b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:red": {},
+    "bap:white": {}
   }
 }

@@ -3,8 +3,30 @@
   "stock": "bap:nsc_lightweight_cnbaggage",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:lime": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:purple": {},
+    "bap:magenta": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {}
   }
 }

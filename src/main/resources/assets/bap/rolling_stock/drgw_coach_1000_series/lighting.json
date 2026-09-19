@@ -3,8 +3,15 @@
   "stock": "bap:drgw_coach_1000_series",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:blue": {},
+    "bap:black": {},
+    "bap:yellow": {},
+    "bap:grey": {}
   }
 }

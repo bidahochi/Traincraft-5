@@ -3,8 +3,27 @@
   "stock": "bap:acf_lightweight_gn60seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:brown": {},
+    "bap:lightblue": {},
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:cyan": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {}
   }
 }

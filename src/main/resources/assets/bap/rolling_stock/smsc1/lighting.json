@@ -3,8 +3,10 @@
   "stock": "bap:smsc1",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:cyan": {}
   }
 }

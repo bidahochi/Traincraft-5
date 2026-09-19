@@ -3,8 +3,14 @@
   "stock": "bap:ps_lightweight_54seatcoach_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:lightgrey": {},
+    "bap:grey": {}
   }
 }

@@ -38,5 +38,11 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:blue": {}
   }
 }

@@ -3,8 +3,10 @@
   "stock": "bap:ns_3700_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {}
   }
 }

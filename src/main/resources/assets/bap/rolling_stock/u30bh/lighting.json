@@ -11,9 +11,9 @@
           "preset": "commander"
         },
         "front_gyralite": {
-            "color": "#FF2020",
-            "fixtureType": "headlight",
-            "preset": "gyralite"
+          "color": "#FF2020",
+          "fixtureType": "headlight",
+          "preset": "gyralite"
         },
         "front_headlight_lower_phase2": {
           "color": "#FFF4B4",
@@ -62,14 +62,14 @@
           "preset": "prime_4"
         },
         "rear_gyralite_left": {
-            "color": "#FF2020",
-            "fixtureType": "headlight",
-            "preset": "gyralite"
+          "color": "#FF2020",
+          "fixtureType": "headlight",
+          "preset": "gyralite"
         },
         "rear_gyralite_right": {
-            "color": "#FF2020",
-            "fixtureType": "headlight",
-            "preset": "gyralite"
+          "color": "#FF2020",
+          "fixtureType": "headlight",
+          "preset": "gyralite"
         },
         "rear_headlight_lower": {
           "color": "#FFF4B4",
@@ -118,32 +118,40 @@
       "bap:u30bh/alternating_ditch": {
         "fixtures": {
           "front_left_lower": {
-              "preset": "alternating_ditch"
+            "preset": "alternating_ditch"
           },
           "front_left_upper": {
-              "preset": "alternating_ditch"
+            "preset": "alternating_ditch"
           },
           "front_right_lower": {
-              "preset": "alternating_ditch",
-              "function": { "phaseIndex": 1 }
+            "preset": "alternating_ditch",
+            "function": {
+              "phaseIndex": 1
+            }
           },
           "front_right_upper": {
-              "preset": "alternating_ditch",
-              "function": { "phaseIndex": 1 }
+            "preset": "alternating_ditch",
+            "function": {
+              "phaseIndex": 1
+            }
           },
           "rear_left_lower": {
-              "preset": "alternating_ditch"
+            "preset": "alternating_ditch"
           },
           "rear_left_upper": {
-              "preset": "alternating_ditch"
+            "preset": "alternating_ditch"
           },
           "rear_right_lower": {
-              "preset": "alternating_ditch",
-              "function": { "phaseIndex": 1 }
+            "preset": "alternating_ditch",
+            "function": {
+              "phaseIndex": 1
+            }
           },
           "rear_right_upper": {
-              "preset": "alternating_ditch",
-              "function": { "phaseIndex": 1 }
+            "preset": "alternating_ditch",
+            "function": {
+              "phaseIndex": 1
+            }
           }
         }
       }
@@ -154,6 +162,11 @@
       "lighting": {
         "profile": "bap:u30bh/alternating_ditch"
       }
-    }
+    },
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
   }
 }

@@ -3,8 +3,11 @@
   "stock": "bap:np_11c_n_12c_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:black": {}
   }
 }

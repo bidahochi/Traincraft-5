@@ -3,8 +3,12 @@
   "stock": "bap:3truckshay_tender",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:white": {}
   }
 }

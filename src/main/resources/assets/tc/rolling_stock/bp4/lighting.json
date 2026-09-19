@@ -21,5 +21,12 @@
         }
       }
     }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:purple": {},
+    "tc:cyan": {},
+    "tc:grey": {},
+    "tc:blue": {}
   }
 }

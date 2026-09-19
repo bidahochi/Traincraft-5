@@ -3,8 +3,13 @@
   "stock": "bap:mon_lightweight_rpo30",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {}
   }
 }

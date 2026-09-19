@@ -3,8 +3,11 @@
   "stock": "bap:ps_drgw_lightweight_5-6-5_sleeper",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:orange": {}
   }
 }

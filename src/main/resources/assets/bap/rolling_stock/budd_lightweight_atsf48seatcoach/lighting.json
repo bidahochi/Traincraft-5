@@ -3,8 +3,10 @@
   "stock": "bap:budd_lightweight_atsf48seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:cyan": {}
   }
 }

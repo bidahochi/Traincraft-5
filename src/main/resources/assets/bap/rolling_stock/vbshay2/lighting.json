@@ -3,8 +3,11 @@
   "stock": "bap:vbshay2",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {}
   }
 }

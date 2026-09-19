@@ -3,7 +3,8 @@
   "stock": "bap:4ed-172t",
   "lighting": {
     "defaults": {
-      "fixtures": {        "marker_body_208": {
+      "fixtures": {
+        "marker_body_208": {
           "enabled": false
         },
         "marker_body_209": {
@@ -23,5 +24,19 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:orange": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {}
   }
 }

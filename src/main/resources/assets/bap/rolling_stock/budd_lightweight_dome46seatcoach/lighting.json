@@ -3,8 +3,31 @@
   "stock": "bap:budd_lightweight_dome46seatcoach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:black": {},
+    "bap:magenta": {},
+    "bap:yellow": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:purple": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {}
   }
 }

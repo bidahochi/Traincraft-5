@@ -3,8 +3,12 @@
   "stock": "bap:c855b",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:cyan": {},
+    "bap:skin16": {}
   }
 }

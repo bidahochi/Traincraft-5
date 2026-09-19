@@ -3,8 +3,12 @@
   "stock": "bap:alco0_6_0t",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:purple": {}
   }
 }

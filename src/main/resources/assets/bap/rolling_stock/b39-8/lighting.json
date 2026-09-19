@@ -3,7 +3,8 @@
   "stock": "bap:b39-8",
   "lighting": {
     "defaults": {
-      "fixtures": {        "cab_speedometer_body_215": {
+      "fixtures": {
+        "cab_speedometer_body_215": {
           "preset": "instrument"
         },
         "cab_speedometer_body_216": {
@@ -32,5 +33,17 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:skin18": {},
+    "bap:brown": {},
+    "bap:skin19": {}
   }
 }

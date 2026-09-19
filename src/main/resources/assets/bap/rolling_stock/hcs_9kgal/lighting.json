@@ -9,5 +9,13 @@
         }
       }
     }
+  },
+  "skins": {
+    "bap:skin19": {},
+    "bap:skin21": {},
+    "bap:skin20": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
   }
 }

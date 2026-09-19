@@ -3,8 +3,12 @@
   "stock": "bap:budd_lightweight_cndiner_lounge",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
   }
 }

@@ -5,5 +5,31 @@
     "defaults": {
       "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:pink": {},
+    "bap:lime": {},
+    "bap:yellow": {},
+    "bap:lightblue": {},
+    "bap:magenta": {},
+    "bap:orange": {},
+    "bap:white": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {}
   }
 }

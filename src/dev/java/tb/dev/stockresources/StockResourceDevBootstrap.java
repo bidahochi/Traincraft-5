@@ -118,6 +118,10 @@ public final class StockResourceDevBootstrap
                 }
                 if (StockResourceGenerator.hasDocument(assets, stock, "lighting.json"))
                 {
+                    if (StockResourceGenerator.populateSkins(assets, stock, record.getColors()))
+                    {
+                        skinLists++;
+                    }
                     continue;
                 }
                 ModelBase model = model(record, world);
@@ -131,6 +135,10 @@ public final class StockResourceDevBootstrap
                 {
                     lighting++;
                 }
+                if (StockResourceGenerator.populateSkins(assets, stock, record.getColors()))
+                {
+                    skinLists++;
+                }
             }
             catch (IOException | IllegalAccessException | RuntimeException exception)
             {
@@ -142,7 +150,7 @@ public final class StockResourceDevBootstrap
         LogManager.getLogger("Traincraft").info(
                 "Development stock scaffolds: {} legacy mappings and {} lighting documents created under {}. "
                     + "Existing files unchanged; use /reloadstocklighting <stock> to preview source JSON",
-                mappings, lighting, assets);
+                mappings, lighting, skinLists, assets);
     }
 
     /** Reuses RenderEnum models directly; other render-record lookups first construct an unspawned stock. */

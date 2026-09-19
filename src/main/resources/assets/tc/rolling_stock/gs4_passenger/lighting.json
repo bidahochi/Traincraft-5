@@ -5,5 +5,28 @@
     "defaults": {
       "fixtures": {}
     }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:white": {},
+    "tc:yellow": {},
+    "tc:brown": {},
+    "tc:green": {},
+    "tc:lime": {},
+    "tc:red": {},
+    "tc:grey": {},
+    "tc:lightgrey": {},
+    "tc:blue": {},
+    "tc:black": {},
+    "tc:lightblue": {},
+    "tc:skin17": {},
+    "tc:skin18": {},
+    "tc:skin19": {},
+    "tc:skin20": {},
+    "tc:skin21": {},
+    "tc:skin22": {},
+    "tc:skin23": {},
+    "tc:skin24": {},
+    "tc:skin25": {}
   }
 }

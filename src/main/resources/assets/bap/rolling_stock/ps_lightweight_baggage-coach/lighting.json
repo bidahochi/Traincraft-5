@@ -3,8 +3,16 @@
   "stock": "bap:ps_lightweight_baggage-coach",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:white": {},
+    "bap:red": {}
   }
 }

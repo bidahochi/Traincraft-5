@@ -3,8 +3,15 @@
   "stock": "bap:highrailvan",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:red": {}
   }
 }

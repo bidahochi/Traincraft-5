@@ -3,8 +3,11 @@
   "stock": "bap:ps_lightweight_cnw48seatcoachdiner",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:green": {}
   }
 }

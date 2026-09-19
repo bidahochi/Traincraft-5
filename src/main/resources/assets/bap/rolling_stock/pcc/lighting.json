@@ -3,8 +3,11 @@
   "stock": "bap:pcc",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:white": {}
   }
 }

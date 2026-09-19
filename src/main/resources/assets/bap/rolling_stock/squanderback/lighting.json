@@ -3,8 +3,12 @@
   "stock": "bap:squanderback",
   "lighting": {
     "defaults": {
-      "fixtures": {
-      }
+      "fixtures": {}
     }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:green": {}
   }
 }

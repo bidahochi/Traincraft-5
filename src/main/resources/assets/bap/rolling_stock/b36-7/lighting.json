@@ -80,6 +80,14 @@
       "lighting": {
         "profile": "bap:b36-7/shared_1"
       }
-    }
+    },
+    "bap:black": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin40": {},
+    "bap:skin38": {},
+    "bap:skin41": {},
+    "bap:skin36": {},
+    "bap:skin39": {}
   }
 }
