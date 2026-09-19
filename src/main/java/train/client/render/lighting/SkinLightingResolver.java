@@ -3,6 +3,7 @@ package train.client.render.lighting;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import train.common.api.ResolvedSkinLighting;
@@ -26,9 +27,9 @@ final class SkinLightingResolver
         RollingStockLightOverride member = overrides.get(fixtureId);
         if (member != null && member.group() != null)
         {
-            return member.group().isEmpty() ? null : member.group();
+            return member.group().isEmpty() ? null : member.group().toLowerCase(Locale.ROOT);
         }
-        return legacyGroup;
+        return legacyGroup == null ? null : legacyGroup.toLowerCase(Locale.ROOT);
     }
 
     /**

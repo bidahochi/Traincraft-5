@@ -80,7 +80,7 @@ public class ModelRendererTurbo
     private String partIdentifier;
 
     /**
-     * Sets the box name before model/render caches are built. Names matching [a-z][a-z0-9_]*
+     * Sets the box name before model/render caches are built. Names matching [A-Za-z][A-Za-z0-9_]*
      * become plain model-local identifiers unless they are built-in preset tags.
      * Plain identifiers carry no lighting role; built-in tags select lighting presets.
      * Stock-specific lighting behavior belongs in JSON. Explicit legacy fixture setters
@@ -89,7 +89,7 @@ public class ModelRendererTurbo
     public ModelRendererTurbo setPartName(String name)
     {
         partIdentifier = null;
-        if (name != null && name.matches("[a-z][a-z0-9_]*") && isLegacyLightPreset(name) == false)
+        if (name != null && name.matches("[A-Za-z][A-Za-z0-9_]*") && isLegacyLightPreset(name.toLowerCase(Locale.ROOT)) == false)
         {
             partIdentifier = name;
         }

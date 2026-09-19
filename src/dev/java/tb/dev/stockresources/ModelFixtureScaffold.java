@@ -30,7 +30,7 @@ public final class ModelFixtureScaffold
     /**
      * Collects explicit fixture IDs, recognized plain identifiers and built-in preset tags from
      * supported model containers and child parts without changing shared models. Plain identifiers
-     * must match [a-z][a-z0-9_]*; arbitrary box names are not included.
+     * must match [A-Za-z][A-Za-z0-9_]*; arbitrary box names are not included.
      * Repeated IDs share one entry. Conflicting defaults abort generation instead of picking
      * an arbitrary part. Plain identifiers have no lighting role and start disabled.
      */

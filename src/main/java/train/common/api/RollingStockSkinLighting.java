@@ -1,7 +1,8 @@
 package train.common.api;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
+import java.util.TreeMap;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -15,8 +16,9 @@ public final class RollingStockSkinLighting
 {
     public static final RollingStockSkinLighting EMPTY = new RollingStockSkinLighting(true);
 
+    // Preserve authored spelling without allocating lowercase strings during fixture lookups.
     private final Map<String, RollingStockLightOverride> lightOverrides =
-        new LinkedHashMap<String, RollingStockLightOverride>();
+        new TreeMap<String, RollingStockLightOverride>(Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
     private final Map<String, RollingStockLightOverride> lightOverridesView =
         Collections.unmodifiableMap(lightOverrides);
     private int lightingRevision;

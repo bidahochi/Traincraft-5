@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.TreeSet;
+import java.util.Comparator;
 import train.common.api.RollingStockSkinLighting;
 
 /**
@@ -55,7 +56,8 @@ public final class RollingStockAppearanceLighting
             }
         }
         skinsByAlias = Collections.unmodifiableMap(aliases);
-        Set<String> declared = new LinkedHashSet<String>(this.defaults.lightOverrides().keySet());
+        Set<String> declared = new TreeSet<String>(Comparator.nullsFirst(String.CASE_INSENSITIVE_ORDER));
+        declared.addAll(this.defaults.lightOverrides().keySet());
         for (RollingStockSkinLighting profile : this.profiles.values())
         {
             declared.addAll(profile.lightOverrides().keySet());

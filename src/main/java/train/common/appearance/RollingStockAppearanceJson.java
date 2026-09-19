@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 import train.common.api.LightFixtureType;
 import train.common.api.LightFunctionOverride;
@@ -105,9 +107,26 @@ public final class RollingStockAppearanceJson
     /** Recursively overlays explicitly present source properties onto a target object. */
     public static void mergeObject(JsonObject target, JsonObject source)
     {
+        mergeObject(target, source, false);
+    }
+
+    /** Fixture names alone compare without case; resource IDs and other schema keys remain exact. */
+    private static void mergeObject(JsonObject target, JsonObject source, boolean fixtureNames)
+    {
         for (Entry<String, JsonElement> entry : source.entrySet())
         {
             String key = entry.getKey();
+            if (fixtureNames)
+            {
+                for (Entry<String, JsonElement> existing : target.entrySet())
+                {
+                    if (existing.getKey().equalsIgnoreCase(key))
+                    {
+                        key = existing.getKey();
+                        break;
+                    }
+                }
+            }
             JsonElement sourceValue = entry.getValue();
             JsonElement targetValue = target.get(key);
             if (sourceValue != null
@@ -115,7 +134,7 @@ public final class RollingStockAppearanceJson
                     && targetValue != null
                     && targetValue.isJsonObject())
             {
-                mergeObject(targetValue.getAsJsonObject(), sourceValue.getAsJsonObject());
+                mergeObject(targetValue.getAsJsonObject(), sourceValue.getAsJsonObject(), "fixtures".equals(key));
             }
             else
             {
@@ -283,9 +302,14 @@ public final class RollingStockAppearanceJson
             return RollingStockSkinLighting.EMPTY;
         }
         RollingStockSkinLighting lighting = new RollingStockSkinLighting();
+        Set<String> fixtureNames = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
         for (Entry<String, JsonElement> entry : fixturesObject.entrySet())
         {
             String fixtureId = entry.getKey();
+            if (fixtureNames.add(fixtureId) == false)
+            {
+                throw new IllegalArgumentException(path + " contains case-insensitive duplicate fixture '" + fixtureId + "'");
+            }
             if (FIXTURE_ID.matcher(fixtureId).matches() == false || "cull".equalsIgnoreCase(fixtureId))
             {
                 throw new IllegalArgumentException(
@@ -315,11 +339,11 @@ public final class RollingStockAppearanceJson
                     throw new IllegalArgumentException(path + "." + fixtureId + ".group must be a string or null");
                 }
                 group = fixture.get("group").getAsString();
-                if (group.isEmpty() == false && group.matches("[a-z0-9_:.\\-/]+") == false)
+                if (group.isEmpty() == false && group.matches("[A-Za-z0-9_:.\\-/]+") == false)
                 {
                     throw new IllegalArgumentException(path + "." + fixtureId + ".group is invalid");
                 }
-                if (group.equals(fixtureId) || "cull".equals(group))
+                if (group.equalsIgnoreCase(fixtureId) || "cull".equalsIgnoreCase(group))
                 {
                     throw new IllegalArgumentException(path + "." + fixtureId
                         + ".group cannot reference itself or the reserved cull name");

@@ -30,27 +30,39 @@
         },
         "FrontDitchLow1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "FrontDitchLow2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "RearDitchLow1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "RearDitchLow2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "FrontDitch1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "FrontDitch2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "front_marker_bugeye_body_345": {
           "preset": "marker_light"
@@ -66,30 +78,42 @@
         },
         "RearDitch1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "RearDitch2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "cab_speedometer_body_383": {
           "preset": "instrument"
         },
         "FrontDitchHigh1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "FrontDitchHigh2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "RearDitchHigh1": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "RearDitchHigh2": {
           "preset": "ditch_light",
-          "hornResponse": { "scope": "none" }
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "lamp_nose_high_a": {
           "preset": "headlight"
@@ -101,6 +125,12 @@
           "preset": "headlight"
         },
         "lamp_nose_low_b": {
+          "preset": "headlight"
+        },
+        "cab_headlight_upper": {
+          "preset": "headlight"
+        },
+        "cab_headlight_lower": {
           "preset": "headlight"
         }
       }
@@ -195,6 +225,13 @@
           "frontHighbeamE": {
             "preset": "gyralite",
             "color": "#FFFFFF"
+          },
+          "cab_headlight_upper": {
+            "preset": "gyralite"
+          },
+          "cab_headlight_lower": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
           }
         }
       }
@@ -246,18 +283,26 @@
                 "cycleTicks": 20
               }
             }
-          }
+          },
+          "cab_headlight_upper": {},
+          "cab_headlight_lower": {}
         }
       }
     },
     "bap:purple": {
-      "lighting": { "profile": "bap:sd50/horn_alternating" }
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
     },
     "bap:pink": {
-      "lighting": { "profile": "bap:sd50/horn_alternating" }
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
     },
     "bap:blue": {
-      "lighting": { "profile": "bap:sd50/horn_alternating" }
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
     },
     "bap:lightblue": {},
     "bap:brown": {},
@@ -298,7 +343,9 @@
           },
           "lamp_nose_high_a": {
             "color": "#FFF4B4"
-          }
+          },
+          "cab_headlight_lower": {},
+          "cab_headlight_upper": {}
         }
       }
     },

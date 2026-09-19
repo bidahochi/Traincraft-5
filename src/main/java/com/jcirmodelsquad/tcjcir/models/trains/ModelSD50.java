@@ -176,8 +176,8 @@ public class ModelSD50 extends ModelConverter //Same as Filename
 		bodyModel[129] = new ModelRendererTurbo(this, 104, 12, textureX, textureY); // Box 221
 		bodyModel[130] = new ModelRendererTurbo(this, 119, 6, textureX, textureY); // Box 220
 		bodyModel[131] = new ModelRendererTurbo(this, 34, 23, textureX, textureY); // Box 219
-		bodyModel[132] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp"); // Box 187 headlight front cab
-		bodyModel[133] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp"); // Box 186 headlight front cab
+		bodyModel[132] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "cab_headlight_lower"); // Box 187 headlight front cab
+		bodyModel[133] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "cab_headlight_upper"); // Box 186 headlight front cab
 		bodyModel[134] = new ModelRendererTurbo(this, 62, 44, textureX, textureY); // Box 44
 		bodyModel[135] = new ModelRendererTurbo(this, 82, 49, textureX, textureY); // Box 43
 		bodyModel[136] = new ModelRendererTurbo(this, 78, 47, textureX, textureY); // Box 48
