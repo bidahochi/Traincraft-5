@@ -3,7 +3,18 @@
   "stock": "bap:rs1",
   "lighting": {
     "defaults": {
-      "fixtures": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra_fmsr": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
       }
     }
   }

@@ -3,7 +3,7 @@
 // This file is for Flan's Flying Mod Version 4.0.x+
 
 // Model: RS1
-// Model Creator: 
+// Model Creator:
 // Created on: 29.04.2020 - 23:08:36
 // Last changed on: 29.04.2020 - 23:08:36
 
@@ -420,11 +420,11 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[374] = new ModelRendererTurbo(this, 192, 19, textureX, textureY, "cull"); // Box 418 cull platform atsf
 		bodyModel[375] = new ModelRendererTurbo(this, 199, 17, textureX, textureY); // Box 308
 		bodyModel[376] = new ModelRendererTurbo(this, 197, 9, textureX, textureY); // Box 185
-		bodyModel[377] = new ModelRendererTurbo(this, 199, 4, textureX, textureY, "lamp"); // Box 247  fncc gyra front
-		bodyModel[378] = new ModelRendererTurbo(this, 199, 4, textureX, textureY, "lamp"); // Box 248 fncc gyra front
+		bodyModel[377] = new ModelRendererTurbo(this, 199, 4, textureX, textureY, "gyra_fmsr"); // Box 247  fncc gyra front
+		bodyModel[378] = new ModelRendererTurbo(this, 199, 4, textureX, textureY, "gyra_fmsr"); // Box 248 fncc gyra front
 		bodyModel[379] = new ModelRendererTurbo(this, 208, 9, textureX, textureY); // Box 185
-		bodyModel[380] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "lamp"); // Box 247  fncc gyra rear
-		bodyModel[381] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "lamp"); // Box 248 fncc gyra rear
+		bodyModel[380] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "gyra_fmsr"); // Box 247  fncc gyra rear
+		bodyModel[381] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "gyra_fmsr"); // Box 248 fncc gyra rear
 		bodyModel[382] = new ModelRendererTurbo(this, 168, 48, textureX, textureY, "lamp"); // Box 401 tidewater cab gyra
 		bodyModel[383] = new ModelRendererTurbo(this, 167, 53, textureX, textureY); // Box 400 tidewater cab grya box
 		bodyModel[384] = new ModelRendererTurbo(this, 167, 58, textureX, textureY, "cull"); // Box 438 tidewader cab gyra CULL
