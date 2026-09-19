@@ -126,8 +126,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[80] = new ModelRendererTurbo(this, 199, 44, textureX, textureY); // NP Bell 1
 		bodyModel[81] = new ModelRendererTurbo(this, 204, 40, textureX, textureY, "cull"); // NP Bell frame cull
 		bodyModel[82] = new ModelRendererTurbo(this, 205, 47, textureX, textureY); // NP Bell 1
-		bodyModel[83] = new ModelRendererTurbo(this, 413, 17, textureX, textureY, "lamp"); // Box 149 glow
-		bodyModel[84] = new ModelRendererTurbo(this, 403, 17, textureX, textureY, "lamp"); // Box 150 glow
+		bodyModel[83] = new ModelRendererTurbo(this, 413, 17, textureX, textureY, "numberboard"); // Box 149 glow
+		bodyModel[84] = new ModelRendererTurbo(this, 403, 17, textureX, textureY, "numberboard"); // Box 150 glow
 		bodyModel[85] = new ModelRendererTurbo(this, 85, 88, textureX, textureY); // Box 67
 		bodyModel[86] = new ModelRendererTurbo(this, 102, 84, textureX, textureY); // Box 70
 		bodyModel[87] = new ModelRendererTurbo(this, 156, 53, textureX, textureY, BoxName.ditch); // Long hood Ditchlight r
@@ -213,8 +213,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[167] = new ModelRendererTurbo(this, 26, 25, textureX, textureY); // Box 57
 		bodyModel[168] = new ModelRendererTurbo(this, 27, 32, textureX, textureY); // Box 58
 		bodyModel[169] = new ModelRendererTurbo(this, 28, 39, textureX, textureY); // Box 59
-		bodyModel[170] = new ModelRendererTurbo(this, 71, 52, textureX, textureY, "lamp"); // Box 149 glow
-		bodyModel[171] = new ModelRendererTurbo(this, 71, 52, textureX, textureY, "lamp"); // Box 150 glow
+		bodyModel[170] = new ModelRendererTurbo(this, 71, 52, textureX, textureY, "numberboard"); // Box 149 glow
+		bodyModel[171] = new ModelRendererTurbo(this, 71, 52, textureX, textureY, "numberboard"); // Box 150 glow
 		bodyModel[172] = new ModelRendererTurbo(this, 329, 128, textureX, textureY); // Box 31
 		bodyModel[173] = new ModelRendererTurbo(this, 341, 142, textureX, textureY); // Box 31
 		bodyModel[174] = new ModelRendererTurbo(this, 360, 136, textureX, textureY); // Box 31
@@ -241,8 +241,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[195] = new ModelRendererTurbo(this, 434, 37, textureX, textureY, ""); // long hood lamp socket
 		bodyModel[196] = new ModelRendererTurbo(this, 444, 55, textureX, textureY, "lamp"); // long hood left lamp
 		bodyModel[197] = new ModelRendererTurbo(this, 444, 55, textureX, textureY, "lamp"); // long hood right lamp
-		bodyModel[198] = new ModelRendererTurbo(this, 442, 44, textureX, textureY, "lamp"); // long hood top lamp
-		bodyModel[199] = new ModelRendererTurbo(this, 442, 49, textureX, textureY, "lamp"); // long hood bottom lamp
+		bodyModel[198] = new ModelRendererTurbo(this, 442, 44, textureX, textureY, "lamp_lh_top"); // long hood top lamp
+		bodyModel[199] = new ModelRendererTurbo(this, 442, 49, textureX, textureY, "lamp_lh_bottom"); // long hood bottom lamp
 		bodyModel[200] = new ModelRendererTurbo(this, 59, 48, textureX, textureY); // Box 78 lamp socket
 		bodyModel[201] = new ModelRendererTurbo(this, 61, 58, textureX, textureY); // Box 78 lamp socket
 		bodyModel[202] = new ModelRendererTurbo(this, 433, 53, textureX, textureY); // Box 78 lamp socket
@@ -270,8 +270,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[224] = new ModelRendererTurbo(this, 148, 60, textureX, textureY); // Box 2
 		bodyModel[225] = new ModelRendererTurbo(this, 149, 65, textureX, textureY); // Box 2
 		bodyModel[226] = new ModelRendererTurbo(this, 148, 60, textureX, textureY); // Box 2
-		bodyModel[227] = new ModelRendererTurbo(this, 158, 62, textureX, textureY, "lamp"); // Markelight glow
-		bodyModel[228] = new ModelRendererTurbo(this, 158, 65, textureX, textureY, "lamp"); // Markelight glow
+		bodyModel[227] = new ModelRendererTurbo(this, 158, 62, textureX, textureY, "markerlight"); // Markelight glow
+		bodyModel[228] = new ModelRendererTurbo(this, 158, 65, textureX, textureY, "markerlight"); // Markelight glow
 		bodyModel[229] = new ModelRendererTurbo(this, 149, 65, textureX, textureY); // Box 2
 		bodyModel[230] = new ModelRendererTurbo(this, 253, 138, textureX, textureY); // Box 23
 		bodyModel[231] = new ModelRendererTurbo(this, 261, 46, textureX, textureY); // Box 99
@@ -332,8 +332,8 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[286] = new ModelRendererTurbo(this, 311, 126, textureX, textureY); // Box 92
 		bodyModel[287] = new ModelRendererTurbo(this, 311, 126, textureX, textureY); // Box 92
 		bodyModel[288] = new ModelRendererTurbo(this, 235, 5, textureX, textureY); // Box 221
-		bodyModel[289] = new ModelRendererTurbo(this, 158, 62, textureX, textureY, "lamp"); // Markelight glow
-		bodyModel[290] = new ModelRendererTurbo(this, 158, 65, textureX, textureY, "lamp"); // Markelight glow
+		bodyModel[289] = new ModelRendererTurbo(this, 158, 62, textureX, textureY, "markerlight"); // Markelight glow
+		bodyModel[290] = new ModelRendererTurbo(this, 158, 65, textureX, textureY, "markerlight"); // Markelight glow
 		bodyModel[291] = new ModelRendererTurbo(this, 29, 10, textureX, textureY); // Box 57
 		bodyModel[292] = new ModelRendererTurbo(this, 30, 4, textureX, textureY); // Box 58
 		bodyModel[293] = new ModelRendererTurbo(this, 89, 15, textureX, textureY); // Box 64
@@ -425,7 +425,7 @@ public class ModelRS1 extends ModelConverter //Same as Filename
 		bodyModel[379] = new ModelRendererTurbo(this, 208, 9, textureX, textureY); // Box 185
 		bodyModel[380] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "gyra_fmsr"); // Box 247  fncc gyra rear
 		bodyModel[381] = new ModelRendererTurbo(this, 210, 4, textureX, textureY, "gyra_fmsr"); // Box 248 fncc gyra rear
-		bodyModel[382] = new ModelRendererTurbo(this, 168, 48, textureX, textureY, "lamp"); // Box 401 tidewater cab gyra
+		bodyModel[382] = new ModelRendererTurbo(this, 168, 48, textureX, textureY, "gyra_tidewater"); // Box 401 tidewater cab gyra
 		bodyModel[383] = new ModelRendererTurbo(this, 167, 53, textureX, textureY); // Box 400 tidewater cab grya box
 		bodyModel[384] = new ModelRendererTurbo(this, 167, 58, textureX, textureY, "cull"); // Box 438 tidewader cab gyra CULL
 

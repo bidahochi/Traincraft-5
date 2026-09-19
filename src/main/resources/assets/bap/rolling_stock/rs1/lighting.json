@@ -3,7 +3,20 @@
   "stock": "bap:rs1",
   "lighting": {
     "defaults": {
-      "fixtures": {}
+      "fixtures": {
+        "gyra_tidewater": {
+          "preset": "headlight"
+        },
+        "lamp_lh_bottom": {
+          "preset": "headlight"
+        },
+        "lamp_lh_top": {
+          "preset": "headlight"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        }
+      }
     }
   },
   "skins": {
@@ -17,14 +30,62 @@
         }
       }
     },
-    "bap:orange": {},
-    "bap:blue": {},
-    "bap:green": {},
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "lamp_lh_bottom": {
+            "preset": "gyralite",
+            "color": "#FF2020"
+          },
+          "lamp_lh_top": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "lamp_lh_bottom": {
+            "preset": "gyralite",
+            "color": "#FF2020"
+          },
+          "lamp_lh_top": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:green": {
+      "lighting": {
+        "fixtures": {
+          "gyra_tidewater": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:skin17": {},
     "bap:skin18": {},
     "bap:lightblue": {},
-    "bap:purple": {},
+    "bap:purple": {
+      "lighting": {
+        "fixtures": {
+          "lamp_lh_bottom": {
+            "preset": "gyralite",
+            "color": "#FF2020"
+          },
+          "lamp_lh_top": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
     "bap:white": {}
   }
