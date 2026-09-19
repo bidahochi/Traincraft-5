@@ -106,6 +106,7 @@ public final class StockResourceDevBootstrap
         ModelFixtureScaffold discovery = new ModelFixtureScaffold();
         int mappings = 0;
         int lighting = 0;
+        int skinLists = 0;
         for (Map.Entry<String, ITrainRecord> entry : stocks.entrySet())
         {
             String stock = entry.getKey();
