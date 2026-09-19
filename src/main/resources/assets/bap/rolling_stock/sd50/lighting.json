@@ -29,22 +29,28 @@
           "preset": "headlight"
         },
         "FrontDitchLow1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "FrontDitchLow2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "RearDitchLow1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "RearDitchLow2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "FrontDitch1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "FrontDitch2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "front_marker_bugeye_body_345": {
           "preset": "marker_light"
@@ -59,25 +65,121 @@
           "preset": "marker_light"
         },
         "RearDitch1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "RearDitch2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "cab_speedometer_body_383": {
           "preset": "instrument"
         },
         "FrontDitchHigh1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "FrontDitchHigh2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "RearDitchHigh1": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
         },
         "RearDitchHigh2": {
-          "preset": "ditch_light"
+          "preset": "ditch_light",
+          "hornResponse": { "scope": "none" }
+        },
+        "lamp_nose_high_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_high_b": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_b": {
+          "preset": "headlight"
+        }
+      }
+    },
+    "profiles": {
+      "bap:sd50/horn_alternating": {
+        "fixtures": {
+          "FrontDitchLow1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "FrontDitchLow2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "RearDitchLow1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitchLow2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitch1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitch2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitch1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitch2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "FrontDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "RearDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          }
         }
       }
     }
@@ -87,51 +189,119 @@
       "lighting": {
         "fixtures": {
           "frontHighbeamF": {
-            "preset": "gyralite"
+            "preset": "gyralite",
+            "color": "#FFFFFF"
           },
           "frontHighbeamE": {
-            "preset": "gyralite"
+            "preset": "gyralite",
+            "color": "#FFFFFF"
           }
         }
       }
     },
     "bap:skin16": {
       "lighting": {
+        "profile": "bap:sd50/horn_alternating",
         "fixtures": {
           "frontHighbeamF": {
-            "preset": "gyralite"
+            "preset": "gyralite",
+            "color": "#FFFFFF"
           },
           "frontHighbeamE": {
-            "preset": "gyralite"
+            "preset": "gyralite",
+            "color": "#FFFFFF"
           },
           "FrontDitchHigh1": {
-            "preset": "alternating_ditch"
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
           },
           "RearDitchHigh1": {
-            "preset": "alternating_ditch"
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
           },
           "FrontDitchHigh2": {
-            "function": {
-              "phaseIndex": 1
-            },
-            "preset": "alternating_ditch"
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
           },
           "RearDitchHigh2": {
-            "function": {
-              "phaseIndex": 1
-            },
-            "preset": "alternating_ditch"
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
           }
         }
       }
     },
-    "bap:purple": {},
-    "bap:pink": {},
-    "bap:blue": {},
+    "bap:purple": {
+      "lighting": { "profile": "bap:sd50/horn_alternating" }
+    },
+    "bap:pink": {
+      "lighting": { "profile": "bap:sd50/horn_alternating" }
+    },
+    "bap:blue": {
+      "lighting": { "profile": "bap:sd50/horn_alternating" }
+    },
     "bap:lightblue": {},
     "bap:brown": {},
-    "bap:black": {},
-    "bap:white": {},
+    "bap:black": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_low_b": {
+            "preset": "mars"
+          },
+          "lamp_nose_low_a": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamF": {
+            "color": "#FFFFFF"
+          },
+          "frontHighbeamE": {
+            "color": "#FFFFFF"
+          },
+          "lamp": {
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_low_b": {
+            "color": "#FFF4B4",
+            "preset": "mars"
+          },
+          "lamp_nose_high_b": {
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_low_a": {
+            "color": "#FFF4B4",
+            "preset": "mars"
+          },
+          "lamp_nose_high_a": {
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:green": {},
     "bap:grey": {},

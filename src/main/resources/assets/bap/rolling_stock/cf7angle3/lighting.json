@@ -18,14 +18,125 @@
         },
         "cab_speedometer_body_459": {
           "preset": "instrument"
+        },
+        "ditch1f1": {
+          "preset": "ditch_light"
+        },
+        "ditch1f2": {
+          "preset": "ditch_light"
+        },
+        "ditch2f1": {
+          "preset": "ditch_light"
+        },
+        "ditch2f2": {
+          "preset": "ditch_light"
+        },
+        "ditch3f1": {
+          "preset": "ditch_light"
+        },
+        "ditch3f2": {
+          "preset": "ditch_light"
+        },
+        "ditch4f1": {
+          "preset": "ditch_light"
+        },
+        "ditch5f1": {
+          "preset": "ditch_light"
+        },
+        "ditch5f2": {
+          "preset": "ditch_light"
+        },
+        "ditch4f2": {
+          "preset": "ditch_light"
+        },
+        "ditch1r1": {
+          "preset": "ditch_light"
+        },
+        "ditch1r2": {
+          "preset": "ditch_light"
+        },
+        "ditch2r1": {
+          "preset": "ditch_light"
+        },
+        "ditch2r2": {
+          "preset": "ditch_light"
+        },
+        "ditch3r1": {
+          "preset": "ditch_light"
+        },
+        "ditch3r2": {
+          "preset": "ditch_light"
+        },
+        "ditch4r1": {
+          "preset": "ditch_light"
+        },
+        "ditch5r1": {
+          "preset": "ditch_light"
+        },
+        "ditch5r2": {
+          "preset": "ditch_light"
+        },
+        "ditch4r2": {
+          "preset": "ditch_light"
+        },
+        "gyra_rear_l": {
+          "preset": "gyralite"
+        },
+        "gyra_rear_r": {
+          "preset": "gyralite"
+        },
+        "gyra_front_l": {
+          "preset": "gyralite"
+        },
+        "gyra_front_r": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:white": {},
-    "bap:cyan": {},
-    "bap:skin16": {},
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "gyra_front_l": {
+            "preset": "mars"
+          },
+          "gyra_front_r": {
+            "preset": "mars"
+          },
+          "gyra_rear_l": {
+            "preset": "mars"
+          },
+          "gyra_rear_r": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra_front_l": {
+            "color": "#FFF4B4"
+          },
+          "gyra_front_r": {
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "gyra_front_l": {
+            "color": "#FFF4B4"
+          },
+          "gyra_front_r": {
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin17": {},
     "bap:skin18": {},
     "bap:skin19": {},
@@ -42,7 +153,18 @@
     "bap:purple": {},
     "bap:lime": {},
     "bap:lightgrey": {},
-    "bap:pink": {},
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "gyra_front_l": {
+            "color": "#FFFFFF"
+          },
+          "gyra_front_r": {
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:skin27": {},
     "bap:skin28": {},
     "bap:yellow": {}

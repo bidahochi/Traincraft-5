@@ -69,6 +69,14 @@
           "lamp_nose_r": {
             "preset": "mars",
             "color": "#FFF4B4"
+          },
+          "gyra_rear_l": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra_rear_r": {
+            "preset": "mars",
+            "color": "#FFF4B4"
           }
         }
       }

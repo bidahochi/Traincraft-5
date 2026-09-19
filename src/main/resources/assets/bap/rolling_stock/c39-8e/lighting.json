@@ -127,10 +127,16 @@
           },
           "ditch_rear_2_b": {
             "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 1
+            },
             "preset": "horn_alternating_ditch"
           },
           "ditch_rear_2_a": {
             "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 0
+            },
             "preset": "horn_alternating_ditch"
           }
         }
@@ -139,20 +145,32 @@
     "bap:skin19": {
       "lighting": {
         "fixtures": {
-          "ditch_rear_2_b": {
+          "ditch_front_1_l": {
             "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            },
             "color": "#FFF4B4"
-          },
-          "ditch_rear_2_a": {
-            "color": "#FFF4B4",
-            "preset": "horn_alternating_ditch"
           },
           "ditch_front_1_r": {
             "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            },
             "color": "#FFF4B4"
           },
-          "ditch_front_1_l": {
+          "ditch_rear_2_b": {
             "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_rear_2_a": {
+            "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 0
+            },
             "preset": "horn_alternating_ditch"
           }
         }

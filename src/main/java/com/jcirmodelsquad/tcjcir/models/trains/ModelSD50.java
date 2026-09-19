@@ -162,10 +162,10 @@ public class ModelSD50 extends ModelConverter //Same as Filename
 		bodyModel[115] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "front_marker2"); // Box 1208 makrerlight front
 		bodyModel[116] = new ModelRendererTurbo(this, 18, 41, textureX, textureY); // Box 1251
 		bodyModel[117] = new ModelRendererTurbo(this, 106, 52, textureX, textureY); // Box 355 brakewheel
-		bodyModel[118] = new ModelRendererTurbo(this, 8, 46, textureX, textureY, "lamp"); // Box 545 headlight nose high b
-		bodyModel[119] = new ModelRendererTurbo(this, 1, 46, textureX, textureY, "lamp"); // Box 546 headlight nose high a
-		bodyModel[120] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp"); // Box 547 headlight nose low a
-		bodyModel[121] = new ModelRendererTurbo(this, 8, 51, textureX, textureY, "lamp"); // Box 548 headlight nose low b
+		bodyModel[118] = new ModelRendererTurbo(this, 8, 46, textureX, textureY, "lamp_nose_high_b"); // Box 545 headlight nose high b
+		bodyModel[119] = new ModelRendererTurbo(this, 1, 46, textureX, textureY, "lamp_nose_high_a"); // Box 546 headlight nose high a
+		bodyModel[120] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp_nose_low_a"); // Box 547 headlight nose low a
+		bodyModel[121] = new ModelRendererTurbo(this, 8, 51, textureX, textureY, "lamp_nose_low_b"); // Box 548 headlight nose low b
 		bodyModel[122] = new ModelRendererTurbo(this, 22, 73, textureX, textureY); // Box 48
 		bodyModel[123] = new ModelRendererTurbo(this, 21, 82, textureX, textureY); // Box 296 nose cover
 		bodyModel[124] = new ModelRendererTurbo(this, 27, 82, textureX, textureY); // Box 299 nose cover
