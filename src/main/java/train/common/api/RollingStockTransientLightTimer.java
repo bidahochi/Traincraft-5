@@ -16,27 +16,6 @@ public final class RollingStockTransientLightTimer
     }
 
     /**
-     * Applies a horn trigger without cancelling an already active response when the new action
-     * does not meet the policy's speed gate.
-     *
-     * @param remaining current response time remaining in ticks
-     * @param policy policy controlling duration and minimum speed
-     * @param speedKmh current rolling-stock speed in km/h
-     * @return the policy duration when eligible, otherwise the non-negative existing duration
-     */
-    public static int startHorn(
-        int remaining,
-        RollingStockHornLightResponsePolicy policy,
-        double speedKmh)
-    {
-        if (policy == null)
-        {
-            return Math.max(0, remaining);
-        }
-        return policy.qualifies(speedKmh) ? policy.durationTicks() : Math.max(0, remaining);
-    }
-
-    /**
      * Advances a response countdown by one server tick.
      *
      * @param remaining current response time remaining in ticks

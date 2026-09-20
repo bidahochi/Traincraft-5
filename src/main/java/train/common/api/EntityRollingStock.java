@@ -3259,16 +3259,6 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	}
 
     /**
-     * Supplies a compatibility fallback when no server JSON policy applies to this stock and skin.
-     *
-     * @return an explicit policy, or {@code null} to retain the unrestricted default timer
-     */
-    protected RollingStockHornLightResponsePolicy getHornLightResponsePolicy()
-    {
-        return null;
-    }
-
-    /**
      * Calculates the current configuration-adjusted horizontal speed without HUD truncation.
      *
      * @return absolute horizontal speed in km/h
@@ -3297,10 +3287,6 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
     {
         RollingStockHornLightResponsePolicy policy =
             LegacyHornLightPolicyAdapter.resolve(getRollingStockAppearanceId(), getColor());
-        if (policy == null)
-        {
-            policy = getHornLightResponsePolicy();
-        }
         if (policy == null)
         {
             return RollingStockTransientLightTimer.startHorn();
