@@ -11,6 +11,8 @@ public final class RollingStockLightFunction
 {
     /** One second at Minecraft's normal 20-tick simulation rate. */
     private static final float STANDARD_CYCLE_TICKS = 20.0F;
+    /** Mars has two vertical sweeps per figure-eight; each uses the standard sweep period. */
+    private static final float MARS_CYCLE_TICKS = STANDARD_CYCLE_TICKS * 2;
     private static final float HALF_CYCLE_DUTY = 0.5F;
     private static final float GYRALITE_SWEEP_DEGREES = 8.0F;
     private static final float MARS_HORIZONTAL_SWEEP_DEGREES = 10.0F;
@@ -200,7 +202,7 @@ public final class RollingStockLightFunction
         return new RollingStockLightFunction(
                    Pattern.MARS,
                    HeadlightRequirement.ACTIVE,
-                   STANDARD_CYCLE_TICKS,
+                   MARS_CYCLE_TICKS,
                    MARS_HORIZONTAL_SWEEP_DEGREES,
                    MARS_VERTICAL_SWEEP_DEGREES,
                    1,

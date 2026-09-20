@@ -51,10 +51,11 @@ final class RollingStockLightControlPanel extends Gui
     private static final int BEACON_BUTTON = 7;
     private static final int GYRA_BUTTON = 12;
     private static final int DITCH_BUTTON = 8;
+    private static final int EMERGENCY_BUTTON = 60;
     private static final int CAPABILITY_REFRESH_TICKS = 10;
 
     // Hit rectangles match the switches painted into generic_light_controls.png.
-    private static final int HEADLIGHT_BUTTON_Y = 4;
+    private static final int HEADLIGHT_BUTTON_Y = 5;
     private static final int HEADLIGHT_BUTTON_HEIGHT = 25;
     private static final int STANDARD_HEADLIGHT_BUTTON_WIDTH = 12;
     private static final int HEADLIGHT_DIM_WIDTH = 15;
@@ -64,7 +65,7 @@ final class RollingStockLightControlPanel extends Gui
     private static final int REAR_OFF_X = 47;
     private static final int REAR_DIM_X = 59;
     private static final int REAR_BRIGHT_X = 74;
-    private static final int CIRCUIT_BUTTON_Y = 8;
+    private static final int CIRCUIT_BUTTON_Y = 9;
     private static final int CIRCUIT_BUTTON_WIDTH = 12;
     private static final int CIRCUIT_BUTTON_HEIGHT = 22;
     private static final int AUX_BUTTON_X = 86;
@@ -82,13 +83,13 @@ final class RollingStockLightControlPanel extends Gui
     private static final int DITCH_PANEL_WIDTH = 14;
     private static final int FRONT_DIAL_X = 21;
     private static final int REAR_DIAL_X = 60;
-    private static final int DIAL_Y = 12;
+    private static final int DIAL_Y = 13;
     private static final int AUX_HANDLE_X = 89;
     private static final int BEACON_HANDLE_X = 105;
     private static final int GYRA_HANDLE_X = 121;
     private static final int DITCH_HANDLE_X = 137;
-    private static final int ENABLED_HANDLE_Y = 14;
-    private static final int DISABLED_HANDLE_Y = 20;
+    private static final int ENABLED_HANDLE_Y = 15;
+    private static final int DISABLED_HANDLE_Y = 21;
     private static final int HANDLE_TEXTURE_X = 10;
     private static final int HANDLE_TEXTURE_Y = 63;
     private static final int HANDLE_WIDTH = 6;
@@ -103,6 +104,7 @@ final class RollingStockLightControlPanel extends Gui
 
     private final EntityRollingStock stock;
     private final IRollingStockLightControls lightControls;
+    private final boolean stockAtlas;
     private final List<GuiButton> panelButtons = new ArrayList<GuiButton>();
     /** Minecraft 1.7 exposes GuiScreen.buttonList as a raw list. */
     @SuppressWarnings("rawtypes")
@@ -116,8 +118,23 @@ final class RollingStockLightControlPanel extends Gui
     private RollingStockLightControlPanel(
         EntityRollingStock stock, IRollingStockLightControls lightControls)
     {
+        this(stock, lightControls, false);
+    }
+
+    /** Stock atlases already contain the panel artwork; only their moving handles are drawn. */
+    private RollingStockLightControlPanel(
+        EntityRollingStock stock, IRollingStockLightControls lightControls, boolean stockAtlas)
+    {
         this.stock = stock;
         this.lightControls = lightControls;
+        this.stockAtlas = stockAtlas;
+    }
+
+    /** Uses the same controls with the host's currently bound 256-pixel rolling-stock GUI atlas. */
+    public static RollingStockLightControlPanel forStockAtlas(
+        EntityRollingStock stock, IRollingStockLightControls controls)
+    {
+        return new RollingStockLightControlPanel(stock, controls, true);
     }
 
     /**
@@ -156,7 +173,14 @@ final class RollingStockLightControlPanel extends Gui
         }
         hostButtons.removeAll(panelButtons);
         panelButtons.clear();
-        circuits = ClientRollingStockLighting.availableControlCircuits(stock);
+        if (stockAtlas)
+        {
+            circuits = EnumSet.allOf(RollingStockLightChannel.class);
+        }
+        else
+        {
+            circuits = ClientRollingStockLighting.availableControlCircuits(stock);
+        }
 
         addButton(
             FRONT_OFF,
@@ -217,6 +241,8 @@ final class RollingStockLightControlPanel extends Gui
             DITCH_BUTTON,
             panelLeft + DITCH_BUTTON_X,
             "Ditch lights");
+        addButton(EMERGENCY_BUTTON, panelLeft + 150, panelTop + CIRCUIT_BUTTON_Y,
+            CIRCUIT_BUTTON_WIDTH, CIRCUIT_BUTTON_HEIGHT, "Emergency lights");
         hostButtons.addAll(panelButtons);
     }
 
@@ -245,6 +271,10 @@ final class RollingStockLightControlPanel extends Gui
     /** Refreshes optional circuit capabilities twice per second while the GUI remains open. */
     void update()
     {
+        if (stockAtlas)
+        {
+            return;
+        }
         ticksSinceCapabilityRefresh++;
         if (ticksSinceCapabilityRefresh % CAPABILITY_REFRESH_TICKS == 0)
         {
@@ -281,8 +311,38 @@ final class RollingStockLightControlPanel extends Gui
         RollingStockLightChannel channel = channelFor(button.id);
         send(
             controlFor(channel),
-            (byte) (lightControls.isLightChannelEnabled(channel) ? 0 : 1));
+            (byte) (lightControls.isLightChannelManuallyEnabled(channel) ? 0 : 1));
         return true;
+    }
+
+    /** Returns the hovered control's action and synchronized state, or null outside visible hit areas. */
+    public String tooltipAt(int mouseX, int mouseY)
+    {
+        for (GuiButton button : panelButtons)
+        {
+            if (button.visible == false || mouseX < button.xPosition || mouseY < button.yPosition
+                || mouseX >= button.xPosition + button.width || mouseY >= button.yPosition + button.height)
+            {
+                continue;
+            }
+            if (button.id >= FRONT_OFF && button.id <= FRONT_BRIGHT)
+            {
+                return button.displayString + " (current: " + lightControls.getFrontHeadlightLevel().name() + ")";
+            }
+            if (button.id >= REAR_OFF && button.id <= REAR_BRIGHT)
+            {
+                return button.displayString + " (current: " + lightControls.getRearHeadlightLevel().name() + ")";
+            }
+            RollingStockLightChannel channel = channelFor(button.id);
+            String label = button.displayString + ": "
+                + (lightControls.isLightChannelManuallyEnabled(channel) ? "On" : "Off");
+            if (channel == RollingStockLightChannel.EMERGENCY && lightControls.isEmergencyLightForced())
+            {
+                label += " (Forced on)";
+            }
+            return label;
+        }
+        return null;
     }
 
     /** Sends one light-control change through the shared validated rolling-stock packet. */
@@ -298,28 +358,31 @@ final class RollingStockLightControlPanel extends Gui
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        minecraft.renderEngine.bindTexture(CONTROLS);
+        if (stockAtlas == false)
+        {
+            minecraft.renderEngine.bindTexture(CONTROLS);
 
-        // Front/rear artwork is always available. Optional segments and their hit regions are
-        // omitted until resolved model/profile metadata confirms that circuit exists.
-        drawTextureRegion(panelLeft, panelTop, 0, 0, HEADLIGHT_PANEL_WIDTH, HEIGHT, zLevel);
-        drawCircuitPanel(
-            RollingStockLightChannel.AUX,
-            AUX_PANEL_X,
-            STANDARD_CIRCUIT_PANEL_WIDTH,
-            zLevel);
-        drawCircuitPanel(
-            RollingStockLightChannel.BEACON,
-            BEACON_PANEL_X,
-            STANDARD_CIRCUIT_PANEL_WIDTH,
-            zLevel);
-        drawCircuitPanel(
-            RollingStockLightChannel.GYRA,
-            GYRA_PANEL_X,
-            STANDARD_CIRCUIT_PANEL_WIDTH,
-            zLevel);
-        drawCircuitPanel(
-            RollingStockLightChannel.DITCH, DITCH_PANEL_X, DITCH_PANEL_WIDTH, zLevel);
+            // Front/rear artwork is always available. Optional segments and their hit regions are
+            // omitted until resolved model/profile metadata confirms that circuit exists.
+            drawTextureRegion(panelLeft, panelTop, 0, 0, HEADLIGHT_PANEL_WIDTH, HEIGHT, zLevel);
+            drawCircuitPanel(
+                RollingStockLightChannel.AUX,
+                AUX_PANEL_X,
+                STANDARD_CIRCUIT_PANEL_WIDTH,
+                zLevel);
+            drawCircuitPanel(
+                RollingStockLightChannel.BEACON,
+                BEACON_PANEL_X,
+                STANDARD_CIRCUIT_PANEL_WIDTH,
+                zLevel);
+            drawCircuitPanel(
+                RollingStockLightChannel.GYRA,
+                GYRA_PANEL_X,
+                STANDARD_CIRCUIT_PANEL_WIDTH,
+                zLevel);
+            drawCircuitPanel(
+                RollingStockLightChannel.DITCH, DITCH_PANEL_X, DITCH_PANEL_WIDTH, zLevel);
+        }
         drawDialLever(
             panelLeft + FRONT_DIAL_X,
             panelTop + DIAL_Y
@@ -338,6 +401,7 @@ final class RollingStockLightControlPanel extends Gui
         drawCircuitHandle(RollingStockLightChannel.GYRA, panelLeft + GYRA_HANDLE_X, zLevel);
         drawCircuitHandle(
             RollingStockLightChannel.DITCH, panelLeft + DITCH_HANDLE_X, zLevel);
+        drawCircuitHandle(RollingStockLightChannel.EMERGENCY, panelLeft + 153, zLevel);
         GL11.glDisable(GL11.GL_BLEND);
     }
 
@@ -356,12 +420,12 @@ final class RollingStockLightControlPanel extends Gui
     private void drawCircuitHandle(
         RollingStockLightChannel channel, int x, float zLevel)
     {
-        if (circuits.contains(channel))
+        if (channel == RollingStockLightChannel.EMERGENCY || circuits.contains(channel))
         {
             drawTextureRegion(
                 x,
                 panelTop
-                + (lightControls.isLightChannelEnabled(channel)
+                + (lightControls.isLightChannelManuallyEnabled(channel)
                    ? ENABLED_HANDLE_Y
                    : DISABLED_HANDLE_Y),
                 HANDLE_TEXTURE_X,
@@ -393,16 +457,22 @@ final class RollingStockLightControlPanel extends Gui
     }
 
     /**
-     * Draws a region from the texture's true 147x70 dimensions.
+     * Draws from the compact panel sheet or the host's 256x256 stock atlas.
      *
      * <p>{@link Gui#drawTexturedModalRect} assumes a 256x256 atlas and would sample the wrong pixels,
      * so this method emits normalized coordinates directly.
      */
-    private static void drawTextureRegion(
+    private void drawTextureRegion(
         int x, int y, int u, int v, int width, int height, float zLevel)
     {
         float inverseWidth = 1.0F / WIDTH;
         float inverseHeight = 1.0F / TEXTURE_HEIGHT;
+        if (stockAtlas)
+        {
+            inverseWidth = 1.0F / 256;
+            inverseHeight = 1.0F / 256;
+            v += GUI_Y;
+        }
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(
@@ -429,6 +499,8 @@ final class RollingStockLightControlPanel extends Gui
                 return RollingStockLightChannel.GYRA;
             case DITCH_BUTTON:
                 return RollingStockLightChannel.DITCH;
+            case EMERGENCY_BUTTON:
+                return RollingStockLightChannel.EMERGENCY;
             default:
                 throw new IllegalArgumentException("Unknown lighting button: " + buttonId);
         }
@@ -447,6 +519,8 @@ final class RollingStockLightControlPanel extends Gui
                 return PacketRollingStockLightState.BEACON;
             case GYRA:
                 return PacketRollingStockLightState.GYRA;
+            case EMERGENCY:
+                return PacketRollingStockLightState.EMERGENCY;
             default:
                 throw new IllegalArgumentException("Unsupported lighting circuit: " + channel);
         }

@@ -358,6 +358,27 @@ public abstract class AbstractTankSlug extends LiquidTank implements IFluidHandl
         return RollingStockLightStateCodec.enabled(synchronizedLightState(), channel);
     }
 
+    /** These independent controls have no forced overrides, so manual and effective state agree. */
+    @Override
+    public boolean isLightChannelManuallyEnabled(RollingStockLightChannel channel)
+    {
+        return isLightChannelEnabled(channel);
+    }
+
+    /** This stock does not own Emergency forcing reasons. */
+    @Override
+    public boolean isEmergencyLightForced()
+    {
+        return false;
+    }
+
+    /** This stock does not receive horn-response signals. */
+    @Override
+    public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
+    {
+        return false;
+    }
+
     @Override
     public void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled)
     {

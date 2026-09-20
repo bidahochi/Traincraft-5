@@ -4,7 +4,6 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.api.RollingStockHornLightResponsePolicy;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
@@ -15,9 +14,6 @@ import java.awt.*;
 
 
 public class DieselSD40dash2 extends DieselTrain {
-    private static final double MINIMUM_HORN_RESPONSE_SPEED_KMH = 24.14016D;
-    static final RollingStockHornLightResponsePolicy CSX_HORN_LIGHT_RESPONSE =
-        RollingStockHornLightResponsePolicy.fixedSeconds(15, MINIMUM_HORN_RESPONSE_SPEED_KMH);
 
     @Override
     public SoundRecord getSoundRecord()
@@ -132,23 +128,5 @@ public class DieselSD40dash2 extends DieselTrain {
     }
 
 
-    @Override
-    protected RollingStockHornLightResponsePolicy getHornLightResponsePolicy()
-    {
-        return isCsxHornLightSkin(getColor())
-               ? CSX_HORN_LIGHT_RESPONSE
-               : RollingStockHornLightResponsePolicy.DISABLED;
-    }
-
-    /**
-     * Reports whether a skin uses the CSX speed-gated horn-light behavior.
-     *
-     * @param color rolling-stock skin index
-     * @return whether the skin enables the CSX horn-light policy
-     */
-    static boolean isCsxHornLightSkin(int color)
-    {
-        return color == 19 || color == 33 || color == 38;
-    }
 
 }

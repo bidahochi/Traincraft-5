@@ -29,6 +29,8 @@ import train.common.api.RollingStockTransientLightSignal;
 import train.common.Traincraft;
 import train.common.appearance.StockLightingIdentity;
 import train.common.appearance.LegacySkinMapping;
+import train.common.appearance.ServerHornLightPolicies;
+import train.common.appearance.HornLightPolicyRegistry;
 import train.common.utils.SharedJsonParser;
 import train.common.library.register.ITrainRecord;
 import train.common.utils.devutils.DebugUtil;
@@ -235,7 +237,27 @@ public final class LightingReloadCommand extends CommandBase
         {
             JsonObject document = readDocument(lighting);
             JsonObject dictionary = Files.isRegularFile(mapping) ? readDocument(mapping) : null;
-            ClientRollingStockAppearanceLoader.INSTANCE.reloadStockFromDocuments(stockId, document, dictionary);
+            HornLightPolicyRegistry registry =
+                HornLightPolicyRegistry.development(project.resolve("src/main/resources/assets"));
+            ClientRollingStockAppearanceLoader.INSTANCE.reloadStockFromDocuments(stockId, document, dictionary, registry);
+            Minecraft minecraft = Minecraft.getMinecraft();
+            if (minecraft.isSingleplayer() && minecraft.getIntegratedServer() != null
+                && minecraft.getIntegratedServer().getPublic() == false)
+            {
+                for (ITrainRecord record : Traincraft.traincraftRegistry.getAllTrains().values())
+                {
+                    if (stockId.equals(StockLightingIdentity.resolve(record)))
+                    {
+                        ServerHornLightPolicies.reloadDevelopment(stockId, document, dictionary, registry);
+                        sender.addChatMessage(new ChatComponentText("Reloaded local server horn policy; active countdowns unchanged."));
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                sender.addChatMessage(new ChatComponentText("Server horn policy unchanged: source reload requires a private integrated dev game."));
+            }
             sender.addChatMessage(new ChatComponentText("Reloaded source lighting: " + lighting
                 + " (local preview; resource-pack overlays bypassed)."));
             LogManager.getLogger("Traincraft").info("Reloaded source lighting: {}", lighting);

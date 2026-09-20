@@ -1,5 +1,7 @@
 package train.client.gui;
 
+import java.util.Collections;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
@@ -53,6 +55,14 @@ public class GuiLiquid extends GuiContainer {
 			}
 		}
 		trainNote.drawTextBox();
+        if (lightControls != null)
+        {
+            String tooltip = lightControls.tooltipAt(mouseX, mouseY);
+            if (tooltip != null)
+            {
+                drawHoveringText(Collections.singletonList(tooltip), mouseX, mouseY, fontRendererObj);
+            }
+        }
 
 
 	}

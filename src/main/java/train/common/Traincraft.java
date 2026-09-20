@@ -1,5 +1,7 @@
 package train.common;
 
+import train.common.appearance.ServerHornLightPolicies;
+
 import train.common.utils.SharedJsonParser;
 
 import com.google.gson.JsonParser;
@@ -343,6 +345,7 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event)
 	{
+        ServerHornLightPolicies.loadInstalled();
 		lockoutPermissionsUtil.SetupLockoutFolders();
 		tcLog.info("Traincraft: Project Locked Folders Initialized");
 		for(HashMap.Entry<String, ILockoutGroup> record : lockoutPermissionsUtil.GetLockoutGroupReg().entrySet())

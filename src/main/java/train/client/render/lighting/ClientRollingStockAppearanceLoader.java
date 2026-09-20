@@ -1,5 +1,7 @@
 package train.client.render.lighting;
 
+import train.common.appearance.HornLightPolicyRegistry;
+
 import org.apache.logging.log4j.LogManager;
 import train.common.utils.SharedJsonParser;
 
@@ -108,8 +110,15 @@ public final class ClientRollingStockAppearanceLoader
      */
     public synchronized void reloadStockFromDocuments(String stockId, JsonObject lighting, JsonObject mapping)
     {
+        reloadStockFromDocuments(stockId, lighting, mapping, HornLightPolicyRegistry.INSTALLED);
+    }
+
+    /** Validates a development preview using the same named policy definitions as its server candidate. */
+    public synchronized void reloadStockFromDocuments(String stockId, JsonObject lighting, JsonObject mapping,
+        HornLightPolicyRegistry registry)
+    {
         LegacySkinMapping.requireId(stockId);
-        RollingStockAppearanceLighting document = RollingStockAppearanceJson.parse(stockId, lighting);
+        RollingStockAppearanceLighting document = RollingStockAppearanceJson.parse(stockId, lighting, registry);
         LegacySkinMapping replacementMapping;
         if (mapping == null)
         {

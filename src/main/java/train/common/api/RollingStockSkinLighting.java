@@ -23,6 +23,21 @@ public final class RollingStockSkinLighting
         Collections.unmodifiableMap(lightOverrides);
     private int lightingRevision;
     private final boolean immutable;
+    private HornLightPolicyOverride hornPolicy;
+
+    /** Sets stock/profile/skin trigger overrides independently of fixture behavior. */
+    public void setHornResponsePolicy(HornLightPolicyOverride policy)
+    {
+        checkMutable();
+        hornPolicy = policy;
+        lightingRevision++;
+    }
+
+    /** Returns inherited partial trigger settings, or null for the server compatibility fallback. */
+    public HornLightPolicyOverride hornResponsePolicy()
+    {
+        return hornPolicy;
+    }
 
     /** Creates a mutable skin-lighting override collection with revision zero. */
     public RollingStockSkinLighting()
@@ -234,10 +249,12 @@ public final class RollingStockSkinLighting
         if (defaults != null)
         {
             result.lightOverrides.putAll(defaults.lightOverrides);
+            result.hornPolicy = defaults.hornPolicy;
             result.lightingRevision += defaults.lightingRevision;
         }
         if (skin != null)
         {
+            result.hornPolicy = result.hornPolicy == null ? skin.hornPolicy : result.hornPolicy.merge(skin.hornPolicy);
             for (Map.Entry<String, RollingStockLightOverride> entry
                     : skin.lightOverrides.entrySet())
             {
@@ -253,7 +270,7 @@ public final class RollingStockSkinLighting
             }
             result.lightingRevision += skin.lightingRevision;
         }
-        return result.lightOverrides.isEmpty() ? EMPTY : result;
+        return result.lightOverrides.isEmpty() && result.hornPolicy == null ? EMPTY : result;
     }
 
     private void checkMutable()

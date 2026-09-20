@@ -3,6 +3,7 @@
   "stock": "bap:sd40-2",
   "lighting": {
     "defaults": {
+      "hornResponsePolicy": { "enabled": false },
       "fixtures": {
         "marker_two_body_391": {
           "preset": "marker_light"
@@ -224,6 +225,7 @@
     },
     "profiles": {
       "bap:sd40dash2/csx_horn_ditch": {
+        "hornResponsePolicy": { "preset": "tc:horn_15s_above_15mph" },
         "fixtures": {
           "front_ditch_variant_3_left": {
             "preset": "horn_alternating_ditch",

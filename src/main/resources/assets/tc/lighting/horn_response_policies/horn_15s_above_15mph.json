@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "description": "Runs a 15-second response after the last qualifying horn action above 15 mph. Slowing down does not cancel an active response.",
+  "policy": {
+    "enabled": true,
+    "durationTicks": 300,
+    "minimumSpeedMph": 15
+  }
+}

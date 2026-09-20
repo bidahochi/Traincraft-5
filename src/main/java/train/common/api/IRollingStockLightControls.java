@@ -39,16 +39,9 @@ public interface IRollingStockLightControls extends IRollingStockLightState
      */
     void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled);
 
-    /**
-     * Reports a synchronized, non-persistent signal such as the active horn response window.
-     * The default keeps existing third-party implementations source compatible.
-     *
-     * @param signal transient signal to query
-     * @return whether that signal is currently active
-     */
-    @Override
-    default boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
-    {
-        return false;
-    }
+    /** Returns manual intent independently of forced activation. */
+    public boolean isLightChannelManuallyEnabled(RollingStockLightChannel channel);
+
+    /** Returns whether server logic holds Emergency on, independently of its switch. */
+    public boolean isEmergencyLightForced();
 }

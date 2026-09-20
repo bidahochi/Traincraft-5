@@ -1,6 +1,7 @@
 package train.common.appearance;
 
 import train.common.utils.SharedJsonParser;
+import train.common.api.HornLightPolicyOverride;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -99,9 +100,15 @@ public final class RollingStockAppearanceJson
     public static RollingStockAppearanceLighting parse(
         String expectedStockId, JsonObject json)
     {
-        validateContribution(expectedStockId, json);
-        return parseLighting(
-            expectedStockId, cloneObject(json), new ArrayList<String>());
+        return parse(expectedStockId, json, HornLightPolicyRegistry.INSTALLED);
+    }
+
+    /** Validates against a captured policy registry, including local development definitions. */
+    public static RollingStockAppearanceLighting parse(
+        String expectedStockId, JsonObject json, HornLightPolicyRegistry registry)
+    {
+        validateHeader(expectedStockId, json);
+        return parseLighting(expectedStockId, cloneObject(json), new ArrayList<String>(), registry);
     }
 
     /** Recursively overlays explicitly present source properties onto a target object. */
@@ -174,6 +181,12 @@ public final class RollingStockAppearanceJson
     private static RollingStockAppearanceLighting parseLighting(
         String stockId, JsonObject root, List<String> diagnostics)
     {
+        return parseLighting(stockId, root, diagnostics, HornLightPolicyRegistry.INSTALLED);
+    }
+
+    private static RollingStockAppearanceLighting parseLighting(
+        String stockId, JsonObject root, List<String> diagnostics, HornLightPolicyRegistry registry)
+    {
         JsonObject lightingObject = optionalObject(root, "lighting");
         RollingStockSkinLighting defaults = RollingStockSkinLighting.EMPTY;
         Map<String, RollingStockSkinLighting> profiles =
@@ -230,21 +243,25 @@ public final class RollingStockAppearanceJson
             }
         }
         RollingStockAppearanceLighting result = new RollingStockAppearanceLighting(stockId, defaults, profiles, skins);
-        validateFunctions(defaults);
+        validateFunctions(defaults, registry);
         for (RollingStockSkinLighting profile : profiles.values())
         {
-            validateFunctions(RollingStockSkinLighting.immutableComposite(defaults, profile));
+            validateFunctions(RollingStockSkinLighting.immutableComposite(defaults, profile), registry);
         }
         for (String skin : skins.keySet())
         {
-            validateFunctions(result.resolve(skin));
+            validateFunctions(result.resolve(skin), registry);
         }
         return result;
     }
 
     /** Rejects invalid combined function settings before a document reaches render-time caches. */
-    private static void validateFunctions(RollingStockSkinLighting lighting)
+    private static void validateFunctions(RollingStockSkinLighting lighting, HornLightPolicyRegistry registry)
     {
+        if (lighting.hornResponsePolicy() != null)
+        {
+            lighting.hornResponsePolicy().resolve(registry);
+        }
         for (Entry<String, RollingStockLightOverride> entry : lighting.lightOverrides().entrySet())
         {
             String group = entry.getValue().group();
@@ -297,11 +314,16 @@ public final class RollingStockAppearanceJson
             return RollingStockSkinLighting.EMPTY;
         }
         JsonObject fixturesObject = optionalObject(layerObject, "fixtures");
+        RollingStockSkinLighting lighting = new RollingStockSkinLighting();
+        if (layerObject.has("hornResponsePolicy"))
+        {
+            JsonObject policy = requiredObject(layerObject.get("hornResponsePolicy"), path + ".hornResponsePolicy");
+            lighting.setHornResponsePolicy(parseHornResponsePolicy(policy));
+        }
         if (fixturesObject == null)
         {
-            return RollingStockSkinLighting.EMPTY;
+            return RollingStockSkinLighting.immutableComposite(null, lighting);
         }
-        RollingStockSkinLighting lighting = new RollingStockSkinLighting();
         Set<String> fixtureNames = new TreeSet<String>(String.CASE_INSENSITIVE_ORDER);
         for (Entry<String, JsonElement> entry : fixturesObject.entrySet())
         {
@@ -320,6 +342,52 @@ public final class RollingStockAppearanceJson
             parseFixture(lighting, fixtureId, fixture, path);
         }
         return RollingStockSkinLighting.immutableComposite(null, lighting);
+    }
+
+    /** Parses shared policy fields for both inline layers and independent registry definitions. */
+    public static HornLightPolicyOverride parseHornResponsePolicy(JsonObject policy)
+    {
+        for (Entry<String, JsonElement> field : policy.entrySet())
+        {
+            String key = field.getKey();
+            if ("enabled".equals(key) == false && "durationTicks".equals(key) == false
+                && "minimumSpeedMph".equals(key) == false && "maximumSpeedMph".equals(key) == false
+                && "preset".equals(key) == false)
+            {
+                throw new IllegalArgumentException("Unknown hornResponsePolicy field: " + key);
+            }
+        }
+        Double maximum = null;
+        if (policy.has("maximumSpeedMph"))
+        {
+            maximum = policy.get("maximumSpeedMph").isJsonNull()
+                ? Double.POSITIVE_INFINITY : policySpeed(policy, "maximumSpeedMph");
+        }
+        String preset = optionalString(policy, "preset");
+        if (preset != null)
+        {
+            LegacySkinMapping.requireId(preset);
+        }
+        return new HornLightPolicyOverride(preset,
+            policy.has("enabled") ? requiredBoolean(policy, "enabled") : null,
+            policy.has("durationTicks") ? boundedInt(policy, "durationTicks", 1, Integer.MAX_VALUE) : null,
+            policy.has("minimumSpeedMph") ? policySpeed(policy, "minimumSpeedMph") : null, maximum);
+    }
+
+    /** Uses double precision so an exact speed threshold survives JSON conversion. */
+    private static double policySpeed(JsonObject policy, String name)
+    {
+        JsonElement value = policy.get(name);
+        if (value.isJsonPrimitive() == false || value.getAsJsonPrimitive().isNumber() == false)
+        {
+            throw new IllegalArgumentException("hornResponsePolicy." + name + " must be a number");
+        }
+        double speed = value.getAsDouble();
+        if (Double.isNaN(speed) || Double.isInfinite(speed) || speed < 0)
+        {
+            throw new IllegalArgumentException("hornResponsePolicy." + name + " must be finite and nonnegative");
+        }
+        return speed;
     }
 
     private static void parseFixture(

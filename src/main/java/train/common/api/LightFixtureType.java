@@ -24,6 +24,14 @@ public enum LightFixtureType
         .clientProjectorEligible(true)
         .build(),
         "A ditch light requiring its configured circuit and facing headlight; DIM emits only the source, while BRIGHT also projects."),
+    EMERGENCY_LIGHT(
+        RollingStockLightBehaviorOverride.builder()
+        .controlCircuit(RollingStockLightChannel.EMERGENCY)
+        .activationPolicy(RollingStockLightActivationPolicy.CIRCUIT_ONLY)
+        .ditchHornResponse(RollingStockDitchHornMode.NONE, null, null)
+        .function(RollingStockLightFunction.STEADY)
+        .build(),
+        "A steady light controlled by Emergency, independent of headlight state; color and geometry remain authored."),
     NUMBERBOARD(
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.AUX)

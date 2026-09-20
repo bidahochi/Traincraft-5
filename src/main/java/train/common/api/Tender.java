@@ -679,7 +679,8 @@ public abstract class Tender extends Freight implements IFluidHandler, IInventor
 				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.AUX),
 				locomotiveState.isLightChannelEnabled(RollingStockLightChannel.GYRA),
 				locomotiveState.isTransientLightSignalEnabled(
-						RollingStockTransientLightSignal.HORN));
+						RollingStockTransientLightSignal.HORN),
+                locomotiveState.isLightChannelEnabled(RollingStockLightChannel.EMERGENCY), false);
 	}
 
 	/** Reads the server-authored mirror used by every tender fixture. */

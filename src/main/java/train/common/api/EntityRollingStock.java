@@ -1,5 +1,7 @@
 package train.common.api;
 
+import train.common.appearance.LegacyHornLightPolicyAdapter;
+
 import train.common.appearance.StockLightingIdentity;
 
 import com.google.gson.JsonElement;
@@ -833,6 +835,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	@Override
 	public void onUpdate()
 	{
+        tickStockResponses();
 		handleParkingBrake();
 		// Commenting out as the primary method in the try statement is never once used and is forcing exceptions constantly
 		//try {
@@ -3256,7 +3259,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	}
 
     /**
-     * Supplies the horn-light response policy for this rolling stock.
+     * Supplies a compatibility fallback when no server JSON policy applies to this stock and skin.
      *
      * @return an explicit policy, or {@code null} to retain the unrestricted default timer
      */
@@ -3277,20 +3280,143 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
     }
 
     /**
-     * Applies this stock's horn policy to its current transient response countdown.
+     * Compatibility timer calculation without watcher updates. Built-in horn handlers use
+     * {@link #triggerHornResponse()} to update the server window and synchronize lighting directly.
      *
      * @param remainingTicks current response time remaining in ticks
      * @return the updated non-negative response duration
      */
     protected final int startHornLightResponse(int remainingTicks)
     {
-        RollingStockHornLightResponsePolicy policy = getHornLightResponsePolicy();
+        int duration = qualifiedHornResponseDuration();
+        return duration > 0 ? duration : Math.max(0, remainingTicks);
+    }
+
+    /** Returns the qualified server horn duration, or zero without changing an active response. */
+    private int qualifiedHornResponseDuration()
+    {
+        RollingStockHornLightResponsePolicy policy =
+            LegacyHornLightPolicyAdapter.resolve(getRollingStockAppearanceId(), getColor());
+        if (policy == null)
+        {
+            policy = getHornLightResponsePolicy();
+        }
         if (policy == null)
         {
             return RollingStockTransientLightTimer.startHorn();
         }
-        return RollingStockTransientLightTimer.startHorn(
-                   remainingTicks, policy, getExactSpeedKmh());
+        return policy.qualifies(getExactSpeedKmh()) ? policy.durationTicks() : 0;
+    }
+
+    /** Stable response identity shared by lighting and other horn-action consumers. */
+    public static final String HORN_RESPONSE_ID = "tc:horn_response";
+
+    private List<RollingStockResponseState> activeResponses;
+    private int lastResponseTick = Integer.MIN_VALUE;
+
+    /** Server-side polling API; clients receive only consumer-specific synchronized state. */
+    public final int responseTicksRemaining(String responseId)
+    {
+        if (worldObj == null || worldObj.isRemote || activeResponses == null)
+        {
+            return 0;
+        }
+        for (int index = 0; index < activeResponses.size(); index++)
+        {
+            RollingStockResponseState state = activeResponses.get(index);
+            if (state.id().equals(responseId))
+            {
+                return state.remainingTicks();
+            }
+        }
+        return 0;
+    }
+
+    /** Called only after existing horn-action authorization; clients cannot start the response. */
+    protected final void triggerHornResponse()
+    {
+        if (worldObj == null || worldObj.isRemote)
+        {
+            return;
+        }
+        triggerStockResponse(HORN_RESPONSE_ID, qualifiedHornResponseDuration());
+    }
+
+    /**
+     * Starts or resets a code-defined response after the caller validates its trigger.
+     * JSON does not invoke this API or choose executable handlers. Rejected durations do nothing.
+     */
+    protected final void triggerStockResponse(String responseId, int durationTicks)
+    {
+        if (worldObj == null || worldObj.isRemote || durationTicks <= 0)
+        {
+            return;
+        }
+        if (activeResponses == null)
+        {
+            activeResponses = new ArrayList<RollingStockResponseState>();
+        }
+        RollingStockResponseState selected = null;
+        for (int index = 0; index < activeResponses.size(); index++)
+        {
+            RollingStockResponseState candidate = activeResponses.get(index);
+            if (candidate.id().equals(responseId))
+            {
+                selected = candidate;
+                break;
+            }
+        }
+        if (selected == null)
+        {
+            selected = new RollingStockResponseState(responseId);
+            activeResponses.add(selected);
+        }
+        selected.trigger(durationTicks);
+        synchronizeResponseLights(selected.id());
+    }
+
+    /** Advances once per entity tick, allowing control subclasses to retain their early update order. */
+    protected final void tickStockResponses()
+    {
+        if (worldObj == null || worldObj.isRemote || activeResponses == null || activeResponses.isEmpty()
+            || lastResponseTick == ticksExisted)
+        {
+            return;
+        }
+        lastResponseTick = ticksExisted;
+        for (int index = activeResponses.size() - 1; index >= 0; index--)
+        {
+            RollingStockResponseState state = activeResponses.get(index);
+            RollingStockResponseState.Transition transition = state.tick();
+            if (transition != null)
+            {
+                activeResponses.remove(index);
+                synchronizeResponseLights(state.id());
+            }
+        }
+    }
+
+    /** Updates the lighting watcher directly after the authoritative horn window changes. */
+    private void synchronizeResponseLights(String responseId)
+    {
+        RollingStockLightControls controls = mutableLightControls();
+        if (controls != null && HORN_RESPONSE_ID.equals(responseId))
+        {
+            controls.synchronize();
+        }
+    }
+
+    /** Optional mutable control owner; ordinary stock and read-only mirrors allocate no component. */
+    protected RollingStockLightControls mutableLightControls()
+    {
+        return null;
+    }
+
+    /** Trusted server logic may hold Emergency on by source ID; no player packet exposes this API. */
+    public final boolean setEmergencyLightForced(String sourceId, boolean active)
+    {
+        RollingStockLightControls controls = mutableLightControls();
+        return controls != null && controls.setEmergencyForced(sourceId, active);
     }
 
 

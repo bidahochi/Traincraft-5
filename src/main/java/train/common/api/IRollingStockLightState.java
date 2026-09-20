@@ -29,8 +29,5 @@ public interface IRollingStockLightState
      * @param signal transient signal to query
      * @return whether that signal is currently active
      */
-    default boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
-    {
-        return false;
-    }
+    public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal);
 }

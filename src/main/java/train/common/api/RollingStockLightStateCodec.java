@@ -9,7 +9,8 @@ package train.common.api;
  * Mutable control owners persist the values represented by bits {@code 0..7} through separate NBT
  * fields and the {@code tcLightChannels} channel-mask conversion. Read-only mirrors such as tenders
  * may publish the
- * same packed layout without saving it. Bit {@code 8} is watcher-only and is never persisted.
+ * same packed layout without saving it. Bit {@code 9} holds the persisted manual Emergency
+ * switch; bit {@code 10} holds transient forcing. Bits {@code 8} and {@code 10} are never persisted.
  */
 public final class RollingStockLightStateCodec
 {
@@ -26,6 +27,8 @@ public final class RollingStockLightStateCodec
     private static final int AUX_BIT = 1 << 6;
     private static final int GYRA_BIT = 1 << 7;
     private static final int HORN_BIT = 1 << 8;
+    private static final int EMERGENCY_MANUAL_BIT = 1 << 9;
+    private static final int EMERGENCY_FORCED_BIT = 1 << 10;
 
     private RollingStockLightStateCodec() {}
 
@@ -67,6 +70,15 @@ public final class RollingStockLightStateCodec
         boolean gyra,
         boolean horn)
     {
+        return pack(front, rear, ditch, beacon, aux, gyra, horn, false, false);
+    }
+
+    /** Appends manual and transient forced Emergency bits without changing the existing layout. */
+    public static int pack(
+        RollingStockHeadlightLevel front, RollingStockHeadlightLevel rear,
+        boolean ditch, boolean beacon, boolean aux, boolean gyra, boolean horn,
+        boolean emergencyManual, boolean emergencyForced)
+    {
         int packed = level(front).ordinal() & LEVEL_MASK;
         packed |= (level(rear).ordinal() & LEVEL_MASK) << REAR_SHIFT;
         if (ditch)
@@ -88,6 +100,14 @@ public final class RollingStockLightStateCodec
         if (horn)
         {
             packed |= HORN_BIT;
+        }
+        if (emergencyManual)
+        {
+            packed |= EMERGENCY_MANUAL_BIT;
+        }
+        if (emergencyForced)
+        {
+            packed |= EMERGENCY_FORCED_BIT;
         }
         return packed;
     }
@@ -134,6 +154,8 @@ public final class RollingStockLightStateCodec
                 return (packed & AUX_BIT) != 0;
             case GYRA:
                 return (packed & GYRA_BIT) != 0;
+            case EMERGENCY:
+                return (packed & (EMERGENCY_MANUAL_BIT | EMERGENCY_FORCED_BIT)) != 0;
             default:
                 return false;
         }
@@ -147,7 +169,7 @@ public final class RollingStockLightStateCodec
         int channels = 0;
         for (RollingStockLightChannel channel : RollingStockLightChannel.values())
         {
-            if (enabled(packed, channel))
+            if (manualEnabled(packed, channel))
             {
                 channels |= channel.mask();
             }
@@ -158,5 +180,21 @@ public final class RollingStockLightStateCodec
     private static RollingStockHeadlightLevel level(RollingStockHeadlightLevel level)
     {
         return level == null ? RollingStockHeadlightLevel.OFF : level;
+    }
+
+    /** Returns operator intent, excluding forced Emergency activation. */
+    public static boolean manualEnabled(int packed, RollingStockLightChannel channel)
+    {
+        if (channel == RollingStockLightChannel.EMERGENCY)
+        {
+            return (packed & EMERGENCY_MANUAL_BIT) != 0;
+        }
+        return enabled(packed, channel);
+    }
+
+    /** Returns the transient indication that server logic holds Emergency on. */
+    public static boolean emergencyForced(int packed)
+    {
+        return (packed & EMERGENCY_FORCED_BIT) != 0;
     }
 }

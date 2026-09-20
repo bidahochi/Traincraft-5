@@ -1,5 +1,7 @@
 package train.client.gui;
 
+import java.util.Collections;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.Entity;
@@ -24,6 +26,20 @@ public class GuiFurnaceCart extends GuiContainer {
 			ySize = RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT;
 		}
 	}
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks)
+    {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        if (lightControls != null)
+        {
+            String tooltip = lightControls.tooltipAt(mouseX, mouseY);
+            if (tooltip != null)
+            {
+                drawHoveringText(Collections.singletonList(tooltip), mouseX, mouseY, fontRendererObj);
+            }
+        }
+    }
 
 	@Override
 	public void initGui() {
