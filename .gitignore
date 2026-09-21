@@ -39,3 +39,4 @@ runserver
 run_server/
 
 gradle.properties
+.tbdevtools-backups/
