@@ -544,15 +544,24 @@ public class PathFindingHelper
         }
     };
 
+    public static final HashSet<EnumCoreTrack> diagonalSwitchCheck = new HashSet<EnumCoreTrack>()
+    {
+        {
+            add(EnumCoreTrack.CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L);
+            add(EnumCoreTrack.CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R);
+        }
+    };
+
     public boolean shouldIgnoreSwitch(EntityMinecart entityMinecart, TileTCRail tile,
             int railX, int railY, int railZ, int meta) {
 
+        final double eps = 0.01;
 
         if (tile != null
-                && (TurnTracksSwitchCheck.contains(tile.getCoreType()))
+                && (TurnTracksSwitchCheck.contains(tile.getCoreType()) || diagonalSwitchCheck.contains(tile.getCoreType()))
                 && tile.canTypeBeModifiedBySwitch) {
             if (meta == 2) {
-                if (entityMinecart.motionZ > 0 && Math.abs(entityMinecart.motionX) < 0.01) {
+                if (entityMinecart.motionZ > 0 && Math.abs(entityMinecart.motionX) < eps) {
                     TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX, railY, railZ + 1);
                     if (tile2 != null && tile2 instanceof TileTCRail) {
                         // ((TileTCRail) tile2).setSwitchState(false, true);
@@ -561,7 +570,7 @@ public class PathFindingHelper
                 }
             }
             if (meta == 0) {
-                if (entityMinecart.motionZ < 0 && Math.abs(entityMinecart.motionX) < 0.01) {
+                if (entityMinecart.motionZ < 0 && Math.abs(entityMinecart.motionX) < eps) {
                     TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX, railY, railZ - 1);
                     if (tile2 != null && tile2 instanceof TileTCRail) {
                         //((TileTCRail) tile2).setSwitchState(false, true);
@@ -570,7 +579,7 @@ public class PathFindingHelper
                 }
             }
             if (meta == 1) {
-                if (Math.abs(entityMinecart.motionZ) < 0.01 && entityMinecart.motionX > 0) {
+                if (Math.abs(entityMinecart.motionZ) < eps && entityMinecart.motionX > 0) {
                     TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX + 1, railY, railZ);
                     if (tile2 != null && tile2 instanceof TileTCRail) {
                         // ((TileTCRail) tile2).setSwitchState(false, true);
@@ -579,7 +588,7 @@ public class PathFindingHelper
                 }
             }
             if (meta == 3) {
-                if (Math.abs(entityMinecart.motionZ) < 0.01 && entityMinecart.motionX < 0) {
+                if (Math.abs(entityMinecart.motionZ) < eps && entityMinecart.motionX < 0) {
                     TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX - 1, railY, railZ);
                     if (tile2 != null && tile2 instanceof TileTCRail) {
                         //((TileTCRail) tile2).setSwitchState(false, true);
@@ -587,6 +596,43 @@ public class PathFindingHelper
                     return true;
                 }
             }
+
+            if (meta == 4) {
+                if (entityMinecart.motionX > eps && entityMinecart.motionZ < -eps) {
+                    TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX + 1, railY, railZ - 1);
+                    if (tile2 != null && tile2 instanceof TileTCRail) {
+                        // ((TileTCRail) tile2).setSwitchState(false, true);
+                    }
+                    return true;
+                }
+            }
+            if (meta == 5) {
+                if (entityMinecart.motionX > eps && entityMinecart.motionZ > eps) {
+                    TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX + 1, railY, railZ + 1);
+                    if (tile2 != null && tile2 instanceof TileTCRail) {
+                        // ((TileTCRail) tile2).setSwitchState(false, true);
+                    }
+                    return true;
+                }
+            }
+            if (meta == 6) {
+                if (entityMinecart.motionX < -eps && entityMinecart.motionZ > eps) {
+                    TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX - 1, railY, railZ + 1);
+                    if (tile2 != null && tile2 instanceof TileTCRail) {
+                        // ((TileTCRail) tile2).setSwitchState(false, true);
+                    }
+                    return true;
+                }
+            }
+            if (meta == 7) {
+                if (entityMinecart.motionX < -eps && entityMinecart.motionZ < -eps) {
+                    TileEntity tile2 = entityMinecart.worldObj.getTileEntity(railX - 1, railY, railZ - 1);
+                    if (tile2 != null && tile2 instanceof TileTCRail) {
+                        // ((TileTCRail) tile2).setSwitchState(false, true);
+                    }
+                    return true;
+                }
+                }
         }
         return false;
     }

@@ -162,6 +162,9 @@ public class ItemTCRail extends ItemPart {
 			add("MEDIUM_RIGHT_PARALLEL_SWITCH");
 			add("MEDIUM_LEFT_PARALLEL_SWITCH");
 			add("LARGE_LEFT_PARALLEL_SWITCH");
+			add("LARGE_RIGHT_PARALLEL_SWITCH");
+			add("DIAGONAL_45DEGREE_4x3_SWITCH_LEFT");
+			add("DIAGONAL_45DEGREE_4x3_SWITCH_RIGHT");
 		}
 	};
 
@@ -3088,9 +3091,10 @@ public class ItemTCRail extends ItemPart {
 		if (EnumCoreTrack.CORE_DIAGONAL_45DEGREE_4X3_SWITCH.equals(type.getCoreTrack()))
 		{
 			String orientation = getTrackOrientation(l, yaw);
-			if (orientation != "")
-			{
-				directionalTrack = EnumTracks.GetTrackByLabel(type.getLabel().replace(EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel(),  EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel() + "_" + orientation.toUpperCase()));
+			if (orientation != "") {
+				directionalTrack = EnumTracks.GetTrackByLabel(type.getLabel().replace(
+						EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel(),
+						EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel() + "_" + orientation.toUpperCase()));
 			}
 
 		}
@@ -4362,15 +4366,18 @@ public class ItemTCRail extends ItemPart {
 
 		int exitDir = (facing + (isRight ? 4 : 3)) & 7;
 
+		int[] turnPosX = flipArraySign(xArray, x, false);
+		int[] turnPosZ = flipArraySign(zArray, z, false);
+
 		// 8-way diagonal direction code for the diagonal-straight rail pieces below.
 		// Cardinal facings 0-3 map to diagonal codes 4-7; which one depends on isRight.
 		int diagFacing = 4 + (isRight ? facing : (facing + 3) % 4);
-		if (!putDownTurn(context, player, world, false, x, y, z, flipArraySign(xArray, x, false), flipArraySign(zArray, z, false), facing, false, exitDir, x + xArray[xArray.length-1], z + zArray[zArray.length-1] , radius, x + worldCenterX,
+		if (!putDownTurn(context, player, world, false, x, y, z, turnPosX, turnPosZ, facing, false, diagFacing, x + xArray[xArray.length-1], z + zArray[zArray.length-1] , radius, x + worldCenterX,
 				y + 1, z + worldCenterZ, typeVariant90Turn, tempType.getItem().item))
 			return false;
 
 		int originShiftX = 0, originShiftZ = 0;
-		System.out.println(facing + " and " + isRight + " and " + tempType.getLabel());
+		System.out.println(facing + " and " + isRight);
 		switch (facing) {
 			case 1:
 				originShiftX = -1;
@@ -4394,7 +4401,7 @@ public class ItemTCRail extends ItemPart {
 		if (tcRailTurn != null) {
 			tcRailTurn.hasModel = false;
 		}
-		world.setBlockMetadataWithNotify(x + originShiftX, y + 1, z + originShiftZ, facing, 3);//to force client update
+		world.setBlockMetadataWithNotify(x + originShiftX, y + 1, z + originShiftZ, diagFacing, 3);//to force client update
 
 		for (int i = 0; i < 3; i++) {
 			if (!canPlaceTrack(context, player, world, x + (dx*i), y + 1, z + (dz*i))) {

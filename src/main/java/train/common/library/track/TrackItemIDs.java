@@ -142,6 +142,7 @@ public enum TrackItemIDs
 
     tcRailEmbeddedMedium45DegreeSwitch("track_switch_45degree_3x5_e", 5),
     tcRailEmbeddedLarge45DegreeSwitch( "track_switch_45degree_4x8_e", 5),
+    tcRailEmbedded4x3Diagonal45DegreeSwitch( "track_switch_diagonal_45degree_4x3_e", 5),
     tcRailEmbeddedCrossoverSwitch10x2("track_switch_crossover_10x2_e", 5),
 
     //diamonds
@@ -201,6 +202,7 @@ public enum TrackItemIDs
 
     tcRail_CONCRETE_TYPE1_Medium45DegreeSwitch("concrete/track_switch_45degree_3x5", 5),
     tcRail_CONCRETE_TYPE1_Large45DegreeSwitch("concrete/track_switch_45degree_4x8", 5),
+    tcRail_CONCRETE_TYPE1_4x3Diagonal45DegreeSwitch("concrete/track_switch_45degree_4x8", 5),
     tcRail_CONCRETE_TYPE1_CrossoverSwitch10x2("concrete/track_switch_crossover_10x2", 5),
 
     //diamonds
@@ -261,6 +263,7 @@ public enum TrackItemIDs
 
     tcRail_CONCRETE_TYPE2_Medium45DegreeSwitch("concrete_2/track_switch_45degree_3x5", 5),
     tcRail_CONCRETE_TYPE2_Large45DegreeSwitch("concrete_2/track_switch_45degree_4x8", 5),
+    tcRail_CONCRETE_TYPE2_4x3Diagonal45DegreeSwitch("concrete_2/track_switch_45degree_4x8", 5),
     tcRail_CONCRETE_TYPE2_CrossoverSwitch10x2("concrete_2/track_switch_crossover_10x2", 5),
 
     //diamonds
@@ -320,6 +323,7 @@ public enum TrackItemIDs
 
     tcRail_WOOD_TYPE1_Medium45DegreeSwitch("wood_treated/track_switch_45degree_3x5", 5),
     tcRail_WOOD_TYPE1_Large45DegreeSwitch("wood_treated/track_switch_45degree_4x8", 5),
+    tcRail_WOOD_TYPE1_4x3Diagonal45DegreeSwitch("wood_treated/track_switch_45degree_4x8", 5),
     tcRail_WOOD_TYPE1_CrossoverSwitch10x2("wood_treated/track_switch_crossover_10x2", 5),
 
     //diamonds
@@ -379,6 +383,7 @@ public enum TrackItemIDs
 
     tcRail_WOOD_TYPE2_Medium45DegreeSwitch("wood_spurce/track_switch_45degree_3x5", 5),
     tcRail_WOOD_TYPE2_Large45DegreeSwitch("wood_spurce/track_switch_45degree_4x8", 5),
+    tcRail_WOOD_TYPE2_4x3Diagonal45DegreeSwitch("wood_spurce/track_switch_45degree_4x8", 5),
     tcRail_WOOD_TYPE2_CrossoverSwitch10x2("wood_spurce/track_switch_crossover_10x2", 5),
 
     //diamonds

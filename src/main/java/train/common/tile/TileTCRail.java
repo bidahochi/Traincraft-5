@@ -1090,23 +1090,25 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 				if (te1 instanceof TileTCRail)
 				{
 					TileTCRail routeRail = (TileTCRail)te1;
-					if (newSwitchState)
-					{
-						if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("LEFT"))
+					if (routeRail.canTypeBeModifiedBySwitch) {
+						if (newSwitchState)
 						{
-							setSwitchRouteType(routeRail, "MEDIUM_LEFT_TURN");
-							routeRail.switchActive = true;
+							if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("LEFT"))
+							{
+								setSwitchRouteType(routeRail, "MEDIUM_LEFT_TURN");
+								routeRail.switchActive = true;
+							}
+							else if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("RIGHT"))
+							{
+								setSwitchRouteType(routeRail, "MEDIUM_RIGHT_TURN");
+								routeRail.switchActive = true;
+							}
 						}
-						else if (tileEntity.getType().contains("SWITCH") && tileEntity.getType().contains("RIGHT"))
+						else
 						{
-							setSwitchRouteType(routeRail, "MEDIUM_RIGHT_TURN");
-							routeRail.switchActive = true;
+							setSwitchRouteType(routeRail, EnumTracks.SMALL_STRAIGHT.getLabel());
+							routeRail.switchActive = false;
 						}
-					}
-					else
-					{
-						setSwitchRouteType(routeRail, EnumTracks.SMALL_STRAIGHT.getLabel());
-						routeRail.switchActive = false;
 					}
 				}
 				offsetX += a;

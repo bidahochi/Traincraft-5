@@ -178,6 +178,7 @@ public class TCItems {
 		TrackItemIDs.tcRailEmbeddedLargeParallelSwitch.item = new ItemTCRail(EnumTracks.EMBEDDED_LARGE_PARALLEL_SWITCH);
 		TrackItemIDs.tcRailEmbeddedMedium45DegreeSwitch.item = new ItemTCRail(EnumTracks.EMBEDDED_MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRailEmbeddedLarge45DegreeSwitch.item = new ItemTCRail(EnumTracks.EMBEDDED_LARGE_45DEGREE_SWITCH);
+		TrackItemIDs.tcRailEmbedded4x3Diagonal45DegreeSwitch.item = new ItemTCRail(EnumTracks.EMBEDDED_DIAGONAL_45DEGREE_4X3_SWITCH);
 
 		TrackItemIDs.tcRailEmbeddedCrossoverSwitch10x2.item = new ItemTCRail(EnumTracks.EMBEDDED_CROSSOVER_SWITCH_10X2);
 
@@ -244,6 +245,7 @@ public class TCItems {
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_LargeParallelSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_LARGE_PARALLEL_SWITCH);
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_Medium45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_Large45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_LARGE_45DEGREE_SWITCH);
+		TrackItemIDs.tcRail_CONCRETE_TYPE1_4x3Diagonal45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_DIAGONAL_45DEGREE_4X3_SWITCH);
 
 		TrackItemIDs.tcRail_CONCRETE_TYPE1_CrossoverSwitch10x2.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE1_CROSSOVER_SWITCH_10X2);
 
@@ -301,6 +303,7 @@ public class TCItems {
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_LargeParallelSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_LARGE_PARALLEL_SWITCH);
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_Medium45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_Large45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_LARGE_45DEGREE_SWITCH);
+		TrackItemIDs.tcRail_CONCRETE_TYPE2_4x3Diagonal45DegreeSwitch.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_DIAGONAL_45DEGREE_4X3_SWITCH);
 
 		TrackItemIDs.tcRail_CONCRETE_TYPE2_CrossoverSwitch10x2.item = new ItemTCRail(EnumTracks.CONCRETE_TYPE2_CROSSOVER_SWITCH_10X2);
 
@@ -358,6 +361,7 @@ public class TCItems {
 		TrackItemIDs.tcRail_WOOD_TYPE1_LargeParallelSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_LARGE_PARALLEL_SWITCH);
 		TrackItemIDs.tcRail_WOOD_TYPE1_Medium45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRail_WOOD_TYPE1_Large45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_LARGE_45DEGREE_SWITCH);
+		TrackItemIDs.tcRail_WOOD_TYPE1_4x3Diagonal45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_DIAGONAL_45DEGREE_4X3_SWITCH);
 
 		TrackItemIDs.tcRail_WOOD_TYPE1_CrossoverSwitch10x2.item = new ItemTCRail(EnumTracks.WOOD_TYPE1_CROSSOVER_SWITCH_10X2);
 
@@ -415,6 +419,7 @@ public class TCItems {
 		TrackItemIDs.tcRail_WOOD_TYPE2_LargeParallelSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_LARGE_PARALLEL_SWITCH);
 		TrackItemIDs.tcRail_WOOD_TYPE2_Medium45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_MEDIUM_45DEGREE_SWITCH);
 		TrackItemIDs.tcRail_WOOD_TYPE2_Large45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_LARGE_45DEGREE_SWITCH);
+		TrackItemIDs.tcRail_WOOD_TYPE2_4x3Diagonal45DegreeSwitch.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_DIAGONAL_45DEGREE_4X3_SWITCH);
 
 		TrackItemIDs.tcRail_WOOD_TYPE2_CrossoverSwitch10x2.item = new ItemTCRail(EnumTracks.WOOD_TYPE2_CROSSOVER_SWITCH_10X2);
 
