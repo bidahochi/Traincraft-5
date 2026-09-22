@@ -26,6 +26,7 @@ import train.client.render.lighting.BoundedIdentityCache;
 import train.client.render.lighting.ClientRollingStockLighting;
 import train.client.render.lighting.PlacedModelLighting;
 import train.client.render.lighting.RollingStockLightOcclusion;
+import train.client.render.translucency.TmtTranslucencyContext;
 
 /**
  * Makes large rolling-stock bodies cheaper to render.
@@ -126,6 +127,9 @@ public final class ModelRendererTurboBatch {
 	}
 
 	public static void begin(Object owner, Entity entity) {
+		if (TmtTranslucencyContext.isReplaying()) {
+			return;
+		}
 		if (!ConfigHandler.ENABLE_TMT_MODEL_BATCHING || owner == null) {
 			return;
 		}

@@ -10,6 +10,8 @@ import train.common.enums.BoxName;
 import train.client.render.lighting.ClientRollingStockLighting;
 import train.client.render.lighting.PlacedModelLighting;
 import train.client.render.lighting.RollingStockLightOcclusion;
+import train.client.render.translucency.TmtPartRenderMode;
+import train.client.render.translucency.TmtTranslucencyContext;
 import train.common.api.LightBeamRotation;
 import train.common.core.handlers.ConfigHandler;
 
@@ -1978,6 +1980,13 @@ public class ModelRendererTurbo
         if(!showModel){
             return;
         }
+        TmtPartRenderMode translucencyMode =
+            TmtTranslucencyContext.enterPart(this, Tessellator.getLastTextureUri());
+        if (translucencyMode == TmtPartRenderMode.SKIP_REPLAY_LEAF) {
+            return;
+        }
+        boolean translucencyReplay =
+            translucencyMode == TmtPartRenderMode.REPLAY;
         /*
          * Every normal MRT render first asks the batch system whether this part
          * has already been emitted. Returning true means this exact part was
@@ -1986,10 +1995,12 @@ public class ModelRendererTurbo
          * the per-part display-list path below in charge, which is
          * important for animated, texture-swapped, or unsupported parts.
          */
-        if(ModelRendererTurboBatch.capture(this, scale, bool)){
+        if(translucencyReplay == false && ModelRendererTurboBatch.capture(this, scale, bool)){
             return;
         }
-        RollingStockLightOcclusion.capturePart(this, scale, bool);
+        if(translucencyReplay == false){
+            RollingStockLightOcclusion.capturePart(this, scale, bool);
+        }
         if(!compiled || forcedRecompile){
             compileDisplayList(scale);
         }
@@ -2015,7 +2026,7 @@ public class ModelRendererTurbo
             if(rotateAngleX != 0.0F){
                 GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
-            renderDisplayListWithLighting(scale);
+            renderDisplayListWithLighting(scale, translucencyReplay);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -2026,7 +2037,7 @@ public class ModelRendererTurbo
         {
         if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
-                renderDisplayListWithLighting(scale);
+                renderDisplayListWithLighting(scale, translucencyReplay);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -2035,7 +2046,7 @@ public class ModelRendererTurbo
             GL11.glTranslatef(-rotationPointX * scale, -rotationPointY * scale, -rotationPointZ * scale);
         }
         else{
-                renderDisplayListWithLighting(scale);
+                renderDisplayListWithLighting(scale, translucencyReplay);
         	if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -2046,8 +2057,13 @@ public class ModelRendererTurbo
     }
 
     /** Renders compiled model geometry while applying the active per-part lighting mode. */
-    private void renderDisplayListWithLighting(float scale)
+    private void renderDisplayListWithLighting(float scale, boolean translucencyReplay)
     {
+        if (translucencyReplay)
+        {
+            TmtTranslucencyContext.drawTranslucentFaces(this, scale);
+            return;
+        }
         if (ConfigHandler.enhancedLightingEnabled() == false)
         {
             callDisplayList();
@@ -2165,6 +2181,7 @@ public class ModelRendererTurbo
     		for(int i = 0; itr.hasNext(); i++){
     			TextureGroup curTexGroup = itr.next();
     			curTexGroup.loadTexture();
+                TmtTranslucencyContext.observeTexture(Tessellator.getLastTextureUri());
     			GL11.glCallList(displayListArray[i]);
     			if(!defaultTexture.equals("")){
     				Tessellator.bindTexture(new ResourceLocation("", defaultTexture));
