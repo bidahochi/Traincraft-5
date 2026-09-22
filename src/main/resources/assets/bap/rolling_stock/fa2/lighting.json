@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fa2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_l_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_1": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:purple": {},
+    "bap:lime": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:magenta": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

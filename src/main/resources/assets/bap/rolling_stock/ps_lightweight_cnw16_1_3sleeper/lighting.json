@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw16_1_3sleeper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:green": {}
+  }
+}

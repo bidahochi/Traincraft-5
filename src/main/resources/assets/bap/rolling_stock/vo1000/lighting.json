@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:vo1000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:skin16": {}
+  }
+}

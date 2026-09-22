@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hbc1b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "prime_1": {
+          "preset": "prime_1"
+        },
+        "prime_3": {
+          "preset": "prime_3"
+        },
+        "prime_2": {
+          "preset": "prime_2"
+        },
+        "prime_4": {
+          "preset": "prime_4"
+        },
+        "rear_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_left_marker": {
+          "preset": "marker_light"
+        },
+        "front_left_marker": {
+          "preset": "marker_light"
+        },
+        "front_right_marker": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:blue": {},
+    "bap:pink": {},
+    "bap:purple": {},
+    "bap:green": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

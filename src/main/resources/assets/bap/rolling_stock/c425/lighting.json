@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:c425",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_126": {
+          "preset": "marker_light"
+        },
+        "marker_body_127": {
+          "preset": "marker_light"
+        },
+        "marker_body_171": {
+          "preset": "marker_light"
+        },
+        "marker_body_172": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:yellow": {},
+    "bap:skin16": {},
+    "bap:green": {}
+  }
+}

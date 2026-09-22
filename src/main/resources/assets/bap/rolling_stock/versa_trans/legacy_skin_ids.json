@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "0": "bap:black"
+  },
+  "stock": "bap:versa_trans"
+}

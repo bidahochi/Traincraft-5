@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fafdl",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_l_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_2": {
+          "preset": "marker_light"
+        },
+        "marker_r_type_1": {
+          "preset": "marker_light"
+        },
+        "marker_l_type_1": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:grey": {}
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40dash2b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_155": {
+          "preset": "marker_light"
+        },
+        "marker_body_156": {
+          "preset": "marker_light"
+        },
+        "marker_body_301": {
+          "preset": "marker_light"
+        },
+        "marker_body_302": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {}
+  }
+}

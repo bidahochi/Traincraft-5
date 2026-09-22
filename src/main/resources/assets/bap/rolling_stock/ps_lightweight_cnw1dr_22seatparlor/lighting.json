@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw1dr_22seatparlor",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_lf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_593": {
+          "preset": "marker_light"
+        },
+        "marker_rf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_596": {
+          "preset": "marker_light"
+        },
+        "marker_body_599": {
+          "preset": "marker_light"
+        },
+        "marker_body_600": {
+          "preset": "marker_light"
+        },
+        "marker_body_604": {
+          "preset": "marker_light"
+        },
+        "marker_body_605": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:blue": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:lightblue": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:magenta": {},
+    "bap:purple": {},
+    "bap:skin16": {}
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:c415s",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_81": {
+          "preset": "marker_light"
+        },
+        "marker_body_82": {
+          "preset": "marker_light"
+        },
+        "marker_body_84": {
+          "preset": "marker_light"
+        },
+        "marker_body_85": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
+  }
+}

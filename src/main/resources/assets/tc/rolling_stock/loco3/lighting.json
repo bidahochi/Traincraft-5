@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:loco3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:green": {},
+    "tc:yellow": {},
+    "tc:black": {},
+    "tc:lightblue": {}
+  }
+}

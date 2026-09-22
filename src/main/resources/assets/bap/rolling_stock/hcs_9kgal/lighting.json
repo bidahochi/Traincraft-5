@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hcs_9kgal",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_headlight": {
+          "preset": "headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:skin19": {},
+    "bap:skin21": {},
+    "bap:skin20": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

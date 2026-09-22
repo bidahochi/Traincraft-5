@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freighttrailer",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:yellow": {},
+    "tc:lightblue": {},
+    "tc:red": {},
+    "tc:grey": {},
+    "tc:lightgrey": {},
+    "tc:magenta": {},
+    "tc:orange": {},
+    "tc:pink": {},
+    "tc:purple": {},
+    "tc:lime": {},
+    "tc:white": {},
+    "tc:green": {}
+  }
+}

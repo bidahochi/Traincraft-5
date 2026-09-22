@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:b30-7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_92": {
+          "preset": "marker_light"
+        },
+        "marker_body_93": {
+          "preset": "marker_light"
+        },
+        "noselightR": {
+          "preset": "headlight"
+        },
+        "noselightL": {
+          "preset": "headlight"
+        },
+        "gyralight_rear_l": {
+          "preset": "headlight"
+        },
+        "gyralight_rear_r": {
+          "preset": "headlight"
+        },
+        "marker_body_230": {
+          "preset": "marker_light"
+        },
+        "marker_body_231": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_407": {
+          "preset": "instrument"
+        },
+        "marker_2_body_438": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_439": {
+          "preset": "marker_light"
+        },
+        "marker_booster_body_23": {
+          "preset": "marker_light"
+        },
+        "marker_booster_body_24": {
+          "preset": "marker_light"
+        },
+        "marker_booster_ssw_body_25": {
+          "preset": "marker_light"
+        },
+        "marker_booster_ssw_body_26": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin34": {},
+    "bap:skin31": {},
+    "bap:blue": {},
+    "bap:skin38": {},
+    "bap:skin36": {},
+    "bap:skin35": {},
+    "bap:skin37": {},
+    "bap:skin42": {}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:66ftcb",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:red": {},
+    "bap:purple": {},
+    "bap:lightblue": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:yellow": {}
+  }
+}

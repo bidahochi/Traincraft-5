@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "1": "bap:red",
+    "11": "bap:yellow",
+    "0": "bap:black"
+  },
+  "stock": "bap:budd_lightweight_prewar_baggage"
+}

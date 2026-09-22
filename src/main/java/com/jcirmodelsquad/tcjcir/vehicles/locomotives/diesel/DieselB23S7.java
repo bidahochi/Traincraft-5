@@ -11,18 +11,6 @@ import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
 public class DieselB23S7 extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:b23s7")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_154", "marker_body_155", "marker_body_338",
-            "marker_body_339")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_149", "numberboard_body_150", "numberboard_body_328",
-            "numberboard_body_329")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -65,10 +53,5 @@ public class DieselB23S7 extends DieselTrain {
         return "1989-1991";
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

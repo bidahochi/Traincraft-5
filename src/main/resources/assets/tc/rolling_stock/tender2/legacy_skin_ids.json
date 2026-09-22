@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "tc:black",
+    "1": "tc:red",
+    "4": "tc:blue",
+    "2": "tc:green",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:tender2"
+}

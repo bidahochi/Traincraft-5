@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dot20600",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:green": {},
+    "bap:lightgrey": {}
+  }
+}

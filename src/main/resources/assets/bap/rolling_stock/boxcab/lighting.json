@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:boxcab",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:white": {},
+    "bap:black": {},
+    "bap:green": {}
+  }
+}

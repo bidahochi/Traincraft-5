@@ -17,6 +17,23 @@ public class ModelRenderHelper
 	private static final int COMMANDER_BEACON_PERIOD_TICKS = 20;
 	private static final int COMMANDER_BEACON_ON_TICKS = COMMANDER_BEACON_PERIOD_TICKS / 2;
     /**
+     * Renders parts using the entity's available light state. This also supports read-only
+     * state providers such as tenders; stock without light state keeps the legacy freight
+     * lighting behavior. Both helpers defer to enhanced lighting while its scope is active.
+     */
+    public static void renderRollingStockModel(ModelRendererTurbo[] parts, Entity entity, float scale)
+    {
+        if (entity instanceof IRollingStockLightState)
+        {
+            renderModelWithRollingStockLightState(parts, (IRollingStockLightState) entity, scale);
+        }
+        else
+        {
+            renderModelWithStandardFreightRollingStock(parts, entity, scale);
+        }
+    }
+
+    /**
      * Renders rolling-stock model parts through the enhanced lighting adapter when a lighting
      * scope is active. Otherwise, the compatibility path applies the original lightmap, beacon, and
      * culling behavior to the recognized part tags: lamp, instrument, numberboard, marker, ditch,
@@ -42,7 +59,7 @@ public class ModelRenderHelper
         }
         for (ModelRendererTurbo bm : bodyModel)
         {
-            switch (bm.boxName)
+            switch (bm.boxName == null ? "" : bm.boxName)
             {
                 case "cull":
                     GL11.glDisable(GL11.GL_CULL_FACE);
@@ -304,7 +321,7 @@ public class ModelRenderHelper
         }
         for (ModelRendererTurbo bm : bodyModel)
         {
-            switch (bm.boxName)
+            switch (bm.boxName == null ? "" : bm.boxName)
             {
                 case "lamp":
                 case "numberboard":

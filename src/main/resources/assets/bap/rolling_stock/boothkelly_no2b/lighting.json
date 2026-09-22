@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:boothkelly_no2b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:orange": {}
+  }
+}

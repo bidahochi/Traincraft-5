@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cf7angle2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_39": {
+          "preset": "marker_light"
+        },
+        "marker_body_41": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:skin16": {},
+    "bap:green": {},
+    "bap:white": {},
+    "bap:skin17": {},
+    "bap:cyan": {}
+  }
+}

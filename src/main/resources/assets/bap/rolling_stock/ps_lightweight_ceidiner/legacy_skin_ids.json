@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_ceidiner"
+}

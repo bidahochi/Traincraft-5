@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "2": "bap:green",
+    "11": "bap:yellow",
+    "10": "bap:lime"
+  },
+  "stock": "bap:ps_lightweight_gnrpo30"
+}

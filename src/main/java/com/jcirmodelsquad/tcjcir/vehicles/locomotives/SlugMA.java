@@ -8,18 +8,6 @@ import train.common.enums.LockoutGroup;
 
 public class SlugMA extends AbstractTankSlug
 {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:slugma")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_157", "marker_body_158", "marker_body_159",
-            "marker_body_160")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "front_numberboard_body_161", "front_numberboard_body_162", "rear_numberboard_body_155",
-            "rear_numberboard_body_156")
-        .build();
 
 	public SlugMA(World world) {
 		super(world);
@@ -41,10 +29,5 @@ public class SlugMA extends AbstractTankSlug
 		return 2.5F;
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_13": {
+          "preset": "instrument"
+        },
+        "marker_two_body_391": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_393": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_406": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_470": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:red": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:black": {},
+    "bap:skin18": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:grey": {},
+    "bap:skin23": {},
+    "bap:skin41": {},
+    "bap:skin42": {},
+    "bap:skin43": {},
+    "bap:skin19": {},
+    "bap:skin24": {}
+  }
+}

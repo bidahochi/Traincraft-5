@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "8": "bap:grey",
+    "2": "bap:green",
+    "14": "bap:orange",
+    "9": "bap:pink",
+    "15": "bap:white",
+    "4": "bap:blue",
+    "7": "bap:lightgrey",
+    "13": "bap:magenta",
+    "1": "bap:red",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:alcos2"
+}

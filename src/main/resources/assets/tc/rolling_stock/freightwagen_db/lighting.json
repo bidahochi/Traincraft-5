@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightwagen_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:green": {},
+    "tc:yellow": {},
+    "tc:orange": {},
+    "tc:pink": {}
+  }
+}

@@ -4,15 +4,6 @@ import net.minecraft.world.World;
 import train.common.api.AbstractPassengerCar;
 
 public class MILW1935_21SeatParlor_Observation extends AbstractPassengerCar {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:milw1935_21seatparlor_observation")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_body_541", "marker_body_543", "marker_body_546",
-            "marker_body_547", "marker_body_548", "marker_body_551",
-            "marker_body_552")
-        .build();
 
 
 	public MILW1935_21SeatParlor_Observation(World world)
@@ -45,9 +36,4 @@ public class MILW1935_21SeatParlor_Observation extends AbstractPassengerCar {
 		return "(Rebuilt) 1935";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

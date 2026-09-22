@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:thanos",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

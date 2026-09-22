@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_52seat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:purple": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:white": {},
+    "bap:red": {}
+  }
+}

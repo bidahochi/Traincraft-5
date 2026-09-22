@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fm_h24-66",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_fl_body_263": {
+          "preset": "marker_light"
+        },
+        "marker_fr_body_264": {
+          "preset": "marker_light"
+        },
+        "marker_rl_body_265": {
+          "preset": "marker_light"
+        },
+        "marker_rr_body_266": {
+          "preset": "marker_light"
+        },
+        "marker_fl_body_423": {
+          "preset": "marker_light"
+        },
+        "marker_fr_body_424": {
+          "preset": "marker_light"
+        },
+        "marker_rl_body_425": {
+          "preset": "marker_light"
+        },
+        "marker_rr_body_426": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:black": {},
+    "bap:brown": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:lime": {}
+  }
+}

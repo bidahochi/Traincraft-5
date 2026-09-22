@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_soubaggage",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:black": {},
+    "bap:brown": {},
+    "bap:magenta": {}
+  }
+}

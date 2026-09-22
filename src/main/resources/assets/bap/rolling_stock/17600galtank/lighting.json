@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:17600galtank",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:brown": {},
+    "bap:purple": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

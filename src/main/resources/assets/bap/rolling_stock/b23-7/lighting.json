@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:b23-7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_92": {
+          "preset": "marker_light"
+        },
+        "marker_body_93": {
+          "preset": "marker_light"
+        },
+        "noselightR": {
+          "preset": "headlight"
+        },
+        "noselightL": {
+          "preset": "headlight"
+        },
+        "gyralight_rear_l": {
+          "preset": "headlight"
+        },
+        "gyralight_rear_r": {
+          "preset": "headlight"
+        },
+        "marker_body_230": {
+          "preset": "marker_light"
+        },
+        "marker_body_231": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_407": {
+          "preset": "instrument"
+        },
+        "marker_2_body_438": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_439": {
+          "preset": "marker_light"
+        },
+        "marker_booster_body_23": {
+          "preset": "marker_light"
+        },
+        "marker_booster_body_24": {
+          "preset": "marker_light"
+        },
+        "marker_booster_ssw_body_25": {
+          "preset": "marker_light"
+        },
+        "marker_booster_ssw_body_26": {
+          "preset": "marker_light"
+        }
+      }
+    },
+    "profiles": {
+      "bap:b23-7/shared_1": {
+        "fixtures": {
+          "noselightR": {
+            "preset": "gyralite"
+          },
+          "noselightL": {
+            "preset": "gyralite"
+          },
+          "gyralight_rear_l": {
+            "preset": "gyralite"
+          },
+          "gyralight_rear_r": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {
+      "lighting": {
+        "profile": "bap:b23-7/shared_1"
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "profile": "bap:b23-7/shared_1"
+      }
+    },
+    "bap:white": {
+      "lighting": {
+        "profile": "bap:b23-7/shared_1"
+      }
+    },
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:skin17": {},
+    "bap:magenta": {},
+    "bap:purple": {},
+    "bap:skin20": {},
+    "bap:pink": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:skin18": {},
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:skin19": {},
+    "bap:skin21": {},
+    "bap:green": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin29": {},
+    "bap:orange": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin32": {},
+    "bap:skin33": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {}
+  }
+}

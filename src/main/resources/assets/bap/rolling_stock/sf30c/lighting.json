@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sf30c",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:red": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "tc:green",
+    "4": "tc:blue",
+    "10": "tc:lime"
+  },
+  "stock": "tc:king_class_locomotive"
+}

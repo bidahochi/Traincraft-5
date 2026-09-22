@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "14": "bap:orange",
+    "7": "bap:lightgrey",
+    "16": "bap:skin16",
+    "9": "bap:pink",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:b40-8w"
+}

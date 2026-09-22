@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ef1b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:black": {},
+    "bap:pink": {}
+  }
+}

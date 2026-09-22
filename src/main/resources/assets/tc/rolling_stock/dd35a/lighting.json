@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:dd35a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:black": {},
+    "tc:pink": {}
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dd55",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lime": {},
+    "bap:purple": {},
+    "bap:lightgrey": {},
+    "bap:pink": {},
+    "bap:blue": {}
+  }
+}

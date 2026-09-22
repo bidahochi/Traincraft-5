@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gsc_53flat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
+  }
+}

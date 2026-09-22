@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd50",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_marker": {
+          "preset": "marker_light"
+        },
+        "front_marker2": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low2": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high2": {
+          "preset": "marker_light"
+        },
+        "frontHighbeamF": {
+          "preset": "headlight"
+        },
+        "frontHighbeamE": {
+          "preset": "headlight"
+        },
+        "FrontDitchLow1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitchLow2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchLow1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchLow2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitch1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitch2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "front_marker_bugeye_body_345": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_346": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_347": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_348": {
+          "preset": "marker_light"
+        },
+        "RearDitch1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitch2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "cab_speedometer_body_383": {
+          "preset": "instrument"
+        },
+        "FrontDitchHigh1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitchHigh2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchHigh1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchHigh2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "lamp_nose_high_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_high_b": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_b": {
+          "preset": "headlight"
+        },
+        "cab_headlight_upper": {
+          "preset": "headlight"
+        },
+        "cab_headlight_lower": {
+          "preset": "headlight"
+        }
+      }
+    },
+    "profiles": {
+      "bap:sd50/horn_alternating": {
+        "fixtures": {
+          "FrontDitchLow1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "FrontDitchLow2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "RearDitchLow1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitchLow2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitch1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitch2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitch1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitch2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "FrontDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "FrontDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "RearDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "RearDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamF": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "frontHighbeamE": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "cab_headlight_upper": {
+            "preset": "gyralite"
+          },
+          "cab_headlight_lower": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating",
+        "fixtures": {
+          "frontHighbeamF": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "frontHighbeamE": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "FrontDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
+          },
+          "RearDitchHigh1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
+          },
+          "FrontDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
+          },
+          "RearDitchHigh2": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0,
+              "function": {
+                "cycleTicks": 20
+              }
+            }
+          },
+          "cab_headlight_upper": {},
+          "cab_headlight_lower": {}
+        }
+      }
+    },
+    "bap:purple": {
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
+    },
+    "bap:pink": {
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
+    },
+    "bap:blue": {
+      "lighting": {
+        "profile": "bap:sd50/horn_alternating"
+      }
+    },
+    "bap:lightblue": {},
+    "bap:brown": {},
+    "bap:black": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_low_b": {
+            "preset": "mars"
+          },
+          "lamp_nose_low_a": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamF": {
+            "color": "#FFFFFF"
+          },
+          "frontHighbeamE": {
+            "color": "#FFFFFF"
+          },
+          "lamp": {
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_low_b": {
+            "color": "#FFF4B4",
+            "preset": "mars"
+          },
+          "lamp_nose_high_b": {
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_low_a": {
+            "color": "#FFF4B4",
+            "preset": "mars"
+          },
+          "lamp_nose_high_a": {
+            "color": "#FFF4B4"
+          },
+          "cab_headlight_lower": {},
+          "cab_headlight_upper": {}
+        }
+      }
+    },
+    "bap:lightgrey": {},
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:yellow": {}
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:c415l",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_72": {
+          "preset": "marker_light"
+        },
+        "marker_body_73": {
+          "preset": "marker_light"
+        },
+        "marker_body_75": {
+          "preset": "marker_light"
+        },
+        "marker_body_76": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dupx_39200",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:white": {},
+    "bap:green": {},
+    "bap:black": {}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "tc:brown",
+    "11": "tc:yellow",
+    "0": "tc:black",
+    "4": "tc:blue",
+    "6": "tc:cyan",
+    "2": "tc:green",
+    "8": "tc:grey",
+    "12": "tc:lightblue",
+    "7": "tc:lightgrey",
+    "10": "tc:lime",
+    "13": "tc:magenta",
+    "14": "tc:orange",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "1": "tc:red",
+    "15": "tc:white"
+  },
+  "stock": "tc:freightcartus"
+}

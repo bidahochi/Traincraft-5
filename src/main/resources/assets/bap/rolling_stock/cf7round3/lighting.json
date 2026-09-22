@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cf7round3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_39": {
+          "preset": "marker_light"
+        },
+        "marker_body_41": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:skin19": {},
+    "bap:white": {},
+    "bap:lightblue": {},
+    "bap:skin20": {},
+    "bap:skin24": {},
+    "bap:lime": {},
+    "bap:skin17": {},
+    "bap:skin16": {}
+  }
+}

@@ -8,11 +8,6 @@ import train.common.api.Tender;
 
 
 public class HCS_9k_Tender extends Tender  {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:hcs_9k_tender")
-        .defaults()
-        .fixtureType(train.common.api.LightFixtureType.HEADLIGHT, "rear_headlight")
-        .build();
 
     public HCS_9k_Tender(World world) {
         super(world,  LiquidManager.WATER_FILTER);
@@ -46,10 +41,5 @@ public class HCS_9k_Tender extends Tender  {
         return 1.8F;
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

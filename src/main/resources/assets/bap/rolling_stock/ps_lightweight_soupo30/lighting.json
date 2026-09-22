@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_soupo30",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:black": {}
+  }
+}

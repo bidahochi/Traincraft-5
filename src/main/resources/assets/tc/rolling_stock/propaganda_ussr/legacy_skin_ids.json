@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "15": "tc:white",
+    "1": "tc:red"
+  },
+  "stock": "tc:propaganda_ussr"
+}

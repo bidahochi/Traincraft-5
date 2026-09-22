@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightcart2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:white": {},
+    "tc:orange": {}
+  }
+}

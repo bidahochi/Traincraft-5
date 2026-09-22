@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_01400",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_left_marker": {
+          "preset": "marker_light"
+        },
+        "front_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_left_marker": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:yellow": {},
+    "bap:cyan": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:skin16": {},
+    "bap:purple": {}
+  }
+}

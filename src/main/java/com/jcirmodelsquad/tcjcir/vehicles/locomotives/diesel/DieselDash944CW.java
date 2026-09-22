@@ -14,18 +14,6 @@ import train.common.overlaytexture.OTSpecificationDynamic;
 import java.awt.*;
 
 public class DieselDash944CW extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:dash944cw")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_aussy_body_266", "marker_aussy_body_267", "marker_body_135",
-            "marker_body_136")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "numberboard_body_157", "numberboard_body_158", "numberboard_body_63",
-            "numberboard_body_65", "numberboard_upper_body_120", "numberboard_upper_body_255")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -82,10 +70,5 @@ public class DieselDash944CW extends DieselTrain {
     }
 
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:usatcuk",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

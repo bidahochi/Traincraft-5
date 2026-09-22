@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locoe10_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:grey": {},
+    "tc:brown": {},
+    "tc:green": {},
+    "tc:lightgrey": {},
+    "tc:lime": {},
+    "tc:pink": {},
+    "tc:purple": {},
+    "tc:cyan": {}
+  }
+}

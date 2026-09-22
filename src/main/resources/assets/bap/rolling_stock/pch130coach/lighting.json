@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch130coach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:white": {}
+  }
+}

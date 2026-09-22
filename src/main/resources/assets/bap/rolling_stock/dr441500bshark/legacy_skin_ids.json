@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "14": "bap:orange",
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "8": "bap:grey"
+  },
+  "stock": "bap:dr441500bshark"
+}

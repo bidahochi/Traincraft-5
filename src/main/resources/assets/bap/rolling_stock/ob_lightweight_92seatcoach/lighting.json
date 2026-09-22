@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_92seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:yellow": {}
+  }
+}

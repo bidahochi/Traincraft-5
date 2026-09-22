@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pcf_rbl_ribbed",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:lime": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:white": {},
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:lightgrey": {}
+  }
+}

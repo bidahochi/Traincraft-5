@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u18balt",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_82": {
+          "preset": "marker_light"
+        },
+        "marker_body_83": {
+          "preset": "marker_light"
+        },
+        "marker_body_137": {
+          "preset": "marker_light"
+        },
+        "marker_body_138": {
+          "preset": "marker_light"
+        },
+        "marker_body_149": {
+          "preset": "marker_light"
+        },
+        "marker_body_150": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_236": {
+          "preset": "instrument"
+        },
+        "rco_light": {
+          "preset": "instrument"
+        },
+        "lamp_nose_r": {
+          "preset": "headlight"
+        },
+        "lamp_nose_l": {
+          "preset": "headlight"
+        },
+        "gyra_rear_l": {
+          "preset": "gyralite",
+          "color": "#FFF4B4"
+        },
+        "gyra_rear_r": {
+          "preset": "gyralite",
+          "color": "#FFF4B4"
+        },
+        "ditch_front_up_l": {
+          "preset": "ditch_light"
+        },
+        "ditch_front_up_r": {
+          "preset": "ditch_light"
+        },
+        "ditch_rear_up_l": {
+          "preset": "ditch_light"
+        },
+        "ditch_rear_up_r": {
+          "preset": "ditch_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_l": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_r": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra_rear_l": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra_rear_r": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:white": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "ditch_front_up_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch_front_up_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditch_rear_up_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch_rear_up_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          }
+        }
+      }
+    },
+    "bap:skin17": {
+      "lighting": {
+        "fixtures": {
+          "ditch_front_up_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditch_front_up_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch_rear_up_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditch_rear_up_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          }
+        }
+      }
+    },
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "ditch_front_down_l": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_front_down_r": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_rear_down_l": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_rear_down_r": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
+    "bap:lime": {},
+    "bap:skin19": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin21": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_l": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_r": {
+            "preset": "gyralite",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
+    "bap:skin29": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_l": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_r": {
+            "preset": "gyralite",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
+    "bap:skin30": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:black": {}
+  }
+}

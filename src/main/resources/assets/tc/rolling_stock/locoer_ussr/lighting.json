@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locoer_ussr",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

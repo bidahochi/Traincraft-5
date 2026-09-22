@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:fol_m1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:grey": {},
+    "tc:blue": {},
+    "tc:black": {}
+  }
+}

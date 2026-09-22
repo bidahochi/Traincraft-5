@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gatx_airslide",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:skin17": {},
+    "bap:lightgrey": {},
+    "bap:skin18": {},
+    "bap:skin21": {},
+    "bap:skin19": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:skin20": {},
+    "bap:pink": {},
+    "bap:magenta": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {}
+  }
+}

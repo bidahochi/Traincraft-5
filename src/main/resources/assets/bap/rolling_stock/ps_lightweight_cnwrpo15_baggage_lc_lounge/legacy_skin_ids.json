@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:ps_lightweight_cnwrpo15_baggage_lc_lounge"
+}

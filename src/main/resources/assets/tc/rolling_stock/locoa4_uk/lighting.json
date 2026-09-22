@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locoa4_uk",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:lime": {},
+    "tc:black": {},
+    "tc:green": {},
+    "tc:white": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:c41tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:grey": {}
+  }
+}

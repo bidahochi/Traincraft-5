@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "14": "bap:orange"
+  },
+  "stock": "bap:ps_lightweight_atsf50seatcoach_observation"
+}

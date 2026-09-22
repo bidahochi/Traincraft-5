@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "6": "bap:cyan",
+    "15": "bap:white",
+    "5": "bap:purple",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:wvcaboose"
+}

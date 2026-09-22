@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f3b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:skin31": {},
+    "bap:skin17": {},
+    "bap:black": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:lightblue": {},
+    "bap:lime": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin34": {}
+  }
+}

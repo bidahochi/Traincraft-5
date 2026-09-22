@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "4": "bap:blue",
+    "3": "bap:brown",
+    "2": "bap:green",
+    "9": "bap:pink",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:40ft_husky"
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "3": "bap:brown",
+    "4": "bap:blue"
+  },
+  "stock": "bap:budd_lightweight_atsf34seatparlor_observation"
+}

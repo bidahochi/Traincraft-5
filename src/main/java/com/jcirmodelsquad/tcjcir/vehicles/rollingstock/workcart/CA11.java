@@ -3,20 +3,10 @@ package com.jcirmodelsquad.tcjcir.vehicles.rollingstock.workcart;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.AbstractWorkCart;
-import train.common.api.RollingStockSkinLightingProfiles;
 import train.common.enums.LockoutGroup;
 
 public class CA11 extends AbstractWorkCart
 {
-    static final RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        RollingStockSkinLightingProfiles.builder("bap:ca11")
-        .defaults()
-        .emissiveOnly(
-            "rear_center", "front_center",
-            "front_right", "front_left", "rear_left", "rear_right",
-            "front_headlight_upper", "front_headlight_lower",
-            "left_side_upper", "left_side_lower")
-        .build();
 
     public CA11(World world) {
         super(world);
@@ -32,11 +22,6 @@ public class CA11 extends AbstractWorkCart
         InsertTexture(9, "");
     }
 
-    @Override
-    protected RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
     @Override
     public String transportCountry()

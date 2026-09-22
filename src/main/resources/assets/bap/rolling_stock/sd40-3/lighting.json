@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40-3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_signal_body_297": {
+          "preset": "instrument"
+        },
+        "cab_signal_body_298": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:orange": {}
+  }
+}

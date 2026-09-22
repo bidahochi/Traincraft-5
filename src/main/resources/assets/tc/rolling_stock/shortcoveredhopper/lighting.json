@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:shortcoveredhopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:grey": {},
+    "tc:orange": {},
+    "tc:lightblue": {},
+    "tc:lime": {},
+    "tc:yellow": {},
+    "tc:blue": {},
+    "tc:cyan": {},
+    "tc:skin16": {}
+  }
+}

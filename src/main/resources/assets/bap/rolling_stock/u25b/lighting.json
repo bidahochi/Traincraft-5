@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:u25b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_56": {
+          "preset": "instrument"
+        },
+        "marker_body_225": {
+          "preset": "marker_light"
+        },
+        "marker_body_226": {
+          "preset": "marker_light"
+        },
+        "marker_body_227": {
+          "preset": "marker_light"
+        },
+        "marker_body_228": {
+          "preset": "marker_light"
+        },
+        "cab_signal_body_354": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:skin18": {},
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:red": {},
+    "bap:skin17": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:brown": {}
+  }
+}

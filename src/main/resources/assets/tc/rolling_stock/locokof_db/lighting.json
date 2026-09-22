@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locokof_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:green": {},
+    "tc:yellow": {},
+    "tc:black": {},
+    "tc:blue": {},
+    "tc:cyan": {}
+  }
+}

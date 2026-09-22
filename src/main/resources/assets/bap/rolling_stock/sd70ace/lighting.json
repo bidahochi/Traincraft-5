@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd70ace",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_cn_body_273": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_274": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_279": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_281": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:black": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {}
+  }
+}

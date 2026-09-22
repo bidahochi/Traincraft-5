@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:berkshire_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:grey": {},
+    "tc:lightgrey": {}
+  }
+}

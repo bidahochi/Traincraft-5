@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:highrail",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:white": {},
+    "bap:lightgrey": {}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:passenger3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

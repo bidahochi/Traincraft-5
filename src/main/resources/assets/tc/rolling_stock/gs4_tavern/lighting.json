@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:gs4_tavern",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:white": {},
+    "tc:yellow": {},
+    "tc:brown": {},
+    "tc:lime": {},
+    "tc:red": {},
+    "tc:grey": {},
+    "tc:green": {},
+    "tc:lightgrey": {},
+    "tc:black": {},
+    "tc:lightblue": {},
+    "tc:skin17": {},
+    "tc:skin18": {},
+    "tc:skin19": {}
+  }
+}

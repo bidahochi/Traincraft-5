@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightcarl",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:blue": {}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sbms",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_168": {
+          "preset": "marker_light"
+        },
+        "marker_body_169": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:pink": {},
+    "bap:black": {}
+  }
+}

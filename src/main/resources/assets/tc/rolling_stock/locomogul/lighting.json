@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locomogul",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:black": {},
+    "tc:brown": {},
+    "tc:green": {},
+    "tc:red": {},
+    "tc:white": {}
+  }
+}

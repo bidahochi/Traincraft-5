@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:40highcube",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:cyan": {},
+    "bap:orange": {},
+    "bap:grey": {},
+    "bap:red": {},
+    "bap:lime": {},
+    "bap:lightgrey": {},
+    "bap:pink": {},
+    "bap:purple": {},
+    "bap:blue": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:magenta": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

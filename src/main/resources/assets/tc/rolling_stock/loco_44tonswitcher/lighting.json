@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:loco_44tonswitcher",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:cyan": {}
+  }
+}

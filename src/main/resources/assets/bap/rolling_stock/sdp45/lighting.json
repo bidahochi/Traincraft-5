@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdp45",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:purple": {},
+    "bap:pink": {}
+  }
+}

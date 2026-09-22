@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:vl10",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

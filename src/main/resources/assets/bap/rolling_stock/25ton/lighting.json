@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:25ton",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:orange": {},
+    "bap:green": {}
+  }
+}

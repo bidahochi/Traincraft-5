@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "13": "bap:magenta",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "11": "bap:yellow",
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "5": "bap:purple",
+    "15": "bap:white",
+    "0": "bap:black"
+  },
+  "stock": "bap:ps_lightweight_bm56seatcoach"
+}

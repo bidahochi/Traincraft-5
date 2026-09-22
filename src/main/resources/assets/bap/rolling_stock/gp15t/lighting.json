@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp15t",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_178": {
+          "preset": "marker_light"
+        },
+        "marker_body_179": {
+          "preset": "marker_light"
+        },
+        "marker_body_189": {
+          "preset": "marker_light"
+        },
+        "marker_body_190": {
+          "preset": "marker_light"
+        },
+        "marker_nose": {
+          "preset": "marker_light"
+        },
+        "rear_marker_body_391": {
+          "preset": "marker_light"
+        },
+        "rear_marker_body_392": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {}
+  }
+}

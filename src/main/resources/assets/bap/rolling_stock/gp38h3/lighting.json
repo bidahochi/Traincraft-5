@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp38h3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:blue": {}
+  }
+}

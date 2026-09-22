@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cf7b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:cyan": {}
+  }
+}

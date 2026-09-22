@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:ceeslug"
+}

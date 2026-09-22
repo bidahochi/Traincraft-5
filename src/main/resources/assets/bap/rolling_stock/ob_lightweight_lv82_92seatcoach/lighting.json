@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_lv82_92seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:white": {},
+    "bap:pink": {}
+  }
+}

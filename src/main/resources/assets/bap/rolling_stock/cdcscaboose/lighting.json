@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cdcscaboose",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:grey": {},
+    "bap:green": {}
+  }
+}

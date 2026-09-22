@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "6": "bap:cyan",
+    "1": "bap:red",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "4": "bap:blue",
+    "12": "bap:lightblue",
+    "7": "bap:lightgrey",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19"
+  },
+  "stock": "bap:amcafe"
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "6": "bap:cyan",
+    "1": "bap:red"
+  },
+  "stock": "bap:m630w"
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:millgondola",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:skin16": {},
+    "bap:skin18": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:skin17": {},
+    "bap:brown": {},
+    "bap:pink": {},
+    "bap:lightgrey": {},
+    "bap:skin19": {},
+    "bap:yellow": {}
+  }
+}

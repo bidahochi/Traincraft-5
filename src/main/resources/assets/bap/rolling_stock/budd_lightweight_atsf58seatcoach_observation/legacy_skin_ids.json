@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "6": "bap:cyan",
+    "5": "bap:purple"
+  },
+  "stock": "bap:budd_lightweight_atsf58seatcoach_observation"
+}

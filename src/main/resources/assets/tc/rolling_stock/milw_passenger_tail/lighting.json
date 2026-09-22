@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:milw_passenger_tail",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:coffincar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

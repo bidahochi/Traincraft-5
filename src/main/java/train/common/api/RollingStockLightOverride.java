@@ -12,6 +12,8 @@ public final class RollingStockLightOverride
 {
     private final boolean enabled, availabilityOverridden;
     private final RollingStockLightBehaviorOverride behavior;
+    private final String group;
+    private final LightFixtureType fixtureType;
 
     /**
      * Creates an override with explicit availability semantics.
@@ -25,9 +27,64 @@ public final class RollingStockLightOverride
         boolean availabilityOverridden,
         RollingStockLightBehaviorOverride behavior)
     {
+        this(enabled, availabilityOverridden, behavior, null);
+    }
+
+    /** Null group inherits; an empty group explicitly leaves this fixture independent. */
+    public RollingStockLightOverride(boolean enabled, boolean availabilityOverridden,
+        RollingStockLightBehaviorOverride behavior, String group)
+    {
+        this(enabled, availabilityOverridden, behavior, group, null);
+    }
+
+    /** Retains the declared source role as well as its expanded effect settings. */
+    public RollingStockLightOverride(boolean enabled, boolean availabilityOverridden,
+        RollingStockLightBehaviorOverride behavior, String group, LightFixtureType fixtureType)
+    {
         this.enabled = enabled;
         this.availabilityOverridden = availabilityOverridden;
         this.behavior = behavior;
+        this.group = group;
+        this.fixtureType = fixtureType;
+    }
+
+    /** Source role for geometry-specific rendering; null inherits the historical model preset. */
+    public LightFixtureType fixtureType()
+    {
+        return fixtureType;
+    }
+
+    /** Optional shared effect identity, resolved by lighting rather than model geometry. */
+    public String group()
+    {
+        return group;
+    }
+
+    /** Composes a higher-priority partial layer while retaining omitted properties. */
+    public RollingStockLightOverride merge(RollingStockLightOverride next)
+    {
+        RollingStockLightBehaviorOverride combined = behavior;
+        if (next.behavior != null)
+        {
+            combined = next.behavior;
+            if (behavior != null)
+            {
+                combined = behavior.merge(next.behavior);
+            }
+        }
+        boolean selectedEnabled = enabled;
+        if (next.availabilityOverridden)
+        {
+            selectedEnabled = next.enabled;
+        }
+        String selectedGroup = group;
+        if (next.group != null)
+        {
+            selectedGroup = next.group;
+        }
+        return new RollingStockLightOverride(selectedEnabled,
+            availabilityOverridden || next.availabilityOverridden, combined, selectedGroup,
+            next.fixtureType == null ? fixtureType : next.fixtureType);
     }
 
     /** Creates an override that explicitly sets availability and optionally changes behavior. */
@@ -83,12 +140,14 @@ public final class RollingStockLightOverride
         RollingStockLightOverride value = (RollingStockLightOverride) other;
         return enabled == value.enabled
                && availabilityOverridden == value.availabilityOverridden
-               && Objects.equals(behavior, value.behavior);
+               && Objects.equals(behavior, value.behavior)
+               && fixtureType == value.fixtureType
+               && Objects.equals(group, value.group);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(enabled, availabilityOverridden, behavior);
+        return Objects.hash(enabled, availabilityOverridden, behavior, group, fixtureType);
     }
 }

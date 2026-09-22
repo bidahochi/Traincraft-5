@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fb2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:magenta": {}
+  }
+}

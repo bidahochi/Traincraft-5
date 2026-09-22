@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw1500",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_159": {
+          "preset": "instrument"
+        },
+        "marker_body_177": {
+          "preset": "marker_light"
+        },
+        "marker_body_178": {
+          "preset": "marker_light"
+        },
+        "marker_body_216": {
+          "preset": "marker_light"
+        },
+        "marker_body_222": {
+          "preset": "marker_light"
+        },
+        "marker_body_376": {
+          "preset": "marker_light"
+        },
+        "marker_body_377": {
+          "preset": "marker_light"
+        },
+        "marker_body_402": {
+          "preset": "marker_light"
+        },
+        "marker_body_404": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_429": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:purple": {},
+    "bap:black": {},
+    "bap:magenta": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:skin18": {},
+    "bap:orange": {},
+    "bap:skin16": {},
+    "bap:blue": {},
+    "bap:skin17": {},
+    "bap:green": {},
+    "bap:skin24": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:red": {},
+    "bap:lime": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {},
+    "bap:skin33": {},
+    "bap:skin34": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {},
+    "bap:skin38": {}
+  }
+}

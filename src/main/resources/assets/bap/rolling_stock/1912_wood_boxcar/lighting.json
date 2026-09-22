@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:1912_wood_boxcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:yellow": {},
+    "bap:green": {}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "0": "bap:black",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "5": "bap:purple",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:thrall63centerbeam"
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "14": "bap:orange",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "5": "bap:purple",
+    "11": "bap:yellow",
+    "9": "bap:pink",
+    "8": "bap:grey",
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "10": "bap:lime",
+    "3": "bap:brown",
+    "13": "bap:magenta",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_cei60seatcoach"
+}

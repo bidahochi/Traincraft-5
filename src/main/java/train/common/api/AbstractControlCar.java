@@ -1,8 +1,5 @@
 package train.common.api;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import cpw.mods.fml.client.FMLClientHandler;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -49,14 +46,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     private boolean backwardPressed = false;
     private boolean brakePressed = false;
 
-    private boolean beaconEnabled;
-    private boolean ditchLightsEnabled;
-    private RollingStockHeadlightLevel frontHeadlightLevel = RollingStockHeadlightLevel.OFF;
-    private RollingStockHeadlightLevel rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
-    private boolean auxLightsEnabled;
-    private boolean gyraLightsEnabled;
-    /** Server-owned countdown; synchronized through the watcher but intentionally omitted from NBT. */
-    private int hornLightResponseTicks;
+    private final RollingStockLightControls lightControls = new RollingStockLightControls(this);
     
     public AbstractControlCar(World world)
     {
@@ -69,7 +59,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
             numCargoSlots2 = 3;
             inventorySize = numCargoSlots + numCargoSlots2 + numCargoSlots1 + 1;
             controlCarInventory = new ItemStack[inventorySize];
-            dataWatcher.addObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
+            lightControls.initialize();
             if (connectedLocomotive == null)
             {
                 dataWatcher.addObject(29, 0);
@@ -89,11 +79,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         super.writeEntityToNBT(nbttagcompound);
         writeInventory(nbttagcompound);
 
-        nbttagcompound.setInteger("tcFrontHeadlightLevel", getFrontHeadlightLevel().ordinal());
-        nbttagcompound.setInteger("tcRearHeadlightLevel", getRearHeadlightLevel().ordinal());
-        nbttagcompound.setInteger(
-            "tcLightChannels",
-            RollingStockLightStateCodec.persistentChannels(packLightState()));
+        lightControls.write(nbttagcompound);
 
 
     }
@@ -120,58 +106,9 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         super.readEntityFromNBT(ntc);
         readInventory(ntc);
 
-        JsonObject previousState = new JsonObject();
-        if (ntc.hasKey("lightingDetailsJSON"))
-        {
-        try {
-                JsonElement parsedState = Traincraft.jsonParser.parse(ntc.getString("lightingDetailsJSON"));
-                if (parsedState.isJsonObject())
-                {
-                    previousState = parsedState.getAsJsonObject();
-        }
-            }
-        catch (JsonParseException ignored)
-        {
-                // A malformed lightingDetailsJSON value falls back to the documented defaults.
-            }
-        }
+        lightControls.read(ntc);
 
-        boolean previousLights = jsonBoolean(previousState, "isLightsEnabled", false);
-        beaconEnabled = jsonBoolean(previousState, "isBeaconEnabled", false);
-        ditchLightsEnabled = jsonByte(previousState, "ditchLightMode", (byte) 0) > 0;
-        frontHeadlightLevel =
-            ntc.hasKey("tcFrontHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal(
-                ntc.getInteger("tcFrontHeadlightLevel"))
-            : previousState.has("frontHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal(
-                previousState.get("frontHeadlightLevel").getAsInt())
-            : previousLights
-            ? RollingStockHeadlightLevel.BRIGHT
-            : RollingStockHeadlightLevel.OFF;
-        rearHeadlightLevel =
-            ntc.hasKey("tcRearHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal(
-                ntc.getInteger("tcRearHeadlightLevel"))
-            : previousState.has("rearHeadlightLevel")
-            ? RollingStockHeadlightLevel.fromOrdinal(
-                previousState.get("rearHeadlightLevel").getAsInt())
-            : RollingStockHeadlightLevel.OFF;
-        if (ntc.hasKey("tcLightChannels"))
-        {
-            int channels = ntc.getInteger("tcLightChannels");
-            ditchLightsEnabled = (channels & RollingStockLightChannel.DITCH.mask()) != 0;
-            beaconEnabled = (channels & RollingStockLightChannel.BEACON.mask()) != 0;
-            auxLightsEnabled = (channels & RollingStockLightChannel.AUX.mask()) != 0;
-            gyraLightsEnabled = (channels & RollingStockLightChannel.GYRA.mask()) != 0;
-        }
-        else
-        {
-            auxLightsEnabled = jsonBoolean(previousState, "auxLightsEnabled", false);
-            gyraLightsEnabled = jsonBoolean(previousState, "gyraLightsEnabled", false);
-        }
-
-        dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
+        lightControls.synchronize();
     }
 
     private void readInventory(NBTTagCompound ntc)
@@ -191,10 +128,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     public void onUpdate()
     {
 
-        if (worldObj.isRemote == false && hornLightResponseTicks > 0)
-        {
-            hornLightResponseTicks = RollingStockTransientLightTimer.tick(hornLightResponseTicks);
-        }
+        tickStockResponses();
 
         if (worldObj.isRemote == false)
         {
@@ -231,7 +165,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         super.onUpdate();
         if (!worldObj.isRemote)
         {
-            synchronizeLightState();
+            lightControls.synchronize();
         }
     }
 
@@ -398,12 +332,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         }
         pressKey(key);
         if (key == HORN_KEY) {
-            int previousHornLightResponseTicks = hornLightResponseTicks;
-            hornLightResponseTicks = startHornLightResponse(hornLightResponseTicks);
-            if (hornLightResponseTicks != previousHornLightResponseTicks)
-            {
-                synchronizeLightState();
-            }
+            triggerHornResponse();
             if (ConfigHandler.SOUNDS) {
                 soundHorn();
             }
@@ -433,133 +362,69 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         return dataWatcher.getWatchableObjectInt(29);
     }
 
+    /** Returns the shared control owner; stock without mutable controls allocates none. */
     @Override
+    protected RollingStockLightControls mutableLightControls()
+    {
+        return lightControls;
+    }
 
+    @Override
     public RollingStockHeadlightLevel getFrontHeadlightLevel()
     {
-        return worldObj != null && worldObj.isRemote
-               ? RollingStockLightStateCodec.front(synchronizedLightState())
-               : frontHeadlightLevel;
+        return lightControls.getFrontHeadlightLevel();
     }
 
     @Override
     public RollingStockHeadlightLevel getRearHeadlightLevel()
     {
-        return worldObj != null && worldObj.isRemote
-               ? RollingStockLightStateCodec.rear(synchronizedLightState())
-               : rearHeadlightLevel;
+        return lightControls.getRearHeadlightLevel();
     }
 
     @Override
     public void setFrontHeadlightLevel(RollingStockHeadlightLevel level)
     {
-        frontHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
-        synchronizeLightState();
+        lightControls.setFrontHeadlightLevel(level);
     }
 
     @Override
-
     public void setRearHeadlightLevel(RollingStockHeadlightLevel level)
     {
-        rearHeadlightLevel = level == null ? RollingStockHeadlightLevel.OFF : level;
-        synchronizeLightState();
+        lightControls.setRearHeadlightLevel(level);
     }
 
     @Override
-
     public boolean isLightChannelEnabled(RollingStockLightChannel channel)
     {
-        return RollingStockLightStateCodec.enabled(synchronizedLightState(), channel);
+        return lightControls.isLightChannelEnabled(channel);
     }
 
     @Override
+    public boolean isLightChannelManuallyEnabled(RollingStockLightChannel channel)
+    {
+        return lightControls.isLightChannelManuallyEnabled(channel);
+    }
 
+    @Override
+    public boolean isEmergencyLightForced()
+    {
+        return lightControls.isEmergencyLightForced();
+    }
+
+    @Override
     public void setLightChannelEnabled(RollingStockLightChannel channel, boolean enabled)
     {
-        if (channel == null)
-    {
-        return;
-    }
-        switch(channel)
-        {
-            case HEADLIGHT:
-                if (enabled == false)
-                {
-                    frontHeadlightLevel = RollingStockHeadlightLevel.OFF;
-                    rearHeadlightLevel = RollingStockHeadlightLevel.OFF;
-                }
-                else
-                {
-                    if(frontHeadlightLevel == RollingStockHeadlightLevel.OFF
-                            && rearHeadlightLevel == RollingStockHeadlightLevel.OFF)
-    {
-                        frontHeadlightLevel = RollingStockHeadlightLevel.BRIGHT;
-                    }
-                }
-                break;
-            case DITCH:
-                ditchLightsEnabled = enabled;
-                break;
-            case BEACON:
-                beaconEnabled = enabled;
-                break;
-            case AUX:
-                auxLightsEnabled = enabled;
-                break;
-            case GYRA:
-                gyraLightsEnabled = enabled;
-                break;
-            default:
-                return;
-        }
-        synchronizeLightState();
-    }
-
-    /** Packs server-owned fields into the stable synchronized representation. */
-    private int packLightState()
-    {
-        return RollingStockLightStateCodec.pack(
-                   frontHeadlightLevel, rearHeadlightLevel,
-                   ditchLightsEnabled, beaconEnabled,
-                   auxLightsEnabled, gyraLightsEnabled,
-                   hornLightResponseTicks > 0);
-    }
-
-    /** Reads the watcher on clients and the authoritative fields on the server. */
-    private int synchronizedLightState()
-    {
-        if (worldObj != null && worldObj.isRemote)
-    {
-            return dataWatcher.getWatchableObjectInt(RollingStockLightStateCodec.WATCHER_SLOT);
-        }
-        return packLightState();
-    }
-
-    /** Publishes a server-side control mutation through the stable watcher slot. */
-    private void synchronizeLightState()
-    {
-        if (worldObj != null && worldObj.isRemote == false)
-    {
-            dataWatcher.updateObject(RollingStockLightStateCodec.WATCHER_SLOT, packLightState());
-        }
-
+        lightControls.setLightChannelEnabled(channel, enabled);
     }
 
     @Override
     public boolean isTransientLightSignalEnabled(RollingStockTransientLightSignal signal)
     {
-        return RollingStockLightStateCodec.transientEnabled(synchronizedLightState(), signal);
+        return lightControls.isTransientLightSignalEnabled(signal);
     }
 
-    private static boolean jsonBoolean(JsonObject object, String key, boolean fallback)
-    {
-        return object != null && object.has(key) ? object.get(key).getAsBoolean() : fallback;
-    }
 
-    private static byte jsonByte(JsonObject object, String key, byte fallback)
-    {
-        return object != null && object.has(key) ? object.get(key).getAsByte() : fallback;
-    }
+
 
     //region Implement IInventory
     @Override

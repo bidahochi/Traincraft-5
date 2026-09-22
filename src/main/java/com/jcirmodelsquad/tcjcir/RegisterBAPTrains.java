@@ -70,6 +70,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Grey"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.3)
+                            .setStockId("vbshay2")
             );
 
             // Skook
@@ -98,6 +99,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(15000)
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(18)
+                            .setStockId("skookumtender")
             );
 
             // Shay3Truck
@@ -116,6 +118,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Grey", "White"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.8)
+                            .setStockId("3truckshay")
             );
 
             // Shay3TruckTender
@@ -126,6 +129,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black", "Grey", "White"})
                             .setGuiRenderScale(22)
+                            .setStockId("3truckshay_tender")
             );
 
             // ClimaxB
@@ -144,6 +148,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Grey", "LightGrey", "Cyan"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.8)
+                            .setStockId("50ton_climax_b")
             );
 
             // F01
@@ -193,6 +198,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(29000)
                             .setColors(new String[] {"Grey"})
                             .setGuiRenderScale(18)
+                            .setStockId("vanderback")
             );
 
             // SquanderbackTender
@@ -206,6 +212,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey", "Green"})
                             .setGuiRenderScale(18)
                             .setAdditionalTooltip(new String[] {" this started life a shitpost but i liked it too much"})
+                            .setStockId("squanderback")
             );
 
             // BKno2a
@@ -225,6 +232,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(-1.3)
                             .setAdditionalTooltip(new String[] {"Place facing forward"})
+                            .setStockId("boothkelly_no2a")
             );
 
             // BKno2b
@@ -244,6 +252,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.2)
                             .setAdditionalTooltip(new String[] {"Place facing backward"})
+                            .setStockId("boothkelly_no2b")
             );
 
             // WCPBuckingBull
@@ -262,6 +271,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.4)
+                            .setStockId("wcp_bucking_bull")
             );
 
             // WCPBaler
@@ -272,6 +282,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(15000)
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(18)
+                            .setStockId("wcp_baler")
             );
 
             // WCPMacky
@@ -290,6 +301,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.2)
+                            .setStockId("wcp_macky_three")
             );
 
             // Alco2102
@@ -308,6 +320,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.4)
+                            .setStockId("alco_2-10-2st")
             );
 
             // MK60
@@ -326,6 +339,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Purple", "Cyan", "Skin22"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.6)
+                            .setStockId("mk60-71")
             );
 
             // Tender10k
@@ -336,6 +350,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(38000)
                             .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Yellow", "Purple", "Pink", "Skin19", "Skin20", "Skin21", "Skin22"})
                             .setGuiRenderScale(18)
+                            .setStockId("wp_10k")
             );
 
             // TenderDeseret
@@ -346,6 +361,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(57000)
                             .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18"})
                             .setGuiRenderScale(18)
+                            .setStockId("wp_deserettender")
             );
 
             // HCS_c57
@@ -374,6 +390,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(34000)
                             .setColors(new String[] {"Skin19","Skin21", "Skin20", "Skin16", "Skin17", "Skin18"})
                             .setGuiRenderScale(18)
+                            .setStockId("hcs_9kgal")
             );
 
             // HotTubTender
@@ -384,6 +401,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(41000)
                             .setColors(new String[] {"Cyan", "Skin16", "Skin17"})
                             .setGuiRenderScale(18)
+                            .setStockId("hottub_tender")
             );
 
             // C11
@@ -402,6 +420,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.0)
+                            .setStockId("lococ11")
             );
 
             // Onion
@@ -458,6 +477,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(26000)
                             .setColors(new String[] {"Grey", "Black"})
                             .setGuiRenderScale(18)
+                            .setStockId("np_11c_n_12c_tender")
             );
 
             // NP_13C_Tender
@@ -486,6 +506,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Skin16", "Red", "Yellow", "Skin17", "Skin18"})
                             .setGuiRenderScale(16)
                             .setBogieLocoPosition(-1.8)
+                            .setStockId("4-6-0")
             );
 
             // Tender460
@@ -496,6 +517,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(26000)
                             .setColors(new String[] {"Black", "Skin16", "Red", "Yellow", "Skin17"})
                             .setGuiRenderScale(18)
+                            .setStockId("4-6-0_tender")
             );
 
             // PELoco
@@ -514,6 +536,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
+                            .setStockId("peloco")
             );
 
             // PETender
@@ -524,6 +547,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(20000)
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(18)
+                            .setStockId("petender")
             );
 
             // PMNstender
@@ -534,6 +558,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(83000)
                             .setColors(new String[] {"LightGrey", "Yellow", "Orange", "White"})
                             .setGuiRenderScale(15)
+                            .setStockId("pm_n_tender")
             );
 
             // PMNandN1
@@ -552,6 +577,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Yellow", "Grey", "Orange", "White"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6)
+                            .setStockId("pm_n_locomotive")
             );
 
             // Alco0_6_0T
@@ -570,6 +596,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Green", "Purple"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.2)
+                            .setStockId("alco0_6_0t")
             );
 
             // Brank
@@ -588,6 +615,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Green"})
                             .setGuiRenderScale(17)
                             .setBogieLocoPosition(-1.0)
+                            .setStockId("brank")
             );
 
             // Lima2_8_0
@@ -606,6 +634,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Green", "Lime", "Grey", "Yellow", "Red"})
                             .setGuiRenderScale(16)
                             .setBogieLocoPosition(-1.65)
+                            .setStockId("lima2_8_0")
             );
 
             // TenderLima2_8_0
@@ -616,6 +645,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(26000)
                             .setColors(new String[] {"Black", "Green", "Yellow", "Red"})
                             .setGuiRenderScale(18)
+                            .setStockId("lima_tender2_8_0")
             );
 
             //EMD Electro-Motive Division of GM//
@@ -771,6 +801,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Yellow", "Skin29", "Red", "Green", "Brown", "Skin16", "Skin17", "Orange", "Skin18", "Skin19", "Skin20", "Skin21", "Black", "Magenta", "Purple", "LightBlue", "Skin27", "Skin33", "Skin34", "Skin38"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.5)
+                            .setStockId("cf7_angle")
             );
 
             // CF7round
@@ -788,6 +819,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "Yellow", "Skin18", "Grey"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.5)
+                            .setStockId("cf7_round")
             );
 
             // CF7round3 roundcab freelances
@@ -873,6 +905,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Lime"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.5)
+                            .setStockId("cf7_highhood")
             );
 
             // F40PH
@@ -907,6 +940,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Magenta", "Cyan", "Skin43", "Green", "Lime", "Brown", "Black", "Orange", "Blue", "LightBlue", "Yellow", "Grey", "LightGrey", "Purple", "Red", "Pink", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin42", "Skin37" ,"Skin41", "Skin38", "Skin39", "Skin40"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.65)
+                            .setStockId("emde7a")
             );
 
             // E7B
@@ -924,6 +958,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Magenta", "Orange", "Yellow", "Grey", "LightGrey", "Purple", "Red", "Pink", "Skin27", "Skin37", "Black", "Skin28", "Skin29"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.77)
+                            .setStockId("emde7b")
             );
 
             // E8A
@@ -941,6 +976,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Orange", "Purple", "Cyan", "Blue", "Brown", "Red", "Pink", "Skin21", "Yellow", "Lime", "Grey", "LightGrey", "White", "Green", "LightBlue", "Black", "Magenta", "Skin17", "Skin18", "Skin19", "Skin20"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.65)
+                            .setStockId("emde8a")
             );
 
             // E8B
@@ -958,6 +994,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Orange", "Blue", "Red", "Grey", "LightGrey"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.77)
+                            .setStockId("emde8b")
             );
 
             // E9A
@@ -975,6 +1012,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey", "Skin16"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.75)
+                            .setStockId("emde9a")
             );
 
             // E9B
@@ -992,6 +1030,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6875)
+                            .setStockId("emde9b")
             );
 
             // CE8
@@ -1367,6 +1406,7 @@ public class RegisterBAPTrains
                             .setColors(new  String[] {"Green"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.9)
+                            .setStockId("gp39t")
             );
 
             // GP39TDash2B
@@ -1384,6 +1424,7 @@ public class RegisterBAPTrains
                             .setColors(new  String[] {"Green"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.9)
+                            .setStockId("gp39tb")
             );
 
             // GP40
@@ -1571,6 +1612,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Grey", "Red", "Skin17", "Yellow", "Magenta", "Blue", "LightGrey", "LightBlue", "Skin16", "Skin18", "Green", "White", "Cyan", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.45)
+                            .setStockId("sd40t")
             );
 
             // SD40dash2B
@@ -1588,6 +1630,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.8)
+                            .setStockId("sd40dash2b")
             );
 
             // SD40R
@@ -1707,6 +1750,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "Yellow", "Red", "White"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.8)
+                            .setStockId("sd45dash2b")
             );
 
             // SDP45
@@ -2047,6 +2091,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Orange", "Skin16", "White"})
                             .setGuiRenderScale(16)
                             .setBogieLocoPosition(-2.3)
+                            .setStockId("mp15dcw-9")
             );
 
             // TR4
@@ -2098,6 +2143,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.2)
+                            .setStockId("atsfbeep")
             );
 
             //GE Transportation//
@@ -2117,6 +2163,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Pink", "LightGrey", "Skin16", "Black", "Skin17", "Skin18", "Magenta", "Purple", "Skin19", "Red", "Skin20", "Skin21", "Skin22", "Brown", "Skin23"})
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(-2.0)
+                            .setStockId("44_ton")
             );
 
             // Boxcab23Ton
@@ -2134,6 +2181,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "White", "Black", "Green"})
                             .setGuiRenderScale(16)
                             .setBogieLocoPosition(-1.5)
+                            .setStockId("boxcab")
             );
 
             // GE25Ton
@@ -2151,6 +2199,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Brown", "Pink", "Cyan", "Orange", "Green"})
                             .setGuiRenderScale(20)
                             .setBogieLocoPosition(-1)
+                            .setStockId("25ton")
             );
 
             // U18B old model
@@ -2679,6 +2728,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Cyan"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-3.1)
+                            .setStockId("b18-8e")
             );
 
             // Dash832BWH
@@ -2696,6 +2746,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Grey", "LightGrey", "Blue", "Orange", "Skin16"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6)
+                            .setStockId("b32-8wh")
             );
 
             // Dash839C
@@ -2713,6 +2764,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightBlue", "Grey", "Skin19", "Black", "Blue", "Skin17", "Cyan", "LightGrey", "Skin16", "Brown", "Orange", "Skin18", "Skin20"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("c39-8")
             );
 
             // Dash839CE
@@ -2730,6 +2782,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Cyan", "Skin18", "Skin19", "Black", "LightGrey"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("c39-8e")
             );
 
             // Dash839B
@@ -2747,6 +2800,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Grey", "Orange", "Skin16", "Skin17", "LightGrey", "Cyan", "Skin18", "Brown", "Skin19"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6)
+                            .setStockId("b39-8")
             );
 
             // Dash840B
@@ -2764,6 +2818,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Grey", "Blue", "Yellow", "Orange", "LightBlue", "Pink", "Purple", "Black"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6)
+                            .setStockId("b40-8")
             );
 
             // Dash840BB
@@ -2781,6 +2836,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Skin17"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-3.3)
+                            .setStockId("dash8_40b_b")
             );
 
             // Dash840BW
@@ -2798,6 +2854,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Orange", "LightGrey", "Skin16", "Pink", "Skin17"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.6)
+                            .setStockId("b40-8w")
             );
 
             // Dash840C
@@ -2815,6 +2872,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Yellow", "Grey", "LightBlue", "Skin24", "Skin22", "Skin25", "Blue", "Skin16", "LightGrey", "Skin17", "Purple", "Skin23", "Skin26"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4)
+                            .setStockId("c40-8")
             );
 
             // Dash841C
@@ -2832,6 +2890,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "LightGrey", "Pink", "Orange", "Skin16", "Green", "Skin17", "Lime"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("c41-8")
             );
 
             // Dash940C
@@ -2849,6 +2908,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"White"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("dash9_40c")
             );
 
             // Dash944CW
@@ -2866,6 +2926,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Skin16", "LightGrey", "Grey", "Orange", "Magenta", "Skin17", "Pink", "Green", "White", "Skin27", "Skin18", "Red", "Skin19", "LightBlue", "Skin28"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("dash9_44cw")
             );
 
             // AC4400CW
@@ -2934,6 +2995,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey","LightBlue", "Green", "Black", "Cyan", "Brown", "Blue", "White", "Lime", "Orange", "Red", "Skin16", "Skin22", "Skin18", "Skin19", "Skin20", "Skin21", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin35", "Skin36", "Skin37", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin32", "Skin33", "Skin34", "Skin23", "Skin24" })
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-4.0)
+                            .setStockId("es44_h")
             );
 
             // P32
@@ -2951,6 +3013,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "Red", "LightGrey"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.5)
+                            .setStockId("p32dc")
             );
 
             // geGenesis
@@ -2968,6 +3031,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.5)
+                            .setStockId("p40dc")
             );
 
             // P42
@@ -2985,6 +3049,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Cyan", "Skin16", "Blue"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.5)
+                            .setStockId("p42dc")
             );
 
             //CEE (Pre GE Involvement)//
@@ -3004,6 +3069,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Pink", "Cyan", "Orange", "Black", "LightGrey", "Skin16", "Skin17", "Green", "Grey", "Skin18", "Skin19", "Skin20"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.85)
+                            .setStockId("4ed-172t")
             );
 
             // CEE4ED172T_E
@@ -3021,6 +3087,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Purple", "LightGrey", "Orange"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.85)
+                            .setStockId("4ed-172t_e")
             );
 
             // CEE4ED172T_G
@@ -3038,6 +3105,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Lime", "LightGrey"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.85)
+                            .setStockId("4ed-172t_g")
             );
 
             // CEE4ED172T_C
@@ -3055,6 +3123,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Yellow", "LightGrey", "Purple"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.85)
+                            .setStockId("4ed-172t_c")
             );
 
             //ALCO-MLW//
@@ -3074,6 +3143,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Pink", "Skin24", "Cyan", "Blue", "Purple", "Magenta", "Yellow", "Orange", "Skin23", "White", "Grey", "Brown", "LightGrey", "Green", "Lime", "LightBlue", "Skin16", "Skin17", "Skin18", "Skin19", "Skin22", "Skin20", "Skin21", "Black"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.15)
+                            .setStockId("alcopa1")
             );
 
             // AlcoPB1
@@ -3091,6 +3161,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Skin24", "Magenta", "Yellow", "Orange", "LightGrey", "Skin19", "Black"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.1)
+                            .setStockId("alcopb1")
             );
 
             // FA1
@@ -3414,6 +3485,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Cyan", "Skin16"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-4.25)
+                            .setStockId("c855")
             );
 
             // C855b
@@ -3465,6 +3537,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Grey", "Green", "Orange", "Pink", "White", "Blue", "LightGrey", "Magenta", "Red", "Skin16", "Skin17", "Skin18"})
                             .setGuiRenderScale(16)
                             .setBogieLocoPosition(-2)
+                            .setStockId("alcos2")
             );
 
             // RSD15
@@ -3773,6 +3846,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Green", "Yellow", "LightGrey", "Blue", "Cyan", "LightBlue", "Grey", "Black", "Orange", "Magenta", "Red"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.845)
+                            .setStockId("rf-16")
             );
 
             // RF16B
@@ -3790,6 +3864,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Green", "Blue", "Cyan", "Grey", "Black", "Orange", "Magenta", "Red", "Purple"})
                             .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.675)
+                            .setStockId("rf-16b")
             );
 
             //FM//
@@ -3809,6 +3884,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Yellow", "Black", "Red", "Blue", "Grey", "LightBlue", "Orange", "White", "Lime", "LightGrey", "Skin16", "Skin17"})
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(-2.2)
+                            .setStockId("fm_h10-44")
             );
 
             // H16_66
@@ -3826,6 +3902,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "Yellow", "LightGrey", "Green", "Lime", "Black", "Grey", "Orange", "Brown", "Red", "Pink", "Magenta", "Skin16"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.35)
+                            .setStockId("fm_h16-66")
             );
 
             // H24_66
@@ -3843,6 +3920,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Red", "Black", "Brown", "Yellow", "Grey", "LightGrey", "Lime"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.75)
+                            .setStockId("fm_h24-66")
             );
 
             // H24_66L
@@ -3860,6 +3938,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Blue", "Green"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.75)
+                            .setStockId("fm_h24-66_l")
             );
 
             // H24_66C
@@ -3877,6 +3956,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Magenta", "Grey", "Yellow"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.75)
+                            .setStockId("fm_h24-66_c")
             );
 
             //MISC//
@@ -3896,6 +3976,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Orange", "Grey", "LightGrey", "Skin16", "Blue"})
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.1)
+                            .setStockId("3gs21b")
             );
 
             // gtavthing
@@ -3932,6 +4013,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.8)
                             .setAdditionalTooltip(new String[] {"Fictional B unit for the Fictional loco from Factorio"})
+                            .setStockId("fol_m1b")
             );
 
             // Krautt
@@ -3949,6 +4031,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Grey", "LightGrey", "Black", "Red"})
                             .setGuiRenderScale(13)
                             .setBogieLocoPosition(-3.3)
+                            .setStockId("km_ml4000")
             );
 
             // DD55
@@ -3995,6 +4078,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(18000)
                             .setColors(new String[] {"White", "Skin16", "Magenta", "Blue", "Yellow", "Green"})
                             .setGuiRenderScale(16)
+                            .setStockId("sma")
             );
 
             // F7BSlug
@@ -4160,6 +4244,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2)
+                            .setStockId("aem-7")
             );
 
             // B_BEL
@@ -4189,6 +4274,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("roundedhopper")
             );
 
             // RibbedHopper
@@ -4200,6 +4286,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("ribbed_hopper")
             );
 
             // Hopper5201
@@ -4211,6 +4298,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("5201")
             );
 
             // Hopper6260
@@ -4222,6 +4310,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("6260")
             );
 
             // FNCC2375Hopper
@@ -4233,6 +4322,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("fncc2375")
             );
 
             // PDH2800
@@ -4244,6 +4334,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(18)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("gatx_2800_pdh")
             );
 
             // ACF2Bay
@@ -4255,6 +4346,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acf_2980")
             );
 
             // ACF4650
@@ -4266,6 +4358,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acf_4650")
             );
 
             // PS2_4750
@@ -4277,6 +4370,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("ps2cd_4750")
             );
 
             // GATC4180Airslide
@@ -4288,6 +4382,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("gatx_airslide")
             );
 
             // ACF3500
@@ -4299,6 +4394,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acf_3500")
             );
 
             // ACF3960
@@ -4310,6 +4406,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acf_3960")
             );
 
             //Freight - Centerbeams & Flats//
@@ -4322,6 +4419,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Yellow", "Green", "LightGrey"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
+                            .setStockId("60ftcb")
             );
 
             // Freight66centerbeam
@@ -4332,6 +4430,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Orange", "Cyan", "Black", "Green", "Lime", "Red", "Purple", "LightBlue", "Pink", "Blue", "Yellow"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
+                            .setStockId("66ftcb")
             );
 
             // Freight73centerbeam
@@ -4342,6 +4441,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Pink", "Cyan", "Green", "Orange", "Yellow", "Red", "Purple"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
+                            .setStockId("73ftcb")
             );
 
             // GSI60FootBulkhead
@@ -4353,6 +4453,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
+                            .setStockId("gsi_60bulk")
             );
 
             // GSC60FootFlatcar
@@ -4364,6 +4465,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
+                            .setStockId("gsc_60flat")
             );
 
             // Thrall63centerbeam
@@ -4374,6 +4476,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Green", "Yellow", "Red", "Black", "Cyan", "Skin16", "Skin17", "Purple", "Skin18"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
+                            .setStockId("thrall63centerbeam")
             );
 
             // FNCC60FootBulk
@@ -4396,6 +4499,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
+                            .setStockId("gsc_53flat")
             );
 
             // GSC53Foot6_6Bulkhead
@@ -4407,6 +4511,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
+                            .setStockId("gsc_53_66flat")
             );
 
             // GSC53Foot8_6Bulkhead
@@ -4418,6 +4523,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
+                            .setStockId("gsc_53_86flat")
             );
 
             // MaPa35FootFlatcar
@@ -4429,6 +4535,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(18)
                             .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
+                            .setStockId("mapa_35flat")
             );
 
             //Freight - Boxcars//
@@ -4475,6 +4582,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("verticube60")
             );
 
             // MILW40boxcar
@@ -4486,6 +4594,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("milw40")
             );
 
             // Freight40highcube
@@ -4508,6 +4617,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("hicube60")
             );
 
             // Reefer64
@@ -4519,6 +4629,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("reefer_64")
             );
 
             // FNCC50Foot
@@ -4530,6 +4641,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(16)
                             .setCargoCapacity(36)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("fncc50foot")
             );
 
             // GN40
@@ -4563,6 +4675,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Cold Stuff lol"})
+                            .setStockId("r-70-15")
             );
 
             // NSCReefer
@@ -4585,6 +4698,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("pcf_6033")
             );
 
             // PCF_RBL_Smooth
@@ -4618,6 +4732,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("pcf_b_100_40")
             );
 
             // ACFRailbox
@@ -4629,6 +4744,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acfrailbox")
             );
 
             // ACFRailboxCushioned
@@ -4640,6 +4756,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("acfrailboxcushioned")
             );
 
             // Evans5100
@@ -4651,6 +4768,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("evans_5100")
             );
 
             // Wood1912Boxcar
@@ -4662,6 +4780,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("1912_wood_boxcar")
             );
 
             // PS_40t_ss_box
@@ -4684,6 +4803,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(16)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("sp_b_50")
             );
 
             // SP_B50_AAR
@@ -4695,6 +4815,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(16)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Whatever a boxcar can hold."})
+                            .setStockId("sp_b_50_28")
             );
 
             // PFEr_40_23Reefer
@@ -4718,6 +4839,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Black", "Orange", "Brown", "Skin16", "Grey", "Pink", "LightBlue", "Yellow"})
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
+                            .setStockId("versa_longi")
             );
 
             // VersaTrans
@@ -4728,6 +4850,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightBlue", "Grey", "LightGrey", "Black"})
                             .setGuiRenderScale(15)
                             .setCargoCapacity(36)
+                            .setStockId("versa_trans")
             );
 
             // MillGondola
@@ -4739,6 +4862,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("millgondola")
             );
 
             // WoodchipHopper
@@ -4749,6 +4873,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Brown", "Blue", "Green", "Orange", "Red", "White", "Cyan", "Skin18", "Skin19", "Skin16", "Skin17"})
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
+                            .setStockId("woodchiphopper")
             );
 
             // gunderson fmc woodchip hopper
@@ -4769,6 +4894,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Brown", "Red", "Orange", "Pink", "Black"})
                             .setGuiRenderScale(18)
                             .setCargoCapacity(27)
+                            .setStockId("orejenny")
             );
 
             // PRRGLaHopper
@@ -4790,6 +4916,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(15)
                             .setCargoCapacity(27)
                             .setAdditionalTooltip(new String[] {"Cargo: Gonstuff"})
+                            .setStockId("acf_41-6_gon")
             );
 
             // BSC 3483
@@ -4801,6 +4928,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Coal n shid"})
+                            .setStockId("bsc_3483")
             );
 
             // BethgonII
@@ -4812,6 +4940,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(14)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Coal n shid"})
+                            .setStockId("bethgon")
             );
 
             // gsco67millgon
@@ -4823,6 +4952,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("gsco_67_millgon")
             );
 
             // gsco52millgon
@@ -4834,6 +4964,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(12)
                             .setCargoCapacity(45)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("gsco_52_millgon")
             );
 
             // AAR50TonHopper
@@ -4877,6 +5008,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(41000)
                             .setColors(new String[] {"Black", "LightGrey", "Grey"})
                             .setGuiRenderScale(16)
+                            .setStockId("dot11k")
             );
 
             // DOT11120600
@@ -4907,6 +5039,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(67000)
                             .setColors(new String[] {"White", "Black", "Blue", "LightGrey", "Grey", "Yellow", "Brown", "Purple", "Skin16", "Skin17", "Skin18"})
                             .setGuiRenderScale(16)
+                            .setStockId("17600galtank")
             );
 
             // NATX30600
@@ -4917,6 +5050,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(116000)
                             .setColors(new String[] {"Black", "Grey", "Green", "Red", "Yellow", "Pink", "Skin16", "Skin17", "LightBlue", "Skin18"})
                             .setGuiRenderScale(12)
+                            .setStockId("natx_30600")
             );
 
             // gatc10000
@@ -4927,6 +5061,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(38000)
                             .setColors(new String[] {"Black", "Skin16", "Skin17", "LightBlue", "Grey", "Skin18", "Skin19"})
                             .setGuiRenderScale(15)
+                            .setStockId("gatc_10000_gal")
             );
 
             // DUPX39200
@@ -4937,6 +5072,7 @@ public class RegisterBAPTrains
                             .setTankCapacity(148000)
                             .setColors(new String[] {"Grey", "White", "Green", "Black"})
                             .setGuiRenderScale(10)
+                            .setStockId("dupx_39200")
             );
 
             // CoffinCar
@@ -4959,6 +5095,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Black","Grey", "LightGrey"})
                             .setGuiRenderScale(18)
                             .setCargoCapacity(18)
+                            .setStockId("skeletonlogcar")
             );
 
             // EarlyFlat
@@ -4970,6 +5107,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(18)
                             .setCargoCapacity(18)
                             .setAdditionalTooltip(new String[] {"Cargo: Any."})
+                            .setStockId("earlyflatcar")
             );
 
             // Gunderson89FootAutorack
@@ -5001,6 +5139,7 @@ public class RegisterBAPTrains
                             .setMass(3.75)
                             .setColors(new String[]{"White", "Brown"})
                             .setGuiRenderScale(10)
+                            .setStockId("cswr_stampederack")
             );
 
             // HuskyStackWellcar
@@ -5012,6 +5151,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setCargoCapacity(54)
                             .setAdditionalTooltip(new String[] {"Will carry containers (for REAL) Eventually!"})
+                            .setStockId("40ft_husky")
             );
 
             // IngotPig
@@ -5022,6 +5162,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Brown", "Black"})
                             .setGuiRenderScale(18)
                             .setCargoCapacity(9)
+                            .setStockId("molteningotpig")
             );
 
             // SteelSlabFlat
@@ -5033,6 +5174,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(16)
                             .setCargoCapacity(9)
                             .setAdditionalTooltip(new String[] {"Cargo: steel and metal ig."})
+                            .setStockId("steelslab15")
             );
 
             // EvansCoilCar
@@ -5062,6 +5204,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"White", "Blue", "Red", "Green", "Lime"})
                             .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.7)
+                            .setStockId("pch120commute")
             );
 
             // pch120coach
@@ -5071,6 +5214,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[] {"White", "Blue", "Red", "Green", "Lime", "Purple", "Pink", "Yellow"})
                             .setGuiRenderScale(14)
+                            .setStockId("pch120car")
             );
 
             // pch130commute2
@@ -5087,6 +5231,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"White"})
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(-3.7)
+                            .setStockId("pch130commute2")
             );
 
             // pch130car2
@@ -5096,6 +5241,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[] {"White"})
                             .setGuiRenderScale(10)
+                            .setStockId("pch130coach")
             );
 
             // PCH100H
@@ -5114,6 +5260,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(-2.6)
                             .setAdditionalTooltip(new String[] {"Powered by Mekanism Hydrogen"})
+                            .setStockId("pch100h")
             );
 
             // PCH100Coach
@@ -5123,6 +5270,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[]{"LightBlue", "Blue", "Lime", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("pch100hcoach")
             );
 
             // aipkitExplorer
@@ -5141,6 +5289,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[]{"White", "Grey","Lime"})
                             .setGuiRenderScale(10)
+                            .setStockId("aipkit_explorerii")
             );
 
             //Passenger - Dominiks collection//
@@ -5153,6 +5302,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Blue", "Cyan", "Orange"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_rpo")
             );
 
             // PS85Baggage
@@ -5163,6 +5313,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Blue", "Orange"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_85_baggage")
             );
 
             // PSCombine
@@ -5173,6 +5324,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Blue", "Yellow", "Orange", "LightGrey", "Grey", "White", "Red"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_baggage-coach")
             );
 
             // PS52SeatCoach
@@ -5182,6 +5334,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "LightBlue", "Yellow", "Orange", "Cyan", "Grey", "LightGrey", "Purple", "Green", "Lime", "White", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_52seat")
             );
 
             // PSDamnitAnotherDiner
@@ -5191,6 +5344,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Orange", "Blue", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_center_diner_2")
             );
 
             // PSSleeper565
@@ -5200,6 +5354,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "Brown", "Orange", "LightBlue", "Grey", "Yellow", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_5-6-5_sleeper")
             );
 
             // PSSleeper565DRGW
@@ -5209,6 +5364,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Orange"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_drgw_lightweight_5-6-5_sleeper")
             );
 
             // PSLunchCounter_Lounge
@@ -5218,6 +5374,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "Yellow", "Orange", "LightBlue", "Purple", "LightGrey", "Grey", "White", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_lunchcounter_lounge")
             );
 
             // PS30SeatParlor
@@ -5227,6 +5384,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Orange", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_30seatparlor")
             );
 
             // DRGWRPO620Series
@@ -5237,6 +5395,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Magenta", "Green", "Lime", "Grey", "Purple", "Yellow"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("drgw_rpo_620_series")
             );
 
             // DRGWRPO630Series
@@ -5247,6 +5406,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Yellow"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("drgw_rpo_630_series")
             );
 
             // DRGWBaggage700Series
@@ -5257,6 +5417,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Magenta", "Green", "Lime", "Brown", "Yellow", "Black", "Grey", "LightGrey", "White", "Orange", "Purple"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("drgw_baggage_700_series")
             );
 
             // DRGWBaggage740Series
@@ -5267,6 +5428,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Lime", "Black", "Brown", "Yellow", "Grey", "Magenta", "LightGrey", "White"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("drgw_baggage_740_series")
             );
 
             // DRGWCoach1000Series
@@ -5276,6 +5438,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Lime", "Blue", "Black", "Yellow", "Grey"})
                             .setGuiRenderScale(12)
+                            .setStockId("drgw_coach_1000_series")
             );
 
             // DRGWCoach1005Series
@@ -5285,6 +5448,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Orange", "Black", "Grey", "LightGrey", "White", "Brown", "Red"})
                             .setGuiRenderScale(12)
+                            .setStockId("drgw_coach_1005_series")
             );
 
             // Pullman 69' Chair Car
@@ -5294,6 +5458,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Lime", "Black", "Grey", "LightGrey", "White", "Red"})
                             .setGuiRenderScale(12)
+                            .setStockId("pullman69chaircar")
             );
             // PSRPOPM
             put(ItemIDs.minecartPSRPOPM.item,
@@ -5303,6 +5468,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Blue", "Yellow"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_rpo_pm")
             );
 
             // PS73Baggage
@@ -5313,6 +5479,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Blue", "Yellow", "Green", "Red", "Magenta", "Orange"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_73_baggage")
             );
 
             // PS54SeatCoach_Lounge
@@ -5322,6 +5489,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "LightBlue", "LightGrey", "Grey"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_54seatcoach_lounge")
             );
 
             // PS54SeatCoach_Lounge_1950
@@ -5331,6 +5499,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_54seatcoach_lounge_1950")
             );
 
             // PScenterDiner
@@ -5340,6 +5509,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_center_diner")
             );
 
             // PS58SeatCoach_Observation
@@ -5349,6 +5519,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Purple", "Orange", "Red", "Magenta", "Pink", "Green", "Lime", "Brown", "Black", "LightGrey", "Grey", "White", "Skin16", "Yellow"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_58seatcoach_observation")
             );
 
             // PSBMCombine
@@ -5359,6 +5530,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Magenta", "Brown", "Green", "Blue"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_bmcombine")
             );
 
             // PSBM56SeatCoach
@@ -5368,6 +5540,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Magenta", "LightGrey", "Grey", "Brown", "Red", "Pink", "Green", "Lime", "Yellow", "Blue", "Cyan", "LightBlue", "Purple", "White", "Black"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_bm56seatcoach")
             );
 
             // PSBMDiner_Lounge
@@ -5377,6 +5550,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Magenta", "Brown", "Green", "Blue", "Cyan", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_bmdiner_lounge")
             );
 
             // ACFGNRPO_30
@@ -5387,6 +5561,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Orange", "Yellow", "Green", "Lime"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("acf_lightweight_gnrpo30")
             );
 
             // ACFGN60SeatCoach
@@ -5396,6 +5571,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Orange", "Yellow", "Brown", "LightBlue", "Green", "LightGrey", "Black", "White", "Cyan", "Blue", "Lime", "Grey", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
                             .setGuiRenderScale(10)
+                            .setStockId("acf_lightweight_gn60seatcoach")
             );
 
             // ACFGNDinerObservation
@@ -5406,6 +5582,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Orange", "Green"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("acf_lightweight_gndiner_observation")
             );
 
             // ACFGN28SeatCoach_Dinette
@@ -5415,6 +5592,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Orange", "Green", "Blue", "White"})
                             .setGuiRenderScale(10)
+                            .setStockId("acf_lightweight_gn28seatcoach_dinette")
             );
 
             // ACFGN1DR_17SeatParlorObservation
@@ -5425,6 +5603,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Orange", "Green", "Blue", "White"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("acf_lightweight_1dr_177seatparlor_observation")
             );
 
             // PSGNRPO_30
@@ -5435,6 +5614,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Orange", "Green", "Yellow", "Lime"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_gnrpo30")
             );
 
             // OB84SeatCoach
@@ -5444,6 +5624,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Lime", "Brown", "Black", "White", "Grey", "LightBlue", "Yellow", "Magenta", "Red", "Pink", "Blue", "LightGrey", "Purple", "Cyan", "Orange", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_84seatcoach")
             );
 
             // OB92SeatCoach
@@ -5453,6 +5634,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Lime", "LightGrey", "Grey", "Brown", "Red", "Black", "White", "Yellow"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_92seatcoach")
             );
 
             // OBNHGrillCar
@@ -5462,6 +5644,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Yellow", "Lime"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_nhgrillcar")
             );
 
             // OBNHLounge5107
@@ -5471,6 +5654,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_nhlounge5107")
             );
 
             // OBBaggage_52SeatDividedCoach
@@ -5481,6 +5665,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "LightGrey", "Lime", "Grey", "Yellow"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ob_lightweight_baggage_52seatdividedcoach")
             );
 
             // OB76SeatDividedCoach
@@ -5490,6 +5675,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Grey", "Yellow", "Lime", "Black", "Blue", "Orange", "Brown", "LightGrey", "Red", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_76seatdividedcoach")
             );
 
             // OBLV82_92SeatCoach
@@ -5499,6 +5685,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "White", "Pink"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_lv82_92seatcoach")
             );
 
             // OBRPO15
@@ -5509,6 +5696,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Lime", "Grey", "Cyan", "LightGrey", "Blue"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("ob_lightweight_rpo15")
             );
 
             // OB24SeatCoach_Dinette
@@ -5518,6 +5706,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Brown", "Green", "Pink", "Lime", "Grey", "Blue"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_24seatcoach_dinette")
             );
 
             // OBBAR52SeatCoach_Dinette
@@ -5527,6 +5716,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey", "Blue"})
                             .setGuiRenderScale(10)
+                            .setStockId("ob_lightweight_bar52seatcoach_dinette")
             );
 
             // PSCNW56SeatCoach
@@ -5536,6 +5726,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black", "Skin19", "Green", "Lime", "Skin20", "White", "Brown", "Skin21", "Grey", "LightGrey", "Skin22", "Skin16", "Skin17", "Skin18", "Purple", "Orange", "Red", "Blue", "Skin23", "Cyan", "LightBlue", "Pink", "Magenta"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw56seatcoach")
             );
 
             // PSCNW48SeatCoach_Lounge
@@ -5545,6 +5736,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw48seatcoach_lounge")
             );
 
             // PSCNW20SeatCoach_Lounge
@@ -5554,6 +5746,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw20seatcoach_lounge")
             );
 
             // PSCNW36SeatCoach_Dinette
@@ -5563,6 +5756,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw36seatcoach_dinette")
             );
 
             // PSCNW56SeatDiner
@@ -5572,6 +5766,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw56seatcoachdiner")
             );
 
             // PSCNW48SeatDiner
@@ -5581,6 +5776,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw48seatcoachdiner")
             );
 
             // PSCNW1DR_22SeatParlor
@@ -5590,6 +5786,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Blue", "White", "Grey", "LightBlue", "Cyan", "LightGrey", "Brown", "Orange", "Red", "Pink", "Magenta", "Purple", "Skin16"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw1dr_22seatparlor")
             );
 
             // PSCNW16_1_3Sleeper
@@ -5599,6 +5796,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw16_1_3sleeper")
             );
 
             // PSCNW12SeatParlor_Observation
@@ -5608,6 +5806,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Black", "Green", "Lime"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw12seatparlor_observation")
             );
 
             // PSCNWRPO15
@@ -5618,6 +5817,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Green"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_cnwrpo15")
             );
 
             // PSCNWRPO60
@@ -5628,6 +5828,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Green", "Orange", "Red", "Grey", "LightGrey", "White", "Magenta", "Brown", "Lime"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_cnwrpo60")
             );
 
             // PSCNWBaggage_LC_Lounge
@@ -5638,6 +5839,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey", "LightGrey", "White", "Magenta"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_cnwbaggage_lc_lounge")
             );
 
             // PSCNWRPO15_Baggage_LC_Lounge
@@ -5648,6 +5850,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey", "LightGrey"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_cnwrpo15_baggage_lc_lounge")
             );
 
             // PSCNWBaggage_LC_Diner
@@ -5658,6 +5861,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_cnwbaggage_lc_diner")
             );
 
             // PSCNW20SeatCoach_Lounge_1959
@@ -5667,6 +5871,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw20seatcoach_lounge_1959")
             );
 
             // PSCNWCommuterLounge
@@ -5676,6 +5881,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnwcommuterlounge")
             );
 
             // PSCNW27SeatParlor_Observation
@@ -5685,6 +5891,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Green", "Black", "Lime"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cnw27seatparlor_observation")
             );
 
             // BuddRDG56SeatCoach_Lounge
@@ -5694,6 +5901,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "Grey", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_rdg56seatcoach_lounge")
             );
 
             // BuddRDGDiner_Lounge
@@ -5703,6 +5911,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_rdgdiner_lounge")
             );
 
             // BuddRDG56SeatCoach_Observation
@@ -5712,6 +5921,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "Grey", "LightGrey", "LightBlue", "White"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_rdg56seatcoach_observation")
             );
 
             // BuddCRIP52SeatCoach
@@ -5721,6 +5931,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey", "LightGrey", "Blue", "White", "Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_crip_lightweight_52seatcoach")
             );
 
             // BuddNYC52SeatCoach
@@ -5730,6 +5941,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Orange", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_nyc_lightweight_52seatcoach")
             );
 
             // BuddCBQ52SeatCoach
@@ -5739,6 +5951,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Brown", "Purple"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_cbq_lightweight_52seatcoach")
             );
 
             // BuddDome46SeatCoach
@@ -5748,6 +5961,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey", "LightGrey", "White", "Brown", "Green", "Lime", "Orange", "Blue", "Black", "Magenta", "Yellow", "Red", "Pink", "Cyan", "LightBlue", "Purple", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_dome46seatcoach")
             );
 
             // BuddCBQDome50SeatCoach
@@ -5757,6 +5971,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cbqdome50seatcoach")
             );
 
             // BuddPrewarBaggage
@@ -5767,6 +5982,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Grey", "LightGrey", "White", "Red", "Yellow", "Black"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("budd_lightweight_prewar_baggage")
             );
 
             // BuddATSF52SeatCoach
@@ -5776,6 +5992,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Yellow", "Orange", "Green", "Pink", "Blue", "Lime", "Purple", "Brown", "Grey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_atsf52seatcoach")
             );
 
             // BuddATSF48SeatCoach
@@ -5785,6 +6002,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Cyan"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_atsf48seatcoach")
             );
 
             // BuddATSF50SeatCoach_observation
@@ -5794,6 +6012,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_atsf50seatcoach_observation")
             );
 
             // BuddATSF34SeatParlor_observation
@@ -5803,6 +6022,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Lime", "Brown", "Blue"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_atsf34seatparlor_observation")
             );
 
             // BuddATSF58SeatCoach_observation
@@ -5812,6 +6032,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Orange", "Cyan", "Purple"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_atsf58seatcoach_observation")
             );
 
             // PSATSF50SeatCoach_observation
@@ -5821,6 +6042,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Grey", "LightGrey", "Blue", "Orange"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_atsf50seatcoach_observation")
             );
 
             // ACF_SP_98seatcoach
@@ -5830,6 +6052,7 @@ public class RegisterBAPTrains
                             .setMass(5)
                             .setColors(new String[]{"Green", "Lime", "LightGrey", "Grey", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20","Skin21","Skin22"})
                             .setGuiRenderScale(10)
+                            .setStockId("acf_sp_72_c_1")
             );
 
             // ACFUPRPO60
@@ -5840,6 +6063,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Yellow", "Red", "Orange", "Brown", "Green", "Blue", "Lime", "Grey", "LightGrey", "Black", "White"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("acf_lightweight_uprpo60")
             );
 
             // BuddDome54SeatCoach
@@ -5849,6 +6073,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Grey", "LightGrey", "White", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_dome54seatcoach")
             );
 
             // PSCEIRPO15_Baggage_LC_Lounge
@@ -5859,6 +6084,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Blue", "Orange", "Cyan", "Red"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_ceirpo15_baggage_lc_lounge")
             );
 
             // PSCEIRPO15_Baggage_38SeatCoach
@@ -5869,6 +6095,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Blue", "Orange", "Cyan", "Red"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(18)
+                            .setStockId("ps_lightweight_ceirpo15_baggage_38seatcoach")
             );
 
             // PSCEI60SeatCoach
@@ -5878,6 +6105,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Orange", "Cyan", "LightBlue", "Purple", "Yellow", "Pink", "Grey", "Green", "LightGrey", "Black", "Lime", "Brown", "Magenta", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cei60seatcoach")
             );
 
             // PSCEIDiner
@@ -5887,6 +6115,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Cyan", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_ceidiner")
             );
 
             // PSCEI1DR_28SeatParlor_Observation
@@ -5896,6 +6125,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Orange", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_cei1dr_28seatparlor_observation")
             );
 
             // OBHWNH5570_5589Baggage
@@ -5906,6 +6136,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Lime", "Yellow", "Grey", "LightGrey", "Black", "Red"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("ob_heavyweight_nh5570_5589baggage")
             );
 
             // BuddCN68SeatCoach_Observation
@@ -5915,6 +6146,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Grey", "LightGrey", "Red", "Pink", "White"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cn68seatcoach_observation")
             );
 
             // BuddCNCoach
@@ -5924,6 +6156,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Grey", "LightGrey", "Red", "Pink", "White"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cncoach")
             );
 
             // BuddCNDiner_Lounge
@@ -5933,6 +6166,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Grey", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cndiner_lounge")
             );
 
             // BuddCN39SeatParlor_Observation
@@ -5942,6 +6176,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Grey", "LightGrey", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cn39seatparlor_observation")
             );
 
             // BuddCN59SeatCoach_Observation
@@ -5951,6 +6186,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Grey"})
                             .setGuiRenderScale(10)
+                            .setStockId("budd_lightweight_cn59seatcoach_observation")
             );
 
             // NSCCNBaggage
@@ -5961,6 +6197,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Green", "Yellow", "LightBlue", "Black", "Lime", "Orange", "Red", "Pink", "Grey", "LightGrey", "Brown", "White", "Blue", "Cyan", "Purple", "Magenta", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(27)
+                            .setStockId("nsc_lightweight_cnbaggage")
             );
 
             // PSSOUBaggage
@@ -5971,6 +6208,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Grey", "LightGrey", "White", "Black", "Brown", "Magenta"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_soubaggage")
             );
 
             // PSSOURPO_30
@@ -5981,6 +6219,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Grey", "LightGrey", "White", "Black"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("ps_lightweight_soupo30")
             );
 
             // PRECOPendulumCoach
@@ -5990,6 +6229,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Blue", "Black", "White", "Grey", "LightGrey", "Magenta", "LightBlue", "Cyan", "Lime", "Orange", "Green", "Red"})
                             .setGuiRenderScale(10)
+                            .setStockId("preco_lightweight_pendulumcoach")
             );
 
             // PSFNCCBaggage_Dinette
@@ -5999,6 +6239,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("ps_lightweight_fnccbaggage_dinette")
             );
 
             // NYCPrewar56SeatCoach
@@ -6008,6 +6249,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Green", "Red", "Grey", "Magenta", "LightGrey", "White", "Blue", "Lime", "Cyan", "Brown", "Pink", "Yellow", "Purple", "Black", "Orange", "LightBlue", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin38", "Skin39"})
                             .setGuiRenderScale(10)
+                            .setStockId("nyc_lightweight_prewar56seatcoach")
             );
 
             // MILWPrewarBaggage
@@ -6028,6 +6270,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Black"})
                             .setGuiRenderScale(12)
                             .setCargoCapacity(18)
+                            .setStockId("milw1935baggage_dinette")
             );
 
             // MILW1935Tap_Dinette
@@ -6037,6 +6280,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
                             .setGuiRenderScale(12)
+                            .setStockId("milw1935tap_dinette")
             );
 
             // MILW1935_48SeatCoach
@@ -6046,6 +6290,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime"})
                             .setGuiRenderScale(10)
+                            .setStockId("milw1935_48seatcoach")
             );
 
             // MILW1935_22SeatParlor
@@ -6055,6 +6300,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green"})
                             .setGuiRenderScale(10)
+                            .setStockId("milw1935_22seatparlor")
             );
 
             // MILW1935_21SeatParlor_Observation
@@ -6064,6 +6310,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
                             .setGuiRenderScale(10)
+                            .setStockId("milw1935_21seatparlor_observation")
             );
 
             // MILW1935_44SeatCoach_Observation
@@ -6073,6 +6320,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black"})
                             .setGuiRenderScale(10)
+                            .setStockId("milw1935_44seatcoach_observation")
             );
 
             // MILW1935Dorm_56SeatCoach
@@ -6082,6 +6330,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey"})
                             .setGuiRenderScale(10)
+                            .setStockId("milw1935dorm_56seatcoach")
             );
 
             // ACF_LN_KCS60SeatDividedCoach
@@ -6091,6 +6340,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
                             .setGuiRenderScale(10)
+                            .setStockId("acf_ln_kcs60seatdividedcoach")
             );
 
             // LNCoach2551Series
@@ -6100,6 +6350,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
                             .setGuiRenderScale(10)
+                            .setStockId("lncoach2551series")
             );
 
             // MON_LightweightRPO_30
@@ -6110,6 +6361,7 @@ public class RegisterBAPTrains
                             .setColors(new String[]{"Black", "Red", "Green", "Brown"})
                             .setGuiRenderScale(10)
                             .setCargoCapacity(27)
+                            .setStockId("mon_lightweight_rpo30")
             );
 
             // MON_LightweightCoach
@@ -6119,6 +6371,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow", "LightBlue"})
                             .setGuiRenderScale(10)
+                            .setStockId("mon_lightweightcoach")
             );
 
             // MON_LightweightDeluxeCoach
@@ -6128,6 +6381,7 @@ public class RegisterBAPTrains
                             .setMass(3)
                             .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
                             .setGuiRenderScale(10)
+                            .setStockId("mon_lightweightdeluxecoach")
             );
 
             //Passenger - Amfleets//
@@ -6233,6 +6487,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[] {"LightGrey", "Grey", "Brown", "Green", "Lime", "Yellow", "Cyan", "Black", "White", "Magenta", "Red", "Orange", "Pink", "Skin16", "Purple"})
                             .setGuiRenderScale(16)
+                            .setStockId("drgw_01400")
             );
 
             // ICC_Bobber
@@ -6251,6 +6506,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[] {"Brown", "Red", "Skin16", "Green", "Cyan", "Skin17", "Orange", "Skin18", "Skin19", "Skin20", "Skin21"})
                             .setGuiRenderScale(16)
+                            .setStockId("iccbaywindow")
             );
 
             // CA11
@@ -6260,6 +6516,7 @@ public class RegisterBAPTrains
                             .setMass(2)
                             .setColors(new String[] {"Yellow", "Red", "Cyan", "Skin17", "Skin18", "Purple", "Skin19"})
                             .setGuiRenderScale(16)
+                            .setStockId("icc_ca11")
             );
 
             // WPShops600Series
@@ -6296,6 +6553,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.5)
+                            .setStockId("w_a11")
             );
 
             // W_A55
@@ -6312,6 +6570,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.55)
+                            .setStockId("w_a55")
             );
 
             // W_A55_Combine
@@ -6328,6 +6587,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.55)
+                            .setStockId("w_a55_combine")
             );
 
             //Funny shit
@@ -6428,6 +6688,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("class_74")
             );
 
             // TwoBil
@@ -6444,6 +6705,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(11)
                             .setBogieLocoPosition(-3.15)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("2-bil")
             );
 
             // TwoBilTail
@@ -6454,6 +6716,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
                             .setGuiRenderScale(11)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("2-bil_tail")
             );
 
             // FourCor
@@ -6470,6 +6733,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(11)
                             .setBogieLocoPosition(-3.6)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("4-cor")
             );
 
             // FourCorTrailerComposite
@@ -6480,6 +6744,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
                             .setGuiRenderScale(11)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("4-cor_trailer_composite")
             );
 
             // FourCorTrailerSecond
@@ -6490,6 +6755,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
                             .setGuiRenderScale(11)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("4-cor_trailer_second")
             );
 
             // FourBuf
@@ -6500,6 +6766,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
                             .setGuiRenderScale(11)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("4-buf")
             );
 
             // FourCorTail
@@ -6510,6 +6777,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey"})
                             .setGuiRenderScale(11)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("4-cor_tail")
             );
 
             // tenderNS3700
@@ -6521,6 +6789,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Black"})
                             .setGuiRenderScale(18)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("ns_3700_tender")
             );
 
             // locoSteamNS3700Class
@@ -6540,6 +6809,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.6)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("ns_3700_class")
             );
 
             // KawasakiLRV
@@ -6574,6 +6844,7 @@ public class RegisterBAPTrains
                             .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("cq_310_po")
             );
 
             // CQ310PA
@@ -6584,6 +6855,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Grey", "Black", "Skin16"})
                             .setGuiRenderScale(18)
                             .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
+                            .setStockId("cq_310_pa")
             );
 
             // PCC
@@ -6611,6 +6883,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Grey", "LightGrey"})
                             .setGuiRenderScale(18)
                             .setAdditionalTooltip(new String[] {"Checks the railroad for things up to standard"})
+                            .setStockId("geometrycar")
             );
 
             // FRED
@@ -6651,6 +6924,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Yellow", "White", "Grey", "Orange", "Green", "Red"})
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(2.7)
+                            .setStockId("highrailvan")
             );
 
             // HighrailTruck
@@ -6668,6 +6942,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"Yellow", "White", "LightGrey"})
                             .setGuiRenderScale(18)
                             .setBogieLocoPosition(2.7)
+                            .setStockId("highrail")
             );
 
             // WorkdayHyrail
@@ -6685,6 +6960,7 @@ public class RegisterBAPTrains
                             .setColors(new String[] {"LightGrey", "Grey", "Cyan", "Yellow", "Skin17", "Orange", "Skin18", "Red"})
                             .setGuiRenderScale(20)
                             .setBogieLocoPosition(-2.0)
+                            .setStockId("workday_hyrail")
             );
         }};
     }

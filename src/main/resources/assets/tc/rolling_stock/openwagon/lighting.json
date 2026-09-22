@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:openwagon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:brown": {},
+    "tc:pink": {}
+  }
+}

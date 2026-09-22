@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:cd742",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:yellow": {},
+    "tc:white": {},
+    "tc:blue": {},
+    "tc:orange": {},
+    "tc:lightblue": {}
+  }
+}

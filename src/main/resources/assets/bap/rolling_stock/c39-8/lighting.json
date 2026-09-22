@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:c39-8",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_191": {
+          "preset": "marker_light"
+        },
+        "marker_body_193": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_333": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_334": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_337": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_338": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_366": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_367": {
+          "preset": "instrument"
+        },
+        "cab_signal_body_370": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:skin19": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:brown": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:skin20": {}
+  }
+}

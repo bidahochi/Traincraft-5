@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "4": "bap:blue",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "8": "bap:grey",
+    "13": "bap:magenta",
+    "10": "bap:lime",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "15": "bap:white",
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:pcf_rbl_ribbed"
+}

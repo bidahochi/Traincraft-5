@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "4": "tc:blue",
+    "2": "tc:green",
+    "14": "tc:orange"
+  },
+  "stock": "tc:prrcaboose"
+}

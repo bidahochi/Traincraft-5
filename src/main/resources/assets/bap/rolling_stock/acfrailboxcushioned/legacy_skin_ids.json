@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "15": "bap:white",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "4": "bap:blue",
+    "8": "bap:grey",
+    "14": "bap:orange",
+    "11": "bap:yellow",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:acfrailboxcushioned"
+}

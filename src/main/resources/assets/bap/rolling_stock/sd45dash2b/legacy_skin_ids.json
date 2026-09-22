@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "15": "bap:white"
+  },
+  "stock": "bap:sd45dash2b"
+}

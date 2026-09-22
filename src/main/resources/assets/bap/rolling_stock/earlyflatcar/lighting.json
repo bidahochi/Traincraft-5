@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:earlyflatcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

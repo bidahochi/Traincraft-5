@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "11": "bap:yellow",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "0": "bap:black",
+    "14": "bap:orange",
+    "13": "bap:magenta",
+    "1": "bap:red"
+  },
+  "stock": "bap:rf-16"
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:lococ11",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

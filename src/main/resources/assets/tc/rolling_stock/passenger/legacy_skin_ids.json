@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "1": "tc:red",
+    "2": "tc:green",
+    "15": "tc:white",
+    "0": "tc:black",
+    "6": "tc:cyan",
+    "14": "tc:orange",
+    "8": "tc:grey",
+    "7": "tc:lightgrey",
+    "12": "tc:lightblue"
+  },
+  "stock": "tc:passenger"
+}

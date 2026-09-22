@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:tanker_three_dome",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:white": {}
+  }
+}

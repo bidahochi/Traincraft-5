@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "1": "bap:red",
+    "2": "bap:green",
+    "4": "bap:blue"
+  },
+  "stock": "bap:icc_bobber"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd70ace_h",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_cn_body_273": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_274": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_279": {
+          "preset": "marker_light"
+        },
+        "marker_cn_body_281": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:skin16": {},
+    "bap:purple": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:lightgrey": {}
+  }
+}

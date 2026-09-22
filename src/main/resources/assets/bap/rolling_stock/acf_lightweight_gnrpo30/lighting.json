@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_gnrpo30",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:lime": {}
+  }
+}

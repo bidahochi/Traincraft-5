@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m640w",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_79": {
+          "preset": "marker_light"
+        },
+        "marker_body_80": {
+          "preset": "marker_light"
+        },
+        "marker_body_207": {
+          "preset": "marker_light"
+        },
+        "marker_body_208": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {}
+  }
+}

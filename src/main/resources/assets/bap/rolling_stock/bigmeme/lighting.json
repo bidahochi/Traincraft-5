@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:bigmeme",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {}
+  }
+}

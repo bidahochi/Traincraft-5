@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw10",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_199": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_255": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:purple": {},
+    "bap:orange": {},
+    "bap:pink": {}
+  }
+}

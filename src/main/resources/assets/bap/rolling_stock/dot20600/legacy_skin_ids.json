@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "0": "bap:black",
+    "15": "bap:white",
+    "2": "bap:green",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:dot20600"
+}

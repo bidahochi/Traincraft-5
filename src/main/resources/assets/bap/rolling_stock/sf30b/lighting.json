@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sf30b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_fictional_body_105": {
+          "preset": "marker_light"
+        },
+        "marker_fictional_body_106": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_169": {
+          "preset": "instrument"
+        },
+        "marker_fictional_body_308": {
+          "preset": "marker_light"
+        },
+        "marker_fictional_body_309": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:lightblue": {},
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:red": {}
+  }
+}

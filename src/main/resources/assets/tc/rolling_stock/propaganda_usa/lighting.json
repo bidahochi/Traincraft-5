@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:propaganda_usa",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:white": {},
+    "tc:red": {},
+    "tc:green": {},
+    "tc:orange": {},
+    "tc:lime": {}
+  }
+}

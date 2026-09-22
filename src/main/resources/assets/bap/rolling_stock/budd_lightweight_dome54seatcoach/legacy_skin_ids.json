@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "1": "bap:red"
+  },
+  "stock": "bap:budd_lightweight_dome54seatcoach"
+}

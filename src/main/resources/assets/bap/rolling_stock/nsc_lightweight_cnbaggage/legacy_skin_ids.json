@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "11": "bap:yellow",
+    "12": "bap:lightblue",
+    "0": "bap:black",
+    "10": "bap:lime",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "3": "bap:brown",
+    "15": "bap:white",
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "5": "bap:purple",
+    "13": "bap:magenta",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20"
+  },
+  "stock": "bap:nsc_lightweight_cnbaggage"
+}

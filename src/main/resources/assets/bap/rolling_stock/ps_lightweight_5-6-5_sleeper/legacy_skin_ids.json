@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "3": "bap:brown",
+    "14": "bap:orange",
+    "12": "bap:lightblue",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:ps_lightweight_5-6-5_sleeper"
+}

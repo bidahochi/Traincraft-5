@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:nyc_lightweight_prewar56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:cyan": {},
+    "bap:brown": {},
+    "bap:pink": {},
+    "bap:yellow": {},
+    "bap:purple": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:lightblue": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {},
+    "bap:skin33": {},
+    "bap:skin34": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {},
+    "bap:skin38": {},
+    "bap:skin39": {}
+  }
+}

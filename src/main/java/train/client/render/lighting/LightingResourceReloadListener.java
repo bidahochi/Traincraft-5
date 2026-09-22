@@ -3,6 +3,8 @@ package train.client.render.lighting;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.resources.IResourceManagerReloadListener;
 import tmt.ModelRendererTurboBatch;
+import train.client.render.RollingStockTranslucencyQueue;
+import train.client.render.translucency.TmtTranslucencyContext;
 import train.client.render.embedded.EmbeddedTrackHostSurfaceRenderer;
 
 /**
@@ -22,12 +24,15 @@ public final class LightingResourceReloadListener implements IResourceManagerRel
     @Override
     public void onResourceManagerReload(IResourceManager manager)
     {
+        ClientRollingStockAppearanceLoader.INSTANCE.clear();
         AutomaticLightSurfaceDetection.clear();
         ClientRollingStockLighting.clearCaches();
         RollingStockLightOcclusion.clearAll();
         RollingStockDepthMask.clear();
         RollingStockShadowRenderer.clear();
         TextureAlphaMaskCache.clear();
+        TmtTranslucencyContext.clear();
+        RollingStockTranslucencyQueue.clear();
         PlacedModelLighting.clear();
         LightEffectRenderBatch.clear();
         MaxOpacityLightCompositor.clear();

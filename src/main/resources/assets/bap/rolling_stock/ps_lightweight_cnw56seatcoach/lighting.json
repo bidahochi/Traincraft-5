@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_634": {
+          "preset": "marker_light"
+        },
+        "marker_body_635": {
+          "preset": "marker_light"
+        },
+        "marker_body_639": {
+          "preset": "marker_light"
+        },
+        "marker_body_640": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:skin19": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:skin20": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:skin21": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:skin22": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:purple": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:blue": {},
+    "bap:skin23": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:pink": {},
+    "bap:magenta": {}
+  }
+}

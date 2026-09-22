@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:wcp_baler",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

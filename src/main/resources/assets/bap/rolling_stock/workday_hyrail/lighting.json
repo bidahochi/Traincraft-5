@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:workday_hyrail",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:cyan": {},
+    "bap:yellow": {},
+    "bap:skin17": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:red": {}
+  }
+}

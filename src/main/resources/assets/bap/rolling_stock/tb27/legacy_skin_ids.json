@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "5": "bap:purple"
+  },
+  "stock": "bap:tb27"
+}

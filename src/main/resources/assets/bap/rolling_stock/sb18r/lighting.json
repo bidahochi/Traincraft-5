@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sb18r",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_82": {
+          "preset": "marker_light"
+        },
+        "marker_body_83": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_222": {
+          "preset": "instrument"
+        },
+        "marker_body_274": {
+          "preset": "marker_light"
+        },
+        "marker_body_276": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_334": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:green": {},
+    "bap:skin17": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {}
+  }
+}

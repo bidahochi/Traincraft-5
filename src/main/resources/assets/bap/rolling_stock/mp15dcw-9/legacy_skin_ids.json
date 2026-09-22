@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "16": "bap:skin16",
+    "15": "bap:white"
+  },
+  "stock": "bap:mp15dcw-9"
+}

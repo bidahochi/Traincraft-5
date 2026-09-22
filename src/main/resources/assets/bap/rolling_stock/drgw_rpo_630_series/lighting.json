@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_rpo_630_series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {}
+  }
+}

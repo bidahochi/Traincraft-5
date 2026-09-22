@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:aar_50_ton_hopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:purple": {},
+    "bap:skin16": {}
+  }
+}

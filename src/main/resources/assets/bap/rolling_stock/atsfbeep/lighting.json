@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:atsfbeep",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "commander_upper": {
+          "preset": "commander"
+        },
+        "commander_lower": {
+          "preset": "commander"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

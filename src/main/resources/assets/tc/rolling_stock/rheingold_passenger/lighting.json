@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:rheingold_passenger",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:green": {},
+    "tc:lightblue": {},
+    "tc:magenta": {},
+    "tc:lime": {},
+    "tc:cyan": {}
+  }
+}

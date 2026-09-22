@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:hicube60",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:lime": {},
+    "bap:white": {},
+    "bap:cyan": {},
+    "bap:green": {},
+    "bap:purple": {},
+    "bap:skin18": {}
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_3500",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:skin17": {},
+    "bap:pink": {},
+    "bap:skin18": {},
+    "bap:brown": {},
+    "bap:skin19": {},
+    "bap:orange": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:versa_trans",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "aaa": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:black": {}
+  }
+}

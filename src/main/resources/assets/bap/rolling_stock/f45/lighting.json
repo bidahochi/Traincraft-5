@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f45",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:red": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "0": "bap:black",
+    "3": "bap:brown",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "10": "bap:lime"
+  },
+  "stock": "bap:fm_h24-66"
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw1600",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_137": {
+          "preset": "instrument"
+        },
+        "marker_body_268": {
+          "preset": "marker_light"
+        },
+        "marker_body_269": {
+          "preset": "marker_light"
+        },
+        "marker_body_291": {
+          "preset": "marker_light"
+        },
+        "marker_body_292": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_306": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:skin16": {}
+  }
+}

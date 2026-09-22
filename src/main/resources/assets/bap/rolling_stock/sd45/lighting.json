@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd45",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_478": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_482": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_484": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:skin16": {},
+    "bap:green": {},
+    "bap:pink": {},
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:orange": {},
+    "bap:skin19": {},
+    "bap:yellow": {},
+    "bap:skin20": {},
+    "bap:red": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:lightgrey": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:purple": {},
+    "bap:skin31": {},
+    "bap:skin32": {}
+  }
+}

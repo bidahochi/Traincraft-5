@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "11": "bap:yellow",
+    "3": "bap:brown",
+    "12": "bap:lightblue",
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "15": "bap:white",
+    "6": "bap:cyan",
+    "4": "bap:blue",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21"
+  },
+  "stock": "bap:acf_lightweight_gn60seatcoach"
+}

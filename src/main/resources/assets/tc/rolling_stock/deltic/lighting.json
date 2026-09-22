@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:deltic",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:cyan": {}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "15": "bap:white",
+    "4": "bap:blue",
+    "1": "bap:red",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "5": "bap:purple",
+    "9": "bap:pink",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:pch120car"
+}

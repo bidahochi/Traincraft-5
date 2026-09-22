@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gtavthing",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {}
+  }
+}

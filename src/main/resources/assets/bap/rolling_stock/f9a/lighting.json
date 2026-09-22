@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f9a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "HL_U1A": {
+          "preset": "headlight"
+        },
+        "HL_U1B": {
+          "preset": "headlight"
+        },
+        "HL_L1A": {
+          "preset": "headlight"
+        },
+        "HL_L1B": {
+          "preset": "headlight"
+        },
+        "HL_L2A": {
+          "preset": "headlight"
+        },
+        "HL_L2B": {
+          "preset": "headlight"
+        },
+        "HL_U2A": {
+          "preset": "headlight"
+        },
+        "HL_U2B": {
+          "preset": "headlight"
+        },
+        "cab_gauge_body_212": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_213": {
+          "preset": "instrument"
+        },
+        "marker_early_body_267": {
+          "preset": "marker_light"
+        },
+        "marker_early_body_270": {
+          "preset": "marker_light"
+        },
+        "marker_body_273": {
+          "preset": "marker_light"
+        },
+        "marker_body_281": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:skin20": {
+      "lighting": {
+        "fixtures": {
+          "HL_U1B": {
+            "color": 16719904,
+            "preset": "gyralite"
+          },
+          "HL_U1A": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "HL_L2A": {
+            "preset": "gyralite"
+          },
+          "HL_L2B": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:black": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
+  }
+}

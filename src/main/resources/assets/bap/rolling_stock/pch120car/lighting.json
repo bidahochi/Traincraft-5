@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch120car",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:purple": {},
+    "bap:pink": {},
+    "bap:yellow": {}
+  }
+}

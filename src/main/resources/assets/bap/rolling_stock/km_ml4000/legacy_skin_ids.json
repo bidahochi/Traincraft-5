@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "1": "bap:red"
+  },
+  "stock": "bap:km_ml4000"
+}

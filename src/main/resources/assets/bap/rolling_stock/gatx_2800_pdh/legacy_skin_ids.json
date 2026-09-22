@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "3": "bap:brown",
+    "13": "bap:magenta",
+    "16": "bap:skin16",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:gatx_2800_pdh"
+}

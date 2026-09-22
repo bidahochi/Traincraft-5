@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "tc:orange",
+    "11": "tc:yellow",
+    "1": "tc:red",
+    "4": "tc:blue",
+    "13": "tc:magenta",
+    "0": "tc:black",
+    "9": "tc:pink",
+    "2": "tc:green"
+  },
+  "stock": "tc:locosd70"
+}

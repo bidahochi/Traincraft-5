@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "6": "bap:cyan",
+    "25": "bap:skin25",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "26": "bap:skin26",
+    "27": "bap:skin27"
+  },
+  "stock": "bap:hcs_c57"
+}

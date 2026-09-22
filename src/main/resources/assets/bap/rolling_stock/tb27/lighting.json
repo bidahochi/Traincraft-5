@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:tb27",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_marker_right": {
+          "preset": "marker_light"
+        },
+        "rear_marker_left": {
+          "preset": "marker_light"
+        },
+        "front_marker_right": {
+          "preset": "marker_light"
+        },
+        "front_marker_left": {
+          "preset": "marker_light"
+        },
+        "front_marker_sp_right": {
+          "preset": "marker_light"
+        },
+        "front_marker_sp_left": {
+          "preset": "marker_light"
+        },
+        "rear_headlight_lower_right": {
+          "preset": "headlight"
+        },
+        "rear_headlight_lower_left": {
+          "preset": "headlight"
+        },
+        "rear_headlight_upper_right": {
+          "preset": "headlight"
+        },
+        "rear_headlight_upper_left": {
+          "preset": "headlight"
+        },
+        "front_headlight_lower": {
+          "preset": "headlight"
+        },
+        "front_headlight_upper": {
+          "preset": "headlight"
+        },
+        "front_gyralite_right": {
+          "fixtureType": "headlight",
+          "preset": "gyralite"
+        },
+        "front_gyralite_left": {
+          "fixtureType": "headlight",
+          "preset": "gyralite"
+        },
+        "cab_speedometer": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:purple": {}
+  }
+}

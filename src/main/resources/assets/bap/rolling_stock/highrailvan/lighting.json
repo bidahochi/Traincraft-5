@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:highrailvan",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:red": {}
+  }
+}

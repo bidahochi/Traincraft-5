@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locosd70",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:orange": {},
+    "tc:yellow": {},
+    "tc:red": {},
+    "tc:blue": {},
+    "tc:magenta": {},
+    "tc:black": {},
+    "tc:pink": {},
+    "tc:green": {}
+  }
+}

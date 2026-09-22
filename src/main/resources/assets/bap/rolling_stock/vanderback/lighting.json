@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:vanderback",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {}
+  }
+}

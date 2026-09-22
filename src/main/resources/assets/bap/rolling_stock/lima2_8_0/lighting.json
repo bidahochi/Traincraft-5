@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:lima2_8_0",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_position_3": {
+          "preset": "marker_light"
+        },
+        "marker_position_4": {
+          "preset": "marker_light"
+        },
+        "marker_position_2": {
+          "preset": "marker_light"
+        },
+        "marker_position_1": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:red": {}
+  }
+}

@@ -3,9 +3,11 @@ package train.client.render.lighting;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import train.common.api.ResolvedSkinLighting;
+import train.common.api.LightFixtureType;
 import train.common.api.RollingStockLightDefinition;
 import train.common.api.RollingStockLightOverride;
 
@@ -18,15 +20,90 @@ final class SkinLightingResolver
 {
     private SkinLightingResolver() {}
 
+    /** Explicit JSON grouping/clearing supersedes the legacy model assignment, including with explicit IDs. */
+    public static String physicalGroup(Map<String, RollingStockLightOverride> overrides,
+        String fixtureId, String legacyGroup)
+    {
+        RollingStockLightOverride member = overrides.get(fixtureId);
+        if (member != null && member.group() != null)
+        {
+            return member.group().isEmpty() ? null : member.group().toLowerCase(Locale.ROOT);
+        }
+        return legacyGroup == null ? null : legacyGroup.toLowerCase(Locale.ROOT);
+    }
+
+    /**
+     * Explicit JSON membership delegates all configurable settings to the shared entry.
+     * Dormant member overrides remain available after clearing membership. Older model-only
+     * groups retain their member-default composition for compatibility.
+     */
+    public static RollingStockLightOverride physicalOverride(
+        Map<String, RollingStockLightOverride> overrides, String fixtureId, String group)
+    {
+        RollingStockLightOverride member = overrides.get(fixtureId);
+        if (group == null)
+        {
+            return member;
+        }
+        RollingStockLightOverride shared = overrides.get(group);
+        if (shared == null || shared == member)
+        {
+            return member;
+        }
+        if (member != null && member.group() != null && member.group().isEmpty() == false)
+        {
+            return shared;
+        }
+        if (member == null)
+        {
+            return shared;
+        }
+        // Surface availability stays member-owned; only shared effect behavior takes precedence.
+        RollingStockLightOverride merged = member.merge(shared);
+        boolean enabled = shared.enabled();
+        if (member.availabilityOverridden())
+        {
+            enabled = member.enabled();
+        }
+        return new RollingStockLightOverride(enabled,
+            member.availabilityOverridden() || shared.availabilityOverridden(),
+            merged.behavior(), group, merged.fixtureType());
+    }
+
+    /** Resolves shared physical-effect settings consistently for rendering and lighting queries. */
+    static RollingStockLightOverride resolveOverride(
+        Map<String, RollingStockLightOverride> overrides, String fixtureId)
+    {
+        return physicalOverride(overrides, fixtureId, physicalGroup(overrides, fixtureId, null));
+    }
+
     static RollingStockLightDefinition resolveDefinition(
         Map<String, RollingStockLightOverride> overrides,
         RollingStockLightDefinition baseline)
     {
+        return resolveDefinition(overrides, baseline, null);
+    }
+
+    /** Uses the same legacy/JSON group precedence for pre-render queries as for visible parts. */
+    public static RollingStockLightDefinition resolveDefinition(
+        Map<String, RollingStockLightOverride> overrides,
+        RollingStockLightDefinition baseline, String legacyGroup)
+    {
+        RollingStockLightOverride override = physicalOverride(overrides, baseline.id(),
+            physicalGroup(overrides, baseline.id(), legacyGroup));
+        if (override != null && override.fixtureType() != null)
+        {
+            LightFixtureType type = override.fixtureType();
+            baseline = baseline.toBuilder(type.behavior().controlCircuit()).build();
+            if (type == LightFixtureType.INSTRUMENT)
+            {
+                baseline = type.behavior().apply(baseline).toBuilder().instrument(true).build();
+            }
+        }
         if (baseline.instrument())
         {
-            return resolveInstrumentDefinition(overrides.get(baseline.id()), baseline);
+            return resolveInstrumentDefinition(override, baseline);
         }
-        RollingStockLightOverride override = overrides.get(baseline.id());
         return override == null || override.behavior() == null
                ? baseline
                : override.behavior().apply(baseline);
@@ -42,7 +119,7 @@ final class SkinLightingResolver
         Set<String> available = new HashSet<String>();
         for (RollingStockLightDefinition base : defaults)
         {
-            RollingStockLightOverride override = overrides.get(base.id());
+            RollingStockLightOverride override = resolveOverride(overrides, base.id());
             String partName = base.taggedPartName();
             known.add(base.id());
             if (partName != null && partName.trim().isEmpty() == false)
@@ -50,7 +127,8 @@ final class SkinLightingResolver
                 known.add(partName);
             }
             boolean enabled;
-            if (base.instrument())
+            RollingStockLightDefinition definition = resolveDefinition(overrides, base);
+            if (definition.instrument())
             {
                 // Instrument behavior is model-owned. A skin may suppress an unwanted
                 // instrument, but may not force-enable hidden texture geometry.
@@ -79,12 +157,6 @@ final class SkinLightingResolver
             {
                 continue;
             }
-            RollingStockLightDefinition definition =
-                base.instrument()
-                ? resolveInstrumentDefinition(override, base)
-                : override != null && override.behavior() != null
-                  ? override.behavior().apply(base)
-                  : base;
             active.add(definition);
             available.add(definition.id());
             if (partName != null && partName.trim().isEmpty() == false)

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "10": "bap:lime",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "0": "bap:black",
+    "15": "bap:white",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:ob_lightweight_92seatcoach"
+}

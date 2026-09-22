@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp39dash2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_10": {
+          "preset": "marker_light"
+        },
+        "marker_body_11": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_247": {
+          "preset": "instrument"
+        },
+        "marker_two_body_440": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_442": {
+          "preset": "marker_light"
+        },
+        "marker_body_444": {
+          "preset": "marker_light"
+        },
+        "marker_body_445": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_446": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:lightblue": {}
+  }
+}

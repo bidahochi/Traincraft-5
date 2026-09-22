@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:astf_autorack",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

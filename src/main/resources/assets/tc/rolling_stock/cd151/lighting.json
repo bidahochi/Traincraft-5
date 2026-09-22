@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:cd151",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:yellow": {},
+    "tc:red": {}
+  }
+}

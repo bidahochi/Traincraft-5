@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f7a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "HL_U1A": {
+          "preset": "headlight"
+        },
+        "HL_U1B": {
+          "preset": "headlight"
+        },
+        "HL_L1A": {
+          "preset": "headlight"
+        },
+        "HL_L1B": {
+          "preset": "headlight"
+        },
+        "HL_L2A": {
+          "preset": "headlight"
+        },
+        "HL_L2B": {
+          "preset": "headlight"
+        },
+        "HL_U2A": {
+          "preset": "headlight"
+        },
+        "HL_U2B": {
+          "preset": "headlight"
+        },
+        "cab_gauge_body_212": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_213": {
+          "preset": "instrument"
+        },
+        "marker_early_body_267": {
+          "preset": "marker_light"
+        },
+        "marker_early_body_270": {
+          "preset": "marker_light"
+        },
+        "marker_body_273": {
+          "preset": "marker_light"
+        },
+        "marker_body_281": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin17": {},
+    "bap:magenta": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {},
+    "bap:skin33": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:skin34": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {},
+    "bap:skin38": {},
+    "bap:lime": {},
+    "bap:green": {},
+    "bap:skin39": {}
+  }
+}

@@ -9,7 +9,8 @@ public enum RollingStockLightChannel
     DITCH(1 << 1),
     BEACON(1 << 2),
     AUX(1 << 3),
-    GYRA(1 << 4);
+    GYRA(1 << 4),
+    EMERGENCY(1 << 5);
 
     private final int mask;
 

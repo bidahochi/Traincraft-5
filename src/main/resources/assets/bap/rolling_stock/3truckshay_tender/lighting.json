@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:3truckshay_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:white": {}
+  }
+}

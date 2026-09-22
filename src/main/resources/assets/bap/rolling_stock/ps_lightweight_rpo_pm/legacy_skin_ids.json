@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:ps_lightweight_rpo_pm"
+}

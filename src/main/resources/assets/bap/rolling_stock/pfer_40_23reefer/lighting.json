@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pfer_40_23reefer",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:brown": {},
+    "bap:yellow": {},
+    "bap:purple": {},
+    "bap:grey": {}
+  }
+}

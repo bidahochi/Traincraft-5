@@ -352,8 +352,8 @@ public class ModelShay3Truck extends ModelConverter //Same as Filename
 		bodyModel[314] = new ModelRendererTurbo(this, 203, 206, textureX, textureY); // Box 592
 		bodyModel[315] = new ModelRendererTurbo(this, 203, 206, textureX, textureY); // Box 593
 		bodyModel[316] = new ModelRendererTurbo(this, 46, 136, textureX, textureY); // Box 597
-		bodyModel[317] = new ModelRendererTurbo(this, 163, 222, textureX, textureY, "marker").setLightFixtureId("marker_body_317"); // Box 598 marker glow
-		bodyModel[318] = new ModelRendererTurbo(this, 163, 222, textureX, textureY, "marker").setLightFixtureId("marker_body_318"); // Box 599 marker glow
+		bodyModel[317] = new ModelRendererTurbo(this, 163, 222, textureX, textureY, "marker_body_317"); // Box 598 marker glow
+		bodyModel[318] = new ModelRendererTurbo(this, 163, 222, textureX, textureY, "marker_body_318"); // Box 599 marker glow
 		bodyModel[319] = new ModelRendererTurbo(this, 263, 237, textureX, textureY); // Box 600
 		bodyModel[320] = new ModelRendererTurbo(this, 263, 237, textureX, textureY); // Box 601
 		bodyModel[321] = new ModelRendererTurbo(this, 263, 237, textureX, textureY); // Box 602

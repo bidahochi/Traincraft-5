@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:preco_lightweight_pendulumcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:magenta": {},
+    "bap:lightblue": {},
+    "bap:cyan": {},
+    "bap:lime": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:red": {}
+  }
+}

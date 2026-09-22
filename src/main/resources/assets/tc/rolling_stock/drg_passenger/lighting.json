@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:drg_passenger",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:yellow": {},
+    "tc:red": {},
+    "tc:green": {}
+  }
+}

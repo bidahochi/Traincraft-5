@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fol_m1b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:black": {}
+  }
+}

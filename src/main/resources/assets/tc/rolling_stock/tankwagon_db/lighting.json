@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:tankwagon_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:green": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "tc:yellow",
+    "1": "tc:red",
+    "4": "tc:blue"
+  },
+  "stock": "tc:german_post"
+}

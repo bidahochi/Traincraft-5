@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40",
+  "legacyColors": {
+    "4": "bap:blue",
+    "7": "bap:lightgrey",
+    "16": "bap:skin16",
+    "1": "bap:red",
+    "17": "bap:skin17",
+    "6": "bap:cyan",
+    "0": "bap:black",
+    "18": "bap:skin18",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "8": "bap:grey",
+    "23": "bap:skin23",
+    "41": "bap:skin41",
+    "42": "bap:skin42",
+    "43": "bap:skin43",
+    "19": "bap:skin19",
+    "24": "bap:skin24"
+  }
+}

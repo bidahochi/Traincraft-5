@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:f40ph",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:red": {},
+    "bap:yellow": {}
+  }
+}

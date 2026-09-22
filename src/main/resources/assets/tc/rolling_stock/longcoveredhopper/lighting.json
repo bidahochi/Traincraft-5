@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:longcoveredhopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:lightgrey": {},
+    "tc:grey": {},
+    "tc:pink": {},
+    "tc:white": {},
+    "tc:green": {},
+    "tc:orange": {},
+    "tc:lime": {},
+    "tc:cyan": {}
+  }
+}

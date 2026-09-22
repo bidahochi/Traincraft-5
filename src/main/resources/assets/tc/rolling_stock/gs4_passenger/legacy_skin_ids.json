@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "tc:orange",
+    "15": "tc:white",
+    "11": "tc:yellow",
+    "3": "tc:brown",
+    "2": "tc:green",
+    "10": "tc:lime",
+    "1": "tc:red",
+    "8": "tc:grey",
+    "7": "tc:lightgrey",
+    "4": "tc:blue",
+    "0": "tc:black",
+    "12": "tc:lightblue",
+    "17": "tc:skin17",
+    "18": "tc:skin18",
+    "19": "tc:skin19",
+    "20": "tc:skin20",
+    "21": "tc:skin21",
+    "22": "tc:skin22",
+    "23": "tc:skin23",
+    "24": "tc:skin24",
+    "25": "tc:skin25"
+  },
+  "stock": "tc:gs4_passenger"
+}

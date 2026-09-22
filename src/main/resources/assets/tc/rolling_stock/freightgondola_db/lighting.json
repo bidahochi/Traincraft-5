@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freightgondola_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:green": {},
+    "tc:black": {},
+    "tc:brown": {},
+    "tc:grey": {},
+    "tc:lightgrey": {},
+    "tc:lime": {},
+    "tc:orange": {},
+    "tc:pink": {},
+    "tc:white": {},
+    "tc:yellow": {}
+  }
+}

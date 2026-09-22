@@ -52,6 +52,12 @@ public final class BoundedIdentityCache<K, V>
         return values.size();
     }
 
+    /** Releases a replaced layout's metadata while preserving unrelated cached entries. */
+    public synchronized V remove(K key)
+    {
+        return values.remove(new IdentityKey<K>(key));
+    }
+
     private static final class IdentityKey<K>
     {
         private final K value;

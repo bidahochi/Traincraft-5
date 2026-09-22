@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935dorm_56seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:grey": {}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locomilw_classa",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "center_headlight": {
+          "preset": "headlight"
+        },
+        "center_headlight_lens_1": {
+          "group": "center_headlight"
+        },
+        "center_headlight_lens_2": {
+          "group": "center_headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

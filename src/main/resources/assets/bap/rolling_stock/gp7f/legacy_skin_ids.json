@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "7": "bap:lightgrey",
+    "17": "bap:skin17",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:gp7f"
+}

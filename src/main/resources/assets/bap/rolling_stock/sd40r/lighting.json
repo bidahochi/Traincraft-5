@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd40r",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_13": {
+          "preset": "instrument"
+        },
+        "marker_two_body_391": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_393": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_406": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_470": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:skin17": {}
+  }
+}

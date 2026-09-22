@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mapa_35flat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:grey": {},
+    "bap:magenta": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:orange": {},
+    "bap:purple": {},
+    "bap:red": {}
+  }
+}

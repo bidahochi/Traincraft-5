@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:amcafe",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:red": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
+  }
+}

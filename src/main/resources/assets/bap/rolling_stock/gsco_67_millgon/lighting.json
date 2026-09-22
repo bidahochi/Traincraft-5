@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gsco_67_millgon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:purple": {},
+    "bap:skin18": {}
+  }
+}

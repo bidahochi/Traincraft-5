@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:rf-16b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:purple": {}
+  }
+}

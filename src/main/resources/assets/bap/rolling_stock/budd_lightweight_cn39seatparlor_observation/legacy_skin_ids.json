@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "1": "bap:red"
+  },
+  "stock": "bap:budd_lightweight_cn39seatparlor_observation"
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch120commute",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "light": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:lime": {}
+  }
+}

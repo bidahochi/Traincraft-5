@@ -81,7 +81,7 @@ public class ModelPE_Tender extends ModelConverter //Same as Filename
 		bodyModel[40] = new ModelRendererTurbo(this, 209, 1, textureX, textureY); // Box 43
 		bodyModel[41] = new ModelRendererTurbo(this, 233, 1, textureX, textureY); // Box 43
 		bodyModel[42] = new ModelRendererTurbo(this, 33, 9, textureX, textureY); // Box 43
-		bodyModel[43] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "marker").setLightFixtureId("marker_red"); // Red Marker light
+		bodyModel[43] = new ModelRendererTurbo(this, 25, 17, textureX, textureY, "marker_red"); // Red Marker light
 		bodyModel[44] = new ModelRendererTurbo(this, 9, 89, textureX, textureY); // Box 3
 		bodyModel[45] = new ModelRendererTurbo(this, 17, 97, textureX, textureY); // Box 3
 		bodyModel[46] = new ModelRendererTurbo(this, 129, 25, textureX, textureY); // Box 8

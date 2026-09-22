@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:bp4",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_upper": {
+          "preset": "headlight"
+        },
+        "rear_upper_lens_1": {
+          "group": "rear_upper"
+        },
+        "rear_upper_lens_2": {
+          "group": "rear_upper"
+        },
+        "rear_center_upper": {
+          "preset": "headlight"
+        },
+        "rear_center_lower": {
+          "preset": "headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:purple": {},
+    "tc:cyan": {},
+    "tc:grey": {},
+    "tc:blue": {}
+  }
+}

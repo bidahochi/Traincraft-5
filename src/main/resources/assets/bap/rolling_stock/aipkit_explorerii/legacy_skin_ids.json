@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "15": "bap:white",
+    "8": "bap:grey",
+    "10": "bap:lime"
+  },
+  "stock": "bap:aipkit_explorerii"
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:emde8a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_193": {
+          "preset": "marker_light"
+        },
+        "marker_body_194": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:blue": {},
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:skin21": {},
+    "bap:yellow": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:green": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:magenta": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {}
+  }
+}

@@ -18,7 +18,7 @@ import train.common.api.RollingStockLightChannel;
 public class PacketRollingStockLightState implements IMessage
 {
     /** Stable wire identifiers; changing their numeric values breaks protocol compatibility. */
-    public static final byte FRONT = 0, REAR = 1, AUX = 2, GYRA = 3, DITCH = 4, BEACON = 5;
+    public static final byte FRONT = 0, REAR = 1, AUX = 2, GYRA = 3, DITCH = 4, BEACON = 5, EMERGENCY = 6;
     private int entityId;
     private byte control, value;
 
@@ -59,7 +59,7 @@ public class PacketRollingStockLightState implements IMessage
             {
                 return null;
             }
-            if (m.control < FRONT || m.control > BEACON)
+            if (m.control < FRONT || m.control > EMERGENCY)
             {
                 return null;
             }
@@ -89,14 +89,27 @@ public class PacketRollingStockLightState implements IMessage
                         }
                         return;
                     }
-                    RollingStockLightChannel channel =
-                        control == AUX
-                        ? RollingStockLightChannel.AUX
-                        : control == GYRA
-                        ? RollingStockLightChannel.GYRA
-                        : control == DITCH
-                        ? RollingStockLightChannel.DITCH
-                        : RollingStockLightChannel.BEACON;
+                    RollingStockLightChannel channel;
+                    switch (control)
+                    {
+                        case AUX:
+                            channel = RollingStockLightChannel.AUX;
+                            break;
+                        case GYRA:
+                            channel = RollingStockLightChannel.GYRA;
+                            break;
+                        case DITCH:
+                            channel = RollingStockLightChannel.DITCH;
+                            break;
+                        case BEACON:
+                            channel = RollingStockLightChannel.BEACON;
+                            break;
+                        case EMERGENCY:
+                            channel = RollingStockLightChannel.EMERGENCY;
+                            break;
+                        default:
+                            return;
+                    }
                     lights.setLightChannelEnabled(channel, value != 0);
                 }
             });

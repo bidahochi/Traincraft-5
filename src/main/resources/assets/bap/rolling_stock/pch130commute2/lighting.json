@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pch130commute2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "door": {
+          "enabled": false
+        },
+        "panel": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:white": {}
+  }
+}

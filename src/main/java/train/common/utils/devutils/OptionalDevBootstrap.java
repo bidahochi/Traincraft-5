@@ -10,7 +10,9 @@ import java.lang.reflect.Method;
  */
 public class OptionalDevBootstrap {
 	private static final String[] BOOTSTRAPS = {
-			"tb.dev.rollingstockicon.RollingStockIconGeneratorDevBootstrap"
+			"tb.dev.rollingstockicon.RollingStockIconGeneratorDevBootstrap",
+			"tb.dev.lightingreload.LightingReloadCommand",
+			"tb.dev.stockresources.StockResourceDevBootstrap"
 	};
 
 	private OptionalDevBootstrap() {

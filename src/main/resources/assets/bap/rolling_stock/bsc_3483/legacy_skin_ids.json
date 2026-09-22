@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "4": "bap:blue",
+    "3": "bap:brown",
+    "6": "bap:cyan",
+    "2": "bap:green",
+    "8": "bap:grey",
+    "9": "bap:pink",
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21"
+  },
+  "stock": "bap:bsc_3483"
+}

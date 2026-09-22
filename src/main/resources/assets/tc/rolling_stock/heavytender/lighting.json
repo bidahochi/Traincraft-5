@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:heavytender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:grey": {},
+    "tc:lightgrey": {}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locopannier",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

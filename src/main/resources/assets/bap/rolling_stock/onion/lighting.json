@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:onion",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:red": {},
+    "bap:yellow": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:pink": {}
+  }
+}

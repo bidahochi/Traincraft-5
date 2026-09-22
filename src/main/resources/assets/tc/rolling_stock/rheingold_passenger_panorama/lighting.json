@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:rheingold_passenger_panorama",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "5": "bap:purple",
+    "13": "bap:magenta",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "2": "bap:green",
+    "6": "bap:cyan"
+  },
+  "stock": "bap:c415h"
+}

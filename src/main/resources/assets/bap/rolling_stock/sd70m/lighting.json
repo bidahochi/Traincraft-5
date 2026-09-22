@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sd70m",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_high": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_202": {
+          "preset": "marker_light"
+        },
+        "front_marker_bugeye_body_203": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_267": {
+          "preset": "marker_light"
+        },
+        "rear_marker_bugeye_body_268": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:blue": {},
+    "bap:skin16": {}
+  }
+}

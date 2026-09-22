@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m630w",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_79": {
+          "preset": "marker_light"
+        },
+        "marker_body_80": {
+          "preset": "marker_light"
+        },
+        "marker_body_207": {
+          "preset": "marker_light"
+        },
+        "marker_body_208": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:red": {}
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "2": "bap:green"
+  },
+  "stock": "bap:acf_lightweight_gndiner_observation"
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "12": "bap:lightblue",
+    "4": "bap:blue",
+    "16": "bap:skin16",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:ac4400cw"
+}

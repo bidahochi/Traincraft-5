@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freight_centerbeam_empty",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:grey": {},
+    "tc:lightgrey": {}
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "0": "bap:black",
+    "11": "bap:yellow",
+    "13": "bap:magenta",
+    "4": "bap:blue",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:prr_gla_hopper"
+}

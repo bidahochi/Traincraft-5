@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "2": "bap:green",
+    "1": "bap:red",
+    "5": "bap:purple",
+    "0": "bap:black",
+    "10": "bap:lime",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "11": "bap:yellow",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:gsc_53_86flat"
+}

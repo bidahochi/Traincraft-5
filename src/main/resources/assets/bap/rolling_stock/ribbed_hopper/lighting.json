@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ribbed_hopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:red": {},
+    "bap:brown": {},
+    "bap:white": {},
+    "bap:pink": {},
+    "bap:skin16": {},
+    "bap:orange": {},
+    "bap:skin20": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin21": {},
+    "bap:green": {},
+    "bap:skin22": {}
+  }
+}

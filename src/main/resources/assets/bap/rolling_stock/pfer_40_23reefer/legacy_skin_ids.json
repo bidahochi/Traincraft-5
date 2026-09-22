@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "1": "bap:red",
+    "3": "bap:brown",
+    "11": "bap:yellow",
+    "5": "bap:purple",
+    "8": "bap:grey"
+  },
+  "stock": "bap:pfer_40_23reefer"
+}

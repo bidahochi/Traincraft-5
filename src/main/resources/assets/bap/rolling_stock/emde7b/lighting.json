@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:emde7b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:magenta": {},
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:purple": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:skin27": {},
+    "bap:skin37": {},
+    "bap:black": {},
+    "bap:skin28": {},
+    "bap:skin29": {}
+  }
+}

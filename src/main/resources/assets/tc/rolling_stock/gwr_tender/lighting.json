@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:gwr_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:lime": {}
+  }
+}

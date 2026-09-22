@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:rsd15",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_457": {
+          "preset": "marker_light"
+        },
+        "marker_body_458": {
+          "preset": "marker_light"
+        },
+        "marker_body_474": {
+          "preset": "marker_light"
+        },
+        "marker_body_475": {
+          "preset": "marker_light"
+        },
+        "marker_body_498": {
+          "preset": "marker_light"
+        },
+        "marker_body_499": {
+          "preset": "marker_light"
+        },
+        "marker_cad_body_524": {
+          "preset": "marker_light"
+        },
+        "marker_cad_body_525": {
+          "preset": "marker_light"
+        },
+        "marker_gmd": {
+          "preset": "marker_light"
+        },
+        "marker_body_586": {
+          "preset": "marker_light"
+        },
+        "marker_body_587": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_596": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:red": {}
+  }
+}

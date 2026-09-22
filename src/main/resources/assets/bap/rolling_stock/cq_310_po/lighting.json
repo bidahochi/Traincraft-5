@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cq_310_po",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:skin16": {}
+  }
+}

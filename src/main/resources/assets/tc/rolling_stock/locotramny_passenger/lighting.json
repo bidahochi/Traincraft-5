@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locotramny_passenger",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:grey": {},
+    "tc:white": {}
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:6260",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:skin17": {}
+  }
+}

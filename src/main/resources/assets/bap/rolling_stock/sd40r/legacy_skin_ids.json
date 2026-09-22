@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "16": "bap:skin16",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:sd40r"
+}

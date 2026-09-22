@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:cablogging",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:cyan": {},
+    "tc:grey": {}
+  }
+}

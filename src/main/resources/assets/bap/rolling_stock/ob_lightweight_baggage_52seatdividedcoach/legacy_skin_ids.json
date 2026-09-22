@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "7": "bap:lightgrey",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:ob_lightweight_baggage_52seatdividedcoach"
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "3": "bap:brown",
+    "11": "bap:yellow",
+    "2": "bap:green",
+    "4": "bap:blue",
+    "5": "bap:purple",
+    "14": "bap:orange",
+    "10": "bap:lime"
+  },
+  "stock": "bap:milw40"
+}

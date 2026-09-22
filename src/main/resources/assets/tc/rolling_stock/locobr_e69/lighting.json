@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locobr_e69",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:red": {},
+    "tc:black": {},
+    "tc:grey": {},
+    "tc:blue": {},
+    "tc:cyan": {}
+  }
+}

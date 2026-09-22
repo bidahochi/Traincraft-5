@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "9": "bap:pink",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "8": "bap:grey",
+    "2": "bap:green"
+  },
+  "stock": "bap:cdcscaboose"
+}

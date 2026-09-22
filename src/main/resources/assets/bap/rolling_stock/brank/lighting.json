@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:brank",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {}
+  }
+}

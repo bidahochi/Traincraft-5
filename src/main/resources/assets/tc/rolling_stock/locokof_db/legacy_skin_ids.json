@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "2": "tc:green",
+    "11": "tc:yellow",
+    "0": "tc:black",
+    "4": "tc:blue",
+    "6": "tc:cyan"
+  },
+  "stock": "tc:locokof_db"
+}

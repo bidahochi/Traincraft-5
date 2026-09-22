@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_rpo",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:orange": {}
+  }
+}

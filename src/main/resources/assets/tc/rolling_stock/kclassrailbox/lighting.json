@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:kclassrailbox",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:yellow": {},
+    "tc:orange": {}
+  }
+}

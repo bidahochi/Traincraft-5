@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freight_100tonhopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:black": {},
+    "tc:blue": {},
+    "tc:grey": {},
+    "tc:lightgrey": {},
+    "tc:brown": {}
+  }
+}

@@ -4,6 +4,7 @@ import train.client.render.lighting.ClientRollingStockLighting;
 import train.client.render.lighting.LightEffectRenderBatch;
 import train.client.render.lighting.RollingStockDepthMask;
 import train.client.render.lighting.RollingStockLightOcclusion;
+import train.client.render.translucency.TmtTranslucencyContext;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
@@ -343,49 +344,91 @@ public class RenderRollingStock extends Render {
             ClientRollingStockLighting.begin(cart, time, lightingTexture);
         }
 
-        try
-        {
-
-		switch (cart.specialRenderMode)
+		// end() is intentionally paired even for GUI rendering, matching the previous cleanup path;
+		// it is a harmless no-op when no enhanced-lighting context was opened.
+		boolean lightingActive = true;
+		boolean occlusionActive = captureBeamOcclusion;
+		boolean mayContainTranslucency;
+		try
 		{
-			case 0:
+			TmtTranslucencyContext.beginTextureInspection(lightingTexture);
+			try
 			{
-				ModelRendererTurboBatch.begin(cart.modelInstance, cart);
-				try {
-					ModelRendererTurboBatch.renderStaticBodySources(cart.modelInstance, cart, 0.0625F, false);
-					cart.modelInstance.render(cart, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_ENABLE_BIT);
+				try
+				{
+					GL11.glDisable(GL11.GL_BLEND);
+					GL11.glEnable(GL11.GL_ALPHA_TEST);
+					GL11.glAlphaFunc(GL11.GL_GEQUAL, 1.0F);
+					GL11.glDepthMask(true);
+					renderModelGeometry(cart);
 				}
-				finally {
-					ModelRendererTurboBatch.end();
+				finally
+				{
+					GL11.glPopAttrib();
 				}
 			}
-			break;
-			case 100: // Only used for AbstractRotarySnowPlow
-				ModelRendererTurboBatch.begin(cart.modelInstance, cart);
-				try {
-					ModelRendererTurboBatch.renderStaticBodySources(cart.modelInstance, cart, 0.0625F, false);
-					ModelRendererTurboBatch.renderRotaryGroup(cart.modelInstance, (AbstractRotarySnowPlow)cart, 0.0625F, false);
-					cart.modelInstance.render(cart, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-				}
-				finally {
-					ModelRendererTurboBatch.end();
-				}
+			finally
+			{
+				mayContainTranslucency = TmtTranslucencyContext.endTextureInspection();
+			}
 
-			break;
+			// Finish solid-only lighting and beam/depth capture before translucent pixels. Glass
+			// must not become a solid beam blocker, shadow mask, or duplicate light source.
+			if (lightingActive)
+			{
+				ClientRollingStockLighting.end();
+				lightingActive = false;
+			}
+			if (occlusionActive)
+			{
+				RollingStockDepthMask.endModel();
+				RollingStockLightOcclusion.endStock();
+				occlusionActive = false;
+			}
+
+			if (mayContainTranslucency)
+			{
+				if (renderModeGUI == false)
+				{
+					RollingStockTranslucencyQueue.submit(cart, lightingTexture, skyLight);
+				}
+				else
+				{
+					// GUI previews have no world-last phase, so replay their translucent pixels now.
+					Tessellator.bindTexture(lightingTexture);
+					GL11.glPushAttrib(
+						GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT | GL11.GL_ENABLE_BIT);
+					try
+					{
+						TmtTranslucencyContext.beginReplay();
+						GL11.glEnable(GL11.GL_BLEND);
+						GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+						GL11.glEnable(GL11.GL_ALPHA_TEST);
+						GL11.glAlphaFunc(GL11.GL_LESS, 1.0F);
+						GL11.glDepthMask(false);
+						renderModelGeometry(cart);
+					}
+					finally
+					{
+						TmtTranslucencyContext.endReplay();
+						GL11.glPopAttrib();
+					}
+				}
+			}
 		}
-        }
-        finally
-        {
-            ClientRollingStockLighting.end();
-            if (renderModeGUI == false)
-            {
-                if (captureBeamOcclusion)
-                {
-                    RollingStockDepthMask.endModel();
-                    RollingStockLightOcclusion.endStock();
-                }
-            }
-        }
+		finally
+		{
+			if (lightingActive)
+			{
+				ClientRollingStockLighting.end();
+			}
+			if (occlusionActive)
+			{
+				RollingStockDepthMask.endModel();
+				RollingStockLightOcclusion.endStock();
+			}
+		}
 
 		if (cart.hasSmoke())
 		{
@@ -413,6 +456,50 @@ public class RenderRollingStock extends Render {
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
+	}
+
+	/**
+	 * Draws one complete rolling-stock model traversal while preserving batching and special modes.
+	 * The active {@link TmtTranslucencyContext} determines whether TMT parts emit their normal
+	 * geometry or only their cached partial-alpha faces.
+	 *
+	 * @param cart stock whose shared model instance and special render mode are evaluated
+	 */
+	static void renderModelGeometry(EntityRollingStock cart)
+	{
+		switch (cart.specialRenderMode)
+		{
+			case 0:
+				ModelRendererTurboBatch.begin(cart.modelInstance, cart);
+				try
+				{
+					ModelRendererTurboBatch.renderStaticBodySources(
+						cart.modelInstance, cart, 0.0625F, false);
+					cart.modelInstance.render(
+						cart, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				}
+				finally
+				{
+					ModelRendererTurboBatch.end();
+				}
+				break;
+			case 100: // Only used for AbstractRotarySnowPlow
+				ModelRendererTurboBatch.begin(cart.modelInstance, cart);
+				try
+				{
+					ModelRendererTurboBatch.renderStaticBodySources(
+						cart.modelInstance, cart, 0.0625F, false);
+					ModelRendererTurboBatch.renderRotaryGroup(
+						cart.modelInstance, (AbstractRotarySnowPlow)cart, 0.0625F, false);
+					cart.modelInstance.render(
+						cart, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+				}
+				finally
+				{
+					ModelRendererTurboBatch.end();
+				}
+				break;
+		}
 	}
 
 	private static void renderSmokeFX(EntityRollingStock cart, float yaw, float pitch, String smokeType, ArrayList<double[]> smokeFX, int smokeIterations, float time) {

@@ -31,6 +31,7 @@ import org.lwjgl.opengl.GL11;
 import train.client.core.handlers.ClientTickHandler;
 import train.client.core.handlers.CustomRenderHandler;
 import train.client.render.lighting.LightingResourceReloadListener;
+import train.client.render.lighting.ClientRollingStockAppearanceLoader;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import train.client.core.handlers.RecipeBookHandler;
 import train.client.core.handlers.TCKeyHandler;
@@ -48,6 +49,7 @@ import train.common.core.network.lockout.PacketLockoutBookData;
 import train.common.blocks.BlockAmericanStopper;
 import train.common.blocks.BlockStopper;
 import train.common.adminbook.GUIAdminBook;
+import train.common.appearance.RollingStockAppearanceResolver;
 import train.common.api.AbstractTrains;
 import train.common.api.EntityBogie;
 import train.common.api.EntityRollingStock;
@@ -121,6 +123,8 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerEvents(FMLPreInitializationEvent event) {
 		super.registerEvents(event);
+		RollingStockAppearanceResolver.setClientProvider(
+			ClientRollingStockAppearanceLoader.INSTANCE);
 		ClientTickHandler tickHandler = new ClientTickHandler();
 		CustomRenderHandler renderHandler = new CustomRenderHandler();
 		HUDloco huDloco = new HUDloco();

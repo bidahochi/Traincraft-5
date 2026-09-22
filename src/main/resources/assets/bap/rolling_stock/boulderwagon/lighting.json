@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:boulderwagon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:black": {}
+  }
+}

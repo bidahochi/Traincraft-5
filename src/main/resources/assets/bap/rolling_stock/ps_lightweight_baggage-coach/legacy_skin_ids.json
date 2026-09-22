@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "15": "bap:white",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_baggage-coach"
+}

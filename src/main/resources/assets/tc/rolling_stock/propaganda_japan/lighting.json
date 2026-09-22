@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:propaganda_japan",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:white": {},
+    "tc:yellow": {}
+  }
+}

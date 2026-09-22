@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:50ton_climax_b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:cyan": {}
+  }
+}

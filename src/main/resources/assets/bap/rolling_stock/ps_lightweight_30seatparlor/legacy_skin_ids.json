@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "14": "bap:orange",
+    "1": "bap:red"
+  },
+  "stock": "bap:ps_lightweight_30seatparlor"
+}

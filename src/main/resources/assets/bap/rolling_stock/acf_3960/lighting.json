@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_3960",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:green": {},
+    "bap:white": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:grey": {}
+  }
+}

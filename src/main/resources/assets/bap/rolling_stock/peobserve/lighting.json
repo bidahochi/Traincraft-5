@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:peobserve",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {}
+  }
+}

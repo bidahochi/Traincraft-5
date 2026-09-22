@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935_22seatparlor",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {}
+  }
+}

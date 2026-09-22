@@ -3,9 +3,30 @@ package train.common.library.register;
 import net.minecraft.item.Item;
 import train.common.enums.InventorySize;
 import train.common.library.EnumTrainType;
+import train.common.appearance.LegacySkinMapping;
 
 public class TrainRecord implements ITrainRecord
 {
+    private String stockId;
+
+    /** Returns the explicit local resource identity, or null to use the internal-name convention. */
+    @Override
+    public String getStockId()
+    {
+        return stockId;
+    }
+
+    /** Assigns a stable local ID before registration; the registering content supplies its namespace. */
+    public TrainRecord setStockId(String stockId)
+    {
+        if (stockId != null)
+        {
+            LegacySkinMapping.requireId("stock:" + stockId);
+        }
+        this.stockId = stockId;
+        return this;
+    }
+
     /**
      * Only used for
      * 1. Passenger Cars

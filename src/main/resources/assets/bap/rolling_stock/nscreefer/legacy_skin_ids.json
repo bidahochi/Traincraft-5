@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "14": "bap:orange"
+  },
+  "stock": "bap:nscreefer"
+}

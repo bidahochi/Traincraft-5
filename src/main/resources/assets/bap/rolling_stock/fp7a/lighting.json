@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fp7a",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_headlight_lower_319": {
+          "preset": "headlight"
+        },
+        "front_headlight_lower_320": {
+          "preset": "headlight"
+        },
+        "cab_speedometer_body_455": {
+          "preset": "instrument"
+        },
+        "marker_body_461": {
+          "preset": "marker_light"
+        },
+        "marker_body_462": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:orange": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:purple": {}
+  }
+}

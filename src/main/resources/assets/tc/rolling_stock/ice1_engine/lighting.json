@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:ice1_engine",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:white": {},
+    "tc:red": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "9": "tc:pink",
+    "2": "tc:green",
+    "1": "tc:red"
+  },
+  "stock": "tc:class66"
+}

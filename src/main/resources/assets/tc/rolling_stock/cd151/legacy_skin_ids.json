@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "11": "tc:yellow",
+    "1": "tc:red"
+  },
+  "stock": "tc:cd151"
+}

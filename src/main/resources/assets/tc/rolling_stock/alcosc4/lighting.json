@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:alcosc4",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:grey": {}
+  }
+}

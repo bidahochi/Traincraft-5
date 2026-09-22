@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:rs3",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_2_body_150": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_152": {
+          "preset": "marker_light"
+        },
+        "marker_body_250": {
+          "preset": "marker_light"
+        },
+        "marker_body_251": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_373": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_374": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_375": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_376": {
+          "preset": "marker_light"
+        },
+        "marker_1_body_377": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_378": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_379": {
+          "preset": "marker_light"
+        },
+        "marker_1_body_380": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_381": {
+          "preset": "marker_light"
+        },
+        "marker_2_body_382": {
+          "preset": "marker_light"
+        },
+        "marker_body_384": {
+          "preset": "marker_light"
+        },
+        "marker_body_385": {
+          "preset": "marker_light"
+        },
+        "marker_body_386": {
+          "preset": "marker_light"
+        },
+        "marker_body_387": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:lightgrey": {},
+    "bap:yellow": {},
+    "bap:magenta": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {}
+  }
+}

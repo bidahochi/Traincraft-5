@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_bar52seatcoach_dinette",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:blue": {}
+  }
+}

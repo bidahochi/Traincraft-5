@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw12seatparlor_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_lf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_405": {
+          "preset": "marker_light"
+        },
+        "marker_rf": {
+          "preset": "marker_light"
+        },
+        "marker_lr_body_408": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {}
+  }
+}

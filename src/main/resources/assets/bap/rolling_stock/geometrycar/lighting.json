@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:geometrycar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:lightgrey": {}
+  }
+}

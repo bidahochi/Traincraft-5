@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "6": "bap:cyan",
+    "16": "bap:skin16",
+    "4": "bap:blue"
+  },
+  "stock": "bap:p42dc"
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fm_h16-66",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_fl": {
+          "preset": "marker_light"
+        },
+        "marker_fr": {
+          "preset": "marker_light"
+        },
+        "marker_rl": {
+          "preset": "marker_light"
+        },
+        "marker_rr": {
+          "preset": "marker_light"
+        },
+        "marker_fm_body_479": {
+          "preset": "marker_light"
+        },
+        "marker_rm": {
+          "preset": "marker_light"
+        },
+        "marker_fm_body_484": {
+          "preset": "marker_light"
+        },
+        "marker_fm_body_486": {
+          "preset": "marker_light"
+        },
+        "marker_fm_body_527": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:lightgrey": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:magenta": {},
+    "bap:skin16": {}
+  }
+}

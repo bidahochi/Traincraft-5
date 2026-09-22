@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fm_h10-44",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_commander": {
+          "preset": "commander"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:red": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:lightblue": {},
+    "bap:orange": {},
+    "bap:white": {},
+    "bap:lime": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:skin17": {}
+  }
+}

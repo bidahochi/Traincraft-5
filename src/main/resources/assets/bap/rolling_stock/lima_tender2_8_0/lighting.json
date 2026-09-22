@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:lima_tender2_8_0",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:red": {}
+  }
+}

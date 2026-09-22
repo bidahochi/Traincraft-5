@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:40ft_husky",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:brown": {},
+    "bap:green": {},
+    "bap:pink": {},
+    "bap:skin16": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp39tb",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_122": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_193": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_76seatdividedcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:lime": {},
+    "bap:black": {},
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:red": {},
+    "bap:cyan": {}
+  }
+}

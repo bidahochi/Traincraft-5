@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sdp40",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_1": {
+          "preset": "instrument"
+        },
+        "marker_two": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:skin18": {},
+    "bap:purple": {},
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:skin19": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "14": "bap:orange",
+    "7": "bap:lightgrey",
+    "4": "bap:blue",
+    "0": "bap:black",
+    "3": "bap:brown",
+    "9": "bap:pink"
+  },
+  "stock": "bap:89ftautorack"
+}

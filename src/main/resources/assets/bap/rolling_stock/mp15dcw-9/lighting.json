@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mp15dcw-9",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:skin16": {},
+    "bap:white": {}
+  }
+}

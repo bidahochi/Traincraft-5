@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:w_a55",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

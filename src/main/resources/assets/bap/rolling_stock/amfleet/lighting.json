@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:amfleet",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:white": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
+  }
+}

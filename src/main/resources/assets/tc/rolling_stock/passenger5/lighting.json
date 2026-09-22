@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:passenger5",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:yellow": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "11": "tc:yellow",
+    "12": "tc:lightblue",
+    "1": "tc:red",
+    "8": "tc:grey",
+    "7": "tc:lightgrey",
+    "13": "tc:magenta",
+    "14": "tc:orange",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "10": "tc:lime",
+    "15": "tc:white",
+    "2": "tc:green"
+  },
+  "stock": "tc:freighttrailer"
+}

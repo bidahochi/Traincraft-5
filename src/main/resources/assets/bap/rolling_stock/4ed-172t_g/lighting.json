@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:4ed-172t_g",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_208": {
+          "preset": "marker_light"
+        },
+        "marker_body_209": {
+          "preset": "marker_light"
+        },
+        "marker_body_210": {
+          "preset": "marker_light"
+        },
+        "marker_body_211": {
+          "preset": "marker_light"
+        },
+        "marker_body_213": {
+          "preset": "marker_light"
+        },
+        "marker_body_214": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lime": {},
+    "bap:lightgrey": {}
+  }
+}

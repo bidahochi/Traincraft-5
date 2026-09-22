@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:wellcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:green": {},
+    "tc:black": {},
+    "tc:grey": {},
+    "tc:cyan": {},
+    "tc:brown": {},
+    "tc:lime": {},
+    "tc:lightblue": {},
+    "tc:lightgrey": {},
+    "tc:magenta": {},
+    "tc:orange": {},
+    "tc:pink": {},
+    "tc:purple": {},
+    "tc:white": {},
+    "tc:yellow": {}
+  }
+}

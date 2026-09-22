@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_gn28seatcoach_dinette",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:white": {}
+  }
+}

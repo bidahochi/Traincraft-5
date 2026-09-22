@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_coach_1005_series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:red": {}
+  }
+}

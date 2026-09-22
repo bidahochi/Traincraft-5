@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:mapa_35gondola",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:grey": {}
+  }
+}

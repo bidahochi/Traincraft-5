@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "4": "tc:blue",
+    "13": "tc:magenta",
+    "6": "tc:cyan",
+    "8": "tc:grey",
+    "12": "tc:lightblue",
+    "7": "tc:lightgrey",
+    "14": "tc:orange",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "15": "tc:white",
+    "11": "tc:yellow",
+    "0": "tc:black",
+    "3": "tc:brown",
+    "16": "tc:skin16",
+    "17": "tc:skin17"
+  },
+  "stock": "tc:br185_engine"
+}

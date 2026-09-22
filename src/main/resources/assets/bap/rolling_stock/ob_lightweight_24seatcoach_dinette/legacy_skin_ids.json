@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "2": "bap:green",
+    "9": "bap:pink",
+    "10": "bap:lime",
+    "8": "bap:grey",
+    "4": "bap:blue"
+  },
+  "stock": "bap:ob_lightweight_24seatcoach_dinette"
+}

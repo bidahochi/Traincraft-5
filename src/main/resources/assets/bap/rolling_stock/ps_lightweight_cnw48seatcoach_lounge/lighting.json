@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnw48seatcoach_lounge",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {}
+  }
+}

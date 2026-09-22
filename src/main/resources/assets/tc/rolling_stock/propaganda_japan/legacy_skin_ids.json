@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "15": "tc:white",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:propaganda_japan"
+}

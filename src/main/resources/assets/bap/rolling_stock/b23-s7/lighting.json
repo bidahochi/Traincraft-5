@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:b23-s7",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_154": {
+          "preset": "marker_light"
+        },
+        "marker_body_155": {
+          "preset": "marker_light"
+        },
+        "cab_signal_body_321": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_322": {
+          "preset": "instrument"
+        },
+        "marker_body_338": {
+          "preset": "marker_light"
+        },
+        "marker_body_339": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:grey": {},
+    "bap:skin17": {},
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:green": {},
+    "bap:skin18": {},
+    "bap:blue": {},
+    "bap:skin19": {}
+  }
+}

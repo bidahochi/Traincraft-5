@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:passenger_2class_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:cyan": {}
+  }
+}

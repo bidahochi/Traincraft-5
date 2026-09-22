@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:flatcarlogs_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:red": {},
+    "tc:green": {},
+    "tc:black": {},
+    "tc:blue": {},
+    "tc:brown": {},
+    "tc:cyan": {},
+    "tc:lightblue": {},
+    "tc:lightgrey": {},
+    "tc:lime": {},
+    "tc:magenta": {},
+    "tc:orange": {},
+    "tc:pink": {},
+    "tc:purple": {},
+    "tc:white": {},
+    "tc:yellow": {}
+  }
+}

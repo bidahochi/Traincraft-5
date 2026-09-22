@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_lightweight_rdg56seatcoach_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_red_body_104": {
+          "color": 16719904,
+          "preset": "marker_light"
+        },
+        "marker_red_body_575": {
+          "color": 16719904,
+          "preset": "marker_light"
+        },
+        "marker_red_body_581": {
+          "color": 16719904,
+          "preset": "marker_light"
+        },
+        "marker_red_body_584": {
+          "color": 16719904,
+          "preset": "marker_light"
+        },
+        "marker_green_body_616": {
+          "color": 4579439,
+          "preset": "marker_light"
+        },
+        "marker_green_body_618": {
+          "color": 4579439,
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:lightblue": {},
+    "bap:white": {}
+  }
+}

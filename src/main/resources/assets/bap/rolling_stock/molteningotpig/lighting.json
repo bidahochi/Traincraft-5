@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:molteningotpig",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:black": {}
+  }
+}

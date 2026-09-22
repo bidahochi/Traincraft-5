@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_rpo15",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:grey": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:blue": {}
+  }
+}

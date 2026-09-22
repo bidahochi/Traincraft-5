@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_lightweight_1dr_177seatparlor_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_203": {
+          "preset": "marker_light"
+        },
+        "marker_body_206": {
+          "preset": "marker_light"
+        },
+        "marker_amtk_body_655": {
+          "preset": "marker_light"
+        },
+        "marker_amtk_body_657": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:white": {}
+  }
+}

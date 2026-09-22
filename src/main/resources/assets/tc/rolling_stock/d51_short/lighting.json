@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:d51_short",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:grey": {}
+  }
+}

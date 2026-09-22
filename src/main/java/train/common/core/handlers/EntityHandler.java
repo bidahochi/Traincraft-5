@@ -33,7 +33,7 @@ public class EntityHandler
 
 		Traincraft.traincraftRegistry
 				.RegisterRollingStockEntities(new RegisterBAPTrains().getRegister()
-						, Traincraft.instance);
+						, Traincraft.instance, "bap");
 
 		//for(EnumTrains trains : EnumTrains.values())
 		//{

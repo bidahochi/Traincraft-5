@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freighthopperus",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:brown": {},
+    "tc:grey": {},
+    "tc:lightgrey": {},
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:yellow": {},
+    "tc:black": {},
+    "tc:lightblue": {},
+    "tc:purple": {},
+    "tc:green": {},
+    "tc:magenta": {},
+    "tc:orange": {},
+    "tc:skin17": {}
+  }
+}

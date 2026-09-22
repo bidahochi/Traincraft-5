@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp38",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_10": {
+          "preset": "marker_light"
+        },
+        "marker_body_11": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_247": {
+          "preset": "instrument"
+        },
+        "marker_two_body_440": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_442": {
+          "preset": "marker_light"
+        },
+        "marker_body_444": {
+          "preset": "marker_light"
+        },
+        "marker_body_445": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_446": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:grey": {},
+    "bap:skin18": {},
+    "bap:skin26": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:magenta": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:red": {},
+    "bap:skin33": {},
+    "bap:skin34": {},
+    "bap:skin35": {},
+    "bap:skin36": {},
+    "bap:skin37": {},
+    "bap:skin38": {},
+    "bap:skin39": {},
+    "bap:skin40": {},
+    "bap:skin41": {}
+  }
+}

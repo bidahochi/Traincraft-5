@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:s12",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:white": {},
+    "bap:cyan": {},
+    "bap:skin18": {},
+    "bap:black": {},
+    "bap:orange": {}
+  }
+}

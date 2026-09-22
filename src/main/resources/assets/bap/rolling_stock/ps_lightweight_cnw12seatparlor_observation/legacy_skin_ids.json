@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "0": "bap:black",
+    "2": "bap:green",
+    "10": "bap:lime"
+  },
+  "stock": "bap:ps_lightweight_cnw12seatparlor_observation"
+}

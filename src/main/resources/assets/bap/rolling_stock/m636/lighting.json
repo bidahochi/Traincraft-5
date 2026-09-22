@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m636",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_headlight_n_upper": {
+          "preset": "headlight"
+        },
+        "front_headlight_n_lower": {
+          "preset": "headlight"
+        },
+        "front_headlight_rock_right": {
+          "preset": "headlight"
+        },
+        "front_headlight_rock_left": {
+          "preset": "headlight"
+        },
+        "front_classlight_right": {
+          "preset": "marker_light"
+        },
+        "front_classlight_left": {
+          "preset": "marker_light"
+        },
+        "rear_headlight_lower": {
+          "preset": "headlight"
+        },
+        "rear_headlight_upper": {
+          "preset": "headlight"
+        },
+        "rear_marker_right": {
+          "preset": "marker_light"
+        },
+        "rear_marker_left": {
+          "preset": "marker_light"
+        },
+        "front_headlight_high_right": {
+          "preset": "headlight"
+        },
+        "front_headlight_high_left": {
+          "preset": "headlight"
+        },
+        "front_gyralite_right": {
+          "fixtureType": "headlight",
+          "preset": "gyralite"
+        },
+        "front_gyralite_left": {
+          "fixtureType": "headlight",
+          "preset": "gyralite"
+        },
+        "front_headlight_vertical_upper": {
+          "preset": "headlight"
+        },
+        "front_headlight_vertical_lower": {
+          "preset": "headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:skin16": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
+  }
+}

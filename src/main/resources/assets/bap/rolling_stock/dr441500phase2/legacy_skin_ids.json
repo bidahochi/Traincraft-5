@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "0": "bap:black",
+    "7": "bap:lightgrey",
+    "11": "bap:yellow",
+    "1": "bap:red",
+    "15": "bap:white",
+    "8": "bap:grey",
+    "13": "bap:magenta",
+    "5": "bap:purple",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:dr441500phase2"
+}

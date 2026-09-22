@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:rf-16",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_335": {
+          "preset": "marker_light"
+        },
+        "marker_body_336": {
+          "preset": "marker_light"
+        },
+        "roof_commander_right": {
+          "preset": "commander"
+        },
+        "roof_commander_left": {
+          "preset": "commander"
+        },
+        "marker_body_531": {
+          "preset": "marker_light"
+        },
+        "marker_body_532": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:yellow": {},
+    "bap:lightgrey": {},
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:magenta": {},
+    "bap:red": {}
+  }
+}

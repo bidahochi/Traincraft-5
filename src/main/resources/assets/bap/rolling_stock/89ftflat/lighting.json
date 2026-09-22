@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:89ftflat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:purple": {}
+  }
+}

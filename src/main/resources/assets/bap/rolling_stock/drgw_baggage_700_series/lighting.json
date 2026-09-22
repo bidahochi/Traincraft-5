@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drgw_baggage_700_series",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:magenta": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:brown": {},
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:white": {},
+    "bap:orange": {},
+    "bap:purple": {}
+  }
+}

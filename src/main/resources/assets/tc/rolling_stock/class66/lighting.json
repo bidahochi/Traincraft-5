@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:class66",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:pink": {},
+    "tc:green": {},
+    "tc:red": {}
+  }
+}

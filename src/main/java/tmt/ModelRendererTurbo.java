@@ -10,6 +10,8 @@ import train.common.enums.BoxName;
 import train.client.render.lighting.ClientRollingStockLighting;
 import train.client.render.lighting.PlacedModelLighting;
 import train.client.render.lighting.RollingStockLightOcclusion;
+import train.client.render.translucency.TmtPartRenderMode;
+import train.client.render.translucency.TmtTranslucencyContext;
 import train.common.api.LightBeamRotation;
 import train.common.core.handlers.ConfigHandler;
 
@@ -77,8 +79,51 @@ public class ModelRendererTurbo
     public boolean useSingleDisplayListCompiler;
     public List<?> childModels;
     public String boxName;
-    /** Stable profile-facing id for this authored light fixture. */
-    public String lightFixtureId;
+    private String partIdentifier;
+
+    /**
+     * Sets the box name before model/render caches are built. Names matching [A-Za-z][A-Za-z0-9_]*
+     * become plain model-local identifiers unless they are built-in preset tags.
+     * Plain identifiers carry no lighting role; built-in tags select lighting presets.
+     * Stock-specific lighting behavior belongs in JSON.
+     */
+    public ModelRendererTurbo setPartName(String name)
+    {
+        partIdentifier = null;
+        if (name != null && name.matches("[A-Za-z][A-Za-z0-9_]*") && isBuiltInLightPreset(name.toLowerCase(Locale.ROOT)) == false)
+        {
+            partIdentifier = name;
+        }
+        boxName = name;
+        return this;
+    }
+
+    /** Returns a plain model-local identifier, independent of lighting and other part consumers. */
+    public String partIdentifier()
+    {
+        return partIdentifier;
+    }
+
+    /** Returns built-in preset tags, excluding plain part identifiers configured through JSON. */
+    public String presetTagName()
+    {
+        if (partIdentifier != null)
+        {
+            return null;
+        }
+        return boxName;
+    }
+
+    /** Built-in preset tags are exact-name shortcuts; substrings in identifiers are not presets. */
+    private static boolean isBuiltInLightPreset(String name)
+    {
+        return "lamp".equals(name) || "ditch".equals(name) || "marker".equals(name)
+            || "numberboard".equals(name) || "instrument".equals(name) || "interior".equals(name)
+            || "commander".equals(name) || "prime1".equals(name) || "prime2".equals(name)
+            || "prime3".equals(name) || "prime4".equals(name)
+            || "ditch_left".equals(name) || "ditch_right".equals(name)
+            || "ditchlight_left".equals(name) || "ditchlight_right".equals(name);
+    }
     /** Optional identity shared by multiple geometry parts forming one fixture. */
     public String lightFixtureGroup;
     /** Optional lens-plane shaping for additive source glow. */
@@ -102,22 +147,6 @@ public class ModelRendererTurbo
     public ModelRendererTurbo setLightFixtureGroup(String fixtureGroup)
     {
         lightFixtureGroup = fixtureGroup;
-        return this;
-    }
-
-    /**
-     * Marks this part as a light fixture and assigns its stable model-local key, such as
-     * {@code front_headlight}. Existing keys are a compatibility boundary for skin profiles.
-     * Recognized {@link #boxName} values such as {@code lamp} remain supported as a
-     * discovery fallback, but new fixtures should use an explicit id.
-     */
-    public ModelRendererTurbo setLightFixtureId(String fixtureId)
-    {
-        if (fixtureId == null || fixtureId.trim().isEmpty())
-        {
-            throw new IllegalArgumentException("Light fixture id must not be blank");
-        }
-        lightFixtureId = fixtureId;
         return this;
     }
 
@@ -275,7 +304,7 @@ public class ModelRendererTurbo
         textureGroup = new HashMap<String, TextureGroup>();
         textureGroup.put("0", new TextureGroup());
         currentTextureGroup = textureGroup.get("0");
-        boxName = s;
+        setPartName(s);
         defaultTexture = "";
         useSingleDisplayListCompiler = true;
 	}
@@ -1951,6 +1980,13 @@ public class ModelRendererTurbo
         if(!showModel){
             return;
         }
+        TmtPartRenderMode translucencyMode =
+            TmtTranslucencyContext.enterPart(this, Tessellator.getLastTextureUri());
+        if (translucencyMode == TmtPartRenderMode.SKIP_REPLAY_LEAF) {
+            return;
+        }
+        boolean translucencyReplay =
+            translucencyMode == TmtPartRenderMode.REPLAY;
         /*
          * Every normal MRT render first asks the batch system whether this part
          * has already been emitted. Returning true means this exact part was
@@ -1959,10 +1995,12 @@ public class ModelRendererTurbo
          * the per-part display-list path below in charge, which is
          * important for animated, texture-swapped, or unsupported parts.
          */
-        if(ModelRendererTurboBatch.capture(this, scale, bool)){
+        if(translucencyReplay == false && ModelRendererTurboBatch.capture(this, scale, bool)){
             return;
         }
-        RollingStockLightOcclusion.capturePart(this, scale, bool);
+        if(translucencyReplay == false){
+            RollingStockLightOcclusion.capturePart(this, scale, bool);
+        }
         if(!compiled || forcedRecompile){
             compileDisplayList(scale);
         }
@@ -1988,7 +2026,7 @@ public class ModelRendererTurbo
             if(rotateAngleX != 0.0F){
                 GL11.glRotatef(rotateAngleX * RADIANS_TO_DEGREES, 1.0F, 0.0F, 0.0F);
             }
-            renderDisplayListWithLighting(scale);
+            renderDisplayListWithLighting(scale, translucencyReplay);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -1999,7 +2037,7 @@ public class ModelRendererTurbo
         {
         if(rotationPointX != 0.0F || rotationPointY != 0.0F || rotationPointZ != 0.0F){
             GL11.glTranslatef(rotationPointX * scale, rotationPointY * scale, rotationPointZ * scale);
-                renderDisplayListWithLighting(scale);
+                renderDisplayListWithLighting(scale, translucencyReplay);
             if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -2008,7 +2046,7 @@ public class ModelRendererTurbo
             GL11.glTranslatef(-rotationPointX * scale, -rotationPointY * scale, -rotationPointZ * scale);
         }
         else{
-                renderDisplayListWithLighting(scale);
+                renderDisplayListWithLighting(scale, translucencyReplay);
         	if(childModels != null){
                 for(Object child : childModels){
                     ((ModelRenderer)child).render(scale);
@@ -2019,8 +2057,13 @@ public class ModelRendererTurbo
     }
 
     /** Renders compiled model geometry while applying the active per-part lighting mode. */
-    private void renderDisplayListWithLighting(float scale)
+    private void renderDisplayListWithLighting(float scale, boolean translucencyReplay)
     {
+        if (translucencyReplay)
+        {
+            TmtTranslucencyContext.drawTranslucentFaces(this, scale);
+            return;
+        }
         if (ConfigHandler.enhancedLightingEnabled() == false)
         {
             callDisplayList();
@@ -2073,6 +2116,7 @@ public class ModelRendererTurbo
             ClientRollingStockLighting.endPart(light);
         }
     }
+
     
     public void renderWithRotation(float f){
         if(field_1402_i){
@@ -2137,6 +2181,7 @@ public class ModelRendererTurbo
     		for(int i = 0; itr.hasNext(); i++){
     			TextureGroup curTexGroup = itr.next();
     			curTexGroup.loadTexture();
+                TmtTranslucencyContext.observeTexture(Tessellator.getLastTextureUri());
     			GL11.glCallList(displayListArray[i]);
     			if(!defaultTexture.equals("")){
     				Tessellator.bindTexture(new ResourceLocation("", defaultTexture));
@@ -2608,7 +2653,7 @@ public class ModelRendererTurbo
 
     public ModelRendererTurbo setName(BoxName boxName)
     {
-        this.boxName = boxName.BoxName;
+        setPartName(boxName.BoxName);
         return this;
     }
 
@@ -2618,11 +2663,11 @@ public class ModelRendererTurbo
         {
             case "ditchlight_right":
             case "ditchlight_left":
-                this.boxName = BoxName.ditch.BoxName;
+                setPartName(BoxName.ditch.BoxName);
             break;
             default:
             {
-                this.boxName = string;
+                setPartName(string);
             }
         }
 		return this;

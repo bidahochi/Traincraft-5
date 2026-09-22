@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:pm_n_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:white": {}
+  }
+}

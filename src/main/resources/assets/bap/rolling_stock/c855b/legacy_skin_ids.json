@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "6": "bap:cyan",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:c855b"
+}

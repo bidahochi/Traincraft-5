@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "tc:brown",
+    "11": "tc:yellow",
+    "2": "tc:green"
+  },
+  "stock": "tc:bulkheadflat"
+}

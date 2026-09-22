@@ -13,18 +13,6 @@ import train.common.overlaytexture.OTSpecificationDynamic;
 import java.awt.*;
 
 public class DieselSD40 extends DieselTrain {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:sd40")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_two_body_391", "marker_two_body_393", "marker_two_body_406",
-            "marker_two_body_470")
-        .fixtureType(
-            train.common.api.LightFixtureType.NUMBERBOARD,
-            "front_numberboard_body_291", "front_numberboard_body_292", "numberboard_body_109",
-            "numberboard_body_110", "rear_numberboard_body_389", "rear_numberboard_body_390")
-        .build();
 
     @Override
     public SoundRecord getSoundRecord()
@@ -117,10 +105,5 @@ public class DieselSD40 extends DieselTrain {
         return "EMD SD40";
     }
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 
 }

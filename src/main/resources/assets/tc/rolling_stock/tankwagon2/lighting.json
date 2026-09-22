@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:tankwagon2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:white": {},
+    "tc:orange": {},
+    "tc:black": {}
+  }
+}

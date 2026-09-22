@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "6": "bap:cyan",
+    "15": "bap:white",
+    "11": "bap:yellow",
+    "16": "bap:skin16",
+    "14": "bap:orange",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "2": "bap:green",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21",
+    "22": "bap:skin22",
+    "23": "bap:skin23",
+    "24": "bap:skin24",
+    "25": "bap:skin25",
+    "26": "bap:skin26",
+    "27": "bap:skin27",
+    "28": "bap:skin28",
+    "29": "bap:skin29",
+    "30": "bap:skin30",
+    "31": "bap:skin31"
+  },
+  "stock": "bap:r70reefer"
+}

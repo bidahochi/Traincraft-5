@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:fmcwoodchip",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:cyan": {},
+    "bap:skin16": {},
+    "bap:skin17": {}
+  }
+}

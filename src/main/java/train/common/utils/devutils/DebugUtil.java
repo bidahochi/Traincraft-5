@@ -9,7 +9,21 @@ import train.common.Traincraft;
 
 public class DebugUtil
 {
-    public static final Boolean dev = (Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
+    private static final String DEV_MARKER = "tb/dev/DevEnvironmentMarker.class";
+
+    public static final boolean dev = detectDevEnvironment();
+
+    private static boolean detectDevEnvironment(){
+        Object deobfuscated = Launch.blackboard.get("fml.deobfuscatedEnvironment");
+        if(Boolean.TRUE.equals(deobfuscated)){
+            return true;
+        }
+        if(deobfuscated instanceof String && Boolean.parseBoolean((String) deobfuscated)){
+            return true;
+        }
+        ClassLoader loader = DebugUtil.class.getClassLoader();
+        return loader != null && loader.getResource(DEV_MARKER) != null;
+    }
 
 
     /**

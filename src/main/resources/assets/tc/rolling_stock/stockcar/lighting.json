@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:stockcar",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:red": {},
+    "tc:yellow": {},
+    "tc:white": {}
+  }
+}

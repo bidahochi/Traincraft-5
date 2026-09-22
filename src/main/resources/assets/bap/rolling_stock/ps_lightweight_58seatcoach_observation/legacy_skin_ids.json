@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "12": "bap:lightblue",
+    "5": "bap:purple",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "13": "bap:magenta",
+    "9": "bap:pink",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "3": "bap:brown",
+    "0": "bap:black",
+    "7": "bap:lightgrey",
+    "8": "bap:grey",
+    "15": "bap:white",
+    "16": "bap:skin16",
+    "11": "bap:yellow"
+  },
+  "stock": "bap:ps_lightweight_58seatcoach_observation"
+}

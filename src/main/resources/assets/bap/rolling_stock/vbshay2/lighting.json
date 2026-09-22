@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:vbshay2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {}
+  }
+}

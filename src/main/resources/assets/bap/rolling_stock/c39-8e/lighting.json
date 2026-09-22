@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:c39-8e",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_266": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_267": {
+          "preset": "instrument"
+        },
+        "cab_signal_body_270": {
+          "preset": "instrument"
+        },
+        "marker_body_327": {
+          "preset": "marker_light"
+        },
+        "marker_body_328": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_465": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_466": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_467": {
+          "preset": "marker_light"
+        },
+        "marker_sou_body_468": {
+          "preset": "marker_light"
+        },
+        "ditch_front_3_l": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_front_3_r": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_front_2_l": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_front_2_r": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_front_1_r": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_front_1_l": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_3_r": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_3_l": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_2_a": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_2_b": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_2_l": {
+          "hornResponse": {
+            "phase": 1
+          },
+          "preset": "ditch_light"
+        },
+        "ditch_rear_2_r": {
+          "hornResponse": {
+            "phase": 0
+          },
+          "preset": "ditch_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "ditch_front_1_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            },
+            "color": "#FFF4B4"
+          },
+          "ditch_front_1_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            },
+            "color": "#FFF4B4"
+          },
+          "ditch_rear_2_b": {
+            "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_rear_2_a": {
+            "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
+    "bap:skin19": {
+      "lighting": {
+        "fixtures": {
+          "ditch_front_1_l": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            },
+            "color": "#FFF4B4"
+          },
+          "ditch_front_1_r": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            },
+            "color": "#FFF4B4"
+          },
+          "ditch_rear_2_b": {
+            "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch_rear_2_a": {
+            "color": "#FFF4B4",
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
+    "bap:black": {},
+    "bap:lightgrey": {}
+  }
+}

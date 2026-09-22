@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "15": "bap:white"
+  },
+  "stock": "bap:budd_lightweight_cncoach"
+}

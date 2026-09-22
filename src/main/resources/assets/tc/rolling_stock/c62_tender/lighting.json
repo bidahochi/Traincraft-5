@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:c62_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:red": {}
+  }
+}

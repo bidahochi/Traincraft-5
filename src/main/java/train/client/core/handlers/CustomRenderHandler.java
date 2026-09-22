@@ -16,6 +16,7 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 import train.client.render.RenderTCRail;
+import train.client.render.RollingStockTranslucencyQueue;
 import train.client.render.TrackAttachmentRenderer;
 import train.client.render.TrackPathDebugRenderer;
 import train.client.render.embedded.EmbeddedTrackHostSurfaceRenderer;
@@ -70,8 +71,9 @@ public class CustomRenderHandler
 		{
 			TrackPathDebugRenderer.render(player);
 		}
-        // Lighting effects consume the completed opaque/world depth. Flush only
-        // after Traincraft's own world-last track work has finished.
+        // Windows must composite over every completed opaque world/entity draw. Lighting effects
+        // remain afterward so their existing framebuffer/depth pipeline sees the completed scene.
+        RollingStockTranslucencyQueue.flush();
         LightEffectRenderBatch.flush();
         EmbeddedTrackHostSurfaceRenderer.compileQueuedDisplayLists();
     }

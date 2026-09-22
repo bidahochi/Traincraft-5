@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:freight_centerbeam_wood_2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:brown": {},
+    "tc:blue": {},
+    "tc:white": {}
+  }
+}

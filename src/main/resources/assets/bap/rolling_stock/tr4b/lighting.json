@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:tr4b",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_crl_body_314": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_315": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_370": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_371": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:magenta": {},
+    "bap:lightgrey": {}
+  }
+}

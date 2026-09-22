@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:alcos2",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:white": {},
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

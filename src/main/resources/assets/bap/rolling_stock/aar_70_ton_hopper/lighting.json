@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:aar_70_ton_hopper",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:magenta": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

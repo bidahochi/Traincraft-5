@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_nyc_lightweight_52seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:orange": {},
+    "bap:red": {}
+  }
+}

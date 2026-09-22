@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "6": "bap:cyan",
+    "8": "bap:grey",
+    "1": "bap:red"
+  },
+  "stock": "bap:rsd15"
+}

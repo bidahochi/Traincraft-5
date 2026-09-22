@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:passengerhighspeedcarzeroed",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:white": {},
+    "tc:lightgrey": {},
+    "tc:grey": {}
+  }
+}

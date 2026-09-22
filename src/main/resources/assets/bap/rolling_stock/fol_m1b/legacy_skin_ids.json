@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "8": "bap:grey",
+    "4": "bap:blue",
+    "0": "bap:black"
+  },
+  "stock": "bap:fol_m1b"
+}

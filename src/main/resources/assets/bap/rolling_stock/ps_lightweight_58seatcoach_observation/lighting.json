@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_58seatcoach_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_lense_lf": {
+          "preset": "marker_light"
+        },
+        "marker_lense_lr_body_279": {
+          "preset": "marker_light"
+        },
+        "marker_lense_rf": {
+          "preset": "marker_light"
+        },
+        "marker_lense_lr_body_282": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:purple": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:magenta": {},
+    "bap:pink": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:brown": {},
+    "bap:black": {},
+    "bap:lightgrey": {},
+    "bap:grey": {},
+    "bap:white": {},
+    "bap:skin16": {},
+    "bap:yellow": {}
+  }
+}

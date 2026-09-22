@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_41-6_gon",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:brown": {},
+    "bap:skin16": {}
+  }
+}

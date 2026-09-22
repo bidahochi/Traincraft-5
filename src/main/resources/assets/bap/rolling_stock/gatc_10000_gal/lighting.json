@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gatc_10000_gal",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:lightblue": {},
+    "bap:grey": {},
+    "bap:skin18": {},
+    "bap:skin19": {}
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gm6c",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "rear_marker": {
+          "preset": "marker_light"
+        },
+        "front_marker": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_268": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_274": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:white": {},
+    "bap:lightgrey": {},
+    "bap:lightblue": {},
+    "bap:black": {},
+    "bap:skin17": {},
+    "bap:cyan": {},
+    "bap:skin18": {}
+  }
+}

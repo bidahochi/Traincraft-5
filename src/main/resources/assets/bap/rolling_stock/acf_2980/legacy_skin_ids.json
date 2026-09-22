@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "7": "bap:lightgrey",
+    "0": "bap:black",
+    "13": "bap:magenta",
+    "16": "bap:skin16",
+    "8": "bap:grey",
+    "1": "bap:red",
+    "14": "bap:orange",
+    "17": "bap:skin17",
+    "18": "bap:skin18",
+    "4": "bap:blue",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "3": "bap:brown"
+  },
+  "stock": "bap:acf_2980"
+}

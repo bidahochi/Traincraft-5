@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gpfdl",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_326": {
+          "preset": "marker_light"
+        },
+        "marker_body_327": {
+          "preset": "marker_light"
+        },
+        "marker_body_328": {
+          "preset": "marker_light"
+        },
+        "marker_body_329": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_389": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:green": {}
+  }
+}

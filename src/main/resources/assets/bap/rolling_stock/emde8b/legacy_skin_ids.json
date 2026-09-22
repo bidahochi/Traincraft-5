@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "14": "bap:orange",
+    "4": "bap:blue",
+    "1": "bap:red",
+    "8": "bap:grey",
+    "7": "bap:lightgrey"
+  },
+  "stock": "bap:emde8b"
+}

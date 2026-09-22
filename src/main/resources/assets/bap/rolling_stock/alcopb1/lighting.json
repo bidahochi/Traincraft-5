@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:alcopb1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:skin24": {},
+    "bap:magenta": {},
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:lightgrey": {},
+    "bap:skin19": {},
+    "bap:black": {}
+  }
+}

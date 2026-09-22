@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sw1200",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_299": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_370": {
+          "preset": "instrument"
+        },
+        "marker_crl_body_386": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_387": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_479": {
+          "preset": "marker_light"
+        },
+        "marker_crl_body_480": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lime": {},
+    "bap:green": {},
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:yellow": {},
+    "bap:pink": {},
+    "bap:orange": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:magenta": {},
+    "bap:brown": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

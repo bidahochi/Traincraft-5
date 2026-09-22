@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:evans_5100",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:lightblue": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:red": {},
+    "bap:skin16": {},
+    "bap:pink": {},
+    "bap:cyan": {},
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:brown": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:purple": {},
+    "bap:magenta": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:skin25": {},
+    "bap:white": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:grey": {}
+  }
+}

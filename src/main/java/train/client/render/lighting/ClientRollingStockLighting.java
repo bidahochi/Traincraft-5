@@ -15,9 +15,11 @@ import tmt.ModelPartLightTable;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
 import train.common.Traincraft;
+import train.common.appearance.RollingStockAppearanceLighting;
 import train.common.api.EntityRollingStock;
 import train.common.api.IRollingStockLightState;
 import train.common.api.LightBeamRotation;
+import train.common.api.LightFixtureType;
 import train.common.api.RollingStockLightChannel;
 import train.common.api.RollingStockLightColors;
 import train.common.api.RollingStockLightDefinition;
@@ -50,9 +52,6 @@ public final class ClientRollingStockLighting
     private static final ThreadLocal<Context> ACTIVE = new ThreadLocal<Context>();
     private static final int MAXIMUM_MODEL_CACHE_ENTRIES = 128;
     private static final float MINIMUM_LONGITUDINAL_DIRECTION = 0.05F;
-    private static final float MINIMUM_GENERATED_GLOW_RADIUS = 0.04F;
-    private static final float MAXIMUM_GENERATED_GLOW_RADIUS = 0.18F;
-    private static final float GENERATED_GLOW_RADIUS_SCALE = 1.35F;
     private static final float COPLANAR_NORMAL_DOT_THRESHOLD = 0.999F;
     private static final float COPLANAR_DISTANCE_EPSILON = 1.0E-4F;
     private static final float GEOMETRY_EPSILON = 1.0E-5F;
@@ -74,12 +73,12 @@ public final class ClientRollingStockLighting
     private static final Map<EntityRollingStock, RollingStockRuntimeState> RUNTIME_STATES =
         Collections.synchronizedMap(
             new WeakHashMap<EntityRollingStock, RollingStockRuntimeState>());
-    private static final BoundedIdentityCache<Object, Integer> SEMANTIC_COUNTS =
-        new BoundedIdentityCache<Object, Integer>(MAXIMUM_MODEL_CACHE_ENTRIES);
+    private static final BoundedIdentityCache<Object, SemanticCount> SEMANTIC_COUNTS =
+        new BoundedIdentityCache<Object, SemanticCount>(MAXIMUM_MODEL_CACHE_ENTRIES);
     private static final BoundedIdentityCache<Object, String> MODEL_SCOPES =
         new BoundedIdentityCache<Object, String>(MAXIMUM_MODEL_CACHE_ENTRIES);
-    private static final BoundedIdentityCache<Object, PrimeTopMetadata> PRIME_TOP_METADATA =
-        new BoundedIdentityCache<Object, PrimeTopMetadata>(MAXIMUM_MODEL_CACHE_ENTRIES);
+    private static final BoundedIdentityCache<Object, BoundedIdentityCache<RollingStockSkinLighting, PrimeTopMetadata>> PRIME_TOP_METADATA =
+        new BoundedIdentityCache<Object, BoundedIdentityCache<RollingStockSkinLighting, PrimeTopMetadata>>(MAXIMUM_MODEL_CACHE_ENTRIES);
 
     private ClientRollingStockLighting()
     {
@@ -114,7 +113,22 @@ public final class ClientRollingStockLighting
     /** Clears the lighting scope associated with the current render thread. */
     public static void end()
     {
-        ACTIVE.remove();
+        Context context = ACTIVE.get();
+        try
+        {
+            if (context != null)
+            {
+                context.finishGroups();
+            }
+        }
+        finally
+        {
+            if (context != null)
+            {
+                context.runtimeState.beginGroups();
+            }
+            ACTIVE.remove();
+        }
     }
 
     /**
@@ -135,9 +149,27 @@ public final class ClientRollingStockLighting
      */
     public static boolean isSemantic(ModelRendererTurbo modelPart)
     {
+        return isSemantic(modelPart, fixtureLayoutKey());
+    }
+
+    /** Matches declared names without treating identifier substrings as built-in presets. */
+    public static boolean isSemantic(ModelRendererTurbo modelPart, Set<String> declaredFixtureIds)
+    {
         return modelPart != null
-               && (modelPart.lightFixtureId != null
-                   || RollingStockLightChannel.fromTaggedPartName(modelPart.boxName) != null);
+               && "cull".equalsIgnoreCase(modelPart.boxName) == false
+               && (RollingStockLightChannel.fromTaggedPartName(modelPart.presetTagName()) != null
+                   || declaredFixtureIds.contains(modelPart.partIdentifier()));
+    }
+
+    /**
+     * Returns the immutable document-wide fixture-name set for the active draw.
+     * Static batch layouts key membership by this object; resource replacement changes it,
+     * whereas switching skins within the same document does not.
+     */
+    private static Set<String> fixtureLayoutKey()
+    {
+        Context context = ACTIVE.get();
+        return context == null ? Collections.<String>emptySet() : context.declaredFixtureIds;
     }
 
     /**
@@ -159,11 +191,16 @@ public final class ClientRollingStockLighting
         {
             return PartLight.NONE;
         }
+        if (modelPart.partIdentifier() != null
+            && context.runtimeState.skin.lightOverrides().containsKey(modelPart.partIdentifier()) == false)
+        {
+            return PartLight.NONE;
+        }
         FixtureMetadata fixtureMetadata = fixtureMetadata(context, modelPart, modelScale);
         DetectedLightSurface surface = fixtureMetadata.surface;
         ResolvedFixture resolvedFixture = context.resolveFixture(fixtureMetadata);
         RollingStockLightDefinition definition = resolvedFixture.definition;
-        int primePhase = primePhase(modelPart.boxName);
+        int primePhase = resolvedFixture.sourceType == null ? 0 : resolvedFixture.sourceType.primePhase();
         DetectedLightFace selectedPrime =
             primePhase > 0 ? selectPrimePhaseFace(surface, primePhase, context) : null;
         if (selectedPrime != null)
@@ -172,7 +209,7 @@ public final class ClientRollingStockLighting
         }
         List<DetectedLightSurface> sourceSurfaces =
             selectSourceSurfaces(modelPart, surface, selectedPrime);
-        RollingStockLightOutput output = context.sampleOutput(definition);
+        RollingStockLightOutput output = context.sampleOutput(definition, resolvedFixture.partIdentity);
         float intensity = output.sourceIntensity();
         // An inactive fixture is ordinary ambient display-list geometry. Avoid
         // lightmap state traffic, matrix readbacks and Prime immediate drawing
@@ -198,14 +235,14 @@ public final class ClientRollingStockLighting
         boolean available =
             explicitlyAvailable
             ? availabilityOverride.enabled()
-            : RollingStockLightChannel.taggedPartIsInterior(modelPart.boxName)
+            : resolvedFixture.sourceType == LightFixtureType.INTERIOR_LIGHT
             || (fixtureMetadata.definition.taggedUvRegions().isEmpty() == false
                 && resolvedFixture.sourceVisible(lightTexture, sourceSurfaces));
         float effectX = oldX, effectY = oldY;
         float[] pose = null;
         if (available)
         {
-            ModelPartLightTable.Mode lightmapMode = context.partLights.mode(definition.id());
+            ModelPartLightTable.Mode lightmapMode = context.partLights.mode(resolvedFixture.partIdentity);
             if (lightmapMode == ModelPartLightTable.Mode.LIGHT_FLOOR)
             {
                 effectX = Math.max(oldX, definition.lightmapFloor());
@@ -235,10 +272,15 @@ public final class ClientRollingStockLighting
                 boolean multipleSources = sourceSurfaces.size() > 1;
                 for (DetectedLightSurface sourceSurface : sourceSurfaces)
                 {
+                    if (resolvedFixture.group != null)
+                    {
+                        context.collectGroup(modelPart, resolvedFixture, sourceSurface, modelScale, pose);
+                        continue;
+                    }
                     String submissionKey =
                         multipleSources && sourceSurface.sourceFace != null
-                        ? definition.id() + ":face" + sourceSurface.sourceFace.faceIndex
-                        : definition.id();
+                        ? resolvedFixture.effectIdentity + ":face" + sourceSurface.sourceFace.faceIndex
+                        : resolvedFixture.effectIdentity;
                     submitFixtureEffects(
                         context,
                         definition,
@@ -247,19 +289,28 @@ public final class ClientRollingStockLighting
                         modelScale,
                         intensity,
                         output.projectedIntensity(),
-                        pose);
+                        pose, false);
                 }
-                submitCommanderSurfaceGlows(
+                if (resolvedFixture.group == null && resolvedFixture.sourceType == LightFixtureType.COMMANDER)
+                {
+                    if (fixtureMetadata.commanderSurfaces == null)
+                    {
+                        fixtureMetadata.commanderSurfaces = mergeCommanderSurfaces(context, fixtureMetadata.surface.faces);
+                    }
+                    submitCommanderSurfaceGlows(
                     context,
-                    fixtureMetadata,
+                    fixtureMetadata.commanderSurfaces,
                     definition,
+                    resolvedFixture.effectIdentity,
                     modelScale,
                     intensity,
                     pose);
+                }
             }
         }
         DetectedLightFace primeTop = context.primeTopFace(modelPart);
         if (intensity > 0
+                && resolvedFixture.group == null
                 && primeTop != null
                 && (explicitlyAvailable
                     ? availabilityOverride.enabled()
@@ -270,7 +321,7 @@ public final class ClientRollingStockLighting
             {
                 pose = captureModelViewMatrix();
             }
-            submitPrimeTop(context, definition, primeTop, modelScale, intensity, pose);
+            submitPrimeTop(context, definition, resolvedFixture.effectIdentity, primeTop, modelScale, intensity, pose);
         }
         return new PartLight(
                    true,
@@ -457,11 +508,16 @@ public final class ClientRollingStockLighting
         {
             return false;
         }
+        Map<String, RollingStockLightOverride> overrides = stock.getSkinLighting().lightOverrides();
         for (FixtureMetadata fixture : metadata.values())
         {
+            if (fixture.requiresDeclaration && overrides.containsKey(fixture.definition.id()) == false)
+            {
+                continue;
+            }
             RollingStockLightDefinition definition =
                 SkinLightingResolver.resolveDefinition(
-                    stock.getSkinLighting().lightOverrides(), fixture.definition);
+                    overrides, fixture.definition, fixture.legacyGroup);
             if (definition.clientProjectorEligible()
                     && definition.channel() == RollingStockLightChannel.HEADLIGHT
                     && definition.controlCircuit() == RollingStockLightChannel.HEADLIGHT
@@ -540,7 +596,13 @@ public final class ClientRollingStockLighting
             : null;
         for (FixtureMetadata fixture : metadata.values())
         {
-            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (fixture.requiresDeclaration && overrides.containsKey(fixture.definition.id()) == false)
+            {
+                continue;
+            }
+            RollingStockLightOverride override = SkinLightingResolver.physicalOverride(overrides,
+                fixture.definition.id(), SkinLightingResolver.physicalGroup(overrides,
+                    fixture.definition.id(), fixture.legacyGroup));
             if (override != null
                     && override.availabilityOverridden()
                     && override.enabled() == false)
@@ -548,7 +610,7 @@ public final class ClientRollingStockLighting
                 continue;
             }
             RollingStockLightDefinition definition =
-                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition, fixture.legacyGroup);
             float projectedIntensity =
                 RollingStockLightState.outputForState(lightState, definition, animationTime)
                 .projectedIntensity();
@@ -609,13 +671,14 @@ public final class ClientRollingStockLighting
                 demand.includeUnknownReach();
                 continue;
             }
+            Set<String> declaredNames = declaredFixtureIds(stock);
             Map<ModelRendererTurbo, FixtureMetadata> metadata = MODEL_METADATA.get(stock.modelInstance);
             if (metadata == null)
             {
                 boolean hasSemanticPart = false;
                 for (ModelRendererTurbo part : modelPartLocators(stock.modelInstance).keySet())
                 {
-                    if (isSemantic(part))
+                    if (isSemantic(part, declaredNames))
                     {
                         hasSemanticPart = true;
                         break;
@@ -628,7 +691,7 @@ public final class ClientRollingStockLighting
                 continue;
             }
             int declaredSemanticParts =
-                countSemanticParts(stock.modelInstance, modelPartLocators(stock.modelInstance));
+                countSemanticParts(stock.modelInstance, modelPartLocators(stock.modelInstance), declaredNames);
             if (metadata.size() < declaredSemanticParts)
             {
                 demand.includeUnknownReach();
@@ -659,7 +722,13 @@ public final class ClientRollingStockLighting
         float maximumReach = 0.0F;
         for (FixtureMetadata fixture : metadata.values())
         {
-            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (fixture.requiresDeclaration && overrides.containsKey(fixture.definition.id()) == false)
+            {
+                continue;
+            }
+            RollingStockLightOverride override = SkinLightingResolver.physicalOverride(overrides,
+                fixture.definition.id(), SkinLightingResolver.physicalGroup(overrides,
+                    fixture.definition.id(), fixture.legacyGroup));
             if (override != null
                     && override.availabilityOverridden()
                     && override.enabled() == false)
@@ -667,7 +736,7 @@ public final class ClientRollingStockLighting
                 continue;
             }
             RollingStockLightDefinition definition =
-                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition, fixture.legacyGroup);
             float projectedIntensity =
                 RollingStockLightState.outputForState(lightState, definition, animationTime)
                 .projectedIntensity();
@@ -734,13 +803,19 @@ public final class ClientRollingStockLighting
             stock.getSkinLighting().lightOverrides();
         for (FixtureMetadata fixture : metadata.values())
         {
-            RollingStockLightOverride override = overrides.get(fixture.definition.id());
+            if (fixture.requiresDeclaration && overrides.containsKey(fixture.definition.id()) == false)
+            {
+                continue;
+            }
+            RollingStockLightOverride override = SkinLightingResolver.physicalOverride(overrides,
+                fixture.definition.id(), SkinLightingResolver.physicalGroup(overrides,
+                    fixture.definition.id(), fixture.legacyGroup));
             if (override != null && override.availabilityOverridden() && override.enabled() == false)
             {
                 continue;
             }
             RollingStockLightDefinition definition =
-                SkinLightingResolver.resolveDefinition(overrides, fixture.definition);
+                SkinLightingResolver.resolveDefinition(overrides, fixture.definition, fixture.legacyGroup);
             result.add(definition.controlCircuit());
         }
         return result;
@@ -779,30 +854,32 @@ public final class ClientRollingStockLighting
                 context.stock.modelRotations(),
                 context.stock.getRenderScale());
         RollingStockLightChannel channel =
-            RollingStockLightChannel.fromTaggedPartName(modelPart.boxName);
-        // ID-only fixtures are configured by their entity profile. HEADLIGHT supplies a safe,
-        // steady compatibility baseline until that profile replaces the inferred behavior.
+            RollingStockLightChannel.fromTaggedPartName(modelPart.presetTagName());
+        // ID-only fixtures use stock lighting JSON. HEADLIGHT supplies the steady
+        // baseline to which the resolved JSON overrides are applied.
         if (channel == null)
         {
             channel = RollingStockLightChannel.HEADLIGHT;
         }
-        String fixtureId =
-            modelPart.lightFixtureId != null
-            ? modelPart.lightFixtureId
-            : modelPart.lightFixtureGroup != null
-            ? "auto:"
-            + context.modelScope
-            + ":"
-            + channel.name().toLowerCase(Locale.ROOT)
-            + ":group:"
-            + normalizeIdentifier(modelPart.lightFixtureGroup)
-            : createFallbackFixtureId(context, modelPart, channel);
+        String fixtureId;
+        if (modelPart.partIdentifier() != null)
+        {
+            fixtureId = modelPart.partIdentifier();
+        }
+        else if (context.runtimeState.skin.lightOverrides().containsKey(modelPart.boxName))
+        {
+            fixtureId = modelPart.boxName;
+        }
+        else
+        {
+            fixtureId = createFallbackFixtureId(context, modelPart, channel);
+        }
         boolean instrument =
-                    RollingStockLightChannel.taggedPartIsInstrument(modelPart.boxName),
+                    RollingStockLightChannel.taggedPartIsInstrument(modelPart.presetTagName()),
                 interior =
-                    RollingStockLightChannel.taggedPartIsInterior(modelPart.boxName),
+                    RollingStockLightChannel.taggedPartIsInterior(modelPart.presetTagName()),
                 illuminated =
-                    RollingStockLightChannel.taggedPartIsIlluminatedSurface(modelPart.boxName),
+                    RollingStockLightChannel.taggedPartIsIlluminatedSurface(modelPart.presetTagName()),
                 beamChannel =
                     instrument == false
                     && interior == false
@@ -817,13 +894,8 @@ public final class ClientRollingStockLighting
             : producesBeam
             ? RollingStockLightDefinition.Effect.BEAM
             : RollingStockLightDefinition.Effect.EMISSIVE_ONLY;
-        String lower = modelPart.boxName == null
-                       ? ""
-                       : modelPart.boxName.toLowerCase(Locale.ROOT);
-        List<CommanderSurface> commanderSurfaces =
-            lower.contains("commander")
-            ? mergeCommanderSurfaces(context, surface.faces)
-            : Collections.<CommanderSurface>emptyList();
+        String presetName = modelPart.presetTagName();
+        String lower = presetName == null ? "" : presetName.toLowerCase(Locale.ROOT);
         boolean orange = lower.contains("commander") || lower.contains("prime");
         int color = orange
                     ? RollingStockLightColors.AMBER
@@ -836,10 +908,10 @@ public final class ClientRollingStockLighting
             instrument || interior || illuminated || lower.contains("commander")
             ? 0
             : Math.max(
-                MINIMUM_GENERATED_GLOW_RADIUS,
+                GroupedLightGeometry.MINIMUM_SOURCE_GLOW_RADIUS,
                 Math.min(
-                    MAXIMUM_GENERATED_GLOW_RADIUS,
-                    surface.radius * modelScale * GENERATED_GLOW_RADIUS_SCALE));
+                    GroupedLightGeometry.MAXIMUM_SOURCE_GLOW_RADIUS,
+                    surface.radius * modelScale * GroupedLightGeometry.SOURCE_GLOW_MARGIN));
         float beamLength =
             producesBeam
             ? (channel == RollingStockLightChannel.DITCH
@@ -875,7 +947,7 @@ public final class ClientRollingStockLighting
                 shape == null ? 1 : shape.heightScale(),
                 shape == null ? 0 : shape.rightOffset(),
                 shape == null ? 0 : shape.upOffset())
-            .function(RollingStockLightChannel.defaultFunction(modelPart.boxName))
+            .function(RollingStockLightChannel.defaultFunction(modelPart.presetTagName()))
             .lightmapFloor(
                 illuminated && lower.contains("numberboard")
                 ? RollingStockLightDefinition.DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR
@@ -886,11 +958,11 @@ public final class ClientRollingStockLighting
             .taggedPart(fixtureId, uvRegions)
             .build();
         modelPart.lightDefinitionId = fixtureId;
-        if (primePhase(modelPart.boxName) > 0)
+        if (primePhase(modelPart.presetTagName()) > 0)
         {
             modelPart.lightExteriorFaceOnly = true;
             DetectedLightFace selected =
-                selectPrimePhaseFace(surface, primePhase(modelPart.boxName), context);
+                selectPrimePhaseFace(surface, primePhase(modelPart.presetTagName()), context);
             modelPart.lightExteriorFaceIndex = selected == null ? -1 : selected.faceIndex;
         }
         if (uvRegions.isEmpty()
@@ -903,12 +975,14 @@ public final class ClientRollingStockLighting
         }
         FixtureMetadata created =
             new FixtureMetadata(
+            values.size(),
+            modelPart,
             surface,
             definition,
-            modelPart.lightFixtureGroup == null
-            ? null
-            : normalizeIdentifier(modelPart.lightFixtureGroup),
-            commanderSurfaces);
+            modelPart.partIdentifier() != null,
+            modelPart.lightFixtureGroup == null ? null
+                : "auto:" + context.modelScope + ":" + channel.name().toLowerCase(Locale.ROOT)
+                    + ":group:" + normalizeIdentifier(modelPart.lightFixtureGroup));
         values.put(modelPart, created);
         return created;
     }
@@ -1098,7 +1172,7 @@ public final class ClientRollingStockLighting
         float modelScale,
         float sourceOutput,
         float projectedOutput,
-        float[] modelViewMatrix)
+        float[] modelViewMatrix, boolean assembledFixture)
     {
         float localX = surface.x * modelScale,
               localY = surface.y * modelScale,
@@ -1172,8 +1246,7 @@ public final class ClientRollingStockLighting
         float fixtureReach =
             BeamVisibilityScaling.fixtureReach(
                 projectedOutput, definition.function().lampResponse());
-        LightEffectRenderBatch.submit(
-            LightEffectSubmission.fixtureLocal(
+        LightEffectSubmission submission = LightEffectSubmission.fixtureLocal(
                 modelViewMatrix,
                 context.stock.getEntityId(),
                 submissionKey,
@@ -1194,7 +1267,12 @@ public final class ClientRollingStockLighting
                 context.visibility.beamScale,
                 context.visibility.beamAlpha,
                 context.visibility.hotspotAlpha,
-                fixtureReach));
+                fixtureReach);
+        if (assembledFixture)
+        {
+            submission.markAssembledFixture();
+        }
+        LightEffectRenderBatch.submit(submission);
         String diagnostic = context.modelScope + ":" + definition.id();
         if (LOGGED_SUBMISSIONS.add(diagnostic))
         {
@@ -1216,16 +1294,17 @@ public final class ClientRollingStockLighting
     /** Submits the merged face glows used by Commander-style beacon fixtures. */
     private static void submitCommanderSurfaceGlows(
         Context context,
-        FixtureMetadata metadata,
+        List<CommanderSurface> surfaces,
         RollingStockLightDefinition definition,
+        String effectIdentity,
         float modelScale,
         float intensity,
         float[] modelViewMatrix)
     {
-        if (metadata.commanderSurfaces.isEmpty() == false)
+        if (surfaces != null && surfaces.isEmpty() == false)
         {
             int index = 0;
-            for (CommanderSurface face : metadata.commanderSurfaces)
+            for (CommanderSurface face : surfaces)
             {
                 float[] center =
                     transformPoint(
@@ -1242,7 +1321,7 @@ public final class ClientRollingStockLighting
                 LightEffectRenderBatch.submitGlow(
                     new LightGlowSubmission(
                         context.stock.getEntityId(),
-                        definition.id() + ":face" + (index++),
+                        effectIdentity + ":face" + (index++),
                         center[0],
                         center[1],
                         center[2],
@@ -1370,6 +1449,7 @@ public final class ClientRollingStockLighting
     private static void submitPrimeTop(
         Context context,
         RollingStockLightDefinition definition,
+        String effectIdentity,
         DetectedLightFace topFace,
         float modelScale,
         float intensity,
@@ -1413,7 +1493,7 @@ public final class ClientRollingStockLighting
         LightEffectRenderBatch.submitEmissive(
             LightEmissiveSubmission.fixtureLocal(
                 context.stock.getEntityId(),
-                definition.id() + ":prime-top",
+                effectIdentity + ":prime-top",
                 modelViewMatrix,
                 originX,
                 originY,
@@ -1713,7 +1793,8 @@ public final class ClientRollingStockLighting
      */
     public static final class PartLight
     {
-        static final PartLight NONE = new PartLight(false, 0, 0, false, 0, 0, -1);
+        static final PartLight NONE =
+            new PartLight(false, 0, 0, false, 0, 0, -1);
         final boolean lightmapChanged;
         final float ambientLightmapX,
                     ambientLightmapY,
@@ -1767,8 +1848,11 @@ public final class ClientRollingStockLighting
 
     private static final class Context
     {
+        private float[] groupPose;
+        private final float[] inverseGroupPose = new float[16];
         final EntityRollingStock stock;
         final IRollingStockLightState lightState;
+        private final Set<String> declaredFixtureIds;
         final double animationTime;
         final ResourceLocation modelTexture;
         final String modelScope;
@@ -1788,12 +1872,12 @@ public final class ClientRollingStockLighting
             ResourceLocation texture)
         {
             this.stock = stock;
+            declaredFixtureIds = declaredFixtureIds(stock);
             lightState = resolveLightState(stock);
             this.animationTime = animationTime;
             modelTexture = texture;
             modelScope = modelScopeIdentifier(stock);
             partLocators = modelPartLocators(stock.modelInstance);
-            rootPrimeTopFaces = resolvePrimeTopFaces(stock.modelInstance, this);
             RollingStockRuntimeState state = RUNTIME_STATES.get(stock);
             if (state == null)
             {
@@ -1802,8 +1886,21 @@ public final class ClientRollingStockLighting
             }
             runtimeState = state;
             runtimeState.prepareFor(stock.modelInstance, stock.getSkinLighting());
+            rootPrimeTopFaces = resolvePrimeTopFaces(stock.modelInstance, this);
+            runtimeState.beginGroups();
+            // Capture the scope frame before any part transforms. Nested legacy models may only
+            // reveal their groups while drawing, so root-array discovery cannot safely gate this.
+            groupPose = captureModelViewMatrix();
+            if (GroupedLightGeometry.invert(groupPose, inverseGroupPose) == false)
+            {
+                groupPose = null;
+                if (LOGGED_SUBMISSIONS.add("singular-group-pose:" + modelScope))
+                {
+                    Traincraft.tcLog.warn("Cannot assemble light groups in {}: singular model transform", modelScope);
+                }
+            }
             partLights = runtimeState.partLights;
-            partLights.reset(Math.max(4, countSemanticParts(stock.modelInstance, partLocators)));
+            partLights.reset(Math.max(4, countSemanticParts(stock.modelInstance, partLocators, declaredFixtureIds)));
             int skyLight =
                 stock.worldObj.getSavedLightValue(
                     EnumSkyBlock.Sky,
@@ -1820,6 +1917,72 @@ public final class ClientRollingStockLighting
         ResolvedFixture resolveFixture(FixtureMetadata fixtureMetadata)
         {
             return runtimeState.resolveFixture(fixtureMetadata);
+        }
+
+        /** Collects only available emitting faces; no geometry is traversed on cache hits. */
+        private void collectGroup(ModelRendererTurbo part, ResolvedFixture fixture,
+            DetectedLightSurface surface, float scale, float[] pose)
+        {
+            if (groupPose == null)
+            {
+                return;
+            }
+            GroupedLightGeometry.Cache cache = runtimeState.groups.get(fixture.group);
+            if (cache == null)
+            {
+                cache = new GroupedLightGeometry.Cache();
+                runtimeState.groups.put(fixture.group, cache);
+            }
+            String key = fixture.memberKey;
+            if (key == null)
+            {
+                String locator = partLocators.get(part);
+                if (locator == null)
+                {
+                    locator = modelPartLocators(part.getModelOwner()).get(part);
+                    if (locator == null)
+                    {
+                        locator = "unlisted";
+                    }
+                    // Different nested owners can expose the same array locator.
+                    locator = "nested:" + runtimeState.nextMemberId++ + ":" + locator;
+                }
+                key = locator + ":" + fixture.definition.id();
+                fixture.memberKey = key;
+            }
+            int face = surface.sourceFace == null ? -1 : surface.sourceFace.faceIndex;
+            String faceKey = fixture.faceKeys.get(face);
+            if (faceKey == null)
+            {
+                faceKey = key + ":face:" + face;
+                fixture.faceKeys.put(face, faceKey);
+            }
+            Float radius = fixture.override == null || fixture.override.behavior() == null
+                ? null : fixture.override.behavior().sourceGlowRadius();
+            cache.add(faceKey, surface, scale, inverseGroupPose, pose, fixture.definition, radius);
+        }
+
+        /** Emits one complete physical fixture before the world-last queue is consumed. */
+        private void finishGroups()
+        {
+            for (Map.Entry<String, GroupedLightGeometry.Cache> entry : runtimeState.groups.entrySet())
+            {
+                GroupedLightGeometry geometry = entry.getValue().finish();
+                if (geometry == null || groupPose == null)
+                {
+                    if (entry.getValue().failure() != null
+                        && LOGGED_SUBMISSIONS.add("invalid-group:" + modelScope + ":" + entry.getKey()))
+                    {
+                        Traincraft.tcLog.warn("Light group {} in {} suppressed: {}",
+                            entry.getKey(), modelScope, entry.getValue().failure());
+                    }
+                    continue;
+                }
+                RollingStockLightDefinition definition = geometry.definition();
+                RollingStockLightOutput output = sampleOutput(definition, entry.getKey());
+                submitFixtureEffects(this, definition, entry.getKey(), geometry.surface(), 1,
+                    output.sourceIntensity(), output.projectedIntensity(), groupPose, true);
+            }
         }
 
         /**
@@ -1856,9 +2019,10 @@ public final class ClientRollingStockLighting
             return lastNestedPrimeTopFaces.get(modelPart);
         }
 
-        RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition)
+        /** Keeps per-part illumination independent even when parts share authored settings. */
+        private RollingStockLightOutput sampleOutput(RollingStockLightDefinition definition, String partIdentity)
         {
-            ModelPartLightTable.Entry cached = partLights.entry(definition.id());
+            ModelPartLightTable.Mode cached = partLights.mode(partIdentity);
             RollingStockLightOutput output =
                 RollingStockLightState.outputForState(
                     lightState,
@@ -1867,7 +2031,7 @@ public final class ClientRollingStockLighting
             if (cached == null)
             {
                 partLights.put(
-                    definition.id(), output.sourceIntensity(),
+                    partIdentity, output.sourceIntensity(),
                     selectLightmapMode(definition, output.sourceIntensity()));
             }
             return output;
@@ -1911,6 +2075,18 @@ public final class ClientRollingStockLighting
 
     private static final class RollingStockRuntimeState
     {
+        private final Map<String, GroupedLightGeometry.Cache> groups =
+            new LinkedHashMap<String, GroupedLightGeometry.Cache>();
+        private int nextMemberId;
+
+        /** Resets per-draw membership while retaining cached geometry and diagnostic failures. */
+        private void beginGroups()
+        {
+            for (GroupedLightGeometry.Cache group : groups.values())
+            {
+                group.begin();
+            }
+        }
         final AdaptiveLightTracker visibilityTracker = new AdaptiveLightTracker();
         final ModelPartLightTable partLights = new ModelPartLightTable();
         final IdentityHashMap<FixtureMetadata, ResolvedFixture> resolvedFixtures =
@@ -1933,6 +2109,8 @@ public final class ClientRollingStockLighting
             skin = currentSkin;
             skinRevision = currentRevision;
             resolvedFixtures.clear();
+            groups.clear();
+            nextMemberId = 0;
         }
 
         /** Resolves and caches the current skin behavior for one detected fixture. */
@@ -1944,13 +2122,16 @@ public final class ClientRollingStockLighting
                 return resolvedFixture;
             }
             Map<String, RollingStockLightOverride> overrides = skin.lightOverrides();
-            RollingStockLightOverride override =
-                overrides.get(fixtureMetadata.definition.id());
+            String group = SkinLightingResolver.physicalGroup(overrides,
+                fixtureMetadata.definition.id(), fixtureMetadata.legacyGroup);
+            RollingStockLightOverride override = SkinLightingResolver.physicalOverride(overrides,
+                fixtureMetadata.definition.id(), group);
+            RollingStockLightDefinition definition = SkinLightingResolver.resolveDefinition(
+                overrides, fixtureMetadata.definition, fixtureMetadata.legacyGroup);
             resolvedFixture =
                 new ResolvedFixture(
-                SkinLightingResolver.resolveDefinition(
-                    overrides, fixtureMetadata.definition),
-                override);
+                definition, override, group, fixtureMetadata.partIndex);
+            resolvedFixture.sourceType = SpecialBeaconSurfaceExtraction.sourceType(fixtureMetadata.modelPart, skin);
             resolvedFixtures.put(fixtureMetadata, resolvedFixture);
             return resolvedFixture;
         }
@@ -1974,8 +2155,14 @@ public final class ClientRollingStockLighting
 
     private static final class ResolvedFixture
     {
+        private LightFixtureType sourceType;
+        private final String group;
+        private String memberKey;
+        private final Map<Integer, String> faceKeys = new HashMap<Integer, String>();
         final RollingStockLightDefinition definition;
         final RollingStockLightOverride override;
+        final String effectIdentity;
+        private final String partIdentity;
         ResourceLocation sourceTexture;
         ResourceLocation primeTexture;
         int sourceGeneration = Integer.MIN_VALUE;
@@ -1986,11 +2173,25 @@ public final class ClientRollingStockLighting
         boolean primeAvailable;
         boolean primeAvailableCached;
 
-        ResolvedFixture(
-            RollingStockLightDefinition definition, RollingStockLightOverride override)
+        /**
+         * Authored names select settings and may be reused. The cached model-part index
+         * separates their effects and lightmap state; only an explicit group shares effects.
+         * The queue additionally scopes these identities by entity, so shared models are safe.
+         */
+        private ResolvedFixture(
+            RollingStockLightDefinition definition, RollingStockLightOverride override, String group,
+            int partIndex)
         {
+            this.group = group;
             this.definition = definition;
             this.override = override;
+            partIdentity = "part:" + partIndex + ":" + definition.id();
+            String identity = partIdentity;
+            if (group != null)
+            {
+                identity = group;
+            }
+            effectIdentity = identity;
         }
 
         /** Returns cached texture-alpha availability for the fixture's visible source face. */
@@ -2092,26 +2293,56 @@ public final class ClientRollingStockLighting
         return value;
     }
 
+    /**
+     * Returns cached all-skin fixture membership for world and inventory batching.
+     * The immutable set remains identical across skin changes and is replaced on JSON reload.
+     * This lookup belongs at draw setup, never inside a per-part batch loop.
+     */
+    public static Set<String> declaredFixtureIds(EntityRollingStock stock)
+    {
+        String stockId = stock.getRollingStockAppearanceId();
+        if (stockId.isEmpty())
+        {
+            return Collections.emptySet();
+        }
+        RollingStockAppearanceLighting document =
+            ClientRollingStockAppearanceLoader.INSTANCE.document(stockId);
+        return document == null ? Collections.<String>emptySet() : document.fixtureIds();
+    }
+
+    /** Count validity includes the document because JSON can add or remove named fixtures. */
+    private static final class SemanticCount
+    {
+        private final Set<String> declaredNames;
+        private final int count;
+
+        private SemanticCount(Set<String> declaredNames, int count)
+        {
+            this.declaredNames = declaredNames;
+            this.count = count;
+        }
+    }
+
     /** Counts semantic light parts once so the per-entity intensity table can be sized correctly. */
     private static int countSemanticParts(
-        Object model, Map<ModelRendererTurbo, String> partLocators)
+        Object model, Map<ModelRendererTurbo, String> partLocators, Set<String> declaredNames)
     {
-        Integer cached = SEMANTIC_COUNTS.get(model);
-        if (cached != null)
+        SemanticCount cached = SEMANTIC_COUNTS.get(model);
+        if (cached != null && cached.declaredNames == declaredNames)
         {
-            return cached;
+            return cached.count;
         }
         int count = 0;
         for (ModelRendererTurbo modelPart : partLocators.keySet())
         {
-            if (isSemantic(modelPart))
+            if (isSemantic(modelPart, declaredNames))
             {
                 count++;
             }
         }
         if (model != null)
         {
-            SEMANTIC_COUNTS.put(model, count);
+            SEMANTIC_COUNTS.put(model, new SemanticCount(declaredNames, count));
         }
         return count;
     }
@@ -2123,17 +2354,22 @@ public final class ClientRollingStockLighting
         int transformSignature =
             31 * Arrays.hashCode(context.stock.getRenderScale())
             + Arrays.hashCode(context.stock.modelRotations());
-        PrimeTopMetadata cached = PRIME_TOP_METADATA.get(model);
-        if (cached != null && cached.transformSignature == transformSignature)
+        RollingStockSkinLighting skin = context.runtimeState.skin;
+        BoundedIdentityCache<RollingStockSkinLighting, PrimeTopMetadata> variants = PRIME_TOP_METADATA.get(model);
+        if (variants == null)
+        {
+            variants = new BoundedIdentityCache<RollingStockSkinLighting, PrimeTopMetadata>(
+                SpecialBeaconSurfaceExtraction.MAXIMUM_SKIN_CACHE_ENTRIES);
+            PRIME_TOP_METADATA.put(model, variants);
+        }
+        PrimeTopMetadata cached = variants.get(skin);
+        if (cached != null && cached.transformSignature == transformSignature
+            && cached.skin == skin && cached.revision == skin.lightingRevision())
         {
             return cached.faces;
         }
         Map<ModelRendererTurbo, DetectedLightFace> members =
-            SpecialBeaconSurfaceExtraction.completePrimeTopFaces(model);
-        if (members.isEmpty())
-        {
-            return members;
-        }
+            SpecialBeaconSurfaceExtraction.completePrimeTopFaces(model, skin);
         IdentityHashMap<ModelRendererTurbo, DetectedLightFace> resolved =
             new IdentityHashMap<ModelRendererTurbo, DetectedLightFace>();
         for (ModelRendererTurbo modelPart : members.keySet())
@@ -2149,19 +2385,23 @@ public final class ClientRollingStockLighting
         Map<ModelRendererTurbo, DetectedLightFace> result = Collections.unmodifiableMap(resolved);
         if (model != null)
         {
-            PRIME_TOP_METADATA.put(model, new PrimeTopMetadata(transformSignature, result));
+            variants.put(skin, new PrimeTopMetadata(transformSignature, result, skin));
         }
         return result;
     }
 
     private static final class PrimeTopMetadata
     {
+        private final RollingStockSkinLighting skin;
+        private final int revision;
         final int transformSignature;
         final Map<ModelRendererTurbo, DetectedLightFace> faces;
 
         PrimeTopMetadata(
-            int transformSignature, Map<ModelRendererTurbo, DetectedLightFace> faces)
+            int transformSignature, Map<ModelRendererTurbo, DetectedLightFace> faces, RollingStockSkinLighting skin)
         {
+            this.skin = skin;
+            this.revision = skin.lightingRevision();
             this.transformSignature = transformSignature;
             this.faces = faces;
         }
@@ -2169,21 +2409,27 @@ public final class ClientRollingStockLighting
 
     private static final class FixtureMetadata
     {
+        private final int partIndex;
+        private final ModelRendererTurbo modelPart;
+        private List<CommanderSurface> commanderSurfaces;
         final DetectedLightSurface surface;
         final RollingStockLightDefinition definition;
-        final String groupKey;
-        final List<CommanderSurface> commanderSurfaces;
+        private final boolean requiresDeclaration;
+        private final String legacyGroup;
 
-        FixtureMetadata(
+        private FixtureMetadata(
+            int partIndex,
+            ModelRendererTurbo modelPart,
             DetectedLightSurface surface,
             RollingStockLightDefinition definition,
-            String groupKey,
-            List<CommanderSurface> commanderSurfaces)
+            boolean requiresDeclaration, String legacyGroup)
         {
+            this.partIndex = partIndex;
+            this.modelPart = modelPart;
+            this.legacyGroup = legacyGroup;
+            this.requiresDeclaration = requiresDeclaration;
             this.surface = surface;
             this.definition = definition;
-            this.groupKey = groupKey;
-            this.commanderSurfaces = commanderSurfaces;
         }
     }
 }

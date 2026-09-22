@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acf_4650",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:skin18": {},
+    "bap:grey": {},
+    "bap:lightgrey": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:brown": {},
+    "bap:white": {},
+    "bap:skin19": {},
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {},
+    "bap:purple": {}
+  }
+}

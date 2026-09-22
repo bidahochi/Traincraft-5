@@ -24,9 +24,18 @@ public enum LightFixtureType
         .clientProjectorEligible(true)
         .build(),
         "A ditch light requiring its configured circuit and facing headlight; DIM emits only the source, while BRIGHT also projects."),
+    EMERGENCY_LIGHT(
+        RollingStockLightBehaviorOverride.builder()
+        .controlCircuit(RollingStockLightChannel.EMERGENCY)
+        .activationPolicy(RollingStockLightActivationPolicy.CIRCUIT_ONLY)
+        .ditchHornResponse(RollingStockDitchHornMode.NONE, null, null)
+        .function(RollingStockLightFunction.STEADY)
+        .build(),
+        "A steady light controlled by Emergency, independent of headlight state; color and geometry remain authored."),
     NUMBERBOARD(
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.AUX)
+        .color(RollingStockLightColors.WHITE)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.ILLUMINATED_SURFACE)
         .lightmapFloor(RollingStockLightDefinition.DEFAULT_NUMBERBOARD_LIGHTMAP_FLOOR)
@@ -38,6 +47,7 @@ public enum LightFixtureType
     INTERIOR_LIGHT(
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.AUX)
+        .color(RollingStockLightColors.WHITE)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.EMISSIVE_ONLY)
         .beamDimensions(0, 0)
@@ -46,23 +56,37 @@ public enum LightFixtureType
         .clientProjectorEligible(false)
         .build(),
         "Non-projecting passenger-compartment illumination controlled by the auxiliary circuit."),
+    INSTRUMENT(
+        RollingStockLightBehaviorOverride.builder()
+        .controlCircuit(RollingStockLightChannel.HEADLIGHT)
+        .color(RollingStockLightColors.WHITE)
+        .function(RollingStockLightFunction.STEADY)
+        .effect(RollingStockLightDefinition.Effect.EMISSIVE_ONLY)
+        .beamDimensions(0, 0)
+        .sourceGlow(0, 0)
+        .hotspotEnabled(false)
+        .clientProjectorEligible(false)
+        .build(),
+        "Headlight-powered instrument backlighting without projected effects."),
     BEACON(
         steadyBeacon(),
         "A steady beacon controlled by the beacon circuit."),
     COMMANDER(
-        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.commander()),
+        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.commander())
+        .merge(RollingStockLightBehaviorOverride.builder().color(RollingStockLightColors.AMBER)
+            .sourceGlowRadius(0).build()),
         "A flashing Commander-style beacon controlled by the beacon circuit."),
     PRIME_1(
-        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.prime(1)),
+        prime(1),
         "The first illuminated phase of a four-part Prime beacon."),
     PRIME_2(
-        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.prime(2)),
+        prime(2),
         "The second illuminated phase of a four-part Prime beacon."),
     PRIME_3(
-        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.prime(3)),
+        prime(3),
         "The third illuminated phase of a four-part Prime beacon."),
     PRIME_4(
-        RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.prime(4)),
+        prime(4),
         "The fourth illuminated phase of a four-part Prime beacon."),
     MARKER_LIGHT(
         RollingStockLightBehaviorOverride.marker(RollingStockLightColors.WHITE),
@@ -101,5 +125,24 @@ public enum LightFixtureType
                .hotspotEnabled(false)
                .clientProjectorEligible(false)
                .build();
+    }
+
+    private static RollingStockLightBehaviorOverride prime(int phase)
+    {
+        return RollingStockLightBehaviorOverride.beacon(RollingStockLightFunction.prime(phase))
+            .merge(RollingStockLightBehaviorOverride.builder().color(RollingStockLightColors.AMBER).build());
+    }
+
+    /** Returns the authored exterior phase, or zero for a non-Prime source. */
+    public int primePhase()
+    {
+        switch (this)
+        {
+            case PRIME_1: return 1;
+            case PRIME_2: return 2;
+            case PRIME_3: return 3;
+            case PRIME_4: return 4;
+            default: return 0;
+        }
     }
 }

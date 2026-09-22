@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:bulkheadflat",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:brown": {},
+    "tc:yellow": {},
+    "tc:green": {}
+  }
+}

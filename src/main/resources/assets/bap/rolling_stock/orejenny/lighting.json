@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:orejenny",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:black": {}
+  }
+}

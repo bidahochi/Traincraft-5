@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "8": "bap:grey",
+    "2": "bap:green",
+    "1": "bap:red",
+    "11": "bap:yellow",
+    "9": "bap:pink",
+    "16": "bap:skin16",
+    "17": "bap:skin17",
+    "12": "bap:lightblue",
+    "18": "bap:skin18"
+  },
+  "stock": "bap:natx_30600"
+}

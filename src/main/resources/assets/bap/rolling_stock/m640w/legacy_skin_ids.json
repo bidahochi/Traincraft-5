@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "3": "bap:brown",
+    "7": "bap:lightgrey",
+    "17": "bap:skin17"
+  },
+  "stock": "bap:m640w"
+}

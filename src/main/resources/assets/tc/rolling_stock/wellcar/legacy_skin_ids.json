@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "tc:blue",
+    "1": "tc:red",
+    "2": "tc:green",
+    "0": "tc:black",
+    "8": "tc:grey",
+    "6": "tc:cyan",
+    "3": "tc:brown",
+    "10": "tc:lime",
+    "12": "tc:lightblue",
+    "7": "tc:lightgrey",
+    "13": "tc:magenta",
+    "14": "tc:orange",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "15": "tc:white",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:wellcar"
+}

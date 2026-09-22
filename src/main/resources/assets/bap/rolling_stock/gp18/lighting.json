@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp18",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_534": {
+          "preset": "marker_light"
+        },
+        "marker_body_535": {
+          "preset": "marker_light"
+        },
+        "marker_body_536": {
+          "preset": "marker_light"
+        },
+        "marker_body_537": {
+          "preset": "marker_light"
+        },
+        "marker_body_538": {
+          "preset": "marker_light"
+        },
+        "marker_body_539": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_567": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:green": {},
+    "bap:blue": {},
+    "bap:pink": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:purple": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:lightgrey": {},
+    "bap:skin20": {},
+    "bap:skin21": {}
+  }
+}

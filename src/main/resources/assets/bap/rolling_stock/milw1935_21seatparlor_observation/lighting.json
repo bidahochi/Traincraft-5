@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:milw1935_21seatparlor_observation",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_541": {
+          "preset": "marker_light"
+        },
+        "marker_body_543": {
+          "preset": "marker_light"
+        },
+        "marker_body_546": {
+          "preset": "marker_light"
+        },
+        "marker_body_547": {
+          "preset": "marker_light"
+        },
+        "marker_body_548": {
+          "preset": "marker_light"
+        },
+        "marker_body_551": {
+          "preset": "marker_light"
+        },
+        "marker_body_552": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {}
+  }
+}

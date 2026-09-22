@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:king_class_locomotive",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:green": {},
+    "tc:blue": {},
+    "tc:lime": {}
+  }
+}

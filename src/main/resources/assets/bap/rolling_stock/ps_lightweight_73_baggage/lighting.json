@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_73_baggage",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:red": {},
+    "bap:magenta": {},
+    "bap:orange": {}
+  }
+}

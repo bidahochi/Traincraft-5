@@ -5,13 +5,6 @@ import train.common.api.AbstractPassengerCar;
 
 public class OB84SeatCoach extends AbstractPassengerCar
 {
-    private static final train.common.api.RollingStockSkinLightingProfiles LIGHTING_PROFILES =
-        train.common.api.RollingStockSkinLightingProfiles.builder("bap:ob84seatcoach")
-        .defaults()
-        .fixtureType(
-            train.common.api.LightFixtureType.MARKER_LIGHT,
-            "marker_two_body_676", "marker_two_body_678")
-        .build();
 
 
 	public OB84SeatCoach(World world) {
@@ -65,9 +58,4 @@ public class OB84SeatCoach extends AbstractPassengerCar
 		return "1935-1938";
 	}
 
-    @Override
-    protected train.common.api.RollingStockSkinLightingProfiles getSkinLightingProfiles()
-    {
-        return LIGHTING_PROFILES;
-    }
 }

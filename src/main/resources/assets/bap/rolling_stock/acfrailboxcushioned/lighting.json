@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:acfrailboxcushioned",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:white": {},
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:blue": {},
+    "bap:grey": {},
+    "bap:orange": {},
+    "bap:yellow": {},
+    "bap:skin16": {}
+  }
+}

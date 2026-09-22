@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:berk1225_locomotive",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "center_headlight": {
+          "preset": "headlight",
+          "sourceGlowWidthScale": 0.75,
+          "sourceGlowHeightScale": 0.75,
+          "sourceGlowRightOffset": 0.0,
+          "sourceGlowUpOffset": 0.0
+        },
+        "center_headlight_lens_1": {
+          "group": "center_headlight"
+        },
+        "center_headlight_lens_2": {
+          "group": "center_headlight"
+        },
+        "center_headlight_lens_3": {
+          "group": "center_headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:lightgrey": {}
+  }
+}

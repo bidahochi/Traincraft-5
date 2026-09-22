@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cnwbaggage_lc_diner",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_555": {
+          "preset": "marker_light"
+        },
+        "marker_body_556": {
+          "preset": "marker_light"
+        },
+        "marker_body_560": {
+          "preset": "marker_light"
+        },
+        "marker_body_561": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:black": {},
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:grey": {}
+  }
+}

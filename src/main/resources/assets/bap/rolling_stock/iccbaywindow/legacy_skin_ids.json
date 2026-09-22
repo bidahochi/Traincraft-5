@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "3": "bap:brown",
+    "1": "bap:red",
+    "16": "bap:skin16",
+    "2": "bap:green",
+    "6": "bap:cyan",
+    "17": "bap:skin17",
+    "14": "bap:orange",
+    "18": "bap:skin18",
+    "19": "bap:skin19",
+    "20": "bap:skin20",
+    "21": "bap:skin21"
+  },
+  "stock": "bap:iccbaywindow"
+}

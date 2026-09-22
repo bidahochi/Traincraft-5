@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sb23r",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_202": {
+          "preset": "marker_light"
+        },
+        "marker_body_204": {
+          "preset": "marker_light"
+        },
+        "cab_speedometer_body_241": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_243": {
+          "preset": "instrument"
+        },
+        "marker_body_245": {
+          "preset": "marker_light"
+        },
+        "marker_body_246": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:red": {},
+    "bap:cyan": {},
+    "bap:magenta": {},
+    "bap:lightgrey": {}
+  }
+}

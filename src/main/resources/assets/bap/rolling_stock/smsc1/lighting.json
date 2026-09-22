@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:smsc1",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:cyan": {}
+  }
+}

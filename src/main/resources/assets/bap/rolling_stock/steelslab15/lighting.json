@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:steelslab15",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:black": {}
+  }
+}

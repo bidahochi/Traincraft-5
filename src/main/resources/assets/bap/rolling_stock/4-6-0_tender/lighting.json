@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:4-6-0_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:skin16": {},
+    "bap:red": {},
+    "bap:yellow": {},
+    "bap:skin17": {}
+  }
+}

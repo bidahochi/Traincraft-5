@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ob_lightweight_84seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_two_body_676": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_678": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:green": {},
+    "bap:lime": {},
+    "bap:brown": {},
+    "bap:black": {},
+    "bap:white": {},
+    "bap:grey": {},
+    "bap:lightblue": {},
+    "bap:yellow": {},
+    "bap:magenta": {},
+    "bap:red": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:orange": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {}
+  }
+}

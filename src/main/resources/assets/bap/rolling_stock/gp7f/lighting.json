@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp7f",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_224": {
+          "preset": "instrument"
+        },
+        "marker_two_body_259": {
+          "preset": "marker_light"
+        },
+        "marker_two_body_288": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:blue": {},
+    "bap:skin16": {},
+    "bap:lightgrey": {},
+    "bap:skin17": {},
+    "bap:skin18": {}
+  }
+}

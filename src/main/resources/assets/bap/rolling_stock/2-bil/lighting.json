@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:2-bil",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {}
+  }
+}

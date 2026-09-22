@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "bap:yellow",
+    "2": "bap:green",
+    "14": "bap:orange",
+    "1": "bap:red",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "15": "bap:white",
+    "13": "bap:magenta",
+    "3": "bap:brown",
+    "10": "bap:lime"
+  },
+  "stock": "bap:ps_lightweight_cnwrpo60"
+}

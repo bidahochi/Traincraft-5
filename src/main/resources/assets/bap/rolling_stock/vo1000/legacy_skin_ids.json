@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "bap:green",
+    "9": "bap:pink",
+    "4": "bap:blue",
+    "12": "bap:lightblue",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:vo1000"
+}

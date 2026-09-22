@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:versa_longi",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "aaa": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:grey": {},
+    "bap:pink": {},
+    "bap:lightblue": {},
+    "bap:yellow": {}
+  }
+}

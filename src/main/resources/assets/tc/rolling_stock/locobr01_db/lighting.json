@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:locobr01_db",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

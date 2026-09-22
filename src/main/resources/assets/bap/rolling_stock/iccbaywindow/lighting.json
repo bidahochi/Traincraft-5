@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:iccbaywindow",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "front_right_marker": {
+          "preset": "marker_light"
+        },
+        "front_left_marker": {
+          "preset": "marker_light"
+        },
+        "rear_right_marker": {
+          "preset": "marker_light"
+        },
+        "rear_left_marker": {
+          "preset": "marker_light"
+        },
+        "rear_center": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_center": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "prime_1": {
+          "preset": "prime_1"
+        },
+        "prime_3": {
+          "preset": "prime_3"
+        },
+        "prime_2": {
+          "preset": "prime_2"
+        },
+        "prime_4": {
+          "preset": "prime_4"
+        },
+        "front_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "front_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_left": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        },
+        "rear_right": {
+          "fixtureType": "headlight",
+          "preset": "emissive_only"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:brown": {},
+    "bap:red": {},
+    "bap:skin16": {},
+    "bap:green": {},
+    "bap:cyan": {},
+    "bap:skin17": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {}
+  }
+}

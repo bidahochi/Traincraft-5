@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "11": "bap:yellow",
+    "7": "bap:lightgrey",
+    "2": "bap:green",
+    "10": "bap:lime",
+    "0": "bap:black",
+    "8": "bap:grey",
+    "14": "bap:orange",
+    "3": "bap:brown",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "13": "bap:magenta",
+    "16": "bap:skin16"
+  },
+  "stock": "bap:fm_h16-66"
+}

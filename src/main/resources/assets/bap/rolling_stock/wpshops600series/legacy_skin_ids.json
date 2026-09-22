@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "bap:red",
+    "3": "bap:brown",
+    "11": "bap:yellow",
+    "2": "bap:green"
+  },
+  "stock": "bap:wpshops600series"
+}

@@ -1,5 +1,7 @@
 package train.client.gui;
 
+import java.util.Collections;
+
 import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -29,12 +31,15 @@ public class GuiControlCar extends GuiContainer
     private GuiButton buttonLock;
 
     private AbstractControlCar controlCar;
+    private final RollingStockLightControlPanel lightControls;
     private Locomotive locomotiveUnderControl;
 
     public GuiControlCar(InventoryPlayer inventoryplayer, Entity entityminecart)
     {
         super(new InventoryControlCar(inventoryplayer,  (AbstractControlCar)entityminecart));
         controlCar = (AbstractControlCar) entityminecart;
+        lightControls = RollingStockLightControlPanel.forStockAtlas(controlCar, controlCar);
+        ySize = RollingStockLightControlPanel.EXPANDED_GUI_HEIGHT;
         locomotiveUnderControl = (Locomotive) Minecraft.getMinecraft().theWorld.getEntityByID(controlCar.getLocomotiveBeingControlledEntityID());
 
     }
@@ -110,33 +115,16 @@ public class GuiControlCar extends GuiContainer
         controlCar.guiTCTextFieldTrainNote = new GuiTCTextField(fontRendererObj, width/2 - 85, var2 - 39, 170,15);
         controlCar.guiTCTextFieldTrainNote.setText(controlCar.getTrainNote());
         //endregion guiTCTextFieldTrainNote
-            buttonList.add( new GuiButton(6, var1 + 108, var2 + 166, 67, 12,
-                "Front: " + controlCar.getFrontHeadlightLevel().name()));
-            buttonList.add( new GuiButton(
-                10, var1 + 176, var2 + 166, 67, 12,
-                "Rear: " + controlCar.getRearHeadlightLevel().name()));
-            buttonList.add( new GuiButton(7, var1 + 41, var2 + 166, 67, 12,
-                "Beacon: " + channelLabel(RollingStockLightChannel.BEACON)));
-            buttonList.add( new GuiButton(
-                8, var1 + 90, var2 + 178,
-                85,
-                12,
-                "Ditch Lights: " + channelLabel(RollingStockLightChannel.DITCH)));
-        buttonList.add(
-            new GuiButton(
-                11,
-                var1 + 176,
-                var2 + 178, 67, 12,
-                "Aux: " + channelLabel(RollingStockLightChannel.AUX)));
-            buttonList.add( new GuiButton(
-                12, var1 + 176, var2 + 190,
-                67, 12,
-                "Gyra: " + channelLabel(RollingStockLightChannel.GYRA)));
+        lightControls.init(buttonList, var1, var2 + RollingStockLightControlPanel.GUI_Y);
     }
 
     @Override
     protected void actionPerformed(GuiButton guibutton)
     {
+        if (lightControls.actionPerformed(guibutton))
+        {
+            return;
+        }
         switch (guibutton.id)
         {
             case 2:
@@ -162,50 +150,7 @@ public class GuiControlCar extends GuiContainer
                 TransportLockGuiHandler.handleLockButton(this, guibutton, (EntityPlayer)controlCar.riddenByEntity, controlCar, isShiftKeyDown());
             break;
 
-            case 6:
-                sendHeadlight (
-                    PacketRollingStockLightState.FRONT, controlCar.getFrontHeadlightLevel().next());
-            break;
-            case 7:
-                sendChannel (PacketRollingStockLightState.BEACON, RollingStockLightChannel.BEACON);
-            break;
-            case 8:
-                sendChannel (PacketRollingStockLightState.DITCH, RollingStockLightChannel.DITCH);
-                break;
-            case 10:
-                sendHeadlight(
-                    PacketRollingStockLightState.REAR, controlCar.getRearHeadlightLevel().next());
-                break;
-            case 11:
-                sendChannel(PacketRollingStockLightState.AUX, RollingStockLightChannel.AUX);
-                break;
-            case 12:
-                sendChannel(PacketRollingStockLightState.GYRA, RollingStockLightChannel.GYRA);
-            break;
-                }
-                }
-
-    /** Requests an explicit directional level; display state updates from server synchronization. */
-    private void sendHeadlight(byte control, RollingStockHeadlightLevel level)
-                {
-        Traincraft.rollingStockLightsChannel.sendToServer(
-            new PacketRollingStockLightState(
-                controlCar.getEntityId(), control, (byte) level.ordinal()));
-                }
-
-    /** Requests the inverse named-circuit state without mutating the client entity locally. */
-    private void sendChannel(byte control, RollingStockLightChannel channel)
-                {
-        boolean enabled = controlCar.isLightChannelEnabled(channel) == false;
-        Traincraft.rollingStockLightsChannel.sendToServer(
-            new PacketRollingStockLightState(
-                controlCar.getEntityId(), control, (byte)(enabled ? 1 : 0)));
         }
-
-    /** Returns the label state from the synchronized watcher. */
-    private String channelLabel(RollingStockLightChannel channel)
-    {
-        return controlCar.isLightChannelEnabled(channel) ? "On" : "Off";
     }
 
     @Override
@@ -289,44 +234,21 @@ public class GuiControlCar extends GuiContainer
     {
         super.drawScreen(mouseX, mouseY,par3);
         controlCar.guiTCTextFieldTrainNote.drawTextBox();
+        if (lightControls != null)
+        {
+            String tooltip = lightControls.tooltipAt(mouseX, mouseY);
+            if (tooltip != null)
+            {
+                drawHoveringText(Collections.singletonList(tooltip), mouseX, mouseY, fontRendererObj);
+            }
+        }
+
     }
 
     @Override
     public void updateScreen() {
         super.updateScreen();
-        for (Object value : buttonList)
-        {
-            if ((value instanceof GuiButton) == false)
-            {
-                continue;
-            }
-            GuiButton button = (GuiButton) value;
-            switch (button.id)
-            {
-                case 6:
-                    button.displayString = "Front: " + controlCar.getFrontHeadlightLevel().name();
-                    break;
-                case 10:
-                    button.displayString = "Rear: " + controlCar.getRearHeadlightLevel().name();
-                    break;
-                case 7:
-                    button.displayString =
-                        "Beacon: " + channelLabel(RollingStockLightChannel.BEACON);
-                    break;
-                case 8:
-                    button.displayString =
-                        "Ditch Lights: " + channelLabel(RollingStockLightChannel.DITCH);
-                    break;
-                case 11:
-                    button.displayString = "Aux: " + channelLabel(RollingStockLightChannel.AUX);
-                    break;
-                case 12:
-                    button.displayString = "Gyra: " + channelLabel(RollingStockLightChannel.GYRA);
-                    break;
-                default:
-                    break;
-            }
-        }
+        lightControls.update();
         if (controlCar.guiTCTextFieldTrainNote.isFocused()) {
             controlCar.guiTCTextFieldTrainNote.updateCursorCounter();
         }
@@ -355,7 +277,7 @@ public class GuiControlCar extends GuiContainer
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int t, int g) {
-        String controlCarGUIFilePath = Info.guiPrefix + "gui_loco.png";
+        String controlCarGUIFilePath = Info.guiPrefix + "gui_tram.png";
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.renderEngine.bindTexture(new ResourceLocation(Info.resourceLocation, controlCarGUIFilePath));
@@ -372,6 +294,8 @@ public class GuiControlCar extends GuiContainer
         for (int k1 = controlCar.numCargoSlots2; k1 < 5; k1++) {
             drawTexturedModalRect(j + 79 + 18 * k1, k + 53, 190, 0, 18, 18);
         }
+
+        lightControls.draw(mc, zLevel);
 
         if (locomotiveUnderControl != null)
         {

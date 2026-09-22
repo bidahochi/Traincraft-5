@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:cf7_angle",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_39": {
+          "preset": "marker_light"
+        },
+        "marker_body_41": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:skin29": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:orange": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:black": {},
+    "bap:magenta": {},
+    "bap:purple": {},
+    "bap:lightblue": {},
+    "bap:skin27": {},
+    "bap:skin33": {},
+    "bap:skin34": {},
+    "bap:skin38": {}
+  }
+}

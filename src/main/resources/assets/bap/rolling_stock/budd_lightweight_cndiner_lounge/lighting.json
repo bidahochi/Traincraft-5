@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_lightweight_cndiner_lounge",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
+  }
+}

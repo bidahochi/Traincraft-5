@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_ceirpo15_baggage_38seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:red": {}
+  }
+}

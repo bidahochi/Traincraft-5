@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:sb36x",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "cab_speedometer_body_216": {
+          "preset": "instrument"
+        },
+        "cab_speedometer_body_218": {
+          "preset": "instrument"
+        },
+        "marker_body_220": {
+          "preset": "marker_light"
+        },
+        "marker_body_221": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:lightblue": {},
+    "bap:cyan": {},
+    "bap:purple": {},
+    "bap:green": {},
+    "bap:orange": {},
+    "bap:pink": {},
+    "bap:red": {},
+    "bap:magenta": {},
+    "bap:yellow": {},
+    "bap:white": {}
+  }
+}

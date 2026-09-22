@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:4-4-0-loco_tender",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {},
+    "tc:white": {},
+    "tc:brown": {},
+    "tc:blue": {},
+    "tc:green": {},
+    "tc:red": {},
+    "tc:purple": {}
+  }
+}

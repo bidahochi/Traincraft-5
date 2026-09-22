@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_ceidiner",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:cyan": {},
+    "bap:red": {}
+  }
+}

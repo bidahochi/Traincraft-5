@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "4": "bap:blue",
+    "15": "bap:white",
+    "0": "bap:black",
+    "2": "bap:green"
+  },
+  "stock": "bap:boxcab"
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ps_lightweight_cei60seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:orange": {},
+    "bap:cyan": {},
+    "bap:lightblue": {},
+    "bap:purple": {},
+    "bap:yellow": {},
+    "bap:pink": {},
+    "bap:grey": {},
+    "bap:green": {},
+    "bap:lightgrey": {},
+    "bap:black": {},
+    "bap:lime": {},
+    "bap:brown": {},
+    "bap:magenta": {},
+    "bap:red": {}
+  }
+}

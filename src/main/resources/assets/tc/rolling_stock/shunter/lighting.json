@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:shunter",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:blue": {},
+    "tc:green": {},
+    "tc:red": {},
+    "tc:black": {},
+    "tc:cyan": {}
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:gp49",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_164": {
+          "preset": "marker_light"
+        },
+        "marker_body_165": {
+          "preset": "marker_light"
+        },
+        "marker_body_189": {
+          "preset": "marker_light"
+        },
+        "marker_body_190": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:blue": {},
+    "bap:lightgrey": {},
+    "bap:purple": {}
+  }
+}

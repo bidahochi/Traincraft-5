@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:budd_lightweight_atsf52seatcoach",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:orange": {},
+    "bap:green": {},
+    "bap:pink": {},
+    "bap:blue": {},
+    "bap:lime": {},
+    "bap:purple": {},
+    "bap:brown": {},
+    "bap:grey": {}
+  }
+}

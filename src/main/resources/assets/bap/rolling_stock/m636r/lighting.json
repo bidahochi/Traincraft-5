@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:m636r",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "marker_body_105": {
+          "preset": "marker_light"
+        },
+        "marker_body_116": {
+          "preset": "marker_light"
+        },
+        "marker_cn_qcm_body_304": {
+          "preset": "marker_light"
+        },
+        "marker_cn_qcm_body_305": {
+          "preset": "marker_light"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:grey": {},
+    "bap:lightgrey": {}
+  }
+}

@@ -2,6 +2,8 @@ package tmt;
 
 import net.minecraft.entity.Entity;
 import train.common.api.AbstractTrains;
+import train.common.api.EntityRollingStock;
+import train.client.renderhelper.ModelRenderHelper;
 
 /**
 * Converter to use Flansmod-Type vehicle models.
@@ -55,29 +57,45 @@ public class ModelConverter extends ModelBase {
 	}
 	@Override
 	public void render(Entity entity, float f0, float f1, float f2, float f3, float f4, float scale){
-		render(bodyModel, scale,false);
-		render(model, scale,false);
-		render(bodyDoorCloseModel, scale,false);
-		render(turretModel, scale,false);
-		render(barrelModel, scale,false);
-		render(frontWheelModel, scale,false);
-		render(backWheelModel, scale,false);
-		render(leftFrontWheelModel, scale,false);
-		render(rightFrontWheelModel, scale,false);
-		render(leftBackWheelModel, scale,false);
-		render(rightBackWheelModel, scale,false);
-		render(rightTrackModel, scale,false);
-		render(leftTrackModel, scale,false);
-		render(rightTrackWheelModels, scale,false);
-		render(leftTrackWheelModels, scale,false);
-		render(trailerModel, scale,false);
-		render(steeringWheelModel, scale,false);
+		renderParts(bodyModel, entity, scale);
+		renderParts(model, entity, scale);
+		renderParts(bodyDoorCloseModel, entity, scale);
+		renderParts(turretModel, entity, scale);
+		renderParts(barrelModel, entity, scale);
+		renderParts(frontWheelModel, entity, scale);
+		renderParts(backWheelModel, entity, scale);
+		renderParts(leftFrontWheelModel, entity, scale);
+		renderParts(rightFrontWheelModel, entity, scale);
+		renderParts(leftBackWheelModel, entity, scale);
+		renderParts(rightBackWheelModel, entity, scale);
+		renderParts(rightTrackModel, entity, scale);
+		renderParts(leftTrackModel, entity, scale);
+		renderParts(rightTrackWheelModels, entity, scale);
+		renderParts(leftTrackWheelModels, entity, scale);
+		renderParts(trailerModel, entity, scale);
+		renderParts(steeringWheelModel, entity, scale);
 
+	}
+
+	/** Renders a group with automatic rolling-stock lighting, including the legacy setting. */
+	protected void renderParts(ModelRendererTurbo[] parts, Entity entity, float scale) {
+		if (parts.length == 0) {
+			return;
+		}
+		if (entity instanceof EntityRollingStock) {
+			ModelRenderHelper.renderRollingStockModel(parts, entity, scale);
+		} else {
+			render(parts, scale, false);
+		}
 	}
 
 	@Override
 	public void render(Object type, Entity ent){
-		render();
+		if (ent instanceof EntityRollingStock) {
+			render(ent, 0, 0, 0, 0, 0, 0.0625F);
+		} else {
+			render();
+		}
 	}
 
 	public void translateAll(float x, float y, float z){

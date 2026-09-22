@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stock": "tc:class85",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "tc:black": {}
+  }
+}

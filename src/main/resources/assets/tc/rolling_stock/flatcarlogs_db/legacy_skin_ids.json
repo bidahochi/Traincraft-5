@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "1": "tc:red",
+    "2": "tc:green",
+    "0": "tc:black",
+    "4": "tc:blue",
+    "3": "tc:brown",
+    "6": "tc:cyan",
+    "12": "tc:lightblue",
+    "7": "tc:lightgrey",
+    "10": "tc:lime",
+    "13": "tc:magenta",
+    "14": "tc:orange",
+    "9": "tc:pink",
+    "5": "tc:purple",
+    "15": "tc:white",
+    "11": "tc:yellow"
+  },
+  "stock": "tc:flatcarlogs_db"
+}

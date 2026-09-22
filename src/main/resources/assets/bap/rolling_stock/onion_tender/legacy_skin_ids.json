@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "0": "bap:black",
+    "14": "bap:orange",
+    "4": "bap:blue",
+    "8": "bap:grey",
+    "1": "bap:red",
+    "11": "bap:yellow",
+    "15": "bap:white",
+    "3": "bap:brown",
+    "7": "bap:lightgrey",
+    "9": "bap:pink"
+  },
+  "stock": "bap:onion_tender"
+}

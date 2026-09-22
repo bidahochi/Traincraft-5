@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "13": "bap:magenta",
+    "14": "bap:orange",
+    "11": "bap:yellow",
+    "8": "bap:grey",
+    "7": "bap:lightgrey",
+    "5": "bap:purple",
+    "1": "bap:red",
+    "9": "bap:pink",
+    "27": "bap:skin27",
+    "37": "bap:skin37",
+    "0": "bap:black",
+    "28": "bap:skin28",
+    "29": "bap:skin29"
+  },
+  "stock": "bap:emde7b"
+}

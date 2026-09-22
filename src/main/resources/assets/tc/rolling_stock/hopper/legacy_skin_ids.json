@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "2": "tc:green",
+    "15": "tc:white"
+  },
+  "stock": "tc:hopper"
+}

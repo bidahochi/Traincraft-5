@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "legacyColors": {
+    "11": "tc:yellow",
+    "15": "tc:white",
+    "4": "tc:blue",
+    "14": "tc:orange",
+    "12": "tc:lightblue"
+  },
+  "stock": "tc:cd742"
+}

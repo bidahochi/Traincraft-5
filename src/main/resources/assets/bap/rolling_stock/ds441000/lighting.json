@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:ds441000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {}
+    }
+  },
+  "skins": {
+    "bap:yellow": {},
+    "bap:green": {},
+    "bap:grey": {},
+    "bap:black": {},
+    "bap:orange": {},
+    "bap:skin20": {}
+  }
+}
