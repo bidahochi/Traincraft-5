@@ -13,7 +13,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import org.lwjgl.input.Keyboard;
+import train.client.core.handlers.SafeKeyboard;
 import train.common.Traincraft;
 import train.common.core.handlers.ConfigHandler;
 import train.common.core.network.PacketKeyPress;
@@ -220,37 +220,34 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         if (worldObj.isRemote) {
             if (ticksExisted % 2 == 0 && !Minecraft.getMinecraft().ingameGUI.getChatGUI().getChatOpen()) {
 
-                if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode())
+                if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode())
                         && !forwardPressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_PRESS_KEY));
                     forwardPressed = true;
                 } else
-                { if (Keyboard
-                        .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode()) == false
+                { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode()) == false
                         && forwardPressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_RELEASE_KEY));
                     forwardPressed = false;
                 }
                 }
-                if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode())
+                if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode())
                         && !backwardPressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_PRESS_KEY));
                     backwardPressed = true;
                 } else
-                { if (Keyboard
-                        .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode()) == false
+                { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode()) == false
                         && backwardPressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_RELEASE_KEY));
                     backwardPressed = false;
                 }
                 }
-                if (Keyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode())
+                if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode())
                         && !brakePressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_PRESS_KEY));
                     brakePressed = true;
                 } else
-                { if (Keyboard
-                        .isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode()) == false
+                { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode()) == false
                         && brakePressed) {
                     Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_RELEASE_KEY));
                     brakePressed = false;
