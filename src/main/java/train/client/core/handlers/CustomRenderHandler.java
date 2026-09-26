@@ -737,6 +737,7 @@ public class CustomRenderHandler
                 divergingMainOffset = 10;
                 divergingSideOffset = 10;
                 break;
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
             case CORE_10x2_CROSSOVER_SWITCH:
                 TrackRenderRouteCache.renderPreview(track, enumCoreTrack.getLeftRightVariant(isLeftTurn), facing, 0, 0, 0, previewRed, previewGreen, previewBlue, previewAlpha);
                 return;

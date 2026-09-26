@@ -42,6 +42,7 @@ public enum EnumTracks implements ITrackDefinition
     VERY_LARGE_SWITCH("VERY_LARGE_SWITCH", NORMAL, CORE_11x11_SWITCH, TrackItemIDs.tcRailVeryLargeSwitch),
 
     CROSSOVER_SWITCH_10X2("CROSSOVER_SWITCH_10X2", NORMAL, CORE_10x2_CROSSOVER_SWITCH, TrackItemIDs.tcRailCrossoverSwitch10x2),
+    DIAGONAL_45DEGREE_4X3_SWITCH("DIAGONAL_45DEGREE_4x3_SWITCH", NORMAL, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRail4x3Diagonal45DegreeSwitch),
 
     MEDIUM_PARALLEL_SWITCH("MEDIUM_PARALLEL_SWITCH", NORMAL, CORE_4x11_PARALLEL_SWITCH, TrackItemIDs.tcRailMediumParallelSwitch),
 
@@ -62,6 +63,7 @@ public enum EnumTracks implements ITrackDefinition
     MEDIUM_45DEGREE_SWITCH("MEDIUM_45DEGREE_SWITCH", NORMAL, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRailMedium45DegreeSwitch),
 
     LARGE_45DEGREE_SWITCH("LARGE_45DEGREE_SWITCH", NORMAL, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRailLarge45DegreeSwitch),
+
 
     TWO_WAYS_CROSSING("TWO_WAYS_CROSSING", NORMAL, CORE_TWO_WAYS_CROSSING, TrackItemIDs.tcRailTwoWaysCrossing),
     DIAGONAL_TWO_WAYS_CROSSING("DIAGONAL_TWO_WAYS_CROSSING", NORMAL, CORE_DIAGONAL_TWO_WAYS_CROSSING, TrackItemIDs.tcRailTwoWaysCrossing),
@@ -172,6 +174,7 @@ public enum EnumTracks implements ITrackDefinition
     EMBEDDED_MEDIUM_45DEGREE_SWITCH("EMBEDDED_MEDIUM_45DEGREE_SWITCH", EMBEDDED, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRailEmbeddedMedium45DegreeSwitch),
 
     EMBEDDED_LARGE_45DEGREE_SWITCH("EMBEDDED_LARGE_45DEGREE_SWITCH", EMBEDDED, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRailEmbeddedLarge45DegreeSwitch),
+    EMBEDDED_DIAGONAL_45DEGREE_4X3_SWITCH("EMBEDDED_DIAGONAL_45DEGREE_4x3_SWITCH", EMBEDDED, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRailEmbedded4x3Diagonal45DegreeSwitch),
 
     EMBEDDED_SLOPE_1X3_DYNAMIC("EMBEDDED_SLOPE_1X3_DYNAMIC", EMBEDDED, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRailEmbedded1x3SlopeDynamic),
     EMBEDDED_SLOPE_DYNAMIC("EMBEDDED_SLOPE_DYNAMIC", EMBEDDED, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRailEmbeddedSlopeDynamic),
@@ -260,6 +263,7 @@ public enum EnumTracks implements ITrackDefinition
 //
     CONCRETE_TYPE1_MEDIUM_45DEGREE_SWITCH("CONCRETE_TYPE1_MEDIUM_45DEGREE_SWITCH", CONCRETE_TYPE1, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE1_Medium45DegreeSwitch),
     CONCRETE_TYPE1_LARGE_45DEGREE_SWITCH("CONCRETE_TYPE1_LARGE_45DEGREE_SWITCH", CONCRETE_TYPE1, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE1_Large45DegreeSwitch),
+    CONCRETE_TYPE1_DIAGONAL_45DEGREE_4X3_SWITCH("CONCRETE_TYPE1_DIAGONAL_45DEGREE_4x3_SWITCH", CONCRETE_TYPE1, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE1_4x3Diagonal45DegreeSwitch),
 //
     CONCRETE_TYPE1_SLOPE_1X3_DYNAMIC("CONCRETE_TYPE1_SLOPE_1X3_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_1x3SlopeDynamic),
     CONCRETE_TYPE1_SLOPE_DYNAMIC("CONCRETE_TYPE1_SLOPE_DYNAMIC", CONCRETE_TYPE1, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE1_SlopeDynamic),
@@ -335,6 +339,7 @@ public enum EnumTracks implements ITrackDefinition
     CONCRETE_TYPE2_MEDIUM_45DEGREE_SWITCH("CONCRETE_TYPE2_MEDIUM_45DEGREE_SWITCH", CONCRETE_TYPE2, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE2_Medium45DegreeSwitch),
     //
     CONCRETE_TYPE2_LARGE_45DEGREE_SWITCH("CONCRETE_TYPE2_LARGE_45DEGREE_SWITCH", CONCRETE_TYPE2, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE2_Large45DegreeSwitch),
+    CONCRETE_TYPE2_DIAGONAL_45DEGREE_4X3_SWITCH("CONCRETE_TYPE2_DIAGONAL_45DEGREE_4x3_SWITCH", CONCRETE_TYPE2, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRail_CONCRETE_TYPE2_4x3Diagonal45DegreeSwitch),
     //
     CONCRETE_TYPE2_SLOPE_1X3_DYNAMIC("CONCRETE_TYPE2_SLOPE_1X3_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_1x3SlopeDynamic),
     CONCRETE_TYPE2_SLOPE_DYNAMIC("CONCRETE_TYPE2_SLOPE_DYNAMIC", CONCRETE_TYPE2, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_CONCRETE_TYPE2_SlopeDynamic),
@@ -404,6 +409,7 @@ public enum EnumTracks implements ITrackDefinition
 
     WOOD_TYPE1_MEDIUM_45DEGREE_SWITCH("WOOD_TYPE1_MEDIUM_45DEGREE_SWITCH", TREATED_WOOD_TYPE1, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_Medium45DegreeSwitch),
     WOOD_TYPE1_LARGE_45DEGREE_SWITCH("WOOD_TYPE1_LARGE_45DEGREE_SWITCH", TREATED_WOOD_TYPE1, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_Large45DegreeSwitch),
+    WOOD_TYPE1_DIAGONAL_45DEGREE_4X3_SWITCH("WOOD_TYPE1_DIAGONAL_45DEGREE_4x3_SWITCH", TREATED_WOOD_TYPE1, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE1_4x3Diagonal45DegreeSwitch),
     //
     WOOD_TYPE1_SLOPE_1X3_DYNAMIC("WOOD_TYPE1_SLOPE_1X3_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_1x3SlopeDynamic),
     WOOD_TYPE1_SLOPE_DYNAMIC("WOOD_TYPE1_SLOPE_DYNAMIC", TREATED_WOOD_TYPE1, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE1_SlopeDynamic),
@@ -471,6 +477,7 @@ public enum EnumTracks implements ITrackDefinition
     WOOD_TYPE2_MEDIUM_45DEGREE_SWITCH("WOOD_TYPE2_MEDIUM_45DEGREE_SWITCH", WOOD_TYPE2, CORE_3x5_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE2_Medium45DegreeSwitch),
 
     WOOD_TYPE2_LARGE_45DEGREE_SWITCH("WOOD_TYPE2_LARGE_45DEGREE_SWITCH", WOOD_TYPE2, CORE_4x8_45DEGREE_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE2_Large45DegreeSwitch),
+    WOOD_TYPE2_DIAGONAL_45DEGREE_4X3_SWITCH("WOOD_TYPE2_DIAGONAL_45DEGREE_4x3_SWITCH", WOOD_TYPE2, CORE_DIAGONAL_45DEGREE_4X3_SWITCH, TrackItemIDs.tcRail_WOOD_TYPE2_4x3Diagonal45DegreeSwitch),
     //
     WOOD_TYPE2_SLOPE_1X3_DYNAMIC("WOOD_TYPE2_SLOPE_1X3_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_3_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_1x3SlopeDynamic),
     WOOD_TYPE2_SLOPE_DYNAMIC("WOOD_TYPE2_SLOPE_DYNAMIC", WOOD_TYPE2, DYNAMIC, CORE_6_SLOPE, TrackItemIDs.tcRail_WOOD_TYPE2_SlopeDynamic),
@@ -675,8 +682,9 @@ public enum EnumTracks implements ITrackDefinition
                         break;
                     case CORE_S_CURVE_20x2:
                     case CORE_10x2_CROSSOVER_SWITCH:
-                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_LEFT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
-                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel() + "_RIGHT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem(), track.getPlacementType());
+                    case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+                        newAutoGenTrackOne = new TrackDefinition(track.getLabel() + "_LEFT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem());
+                        newAutoGenTrackTwo = new TrackDefinition(track.getLabel() + "_RIGHT", track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_R"), track.getItem());
                         break;
                     case CORE_DIAMOND_CROSSING:
                         newAutoGenTrackOne = new TrackDefinition(track.getLabel().replace("DIAMOND", "LEFT_DIAMOND"), track.getRailType(), track.getVariant(), EnumCoreTrack.valueOf(track.getCoreTrack() + "_L"), track.getItem(), track.getPlacementType());
@@ -1083,6 +1091,9 @@ public enum EnumTracks implements ITrackDefinition
                 {
                     return new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0},{5,0},{6,0},{3, 1}, {4, 1}, {5, 1}, {6, 1}, {5, 2}, {6, 2}, {7, 2}, {6, 3},};
                 }
+            /** Diagonal 45 Degree Switches */
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+                return new int[][]{{0,0}, {1, 0}, {2, 0}, {1,1}, {2,1}, {3,1}, {2,2}};
             /** Crossing */
             case CORE_TWO_WAYS_CROSSING:
                 return new int[][] { {0,0}, {1,0}, {2,0}, {1,1}, {1,-1} };
@@ -1111,6 +1122,9 @@ public enum EnumTracks implements ITrackDefinition
             case CORE_3x5_45DEGREE_SWITCH:
             case CORE_3x5_45DEGREE_SWITCH_L:
             case CORE_3x5_45DEGREE_SWITCH_R:
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L:
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R:
                 return 2;
 
             case CORE_4x11_PARALLEL_SWITCH:

@@ -27,6 +27,10 @@ public abstract class AbstractSwitchTCTrack extends AbstractTrackModel
     protected int listCrossover10x2SwitchActive = -1;
     protected int listCrossover10x2SwitchInactive = -1;
 
+
+    protected int listDiagonal4x3SwitchActive = -1;
+    protected int listDiagonal4x3SwitchInactive = -1;
+
     protected final void bake(String rotation)
     {
         listMediumSwitchActive = getDisplayList("track/switch/active/4x4_" + rotation + ".obj");
@@ -45,6 +49,8 @@ public abstract class AbstractSwitchTCTrack extends AbstractTrackModel
         listVeryLargeSwitchInactive = getDisplayList("track/switch/inactive/11x11_" + rotation + ".obj");
         listCrossover10x2SwitchActive = getDisplayList("track/switch/active/crossover_10x2_" + rotation + ".obj");
         listCrossover10x2SwitchInactive = getDisplayList("track/switch/inactive/crossover_10x2_" + rotation + ".obj");
+        listDiagonal4x3SwitchActive = getDisplayList("track/switch/active/45/4x3_" + rotation + ".obj");
+        listDiagonal4x3SwitchInactive = getDisplayList("track/switch/inactive/45/4x3_" + rotation + ".obj");
     }
     
    public final void renderMediumActive()
@@ -107,12 +113,22 @@ public abstract class AbstractSwitchTCTrack extends AbstractTrackModel
         GL11.glCallList(listLarge45degreeSwitchInActive);
     }
 
-   public final void renderCrossover10x2Active()
+    public final void renderCrossover10x2Active()
     {
         GL11.glCallList(listCrossover10x2SwitchActive);
     }
+
    public final void renderCrossover10x2Inactive()
     {
         GL11.glCallList(listCrossover10x2SwitchInactive);
+    }
+
+
+    public final void renderDiagonal4x3Active() {
+        GL11.glCallList(listDiagonal4x3SwitchActive);
+    }
+
+    public final void renderDiagonal4x3Inactive() {
+        GL11.glCallList(listDiagonal4x3SwitchInactive);
     }
 }

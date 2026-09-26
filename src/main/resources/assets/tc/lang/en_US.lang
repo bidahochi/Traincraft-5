@@ -505,6 +505,7 @@ item.tc:tcRailLargeParallelSwitch.name=4x17 Parallel Switch
 item.tc:tcRailMedium45DegreeSwitch.name=3x5 45 Degree Switch
 item.tc:tcRailLarge45DegreeSwitch.name=4x8 45 Degree Switch
 item.tc:tcRailCrossoverSwitch10x2.name=10x3 Crossover Switch
+item.tc:tcRail4x3Diagonal45DegreeSwitch.name=4x3 Diagonal Switch
 
 item.tc:tcRailTwoWaysCrossing.name=Plus Crossing
 item.tc:tcRailDiamondCrossing.name=X Crossing
@@ -586,6 +587,7 @@ item.tc:tcRailEmbeddedLargeParallelSwitch.name=4x17 Sleeperless Parallel Switch
 item.tc:tcRailEmbeddedMedium45DegreeSwitch.name=3x5 Sleeperless 45 Degree Switch
 item.tc:tcRailEmbeddedLarge45DegreeSwitch.name=4x8 Sleeperless 45 Degree Switch
 item.tc:tcRailEmbeddedCrossoverSwitch10x2.name=10x3 Sleeperless Crossover Switch
+item.tc:tcRailEmbedded4x3Diagonal45DegreeSwitch.name=4x3 Sleeperless Diagonal Switch
 
 item.tc:tcRailEmbeddedTwoWaysCrossing.name=Sleeperless Plus Crossing
 item.tc:tcRailEmbeddedDiamondCrossing.name=Sleeperless X Crossing
@@ -631,6 +633,7 @@ item.tc:tcRail_CONCRETE_TYPE1_LargeParallelSwitch.name=4x17 Grey Concrete Parall
 item.tc:tcRail_CONCRETE_TYPE1_Medium45DegreeSwitch.name=3x5 Grey Concrete 45 Degree Switch
 item.tc:tcRail_CONCRETE_TYPE1_Large45DegreeSwitch.name=4x8 Grey Concrete 45 Degree Switch
 item.tc:tcRail_CONCRETE_TYPE1_CrossoverSwitch10x2.name=10x3 Grey Concrete Crossover Switch
+item.tc:tcRail_CONCRETE_TYPE1_4x3Diagonal45DegreeSwitch.name=4x3 Grey Concrete Diagonal Switch
 
 item.tc:tcRail_CONCRETE_TYPE1_TwoWaysCrossing.name=Grey Concrete Plus Crossing
 item.tc:tcRail_CONCRETE_TYPE1_DiamondCrossing.name=Grey Concrete X Crossing
@@ -676,6 +679,7 @@ item.tc:tcRail_CONCRETE_TYPE2_LargeParallelSwitch.name=4x17 Weathered Concrete P
 item.tc:tcRail_CONCRETE_TYPE2_Medium45DegreeSwitch.name=3x5 Weathered Concrete 45 Degree Switch
 item.tc:tcRail_CONCRETE_TYPE2_Large45DegreeSwitch.name=4x8 Weathered Concrete 45 Degree Switch
 item.tc:tcRail_CONCRETE_TYPE2_CrossoverSwitch10x2.name=10x3 Weathered Concrete Crossover Switch
+item.tc:tcRail_CONCRETE_TYPE2_4x3Diagonal45DegreeSwitch.name=4x3 Weathered Concrete Diagonal Switch
 
 item.tc:tcRail_CONCRETE_TYPE2_TwoWaysCrossing.name=Weathered Concrete Plus Crossing
 item.tc:tcRail_CONCRETE_TYPE2_DiamondCrossing.name=Weathered Concrete X Crossing
@@ -721,6 +725,7 @@ item.tc:tcRail_WOOD_TYPE1_LargeParallelSwitch.name=4x17 Treated Wood Parallel Sw
 item.tc:tcRail_WOOD_TYPE1_Medium45DegreeSwitch.name=3x5 Treated Wood 45 Degree Switch
 item.tc:tcRail_WOOD_TYPE1_Large45DegreeSwitch.name=4x8 Treated Wood 45 Degree Switch
 item.tc:tcRail_WOOD_TYPE1_CrossoverSwitch10x2.name=10x3 Treated Wood Crossover Switch
+item.tc:tcRail_WOOD_TYPE1_4x3Diagonal45DegreeSwitch.name=4x3 Treated Wood Diagonal Switch
 
 item.tc:tcRail_WOOD_TYPE1_TwoWaysCrossing.name=Treated Wood Plus Crossing
 item.tc:tcRail_WOOD_TYPE1_DiamondCrossing.name=Treated Wood X Crossing
@@ -766,6 +771,7 @@ item.tc:tcRail_WOOD_TYPE2_LargeParallelSwitch.name=4x17 Spruce Wood Parallel Swi
 item.tc:tcRail_WOOD_TYPE2_Medium45DegreeSwitch.name=3x5 Spruce Wood 45 Degree Switch
 item.tc:tcRail_WOOD_TYPE2_Large45DegreeSwitch.name=4x8 Spruce Wood 45 Degree Switch
 item.tc:tcRail_WOOD_TYPE2_CrossoverSwitch10x2.name=10x3 Spruce Wood Crossover Switch
+item.tc:tcRail_WOOD_TYPE2_4x3Diagonal45DegreeSwitch.name=4x3 Spruce Wood Diagonal Switch
 
 item.tc:tcRail_WOOD_TYPE2_TwoWaysCrossing.name=Spruce Wood Plus Crossing
 item.tc:tcRail_WOOD_TYPE2_DiamondCrossing.name=Spruce Wood X Crossing

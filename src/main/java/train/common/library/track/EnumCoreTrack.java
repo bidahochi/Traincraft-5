@@ -143,6 +143,13 @@ public enum EnumCoreTrack
     CORE_4x8_45DEGREE_SWITCH_R(TCRailTypes.RailTypes.SWITCH),
     // endregion 45 Switches
 
+    // region 45-offset 45 Switches
+    CORE_DIAGONAL_45DEGREE_4X3_SWITCH(TCRailTypes.RailTypes.SWITCH),
+    CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L(TCRailTypes.RailTypes.SWITCH),
+    CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R(TCRailTypes.RailTypes.SWITCH),
+
+    // endregion 45-offset 45 Switches
+
     // region Slopes
     CORE_3_SLOPE(TCRailTypes.RailTypes.SLOPE),
     CORE_6_SLOPE(TCRailTypes.RailTypes.SLOPE),

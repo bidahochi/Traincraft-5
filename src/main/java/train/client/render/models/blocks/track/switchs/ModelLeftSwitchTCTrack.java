@@ -85,6 +85,15 @@ public class ModelLeftSwitchTCTrack extends AbstractSwitchTCTrack
 		GL11.glPopMatrix();
 	}
 
+	public void renderDiagonal4x3(RailVariants railVariant, int facing, boolean active, double x, double y, double z, float r, float g, float b, float a)
+	{
+		beginRender(railVariant, x, y, z, r, g, b, a);
+		applyDiagonal4x3Transform(facing);
+		if (active) this.renderDiagonal4x3Active();
+		else this.renderDiagonal4x3Inactive();
+		GL11.glPopMatrix();
+	}
+
 	private void beginRender(RailVariants railVariant, double x, double y, double z, float r, float g, float b, float a)
 	{
 		GL11.glPushMatrix();
@@ -182,5 +191,20 @@ public class ModelLeftSwitchTCTrack extends AbstractSwitchTCTrack
 			case 0: GL11.glRotatef(180, 0, 1, 0); break;
 		}
 		GL11.glTranslatef(-0.5f, 0.0f, 0.5f);
+	}
+
+
+	private void applyDiagonal4x3Transform(int facing)
+	{
+		switch (facing)
+		{
+			case 3: GL11.glRotatef(180, 0, 1, 0); break;
+			case 2: GL11.glRotatef(270, 0, 1, 0); break;
+			case 0: GL11.glRotatef(90, 0, 1, 0); break;
+			case 4: GL11.glRotatef(90, 0, 1, 0); break;
+			case 6: GL11.glRotatef(-90, 0, 1, 0); break;
+			case 7: GL11.glRotatef(180, 0, 1, 0); break;
+		}
+		GL11.glTranslatef(0.5f, 0.0f, 0.5f);
 	}
 }

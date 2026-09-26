@@ -753,43 +753,89 @@ public class BogiePathfinding  extends EntityMinecart implements IMinecart{
         motionZ = vz2;
     }
     private boolean shouldIgnoreSwitch(TileTCRail tile, int i, int j, int k, int meta) {
+
+        final double eps = 0.01;
+
         if (tile != null
                 && (PathFindingHelper.TurnTracksSwitchCheck.contains(tile.getCoreType()))
                 && tile.canTypeBeModifiedBySwitch) {
-            if (meta == 2) {
-                if (motionZ > 0 && Math.abs(motionX) < 0.01) {
-                    TileEntity tile2 = worldObj.getTileEntity(i, j, k + 1);
-                    if (tile2 != null && tile2 instanceof TileTCRail) {
-                        ((TileTCRail) tile2).setSwitchState(false, true);
+            if (!PathFindingHelper.diagonalSwitchCheck.contains(tile.getCoreType())) {
+                if (meta == 2) {
+                    if (motionZ > 0 && Math.abs(motionX) < eps) {
+                        TileEntity tile2 = worldObj.getTileEntity(i, j, k + 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
                     }
-                    return true;
+                }
+                if (meta == 0) {
+                    if (motionZ < 0 && Math.abs(motionX) < eps) {
+                        TileEntity tile2 = worldObj.getTileEntity(i, j, k - 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
+                    }
+                }
+                if (meta == 1) {
+                    if (Math.abs(motionZ) < eps && motionX > 0) {
+                        TileEntity tile2 = worldObj.getTileEntity(i + 1, j, k);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
+                    }
+                }
+                if (meta == 3) {
+                    if (Math.abs(motionZ) < eps && motionX < 0) {
+                        TileEntity tile2 = worldObj.getTileEntity(i - 1, j, k);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
+                    }
                 }
             }
-            if (meta == 0) {
-                if (motionZ < 0 && Math.abs(motionX) < 0.01) {
-                    TileEntity tile2 = worldObj.getTileEntity(i, j, k - 1);
-                    if (tile2 != null && tile2 instanceof TileTCRail) {
-                        ((TileTCRail) tile2).setSwitchState(false, true);
+
+            // Diagonals
+            if (PathFindingHelper.diagonalSwitchCheck.contains(tile.getCoreType())) {
+                if (meta == 4) {
+                    if (motionX > eps && motionZ < -eps) {
+                        TileEntity tile2 = worldObj.getTileEntity(i + 1, j, k - 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            // ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
                     }
-                    return true;
                 }
-            }
-            if (meta == 1) {
-                if (Math.abs(motionZ) < 0.01 && motionX > 0) {
-                    TileEntity tile2 = worldObj.getTileEntity(i + 1, j, k);
-                    if (tile2 != null && tile2 instanceof TileTCRail) {
-                        ((TileTCRail) tile2).setSwitchState(false, true);
+                if (meta == 5) {
+                    if (motionX > eps && motionZ > eps) {
+                        TileEntity tile2 = worldObj.getTileEntity(i + 1, j, k + 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            // ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
                     }
-                    return true;
                 }
-            }
-            if (meta == 3) {
-                if (Math.abs(motionZ) < 0.01 && motionX < 0) {
-                    TileEntity tile2 = worldObj.getTileEntity(i - 1, j, k);
-                    if (tile2 != null && tile2 instanceof TileTCRail) {
-                        ((TileTCRail) tile2).setSwitchState(false, true);
+                if (meta == 6) {
+                    if (motionX < -eps && motionZ > eps) {
+                        TileEntity tile2 = worldObj.getTileEntity(i - 1, j, k + 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            // ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
                     }
-                    return true;
+                }
+                if (meta == 7) {
+                    if (motionX < -eps && motionZ < -eps
+                            && PathFindingHelper.diagonalSwitchCheck.contains(tile.getCoreType())) {
+                        TileEntity tile2 = worldObj.getTileEntity(i - 1, j, k - 1);
+                        if (tile2 != null && tile2 instanceof TileTCRail) {
+                            // ((TileTCRail) tile2).setSwitchState(false, true);
+                        }
+                        return true;
+                    }
                 }
             }
         }

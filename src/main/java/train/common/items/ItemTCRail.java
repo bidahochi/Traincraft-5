@@ -162,6 +162,9 @@ public class ItemTCRail extends ItemPart {
 			add("MEDIUM_RIGHT_PARALLEL_SWITCH");
 			add("MEDIUM_LEFT_PARALLEL_SWITCH");
 			add("LARGE_LEFT_PARALLEL_SWITCH");
+			add("LARGE_RIGHT_PARALLEL_SWITCH");
+			add("DIAGONAL_45DEGREE_4x3_SWITCH_LEFT");
+			add("DIAGONAL_45DEGREE_4x3_SWITCH_RIGHT");
 		}
 	};
 
@@ -1106,7 +1109,12 @@ public class ItemTCRail extends ItemPart {
 			case CORE_10x2_CROSSOVER_SWITCH_R:
 				if (!crossover10x2Switch(context, player, world, x, y, z, l, tempType, context.getStraightLabel(), typeVariant90Turn(context, EnumCoreTrack. CORE_5X_TURN_R, tempType.getVariant()), player.isSneaking(), true)) { return false; }
 				break;
-
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L:
+				if (!diagonal45Degree4x3Switch(context, player, world, x, y, z, l, tempType, context.getDiagonalStraightLabel(), typeVariant90Turn(context, EnumCoreTrack.CORE_5X_TURN_L, tempType.getVariant()), player.isSneaking(), false)) { return false; }
+				break;
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R:
+				if (!diagonal45Degree4x3Switch(context, player, world, x, y, z, l, tempType, context.getDiagonalStraightLabel(), typeVariant90Turn(context, EnumCoreTrack.CORE_5X_TURN_R, tempType.getVariant()), player.isSneaking(), true)) { return false; }
+				break;
 			case CORE_4x4_SWITCH_R:
 				if (l == 2) {
 					/** Check if straight exit can be put down */
@@ -3079,6 +3087,17 @@ public class ItemTCRail extends ItemPart {
 			}
 
 		}
+
+		if (EnumCoreTrack.CORE_DIAGONAL_45DEGREE_4X3_SWITCH.equals(type.getCoreTrack()))
+		{
+			String orientation = getTrackOrientation(l, yaw);
+			if (orientation != "") {
+				directionalTrack = EnumTracks.GetTrackByLabel(type.getLabel().replace(
+						EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel(),
+						EnumTracks.DIAGONAL_45DEGREE_4X3_SWITCH.getLabel() + "_" + orientation.toUpperCase()));
+			}
+
+		}
 		if (EnumCoreTrack.CORE_DIAMOND_CROSSING.equals(type.getCoreTrack()))
 		{
 			String orientation = getTrackOrientation(l, yaw);
@@ -4292,13 +4311,113 @@ public class ItemTCRail extends ItemPart {
 
 		putDownSingleRail(context, world, x, y + 1, z, facing, x + centerX, y + 1, z + centerZ, radius, tempType.getLabel(), true, x + originShiftX, y + 1, z + originShiftZ, true, false);
 		for (int i = 1; i < EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i++) {
-			putDownSingleRail(context, world, x + (dx*i), y + 1, z + (dz*i), facing, x + centerX, y + 1, z + centerZ, radius, typeVariantStraight, false, x+originShiftX, y + 1, z + originShiftZ, true, false);
+			putDownSingleRail(context, world, x + (dx*i), y + 1, z + (dz*i), facing, x + centerX, y + 1, z + centerZ, radius, typeVariantStraight, false, x + originShiftX, y + 1, z + originShiftZ, true, false);
 		}
 		for (int i = EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i < 10; i++) {
 			putDownSingleRail(context, world, x + (i * dx), y + 1, z + (i * dz), facing, x + 1 , y + 1, z - 7.99, 8.49, typeVariantStraight, false, x + originShiftX, y + 1, z + originShiftZ, false, false);
 		}
 		return true;
 	}
+
+	private boolean diagonal45Degree4x3Switch(TrackPlacementContext context, EntityPlayer player, World world, int x, int y, int z, int facing, ITrackDefinition tempType, String typeVariantStraight, String typeVariant90Turn, boolean sneaking, boolean isRight) {
+		int dx = 1;
+		int dz = 1;
+		int[] xArray, zArray, tArray;
+
+		//the following arrays are for the switch branch.
+		xArray = new int[]{0, 0, 1, 1};
+		zArray = new int[]{1, 2, 2, 3};
+
+		double worldCenterX = 0, worldCenterZ = 0, circCenterX = 4, circCenterZ = -5.58;
+		double radius = 6.08;
+
+		switch (facing) {
+			case 1:
+				tArray = zArray;
+				zArray = isRight?flipArraySign(xArray):xArray;
+				xArray = flipArraySign(tArray);
+				dx = -1;
+				worldCenterX = -circCenterX + 1;
+				worldCenterZ = isRight ? -circCenterZ: circCenterZ + 1;
+				break;
+			case 2:
+				xArray = isRight?xArray:flipArraySign(xArray);
+				zArray = flipArraySign(zArray);
+				dz = -1;
+				worldCenterX = isRight ? circCenterZ + 1: -circCenterZ;
+				worldCenterZ = -circCenterX + 1;
+				break;
+			case 3:
+				tArray = xArray;
+				xArray = zArray;
+				zArray = isRight?tArray:flipArraySign(tArray);
+				worldCenterX = circCenterX;
+				worldCenterZ = isRight ? circCenterZ + 1: -circCenterZ;
+				dx = 1;
+				break;
+			default:
+				if (isRight)
+					xArray = flipArraySign(xArray);
+				dz = 1;
+				worldCenterX = isRight ? -circCenterZ : circCenterZ + 1;
+				worldCenterZ = circCenterX;
+				break;
+		}
+
+		int exitDir = (facing + (isRight ? 4 : 3)) & 7;
+
+		int[] turnPosX = flipArraySign(xArray, x, false);
+		int[] turnPosZ = flipArraySign(zArray, z, false);
+
+		// 8-way diagonal direction code for the diagonal-straight rail pieces below.
+		// Cardinal facings 0-3 map to diagonal codes 4-7; which one depends on isRight.
+		int diagFacing = 4 + (isRight ? facing : (facing + 3) % 4);
+		if (!putDownTurn(context, player, world, false, x, y, z, turnPosX, turnPosZ, facing, false, diagFacing, x + xArray[xArray.length-1], z + zArray[zArray.length-1] , radius, x + worldCenterX,
+				y + 1, z + worldCenterZ, typeVariant90Turn, tempType.getItem().item))
+			return false;
+
+		int originShiftX = 0, originShiftZ = 0;
+		switch (facing) {
+			case 1:
+				originShiftX = -1;
+				dz = isRight ? -1 : 1;
+				break;
+			case 2:
+				originShiftZ = -1;
+				dx = isRight ? 1 : -1;
+				break;
+			case 3:
+				originShiftX = 1;
+				dz = isRight ? 1 : -1;
+				break;
+			default:
+				originShiftZ = 1;
+				dx = isRight ? -1 : 1;
+				break;
+
+		}
+		TileTCRail tcRailTurn = (TileTCRail) world.getTileEntity(x + originShiftX, y + 1, z + originShiftZ);
+		if (tcRailTurn != null) {
+			tcRailTurn.hasModel = false;
+		}
+		world.setBlockMetadataWithNotify(x + originShiftX, y + 1, z + originShiftZ, diagFacing, 3);//to force client update
+
+		for (int i = 0; i < 3; i++) {
+			if (!canPlaceTrack(context, player, world, x + (dx*i), y + 1, z + (dz*i))) {
+				return false;
+			}
+		}
+
+		putDownSingleRail(context, world, x, y + 1, z, diagFacing, x + worldCenterX,y + 1, z + worldCenterZ, radius, tempType.getLabel(), true, x + originShiftX, y + 1, z + originShiftZ, true, false);
+		for (int i = 1; i < EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i++) {
+			putDownSingleRail(context, world, x + (dx*i), y + 1, z + (dz*i), diagFacing, x + worldCenterX, y + 1, z + worldCenterZ, radius, tempType.getLabel(), false, x + originShiftX, y + 1, z + originShiftZ, true, false);
+		}
+		for (int i = EnumTracks.GetSwitchSize(tempType.getCoreTrack()); i < 3; i++) {
+			putDownSingleRail(context, world, x + (i * dx), y + 1, z + (i * dz), diagFacing, x + 1 , y + 1, z - 7.99, 8.49, typeVariantStraight, false, x + originShiftX, y + 1, z + originShiftZ, false, false);
+		}
+		return true;
+	}
+
 
 	private boolean rightDiamondCrossing(TrackPlacementContext context, EntityPlayer player, World world, int x, int y, int z, int l, ITrackDefinition tempType)
 	{
@@ -6122,6 +6241,9 @@ public class ItemTCRail extends ItemPart {
 				break;
 			case CORE_10x2_CROSSOVER_SWITCH:
 				toolTipDetail = "10x3";
+				break;
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+				toolTipDetail = "4x3";
 				break;
 			case CORE_4x11_PARALLEL_SWITCH:
 				toolTipDetail = "4x11";

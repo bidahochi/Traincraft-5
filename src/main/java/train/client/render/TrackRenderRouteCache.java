@@ -200,6 +200,11 @@ public final class TrackRenderRouteCache
                 return rightCrossover10x2SwitchRoute();
             case CORE_10x2_CROSSOVER_SWITCH_L:
                 return leftCrossover10x2SwitchRoute();
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L:
+                return rightDiagonal4x3SwitchRoute();
+            case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R:
+                return leftDiagonal4x3SwitchRoute();
             case CORE_3x5_45DEGREE_SWITCH:
             case CORE_3x5_45DEGREE_SWITCH_R:
                 return rightMedium45SwitchRoute();
@@ -435,6 +440,8 @@ public final class TrackRenderRouteCache
     private static TrackRenderRoute leftLarge45SwitchRoute() { return context -> RenderTCRail.modelLeftSwitchTurn.renderLarge45(context.variant, context.facing, active(context), context.x, context.y, context.z, context.r, context.g, context.b, context.a); }
     private static TrackRenderRoute rightCrossover10x2SwitchRoute() { return context -> RenderTCRail.modelRightSwitchTurn.renderCrossover10x2(context.variant, context.facing, active(context), context.x, context.y, context.z, context.r, context.g, context.b, context.a); }
     private static TrackRenderRoute leftCrossover10x2SwitchRoute() { return context -> RenderTCRail.modelLeftSwitchTurn.renderCrossover10x2(context.variant, context.facing, active(context), context.x, context.y, context.z, context.r, context.g, context.b, context.a); }
+    private static TrackRenderRoute rightDiagonal4x3SwitchRoute() { return context -> RenderTCRail.modelRightSwitchTurn.renderDiagonal4x3(context.variant, context.facing, active(context), context.x, context.y, context.z, context.r, context.g, context.b, context.a); }
+    private static TrackRenderRoute leftDiagonal4x3SwitchRoute() { return context -> RenderTCRail.modelLeftSwitchTurn.renderDiagonal4x3(context.variant, context.facing, active(context), context.x, context.y, context.z, context.r, context.g, context.b, context.a); }
 
     // S-curve routes
     private static TrackRenderRoute right2x8SCurveRoute() { return context -> RenderTCRail.modelRightParallelCurve.render2x8(context.variant, context.facing, context.x, context.y, context.z, context.r, context.g, context.b, context.a); }

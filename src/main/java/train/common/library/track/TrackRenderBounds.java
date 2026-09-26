@@ -102,6 +102,9 @@ public final class TrackRenderBounds
 			case CORE_3X_TURN:
 			case CORE_3X_TURN_L:
 			case CORE_3X_TURN_R:
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH:
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_L:
+			case CORE_DIAGONAL_45DEGREE_4X3_SWITCH_R:
 				return 4;
 
 			case CORE_LONG_STRAIGHT:
