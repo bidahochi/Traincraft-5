@@ -143,9 +143,7 @@ public final class RollingStockLightDefinition
             sourceGlowSurfaces,
             function,
             defaultActivationPolicy(channel),
-            channel == RollingStockLightChannel.DITCH
-            ? RollingStockDitchHornMode.ACTIVE_END
-            : RollingStockDitchHornMode.NONE,
+            RollingStockDitchHornMode.NONE,
             null,
             null,
             channel == RollingStockLightChannel.HEADLIGHT
@@ -671,9 +669,7 @@ public final class RollingStockLightDefinition
             this.channel = channel;
             this.circuit = channel;
             this.activationPolicy = defaultActivationPolicy(channel);
-            this.ditchHornMode = channel == RollingStockLightChannel.DITCH
-                                 ? RollingStockDitchHornMode.ACTIVE_END
-                                 : RollingStockDitchHornMode.NONE;
+            this.ditchHornMode = RollingStockDitchHornMode.NONE;
             if (channel == RollingStockLightChannel.HEADLIGHT)
             {
                 lightmapFloor = MAXIMUM_LIGHTMAP_FLOOR;

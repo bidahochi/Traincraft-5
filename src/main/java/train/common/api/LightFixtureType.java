@@ -16,7 +16,7 @@ public enum LightFixtureType
         RollingStockLightBehaviorOverride.builder()
         .controlCircuit(RollingStockLightChannel.DITCH)
         .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
-        .ditchHornResponse(RollingStockDitchHornMode.ACTIVE_END, null, null)
+        .ditchHornResponse(RollingStockDitchHornMode.NONE, null, null)
         .function(RollingStockLightFunction.STEADY)
         .effect(RollingStockLightDefinition.Effect.BEAM)
         .beamLength(RollingStockLightDefinition.DEFAULT_DITCH_LIGHT_BEAM_LENGTH)

@@ -210,7 +210,7 @@ public final class RollingStockLightBehaviorOverride
         return builder()
                .controlCircuit(RollingStockLightChannel.DITCH)
                .activationPolicy(RollingStockLightActivationPolicy.FACING_HEADLIGHT)
-               .ditchHornResponse(RollingStockDitchHornMode.ACTIVE_END, null, null)
+               .ditchHornResponse(RollingStockDitchHornMode.NONE, null, null)
                .function(function)
                .hotspotEnabled(true)
                .clientProjectorEligible(true)
