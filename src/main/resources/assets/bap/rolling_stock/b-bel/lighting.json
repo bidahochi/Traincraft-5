@@ -24,17 +24,99 @@
         },
         "marker_2_body_311": {
           "preset": "marker_light"
+        },
+        "ditchf1a": {
+          "preset": "ditch_light"
+        },
+        "ditchf1b": {
+          "preset": "ditch_light"
+        },
+        "ditchr1a": {
+          "preset": "ditch_light"
+        },
+        "ditchr1b": {
+          "preset": "ditch_light"
+        },
+        "lamp_down": {
+          "preset": "headlight"
+        },
+        "lamp_up": {
+          "preset": "headlight"
         }
       }
-    }
+    },
+    "profiles": {}
   },
   "skins": {
     "bap:grey": {},
-    "bap:skin16": {},
-    "bap:green": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "ditchf1a": {
+            "preset": "horn_alternating_ditch",
+            "color": "#FFFFFF",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchf1b": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch",
+            "color": "#FFFFFF"
+          },
+          "ditchr1a": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "color": "#FFFFFF",
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchr1b": {
+            "preset": "horn_alternating_ditch",
+            "color": "#FFFFFF",
+            "hornResponse": {
+              "phase": 0
+            }
+          }
+        }
+      }
+    },
+    "bap:green": {
+      "lighting": {
+        "fixtures": {
+          "ditchf1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchf1b": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
     "bap:pink": {},
     "bap:lightgrey": {},
     "bap:purple": {},
-    "bap:yellow": {}
+    "bap:yellow": {
+      "lighting": {
+        "fixtures": {
+          "lamp_up": {
+            "preset": "mars"
+          },
+          "lamp_down": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    }
   }
 }

@@ -21,6 +21,12 @@
         },
         "marker_body_214": {
           "preset": "marker_light"
+        },
+        "lamp_down": {
+          "preset": "headlight"
+        },
+        "lamp_up": {
+          "preset": "headlight"
         }
       }
     }
@@ -28,6 +34,19 @@
   "skins": {
     "bap:purple": {},
     "bap:lightgrey": {},
-    "bap:orange": {}
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "lamp_up": {
+            "preset": "gyralite"
+          },
+          "lamp_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    }
   }
 }

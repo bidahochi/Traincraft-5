@@ -175,8 +175,8 @@ public class Model4ED172T extends ModelConverter //Same as Filename
 		bodyModel[129] = new ModelRendererTurbo(this, 54, 17, textureX, textureY); // Box 48
 		bodyModel[130] = new ModelRendererTurbo(this, 51, 9, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[131] = new ModelRendererTurbo(this, 51, 9, textureX, textureY, "numberboard"); // Box 118 numberboard
-		bodyModel[132] = new ModelRendererTurbo(this, 49, 9, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[133] = new ModelRendererTurbo(this, 59, 9, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[132] = new ModelRendererTurbo(this, 49, 9, textureX, textureY, "lamp_up"); // Box 186 Headlight Front up
+		bodyModel[133] = new ModelRendererTurbo(this, 59, 9, textureX, textureY, "lamp_down"); // Box 187 Headlight Front down
 		bodyModel[134] = new ModelRendererTurbo(this, 178, 85, textureX, textureY); // Box 285
 		bodyModel[135] = new ModelRendererTurbo(this, 106, 49, textureX, textureY); // Box 286
 		bodyModel[136] = new ModelRendererTurbo(this, 99, 53, textureX, textureY); // Box 287
@@ -246,11 +246,11 @@ public class Model4ED172T extends ModelConverter //Same as Filename
 		bodyModel[200] = new ModelRendererTurbo(this, 327, 158, textureX, textureY); // Box 257
 		bodyModel[201] = new ModelRendererTurbo(this, 327, 158, textureX, textureY); // Box 258
 		bodyModel[202] = new ModelRendererTurbo(this, 223, 66, textureX, textureY); // Box 259
-		bodyModel[203] = new ModelRendererTurbo(this, 216, 66, textureX, textureY, "lamp"); // Box 260 gryalight front
-		bodyModel[204] = new ModelRendererTurbo(this, 230, 66, textureX, textureY, "lamp"); // Box 261 gyralight front
+		bodyModel[203] = new ModelRendererTurbo(this, 216, 66, textureX, textureY, "gyra_front_hh_up"); // Box 260 gryalight front
+		bodyModel[204] = new ModelRendererTurbo(this, 230, 66, textureX, textureY, "gyra_front_hh_down"); // Box 261 gyralight front
 		bodyModel[205] = new ModelRendererTurbo(this, 437, 39, textureX, textureY); // Box 262
-		bodyModel[206] = new ModelRendererTurbo(this, 430, 39, textureX, textureY, "lamp"); // Box 263 gyralight rear
-		bodyModel[207] = new ModelRendererTurbo(this, 444, 39, textureX, textureY, "lamp"); // Box 264 gyralight rear
+		bodyModel[206] = new ModelRendererTurbo(this, 430, 39, textureX, textureY, "gyra_rear_up"); // Box 263 gyralight rear
+		bodyModel[207] = new ModelRendererTurbo(this, 444, 39, textureX, textureY, "gyra_rear_down"); // Box 264 gyralight rear
 		bodyModel[208] = new ModelRendererTurbo(this, 228, 49, textureX, textureY, "marker_body_208"); // Box 266 markerlight
 		bodyModel[209] = new ModelRendererTurbo(this, 228, 49, textureX, textureY, "marker_body_209"); // Box 267 markerlight
 		bodyModel[210] = new ModelRendererTurbo(this, 442, 22, textureX, textureY, "marker_body_210"); // Box 266 markerlight

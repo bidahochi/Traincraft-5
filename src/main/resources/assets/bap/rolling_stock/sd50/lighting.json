@@ -227,11 +227,12 @@
             "color": "#FFFFFF"
           },
           "cab_headlight_upper": {
-            "preset": "gyralite"
+            "preset": "headlight",
+            "color": "#FFF4B4"
           },
           "cab_headlight_lower": {
-            "preset": "gyralite",
-            "color": "#FFFFFF"
+            "preset": "headlight",
+            "color": "#FFF4B4"
           }
         }
       }

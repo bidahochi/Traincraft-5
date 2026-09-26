@@ -5,29 +5,58 @@
     "defaults": {
       "fixtures": {
         "marker_body_208": {
-          "enabled": false
+          "preset": "marker_light"
         },
         "marker_body_209": {
-          "enabled": false
+          "preset": "marker_light"
         },
         "marker_body_210": {
-          "enabled": false
+          "preset": "marker_light"
         },
         "marker_body_211": {
-          "enabled": false
+          "preset": "marker_light"
         },
         "marker_body_213": {
-          "enabled": false
+          "preset": "marker_light"
         },
         "marker_body_214": {
-          "enabled": false
+          "preset": "marker_light"
+        },
+        "gyra_front_hh_up": {
+          "preset": "headlight"
+        },
+        "gyra_front_hh_down": {
+          "preset": "headlight"
+        },
+        "gyra_rear_up": {
+          "preset": "headlight"
+        },
+        "gyra_rear_down": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
     "bap:pink": {},
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra_front_hh_down": {
+            "preset": "mars"
+          },
+          "gyra_front_hh_up": {
+            "preset": "mars"
+          },
+          "gyra_rear_up": {
+            "preset": "mars"
+          },
+          "gyra_rear_down": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:orange": {},
     "bap:black": {},
     "bap:lightgrey": {},

@@ -55,7 +55,8 @@
         "fixtures": {
           "HL_U1B": {
             "color": 16719904,
-            "preset": "gyralite"
+            "preset": "gyralite",
+            "controlCircuit": "emergency"
           },
           "HL_U1A": {
             "preset": "gyralite"

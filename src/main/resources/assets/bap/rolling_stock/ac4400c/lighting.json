@@ -12,16 +12,179 @@
         },
         "cab_signal_body_375": {
           "preset": "instrument"
+        },
+        "ditchf2a": {
+          "preset": "ditch_light"
+        },
+        "ditchf2b": {
+          "preset": "ditch_light"
+        },
+        "ditchr2a": {
+          "preset": "ditch_light"
+        },
+        "ditchr2b": {
+          "preset": "ditch_light"
+        },
+        "ditchf1a": {
+          "preset": "ditch_light"
+        },
+        "ditchf1b": {
+          "preset": "ditch_light"
+        },
+        "ditchr1a": {
+          "preset": "ditch_light"
+        },
+        "ditchr1b": {
+          "preset": "ditch_light"
+        },
+        "marker_body_311": {
+          "preset": "marker_light"
         }
       }
     }
   },
   "skins": {
-    "bap:green": {},
-    "bap:cyan": {},
-    "bap:skin16": {},
+    "bap:green": {
+      "lighting": {
+        "fixtures": {
+          "ditchf2a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchf2b": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchr2a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchr2b": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "ditchf1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchf1b": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchr1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchr1b": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchf2a": {
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchf2b": {
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchr2a": {
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchr2b": {
+            "hornResponse": {
+              "phase": 0
+            }
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "ditchf1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchf1b": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchr1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditchr1b": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
     "bap:lightblue": {},
     "bap:grey": {},
-    "bap:blue": {}
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "ditchf2a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchf2b": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditchr2a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditchr2b": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    }
   }
 }
