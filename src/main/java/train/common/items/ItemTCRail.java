@@ -4377,7 +4377,6 @@ public class ItemTCRail extends ItemPart {
 			return false;
 
 		int originShiftX = 0, originShiftZ = 0;
-		System.out.println(facing + " and " + isRight);
 		switch (facing) {
 			case 1:
 				originShiftX = -1;
