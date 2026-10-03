@@ -667,28 +667,28 @@ public class ModelCDCScaboose extends ModelConverter //Same as Filename
 		bodyModel[146].rotateAngleZ = 0.61086524F;
 
 		bodyModel[147].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 156 CULL
-		bodyModel[147].setRotationPoint(24F, 4.5F, -11.5F);
+		bodyModel[147].setRotationPoint(23.99F, 4.51F, -11.5F);
 
 		bodyModel[148].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.25F, 0F, 0F, -0.25F); // Box 157 CULL
-		bodyModel[148].setRotationPoint(24F, 1.5F, -11F);
+		bodyModel[148].setRotationPoint(23.99F, 1.5F, -11F);
 
 		bodyModel[149].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 158 CULL
-		bodyModel[149].setRotationPoint(24F, 4.5F, 9.5F);
+		bodyModel[149].setRotationPoint(23.99F, 4.51F, 9.5F);
 
 		bodyModel[150].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 159 CULL
-		bodyModel[150].setRotationPoint(24F, 1.5F, 9F);
+		bodyModel[150].setRotationPoint(23.99F, 1.5F, 9F);
 
 		bodyModel[151].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 160 CULL
-		bodyModel[151].setRotationPoint(-28F, 4.5F, 9.5F);
+		bodyModel[151].setRotationPoint(-27.99F, 4.51F, 9.5F);
 
 		bodyModel[152].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 161 CULL
-		bodyModel[152].setRotationPoint(-28F, 1.5F, 9F);
+		bodyModel[152].setRotationPoint(-27.99F, 1.5F, 9F);
 
 		bodyModel[153].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0.25F, 0F, 0F, 0.25F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 162 CULL
-		bodyModel[153].setRotationPoint(-28F, 4.5F, -11.5F);
+		bodyModel[153].setRotationPoint(-27.99F, 4.51F, -11.5F);
 
 		bodyModel[154].addShapeBox(0F, 0F, 0F, 4, 3, 2, 0F,0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.25F, 0F, 0F, -0.25F); // Box 163 CULL
-		bodyModel[154].setRotationPoint(-28F, 1.5F, -11F);
+		bodyModel[154].setRotationPoint(-27.99F, 1.5F, -11F);
 
 		bodyModel[155].addBox(0F, 0F, 0F, 0, 2, 5, 0F); // Box 164
 		bodyModel[155].setRotationPoint(29.01F, 2F, 3F);
