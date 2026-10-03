@@ -1,9 +1,11 @@
 package train.common.slots;
 
+import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import train.common.api.LiquidManager;
+import train.common.core.handlers.ItemHandler;
 
 public class SpecialSlots extends Slot {
 	public SpecialSlots(IInventory iinventory, int i, int j, int k) {
@@ -25,7 +27,14 @@ public class SpecialSlots extends Slot {
 		}
 		
 		@Override
-		public boolean isItemValid(ItemStack itemstack) {
+		public boolean isItemValid(ItemStack itemStack)
+		{
+			Block block = Block.getBlockFromItem(itemStack.getItem());
+			if (block == null || ItemHandler.isBanned(itemStack))
+			{
+				return false;
+			}
+
 			return true;
 		}
 	}
@@ -36,8 +45,15 @@ public class SpecialSlots extends Slot {
 		}
 		
 		@Override
-		public boolean isItemValid(ItemStack itemstack) {
-			return LiquidManager.getInstance().isContainer(itemstack);
+		public boolean isItemValid(ItemStack itemStack)
+		{
+			Block block = Block.getBlockFromItem(itemStack.getItem());
+			if (block == null || ItemHandler.isBanned(itemStack))
+			{
+				return false;
+			}
+
+			return LiquidManager.getInstance().isContainer(itemStack);
 		}
 	}
 
@@ -58,7 +74,14 @@ public class SpecialSlots extends Slot {
 		}
 
 		@Override
-		public boolean isItemValid(ItemStack itemstack) {
+		public boolean isItemValid(ItemStack itemstack)
+		{
+			Block block = Block.getBlockFromItem(itemstack.getItem());
+			if (block == null || ItemHandler.isBanned(itemstack))
+			{
+				return false;
+			}
+
 			return validator != null
 					&& validator.isContainerValidForInputSlot(inputSlot, itemstack);
 		}
