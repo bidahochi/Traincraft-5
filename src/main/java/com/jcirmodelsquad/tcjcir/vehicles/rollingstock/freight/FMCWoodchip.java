@@ -38,13 +38,20 @@ public class FMCWoodchip extends AbstractStandardFreightCar
         InsertTexture(1, "FNCC (Big Wording)");
         InsertTexture(2, "FNCC (Herald)");
         InsertTexture(3, "FNCC (Herald Black)");
-        InsertTexture(4, "");
-        InsertTexture(5, "");
-        InsertTexture(6, "");
-        InsertTexture(7, "");
-        InsertTexture(8, "");
-        InsertTexture(9, "");
-        InsertTexture(10, "");
+        InsertTexture(4, "Northern Pacific 1");
+        InsertTexture(5, "Northern Pacific 2");
+        InsertTexture(6, "Great Northern");
+        InsertTexture(7, "Union Pacific 1");
+        InsertTexture(8, "Union Pacific 2");
+        InsertTexture(9, "THE Milwaukee Road");
+        InsertTexture(10, "BN 1");
+        InsertTexture(11, "BN 2");
+        InsertTexture(12, "BN 3");
+        InsertTexture(13, "BN 4");
+        InsertTexture(14, "B&B tall end brakewheel");
+        InsertTexture(15, "B&B Low end brakewheel");
+        InsertTexture(16, "B&B Side brakewheel");
+        InsertTexture(17, "B&B Side brake ratchet");
     }
 
     @Override

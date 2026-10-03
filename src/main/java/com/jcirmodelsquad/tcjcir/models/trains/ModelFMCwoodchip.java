@@ -166,7 +166,7 @@ public class ModelFMCwoodchip extends ModelConverter //Same as Filename
 		bodyModel[125] = new ModelRendererTurbo(this, 221, 133, textureX, textureY); // Box 130
 		bodyModel[126] = new ModelRendererTurbo(this, 216, 124, textureX, textureY, "cull"); // Box 131 cull
 		bodyModel[127] = new ModelRendererTurbo(this, 205, 124, textureX, textureY, "cull"); // Box 132 cull
-		bodyModel[128] = new ModelRendererTurbo(this, 26, 82, textureX, textureY); // Box 133
+		bodyModel[128] = new ModelRendererTurbo(this, 26, 82, textureX, textureY, "cull"); // Box 133
 		bodyModel[129] = new ModelRendererTurbo(this, 217, 134, textureX, textureY, "cull"); // Box 134 cull
 		bodyModel[130] = new ModelRendererTurbo(this, 290, 67, textureX, textureY, "cull"); // Box 15 cut bar support cull
 		bodyModel[131] = new ModelRendererTurbo(this, 277, 76, textureX, textureY); // Box 81
@@ -436,7 +436,7 @@ public class ModelFMCwoodchip extends ModelConverter //Same as Filename
 		bodyModel[80].addBox(0F, 0F, 0F, 5, 1, 1, 0F); // Box 36
 		bodyModel[80].setRotationPoint(20.5F, -8.5F, -10.63F);
 
-		bodyModel[81].addBox(0F, 0F, 0F, 83, 1, 17, 0F); // Box 83
+		bodyModel[81].addShapeBox(0F, 0F, 0F, 83, 1, 17, 0F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0.05F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 83
 		bodyModel[81].setRotationPoint(-41.5F, 2F, -8.5F);
 
 		bodyModel[82].addShapeBox(0F, 0F, 0F, 3, 8, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -1F, 0F, 0F, -1F); // ladder cull
