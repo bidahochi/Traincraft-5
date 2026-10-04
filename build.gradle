@@ -44,37 +44,24 @@ archivesBaseName = "Fox-Traincraft"
 configurations {
     shade
     compile.extendsFrom shade
-    devCompile.extendsFrom compile
-    devRuntime.extendsFrom runtime
 }
 
 sourceSets {
-    dev {
+    main {
         java.srcDir 'src/dev/java'
-        resources.srcDir 'src/dev/resources'
-        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
-        runtimeClasspath += output + compileClasspath
-    }
-    test {
-        compileClasspath += sourceSets.dev.output
-        runtimeClasspath += sourceSets.dev.output
     }
 }
 
-dependencies {
-    runtime sourceSets.dev.output
+task prepareDevRuntime(type: Sync) {
+    from sourceSets.main.output
+    include 'tb/dev/**'
+    into "$buildDir/dev-runtime"
 }
-
-compileDevJava {
-    sourceCompatibility = targetCompatibility = "1.8"
-}
-
-compileJava.finalizedBy compileDevJava
 
 tasks.withType(JavaExec) { task ->
     if (task.name.toLowerCase().contains("run") || task.name in ['debugClient', 'debugServer']) {
-        dependsOn devClasses
-        classpath += sourceSets.dev.output
+        dependsOn prepareDevRuntime
+        classpath += files(prepareDevRuntime.destinationDir)
     }
 }
 
@@ -155,6 +142,7 @@ dependencies {
 }
 
 jar {
+    exclude 'tb/dev/**'
     def serviceEntries = [:].withDefault { [] }
     def tmpDir = file("$buildDir/mergedServices")
 
@@ -222,13 +210,13 @@ task sourceJar(type: Jar) {
 	classifier = 'sources'
 	from sourceSets.main.allSource
 	exclude 'assets/**'
+	exclude 'tb/dev/**'
 }
 
 task devJar(type: Jar) {
 	manifest {}
 	classifier = 'dev'
 	from sourceSets.main.output
-	from sourceSets.dev.output
 }
 
 artifacts {
