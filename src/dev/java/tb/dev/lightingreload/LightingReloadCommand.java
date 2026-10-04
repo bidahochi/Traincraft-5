@@ -43,13 +43,18 @@ public final class LightingReloadCommand extends CommandBase
     /** Installs the command once on development clients through the optional cold bootstrap. */
     public static void init()
     {
-        if (Boolean.TRUE.equals(DebugUtil.dev) == false
-            || FMLCommonHandler.instance().getSide().isClient() == false || registered)
+        if (Boolean.TRUE.equals(DebugUtil.dev) == false || registered)
         {
+            return;
+        }
+        if (FMLCommonHandler.instance().getSide().isClient() == false)
+        {
+            Traincraft.tcLog.info("Skipping /reloadstocklighting: this command registers on the client only.");
             return;
         }
         ClientCommandHandler.instance.registerCommand(new LightingReloadCommand());
         registered = true;
+        Traincraft.tcLog.info("Registered development client command /reloadstocklighting.");
     }
 
     /** The command is registered only through the development bootstrap. */

@@ -61,6 +61,10 @@ sourceSets {
     }
 }
 
+dependencies {
+    runtime sourceSets.dev.output
+}
+
 compileDevJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
@@ -68,7 +72,8 @@ compileDevJava {
 compileJava.finalizedBy compileDevJava
 
 tasks.withType(JavaExec) { task ->
-    if (task.name.toLowerCase().contains("run")) {
+    if (task.name.toLowerCase().contains("run") || task.name in ['debugClient', 'debugServer']) {
+        dependsOn devClasses
         classpath += sourceSets.dev.output
     }
 }

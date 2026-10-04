@@ -4,25 +4,36 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.launchwrapper.LaunchClassLoader;
+import java.io.IOException;
 import org.apache.logging.log4j.Level;
 import train.common.Traincraft;
 
 public class DebugUtil
 {
-    private static final String DEV_MARKER = "tb/dev/DevEnvironmentMarker.class";
-
     public static final boolean dev = detectDevEnvironment();
 
     private static boolean detectDevEnvironment(){
-        Object deobfuscated = Launch.blackboard.get("fml.deobfuscatedEnvironment");
-        if(Boolean.TRUE.equals(deobfuscated)){
+        Object deobfuscated = Launch.blackboard == null ? null
+                : Launch.blackboard.get("fml.deobfuscatedEnvironment");
+        return detectDevEnvironment(deobfuscated, DebugUtil.class.getClassLoader(), Launch.classLoader);
+    }
+
+    static boolean detectDevEnvironment(Object deobfuscated, ClassLoader modLoader, LaunchClassLoader minecraftLoader){
+        if(Boolean.TRUE.equals(deobfuscated)
+                || (deobfuscated instanceof String && Boolean.parseBoolean((String) deobfuscated))){
             return true;
         }
-        if(deobfuscated instanceof String && Boolean.parseBoolean((String) deobfuscated)){
+        if(modLoader != null && modLoader.getResource("tb/dev/DevEnvironmentMarker.class") != null){
             return true;
         }
-        ClassLoader loader = DebugUtil.class.getClassLoader();
-        return loader != null && loader.getResource(DEV_MARKER) != null;
+        if(minecraftLoader != null){
+            try {
+                return minecraftLoader.getClassBytes("net.minecraft.world.World") != null;
+            } catch (IOException ignored) {
+            }
+        }
+        return false;
     }
 
 

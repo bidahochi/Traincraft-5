@@ -28,8 +28,10 @@ public class OptionalDevBootstrap {
 				Class<?> bootstrapClass = Class.forName(bootstrap);
 				Method init = bootstrapClass.getMethod("init");
 				init.invoke(null);
-			} catch (ClassNotFoundException ignored) {
-				// Expected in production jars, where src/dev output is not packaged.
+			} catch (ClassNotFoundException missing) {
+				Traincraft.tcLog.warn("Development environment detected, but optional dev bootstrap is missing: "
+						+ bootstrap + ". Include the compiled src/dev/java output on the launch runtime classpath. "
+						+ "Reload the Gradle project in IntelliJ and rebuild to include the dev runtime dependency.");
 			} catch (Throwable throwable) {
 				Traincraft.tcLog.warn("Failed to initialize optional dev bootstrap: " + bootstrap, throwable);
 			}
