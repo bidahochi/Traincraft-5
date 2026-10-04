@@ -178,8 +178,8 @@ public class ModelB23 extends ModelConverter //Same as Filename
 		bodyModel[133] = new ModelRendererTurbo(this, 110, 3, textureX, textureY); // Box 165
 		bodyModel[134] = new ModelRendererTurbo(this, 110, 29, textureX, textureY); // Box 167
 		bodyModel[135] = new ModelRendererTurbo(this, 1, 57, textureX, textureY); // Box 48
-		bodyModel[136] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[137] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[136] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "headlight_f_u"); // Box 186 Headlight Front up
+		bodyModel[137] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "headlight_f_l"); // Box 187 Headlight Front down
 		bodyModel[138] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[139] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 118 numberboard
 		bodyModel[140] = new ModelRendererTurbo(this, 21, 39, textureX, textureY); // Box 43
@@ -360,12 +360,12 @@ public class ModelB23 extends ModelConverter //Same as Filename
 		bodyModel[315] = new ModelRendererTurbo(this, 148, 8, textureX, textureY, "prime4"); // Box 9 PRIME2-4
 		bodyModel[316] = new ModelRendererTurbo(this, 146, 16, textureX, textureY, "cull"); // Box 330 cull sp beacon holder
 		bodyModel[317] = new ModelRendererTurbo(this, 234, 101, textureX, textureY); // Box 331 sp thing
-		bodyModel[318] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "lamp"); // Box 401 sp emergency gyra
+		bodyModel[318] = new ModelRendererTurbo(this, 137, 1, textureX, textureY, "sp_e_gyra_f"); // Box 401 sp emergency gyra
 		bodyModel[319] = new ModelRendererTurbo(this, 145, 1, textureX, textureY); // Box 400 sp E gyra box
 		bodyModel[320] = new ModelRendererTurbo(this, 142, -1, textureX, textureY); // Box 335 sp e gyra box holder stick
 		bodyModel[321] = new ModelRendererTurbo(this, 313, 89, textureX, textureY); // Box 336 tiny mini mexico tank
 		bodyModel[322] = new ModelRendererTurbo(this, 493, 103, textureX, textureY, ""); // Box 414 sp e gyra holdy rear
-		bodyModel[323] = new ModelRendererTurbo(this, 494, 98, textureX, textureY, "lamp"); // Box 415 sp e gyra reart
+		bodyModel[323] = new ModelRendererTurbo(this, 494, 98, textureX, textureY, "sp_e_gyra_r"); // Box 415 sp e gyra reart
 		bodyModel[324] = new ModelRendererTurbo(this, 494, 108, textureX, textureY, "cull"); // Box 416 cull sp e gyra holdy rear
 		bodyModel[325] = new ModelRendererTurbo(this, 339, 122, textureX, textureY); // Box 340 spee pee lol
 		bodyModel[326] = new ModelRendererTurbo(this, 341, 112, textureX, textureY); // Box 341 spee pee lol

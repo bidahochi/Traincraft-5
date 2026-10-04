@@ -15,6 +15,40 @@
         },
         "marker_body_86": {
           "preset": "marker_light"
+        },
+        "gyra1fb": {
+          "preset": "gyralite"
+        },
+        "gyra1fa": {
+          "preset": "gyralite"
+        },
+        "gyra1ra": {
+          "preset": "gyralite"
+        },
+        "gyra1rb": {
+          "preset": "gyralite"
+        },
+        "gyra2fa": {
+          "preset": "gyralite"
+        },
+        "gyra2fb": {
+          "preset": "gyralite"
+        },
+        "gyra2ra": {
+          "preset": "gyralite"
+        },
+        "gyra2rb": {
+          "preset": "gyralite"
+        },
+        "gyra_re": {
+          "preset": "gyralite",
+          "controlCircuit": "emergency",
+          "color": "#FF2020"
+        },
+        "gyra_fe": {
+          "preset": "gyralite",
+          "controlCircuit": "emergency",
+          "color": "#FF2020"
         }
       }
     }
@@ -26,6 +60,27 @@
     "bap:red": {},
     "bap:pink": {},
     "bap:green": {},
-    "bap:cyan": {}
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra1fa": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra1fb": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra1ra": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra1rb": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    }
   }
 }

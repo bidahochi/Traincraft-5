@@ -245,8 +245,8 @@ public class ModelC424new extends ModelConverter //Same as Filename
 		bodyModel[199] = new ModelRendererTurbo(this, 90, 166, textureX, textureY); // Box 246
 		bodyModel[200] = new ModelRendererTurbo(this, 116, 136, textureX, textureY); // Box 247
 		bodyModel[201] = new ModelRendererTurbo(this, 34, 78, textureX, textureY); // Box 238
-		bodyModel[202] = new ModelRendererTurbo(this, 6, 82, textureX, textureY, "lamp"); // Box 448 headlight front n
-		bodyModel[203] = new ModelRendererTurbo(this, 6, 87, textureX, textureY, "lamp"); // Box 449 headlight front n
+		bodyModel[202] = new ModelRendererTurbo(this, 6, 82, textureX, textureY, "lamp_n_v_1"); // Box 448 headlight front n
+		bodyModel[203] = new ModelRendererTurbo(this, 6, 87, textureX, textureY, "lamp_n_v_2"); // Box 449 headlight front n
 		bodyModel[204] = new ModelRendererTurbo(this, 16, 87, textureX, textureY, "lamp"); // Box 451 headlight front rock
 		bodyModel[205] = new ModelRendererTurbo(this, 16, 87, textureX, textureY, "lamp"); // Box 454 headlight front rock
 		bodyModel[206] = new ModelRendererTurbo(this, 78, 163, textureX, textureY); // Box 253

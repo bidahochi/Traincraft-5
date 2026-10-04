@@ -27,12 +27,28 @@
         },
         "rear_marker_box_body_400": {
           "preset": "marker_light"
+        },
+        "gyra": {
+          "preset": "gyralite"
+        },
+        "flasher": {
+          "preset": "commander",
+          "color": "#FFFFFF"
         }
       }
     }
   },
   "skins": {
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "gyra": {
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:blue": {},
     "bap:orange": {},

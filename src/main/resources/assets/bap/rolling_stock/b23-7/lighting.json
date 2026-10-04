@@ -48,6 +48,22 @@
         },
         "marker_booster_ssw_body_26": {
           "preset": "marker_light"
+        },
+        "sp_e_gyra_f": {
+          "preset": "gyralite",
+          "controlCircuit": "emergency",
+          "color": "#FF2020"
+        },
+        "sp_e_gyra_r": {
+          "preset": "gyralite",
+          "controlCircuit": "emergency",
+          "color": "#FF2020"
+        },
+        "headlight_f_l": {
+          "preset": "headlight"
+        },
+        "headlight_f_u": {
+          "preset": "headlight"
         }
       }
     },
@@ -87,7 +103,24 @@
       }
     },
     "bap:red": {},
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "headlight_f_u": {
+            "preset": "gyralite"
+          },
+          "headlight_f_l": {
+            "preset": "gyralite"
+          },
+          "gyralight_rear_l": {
+            "preset": "gyralite"
+          },
+          "gyralight_rear_r": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin17": {},
     "bap:magenta": {},
     "bap:purple": {},

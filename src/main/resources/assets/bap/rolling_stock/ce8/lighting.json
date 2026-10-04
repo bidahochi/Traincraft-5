@@ -9,12 +9,35 @@
         },
         "marker_body_126": {
           "preset": "marker_light"
+        },
+        "gyra_1": {
+          "preset": "gyralite"
+        },
+        "gyra_2": {
+          "preset": "gyralite"
+        },
+        "gyra_2r": {
+          "preset": "gyralite"
+        },
+        "gyra_1r": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra_1": {
+            "color": "#FFF4B4"
+          },
+          "gyra_2": {
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:brown": {},
     "bap:lightgrey": {}
   }

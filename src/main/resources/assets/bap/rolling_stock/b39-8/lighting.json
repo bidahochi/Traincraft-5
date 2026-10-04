@@ -30,6 +30,42 @@
         },
         "marker_sou_body_351": {
           "preset": "marker_light"
+        },
+        "ditch1fa": {
+          "preset": "ditch_light"
+        },
+        "ditch1fb": {
+          "preset": "ditch_light"
+        },
+        "ditch1rb": {
+          "preset": "ditch_light"
+        },
+        "ditch1ra": {
+          "preset": "ditch_light"
+        },
+        "ditch2fa": {
+          "preset": "ditch_light"
+        },
+        "ditch2fb": {
+          "preset": "ditch_light"
+        },
+        "ditch3fa": {
+          "preset": "ditch_light"
+        },
+        "ditch3fb": {
+          "preset": "ditch_light"
+        },
+        "ditch2ra": {
+          "preset": "ditch_light"
+        },
+        "ditch2rb": {
+          "preset": "ditch_light"
+        },
+        "ditch3rb": {
+          "preset": "ditch_light"
+        },
+        "ditch3ra": {
+          "preset": "ditch_light"
         }
       }
     }
@@ -42,7 +78,36 @@
     "bap:skin17": {},
     "bap:lightgrey": {},
     "bap:cyan": {},
-    "bap:skin18": {},
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "ditch1fa": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditch1fb": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch1ra": {
+            "hornResponse": {
+              "phase": 1
+            },
+            "preset": "horn_alternating_ditch"
+          },
+          "ditch1rb": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
+          }
+        }
+      }
+    },
     "bap:brown": {},
     "bap:skin19": {}
   }

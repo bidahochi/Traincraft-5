@@ -331,7 +331,7 @@ public class ModelDash832BWH extends ModelConverter //Same as Filename
 		bodyModel[287] = new ModelRendererTurbo(this, 100, 192, textureX, textureY, "marker_aussy_body_287"); // Box 316 aussy markers
 		bodyModel[288] = new ModelRendererTurbo(this, 113, 249, textureX, textureY); // amtk ostricol backplate
 		bodyModel[289] = new ModelRendererTurbo(this, 119, 238, textureX, textureY, "cull"); // cull
-		bodyModel[290] = new ModelRendererTurbo(this, 126, 238, textureX, textureY, "lamp"); // amtk ostricol glowNoName
+		bodyModel[290] = new ModelRendererTurbo(this, 126, 238, textureX, textureY, "gyra"); // amtk ostricol glowNoName
 		bodyModel[291] = new ModelRendererTurbo(this, 110, 243, textureX, textureY); // Box 232
 		bodyModel[292] = new ModelRendererTurbo(this, 114, 34, textureX, textureY); // Box 233
 		bodyModel[293] = new ModelRendererTurbo(this, 114, 30, textureX, textureY); // Box 234
@@ -385,8 +385,8 @@ public class ModelDash832BWH extends ModelConverter //Same as Filename
 		bodyModel[341] = new ModelRendererTurbo(this, 21, 134, textureX, textureY); // Box 440 honse m-2
 		bodyModel[342] = new ModelRendererTurbo(this, 131, 98, textureX, textureY); // Box 382
 		bodyModel[343] = new ModelRendererTurbo(this, 131, 98, textureX, textureY); // Box 384
-		bodyModel[344] = new ModelRendererTurbo(this, 131, 94, textureX, textureY, "lamp"); // Box 385 amsnack flashie
-		bodyModel[345] = new ModelRendererTurbo(this, 131, 94, textureX, textureY, "lamp"); // Box 386 amsnack flashie
+		bodyModel[344] = new ModelRendererTurbo(this, 131, 94, textureX, textureY, "flasher"); // Box 385 amsnack flashie
+		bodyModel[345] = new ModelRendererTurbo(this, 131, 94, textureX, textureY, "flasher"); // Box 386 amsnack flashie
 		bodyModel[346] = new ModelRendererTurbo(this, 129, 111, textureX, textureY); // Box 378
 		bodyModel[347] = new ModelRendererTurbo(this, 167, 93, textureX, textureY); // Box 379
 		bodyModel[348] = new ModelRendererTurbo(this, 89, 107, textureX, textureY); // Box 380

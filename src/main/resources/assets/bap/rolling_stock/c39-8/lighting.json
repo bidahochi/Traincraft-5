@@ -30,6 +30,12 @@
         },
         "cab_signal_body_370": {
           "preset": "instrument"
+        },
+        "lamp_f_up": {
+          "preset": "headlight"
+        },
+        "lamp_f_d": {
+          "preset": "headlight"
         }
       }
     }
@@ -45,7 +51,21 @@
     "bap:lightgrey": {},
     "bap:skin16": {},
     "bap:brown": {},
-    "bap:orange": {},
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "lamp_f_up": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_f_d": {
+            "preset": "mars",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:skin18": {},
     "bap:skin20": {}
   }

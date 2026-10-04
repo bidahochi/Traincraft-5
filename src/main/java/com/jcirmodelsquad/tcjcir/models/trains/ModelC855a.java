@@ -85,8 +85,8 @@ public class ModelC855a extends ModelConverter //Same as Filename
 		bodyModel[38] = new ModelRendererTurbo(this, 305, 9, textureX, textureY); // Box 79
 		bodyModel[39] = new ModelRendererTurbo(this, 249, 1, textureX, textureY); // Box 80
 		bodyModel[40] = new ModelRendererTurbo(this, 41, 33, textureX, textureY); // Box 81
-		bodyModel[41] = new ModelRendererTurbo(this, 313, 1, textureX, textureY, "lamp"); // Box 87 headlight front vertical
-		bodyModel[42] = new ModelRendererTurbo(this, 337, 1, textureX, textureY, "lamp"); // Box 88 headlight front vertical
+		bodyModel[41] = new ModelRendererTurbo(this, 313, 1, textureX, textureY, "lamp_up"); // Box 87 headlight front vertical
+		bodyModel[42] = new ModelRendererTurbo(this, 337, 1, textureX, textureY, "lamp_down"); // Box 88 headlight front vertical
 		bodyModel[43] = new ModelRendererTurbo(this, 385, 17, textureX, textureY); // Box 87
 		bodyModel[44] = new ModelRendererTurbo(this, 33, 33, textureX, textureY); // Box 88
 		bodyModel[45] = new ModelRendererTurbo(this, 65, 33, textureX, textureY); // Box 89

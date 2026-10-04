@@ -222,8 +222,8 @@ public class ModelDash839C extends ModelConverter //Same as Filename
 		bodyModel[179] = new ModelRendererTurbo(this, 43, 209, textureX, textureY); // Box 52 door swing right
 		bodyModel[180] = new ModelRendererTurbo(this, 118, 209, textureX, textureY); // Box 314 door swing right
 		bodyModel[181] = new ModelRendererTurbo(this, 15, 206, textureX, textureY); // Box 48
-		bodyModel[182] = new ModelRendererTurbo(this, 8, 203, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[183] = new ModelRendererTurbo(this, 8, 208, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[182] = new ModelRendererTurbo(this, 8, 203, textureX, textureY, "lamp_f_up"); // Box 186 Headlight Front up
+		bodyModel[183] = new ModelRendererTurbo(this, 8, 208, textureX, textureY, "lamp_f_d"); // Box 187 Headlight Front down
 		bodyModel[184] = new ModelRendererTurbo(this, 86, 177, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[185] = new ModelRendererTurbo(this, 78, 180, textureX, textureY, "numberboard"); // Box 118 numberboard
 		bodyModel[186] = new ModelRendererTurbo(this, 62, 180, textureX, textureY); // Box 43
@@ -285,7 +285,7 @@ public class ModelDash839C extends ModelConverter //Same as Filename
 		bodyModel[242] = new ModelRendererTurbo(this, 472, 171, textureX, textureY); // Box 256
 		bodyModel[243] = new ModelRendererTurbo(this, 469, 172, textureX, textureY); // Box 257
 		bodyModel[244] = new ModelRendererTurbo(this, 462, 108, textureX, textureY); // Box 254
-		bodyModel[245] = new ModelRendererTurbo(this, 475, 108, textureX, textureY, "lamp"); // Box 257
+		bodyModel[245] = new ModelRendererTurbo(this, 475, 108, textureX, textureY, "numberboard"); // Box 257
 		bodyModel[246] = new ModelRendererTurbo(this, 462, 108, textureX, textureY); // Box 258
 		bodyModel[247] = new ModelRendererTurbo(this, 415, 83, textureX, textureY); // Box 235
 		bodyModel[248] = new ModelRendererTurbo(this, 423, 90, textureX, textureY); // Box 260

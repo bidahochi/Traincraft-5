@@ -45,6 +45,48 @@
         },
         "marker_body_281": {
           "preset": "marker_light"
+        },
+        "lamp_gyra_huhh_1": {
+          "preset": "headlight"
+        },
+        "lamp_gyra_huhh_2": {
+          "preset": "headlight"
+        },
+        "fh_up": {
+          "preset": "headlight"
+        },
+        "fh_up1": {
+          "group": "fh_up"
+        },
+        "fh_up2": {
+          "group": "fh_up"
+        },
+        "fh_up3": {
+          "group": "fh_up"
+        },
+        "fh_up4": {
+          "group": "fh_up"
+        },
+        "fh_down": {
+          "preset": "headlight"
+        },
+        "fh_down1": {
+          "group": "fh_down"
+        },
+        "fh_down2": {
+          "group": "fh_down"
+        },
+        "fh_down3": {
+          "group": "fh_down"
+        },
+        "fh_down4": {
+          "group": "fh_down"
+        },
+        "lamp_big_top": {
+          "preset": "headlight"
+        },
+        "lamp_big_bottom": {
+          "preset": "headlight"
         }
       }
     },
@@ -80,23 +122,159 @@
     "bap:lightgrey": {},
     "bap:skin17": {},
     "bap:magenta": {},
-    "bap:skin16": {},
-    "bap:red": {},
-    "bap:black": {},
-    "bap:yellow": {},
-    "bap:grey": {},
-    "bap:orange": {},
-    "bap:white": {},
-    "bap:pink": {},
-    "bap:blue": {},
-    "bap:purple": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "HL_U1B": {
+            "preset": "gyralite"
+          },
+          "HL_U1A": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:red": {
+      "lighting": {
+        "fixtures": {
+          "lamp_gyra_huhh_1": {
+            "preset": "gyralite"
+          },
+          "lamp_gyra_huhh_2": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:black": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:yellow": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:purple": {
+      "lighting": {
+        "fixtures": {
+          "fh_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:lightblue": {},
     "bap:lime": {},
-    "bap:skin18": {},
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "lamp_big_top": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
-    "bap:skin20": {},
-    "bap:skin21": {},
-    "bap:skin22": {},
+    "bap:skin20": {
+      "lighting": {
+        "fixtures": {
+          "HL_U1A": {
+            "preset": "gyralite"
+          },
+          "HL_U1B": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
+    "bap:skin21": {
+      "lighting": {
+        "fixtures": {
+          "HL_U1B": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          },
+          "HL_U1A": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:skin22": {
+      "lighting": {
+        "fixtures": {
+          "HL_U1B": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          },
+          "HL_U1A": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin23": {},
     "bap:skin24": {},
     "bap:skin25": {},
@@ -105,7 +283,16 @@
     "bap:skin28": {},
     "bap:skin29": {},
     "bap:skin30": {},
-    "bap:skin32": {},
+    "bap:skin32": {
+      "lighting": {
+        "fixtures": {
+          "lamp_big_top": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin33": {}
   }
 }

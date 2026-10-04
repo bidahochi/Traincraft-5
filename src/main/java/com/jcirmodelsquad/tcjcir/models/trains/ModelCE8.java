@@ -231,8 +231,8 @@ public class ModelCE8 extends ModelConverter //Same as Filename
 		bodyModel[189] = new ModelRendererTurbo(this, 234, 109, textureX, textureY); // Box 43
 		bodyModel[190] = new ModelRendererTurbo(this, 235, 113, textureX, textureY); // Box 43
 		bodyModel[191] = new ModelRendererTurbo(this, 238, 87, textureX, textureY); // Box 333
-		bodyModel[192] = new ModelRendererTurbo(this, 247, 86, textureX, textureY, "lamp"); // Box 334 Rear Gyralight L
-		bodyModel[193] = new ModelRendererTurbo(this, 254, 86, textureX, textureY, "lamp"); // Box 335 Rear Gyralight R
+		bodyModel[192] = new ModelRendererTurbo(this, 247, 86, textureX, textureY, "gyra_1r"); // Box 334 Rear Gyralight L
+		bodyModel[193] = new ModelRendererTurbo(this, 254, 86, textureX, textureY, "gyra_2r"); // Box 335 Rear Gyralight R
 		bodyModel[194] = new ModelRendererTurbo(this, 246, 111, textureX, textureY); // Box 601
 		bodyModel[195] = new ModelRendererTurbo(this, 215, 90, textureX, textureY); // Box 402
 		bodyModel[196] = new ModelRendererTurbo(this, 251, 92, textureX, textureY, "numberboard"); // Box 117 Numberboard R
@@ -315,8 +315,8 @@ public class ModelCE8 extends ModelConverter //Same as Filename
 		bodyModel[273] = new ModelRendererTurbo(this, 113, 20, textureX, textureY); // Box 92
 		bodyModel[274] = new ModelRendererTurbo(this, 92, 41, textureX, textureY); // Box 99
 		bodyModel[275] = new ModelRendererTurbo(this, 331, 111, textureX, textureY); // Box 336
-		bodyModel[276] = new ModelRendererTurbo(this, 317, 113, textureX, textureY, "lamp"); // Box 337 Front Gyralight L
-		bodyModel[277] = new ModelRendererTurbo(this, 324, 113, textureX, textureY, "lamp"); // Box 338 Front Gyralight R
+		bodyModel[276] = new ModelRendererTurbo(this, 317, 113, textureX, textureY, "gyra_1"); // Box 337 Front Gyralight L
+		bodyModel[277] = new ModelRendererTurbo(this, 324, 113, textureX, textureY, "gyra_2"); // Box 338 Front Gyralight R
 		bodyModel[278] = new ModelRendererTurbo(this, 361, 227, textureX, textureY); // Box 278
 		bodyModel[279] = new ModelRendererTurbo(this, 361, 224, textureX, textureY); // Box 279
 		bodyModel[280] = new ModelRendererTurbo(this, 361, 221, textureX, textureY); // Box 280

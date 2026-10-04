@@ -3,7 +3,22 @@
   "stock": "bap:b23-7_wrx",
   "lighting": {
     "defaults": {
-      "fixtures": {}
+      "fixtures": {
+        "nose_gyra": {
+          "preset": "gyralite",
+          "color": "#FFF4B4"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "rear_gyra": {
+          "preset": "gyralite",
+          "color": "#FFF4B4"
+        },
+        "speedo": {
+          "preset": "instrument"
+        }
+      }
     }
   },
   "skins": {
