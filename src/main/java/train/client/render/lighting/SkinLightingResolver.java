@@ -89,8 +89,8 @@ final class SkinLightingResolver
         Map<String, RollingStockLightOverride> overrides,
         RollingStockLightDefinition baseline, String legacyGroup)
     {
-        RollingStockLightOverride override = physicalOverride(overrides, baseline.id(),
-            physicalGroup(overrides, baseline.id(), legacyGroup));
+        String group = physicalGroup(overrides, baseline.id(), legacyGroup);
+        RollingStockLightOverride override = physicalOverride(overrides, baseline.id(), group);
         if (override != null && override.fixtureType() != null)
         {
             LightFixtureType type = override.fixtureType();
@@ -103,6 +103,20 @@ final class SkinLightingResolver
         if (baseline.instrument())
         {
             return resolveInstrumentDefinition(override, baseline);
+        }
+        // Flat lenses have overlapping front/back faces, so detection gives them zero beam dimensions.
+        // Combining the lens pieces can still establish a shared outward direction.
+        //
+        // Give beam groups default dimensions first, then apply overrides.
+        // Explicit dimensions (including zero) still win.
+        if (group != null && override != null && override.behavior() != null
+            && override.behavior().effect() == RollingStockLightDefinition.Effect.BEAM
+            && baseline.effect() == RollingStockLightDefinition.Effect.EMISSIVE_ONLY
+            && baseline.beamLength() == 0.0F && baseline.beamWidth() == 0.0F)
+        {
+            baseline = baseline.toBuilder().beamDimensions(
+                RollingStockLightDefinition.DEFAULT_HEADLIGHT_BEAM_LENGTH,
+                RollingStockLightDefinition.DEFAULT_HEADLIGHT_BEAM_WIDTH).build();
         }
         return override == null || override.behavior() == null
                ? baseline
