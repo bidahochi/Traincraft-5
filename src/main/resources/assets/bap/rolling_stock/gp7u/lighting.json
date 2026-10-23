@@ -18,6 +18,33 @@
         },
         "marker_two_body_401": {
           "preset": "marker_light"
+        },
+        "lamp_highbeam1": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam2": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam1r": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam2r": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_down": {
+          "preset": "headlight"
+        },
+        "markerlight": {
+          "preset": "marker_light"
         }
       }
     }
@@ -26,11 +53,73 @@
     "bap:red": {},
     "bap:blue": {},
     "bap:lightgrey": {},
-    "bap:white": {},
-    "bap:skin16": {},
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_up": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose_down": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam1": {
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2": {
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam1r": {
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2r": {
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam2": {
+            "preset": "gyralite"
+          },
+          "lamp_highbeam1": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:grey": {},
     "bap:green": {},
-    "bap:cyan": {},
-    "bap:skin17": {}
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_highbeam2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin17": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_highbeam2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    }
   }
 }

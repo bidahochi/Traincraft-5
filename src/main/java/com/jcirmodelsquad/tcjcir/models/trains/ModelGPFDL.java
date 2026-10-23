@@ -316,11 +316,11 @@ public class ModelGPFDL extends ModelConverter//Same as Filename
 		bodyModel[268] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[269] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[270] = new ModelRendererTurbo(this, 19, 93, textureX, textureY); // Box 336
-		bodyModel[271] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam front
-		bodyModel[272] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam front
+		bodyModel[271] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "fuck1"); // Box 337 headlight ane 2 beam front
+		bodyModel[272] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "fuck2"); // Box 338 headlight ane 2 beam front
 		bodyModel[273] = new ModelRendererTurbo(this, 444, 141, textureX, textureY); // Box 336
-		bodyModel[274] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam rear
-		bodyModel[275] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam rear
+		bodyModel[274] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "fuck4"); // Box 337 headlight ane 2 beam rear
+		bodyModel[275] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "fuck3"); // Box 338 headlight ane 2 beam rear
 		bodyModel[276] = new ModelRendererTurbo(this, 283, 73, textureX, textureY, "cull"); // Box 3 cull aww
 		bodyModel[277] = new ModelRendererTurbo(this, 283, 62, textureX, textureY, "cull"); // Box 306 cull aww
 		bodyModel[278] = new ModelRendererTurbo(this, 40, 78, textureX, textureY); // Box 462

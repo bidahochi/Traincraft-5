@@ -42,6 +42,78 @@
         },
         "cab_speedometer_body_567": {
           "preset": "instrument"
+        },
+        "lf1": {
+          "preset": "headlight"
+        },
+        "lf2": {
+          "preset": "headlight"
+        },
+        "lf3": {
+          "preset": "headlight"
+        },
+        "lf4": {
+          "preset": "headlight"
+        },
+        "lf5": {
+          "preset": "headlight"
+        },
+        "lf6": {
+          "preset": "headlight"
+        },
+        "lr1": {
+          "preset": "headlight"
+        },
+        "lr2": {
+          "preset": "headlight"
+        },
+        "lr3": {
+          "preset": "headlight"
+        },
+        "lr4": {
+          "preset": "headlight"
+        },
+        "gr1": {
+          "preset": "gyralite"
+        },
+        "gr2": {
+          "preset": "gyralite"
+        },
+        "gf1": {
+          "preset": "gyralite"
+        },
+        "gf2": {
+          "preset": "gyralite"
+        },
+        "egf": {
+          "preset": "gyralite"
+        },
+        "egr": {
+          "preset": "gyralite"
+        },
+        "ditch1a": {
+          "preset": "ditch_light"
+        },
+        "ditch1b": {
+          "preset": "ditch_light"
+        },
+        "ditch2a": {
+          "preset": "ditch_light"
+        },
+        "ditch2b": {
+          "preset": "ditch_light"
+        },
+        "ditch3a": {
+          "preset": "ditch_light"
+        },
+        "ditch3b": {
+          "preset": "ditch_light"
+        },
+        "lfc2": {
+          "preset": "headlight"
+        },
+        "lfc1": {
+          "preset": "headlight"
         }
       }
     },
@@ -67,12 +139,48 @@
   "skins": {
     "bap:skin32": {
       "lighting": {
-        "profile": "bap:gp7/gyralite"
+        "profile": "bap:gp7/gyralite",
+        "fixtures": {
+          "GyraFrontANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraFrontANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
       }
     },
     "bap:skin60": {
       "lighting": {
-        "profile": "bap:gp7/gyralite"
+        "profile": "bap:gp7/gyralite",
+        "fixtures": {
+          "GyraFrontANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraFrontANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
       }
     },
     "bap:white": {},
@@ -92,8 +200,36 @@
     "bap:skin18": {},
     "bap:skin59": {},
     "bap:grey": {},
-    "bap:orange": {},
-    "bap:pink": {},
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "lf3": {
+            "preset": "mars",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lr3": {
+            "preset": "mars",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "gf2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "gr2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:skin35": {},
     "bap:skin36": {},
     "bap:skin37": {},
@@ -120,7 +256,28 @@
     "bap:red": {},
     "bap:magenta": {},
     "bap:skin46": {},
-    "bap:skin47": {},
+    "bap:skin47": {
+      "lighting": {
+        "fixtures": {
+          "GyraFrontANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraFrontANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "GyraRearANE2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin48": {},
     "bap:skin49": {},
     "bap:skin50": {},
@@ -129,8 +286,38 @@
     "bap:skin53": {},
     "bap:skin54": {},
     "bap:skin55": {},
-    "bap:skin56": {},
-    "bap:skin57": {},
+    "bap:skin56": {
+      "lighting": {
+        "fixtures": {
+          "gf2": {
+            "color": "#FFFFFF"
+          },
+          "gf1": {
+            "color": "#FFFFFF"
+          },
+          "gr2": {
+            "color": "#FFFFFF"
+          },
+          "gr1": {
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:skin57": {
+      "lighting": {
+        "fixtures": {
+          "lfc1": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lfc2": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:skin58": {},
     "bap:skin61": {},
     "bap:skin62": {},

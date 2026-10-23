@@ -10,6 +10,18 @@
         "marker_wm_chop_body_12": {
           "preset": "marker_light"
         },
+        "GyraFrontANE1": {
+          "preset": "headlight"
+        },
+        "GyraFrontANE2": {
+          "preset": "headlight"
+        },
+        "GyraRearANE1": {
+          "preset": "headlight"
+        },
+        "GyraRearANE2": {
+          "preset": "headlight"
+        },
         "marker_body_534": {
           "preset": "marker_light"
         },
@@ -30,14 +42,112 @@
         },
         "cab_speedometer_body_567": {
           "preset": "instrument"
+        },
+        "lf1": {
+          "preset": "headlight"
+        },
+        "lf2": {
+          "preset": "headlight"
+        },
+        "lf3": {
+          "preset": "headlight"
+        },
+        "lf4": {
+          "preset": "headlight"
+        },
+        "lf5": {
+          "preset": "headlight"
+        },
+        "lf6": {
+          "preset": "headlight"
+        },
+        "lr1": {
+          "preset": "headlight"
+        },
+        "lr2": {
+          "preset": "headlight"
+        },
+        "lr3": {
+          "preset": "headlight"
+        },
+        "lr4": {
+          "preset": "headlight"
+        },
+        "gr1": {
+          "preset": "gyralite"
+        },
+        "gr2": {
+          "preset": "gyralite"
+        },
+        "gf1": {
+          "preset": "gyralite"
+        },
+        "gf2": {
+          "preset": "gyralite"
+        },
+        "egf": {
+          "preset": "gyralite"
+        },
+        "egr": {
+          "preset": "gyralite"
+        },
+        "ditch1a": {
+          "preset": "ditch_light"
+        },
+        "ditch1b": {
+          "preset": "ditch_light"
+        },
+        "ditch2a": {
+          "preset": "ditch_light"
+        },
+        "ditch2b": {
+          "preset": "ditch_light"
+        },
+        "ditch3a": {
+          "preset": "ditch_light"
+        },
+        "ditch3b": {
+          "preset": "ditch_light"
+        },
+        "lfc2": {
+          "preset": "headlight"
+        },
+        "lfc1": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
     "bap:green": {},
-    "bap:black": {},
-    "bap:skin21": {},
+    "bap:black": {
+      "lighting": {
+        "fixtures": {
+          "egf": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "egr": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
+    "bap:skin21": {
+      "lighting": {
+        "fixtures": {
+          "egf": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "egr": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:orange": {},
     "bap:skin25": {},
     "bap:white": {},
@@ -45,8 +155,34 @@
     "bap:skin16": {},
     "bap:skin17": {},
     "bap:lightgrey": {},
-    "bap:skin19": {},
-    "bap:skin20": {},
+    "bap:skin19": {
+      "lighting": {
+        "fixtures": {
+          "gf2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "gr2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
+    "bap:skin20": {
+      "lighting": {
+        "fixtures": {
+          "gf2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "gr2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:pink": {},
     "bap:magenta": {},
     "bap:skin35": {},
@@ -55,7 +191,20 @@
     "bap:lightblue": {},
     "bap:skin23": {},
     "bap:brown": {},
-    "bap:skin26": {},
+    "bap:skin26": {
+      "lighting": {
+        "fixtures": {
+          "lfc1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lfc2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin31": {},
     "bap:skin28": {},
     "bap:skin29": {},
@@ -87,7 +236,16 @@
     "bap:skin24": {},
     "bap:skin27": {},
     "bap:skin54": {},
-    "bap:skin55": {},
+    "bap:skin55": {
+      "lighting": {
+        "fixtures": {
+          "egf": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:skin32": {},
     "bap:skin56": {}
   }

@@ -157,8 +157,8 @@ public class ModelGP7U_ATSF extends ModelConverter //Same as Filename
 		bodyModel[110] = new ModelRendererTurbo(this, 205, 145, textureX, textureY); // Box 370
 		bodyModel[111] = new ModelRendererTurbo(this, 205, 157, textureX, textureY); // Box 374
 		bodyModel[112] = new ModelRendererTurbo(this, 167, 119, textureX, textureY); // Box 375
-		bodyModel[113] = new ModelRendererTurbo(this, 39, 142, textureX, textureY, "lamp"); // Box 149 headlight front nose
-		bodyModel[114] = new ModelRendererTurbo(this, 32, 142, textureX, textureY, "lamp"); // Box 149 headlight front nose
+		bodyModel[113] = new ModelRendererTurbo(this, 39, 142, textureX, textureY, "lamp_nose_up"); // Box 149 headlight front nose
+		bodyModel[114] = new ModelRendererTurbo(this, 32, 142, textureX, textureY, "lamp_nose_down"); // Box 149 headlight front nose
 		bodyModel[115] = new ModelRendererTurbo(this, 188, 160, textureX, textureY); // Box 137
 		bodyModel[116] = new ModelRendererTurbo(this, 188, 148, textureX, textureY); // Box 138
 		bodyModel[117] = new ModelRendererTurbo(this, 2, 97, textureX, textureY, "cull"); // Box 160 cull crossover
@@ -298,11 +298,11 @@ public class ModelGP7U_ATSF extends ModelConverter //Same as Filename
 		bodyModel[251] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[252] = new ModelRendererTurbo(this, 354, 164, textureX, textureY); // Box 443 hd funky dynamic radiator
 		bodyModel[253] = new ModelRendererTurbo(this, 19, 93, textureX, textureY); // Box 336
-		bodyModel[254] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam front
-		bodyModel[255] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam front
+		bodyModel[254] = new ModelRendererTurbo(this, 32, 95, textureX, textureY, "lamp_highbeam1"); // Box 337 headlight ane 2 beam front
+		bodyModel[255] = new ModelRendererTurbo(this, 39, 95, textureX, textureY, "lamp_highbeam2"); // Box 338 headlight ane 2 beam front
 		bodyModel[256] = new ModelRendererTurbo(this, 444, 141, textureX, textureY); // Box 336
-		bodyModel[257] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "lamp"); // Box 337 headlight ane 2 beam rear
-		bodyModel[258] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "lamp"); // Box 338 headlight ane 2 beam rear
+		bodyModel[257] = new ModelRendererTurbo(this, 464, 143, textureX, textureY, "lamp_highbeam2r"); // Box 337 headlight ane 2 beam rear
+		bodyModel[258] = new ModelRendererTurbo(this, 457, 143, textureX, textureY, "lamp_highbeam1r"); // Box 338 headlight ane 2 beam rear
 		bodyModel[259] = new ModelRendererTurbo(this, 310, 235, textureX, textureY); // Box 452 rear fuel fill
 		bodyModel[260] = new ModelRendererTurbo(this, 310, 235, textureX, textureY); // Box 452 rear fuel fill
 		bodyModel[261] = new ModelRendererTurbo(this, 283, 73, textureX, textureY, "cull"); // Box 3 cull aww
@@ -385,8 +385,8 @@ public class ModelGP7U_ATSF extends ModelConverter //Same as Filename
 		bodyModel[338] = new ModelRendererTurbo(this, 205, 64, textureX, textureY); // Box 74
 		bodyModel[339] = new ModelRendererTurbo(this, 216, 61, textureX, textureY); // Box 75
 		bodyModel[340] = new ModelRendererTurbo(this, 190, 61, textureX, textureY); // Box 76
-		bodyModel[341] = new ModelRendererTurbo(this, 32, 120, textureX, textureY, "lamp"); // Box 186 Headlight Front
-		bodyModel[342] = new ModelRendererTurbo(this, 32, 125, textureX, textureY, "lamp"); // Box 187 Headlight Front
+		bodyModel[341] = new ModelRendererTurbo(this, 32, 120, textureX, textureY, "lamp_cab_up"); // Box 186 Headlight Front
+		bodyModel[342] = new ModelRendererTurbo(this, 32, 125, textureX, textureY, "lamp_cab_down"); // Box 187 Headlight Front
 		bodyModel[343] = new ModelRendererTurbo(this, 192, 39, textureX, textureY); // Box 332
 		bodyModel[344] = new ModelRendererTurbo(this, 229, 77, textureX, textureY); // Box 67
 		bodyModel[345] = new ModelRendererTurbo(this, 256, 39, textureX, textureY); // Box 333
@@ -444,9 +444,9 @@ public class ModelGP7U_ATSF extends ModelConverter //Same as Filename
 		bodyModel[397] = new ModelRendererTurbo(this, 269, 2, textureX, textureY, "cull"); // Box 561 cull ptc antenna shiz
 		bodyModel[398] = new ModelRendererTurbo(this, 260, 2, textureX, textureY); // Box 563
 		bodyModel[399] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "marker_two_body_399"); // Box 71 markerlight twO
-		bodyModel[400] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[400] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[401] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "marker_two_body_401"); // Box 71 markerlight twO
-		bodyModel[402] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[402] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[403] = new ModelRendererTurbo(this, 332, 115, textureX, textureY, "cull"); // Box 628 cull fncc numberboard
 		bodyModel[404] = new ModelRendererTurbo(this, 332, 111, textureX, textureY, "cull"); // Box 629 cull fncc numberboard
 

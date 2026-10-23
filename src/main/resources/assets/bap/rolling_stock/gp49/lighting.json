@@ -27,6 +27,12 @@
         },
         "lamp_cab_down": {
           "preset": "headlight"
+        },
+        "ditch1": {
+          "preset": "ditch_light"
+        },
+        "ditch2": {
+          "preset": "ditch_light"
         }
       }
     }
@@ -54,6 +60,18 @@
           "lamp_highbeam2": {
             "preset": "mars",
             "color": "#FFFFFF"
+          },
+          "ditch1": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch2": {
+            "hornResponse": {
+              "phase": 0
+            },
+            "preset": "horn_alternating_ditch"
           }
         }
       }
