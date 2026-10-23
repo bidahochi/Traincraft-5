@@ -331,8 +331,8 @@ public class ModelGP18 extends ModelConverter //Same as Filename
 		bodyModel[286] = new ModelRendererTurbo(this, 62, 120, textureX, textureY); // Box 236 steam gen exhaust
 		bodyModel[287] = new ModelRendererTurbo(this, 53, 105, textureX, textureY); // Box 259
 		bodyModel[288] = new ModelRendererTurbo(this, 62, 77, textureX, textureY); // Box 74
-		bodyModel[289] = new ModelRendererTurbo(this, 63, 84, textureX, textureY, "lamp"); // Box 186 headlight f chop 1
-		bodyModel[290] = new ModelRendererTurbo(this, 63, 89, textureX, textureY, "lamp"); // Box 187 headlight f chop 2
+		bodyModel[289] = new ModelRendererTurbo(this, 63, 84, textureX, textureY, "lamp_cab_up"); // Box 186 headlight f chop 1
+		bodyModel[290] = new ModelRendererTurbo(this, 63, 89, textureX, textureY, "lamp_cab_down"); // Box 187 headlight f chop 2
 		bodyModel[291] = new ModelRendererTurbo(this, 71, 75, textureX, textureY); // Box 644
 		bodyModel[292] = new ModelRendererTurbo(this, 72, 66, textureX, textureY); // Box 645
 		bodyModel[293] = new ModelRendererTurbo(this, 61, 71, textureX, textureY); // Box 646

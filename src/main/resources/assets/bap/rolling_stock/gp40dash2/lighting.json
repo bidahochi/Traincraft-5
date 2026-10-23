@@ -27,22 +27,179 @@
         },
         "marker_two_body_446": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp_nose_b_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_up": {
+          "preset": "headlight"
+        },
+        "ditch1": {
+          "preset": "ditch_light"
+        },
+        "ditch2": {
+          "preset": "ditch_light"
+        },
+        "ditch1a": {
+          "preset": "ditch_light"
+        },
+        "ditch2a": {
+          "preset": "ditch_light"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
     "bap:skin31": {},
-    "bap:skin16": {},
-    "bap:skin17": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_b_up": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "ditch1a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          },
+          "ditch2a": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch1b": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 1
+            }
+          },
+          "ditch2b": {
+            "preset": "horn_alternating_ditch",
+            "hornResponse": {
+              "phase": 0
+            }
+          }
+        }
+      }
+    },
+    "bap:skin17": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_up": {
+            "preset": "gyralite"
+          },
+          "lamp_nose_b_down": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin27": {},
     "bap:lime": {},
-    "bap:white": {},
-    "bap:skin18": {},
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose_b_down": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_b_down": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:black": {},
-    "bap:skin26": {},
-    "bap:skin29": {},
+    "bap:skin26": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose_b_down": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin29": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:grey": {},
     "bap:blue": {},
     "bap:lightblue": {},

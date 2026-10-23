@@ -12,38 +12,219 @@
         },
         "marker_nose": {
           "preset": "marker_light"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam_1": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam_2": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_e": {
+          "preset": "headlight"
+        },
+        "lamp_nose_f": {
+          "preset": "headlight"
+        },
+        "lamp_nose_emerg": {
+          "preset": "gyralite"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp_rear_gyra_down": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_gyra_up": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_emerg": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_gyra2_down": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_gyra2_up": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
     "bap:orange": {},
-    "bap:black": {},
+    "bap:black": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          },
+          "lamp_rear_gyra2_down": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:blue": {},
     "bap:skin23": {},
     "bap:skin24": {},
     "bap:lightblue": {},
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_a_down": {
+            "preset": "gyralite"
+          },
+          "lamp_nose_a_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin17": {},
     "bap:yellow": {},
     "bap:green": {},
     "bap:skin18": {},
-    "bap:skin16": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam_1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_highbeam_2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_rear_gyra2_down": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_rear_gyra2_up": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:purple": {},
     "bap:pink": {},
-    "bap:red": {},
+    "bap:red": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite"
+          },
+          "lamp_highbeam_1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
     "bap:lightgrey": {},
     "bap:skin20": {},
-    "bap:skin21": {},
+    "bap:skin21": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_up": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:skin22": {},
-    "bap:magenta": {},
+    "bap:magenta": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:lime": {},
     "bap:skin25": {},
     "bap:skin26": {},
-    "bap:skin27": {},
+    "bap:skin27": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_emerg": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_rear_emerg": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin28": {},
-    "bap:skin29": {},
+    "bap:skin29": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam_1": {
+            "preset": "mars"
+          },
+          "lamp_highbeam_2": {
+            "preset": "mars"
+          },
+          "lamp_rear_gyra2_down": {
+            "preset": "mars"
+          },
+          "lamp_rear_gyra2_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin30": {},
     "bap:skin31": {}
   }

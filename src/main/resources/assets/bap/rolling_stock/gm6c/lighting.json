@@ -15,6 +15,12 @@
         },
         "cab_speedometer_body_274": {
           "preset": "instrument"
+        },
+        "gyra1": {
+          "preset": "gyralite"
+        },
+        "gyra2": {
+          "preset": "gyralite"
         }
       }
     }
@@ -25,7 +31,31 @@
     "bap:lightblue": {},
     "bap:black": {},
     "bap:skin17": {},
-    "bap:cyan": {},
-    "bap:skin18": {}
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "gyra1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "gyra2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "gyra1": {
+            "preset": "mars"
+          },
+          "gyra2": {
+            "preset": "mars"
+          }
+        }
+      }
+    }
   }
 }

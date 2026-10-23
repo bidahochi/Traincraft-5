@@ -254,8 +254,8 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[211] = new ModelRendererTurbo(this, 257, 147, textureX, textureY); // Box 114
 		bodyModel[212] = new ModelRendererTurbo(this, 256, 143, textureX, textureY, "cull"); // Box 1007 cull
 		bodyModel[213] = new ModelRendererTurbo(this, 112, 79, textureX, textureY); // Box 443 gyra 4head casing
-		bodyModel[214] = new ModelRendererTurbo(this, 112, 73, textureX, textureY, "lamp"); // Box 444 gyra 4head
-		bodyModel[215] = new ModelRendererTurbo(this, 112, 73, textureX, textureY, "lamp"); // Box 445 gyra 4head
+		bodyModel[214] = new ModelRendererTurbo(this, 112, 73, textureX, textureY, "gyra1"); // Box 444 gyra 4head
+		bodyModel[215] = new ModelRendererTurbo(this, 112, 73, textureX, textureY, "gyra2"); // Box 445 gyra 4head
 		bodyModel[216] = new ModelRendererTurbo(this, 253, 67, textureX, textureY); // Box 1251 sandcap
 		bodyModel[217] = new ModelRendererTurbo(this, 253, 63, textureX, textureY, "cull"); // Box 221 sandcap cull box
 		bodyModel[218] = new ModelRendererTurbo(this, 450, 67, textureX, textureY); // Box 1251 sandcap

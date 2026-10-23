@@ -27,6 +27,27 @@
         },
         "marker_two_body_446": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp_nose_b_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
         }
       }
     }
@@ -37,16 +58,66 @@
     "bap:skin20": {},
     "bap:grey": {},
     "bap:orange": {},
-    "bap:skin21": {},
+    "bap:skin21": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "gyralite"
+          },
+          "lamp_nose_b_up": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:skin22": {},
     "bap:green": {},
-    "bap:magenta": {},
+    "bap:magenta": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
     "bap:skin23": {},
     "bap:skin24": {},
     "bap:skin25": {},
-    "bap:skin28": {},
-    "bap:skin30": {},
+    "bap:skin28": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_highbeam1": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:skin30": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "mars"
+          },
+          "lamp_nose_b_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin32": {},
     "bap:skin33": {},
     "bap:skin34": {},
@@ -54,7 +125,20 @@
     "bap:skin35": {},
     "bap:lime": {},
     "bap:skin36": {},
-    "bap:skin37": {},
+    "bap:skin37": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin38": {},
     "bap:skin39": {},
     "bap:skin40": {},

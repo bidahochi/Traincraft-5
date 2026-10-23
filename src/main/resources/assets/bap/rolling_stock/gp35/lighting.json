@@ -15,36 +15,193 @@
         },
         "cab_speedometer_body_207": {
           "preset": "instrument"
+        },
+        "lamp_nose_a_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_a_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_b_up": {
+          "preset": "headlight"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp_nose_f": {
+          "preset": "headlight"
+        },
+        "lamp_nose_e": {
+          "preset": "headlight"
+        },
+        "lamp_nose_emerg": {
+          "preset": "gyralite"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_rear_emerg": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_gyra_f": {
+          "preset": "gyralite"
+        },
+        "lamp_rear_gyra_e": {
+          "preset": "gyralite"
+        },
+        "lamp_highbeam1": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam2": {
+          "preset": "headlight"
+        }
+      }
+    },
+    "profiles": {
+      "gp35:benbonar": {
+        "fixtures": {
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
         }
       }
     }
   },
   "skins": {
-    "bap:red": {},
-    "bap:skin19": {},
+    "bap:red": {
+      "lighting": {
+        "profile": "gp35:benbonar"
+      }
+    },
+    "bap:skin19": {
+      "lighting": {
+        "profile": "gp35:benbonar"
+      }
+    },
     "bap:black": {},
     "bap:magenta": {},
     "bap:skin16": {},
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_emerg": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_rear_emerg": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:skin17": {},
     "bap:lightblue": {},
     "bap:lightgrey": {},
     "bap:skin18": {},
-    "bap:pink": {},
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        },
+        "profile": "gp35:benbonar"
+      }
+    },
     "bap:yellow": {},
     "bap:purple": {},
-    "bap:lime": {},
-    "bap:cyan": {},
+    "bap:lime": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "mars"
+          },
+          "lamp_nose_b_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_b_down": {
+            "preset": "mars"
+          },
+          "lamp_nose_b_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin20": {},
     "bap:skin21": {},
-    "bap:white": {},
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_highbeam2": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:skin22": {},
-    "bap:skin23": {},
-    "bap:skin24": {},
+    "bap:skin23": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "gyralite"
+          },
+          "lamp_highbeam2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
+    "bap:skin24": {
+      "lighting": {
+        "profile": "gp35:benbonar"
+      }
+    },
     "bap:skin25": {},
     "bap:skin26": {},
     "bap:skin27": {},
-    "bap:skin28": {},
+    "bap:skin28": {
+      "lighting": {
+        "profile": "gp35:benbonar"
+      }
+    },
     "bap:skin29": {},
     "bap:skin30": {},
     "bap:green": {},

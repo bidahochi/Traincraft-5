@@ -24,6 +24,12 @@
         },
         "cab_speedometer_body_567": {
           "preset": "instrument"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
         }
       }
     }
@@ -31,7 +37,21 @@
   "skins": {
     "bap:black": {},
     "bap:green": {},
-    "bap:blue": {},
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_up": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:pink": {},
     "bap:skin16": {},
     "bap:skin17": {},

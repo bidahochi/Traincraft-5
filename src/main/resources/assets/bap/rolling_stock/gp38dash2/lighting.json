@@ -27,6 +27,15 @@
         },
         "marker_two_body_446": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
         }
       }
     }
