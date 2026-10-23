@@ -50,6 +50,7 @@ import train.common.adminbook.ServerLogger;
 import train.common.appearance.RollingStockAppearanceResolver;
 import train.common.api.pathfinding.PathFindingHelper;
 import train.common.core.HandleOverheating;
+import train.common.core.ActionBarMessenger;
 import train.common.core.handlers.*;
 import train.common.core.network.PacketParkingBrake;
 import train.common.core.network.PacketRollingStockRotation;
@@ -61,6 +62,7 @@ import train.common.library.GuiIDs;
 import train.common.library.track.TrackCellResolver;
 import train.common.library.ItemIDs;
 import train.common.library.register.ITrainRecord;
+import train.common.slots.util.NbtContentsRule;
 import train.common.tile.TileTCRail;
 import train.common.tile.TileTCRailGag;
 import train.common.tile.TileTrainDetector;
@@ -2044,6 +2046,36 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		return 0.0F;
 	}
 
+
+	/**
+	 * Applies the server's carried-container restriction at the point of boarding.
+	 * Existing rider interactions can still dismount, and tool interactions never
+	 * enter this method. The inventory is read only when the optional rule is active.
+	 */
+	protected final void boardPlayer(EntityPlayer player)
+	{
+		if (worldObj.isRemote)
+		{
+			return;
+		}
+		if (player.ridingEntity != this)
+		{
+			BoardingRestriction restriction = ItemHandler.findBoardingRestriction(player.inventory);
+			if (restriction != null)
+			{
+				String messageKey = "tc.boarding.filled_container";
+				if (restriction.verdict == NbtContentsRule.Result.UNVERIFIED)
+				{
+					messageKey = "tc.boarding.unverified_container";
+				}
+				ChatComponentTranslation boardingMessage = new ChatComponentTranslation(
+						messageKey, restriction.stack.getDisplayName());
+				ActionBarMessenger.display(player, EnumChatFormatting.YELLOW + boardingMessage.getUnformattedText());
+				return;
+			}
+		}
+		player.mountEntity(this);
+	}
 
 	@Override
 	public boolean interactFirst(EntityPlayer entityplayer) {

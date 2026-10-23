@@ -55,9 +55,7 @@ public class AmfleetCab extends AbstractControlCar
             if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
                 return true;
             }
-            if (!worldObj.isRemote) {
-                entityplayer.mountEntity(this);
-            }
+            boardPlayer(entityplayer);
         }
         return true;
     }

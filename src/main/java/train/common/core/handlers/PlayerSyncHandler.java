@@ -9,13 +9,18 @@ import train.common.core.network.PacketSyncBannedItems;
 public class PlayerSyncHandler
 {
     @SubscribeEvent
-    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!(event.player instanceof EntityPlayerMP)) return;
+    public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event)
+    {
+        if ((event.player instanceof EntityPlayerMP) == false)
+        {
+            return;
+        }
 
         EntityPlayerMP player = (EntityPlayerMP) event.player;
 
         Traincraft.BannedItems_CHANNEL.sendTo(
-                new PacketSyncBannedItems(ItemHandler.BANNED_ITEMS),
+                new PacketSyncBannedItems(ItemHandler.BANNED_ITEMS, ItemHandler.getNonemptyBannedItems(),
+                        ItemHandler.getContainerContentsRules()),
                 player
         );
     }

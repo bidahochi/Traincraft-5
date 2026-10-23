@@ -32,9 +32,7 @@ public class PassengerIC4_DSB_FH extends EntityRollingStock implements IPassenge
 			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
 				return true;
 			}
-			if (!worldObj.isRemote) {
-				entityplayer.mountEntity(this);
-			}
+			boardPlayer(entityplayer);
 		}
 		return true;
 	}

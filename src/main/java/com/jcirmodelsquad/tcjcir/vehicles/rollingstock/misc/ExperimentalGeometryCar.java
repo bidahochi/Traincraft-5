@@ -154,9 +154,7 @@ public class ExperimentalGeometryCar extends EntityRollingStock implements IPass
 
             }
 */
-            if (!worldObj.isRemote) {
-                entityplayer.mountEntity(this);
-            }
+            boardPlayer(entityplayer);
         }
         return true;
     }

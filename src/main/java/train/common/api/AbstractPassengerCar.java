@@ -68,10 +68,7 @@ public abstract class AbstractPassengerCar extends EntityRollingStock implements
                 return true;
             }
 
-            if (worldObj.isRemote == false)
-            {
-                entityplayer.mountEntity(this);
-            }
+            boardPlayer(entityplayer);
         }
 
         return true;

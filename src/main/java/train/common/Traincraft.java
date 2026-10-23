@@ -335,6 +335,7 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 		}
 
 		ItemHandler.parseBannedItems(ConfigHandler.ROLLINGSTOCK_INVENTORY_BLACKLIST_RAW);
+		ItemHandler.parseNonemptyBannedItems(ConfigHandler.ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW);
 	}
 
 	@EventHandler

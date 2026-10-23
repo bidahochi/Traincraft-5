@@ -342,9 +342,7 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
 				return true;
 			}
-			if (!worldObj.isRemote) {
-				entityplayer.mountEntity(this);
-			}
+			boardPlayer(entityplayer);
 		}
 		return true;
 	}

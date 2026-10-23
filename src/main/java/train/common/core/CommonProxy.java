@@ -41,6 +41,8 @@ import train.common.mtc.block.BlockTransmitterMTC;
 import train.common.mtc.block.BlockTransmitterSpeed;
 import train.common.mtc.block.BlockTransmitterStopPoint;
 import train.common.mtc.tile.*;
+import train.common.slots.util.ItemKey;
+import train.common.slots.util.NbtContentsRule;
 import train.common.tile.*;
 import train.common.tile.tileStopper.TileAmericanStopper;
 import train.common.tile.tileStopper.TileGenericStopper;
@@ -62,6 +64,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CommonProxy implements IGuiHandler {
 	public static List<ReplacementStreamPlayer> playerList = new ArrayList<ReplacementStreamPlayer>();
@@ -347,6 +350,12 @@ public class CommonProxy implements IGuiHandler {
 
 	/** Ignores a client-only lockout-book update on the logical server. */
 	public void updateLockoutBook(PacketLockoutBookData packet)
+	{
+	}
+
+	/** Ignores client-only inventory policy synchronization on a dedicated server. */
+	public void applyInventoryBlacklists(Set<ItemKey> banned, Set<ItemKey> nonemptyBanned,
+			List<NbtContentsRule> rules)
 	{
 	}
 

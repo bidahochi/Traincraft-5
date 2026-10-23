@@ -13,6 +13,7 @@ import train.common.Traincraft;
 import train.common.library.Info;
 
 import java.io.File;
+import java.util.Locale;
 
 import static net.minecraftforge.common.config.Configuration.CATEGORY_GENERAL;
 
@@ -63,6 +64,12 @@ public class ConfigHandler {
     public static LightingMode LIGHTING_MODE = LightingMode.FULL;
     public static int MAX_TRUSTEES_ON_PADLOCK;
 	public static String[] ROLLINGSTOCK_INVENTORY_BLACKLIST_RAW;
+	/** Registry entries banned while filled or when their contents cannot be verified. */
+	public static String[] ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW;
+	/** Item selectors and NBT paths used to verify listed container contents. */
+	public static String[] ROLLINGSTOCK_CONTAINER_CONTENTS_RULES_RAW;
+	/** Server boarding restriction for filled or unverified containers in the nonempty inventory list. */
+	public static boolean ROLLINGSTOCK_BOARDING_BAN_NONEMPTY_CONTAINERS;
 
 	public static boolean ROLLINGSTOCK_INVENTORY_BAN_OPEN_FLUID_CONTAINERS;
 
@@ -77,6 +84,18 @@ public class ConfigHandler {
         + "illuminated fixtures and glows without projected cones, and FULL enables cones, "
         + "hotspots, rolling-stock occlusion, and shadows.";
     private static File activeConfigFile;
+
+    /** Supplies fresh copies of the default data rules for existing configurations. */
+    public static String[] getDefaultContainerContentsRules()
+    {
+        return new String[]
+        {
+            "ThermalExpansion:Cache | Item.Count",
+            "ThermalExpansion:Strongbox | Inventory[].Count",
+            "ImmersiveEngineering:woodenDevice:4 | inventory[].Count",
+            "etfuturum:shulker_box | Items[].Count"
+        };
+    }
 
 	public static void changeFirstLoad(){
 		Configuration cf = new Configuration(new File(Traincraft.configDirectory, Info.modName + ".cfg"), "1.0");
@@ -153,14 +172,39 @@ public class ConfigHandler {
 					new String[]
 					{
 							"ThermalFoundation:Storage:0-15",
+							"ImmersiveEngineering:woodenDevice:0-3",
+							"ImmersiveEngineering:woodenDevice:5-6"
+					},
+					"Always-banned inventory items. Entries here override the nonempty blacklist. "
+					+ "Remove supported containers here to allow empty ones. Replace ImmersiveEngineering:woodenDevice "
+					+ "with metadata 0-3 and 5-6 to preserve bans on non-crate variants.").getStringList();
+			ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW = cf.get(CATEGORY_INVENTORY, "ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW",
+					new String[]
+					{
 							"ThermalExpansion:Cache",
 							"ThermalExpansion:Strongbox",
-							"etfuturum:shulker_box",
-							"ImmersiveEngineering:woodenDevice"
+							"ImmersiveEngineering:woodenDevice:4",
+							"etfuturum:shulker_box"
 					},
-					"List of banned INVENTORY items").getStringList();
+					"Listed items use ROLLINGSTOCK_CONTAINER_CONTENTS_RULES_RAW to check contents. "
+					+ "Items without a valid matching reader are fully banned, including empty ones. "
+					+ "Supports optional metadata, ranges, or lists as in the always-banned list. "
+					+ "Empty containers still follow the car's cargo filter. Restart after changing either list.").getStringList();
+			ROLLINGSTOCK_CONTAINER_CONTENTS_RULES_RAW = cf.get(CATEGORY_INVENTORY,
+					"ROLLINGSTOCK_CONTAINER_CONTENTS_RULES_RAW", getDefaultContainerContentsRules(),
+					"Contents readers: item selector | NBT path. Example: mod:crate:4 | BlockEntityTag.Items[].Count. "
+					+ "Dots traverse compounds; [] checks every list entry; the final tag is numeric and positive means filled. "
+					+ "Only items in the nonempty blacklist are affected. Invalid readers and malformed contents are fully blocked. "
+					+ "Valid readers allow absent contents compounds/lists as empty. Restart after editing.").getStringList();
 			ROLLINGSTOCK_INVENTORY_BAN_OPEN_FLUID_CONTAINERS = cf.get(CATEGORY_INVENTORY, "ROLLINGSTOCK_INVENTORY_BAN_OPEN_FLUID_CONTAINERS",
 					false, "Blocks open fluid containers from being stored in Freight Cars").getBoolean(false);
+			ROLLINGSTOCK_BOARDING_BAN_NONEMPTY_CONTAINERS = cf.get(CATEGORY_INVENTORY,
+					"ROLLINGSTOCK_BOARDING_BAN_NONEMPTY_CONTAINERS", false,
+					"Server-side: prevents boarding rolling stock while carrying a filled container matched by "
+					+ "ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW. Checks main inventory, hotbar, armor, and cursor. "
+					+ "Containers without a valid reader or with malformed contents also block boarding. "
+					+ "Verified empty containers and dismounting are allowed. Applies to all players, including creative mode. "
+					+ "Restart after changing this option.").getBoolean(false);
 			ROLLINGSTOCK_PLAYER_SCALING = cf.get(CATEGORY_GENERAL, "ROLLINGSTOCK_PLAYER_SCALING",
 					true, "Toggles player scaling").getBoolean(true);
 		} catch (Exception e) {
@@ -285,7 +329,7 @@ public class ConfigHandler {
             {
                 try
                 {
-                    return valueOf(value.trim().toUpperCase(java.util.Locale.ROOT));
+                    return valueOf(value.trim().toUpperCase(Locale.ROOT));
                 }
                 catch (IllegalArgumentException ignored)
                 {

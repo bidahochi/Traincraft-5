@@ -216,7 +216,7 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
             if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
                 return true;
             }
-            entityplayer.mountEntity(this);
+            boardPlayer(entityplayer);
         }
         return true;
     }

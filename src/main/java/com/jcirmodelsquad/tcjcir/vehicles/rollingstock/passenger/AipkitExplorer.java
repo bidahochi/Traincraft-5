@@ -77,9 +77,7 @@ public class AipkitExplorer extends EntityRollingStock implements IPassenger {
             if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
                 return true;
             }
-            if (!worldObj.isRemote) {
-                entityplayer.mountEntity(this);
-            }
+            boardPlayer(entityplayer);
         }
         return true;
     }

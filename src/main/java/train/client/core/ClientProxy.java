@@ -46,6 +46,7 @@ import train.client.render.models.blocks.ModelStopper;
 import train.client.render.models.blocks.track.straight.ModelRoadCrossingAttachment;
 import train.client.render.itemRender.*;
 import train.common.Traincraft;
+import train.common.core.handlers.ItemHandler;
 import train.common.core.network.lockout.PacketLockoutBookData;
 import train.common.blocks.BlockAmericanStopper;
 import train.common.blocks.BlockStopper;
@@ -72,6 +73,8 @@ import train.common.mtc.render.RenderMTCBlock;
 import train.common.mtc.tile.TileTransmitterSpeed;
 import train.common.overlaytexture.OTSpecificationDynamic;
 import train.common.overlaytexture.OTSpecificationFixed;
+import train.common.slots.util.ItemKey;
+import train.common.slots.util.NbtContentsRule;
 import train.common.tile.*;
 import train.common.tile.tileStopper.TileAmericanStopper;
 import train.common.tile.tileStopper.TileGenericStopper;
@@ -93,7 +96,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ClientProxy extends CommonProxy
@@ -575,6 +580,28 @@ public class ClientProxy extends CommonProxy
 				{
 					((GuiLockoutBook) Minecraft.getMinecraft().currentScreen).loadData(packet);
 				}
+			}
+		});
+	}
+
+	/**
+	 * Copies decoded server policies and queues replacement on Minecraft's main
+	 * thread so slot checks cannot race the network decoder's collection changes.
+	 */
+	@Override
+	public void applyInventoryBlacklists(Set<ItemKey> banned, Set<ItemKey> nonemptyBanned,
+			List<NbtContentsRule> rules)
+	{
+		final Set<ItemKey> bannedSnapshot = new HashSet<ItemKey>(banned);
+		final Set<ItemKey> nonemptySnapshot = new HashSet<ItemKey>(nonemptyBanned);
+		final List<NbtContentsRule> ruleSnapshot = new ArrayList<>(rules);
+		Minecraft.getMinecraft().func_152344_a(new Runnable()
+		{
+			/** Applies the captured server policy before subsequent client slot checks. */
+			@Override
+			public void run()
+			{
+				ItemHandler.applySyncedBannedItems(bannedSnapshot, nonemptySnapshot, ruleSnapshot);
 			}
 		});
 	}

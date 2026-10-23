@@ -65,9 +65,11 @@ public abstract class AbstractPassengerCombineCar extends AbstractStandardFreigh
                 return true;
             }
 
-            if (worldObj.isRemote == false && entityplayer.isSneaking() == false && (itemstack == null || itemstack.getItem() != ItemIDs.stake.item && itemstack.getItem() != ItemIDs.padlock.item))
+            if (entityplayer.isSneaking() == false
+                && (itemstack == null
+                    || (itemstack.getItem() != ItemIDs.stake.item && itemstack.getItem() != ItemIDs.padlock.item)))
             {
-                entityplayer.mountEntity(this);
+                boardPlayer(entityplayer);
             }
         }
 

@@ -1607,3 +1607,6 @@ item.tc:minecartLocoNS3700Class.name=NS 3700 Class
 item.tc:minecartTenderNS3700.name=NS 3700 Tender
 
 item.tc:minecartWorkdayHyrail.name=1980 Pine Workday Hi-rail Truck
+
+tc.boarding.filled_container=You're over-encumbered! Can't climb the steps with a packed %s.
+tc.boarding.unverified_container=Can't board with %s: its contents couldn't be verified.
