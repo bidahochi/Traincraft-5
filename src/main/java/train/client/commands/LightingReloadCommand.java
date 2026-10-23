@@ -1,4 +1,4 @@
-package tb.dev.lightingreload;
+package train.client.commands;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -33,17 +33,15 @@ import train.common.appearance.ServerHornLightPolicies;
 import train.common.appearance.HornLightPolicyRegistry;
 import train.common.utils.SharedJsonParser;
 import train.common.library.register.ITrainRecord;
-import train.common.utils.devutils.DebugUtil;
 
-/** Development-only lighting preview reload and cached-fixture diagnostics. */
+/** Client lighting preview reload and cached-fixture diagnostics. */
 public final class LightingReloadCommand extends CommandBase
 {
     private static boolean registered;
 
-    /** Installs the command once on development clients through the optional cold bootstrap. */
     public static void init()
     {
-        if (Boolean.TRUE.equals(DebugUtil.dev) == false || registered)
+        if (registered)
         {
             return;
         }
@@ -54,10 +52,9 @@ public final class LightingReloadCommand extends CommandBase
         }
         ClientCommandHandler.instance.registerCommand(new LightingReloadCommand());
         registered = true;
-        Traincraft.tcLog.info("Registered development client command /reloadstocklighting.");
+        Traincraft.tcLog.info("Registered client command /reloadstocklighting.");
     }
 
-    /** The command is registered only through the development bootstrap. */
     private LightingReloadCommand()
     {
     }
@@ -80,17 +77,13 @@ public final class LightingReloadCommand extends CommandBase
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender)
     {
-        return Boolean.TRUE.equals(DebugUtil.dev);
+        return true;
     }
 
     /** Validates the registered stock, then atomically replaces its accepted resource data. */
     @Override
     public void processCommand(ICommandSender sender, String[] arguments)
     {
-        if (Boolean.TRUE.equals(DebugUtil.dev) == false)
-        {
-            return;
-        }
         if (arguments.length < 1 || arguments.length > 2
             || (arguments.length == 2 && "resources".equals(arguments[1]) == false
                 && "diagnose".equals(arguments[1]) == false))
@@ -139,7 +132,7 @@ public final class LightingReloadCommand extends CommandBase
 
     /**
      * Reads the renderer's existing cache without reloading it or changing entity controls.
-     * Reflection is confined to this development-only command so production rendering needs
+     * Reflection is confined to this command so rendering needs
      * no diagnostic API. Each field is resolved once per invocation, outside any render loop.
      * The cache is read on its owning client thread; failure reports an incompatible renderer.
      */

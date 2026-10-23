@@ -11,7 +11,6 @@ import java.lang.reflect.Method;
 public class OptionalDevBootstrap {
 	private static final String[] BOOTSTRAPS = {
 			"tb.dev.rollingstockicon.RollingStockIconGeneratorDevBootstrap",
-			"tb.dev.lightingreload.LightingReloadCommand",
 			"tb.dev.stockresources.StockResourceDevBootstrap"
 	};
 
@@ -31,7 +30,7 @@ public class OptionalDevBootstrap {
 			} catch (ClassNotFoundException missing) {
 				Traincraft.tcLog.warn("Development environment detected, but optional dev bootstrap is missing: "
 						+ bootstrap + ". Include the compiled src/dev/java output on the launch runtime classpath. "
-						+ "Reload the Gradle project in IntelliJ and rebuild to include the dev runtime dependency.");
+						+ "Reload the Gradle project in IntelliJ and rebuild to include src/dev/java in the main module.");
 			} catch (Throwable throwable) {
 				Traincraft.tcLog.warn("Failed to initialize optional dev bootstrap: " + bootstrap, throwable);
 			}

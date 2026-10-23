@@ -29,6 +29,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 import train.client.core.handlers.ClientTickHandler;
+import train.client.commands.LightingReloadCommand;
 import train.client.core.handlers.CustomRenderHandler;
 import train.client.render.lighting.LightingResourceReloadListener;
 import train.client.render.lighting.ClientRollingStockAppearanceLoader;
@@ -123,6 +124,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void registerEvents(FMLPreInitializationEvent event) {
 		super.registerEvents(event);
+		LightingReloadCommand.init();
 		RollingStockAppearanceResolver.setClientProvider(
 			ClientRollingStockAppearanceLoader.INSTANCE);
 		ClientTickHandler tickHandler = new ClientTickHandler();
