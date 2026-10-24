@@ -15,6 +15,10 @@
         },
         "rear_marker_lightt_body_400": {
           "preset": "marker_light"
+        },
+        "emerg": {
+          "controlCircuit": "emergency",
+          "preset": "emissive_only"
         }
       }
     }

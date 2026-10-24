@@ -177,8 +177,8 @@ public class ModelP42 extends ModelConverter //Same as Filename
 		bodyModel[135] = new ModelRendererTurbo(this, 22, 95, textureX, textureY); // Box 2
 		bodyModel[136] = new ModelRendererTurbo(this, 17, 95, textureX, textureY); // Box 2
 		bodyModel[137] = new ModelRendererTurbo(this, 71, 95, textureX, textureY); // Box 2
-		bodyModel[138] = new ModelRendererTurbo(this, 64, 122, textureX, textureY, "lamp"); // Box 5 ditchlight glow
-		bodyModel[139] = new ModelRendererTurbo(this, 32, 122, textureX, textureY, "lamp"); // Box 5 ditchlight glow
+		bodyModel[138] = new ModelRendererTurbo(this, 64, 122, textureX, textureY, "ditch"); // Box 5 ditchlight glow
+		bodyModel[139] = new ModelRendererTurbo(this, 32, 122, textureX, textureY, "ditch"); // Box 5 ditchlight glow
 		bodyModel[140] = new ModelRendererTurbo(this, 24, 124, textureX, textureY, "marker_body_140"); // Box 5 marker light glow
 		bodyModel[141] = new ModelRendererTurbo(this, 74, 122, textureX, textureY, "marker_body_141"); // Box 5 marker light glow
 		bodyModel[142] = new ModelRendererTurbo(this, 53, 92, textureX, textureY, "lamp"); // Box 2 Headlight 2 glow
@@ -469,10 +469,10 @@ public class ModelP42 extends ModelConverter //Same as Filename
 		bodyModel[427] = new ModelRendererTurbo(this, 76, 48, textureX, textureY); // Box 2
 		bodyModel[428] = new ModelRendererTurbo(this, 44, 86, textureX, textureY, "numberboard"); // Box 2 number board glow
 		bodyModel[429] = new ModelRendererTurbo(this, 52, 86, textureX, textureY, "numberboard"); // Box 2 number board glow
-		bodyModel[430] = new ModelRendererTurbo(this, 43, 74, textureX, textureY, "lamp"); // Box 2 weird ass becon glow
-		bodyModel[431] = new ModelRendererTurbo(this, 48, 75, textureX, textureY, "lamp"); // Box 2 weird ass becon grouped glow
-		bodyModel[432] = new ModelRendererTurbo(this, 55, 74, textureX, textureY, "lamp"); // Box 2 weird ass becon glow
-		bodyModel[433] = new ModelRendererTurbo(this, 52, 75, textureX, textureY, "lamp"); // Box 2 weird ass becon grouped glow
+		bodyModel[430] = new ModelRendererTurbo(this, 43, 74, textureX, textureY, "commander"); // Box 2 weird ass becon glow
+		bodyModel[431] = new ModelRendererTurbo(this, 48, 75, textureX, textureY, "emerg"); // Box 2 weird ass becon grouped glow
+		bodyModel[432] = new ModelRendererTurbo(this, 55, 74, textureX, textureY, "commander"); // Box 2 weird ass becon glow
+		bodyModel[433] = new ModelRendererTurbo(this, 52, 75, textureX, textureY, "emerg"); // Box 2 weird ass becon grouped glow
 		bodyModel[434] = new ModelRendererTurbo(this, 10, 53, textureX, textureY); // Box 2
 		bodyModel[435] = new ModelRendererTurbo(this, 10, 51, textureX, textureY); // Box 2
 		bodyModel[436] = new ModelRendererTurbo(this, 10, 55, textureX, textureY); // Box 2

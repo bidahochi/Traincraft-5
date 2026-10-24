@@ -12,16 +12,59 @@
         },
         "cab_speedometer_body_247": {
           "preset": "instrument"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_down": {
+          "preset": "headlight"
+        },
+        "markerlight": {
+          "preset": "marker_light"
         }
       }
     }
   },
   "skins": {
     "bap:blue": {},
-    "bap:skin16": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose_up": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_nose_down": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:black": {},
     "bap:skin17": {},
-    "bap:orange": {},
+    "bap:orange": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_up": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:grey": {}
   }
 }

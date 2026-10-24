@@ -81,8 +81,8 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[36] = new ModelRendererTurbo(this, 78, 47, textureX, textureY); // Box 48
 		bodyModel[37] = new ModelRendererTurbo(this, 82, 49, textureX, textureY); // Box 43
 		bodyModel[38] = new ModelRendererTurbo(this, 62, 44, textureX, textureY); // Box 44
-		bodyModel[39] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp"); // Box 186 headlight front
-		bodyModel[40] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp"); // Box 187 headlight front
+		bodyModel[39] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp_cab_up"); // Box 186 headlight front
+		bodyModel[40] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp_cab_down"); // Box 187 headlight front
 		bodyModel[41] = new ModelRendererTurbo(this, 368, 178, textureX, textureY); // Box 225
 		bodyModel[42] = new ModelRendererTurbo(this, 12, 135, textureX, textureY); // Box 226
 		bodyModel[43] = new ModelRendererTurbo(this, 10, 131, textureX, textureY); // Box 227
@@ -176,8 +176,8 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[131] = new ModelRendererTurbo(this, 73, 12, textureX, textureY); // Box 350
 		bodyModel[132] = new ModelRendererTurbo(this, 55, 12, textureX, textureY); // Box 351
 		bodyModel[133] = new ModelRendererTurbo(this, 175, 44, textureX, textureY); // Box 336
-		bodyModel[134] = new ModelRendererTurbo(this, 184, 43, textureX, textureY, "lamp"); // Box 337 lamp
-		bodyModel[135] = new ModelRendererTurbo(this, 172, 43, textureX, textureY, "lamp"); // Box 338 lamp
+		bodyModel[134] = new ModelRendererTurbo(this, 184, 43, textureX, textureY, "lamp_highbeam1"); // Box 337 lamp
+		bodyModel[135] = new ModelRendererTurbo(this, 172, 43, textureX, textureY, "lamp_highbeam2"); // Box 338 lamp
 		bodyModel[136] = new ModelRendererTurbo(this, 185, 32, textureX, textureY); // Box 327
 		bodyModel[137] = new ModelRendererTurbo(this, 187, 26, textureX, textureY); // Box 328
 		bodyModel[138] = new ModelRendererTurbo(this, 187, 38, textureX, textureY); // Box 329
@@ -213,11 +213,11 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[168] = new ModelRendererTurbo(this, 71, 171, textureX, textureY); // Box 449
 		bodyModel[169] = new ModelRendererTurbo(this, 478, 102, textureX, textureY); // Box 381 sp mount
 		bodyModel[170] = new ModelRendererTurbo(this, 476, 94, textureX, textureY); // Box 31 sp mount
-		bodyModel[171] = new ModelRendererTurbo(this, 491, 102, textureX, textureY, "lamp"); // Box 247 lamp gyralight rear
-		bodyModel[172] = new ModelRendererTurbo(this, 471, 102, textureX, textureY, "lamp"); // Box 248 lamp gyralight rear
+		bodyModel[171] = new ModelRendererTurbo(this, 491, 102, textureX, textureY, "gyra1"); // Box 247 lamp gyralight rear
+		bodyModel[172] = new ModelRendererTurbo(this, 471, 102, textureX, textureY, "gyra2"); // Box 248 lamp gyralight rear
 		bodyModel[173] = new ModelRendererTurbo(this, 471, 108, textureX, textureY, "lamp"); // Box 386 lamp rear
 		bodyModel[174] = new ModelRendererTurbo(this, 491, 108, textureX, textureY, "lamp"); // Box 387lamp rear
-		bodyModel[175] = new ModelRendererTurbo(this, 484, 90, textureX, textureY, "lamp"); // Box 388 light red gyralight rear
+		bodyModel[175] = new ModelRendererTurbo(this, 484, 90, textureX, textureY, "egyra2"); // Box 388 light red gyralight rear
 		bodyModel[176] = new ModelRendererTurbo(this, 487, 96, textureX, textureY); // Box 389 sp mount
 		bodyModel[177] = new ModelRendererTurbo(this, 405, 159, textureX, textureY); // Box 390
 		bodyModel[178] = new ModelRendererTurbo(this, 367, 159, textureX, textureY); // Box 391
@@ -227,8 +227,8 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[182] = new ModelRendererTurbo(this, 2, 92, textureX, textureY); // Box 45
 		bodyModel[183] = new ModelRendererTurbo(this, 3, 83, textureX, textureY); // Box 42
 		bodyModel[184] = new ModelRendererTurbo(this, 22, 73, textureX, textureY); // Box 48 lamp
-		bodyModel[185] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp"); // Box 294 lamp drgw
-		bodyModel[186] = new ModelRendererTurbo(this, 1, 46, textureX, textureY, "lamp"); // Box 295 lamp drgw
+		bodyModel[185] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp_nose_down"); // Box 294 lamp drgw
+		bodyModel[186] = new ModelRendererTurbo(this, 1, 46, textureX, textureY, "lamp_nose_up"); // Box 295 lamp drgw
 		bodyModel[187] = new ModelRendererTurbo(this, 21, 82, textureX, textureY); // Box 296 nose cover
 		bodyModel[188] = new ModelRendererTurbo(this, 26, 83, textureX, textureY); // Box 298
 		bodyModel[189] = new ModelRendererTurbo(this, 26, 82, textureX, textureY); // Box 299 nose cover
@@ -236,7 +236,7 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[191] = new ModelRendererTurbo(this, 31, 73, textureX, textureY); // Box 319
 		bodyModel[192] = new ModelRendererTurbo(this, 42, 50, textureX, textureY, "lamp"); // Box 314 lamp sp
 		bodyModel[193] = new ModelRendererTurbo(this, 30, 50, textureX, textureY, "lamp"); // Box 315 lamp sp
-		bodyModel[194] = new ModelRendererTurbo(this, 48, 47, textureX, textureY, "lamp"); // Box 316 lamp sp gyralight
+		bodyModel[194] = new ModelRendererTurbo(this, 48, 47, textureX, textureY, "egyra3"); // Box 316 lamp sp gyralight
 		bodyModel[195] = new ModelRendererTurbo(this, 46, 52, textureX, textureY); // Box 317
 		bodyModel[196] = new ModelRendererTurbo(this, 405, 247, textureX, textureY); // Box 20
 		bodyModel[197] = new ModelRendererTurbo(this, 168, 22, textureX, textureY); // Box 297
@@ -324,11 +324,11 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[279] = new ModelRendererTurbo(this, 366, 232, textureX, textureY); // Box 359
 		bodyModel[280] = new ModelRendererTurbo(this, 366, 224, textureX, textureY); // Box 360
 		bodyModel[281] = new ModelRendererTurbo(this, 371, 224, textureX, textureY); // Box 361
-		bodyModel[282] = new ModelRendererTurbo(this, 394, 235, textureX, textureY, "lamp"); // Box 365 lamp snoot
-		bodyModel[283] = new ModelRendererTurbo(this, 394, 230, textureX, textureY, "lamp"); // Box 366 lamp snoot
+		bodyModel[282] = new ModelRendererTurbo(this, 394, 235, textureX, textureY, "lamp_s2"); // Box 365 lamp snoot
+		bodyModel[283] = new ModelRendererTurbo(this, 394, 230, textureX, textureY, "lamps1"); // Box 366 lamp snoot
 		bodyModel[284] = new ModelRendererTurbo(this, 33, 51, textureX, textureY); // Box 20
 		bodyModel[285] = new ModelRendererTurbo(this, 406, 241, textureX, textureY); // Box 368
-		bodyModel[286] = new ModelRendererTurbo(this, 408, 231, textureX, textureY, "lamp"); // Box 369 lamp sp gyralight snoot
+		bodyModel[286] = new ModelRendererTurbo(this, 408, 231, textureX, textureY, "egyra1"); // Box 369 lamp sp gyralight snoot
 		bodyModel[287] = new ModelRendererTurbo(this, 408, 226, textureX, textureY, "lamp"); // Box 370 lamp sp snoot
 		bodyModel[288] = new ModelRendererTurbo(this, 408, 236, textureX, textureY, "lamp"); // Box 371 lamp sp snoot
 		bodyModel[289] = new ModelRendererTurbo(this, 384, 224, textureX, textureY); // Box 384
@@ -363,9 +363,9 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[318] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "numberboard"); // Box 117 numberboard front
 		bodyModel[319] = new ModelRendererTurbo(this, 120, 51, textureX, textureY, "numberboard"); // Box 118 numberboard front
 		bodyModel[320] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker_two_body_320"); // Box 71 markerlight twO
-		bodyModel[321] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[321] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[322] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "marker_two_body_322"); // Box 71 markerlight twO
-		bodyModel[323] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[323] = new ModelRendererTurbo(this, 39, 83, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[324] = new ModelRendererTurbo(this, 335, 123, textureX, textureY); // Box 489
 		bodyModel[325] = new ModelRendererTurbo(this, 310, 153, textureX, textureY); // Box 278
 		bodyModel[326] = new ModelRendererTurbo(this, 311, 159, textureX, textureY); // Box 281
@@ -510,8 +510,8 @@ public class ModelSD40T extends ModelConverter //Same as Filename
 		bodyModel[465] = new ModelRendererTurbo(this, 173, 17, textureX, textureY, BoxName.prime2); // Box 8 PRIME3-2
 		bodyModel[466] = new ModelRendererTurbo(this, 173, 17, textureX, textureY, BoxName.prime4); // Box 9 PRIME3-4
 		bodyModel[467] = new ModelRendererTurbo(this, 50, 75, textureX, textureY, "cull"); // Box 467 drgw light cull
-		bodyModel[468] = new ModelRendererTurbo(this, 59, 75, textureX, textureY, "lamp"); // Box 468 lamp drgw
-		bodyModel[469] = new ModelRendererTurbo(this, 59, 80, textureX, textureY, "lamp"); // Box 469 lamp drgw
+		bodyModel[468] = new ModelRendererTurbo(this, 59, 75, textureX, textureY, "lamp_drgw_gyra"); // Box 468 lamp drgw
+		bodyModel[469] = new ModelRendererTurbo(this, 59, 80, textureX, textureY, "lamp_drgw_gyra2"); // Box 469 lamp drgw
 		bodyModel[470] = new ModelRendererTurbo(this, 253, 49, textureX, textureY); // Box 470
 
 		bodyModel[0].addBox(0F, 0F, 0F, 88, 1, 4, 0F); // Box 0

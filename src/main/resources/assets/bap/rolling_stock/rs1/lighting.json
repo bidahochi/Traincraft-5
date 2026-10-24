@@ -15,6 +15,10 @@
         },
         "markerlight": {
           "preset": "marker_light"
+        },
+        "gyra_fmsr": {
+          "preset": "mars",
+          "color": "#FFF4B4"
         }
       }
     }
@@ -35,7 +39,8 @@
         "fixtures": {
           "lamp_lh_bottom": {
             "preset": "gyralite",
-            "color": "#FF2020"
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
           },
           "lamp_lh_top": {
             "preset": "gyralite",
@@ -49,7 +54,8 @@
         "fixtures": {
           "lamp_lh_bottom": {
             "preset": "gyralite",
-            "color": "#FF2020"
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
           },
           "lamp_lh_top": {
             "preset": "gyralite",
@@ -77,7 +83,8 @@
         "fixtures": {
           "lamp_lh_bottom": {
             "preset": "gyralite",
-            "color": "#FF2020"
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
           },
           "lamp_lh_top": {
             "preset": "gyralite",

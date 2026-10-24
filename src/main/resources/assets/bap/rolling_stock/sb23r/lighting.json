@@ -21,13 +21,32 @@
         },
         "marker_body_246": {
           "preset": "marker_light"
+        },
+        "highbeam2": {
+          "preset": "headlight"
+        },
+        "highbeam1": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
     "bap:red": {},
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "highbeam1": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "highbeam2": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:magenta": {},
     "bap:lightgrey": {}
   }

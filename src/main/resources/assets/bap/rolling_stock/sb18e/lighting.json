@@ -21,6 +21,12 @@
         },
         "cab_speedometer_body_318": {
           "preset": "instrument"
+        },
+        "highbeam1": {
+          "preset": "headlight"
+        },
+        "highbeam2": {
+          "preset": "headlight"
         }
       }
     }

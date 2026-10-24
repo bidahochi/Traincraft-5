@@ -174,8 +174,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[130] = new ModelRendererTurbo(this, 98, 141, textureX, textureY); // Box 310 sp light cover
 		bodyModel[131] = new ModelRendererTurbo(this, 126, 136, textureX, textureY); // Box 414
 		bodyModel[132] = new ModelRendererTurbo(this, 110, 134, textureX, textureY); // Box 415
-		bodyModel[133] = new ModelRendererTurbo(this, 85, 152, textureX, textureY, "lamp"); // Box 333 lamp front gyro sp
-		bodyModel[134] = new ModelRendererTurbo(this, 78, 152, textureX, textureY, "lamp"); // Box 334 lamp front gyro sp
+		bodyModel[133] = new ModelRendererTurbo(this, 85, 152, textureX, textureY, "lg2"); // Box 333 lamp front gyro sp
+		bodyModel[134] = new ModelRendererTurbo(this, 78, 152, textureX, textureY, "lg1"); // Box 334 lamp front gyro sp
 		bodyModel[135] = new ModelRendererTurbo(this, 88, 134, textureX, textureY); // Box 299
 		bodyModel[136] = new ModelRendererTurbo(this, 108, 135, textureX, textureY, "marker_body_136"); // Box 300 glow marker
 		bodyModel[137] = new ModelRendererTurbo(this, 98, 135, textureX, textureY, "marker_body_137"); // Box 348 glow marker
@@ -190,8 +190,8 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[146] = new ModelRendererTurbo(this, 211, 143, textureX, textureY); // Box 420
 		bodyModel[147] = new ModelRendererTurbo(this, 220, 145, textureX, textureY); // Box 421
 		bodyModel[148] = new ModelRendererTurbo(this, 154, 146, textureX, textureY); // Box 422
-		bodyModel[149] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "lamp"); // Box 333 lamp rear gyro sp
-		bodyModel[150] = new ModelRendererTurbo(this, 173, 157, textureX, textureY, "lamp"); // Box 334 lamp rear gyro sp
+		bodyModel[149] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "lg1"); // Box 333 lamp rear gyro sp
+		bodyModel[150] = new ModelRendererTurbo(this, 173, 157, textureX, textureY, "lg2"); // Box 334 lamp rear gyro sp
 		bodyModel[151] = new ModelRendererTurbo(this, 190, 150, textureX, textureY, "marker_body_151"); // Box 300 glow marker
 		bodyModel[152] = new ModelRendererTurbo(this, 200, 150, textureX, textureY, "marker_body_152"); // Box 348 glow marker
 		bodyModel[153] = new ModelRendererTurbo(this, 180, 149, textureX, textureY); // Box 416
@@ -244,10 +244,10 @@ public class ModelMP900 extends ModelConverter //Same as Filename
 		bodyModel[200] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard"); // Box 193 numberboard glow
 		bodyModel[201] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard"); // Box 194 numberboard glow
 		bodyModel[202] = new ModelRendererTurbo(this, 237, 132, textureX, textureY); // Box 556
-		bodyModel[203] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "lamp"); // Box 557
+		bodyModel[203] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard"); // Box 557
 		bodyModel[204] = new ModelRendererTurbo(this, 209, 133, textureX, textureY); // Box 558
 		bodyModel[205] = new ModelRendererTurbo(this, 222, 132, textureX, textureY); // Box 559
-		bodyModel[206] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "lamp"); // Box 560
+		bodyModel[206] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard"); // Box 560
 		bodyModel[207] = new ModelRendererTurbo(this, 294, 125, textureX, textureY); // Box 356
 		bodyModel[208] = new ModelRendererTurbo(this, 291, 125, textureX, textureY); // Box 358
 		bodyModel[209] = new ModelRendererTurbo(this, 288, 125, textureX, textureY); // Box 359

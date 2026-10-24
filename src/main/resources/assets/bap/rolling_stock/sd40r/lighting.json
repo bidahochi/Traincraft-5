@@ -18,14 +18,103 @@
         },
         "marker_two_body_470": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp1": {
+          "preset": "headlight"
+        },
+        "lamp2": {
+          "preset": "headlight"
+        },
+        "lamp3": {
+          "preset": "headlight"
+        },
+        "lamp4": {
+          "preset": "headlight"
+        },
+        "lamps1": {
+          "preset": "headlight"
+        },
+        "lamps2": {
+          "preset": "headlight"
+        },
+        "lamps3": {
+          "preset": "headlight"
+        },
+        "lamps4": {
+          "preset": "headlight"
+        },
+        "egyra1": {
+          "preset": "gyralite"
+        },
+        "egyra2": {
+          "preset": "gyralite"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam1": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam2": {
+          "preset": "headlight"
+        },
+        "rg1": {
+          "preset": "gyralite"
+        },
+        "rg2": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab1": {
+            "preset": "gyralite"
+          },
+          "lamp_cab2": {
+            "preset": "gyralite"
+          },
+          "egyra1": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "egyra2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
-    "bap:skin16": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "egyra1": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab2": {
+            "preset": "gyralite"
+          },
+          "lamp_cab1": {
+            "preset": "gyralite"
+          },
+          "egyra2": {
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:skin17": {}
   }
 }

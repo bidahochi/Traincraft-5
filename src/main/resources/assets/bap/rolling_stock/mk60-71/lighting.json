@@ -9,6 +9,9 @@
         },
         "marker_body_72": {
           "preset": "marker_light"
+        },
+        "fuckkkk": {
+          "preset": "headlight"
         }
       }
     }
@@ -22,7 +25,25 @@
     "bap:skin20": {},
     "bap:skin21": {},
     "bap:purple": {},
-    "bap:cyan": {},
-    "bap:skin22": {}
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "fuckkkk": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin22": {
+      "lighting": {
+        "fixtures": {
+          "fuckkkk": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    }
   }
 }

@@ -18,6 +18,57 @@
         },
         "marker_two_body_470": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "lamp1": {
+          "preset": "headlight"
+        },
+        "lamp2": {
+          "preset": "headlight"
+        },
+        "lamp3": {
+          "preset": "headlight"
+        },
+        "lamp4": {
+          "preset": "headlight"
+        },
+        "lamps1": {
+          "preset": "headlight"
+        },
+        "lamps2": {
+          "preset": "headlight"
+        },
+        "lamps3": {
+          "preset": "headlight"
+        },
+        "lamps4": {
+          "preset": "headlight"
+        },
+        "egyra1": {
+          "preset": "gyralite"
+        },
+        "egyra2": {
+          "preset": "gyralite"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam1": {
+          "preset": "headlight"
+        },
+        "lamp_highbeam2": {
+          "preset": "headlight"
+        },
+        "rg1": {
+          "preset": "gyralite"
+        },
+        "rg2": {
+          "preset": "gyralite"
         }
       }
     }
@@ -28,12 +79,38 @@
     "bap:skin16": {},
     "bap:red": {},
     "bap:skin17": {},
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_highbeam1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_highbeam2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:black": {},
     "bap:skin18": {},
     "bap:skin20": {},
     "bap:skin21": {},
-    "bap:skin22": {},
+    "bap:skin22": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_cab1": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:grey": {},
     "bap:skin23": {},
     "bap:skin41": {},

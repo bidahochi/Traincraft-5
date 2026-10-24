@@ -58,7 +58,20 @@
   "skins": {
     "bap:skin17": {},
     "bap:lightgrey": {},
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "front_headlight_n_upper": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          },
+          "front_headlight_n_lower": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:purple": {},
     "bap:brown": {}
   }

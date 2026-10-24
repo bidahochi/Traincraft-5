@@ -176,8 +176,8 @@ public class ModelSB18E extends ModelConverter //Same as Filename
 		bodyModel[131] = new ModelRendererTurbo(this, 215, 99, textureX, textureY); // Box 557
 		bodyModel[132] = new ModelRendererTurbo(this, 249, 99, textureX, textureY); // Box 558
 		bodyModel[133] = new ModelRendererTurbo(this, 332, 90, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[134] = new ModelRendererTurbo(this, 329, 89, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[135] = new ModelRendererTurbo(this, 339, 89, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[134] = new ModelRendererTurbo(this, 329, 89, textureX, textureY, "highbeam1"); // Box 289 gyralight rear l
+		bodyModel[135] = new ModelRendererTurbo(this, 339, 89, textureX, textureY, "highbeam2"); // Box 290 gyralight rear r
 		bodyModel[136] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
 		bodyModel[137] = new ModelRendererTurbo(this, 457, 107, textureX, textureY); // Box 325
 		bodyModel[138] = new ModelRendererTurbo(this, 475, 107, textureX, textureY); // Box 326
@@ -319,8 +319,8 @@ public class ModelSB18E extends ModelConverter //Same as Filename
 		bodyModel[274] = new ModelRendererTurbo(this, 139, 157, textureX, textureY); // Box 407
 		bodyModel[275] = new ModelRendererTurbo(this, 142, 149, textureX, textureY); // Box 410
 		bodyModel[276] = new ModelRendererTurbo(this, 111, 62, textureX, textureY); // Box 336 top gyra bloc
-		bodyModel[277] = new ModelRendererTurbo(this, 108, 61, textureX, textureY, "lamp"); // Box 337 Front Gyralight L
-		bodyModel[278] = new ModelRendererTurbo(this, 120, 61, textureX, textureY, "lamp"); // Box 338 Front Gyralight R
+		bodyModel[277] = new ModelRendererTurbo(this, 108, 61, textureX, textureY, "highbeam1"); // Box 337 Front Gyralight L
+		bodyModel[278] = new ModelRendererTurbo(this, 120, 61, textureX, textureY, "highbeam2"); // Box 338 Front Gyralight R
 		bodyModel[279] = new ModelRendererTurbo(this, 77, 59, textureX, textureY, "cull"); // Box 3 cull aww
 		bodyModel[280] = new ModelRendererTurbo(this, 79, 54, textureX, textureY); // Box 5
 		bodyModel[281] = new ModelRendererTurbo(this, 109, 20, textureX, textureY, "cull"); // Box 416 cull

@@ -21,6 +21,18 @@
         },
         "cab_speedometer_body_334": {
           "preset": "instrument"
+        },
+        "highbeam1": {
+          "preset": "headlight"
+        },
+        "highbeam2": {
+          "preset": "headlight"
+        },
+        "lamp_nose_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_down": {
+          "preset": "headlight"
         }
       }
     }

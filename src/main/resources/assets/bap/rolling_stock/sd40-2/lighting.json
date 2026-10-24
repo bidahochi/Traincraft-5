@@ -3,7 +3,9 @@
   "stock": "bap:sd40-2",
   "lighting": {
     "defaults": {
-      "hornResponsePolicy": { "enabled": false },
+      "hornResponsePolicy": {
+        "enabled": false
+      },
       "fixtures": {
         "marker_two_body_391": {
           "preset": "marker_light"
@@ -141,13 +143,13 @@
           "preset": "headlight"
         },
         "marker_two_lamp_392": {
-          "preset": "headlight"
+          "preset": "marker_light"
         },
         "marker_two_lamp_394": {
-          "preset": "headlight"
+          "preset": "marker_light"
         },
         "marker_two_lamp_407": {
-          "preset": "headlight"
+          "preset": "marker_light"
         },
         "front_headlight_variant_3_right": {
           "preset": "headlight"
@@ -183,7 +185,7 @@
           "preset": "headlight"
         },
         "marker_two_lamp_471": {
-          "preset": "headlight"
+          "preset": "marker_light"
         },
         "commander_variant_1": {
           "preset": "commander"
@@ -225,7 +227,9 @@
     },
     "profiles": {
       "bap:sd40dash2/csx_horn_ditch": {
-        "hornResponsePolicy": { "preset": "tc:horn_15s_above_15mph" },
+        "hornResponsePolicy": {
+          "preset": "tc:horn_15s_above_15mph"
+        },
         "fixtures": {
           "front_ditch_variant_3_left": {
             "preset": "horn_alternating_ditch",
@@ -273,8 +277,42 @@
     },
     "bap:magenta": {},
     "bap:green": {},
-    "bap:white": {},
-    "bap:skin18": {},
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "front_lamp_variant_1_left": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "front_lamp_variant_1_right": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "front_lamp_variant_1_left": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "front_lamp_variant_1_right": {
+            "preset": "headlight",
+            "color": "#FFFFFF"
+          },
+          "front_headlight_nose_variant_1_low_b": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "front_headlight_nose_variant_1_low_a": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:yellow": {},
     "bap:orange": {},
     "bap:skin20": {},
@@ -298,7 +336,20 @@
     "bap:skin30": {},
     "bap:skin31": {},
     "bap:skin32": {},
-    "bap:skin34": {},
+    "bap:skin34": {
+      "lighting": {
+        "fixtures": {
+          "front_lamp_variant_1_left": {
+            "preset": "gyralite"
+          },
+          "front_lamp_variant_1_right": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:skin35": {},
     "bap:skin36": {},
     "bap:skin37": {},

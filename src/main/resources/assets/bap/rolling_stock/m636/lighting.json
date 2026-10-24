@@ -58,10 +58,41 @@
     }
   },
   "skins": {
-    "bap:green": {},
-    "bap:skin16": {},
+    "bap:green": {
+      "lighting": {
+        "fixtures": {
+          "front_gyralite_right": {
+            "color": "#FF2020"
+          },
+          "front_gyralite_left": {
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "front_gyralite_right": {
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:blue": {},
-    "bap:grey": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "front_gyralite_left": {
+            "color": "#FF2020"
+          },
+          "front_gyralite_right": {
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {}
   }
 }

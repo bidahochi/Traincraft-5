@@ -18,12 +18,27 @@
         },
         "marker_body_152": {
           "preset": "marker_light"
+        },
+        "lg1": {
+          "preset": "gyralite"
+        },
+        "lg2": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:blue": {},
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "lg2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:cyan": {}
   }

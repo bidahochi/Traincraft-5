@@ -148,7 +148,7 @@ public class ModelSD40A extends ModelConverter //Same as Filename
 		bodyModel[100] = new ModelRendererTurbo(this, 475, 83, textureX, textureY, "lamp"); // Box 247 headlight rear 2 beam
 		bodyModel[101] = new ModelRendererTurbo(this, 475, 83, textureX, textureY, "lamp"); // Box 248 headlight rear 2 beam
 		bodyModel[102] = new ModelRendererTurbo(this, 482, 99, textureX, textureY, "marker_two_body_102"); // Box 71 markerlight twO
-		bodyModel[103] = new ModelRendererTurbo(this, 475, 99, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[103] = new ModelRendererTurbo(this, 475, 99, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[104] = new ModelRendererTurbo(this, 313, 116, textureX, textureY); // Box 36
 		bodyModel[105] = new ModelRendererTurbo(this, 305, 50, textureX, textureY); // Box 271
 		bodyModel[106] = new ModelRendererTurbo(this, 305, 45, textureX, textureY); // Box 272
@@ -172,7 +172,7 @@ public class ModelSD40A extends ModelConverter //Same as Filename
 		bodyModel[124] = new ModelRendererTurbo(this, 119, 61, textureX, textureY); // Box 43
 		bodyModel[125] = new ModelRendererTurbo(this, 119, 64, textureX, textureY); // Box 43
 		bodyModel[126] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker_two_body_126"); // Box 71 markerlight twO
-		bodyModel[127] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[127] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[128] = new ModelRendererTurbo(this, 22, 73, textureX, textureY); // Box 48
 		bodyModel[129] = new ModelRendererTurbo(this, 78, 47, textureX, textureY); // Box 48
 		bodyModel[130] = new ModelRendererTurbo(this, 82, 49, textureX, textureY); // Box 43
@@ -317,10 +317,10 @@ public class ModelSD40A extends ModelConverter //Same as Filename
 		bodyModel[269] = new ModelRendererTurbo(this, 169, 9, textureX, textureY); // Box 74
 		bodyModel[270] = new ModelRendererTurbo(this, 169, 15, textureX, textureY); // Box 78
 		bodyModel[271] = new ModelRendererTurbo(this, 168, 5, textureX, textureY); // Box 245
-		bodyModel[272] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp"); // Box 547 headlight nose low a
-		bodyModel[273] = new ModelRendererTurbo(this, 8, 51, textureX, textureY, "lamp"); // Box 548 headlight nose low b
-		bodyModel[274] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp"); // Box 186 headlight standard
-		bodyModel[275] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp"); // Box 187 headlight standard
+		bodyModel[272] = new ModelRendererTurbo(this, 1, 51, textureX, textureY, "lamp_nose_up"); // Box 547 headlight nose low a
+		bodyModel[273] = new ModelRendererTurbo(this, 8, 51, textureX, textureY, "lamp_nose_down"); // Box 548 headlight nose low b
+		bodyModel[274] = new ModelRendererTurbo(this, 79, 42, textureX, textureY, "lamp_cab_up"); // Box 186 headlight standard
+		bodyModel[275] = new ModelRendererTurbo(this, 72, 44, textureX, textureY, "lamp_cab_down"); // Box 187 headlight standard
 		bodyModel[276] = new ModelRendererTurbo(this, 86, 117, textureX, textureY); // Box 281
 		bodyModel[277] = new ModelRendererTurbo(this, 83, 117, textureX, textureY); // Box 282
 		bodyModel[278] = new ModelRendererTurbo(this, 83, 107, textureX, textureY); // Box 283

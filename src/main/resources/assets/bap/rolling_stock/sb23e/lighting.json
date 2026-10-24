@@ -21,6 +21,12 @@
         },
         "cab_speedometer_body_311": {
           "preset": "instrument"
+        },
+        "highbeam1": {
+          "preset": "headlight"
+        },
+        "highbeam2": {
+          "preset": "headlight"
         }
       }
     }
@@ -28,7 +34,20 @@
   "skins": {
     "bap:green": {},
     "bap:skin16": {},
-    "bap:cyan": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "highbeam1": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "highbeam2": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:blue": {},
     "bap:magenta": {}

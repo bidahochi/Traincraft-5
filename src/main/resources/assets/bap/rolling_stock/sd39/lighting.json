@@ -24,6 +24,57 @@
         },
         "marker_two_body_532": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
+        },
+        "ls1": {
+          "preset": "headlight"
+        },
+        "ls2": {
+          "preset": "headlight"
+        },
+        "ls3": {
+          "preset": "headlight"
+        },
+        "ls4": {
+          "preset": "headlight"
+        },
+        "l1": {
+          "preset": "headlight"
+        },
+        "l2": {
+          "preset": "headlight"
+        },
+        "l3": {
+          "preset": "headlight"
+        },
+        "l4": {
+          "preset": "headlight"
+        },
+        "merg1": {
+          "preset": "gyralite"
+        },
+        "rg1": {
+          "preset": "gyralite"
+        },
+        "rg2": {
+          "preset": "gyralite"
+        },
+        "merge2": {
+          "preset": "gyralite"
+        },
+        "fuck_you_light1": {
+          "preset": "headlight"
+        },
+        "fuck_you_light2": {
+          "preset": "headlight"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
         }
       }
     }
@@ -32,9 +83,37 @@
     "bap:orange": {},
     "bap:lightgrey": {},
     "bap:brown": {},
-    "bap:skin18": {},
+    "bap:skin18": {
+      "lighting": {
+        "fixtures": {
+          "ls2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "ls4": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
-    "bap:skin20": {},
+    "bap:skin20": {
+      "lighting": {
+        "fixtures": {
+          "l2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "l4": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:cyan": {},
     "bap:purple": {}
   }

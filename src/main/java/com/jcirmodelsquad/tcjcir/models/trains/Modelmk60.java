@@ -242,7 +242,7 @@ public class Modelmk60 extends ModelConverter //Same as Filename
 		bodyModel[202] = new ModelRendererTurbo(this, 162, 169, textureX, textureY); // Box 201
 		bodyModel[203] = new ModelRendererTurbo(this, 25, 145, textureX, textureY, "cull"); // Box 524 cull support
 		bodyModel[204] = new ModelRendererTurbo(this, 353, 137, textureX, textureY); // Box 147
-		bodyModel[205] = new ModelRendererTurbo(this, 329, 137, textureX, textureY, "prime1"); // Box 169 glow front lamp
+		bodyModel[205] = new ModelRendererTurbo(this, 329, 137, textureX, textureY, "fuckkkk"); // Box 169 glow front lamp
 		bodyModel[206] = new ModelRendererTurbo(this, 153, 145, textureX, textureY, "cull"); // Box 521 cull
 		bodyModel[207] = new ModelRendererTurbo(this, 121, 145, textureX, textureY, "cull"); // Box 520 cull
 		bodyModel[208] = new ModelRendererTurbo(this, 113, 145, textureX, textureY); // Box 518

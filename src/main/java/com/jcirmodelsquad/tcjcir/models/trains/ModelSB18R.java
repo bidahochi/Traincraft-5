@@ -177,8 +177,8 @@ public class ModelSB18R extends ModelConverter //Same as Filename
 		bodyModel[132] = new ModelRendererTurbo(this, 215, 99, textureX, textureY); // Box 557
 		bodyModel[133] = new ModelRendererTurbo(this, 249, 99, textureX, textureY); // Box 558
 		bodyModel[134] = new ModelRendererTurbo(this, 332, 90, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[135] = new ModelRendererTurbo(this, 329, 89, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[136] = new ModelRendererTurbo(this, 339, 89, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[135] = new ModelRendererTurbo(this, 329, 89, textureX, textureY, "highbeam1"); // Box 289 gyralight rear l
+		bodyModel[136] = new ModelRendererTurbo(this, 339, 89, textureX, textureY, "highbeam2"); // Box 290 gyralight rear r
 		bodyModel[137] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
 		bodyModel[138] = new ModelRendererTurbo(this, 457, 107, textureX, textureY); // Box 325
 		bodyModel[139] = new ModelRendererTurbo(this, 475, 107, textureX, textureY); // Box 326
@@ -323,9 +323,9 @@ public class ModelSB18R extends ModelConverter //Same as Filename
 		bodyModel[278] = new ModelRendererTurbo(this, 198, 197, textureX, textureY); // Box 338
 		bodyModel[279] = new ModelRendererTurbo(this, 211, 197, textureX, textureY); // Box 340
 		bodyModel[280] = new ModelRendererTurbo(this, 198, 195, textureX, textureY); // Box 344
-		bodyModel[281] = new ModelRendererTurbo(this, 201, 184, textureX, textureY, "lamp"); // Box 573 Headlight Front Nose
+		bodyModel[281] = new ModelRendererTurbo(this, 201, 184, textureX, textureY, "lamp_nose_down"); // Box 573 Headlight Front Nose
 		bodyModel[282] = new ModelRendererTurbo(this, 201, 172, textureX, textureY); // Box 574 nose light mount
-		bodyModel[283] = new ModelRendererTurbo(this, 201, 179, textureX, textureY, "lamp"); // Box 575 Headlight Front Nose
+		bodyModel[283] = new ModelRendererTurbo(this, 201, 179, textureX, textureY, "lamp_nose_up"); // Box 575 Headlight Front Nose
 		bodyModel[284] = new ModelRendererTurbo(this, 149, 149, textureX, textureY); // Box 292
 		bodyModel[285] = new ModelRendererTurbo(this, 157, 157, textureX, textureY); // Box 293
 		bodyModel[286] = new ModelRendererTurbo(this, 152, 160, textureX, textureY); // Box 294
@@ -333,8 +333,8 @@ public class ModelSB18R extends ModelConverter //Same as Filename
 		bodyModel[288] = new ModelRendererTurbo(this, 139, 157, textureX, textureY); // Box 407
 		bodyModel[289] = new ModelRendererTurbo(this, 139, 149, textureX, textureY); // Box 410
 		bodyModel[290] = new ModelRendererTurbo(this, 111, 62, textureX, textureY); // Box 336 top gyra bloc
-		bodyModel[291] = new ModelRendererTurbo(this, 108, 61, textureX, textureY, "lamp"); // Box 337 Front Gyralight L
-		bodyModel[292] = new ModelRendererTurbo(this, 120, 61, textureX, textureY, "lamp"); // Box 338 Front Gyralight R
+		bodyModel[291] = new ModelRendererTurbo(this, 108, 61, textureX, textureY, "highbeam1"); // Box 337 Front Gyralight L
+		bodyModel[292] = new ModelRendererTurbo(this, 120, 61, textureX, textureY, "highbeam2"); // Box 338 Front Gyralight R
 		bodyModel[293] = new ModelRendererTurbo(this, 394, 121, textureX, textureY); // Box 204
 		bodyModel[294] = new ModelRendererTurbo(this, 395, 128, textureX, textureY); // Box 205
 		bodyModel[295] = new ModelRendererTurbo(this, 395, 117, textureX, textureY); // Box 206
