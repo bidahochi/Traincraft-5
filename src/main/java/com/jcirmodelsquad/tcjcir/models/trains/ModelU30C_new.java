@@ -165,8 +165,8 @@ public class ModelU30C_new extends ModelConverter //Same as Filename
 		bodyModel[122] = new ModelRendererTurbo(this, 234, 40, textureX, textureY); // Box 545
 		bodyModel[123] = new ModelRendererTurbo(this, 215, 40, textureX, textureY); // Box 546
 		bodyModel[124] = new ModelRendererTurbo(this, 1, 57, textureX, textureY); // Box 48
-		bodyModel[125] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[126] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[125] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp_cab_up"); // Box 186 Headlight Front up
+		bodyModel[126] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp_cab_down"); // Box 187 Headlight Front down
 		bodyModel[127] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[128] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 118 numberboard
 		bodyModel[129] = new ModelRendererTurbo(this, 21, 39, textureX, textureY); // Box 43
@@ -191,8 +191,8 @@ public class ModelU30C_new extends ModelConverter //Same as Filename
 		bodyModel[148] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_148"); // Box 339 glowey marker
 		bodyModel[149] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_149"); // Box 340 glowey marker
 		bodyModel[150] = new ModelRendererTurbo(this, 462, 104, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[151] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[152] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[151] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp_grya1r"); // Box 289 gyralight rear l
+		bodyModel[152] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp_gyra2r"); // Box 290 gyralight rear r
 		bodyModel[153] = new ModelRendererTurbo(this, 462, 1, textureX, textureY); // Box 293
 		bodyModel[154] = new ModelRendererTurbo(this, 473, 10, textureX, textureY); // Box 293
 		bodyModel[155] = new ModelRendererTurbo(this, 462, 10, textureX, textureY); // Box 293
@@ -275,8 +275,8 @@ public class ModelU30C_new extends ModelConverter //Same as Filename
 		bodyModel[232] = new ModelRendererTurbo(this, 331, 117, textureX, textureY); // Box 382 fillerup please
 		bodyModel[233] = new ModelRendererTurbo(this, 331, 117, textureX, textureY); // Box 383 fillerup please
 		bodyModel[234] = new ModelRendererTurbo(this, 1, 76, textureX, textureY); // Box 185
-		bodyModel[235] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
-		bodyModel[236] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
+		bodyModel[235] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp_nose2"); // Box 247 Headlight Front nose R
+		bodyModel[236] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp_nose1"); // Box 248 Headlight Front nose L
 		bodyModel[237] = new ModelRendererTurbo(this, 119, 117, textureX, textureY); // Box 302
 		bodyModel[238] = new ModelRendererTurbo(this, 107, 117, textureX, textureY); // Box 303
 		bodyModel[239] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
@@ -336,7 +336,7 @@ public class ModelU30C_new extends ModelConverter //Same as Filename
 		bodyModel[293] = new ModelRendererTurbo(this, 165, 34, textureX, textureY, "prime4"); // Box 9 PRIME1-4
 		bodyModel[294] = new ModelRendererTurbo(this, 322, 124, textureX, textureY); // Box 331 why dont you ALSO filter some biiiitchhheesssssssss
 		bodyModel[295] = new ModelRendererTurbo(this, 332, 124, textureX, textureY); // Box 332 why dont you additonally filter some bitches on you dick
-		bodyModel[296] = new ModelRendererTurbo(this, 142, 47, textureX, textureY, "lamp"); // Box 401 sp emergency gyra
+		bodyModel[296] = new ModelRendererTurbo(this, 142, 47, textureX, textureY, "lamp_emerg"); // Box 401 sp emergency gyra
 		bodyModel[297] = new ModelRendererTurbo(this, 141, 52, textureX, textureY); // Box 400 sp E gyra box
 		bodyModel[298] = new ModelRendererTurbo(this, 142, 57, textureX, textureY); // Box 335
 		bodyModel[299] = new ModelRendererTurbo(this, 198, 99, textureX, textureY); // Box 36 electrical locker

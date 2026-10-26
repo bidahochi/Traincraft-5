@@ -60,8 +60,8 @@ public class ModelU50 extends ModelConverter //Same as Filename
 		bodyModel[17] = new ModelRendererTurbo(this, 73, 24, textureX, textureY); // Box 48
 		bodyModel[18] = new ModelRendererTurbo(this, 121, 50, textureX, textureY); // Box 51
 		bodyModel[19] = new ModelRendererTurbo(this, 93, 27, textureX, textureY); // Box 48
-		bodyModel[20] = new ModelRendererTurbo(this, 86, 24, textureX, textureY, "lamp"); // Box 186 headlight front up
-		bodyModel[21] = new ModelRendererTurbo(this, 86, 29, textureX, textureY, "lamp"); // Box 187 headlight front up
+		bodyModel[20] = new ModelRendererTurbo(this, 86, 24, textureX, textureY, "lamp_cab1"); // Box 186 headlight front up
+		bodyModel[21] = new ModelRendererTurbo(this, 86, 29, textureX, textureY, "lamp_cab2"); // Box 187 headlight front up
 		bodyModel[22] = new ModelRendererTurbo(this, 70, 19, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[23] = new ModelRendererTurbo(this, 70, 19, textureX, textureY, "numberboard"); // Box 118 numberboard
 		bodyModel[24] = new ModelRendererTurbo(this, 199, 194, textureX, textureY); // Box 58
@@ -116,9 +116,9 @@ public class ModelU50 extends ModelConverter //Same as Filename
 		bodyModel[73] = new ModelRendererTurbo(this, 125, 26, textureX, textureY); // Box 104
 		bodyModel[74] = new ModelRendererTurbo(this, 137, 50, textureX, textureY); // Box 105
 		bodyModel[75] = new ModelRendererTurbo(this, 42, 26, textureX, textureY); // Box 185
-		bodyModel[76] = new ModelRendererTurbo(this, 51, 25, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
-		bodyModel[77] = new ModelRendererTurbo(this, 39, 25, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
-		bodyModel[78] = new ModelRendererTurbo(this, 86, 8, textureX, textureY, "lamp"); // Box 109 SP front gyro red
+		bodyModel[76] = new ModelRendererTurbo(this, 51, 25, textureX, textureY, "lamp_nose2"); // Box 247 Headlight Front nose R
+		bodyModel[77] = new ModelRendererTurbo(this, 39, 25, textureX, textureY, "lamp_nose1"); // Box 248 Headlight Front nose L
+		bodyModel[78] = new ModelRendererTurbo(this, 86, 8, textureX, textureY, "lamp_emerg"); // Box 109 SP front gyro red
 		bodyModel[79] = new ModelRendererTurbo(this, 92, 5, textureX, textureY); // Box 110
 		bodyModel[80] = new ModelRendererTurbo(this, 92, 11, textureX, textureY); // Box 111
 		bodyModel[81] = new ModelRendererTurbo(this, 67, 6, textureX, textureY); // Box 364 prime base
@@ -133,8 +133,8 @@ public class ModelU50 extends ModelConverter //Same as Filename
 		bodyModel[90] = new ModelRendererTurbo(this, 60, 77, textureX, textureY); // Box 74
 		bodyModel[91] = new ModelRendererTurbo(this, 62, 87, textureX, textureY); // Box 78
 		bodyModel[92] = new ModelRendererTurbo(this, 93, 17, textureX, textureY); // Box 125 SP front gyro HOLDER
-		bodyModel[93] = new ModelRendererTurbo(this, 86, 14, textureX, textureY, "lamp"); // Box 126 SP front gyro
-		bodyModel[94] = new ModelRendererTurbo(this, 86, 19, textureX, textureY, "lamp"); // Box 127 SP front gyro
+		bodyModel[93] = new ModelRendererTurbo(this, 86, 14, textureX, textureY, "lamp_cab_gyra1"); // Box 126 SP front gyro
+		bodyModel[94] = new ModelRendererTurbo(this, 86, 19, textureX, textureY, "lamp_cab_gyra2"); // Box 127 SP front gyro
 		bodyModel[95] = new ModelRendererTurbo(this, 439, 76, textureX, textureY, "cull"); // Box 128 walkway cull
 		bodyModel[96] = new ModelRendererTurbo(this, 102, 5, textureX, textureY); // Box 129
 		bodyModel[97] = new ModelRendererTurbo(this, 102, 2, textureX, textureY); // Box 130

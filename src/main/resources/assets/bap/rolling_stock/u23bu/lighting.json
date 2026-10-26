@@ -30,15 +30,89 @@
         },
         "cab_speedometer_body_366": {
           "preset": "instrument"
+        },
+        "lamp_cab_up1": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down1": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up2": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down2": {
+          "preset": "headlight"
+        },
+        "lamp_nose1": {
+          "preset": "headlight"
+        },
+        "lamp_nose2": {
+          "preset": "headlight"
+        },
+        "nose_gyra": {
+          "preset": "gyralite"
+        },
+        "lamp_cab_gyra": {
+          "preset": "gyralite"
+        },
+        "lamp_grya1r": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra2r": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:cyan": {},
-    "bap:skin16": {},
-    "bap:skin17": {},
-    "bap:white": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose2": {
+            "preset": "mars"
+          },
+          "lamp_nose1": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:skin17": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose2": {
+            "preset": "gyralite"
+          },
+          "lamp_nose1": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:white": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars"
+          },
+          "lamp_nose2": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin18": {},
     "bap:lightblue": {},
     "bap:skin19": {},
@@ -46,6 +120,17 @@
     "bap:skin20": {},
     "bap:blue": {},
     "bap:purple": {},
-    "bap:pink": {}
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars"
+          },
+          "lamp_nose2": {
+            "preset": "mars"
+          }
+        }
+      }
+    }
   }
 }

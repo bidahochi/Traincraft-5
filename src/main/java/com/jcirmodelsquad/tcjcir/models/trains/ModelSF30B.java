@@ -99,8 +99,8 @@ public class ModelSF30B extends ModelConverter //Same as Filename
 		bodyModel[55] = new ModelRendererTurbo(this, 487, 145, textureX, textureY); // Box 273
 		bodyModel[56] = new ModelRendererTurbo(this, 194, 33, textureX, textureY, "ditch"); // Box 275 ditchlight f2
 		bodyModel[57] = new ModelRendererTurbo(this, 201, 33, textureX, textureY, "ditch"); // Box 278 ditchlight r2
-		bodyModel[58] = new ModelRendererTurbo(this, 193, 52, textureX, textureY, "lamp"); // Box 186 Headlight Front up NOSE
-		bodyModel[59] = new ModelRendererTurbo(this, 193, 57, textureX, textureY, "lamp"); // Box 187 Headlight Front down NOSE
+		bodyModel[58] = new ModelRendererTurbo(this, 193, 52, textureX, textureY, "lamp_nose_up"); // Box 186 Headlight Front up NOSE
+		bodyModel[59] = new ModelRendererTurbo(this, 193, 57, textureX, textureY, "lamp_nose_down"); // Box 187 Headlight Front down NOSE
 		bodyModel[60] = new ModelRendererTurbo(this, 406, 66, textureX, textureY, "lamp"); // Box 284 Headlight Rear down
 		bodyModel[61] = new ModelRendererTurbo(this, 406, 61, textureX, textureY, "lamp"); // Box 285 Headlight Rear up
 		bodyModel[62] = new ModelRendererTurbo(this, 17, 3, textureX, textureY); // Box 2
@@ -263,8 +263,8 @@ public class ModelSF30B extends ModelConverter //Same as Filename
 		bodyModel[219] = new ModelRendererTurbo(this, 442, 140, textureX, textureY); // Box 300
 		bodyModel[220] = new ModelRendererTurbo(this, 490, 140, textureX, textureY); // Box 301
 		bodyModel[221] = new ModelRendererTurbo(this, 84, 80, textureX, textureY); // Box 558
-		bodyModel[222] = new ModelRendererTurbo(this, 84, 12, textureX, textureY, "lamp"); // Box 186 Headlight Front up CAB
-		bodyModel[223] = new ModelRendererTurbo(this, 84, 17, textureX, textureY, "lamp"); // Box 187 Headlight Front down CAB
+		bodyModel[222] = new ModelRendererTurbo(this, 84, 12, textureX, textureY, "lamp_cab_up"); // Box 186 Headlight Front up CAB
+		bodyModel[223] = new ModelRendererTurbo(this, 84, 17, textureX, textureY, "lamp_cab_down"); // Box 187 Headlight Front down CAB
 		bodyModel[224] = new ModelRendererTurbo(this, 318, 62, textureX, textureY); // Box 264
 		bodyModel[225] = new ModelRendererTurbo(this, 318, 58, textureX, textureY); // Box 265
 		bodyModel[226] = new ModelRendererTurbo(this, 285, 62, textureX, textureY); // Box 432

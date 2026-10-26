@@ -3,7 +3,16 @@
   "stock": "bap:workday_hyrail",
   "lighting": {
     "defaults": {
-      "fixtures": {}
+      "fixtures": {
+        "turnsig": {
+          "preset": "emissive_only",
+          "color": "#FF5D17",
+          "controlCircuit": "aux"
+        },
+        "taillight": {
+          "preset": "emissive_only"
+        }
+      }
     }
   },
   "skins": {

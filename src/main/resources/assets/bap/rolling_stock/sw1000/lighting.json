@@ -33,6 +33,39 @@
         },
         "cab_speedometer_body_429": {
           "preset": "instrument"
+        },
+        "lamp_gyra_single": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra_emerg2": {
+          "preset": "gyralite"
+        },
+        "lamp_hl_sp1": {
+          "preset": "headlight"
+        },
+        "lamp_hl_sp2": {
+          "preset": "headlight"
+        },
+        "lamp_gyra_sp1": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra_sp2": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra_sp1r": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra_sp2r": {
+          "preset": "gyralite"
+        },
+        "lamp_hl_sp1r": {
+          "preset": "headlight"
+        },
+        "lamp_hl_sp2r": {
+          "preset": "headlight"
+        },
+        "lamp_gyra_emerg1": {
+          "preset": "gyralite"
         }
       }
     }
@@ -42,10 +75,62 @@
     "bap:lightgrey": {},
     "bap:purple": {},
     "bap:yellow": {},
-    "bap:skin16": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_hl_sp1": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_hl_sp2": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_hl_sp1r": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_hl_sp2r": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_gyra_sp1r": {
+            "preset": "headlight",
+            "color": "#FFF4B4"
+          },
+          "lamp_gyra_sp2r": {
+            "preset": "headlight",
+            "color": "#FFF4B4"
+          },
+          "lamp_gyra_sp1": {
+            "preset": "headlight",
+            "color": "#FFF4B4"
+          },
+          "lamp_gyra_sp2": {
+            "preset": "headlight",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin19": {},
     "bap:skin20": {},
-    "bap:magenta": {},
+    "bap:magenta": {
+      "lighting": {
+        "fixtures": {
+          "lamp_gyra_single": {
+            "preset": "mars"
+          },
+          "lamp_gyra_emerg2": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin21": {},
     "bap:skin22": {},
     "bap:brown": {}

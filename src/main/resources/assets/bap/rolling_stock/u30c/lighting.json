@@ -30,6 +30,29 @@
         },
         "cab_speedometer_body_362": {
           "preset": "instrument"
+        },
+        "lamp_nose1": {
+          "preset": "headlight"
+        },
+        "lamp_nose2": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_grya1r": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra2r": {
+          "preset": "gyralite"
+        },
+        "lamp_emerg": {
+          "preset": "gyralite",
+          "color": "#FF2020",
+          "controlCircuit": "emergency"
         }
       }
     }
@@ -37,9 +60,58 @@
   "skins": {
     "bap:green": {},
     "bap:lightgrey": {},
-    "bap:cyan": {},
-    "bap:skin16": {},
-    "bap:grey": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          },
+          "lamp_grya1r": {
+            "color": "#FFF4B4"
+          },
+          "lamp_gyra2r": {
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite",
+            "color": "#FFFFFF"
+          },
+          "lamp_grya1r": {
+            "color": "#FFFFFF"
+          },
+          "lamp_gyra2r": {
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "mars"
+          },
+          "lamp_cab_up": {
+            "preset": "mars"
+          }
+        }
+      }
+    },
     "bap:skin17": {},
     "bap:skin18": {},
     "bap:lime": {},

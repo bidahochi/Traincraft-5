@@ -307,8 +307,8 @@ public class ModelSW1600 extends ModelConverter //Same as Filename
 		bodyModel[263] = new ModelRendererTurbo(this, 292, 230, textureX, textureY); // Box 397 smol fuel tank addition
 		bodyModel[264] = new ModelRendererTurbo(this, 194, 156, textureX, textureY, "lamp"); // Box 331 lamp rear 2 beam sp
 		bodyModel[265] = new ModelRendererTurbo(this, 194, 156, textureX, textureY, "lamp"); // Box 332 lamp rear 2 beam sp
-		bodyModel[266] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "lamp"); // Box 333 lamp rear gyro sp
-		bodyModel[267] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "lamp"); // Box 334 lamp rear gyro sp
+		bodyModel[266] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "gyra3"); // Box 333 lamp rear gyro sp
+		bodyModel[267] = new ModelRendererTurbo(this, 180, 156, textureX, textureY, "gyra4"); // Box 334 lamp rear gyro sp
 		bodyModel[268] = new ModelRendererTurbo(this, 190, 150, textureX, textureY, "marker_body_268"); // Box 300 glow marker
 		bodyModel[269] = new ModelRendererTurbo(this, 200, 150, textureX, textureY, "marker_body_269"); // Box 348 glow marker
 		bodyModel[270] = new ModelRendererTurbo(this, 179, 149, textureX, textureY); // Box 349
@@ -329,8 +329,8 @@ public class ModelSW1600 extends ModelConverter //Same as Filename
 		bodyModel[285] = new ModelRendererTurbo(this, 236, 141, textureX, textureY, "numberboard"); // Box 194 numberboard glow
 		bodyModel[286] = new ModelRendererTurbo(this, 102, 141, textureX, textureY, "lamp"); // Box 331 lamp front 2 beam sp
 		bodyModel[287] = new ModelRendererTurbo(this, 102, 141, textureX, textureY, "lamp"); // Box 332 lamp front 2 beam sp
-		bodyModel[288] = new ModelRendererTurbo(this, 88, 141, textureX, textureY, "lamp"); // Box 333 lamp front gyro sp
-		bodyModel[289] = new ModelRendererTurbo(this, 88, 141, textureX, textureY, "lamp"); // Box 334 lamp front gyro sp
+		bodyModel[288] = new ModelRendererTurbo(this, 88, 141, textureX, textureY, "gyra2"); // Box 333 lamp front gyro sp
+		bodyModel[289] = new ModelRendererTurbo(this, 88, 141, textureX, textureY, "gyra1"); // Box 334 lamp front gyro sp
 		bodyModel[290] = new ModelRendererTurbo(this, 88, 134, textureX, textureY); // Box 299
 		bodyModel[291] = new ModelRendererTurbo(this, 108, 135, textureX, textureY, "marker_body_291"); // Box 300 glow marker
 		bodyModel[292] = new ModelRendererTurbo(this, 98, 135, textureX, textureY, "marker_body_292"); // Box 348 glow marker

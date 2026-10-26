@@ -12,12 +12,61 @@
         },
         "cab_speedometer_body_254": {
           "preset": "instrument"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
+        },
+        "lamp_cab_gyra1": {
+          "preset": "gyralite"
+        },
+        "lamp_cab_gyra2": {
+          "preset": "gyralite"
+        },
+        "lamp_emerg": {
+          "preset": "gyralite",
+          "color": "#FF2020",
+          "controlCircuit": "emergency"
+        },
+        "lamp_nose1": {
+          "preset": "headlight"
+        },
+        "lamp_nose2": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
-    "bap:cyan": {},
-    "bap:skin16": {}
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          },
+          "lamp_nose2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    }
   }
 }

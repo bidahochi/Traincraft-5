@@ -30,14 +30,74 @@
         },
         "cab_signal_body_359": {
           "preset": "instrument"
+        },
+        "lamp_emerg": {
+          "preset": "gyralite"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
+        },
+        "lamp_nose_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_down": {
+          "preset": "headlight"
+        },
+        "lamp_gyra_1r": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra_2r": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra1": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra2": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:red": {},
-    "bap:pink": {},
+    "bap:red": {
+      "lighting": {
+        "fixtures": {
+          "lamp_emerg": {
+            "preset": "mars",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
+    "bap:pink": {
+      "lighting": {
+        "fixtures": {
+          "lamp_emerg": {
+            "color": "#FF2020",
+            "preset": "mars",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
-    "bap:purple": {}
+    "bap:purple": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#BB0CB0"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    }
   }
 }

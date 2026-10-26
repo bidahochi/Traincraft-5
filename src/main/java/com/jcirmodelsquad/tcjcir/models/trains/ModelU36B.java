@@ -131,10 +131,10 @@ public class ModelU36B extends ModelConverter //Same as Filename
 		bodyModel[86] = new ModelRendererTurbo(this, 201, 60, textureX, textureY, BoxName.ditch); // Box 190 ditchlight f1
 		bodyModel[87] = new ModelRendererTurbo(this, 469, 164, textureX, textureY); // Box 273
 		bodyModel[88] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, BoxName.ditch); // Box 276 ditchlight r1
-		bodyModel[89] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[90] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
-		bodyModel[91] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
-		bodyModel[92] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
+		bodyModel[89] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp_cab1"); // Box 186 Headlight Front up
+		bodyModel[90] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp_cab2"); // Box 187 Headlight Front down
+		bodyModel[91] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp_nose2"); // Box 247 Headlight Front nose R
+		bodyModel[92] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp_nose1"); // Box 248 Headlight Front nose L
 		bodyModel[93] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 284 Headlight Rear down
 		bodyModel[94] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 285 Headlight Rear up
 		bodyModel[95] = new ModelRendererTurbo(this, 17, 3, textureX, textureY); // Box 2
@@ -220,8 +220,8 @@ public class ModelU36B extends ModelConverter //Same as Filename
 		bodyModel[175] = new ModelRendererTurbo(this, 492, 140, textureX, textureY, "marker_body_175"); // Box 339 glowey marker
 		bodyModel[176] = new ModelRendererTurbo(this, 492, 140, textureX, textureY, "marker_body_176"); // Box 340 glowey marker
 		bodyModel[177] = new ModelRendererTurbo(this, 462, 104, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[178] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[179] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[178] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp_gyra1"); // Box 289 gyralight rear l
+		bodyModel[179] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp_gyra2"); // Box 290 gyralight rear r
 		bodyModel[180] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
 		bodyModel[181] = new ModelRendererTurbo(this, 457, 107, textureX, textureY); // Box 325
 		bodyModel[182] = new ModelRendererTurbo(this, 475, 107, textureX, textureY); // Box 326

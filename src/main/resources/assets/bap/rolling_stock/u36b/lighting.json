@@ -18,12 +18,44 @@
         },
         "cab_speedometer_body_294": {
           "preset": "instrument"
+        },
+        "lamp_nose1": {
+          "preset": "headlight"
+        },
+        "lamp_nose2": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_gyra1": {
+          "preset": "gyralite"
+        },
+        "lamp_gyra2": {
+          "preset": "gyralite"
         }
       }
     }
   },
   "skins": {
-    "bap:purple": {},
+    "bap:purple": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_nose2": {
+            "preset": "mars",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:blue": {},
     "bap:grey": {},
     "bap:lightgrey": {},
@@ -31,9 +63,49 @@
     "bap:skin20": {},
     "bap:skin21": {},
     "bap:skin22": {},
-    "bap:lightblue": {},
-    "bap:green": {},
-    "bap:skin16": {},
+    "bap:lightblue": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          },
+          "lamp_nose2": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
+    "bap:green": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite",
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite",
+            "color": "#FFF4B4"
+          }
+        }
+      }
+    },
     "bap:skin17": {}
   }
 }

@@ -21,6 +21,18 @@
         },
         "cab_speedometer_body_306": {
           "preset": "instrument"
+        },
+        "gyra1": {
+          "preset": "mars"
+        },
+        "gyra2": {
+          "preset": "mars"
+        },
+        "gyra3": {
+          "preset": "mars"
+        },
+        "gyra4": {
+          "preset": "mars"
         }
       }
     }

@@ -12,16 +12,77 @@
         },
         "cab_speedometer_body_254": {
           "preset": "instrument"
+        },
+        "lamp_cab1": {
+          "preset": "headlight"
+        },
+        "lamp_cab2": {
+          "preset": "headlight"
+        },
+        "lamp_cab_gyra1": {
+          "preset": "gyralite"
+        },
+        "lamp_cab_gyra2": {
+          "preset": "gyralite"
+        },
+        "lamp_emerg": {
+          "preset": "gyralite",
+          "color": "#FF2020",
+          "controlCircuit": "emergency"
+        },
+        "lamp_nose1": {
+          "preset": "headlight"
+        },
+        "lamp_nose2": {
+          "preset": "headlight"
         }
       }
     }
   },
   "skins": {
     "bap:yellow": {},
-    "bap:red": {},
+    "bap:red": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {},
+          "lamp_nose2": {},
+          "lamp_emerg": {}
+        }
+      }
+    },
     "bap:lightgrey": {},
-    "bap:skin16": {},
-    "bap:skin17": {},
+    "bap:skin16": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite"
+          },
+          "lamp_emerg": {
+            "color": "#FFFFFF",
+            "controlCircuit": "gyra"
+          }
+        }
+      }
+    },
+    "bap:skin17": {
+      "lighting": {
+        "fixtures": {
+          "lamp_nose1": {
+            "preset": "gyralite"
+          },
+          "lamp_nose2": {
+            "preset": "gyralite"
+          },
+          "lamp_emerg": {
+            "color": "#FFFFFF",
+            "controlCircuit": "gyra"
+          }
+        }
+      }
+    },
     "bap:black": {},
     "bap:skin18": {}
   }

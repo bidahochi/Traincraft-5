@@ -186,8 +186,8 @@ public class ModelU23BW extends ModelConverter //Same as Filename
 		bodyModel[141] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_141"); // Box 339 glowey marker
 		bodyModel[142] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_142"); // Box 340 glowey marker
 		bodyModel[143] = new ModelRendererTurbo(this, 462, 104, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[144] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[145] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[144] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp_gyra_1r"); // Box 289 gyralight rear l
+		bodyModel[145] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp_gyra_2r"); // Box 290 gyralight rear r
 		bodyModel[146] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
 		bodyModel[147] = new ModelRendererTurbo(this, 457, 107, textureX, textureY); // Box 325
 		bodyModel[148] = new ModelRendererTurbo(this, 475, 107, textureX, textureY); // Box 326
@@ -320,8 +320,8 @@ public class ModelU23BW extends ModelConverter //Same as Filename
 		bodyModel[275] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "marker_body_275"); // Box 307 glowey marker
 		bodyModel[276] = new ModelRendererTurbo(this, 1, 65, textureX, textureY, "marker_body_276"); // Box 308 glowey marker
 		bodyModel[277] = new ModelRendererTurbo(this, 21, 90, textureX, textureY); // Box 350
-		bodyModel[278] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[279] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[278] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp_cab_up"); // Box 186 Headlight Front up
+		bodyModel[279] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp_cab_down"); // Box 187 Headlight Front down
 		bodyModel[280] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[281] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 118 numberboard
 		bodyModel[282] = new ModelRendererTurbo(this, 128, 45, textureX, textureY); // Box 354
@@ -331,8 +331,8 @@ public class ModelU23BW extends ModelConverter //Same as Filename
 		bodyModel[286] = new ModelRendererTurbo(this, 139, 42, textureX, textureY); // Box 332
 		bodyModel[287] = new ModelRendererTurbo(this, 132, 39, textureX, textureY); // Box 331
 		bodyModel[288] = new ModelRendererTurbo(this, 1, 76, textureX, textureY); // Box 185
-		bodyModel[289] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front BLOCK R
-		bodyModel[290] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front BLOCK L
+		bodyModel[289] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp_gyra2"); // Box 247 Headlight Front BLOCK R
+		bodyModel[290] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp_gyra1"); // Box 248 Headlight Front BLOCK L
 		bodyModel[291] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, BoxName.prime1); // Box 6 PRIME3-1
 		bodyModel[292] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, BoxName.prime3); // Box 7 PRIME3-3
 		bodyModel[293] = new ModelRendererTurbo(this, 151, 55, textureX, textureY, BoxName.prime2); // Box 8 PRIME3-2
@@ -356,8 +356,8 @@ public class ModelU23BW extends ModelConverter //Same as Filename
 		bodyModel[311] = new ModelRendererTurbo(this, 155, 105, textureX, textureY); // Box 488 crab support
 		bodyModel[312] = new ModelRendererTurbo(this, 148, 106, textureX, textureY); // Box 489 crab step
 		bodyModel[313] = new ModelRendererTurbo(this, 8, 57, textureX, textureY); // Box 48
-		bodyModel[314] = new ModelRendererTurbo(this, 8, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[315] = new ModelRendererTurbo(this, 8, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
+		bodyModel[314] = new ModelRendererTurbo(this, 8, 47, textureX, textureY, "lamp_nose_up"); // Box 186 Headlight Front up
+		bodyModel[315] = new ModelRendererTurbo(this, 8, 52, textureX, textureY, "lamp_nose_down"); // Box 187 Headlight Front down
 		bodyModel[316] = new ModelRendererTurbo(this, 129, 53, textureX, textureY); // Box 409 commander base
 		bodyModel[317] = new ModelRendererTurbo(this, 134, 52, textureX, textureY, BoxName.commander); // Box 410 commander beacon
 		bodyModel[318] = new ModelRendererTurbo(this, 144, 53, textureX, textureY); // Box 409 commander base
@@ -377,7 +377,7 @@ public class ModelU23BW extends ModelConverter //Same as Filename
 		bodyModel[332] = new ModelRendererTurbo(this, 257, 39, textureX, textureY); // Box 336 air intake u18bwh
 		bodyModel[333] = new ModelRendererTurbo(this, 238, 73, textureX, textureY); // Box 337 u18bwh exhaust
 		bodyModel[334] = new ModelRendererTurbo(this, 96, 3, textureX, textureY); // Box 314 door swing left
-		bodyModel[335] = new ModelRendererTurbo(this, 1, 42, textureX, textureY, "lamp"); // Box 339 red gyra amtk u18bwh
+		bodyModel[335] = new ModelRendererTurbo(this, 1, 42, textureX, textureY, "lamp_emerg"); // Box 339 red gyra amtk u18bwh
 		bodyModel[336] = new ModelRendererTurbo(this, 152, 42, textureX, textureY); // Box 427
 		bodyModel[337] = new ModelRendererTurbo(this, 152, 45, textureX, textureY); // Box 428
 		bodyModel[338] = new ModelRendererTurbo(this, 152, 48, textureX, textureY); // Box 429

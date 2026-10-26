@@ -30,7 +30,7 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 
 	public ModelU23BU() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[439];
+		bodyModel = new ModelRendererTurbo[440];
 
 		initbodyModel_1();
 
@@ -135,10 +135,10 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 		bodyModel[91] = new ModelRendererTurbo(this, 193, 61, textureX, textureY, "ditch"); // Box 275 ditchlight f2
 		bodyModel[92] = new ModelRendererTurbo(this, 213, 60, textureX, textureY, "ditch"); // Box 276 ditchlight r1
 		bodyModel[93] = new ModelRendererTurbo(this, 222, 60, textureX, textureY, "ditch"); // Box 278 ditchlight r2
-		bodyModel[94] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp"); // Box 186 Headlight Front up
-		bodyModel[95] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp"); // Box 187 Headlight Front down
-		bodyModel[96] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp"); // Box 247 Headlight Front nose R
-		bodyModel[97] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp"); // Box 248 Headlight Front nose L
+		bodyModel[94] = new ModelRendererTurbo(this, 1, 47, textureX, textureY, "lamp_cab_up1"); // Box 186 Headlight Front up
+		bodyModel[95] = new ModelRendererTurbo(this, 1, 52, textureX, textureY, "lamp_cab_down1"); // Box 187 Headlight Front down
+		bodyModel[96] = new ModelRendererTurbo(this, 4, 71, textureX, textureY, "lamp_nose2"); // Box 247 Headlight Front nose R
+		bodyModel[97] = new ModelRendererTurbo(this, 12, 81, textureX, textureY, "lamp_nose1"); // Box 248 Headlight Front nose L
 		bodyModel[98] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 284 Headlight Rear down
 		bodyModel[99] = new ModelRendererTurbo(this, 447, 112, textureX, textureY, "lamp"); // Box 285 Headlight Rear up
 		bodyModel[100] = new ModelRendererTurbo(this, 17, 3, textureX, textureY); // Box 2
@@ -272,8 +272,8 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 		bodyModel[228] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_228"); // Box 339 glowey marker
 		bodyModel[229] = new ModelRendererTurbo(this, 500, 152, textureX, textureY, "marker_body_229"); // Box 340 glowey marker
 		bodyModel[230] = new ModelRendererTurbo(this, 462, 104, textureX, textureY); // Box 288 rear gyralight mount
-		bodyModel[231] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp"); // Box 289 gyralight rear l
-		bodyModel[232] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp"); // Box 290 gyralight rear r
+		bodyModel[231] = new ModelRendererTurbo(this, 1, 91, textureX, textureY, "lamp_grya1r"); // Box 289 gyralight rear l
+		bodyModel[232] = new ModelRendererTurbo(this, 8, 91, textureX, textureY, "lamp_gyra2r"); // Box 290 gyralight rear r
 		bodyModel[233] = new ModelRendererTurbo(this, 455, 111, textureX, textureY); // Box 324
 		bodyModel[234] = new ModelRendererTurbo(this, 457, 107, textureX, textureY); // Box 325
 		bodyModel[235] = new ModelRendererTurbo(this, 475, 107, textureX, textureY); // Box 326
@@ -437,10 +437,10 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 		bodyModel[393] = new ModelRendererTurbo(this, 83, 181, textureX, textureY); // Box 25
 		bodyModel[394] = new ModelRendererTurbo(this, 96, 183, textureX, textureY); // Box 405
 		bodyModel[395] = new ModelRendererTurbo(this, 109, 181, textureX, textureY); // Box 406
-		bodyModel[396] = new ModelRendererTurbo(this, 173, 28, textureX, textureY, "lamp"); // Box 401 sp emergency gyra
+		bodyModel[396] = new ModelRendererTurbo(this, 173, 28, textureX, textureY, "lamp_cab_gyra"); // Box 401 sp emergency gyra
 		bodyModel[397] = new ModelRendererTurbo(this, 163, 28, textureX, textureY); // Box 400 sp E gyra box
 		bodyModel[398] = new ModelRendererTurbo(this, 170, 26, textureX, textureY); // Box 335 sp e gyra box holder stick
-		bodyModel[399] = new ModelRendererTurbo(this, 12, 86, textureX, textureY); // Box 401 schnoz gyra
+		bodyModel[399] = new ModelRendererTurbo(this, 12, 86, textureX, textureY, "nose_gyra"); // Box 401 schnoz gyra
 		bodyModel[400] = new ModelRendererTurbo(this, 115, 45, textureX, textureY); // Box 355 brakewheel
 		bodyModel[401] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 117 numberboard
 		bodyModel[402] = new ModelRendererTurbo(this, 39, 54, textureX, textureY, "numberboard"); // Box 118 numberboard
@@ -476,10 +476,11 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 		bodyModel[432] = new ModelRendererTurbo(this, 185, 21, textureX, textureY); // Box 362 rv ac
 		bodyModel[433] = new ModelRendererTurbo(this, 185, 27, textureX, textureY); // Box 363 rv ac
 		bodyModel[434] = new ModelRendererTurbo(this, 1, 102, textureX, textureY); // Box 48 ph2 headlight
-		bodyModel[435] = new ModelRendererTurbo(this, 8, 101, textureX, textureY, "lamp"); // Box 186 Headlight Front up ph2
-		bodyModel[436] = new ModelRendererTurbo(this, 8, 106, textureX, textureY, "lamp"); // Box 187 Headlight Front down ph2
+		bodyModel[435] = new ModelRendererTurbo(this, 8, 101, textureX, textureY, "lamp_cab_up2"); // Box 186 Headlight Front up ph2
+		bodyModel[436] = new ModelRendererTurbo(this, 8, 106, textureX, textureY, "lamp_cab_down2"); // Box 187 Headlight Front down ph2
 		bodyModel[437] = new ModelRendererTurbo(this, 1, 109, textureX, textureY); // Box 133 ph2 headlight
 		bodyModel[438] = new ModelRendererTurbo(this, 1, 98, textureX, textureY); // Box 187 ph2 headlight
+		bodyModel[439] = new ModelRendererTurbo(this, 187, 4, textureX, textureY); // Box 104 cnrc antenna
 
 		bodyModel[0].addBox(0F, 0F, 0F, 76, 2, 22, 0F); // Box 0
 		bodyModel[0].setRotationPoint(-38F, -1F, -11F);
@@ -1824,6 +1825,9 @@ public class ModelU23BU extends ModelConverter //Same as Filename
 
 		bodyModel[438].addShapeBox(0F, 0F, 0F, 1, 1, 2, 0F,0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, -0.5F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 187 ph2 headlight
 		bodyModel[438].setRotationPoint(-34F, -22.5F, -1F);
+
+		bodyModel[439].addShapeBox(0F, 0F, 0F, 1, 4, 0, 0F,-0.75F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.75F, 0F, 0F, -0.75F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.75F, 0F, 0F); // Box 104 cnrc antenna
+		bodyModel[439].setRotationPoint(-28F, -25.5F, 0F);
 	}
 	ModelFB2_new theTrucks2 = new ModelFB2_new();
 	ModelBlombergBnew theTrucks3 = new ModelBlombergBnew();

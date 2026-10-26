@@ -55,7 +55,28 @@
     }
   },
   "skins": {
-    "bap:red": {},
+    "bap:red": {
+      "lighting": {
+        "fixtures": {
+          "front_headlight_upper": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          },
+          "front_headlight_lower": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          },
+          "rear_headlight_lower_right": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          },
+          "rear_headlight_lower_left": {
+            "preset": "mars",
+            "color": "#FFFFFF"
+          }
+        }
+      }
+    },
     "bap:lightgrey": {},
     "bap:white": {},
     "bap:purple": {}

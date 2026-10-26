@@ -7,11 +7,62 @@
         "front_marker": {
           "preset": "marker_light"
         },
+        "front_marker2": {
+          "preset": "marker_light"
+        },
         "rear_marker_low": {
+          "preset": "marker_light"
+        },
+        "rear_marker_low2": {
           "preset": "marker_light"
         },
         "rear_marker_high": {
           "preset": "marker_light"
+        },
+        "rear_marker_high2": {
+          "preset": "marker_light"
+        },
+        "frontHighbeamF": {
+          "preset": "headlight"
+        },
+        "frontHighbeamE": {
+          "preset": "headlight"
+        },
+        "FrontDitchLow1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitchLow2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchLow1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchLow2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitch1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitch2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
         },
         "front_marker_bugeye_body_345": {
           "preset": "marker_light"
@@ -25,8 +76,62 @@
         "rear_marker_bugeye_body_348": {
           "preset": "marker_light"
         },
+        "RearDitch1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitch2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
         "cab_speedometer_body_383": {
           "preset": "instrument"
+        },
+        "FrontDitchHigh1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "FrontDitchHigh2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchHigh1": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "RearDitchHigh2": {
+          "preset": "ditch_light",
+          "hornResponse": {
+            "scope": "none"
+          }
+        },
+        "lamp_nose_high_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_a": {
+          "preset": "headlight"
+        },
+        "lamp_nose_high_b": {
+          "preset": "headlight"
+        },
+        "lamp_nose_low_b": {
+          "preset": "headlight"
+        },
+        "cab_headlight_upper": {
+          "preset": "headlight"
+        },
+        "cab_headlight_lower": {
+          "preset": "headlight"
         }
       }
     }
@@ -39,7 +144,20 @@
     "bap:brown": {},
     "bap:lightblue": {},
     "bap:lightgrey": {},
-    "bap:purple": {},
+    "bap:purple": {
+      "lighting": {
+        "fixtures": {
+          "frontHighbeamE": {
+            "preset": "gyralite"
+          },
+          "frontHighbeamF": {
+            "preset": "gyralite",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          }
+        }
+      }
+    },
     "bap:green": {},
     "bap:lime": {},
     "bap:skin18": {},

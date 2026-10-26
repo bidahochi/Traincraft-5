@@ -21,6 +21,28 @@
         },
         "marker_crl_body_425": {
           "preset": "marker_light"
+        },
+        "lampgyraane1": {
+          "preset": "gyralite"
+        },
+        "lampgyraane2": {
+          "preset": "gyralite"
+        },
+        "lampgyraane3": {
+          "preset": "gyralite"
+        },
+        "lampgyraane4": {
+          "preset": "gyralite"
+        },
+        "lamptrash": {
+          "preset": "mars",
+          "color": "#FF2020",
+          "controlCircuit": "emergency"
+        },
+        "lamptrash2": {
+          "preset": "mars",
+          "color": "#FF2020",
+          "controlCircuit": "emergency"
         }
       }
     }

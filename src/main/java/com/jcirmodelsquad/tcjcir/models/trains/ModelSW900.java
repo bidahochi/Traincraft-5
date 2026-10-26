@@ -193,7 +193,7 @@ public class ModelSW900 extends ModelConverter //Same as Filename
 		bodyModel[148] = new ModelRendererTurbo(this, 272, 185, textureX, textureY); // Box 205
 		bodyModel[149] = new ModelRendererTurbo(this, 272, 174, textureX, textureY); // Box 206
 		bodyModel[150] = new ModelRendererTurbo(this, 270, 196, textureX, textureY, "cull"); // Box 207 cull trashcan holder
-		bodyModel[151] = new ModelRendererTurbo(this, 272, 189, textureX, textureY, "lamp"); // Box 208 sp trashcan light front
+		bodyModel[151] = new ModelRendererTurbo(this, 272, 189, textureX, textureY, "lamptrash"); // Box 208 sp trashcan light front
 		bodyModel[152] = new ModelRendererTurbo(this, 244, 165, textureX, textureY); // Box 209
 		bodyModel[153] = new ModelRendererTurbo(this, 246, 172, textureX, textureY, "lamp"); // Box 363 sp headlight front
 		bodyModel[154] = new ModelRendererTurbo(this, 246, 172, textureX, textureY, "lamp"); // Box 364 sp headlight front
@@ -307,11 +307,11 @@ public class ModelSW900 extends ModelConverter //Same as Filename
 		bodyModel[262] = new ModelRendererTurbo(this, 396, 57, textureX, textureY); // Box 351
 		bodyModel[263] = new ModelRendererTurbo(this, 328, 117, textureX, textureY); // Box 319
 		bodyModel[264] = new ModelRendererTurbo(this, 281, 165, textureX, textureY); // Box 362 ane shit
-		bodyModel[265] = new ModelRendererTurbo(this, 274, 167, textureX, textureY, "lamp"); // Box 363 ane front light gyra
-		bodyModel[266] = new ModelRendererTurbo(this, 267, 167, textureX, textureY, "lamp"); // Box 364 ane front light gyra
+		bodyModel[265] = new ModelRendererTurbo(this, 274, 167, textureX, textureY, "lampgyraane2"); // Box 363 ane front light gyra
+		bodyModel[266] = new ModelRendererTurbo(this, 267, 167, textureX, textureY, "lampgyraane1"); // Box 364 ane front light gyra
 		bodyModel[267] = new ModelRendererTurbo(this, 466, 22, textureX, textureY); // Box 365 ane shit
-		bodyModel[268] = new ModelRendererTurbo(this, 452, 24, textureX, textureY, "lamp"); // Box 366 ane rear light gyra
-		bodyModel[269] = new ModelRendererTurbo(this, 459, 24, textureX, textureY, "lamp"); // Box 367 ane rear light gyra
+		bodyModel[268] = new ModelRendererTurbo(this, 452, 24, textureX, textureY, "lampgyraane3"); // Box 366 ane rear light gyra
+		bodyModel[269] = new ModelRendererTurbo(this, 459, 24, textureX, textureY, "lampgyraane4"); // Box 367 ane rear light gyra
 		bodyModel[270] = new ModelRendererTurbo(this, 350, 35, textureX, textureY); // Box 81
 		bodyModel[271] = new ModelRendererTurbo(this, 350, 23, textureX, textureY); // Box 82
 		bodyModel[272] = new ModelRendererTurbo(this, 348, 32, textureX, textureY); // Box 83
@@ -326,7 +326,7 @@ public class ModelSW900 extends ModelConverter //Same as Filename
 		bodyModel[281] = new ModelRendererTurbo(this, 272, 185, textureX, textureY); // Box 205
 		bodyModel[282] = new ModelRendererTurbo(this, 272, 174, textureX, textureY); // Box 206
 		bodyModel[283] = new ModelRendererTurbo(this, 270, 196, textureX, textureY, "cull"); // Box 207 cull trashcan holder
-		bodyModel[284] = new ModelRendererTurbo(this, 272, 189, textureX, textureY, "lamp"); // Box 208 sp trashcan light rear
+		bodyModel[284] = new ModelRendererTurbo(this, 272, 189, textureX, textureY, "lamptrash2"); // Box 208 sp trashcan light rear
 		bodyModel[285] = new ModelRendererTurbo(this, 292, 130, textureX, textureY, "cull"); // Box 354 cull
 		bodyModel[286] = new ModelRendererTurbo(this, 292, 130, textureX, textureY, "cull"); // Box 355 cull
 		bodyModel[287] = new ModelRendererTurbo(this, 76, 91, textureX, textureY, BoxName.ditch); // Box 356 front ditchlight canook

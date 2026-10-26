@@ -18,6 +18,18 @@
         },
         "marker_fictional_body_309": {
           "preset": "marker_light"
+        },
+        "lamp_nose_up": {
+          "preset": "headlight"
+        },
+        "lamp_nose_down": {
+          "preset": "headlight"
+        },
+        "lamp_cab_up": {
+          "preset": "headlight"
+        },
+        "lamp_cab_down": {
+          "preset": "headlight"
         }
       }
     }
@@ -27,7 +39,18 @@
     "bap:brown": {},
     "bap:skin16": {},
     "bap:blue": {},
-    "bap:yellow": {},
+    "bap:yellow": {
+      "lighting": {
+        "fixtures": {
+          "lamp_cab_down": {
+            "preset": "gyralite"
+          },
+          "lamp_cab_up": {
+            "preset": "gyralite"
+          }
+        }
+      }
+    },
     "bap:lightblue": {},
     "bap:orange": {},
     "bap:cyan": {},
