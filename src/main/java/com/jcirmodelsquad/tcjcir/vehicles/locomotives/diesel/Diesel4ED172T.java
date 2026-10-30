@@ -73,7 +73,7 @@ public class Diesel4ED172T extends DieselTrain {
                 new ArrayList<double[]>()
                 {
                     {
-                        add(new double[]{0.45D, 1.5D, 0.0D});
+                        add(new double[]{0.45D, 1.32D, 0.0D});
                     }
                 },
                 "", null, 4, 0)

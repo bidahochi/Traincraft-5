@@ -21,8 +21,6 @@ public class Pullman69ChairCar extends AbstractPassengerCar {
 		InsertTexture(6, "Definitely not RBMN");
 	}
 
-
-
 	@Override
 	public double getAdditionalYOffset()
 	{
@@ -36,6 +34,7 @@ public class Pullman69ChairCar extends AbstractPassengerCar {
 	public String transportYear() {
 		return "1922";
 	}
+
 	public void onRenderInsertRecord()
 	{
 		Traincraft.traincraftRegistry.RegisterRollingStockModel(new TrainRenderRecord(Info.modID,
@@ -48,5 +47,4 @@ public class Pullman69ChairCar extends AbstractPassengerCar {
 				)
 		);
 	}
-
 }

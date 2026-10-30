@@ -2297,6 +2297,7 @@ public enum RenderEnum implements ITrainRenderRecord, ISubTrainRenderRecord
 
 	PSSOUBaggage(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.passenger.baggagecar.PSSOUBaggage.class, new ModelPSSOUBaggage(), "PS_lightweight_SOUBaggage_", true, new float[] { 0F, 0.15F, 0.0F }, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
 	PSSOURPO_30(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.passenger.rpo.PSSOURPO_30.class, new ModelPSSOURPO_30(), "PS_lightweight_SOUPO30_", true, new float[] { 0F, 0.15F, 0.0F }, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
+	//ModelPullman69ChairCar for the Pullman 69' Chair Car (SOU) is in its entity file for some reason
 
 	PRECOPendulumCoach(PRECOPendulumCoach.class, new ModelPRECOPendulumCoach(), "PRECO_lightweight_PendulumCoach_", true, new float[] { 0F, 0.15F, 0.0F }, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
 
