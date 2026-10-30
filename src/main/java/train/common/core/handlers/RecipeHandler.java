@@ -18,6 +18,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import train.common.Traincraft;
 import train.common.inventory.TrainCraftingManager;
 import train.common.items.BallastTypes;
+import train.common.items.ItemInterchangeTransferReportBoard;
 import train.common.items.RailVariants;
 import train.common.library.BlockIDs;
 import train.common.library.ItemIDs;
@@ -211,12 +212,22 @@ public class RecipeHandler extends AbstractRecipeHandler
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36D_2.block,1), "   ","OS ","IW ", 'O', new ItemStack(Items.dye, 1, 15), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36H.block,1), " O "," S ","IW ", 'O', new ItemStack(Items.dye, 1, 1), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
 		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36H_2.block,1), " O "," S ","IW ", 'O', new ItemStack(Items.dye, 1, 2), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
+		addDictRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);
+		addDictRecipe(new ItemStack(BlockIDs.MILWSwitchStand.block, 1)," RW","BWR","AAA", Character.valueOf('A'), new ItemStack(Items.stick), Character.valueOf('B'), Blocks.iron_bars, Character.valueOf('R'), new ItemStack(Items.dye, 1, 1), Character.valueOf('W'), new ItemStack(Items.dye, 1, 15));
+		//coomer switch stands
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36D_B.block,1), "   ","OSI","IW ", 'O', new ItemStack(Items.dye, 1, 2), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36H_B.block,1), " O "," SI","IW ", 'O', new ItemStack(Items.dye, 1, 1), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.USSM22.block, 1), "   ","CI ","IWW", 'C', new ItemStack(ItemIDs.electronicCircuit.item,1), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.Racor36D_3.block,1), "   ","OSL","IW ", 'O', new ItemStack(Items.dye, 1, 2), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks, 'L', new ItemStack(ItemIDs.padlock.item, 1));
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.USSTL21NL.block, 1), "   ","CI ","IIW", 'C', new ItemStack(ItemIDs.electronicCircuit.item,1), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks);
+		GameRegistry.addRecipe(new ItemStack(BlockIDs.USST20WL.block, 1), "   ","CIL","IIW", 'C', new ItemStack(ItemIDs.electronicCircuit.item,1), 'S', Items.stick, 'I', Items.iron_ingot, 'W', Blocks.planks, 'L', new ItemStack(ItemIDs.padlock.item, 1));
+
 
 		/* Recipe book */
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.recipeBook.item, 1),  "TTT", "TBT", "TTT", Character.valueOf('T'), Blocks.rail, Character.valueOf('B'), Items.book );
 
-		addDictRecipe(new ItemStack(BlockIDs.switchStand.block, 1), " W ", " I ", " R ", Character.valueOf('W'), Blocks.lever, Character.valueOf('R'), Items.stick, Character.valueOf('I'), ironingot);
-		addDictRecipe(new ItemStack(BlockIDs.MILWSwitchStand.block, 1)," RW","BWR","AAA", Character.valueOf('A'), new ItemStack(Items.stick), Character.valueOf('B'), Blocks.iron_bars, Character.valueOf('R'), new ItemStack(Items.dye, 1, 1), Character.valueOf('W'), new ItemStack(Items.dye, 1, 15));
+		//interchange report generator
+		GameRegistry.addRecipe(new ItemStack(ItemIDs.interchangeTransferReportBoard.item, 1), " S "," B ", "   ", 'S', new ItemStack(ItemIDs.partSpike.item, 1), 'B', new ItemStack(Items.book, 1));
 
 		/* Signal bungalows */
 		addDictRecipe(new ItemStack(BlockIDs.SmallBungalo.block, 1), "SIS", "IFI", "SIS", 'S', itemSteel, 'I', ironingot, 'F', ItemIDs.steelframe.item);
