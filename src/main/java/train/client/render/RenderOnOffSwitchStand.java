@@ -57,11 +57,16 @@ public final class RenderOnOffSwitchStand extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 		try
 		{
-			GL11.glTranslated(x + definition.getOriginX(),
+			GL11.glTranslated(x + definition.getOriginX() + switchStand.getRenderOffsetX(),
 					y + definition.getOriginY() + switchStand.getMountRenderOffset(),
-					z + definition.getOriginZ());
-			applyInitialRotation();
-			applyFacingTransform(facingTransform);
+					z + definition.getOriginZ() + switchStand.getRenderOffsetZ());
+			GL11.glRotated(definition.getInitialRotationX(), 1.0D, 0.0D, 0.0D);
+			GL11.glRotated(definition.getInitialRotationY(), 0.0D, 1.0D, 0.0D);
+			GL11.glRotated(definition.getInitialRotationZ(), 0.0D, 0.0D, 1.0D);
+			GL11.glRotated(facingTransform.getRotationZ(), 0.0D, 0.0D, 1.0D);
+			GL11.glRotated(facingTransform.getRotationY(), 0.0D, 1.0D, 0.0D);
+			GL11.glRotated(facingTransform.getRotationX(), 1.0D, 0.0D, 0.0D);
+			GL11.glTranslated(facingTransform.getOffsetX(), facingTransform.getOffsetY(), facingTransform.getOffsetZ());
 
 			Block block = tileEntity.getWorldObj().getBlock(
 					tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
@@ -77,20 +82,4 @@ public final class RenderOnOffSwitchStand extends TileEntitySpecialRenderer
 		}
 	}
 
-	/** Applies the skin's authored-axis correction before its world-facing transform. */
-	private void applyInitialRotation()
-	{
-		GL11.glRotated(definition.getInitialRotationX(), 1.0D, 0.0D, 0.0D);
-		GL11.glRotated(definition.getInitialRotationY(), 0.0D, 1.0D, 0.0D);
-		GL11.glRotated(definition.getInitialRotationZ(), 0.0D, 0.0D, 1.0D);
-	}
-
-	/** Applies the exact rotation order and local correction used by the legacy stand renderers. */
-	private void applyFacingTransform(OnOffSwitchStandRenderDefinition.Transform transform)
-	{
-		GL11.glRotated(transform.getRotationZ(), 0.0D, 0.0D, 1.0D);
-		GL11.glRotated(transform.getRotationY(), 0.0D, 1.0D, 0.0D);
-		GL11.glRotated(transform.getRotationX(), 1.0D, 0.0D, 0.0D);
-		GL11.glTranslated(transform.getOffsetX(), transform.getOffsetY(), transform.getOffsetZ());
-	}
 }

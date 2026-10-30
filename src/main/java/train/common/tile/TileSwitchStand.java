@@ -31,7 +31,13 @@ public abstract class TileSwitchStand extends TileLockable
     private static final String MAX_Y_TAG = "MaxY";
     private static final String MAX_Z_TAG = "MaxZ";
     private static boolean restoringEmbeddedHost;
-    private ForgeDirection facing;
+    private static final double DIAGONAL_OFFSET_COMPONENT = 0.35D / Math.sqrt(2.0D);
+    // Preserve ForgeDirection's original ordinals 0-6; append the four diagonals.
+    public static final int NORTH_EAST = 7;
+    public static final int SOUTH_EAST = 8;
+    public static final int SOUTH_WEST = 9;
+    public static final int NORTH_WEST = 10;
+    private int facing = ForgeDirection.UNKNOWN.ordinal();
     private EmbeddedHostType embeddedHostType;
     private Block embeddedHostBlock;
     private int embeddedHostMetadata;
@@ -189,11 +195,21 @@ public abstract class TileSwitchStand extends TileLockable
         embeddedHostShapes.clear();
     }
 
+    /** Power and mount metadata updates must retain orientation, ownership and captured host data. */
+    @Override
+    public boolean shouldRefresh(Block oldBlock, Block newBlock, int oldMetadata, int newMetadata,
+            World world, int x, int y, int z)
+    {
+        return oldBlock != newBlock;
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTag)
     {
         super.readFromNBT(nbtTag);
-        facing = ForgeDirection.getOrientation(nbtTag.getByte("Orientation"));
+        int orientation = nbtTag.getByte("Orientation");
+        facing = orientation >= 0 && orientation <= NORTH_WEST
+                ? orientation : ForgeDirection.UNKNOWN.ordinal();
         clearEmbeddedHost();
         if (nbtTag.hasKey(EMBEDDED_HOST_TYPE_TAG) && nbtTag.hasKey(EMBEDDED_HOST_BLOCK_TAG))
         {
@@ -227,14 +243,7 @@ public abstract class TileSwitchStand extends TileLockable
     public void writeToNBT(NBTTagCompound nbtTag)
     {
         super.writeToNBT(nbtTag);
-        if (facing != null)
-        {
-            nbtTag.setByte("Orientation", (byte) facing.ordinal());
-        }
-        else
-        {
-            nbtTag.setByte("Orientation", (byte) ForgeDirection.NORTH.ordinal());
-        }
+        nbtTag.setByte("Orientation", (byte)facing);
         if (isEmbedded())
         {
             nbtTag.setString(EMBEDDED_HOST_TYPE_TAG, embeddedHostType.name());
@@ -256,30 +265,53 @@ public abstract class TileSwitchStand extends TileLockable
         }
     }
 
-    /** Returns the stored cardinal facing, or {@link ForgeDirection#UNKNOWN} when none has been assigned. */
-    public ForgeDirection getFacing()
+    /** Original Forge orientation values followed by the four diagonal orientations. */
+    public int getFacing()
     {
-        if (facing != null)
-        {
-            return facing;
-        }
-        return ForgeDirection.UNKNOWN;
+        return facing;
     }
 
-    /** Updates the direction used to orient this stand's rendered model. */
-    public void setFacing(ForgeDirection face)
+    public void setFacing(int facing)
     {
-        if (facing != face)
+        this.facing = facing >= 0 && facing <= NORTH_WEST
+                ? facing : ForgeDirection.UNKNOWN.ordinal();
+        markDirty();
+        if (worldObj != null && !worldObj.isRemote)
         {
-            this.facing = face;
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
     }
 
+    public double getRenderOffsetX()
+    {
+        switch (facing)
+        {
+            case NORTH_EAST: case SOUTH_EAST: return -DIAGONAL_OFFSET_COMPONENT;
+            case SOUTH_WEST: case NORTH_WEST: return DIAGONAL_OFFSET_COMPONENT;
+            default: return 0.0D;
+        }
+    }
+
+    public double getRenderOffsetZ()
+    {
+        switch (facing)
+        {
+            case NORTH_EAST: case NORTH_WEST: return DIAGONAL_OFFSET_COMPONENT;
+            case SOUTH_EAST: case SOUTH_WEST: return -DIAGONAL_OFFSET_COMPONENT;
+            default: return 0.0D;
+        }
+    }
     @SideOnly(Side.CLIENT)
     @Override
     public AxisAlignedBB getRenderBoundingBox()
     {
-        return AxisAlignedBB.getBoundingBox(xCoord-1, yCoord-1, zCoord-1, xCoord + 2, yCoord + 3, zCoord + 2);
+        return AxisAlignedBB.getBoundingBox(
+                xCoord - 2 + Math.min(0, getRenderOffsetX()),
+                yCoord - 1,
+                zCoord - 2 + Math.min(0, getRenderOffsetZ()),
+                xCoord + 3 + Math.max(0, getRenderOffsetX()),
+                yCoord + 3,
+                zCoord + 3 + Math.max(0, getRenderOffsetZ()));
     }
 
 }

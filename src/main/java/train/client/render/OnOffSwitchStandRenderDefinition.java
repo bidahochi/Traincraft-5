@@ -2,7 +2,7 @@ package train.client.render;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
+import train.common.tile.TileSwitchStand;
 
 /** Immutable models, textures, and transforms for a two-state switch-stand skin. */
 public final class OnOffSwitchStandRenderDefinition
@@ -111,29 +111,28 @@ public final class OnOffSwitchStandRenderDefinition
 		return initialRotationZ;
 	}
 
-	/**
-	 * Returns the local correction for one cardinal world direction.
-	 *
-	 * @param facing direction stored by the switch-stand tile
-	 * @return matching transform, or {@code null} for a non-cardinal direction
-	 */
-	public Transform getFacingTransform(ForgeDirection facing)
+	/** Uses the original orientation numbers, with four appended diagonal values. */
+	public Transform getFacingTransform(int facing)
 	{
+		double diagonalRotation;
 		switch (facing)
 		{
-			case NORTH:
-				return northTransform;
-			case SOUTH:
-				return southTransform;
-			case EAST:
-				return eastTransform;
-			case WEST:
-				return westTransform;
-			default:
-				return null;
+			case 2: return northTransform;
+			case 3: return southTransform;
+			case 4: return westTransform;
+			case 5: return eastTransform;
+			case TileSwitchStand.NORTH_EAST: diagonalRotation = 45; break;
+			case TileSwitchStand.SOUTH_EAST: diagonalRotation = 135; break;
+			case TileSwitchStand.SOUTH_WEST: diagonalRotation = 225; break;
+			case TileSwitchStand.NORTH_WEST: diagonalRotation = 315; break;
+			default: return null;
 		}
+		return new Transform(northTransform.rotationX, northTransform.rotationY + diagonalRotation,
+				northTransform.rotationZ,
+				(northTransform.offsetX + eastTransform.offsetX) * 0.5D,
+				(northTransform.offsetY + eastTransform.offsetY) * 0.5D,
+				(northTransform.offsetZ + eastTransform.offsetZ) * 0.5D);
 	}
-
 	/** One facing's ordered rotations followed by its model-local translation. */
 	public static final class Transform
 	{

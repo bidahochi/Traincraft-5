@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -25,6 +24,7 @@ import train.common.items.TCRailTypes;
 import train.common.library.GuiIDs;
 import train.common.library.Info;
 import train.common.library.track.TrackHostConstants;
+import train.common.library.track.DiagonalSwitchStandControl;
 import train.common.tile.TileSwitchStand;
 import train.common.tile.TileTCRail;
 
@@ -121,19 +121,24 @@ public abstract class BlockSwitchStand extends BlockLever
 	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
 	{
 		TileSwitchStand switchStand = getSwitchStand(world, x, y, z);
+		float offsetX = switchStand == null ? 0 : (float)switchStand.getRenderOffsetX();
+		float offsetZ = switchStand == null ? 0 : (float)switchStand.getRenderOffsetZ();
 		if (switchStand != null && switchStand.isEmbedded())
 		{
-			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F,
-					(float)(switchStand.getMountRenderOffset() + 1.0D), 1.0F);
+			// The captured host stays at its original position when the model moves.
+			setBlockBounds(Math.min(0, offsetX), 0, Math.min(0, offsetZ),
+					1 + Math.max(0, offsetX),
+					(float)(switchStand.getMountRenderOffset() + 1.0D),
+					1 + Math.max(0, offsetZ));
 			return;
 		}
 		if (isLoweredMountSupport(world, x, y - 1, z))
 		{
-			setBlockBounds(0.0F, LOWERED_SELECTION_MINIMUM, 0.0F,
-					1.0F, LOWERED_SELECTION_MAXIMUM, 1.0F);
+			setBlockBounds(offsetX, LOWERED_SELECTION_MINIMUM, offsetZ,
+					1 + offsetX, LOWERED_SELECTION_MAXIMUM, 1 + offsetZ);
 			return;
 		}
-		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		setBlockBounds(offsetX, 0, offsetZ, 1 + offsetX, 1, 1 + offsetZ);
 	}
 
 	@Override
@@ -188,6 +193,7 @@ public abstract class BlockSwitchStand extends BlockLever
 			switchStand.restoreEmbeddedHost(world);
 		}
 		super.breakBlock(world, x, y, z, removedBlock, removedMetadata);
+		DiagonalSwitchStandControl.updateNearbySwitches(world, x, y, z);
 	}
 
 	/** Returns the switch-stand tile at a coordinate when one is present. */
@@ -313,28 +319,24 @@ public abstract class BlockSwitchStand extends BlockLever
 		TileSwitchStand switchStand = getSwitchStand(world, x, y, z);
 		if (switchStand != null)
 		{
-			int horizontalDirection = MathHelper.floor_double(
-					(double)((placer.rotationYaw * 4.0F) / 360.0F) + 0.5D) & 3;
-			switch (horizontalDirection)
+			int sector = (int)Math.floor(placer.rotationYaw / 45.0D + 0.5D) & 7;
+			switch (sector)
 			{
-				case 0:
-					switchStand.setFacing(ForgeDirection.NORTH);
-					break;
-				case 1:
-					switchStand.setFacing(ForgeDirection.EAST);
-					break;
-				case 2:
-					switchStand.setFacing(ForgeDirection.SOUTH);
-					break;
-				default:
-					switchStand.setFacing(ForgeDirection.WEST);
-					break;
+				case 0: switchStand.setFacing(ForgeDirection.NORTH.ordinal()); break;
+				case 1: switchStand.setFacing(TileSwitchStand.NORTH_EAST); break;
+				case 2: switchStand.setFacing(ForgeDirection.EAST.ordinal()); break;
+				case 3: switchStand.setFacing(TileSwitchStand.SOUTH_EAST); break;
+				case 4: switchStand.setFacing(ForgeDirection.SOUTH.ordinal()); break;
+				case 5: switchStand.setFacing(TileSwitchStand.SOUTH_WEST); break;
+				case 6: switchStand.setFacing(ForgeDirection.WEST.ordinal()); break;
+				case 7: switchStand.setFacing(TileSwitchStand.NORTH_WEST); break;
 			}
 			if (placer instanceof EntityPlayer)
 			{
 				switchStand.setOwner(((EntityPlayer)placer).getDisplayName());
 			}
 			world.markBlockForUpdate(x, y, z);
+			DiagonalSwitchStandControl.updateNearbySwitches(world, x, y, z);
 		}
 	}
 
@@ -406,11 +408,14 @@ public abstract class BlockSwitchStand extends BlockLever
 								+ " using operator permission."));
 				super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ);
 			}
-			if (world.getBlockMetadata(x, y, z) != initialMetadata
-					&& isLoweredMountSupport(world, x, y - 1, z))
+			if (world.getBlockMetadata(x, y, z) != initialMetadata)
 			{
-				world.notifyBlocksOfNeighborChange(x, y - 1, z, this);
-				updateSlabMountedSwitchControls(world, x, y, z);
+				if (isLoweredMountSupport(world, x, y - 1, z))
+				{
+					world.notifyBlocksOfNeighborChange(x, y - 1, z, this);
+					updateSlabMountedSwitchControls(world, x, y, z);
+				}
+				DiagonalSwitchStandControl.updateNearbySwitches(world, x, y, z);
 			}
 		}
 		else if (requestsLockMenu)

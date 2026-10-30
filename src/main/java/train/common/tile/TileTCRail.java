@@ -18,6 +18,7 @@ import train.common.Traincraft;
 import train.common.blocks.BlockSwitchStand;
 import train.common.items.TCRailTypes;
 import train.common.library.track.TrackHostConstants;
+import train.common.library.track.DiagonalSwitchStandControl;
 import train.common.library.track.EnumCoreTrack;
 import train.common.library.track.EnumTracks;
 import train.common.library.track.ITrackDefinition;
@@ -1030,7 +1031,8 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 			boolean receivingPower = tileEntity.isSlabMountedTrack()
 					? isReceivingSwitchPower()
 					: checkNonSwitchPieceForRedstonePower()
-							|| worldObj.isBlockIndirectlyGettingPowered(x, y, z);
+							|| worldObj.isBlockIndirectlyGettingPowered(x, y, z)
+							|| DiagonalSwitchStandControl.hasCornerStandPower(worldObj, tileEntity);
 			if (receivingPower)
 			{
 				newSwitchState = true;
@@ -1140,7 +1142,8 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 	public boolean isReceivingSwitchPower()
 	{
 		return checkNonSwitchPieceForRedstonePower()
-				|| isTrackControlCellPowered(xCoord, yCoord, zCoord);
+				|| isTrackControlCellPowered(xCoord, yCoord, zCoord)
+				|| DiagonalSwitchStandControl.hasCornerStandPower(worldObj, this);
 	}
 
 	private boolean isTrackControlCellPowered(int controlX, int controlY, int controlZ)
