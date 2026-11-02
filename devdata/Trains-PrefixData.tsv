@@ -65,6 +65,8 @@ item.tc:minecartDRGWRPO620Series	D&RGW RPO 620 Series	com.jcirmodelsquad.tcjcir.
 item.tc:minecartDRGWRPO630Series	D&RGW RPO 630 Series	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.passenger.baggagecar.DRGWRPO630Series	DRGW_RPO_630_Series_
 item.tc:minecartDRGWCaboose	DRGWCaboose	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.workcart.DRGWboose	BAP_DRGW_01400_
 item.tc:minecartDUPX39200	DUPX39200	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tanker.DUPX39200	dupx_39200_
+item.tc:minecart0_6_6_0_1000_2B_DE	0660_1000_2B_DE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel0_6_6_0_1000_2B_DE	0660_100_2B_DE_
+item.tc:minecart0_6_6_0_1000_2_DE	0660_1000_2_DE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel0_6_6_0_1000_2_DE	0660_100_2_DE_
 item.tc:minecart4ED172T	4ED172T	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T	4ED-172T_
 item.tc:minecart4ED172T_C	4ED172T_C	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T_C	4ED-172T_C_
 item.tc:minecart4ED172T_E	4ED172T_E	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T_E	4ED-172T_E_
@@ -197,7 +199,6 @@ item.tc:minecartP42	P42	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Di
 item.tc:minecartAlcoPA1	PA1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselPA1	AlcoPA1_
 item.tc:minecartAlcoPB1	PB1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselPB1	AlcoPB1_
 item.tc:minecartRF16	RF16	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRF16	RF-16_
-item.tc:minecartRF16B	RF16B	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRF16B	RF-16B_
 item.tc:minecartRS1	RS1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS1	rs1_
 item.tc:minecartRS2	RS2	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS2	rs2_
 item.tc:minecartRS3	RS3	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS3	rs3_

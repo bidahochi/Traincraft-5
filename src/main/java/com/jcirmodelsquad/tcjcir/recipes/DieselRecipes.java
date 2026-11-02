@@ -33,6 +33,10 @@ public class DieselRecipes extends AbstractRecipeHandler {
 
         cm.addRecipe(2, new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.partBlombergB.item, 2), new ItemStack(ItemIDs.steelframe.item, 2), SteelIngot(3), new ItemStack(ItemIDs.steelchimney.item, 2), new ItemStack(ItemIDs.partComponentEMD.item, 1), new ItemStack(ItemIDs.generator.item, 2), new ItemStack(ItemIDs.dieselengine.item, 3), new ItemStack(ItemIDs.controls.item, 1), BLUE_DYE, new ItemStack(ItemIDs.minecartFP9A.item, 1), 1);
 
+        //0-6-6-0 1000/2 DE
+        cm.addRecipe(2, new ItemStack(ItemIDs.controls.item, 2), new ItemStack(ItemIDs.bogie.item, 6), new ItemStack(ItemIDs.steelframe.item, 4), SteelIngot(4), new ItemStack(ItemIDs.steelchimney.item, 2), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.electmotor.item, 4), new ItemStack(ItemIDs.dieselengine.item, 6), new ItemStack(ItemIDs.generator.item, 6), BLUE_DYE, new ItemStack(ItemIDs.minecart0_6_6_0_1000_2_DE.item, 1), 1);
+        cm.addRecipe(2, null, new ItemStack(ItemIDs.bogie.item, 6), new ItemStack(ItemIDs.steelframe.item, 4), SteelIngot(4), new ItemStack(ItemIDs.steelchimney.item, 2), new ItemStack(ItemIDs.steelcab.item, 1), new ItemStack(ItemIDs.electmotor.item, 4), new ItemStack(ItemIDs.dieselengine.item, 6), new ItemStack(ItemIDs.generator.item, 6), BLUE_DYE, new ItemStack(ItemIDs.minecart0_6_6_0_1000_2B_DE.item, 1), 1);
+
         //CF7s
         cm.addRecipe(2, new ItemStack(ItemIDs.steelcab.item, 2), null, new ItemStack(ItemIDs.steelframe.item, 2), SteelIngot(3), null, new ItemStack(ItemIDs.partComponentEMD.item, 1), new ItemStack(ItemIDs.minecartF7A.item, 1), null, null, YELLOW_DYE, new ItemStack(ItemIDs.minecartCF7angle.item, 1), 1);
         cm.addRecipe(2, new ItemStack(ItemIDs.steelcab.item, 1), null, new ItemStack(ItemIDs.steelframe.item, 2), SteelIngot(3), null, new ItemStack(ItemIDs.partComponentEMD.item, 1), new ItemStack(ItemIDs.minecartF7A.item, 1), null, null, YELLOW_DYE, new ItemStack(ItemIDs.minecartCF7round.item, 1), 1);

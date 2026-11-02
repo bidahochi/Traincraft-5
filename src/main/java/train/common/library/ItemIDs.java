@@ -607,6 +607,8 @@ public enum ItemIDs {
 	minecartDR441500BShark("ItemRollingStock", "DR441500BShark", DIESEL,4),
 	minecartRF16("ItemRollingStock", "RF16", DIESEL,4),
 	minecartRF16B("ItemRollingStock", "RF16B", DIESEL,4),
+	minecart0_6_6_0_1000_2_DE("ItemRollingStock", "0-6-6-0_1000_2_DE", DIESEL,5),
+	minecart0_6_6_0_1000_2B_DE("ItemRollingStock", "0-6-6-0_1000_2B_DE", DIESEL,5),
 
 	//Fairbanks Morse//
 	minecartH1044("ItemRollingStock", "h1044", DIESEL, 4),

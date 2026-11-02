@@ -53,6 +53,9 @@ public enum LockoutGroup implements ILockoutGroup
 
     //Cheesewheel
     CDCS("43efda8c-f591-4f7e-bc54-c4978484e69f"), //Clarksville, Deer Creek & Southern
+
+    //Dominik
+    DPNC("620377d9-34d7-4abb-bed0-5b064915db6b"), //Des Plaines Navigation Company
     ;
 
     /**

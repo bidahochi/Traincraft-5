@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:blw0-6-6-0_1000_2b_de",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight_1": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "backlight_1F": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "backlight_2": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "backlight_2F": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "backlight_3": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "backlight_3F": {
+          "enabled": false,
+          "preset": "headlight"
+        },
+        "gauges": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {}
+  }
+}

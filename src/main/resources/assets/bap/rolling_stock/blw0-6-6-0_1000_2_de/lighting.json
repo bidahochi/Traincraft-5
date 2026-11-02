@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:blw0-6-6-0_1000_2_de",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "headlight2beamUB2": {
+          "preset": "headlight"
+        },
+        "big_headlight_top": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA2": {
+          "preset": "headlight"
+        },
+        "headlight2beamUB1": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA1": {
+          "preset": "headlight"
+        },
+        "numberboard_R_type_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_L_type_2": {
+          "preset": "numberboard"
+        },
+        "markerlight_545_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_353_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_353": {
+          "preset": "marker_light"
+        },
+        "markerlight_545": {
+          "preset": "marker_light"
+        },
+        "numberboard_L_type_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_R_type_1": {
+          "preset": "numberboard"
+        },
+        "speedo": {
+          "preset": "instrument"
+        },
+        "headlight2beamBB2": {
+          "preset": "headlight"
+        },
+        "headlight2beamBB1": {
+          "preset": "headlight"
+        },
+        "headlight2beamBA2": {
+          "preset": "headlight"
+        },
+        "headlight2beamBA1": {
+          "preset": "headlight"
+        },
+        "big_headlight_bottom": {
+          "preset": "headlight"
+        },
+        "backlight_3": {
+          "preset": "headlight"
+        },
+        "backlight_2": {
+          "preset": "headlight"
+        },
+        "backlight_1": {
+          "preset": "headlight"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {
+      "lighting": {
+        "fixtures": {
+          "headlight2beamBA1": {},
+          "headlight2beamBA2": {},
+          "gauges": {
+            "preset": "instrument"
+          }
+        }
+      }
+    },
+    "bap:purple": {},
+    "bap:cyan": {
+      "lighting": {
+        "fixtures": {
+          "headlight2beamBA2": {
+            "preset": "mars",
+            "controlCircuit": "emergency",
+            "color": "#FF2020"
+          },
+          "headlight2beamBA1": {
+            "preset": "mars"
+          }
+        }
+      }
+    }
+  }
+}

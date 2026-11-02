@@ -209,11 +209,13 @@ menu.item.lv=Latvia
 menu.item.lt=Lithuania
 menu.item.lu=Luxembourg
 menu.item.mt=Malta
+menu.item.mx=Mexico
 menu.item.nl=Netherlands
 menu.item.pl=Poland
 menu.item.ro=Romania
 menu.item.sk=Slovakia
 menu.item.si=Slovenia
+menu.item.us_mx= United States and Mexico
 
 <!-- ## Achievements ## -->
 achievement.tc:engineer=Engineers clothes
@@ -1273,6 +1275,8 @@ item.tc:minecartDR441500Shark.name=BLW DR-4-4-1500 (Phase 3)
 item.tc:minecartDR441500BShark.name=BLW DR-4-4-1500B (Phase 3)
 item.tc:minecartRF16.name=BLH RF-16
 item.tc:minecartRF16B.name=BLH RF-16B
+item.tc:minecart0_6_6_0_1000_2_DE.name=BLW 0-6-6-0 1000/2 DE
+item.tc:minecart0_6_6_0_1000_2B_DE.name=BLW 0-6-6-0 1000/2B DE
 
 --------------------------------------------------------
 

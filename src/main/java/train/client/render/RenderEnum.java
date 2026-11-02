@@ -1996,6 +1996,31 @@ public enum RenderEnum implements ITrainRenderRecord, ISubTrainRenderRecord
 			add(new double[]{1.68D, 1.32D, 0.22D});
 		}
 	}, "", null, 0, false),
+	BLW066010002DE( Diesel0_6_6_0_1000_2_DE.class,  new Model0_6_6_0_1000_2_DE(), "0660_100_2_DE_", true,new float[] {-1.85F, 0.15F, 0F},  new float[] { 0F, 180F, 180F },  new float[] { 1F, 1.0F, 1F }, "smoke", 3,  new ArrayList<double[]>() {
+		{
+			add(new double[]{3.67D, 1.31D, 0.23D});
+			add(new double[]{3.37D, 1.31D, 0.23D});
+			add(new double[]{3.07D, 1.31D, 0.23D});
+			add(new double[]{2.77D, 1.31D, 0.23D});
+			add(new double[]{0.94D, 1.31D, 0.23D});
+			add(new double[]{0.64D, 1.31D, 0.23D});
+			add(new double[]{0.34D, 1.31D, 0.23D});
+			add(new double[]{0.04D, 1.31D, 0.23D});
+		}
+	},"", null, 0, false),
+	BLW066010002BDE( Diesel0_6_6_0_1000_2B_DE.class,  new Model0_6_6_0_1000_2B_DE(), "0660_100_2B_DE_", true,new float[] {-1.85F, 0.15F, 0F},  new float[] { 0F, 180F, 180F },  new float[] { 1F, 1.0F, 1F }, "smoke", 3,  new ArrayList<double[]>() {
+		{
+			add(new double[]{3.76D, 1.31D, 0.23D});
+			add(new double[]{3.46D, 1.31D, 0.23D});
+			add(new double[]{3.16D, 1.31D, 0.23D});
+			add(new double[]{2.86D, 1.31D, 0.23D});
+			add(new double[]{1.03D, 1.31D, 0.23D});
+			add(new double[]{0.73D, 1.31D, 0.23D});
+			add(new double[]{0.43D, 1.31D, 0.23D});
+			add(new double[]{0.13D, 1.31D, 0.23D});
+		}
+	},"", null, 0, false),
+
 
 	/**Fairbanks Morse**/
 	H1044( DieselH1044.class,  new ModelH1044(), "FM_H10-44_", true,new float[] {-1.1F, 0.15F, 0F},  new float[] { 0F, 180F, 180F }, null, "smoke", 4,  new ArrayList<double[]>() {
