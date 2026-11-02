@@ -3864,6 +3864,24 @@ public class RegisterBAPTrains
                         .setStockId("rf-16")
         );
 
+        // RF16B
+        register.put(ItemIDs.minecartRF16B.item,
+                new TrainRecord("RF16B", DieselRF16B.class, ItemIDs.minecartRF16B.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(1600)
+                        .setMaxSpeed(105)
+                        .setMass(0)
+                        .setFuelConsumption(6)
+                        .setHeatingTime(200)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Green", "Blue", "Cyan", "Grey", "Black", "Orange", "Magenta", "Red", "Purple"})
+                        .setGuiRenderScale(15)
+                        .setBogieLocoPosition(-2.675)
+                        .setStockId("rf-16b")
+        );
+
             // 0-6-6-0 1000/2 DE
         register.put(ItemIDs.minecart0_6_6_0_1000_2_DE.item,
                     new TrainRecord("0660_1000_2_DE", Diesel0_6_6_0_1000_2_DE.class, ItemIDs.minecart0_6_6_0_1000_2_DE.item)
