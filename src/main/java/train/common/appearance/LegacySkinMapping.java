@@ -73,22 +73,102 @@ public final class LegacySkinMapping
     /** Validates path-safe namespaced identities; dot traversal segments are forbidden. */
     public static void requireId(String id)
     {
+        requireId(id, "Invalid namespaced identity '" + id + "': ", false);
+    }
+
+    /** Validates a local stock ID while reporting its owning record rather than a dummy namespace. */
+    public static void requireStockId(String id, String stockDescription)
+    {
+        requireId(id == null ? null : "stock:" + id,
+            "Invalid stock ID '" + id + "' for " + stockDescription + ": ", true);
+    }
+
+    private static void requireId(String id, String errorPrefix, boolean localId)
+    {
         if (id == null || ID.matcher(id).matches() == false)
         {
-            throw new IllegalArgumentException("Invalid namespaced identity: " + id);
+            throw invalidId(errorPrefix, invalidIdReason(id, localId), localId);
         }
         String namespace = id.substring(0, id.indexOf(':'));
         if (namespace.equals(".") || namespace.equals(".."))
         {
-            throw new IllegalArgumentException("Invalid identity namespace: " + id);
+            throw invalidId(errorPrefix, "the namespace must not be '.' or '..'", localId);
         }
         for (String segment : id.substring(id.indexOf(':') + 1).split("/"))
         {
             if (segment.equals(".") || segment.equals(".."))
             {
-                throw new IllegalArgumentException("Identity contains a traversal segment: " + id);
+                throw invalidId(errorPrefix, "path segment '" + segment
+                    + "' is forbidden; '.' and '..' traversal segments are not allowed", localId);
             }
         }
+    }
+
+    private static IllegalArgumentException invalidId(String errorPrefix, String reason, boolean localId)
+    {
+        return new IllegalArgumentException(errorPrefix + reason + (localId
+            ? ". setStockId() takes only a local ID (for example 'my_stock'); the namespace is supplied during registration. "
+                + "Resource folder and JSON IDs must match the stock ID spelling."
+            : ""));
+    }
+
+    private static String invalidIdReason(String id, boolean localId)
+    {
+        if (id == null || id.isEmpty())
+        {
+            return "the ID must not be null or empty; expected namespace:path (for example 'bap:my_stock')";
+        }
+        int separator = id.indexOf(':');
+        if (separator < 0)
+        {
+            return "missing namespace separator ':'; expected namespace:path (for example 'bap:my_stock')";
+        }
+        if (separator != id.lastIndexOf(':'))
+        {
+            return localId ? "':' is not allowed in a local stock ID; do not include a namespace"
+                : "only one ':' separator is allowed; expected namespace:path";
+        }
+        if (separator == 0 || separator == id.length() - 1)
+        {
+            return localId ? "the local stock ID must not be empty"
+                : "both the namespace and path must be nonempty; expected namespace:path";
+        }
+        for (int index = 0; index < id.length(); index++)
+        {
+            if (index == separator)
+            {
+                continue;
+            }
+            char character = id.charAt(index);
+            String component = index < separator ? "namespace" : "path";
+            if (character >= 'A' && character <= 'Z')
+            {
+                String reason = "uppercase letter '" + character + "' in the " + component
+                    + "; IDs require lowercase letters (a-z)";
+                String lowercase = id.toLowerCase(Locale.ROOT);
+                if (ID.matcher(lowercase).matches())
+                {
+                    reason += "; use '" + (localId ? lowercase.substring(separator + 1) : lowercase) + "'";
+                }
+                return reason;
+            }
+            if (Character.isWhitespace(character))
+            {
+                return "whitespace in the " + component + " at position " + (localId ? index - separator : index + 1)
+                    + "; remove spaces, tabs and line breaks or replace them with '_'";
+            }
+            boolean allowed = character >= 'a' && character <= 'z'
+                || character >= '0' && character <= '9'
+                || character == '_' || character == '.' || character == '-'
+                || character == '/' && index > separator;
+            if (allowed == false)
+            {
+                return "invalid character '" + character + "' in the " + component + " at position "
+                    + (localId ? index - separator : index + 1)
+                    + "; allowed characters are a-z, 0-9, '_', '.', '-' and '/' between path segments only";
+            }
+        }
+        return "the path contains an empty segment; '/' cannot start or end the path or appear twice in a row";
     }
 
     /** Generates the existing string-style color name, never a texture or display description. */

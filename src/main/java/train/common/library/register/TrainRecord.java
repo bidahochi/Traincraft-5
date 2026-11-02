@@ -21,7 +21,8 @@ public class TrainRecord implements ITrainRecord
     {
         if (stockId != null)
         {
-            LegacySkinMapping.requireId("stock:" + stockId);
+            LegacySkinMapping.requireStockId(stockId, "'" + internalName + "'"
+                + (entityClass == null ? "" : " (" + entityClass.getName() + ")"));
         }
         this.stockId = stockId;
         return this;
