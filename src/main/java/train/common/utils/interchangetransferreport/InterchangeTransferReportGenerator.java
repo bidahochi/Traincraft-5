@@ -32,8 +32,8 @@ public class InterchangeTransferReportGenerator
 {
     // These limits match the fixed-width interchange report format, not the GUI column widths.
     public static final int CAR_LIMIT = 12;
-    public static final int DESTINATION_LIMIT = 4;
-    public static final int CUSTOMER_LIMIT = 6;
+    public static final int DESTINATION_LIMIT = 5;
+    public static final int CUSTOMER_LIMIT = 9;
     public static final int CARGO_LIMIT = 14;
 
     private static final String EMPTY_STATUS = "**EMPTY**";
@@ -139,17 +139,17 @@ public class InterchangeTransferReportGenerator
 
             theReport.add((i + 1)
                     + ((i + 1) > 9 ? "  " : "   ")
-                    + padRight(limit(row.car, CAR_LIMIT), 13)
+                    + padRight(limit(row.car, CAR_LIMIT), 14)
                     + (row.loaded ? "L" : "E")
                     + "/"
                     + limit(emptyIfNull(row.typeCode), 1)
                     + "  "
-                    + padRight(limit(row.destination, DESTINATION_LIMIT), 4)
-                    + "   "
+                    + padRight(limit(row.destination, DESTINATION_LIMIT), 5)
+                    + "  "
                     + "{"
-                    + padRight(limit(row.customer, CUSTOMER_LIMIT), 6)
+                    + padRight(limit(row.customer, CUSTOMER_LIMIT), 9)
                     + "}"
-                    + "     "
+                    + "  "
                     + limit(getCargoForReport(row), CARGO_LIMIT)
                     + "\n");
         }
@@ -373,13 +373,14 @@ public class InterchangeTransferReportGenerator
             return cargo;
         }
 
-        String hazmatText = emptyIfNull(row.hazmatCode).length() == 0 ? "HAZ" : "HAZ " + row.hazmatCode;
+        String hazmatText = emptyIfNull(row.hazmatCode).length() == 0 ? "[" : "HAZ " + row.hazmatCode;
+
         if (cargo.length() == 0 || cargo.startsWith("**"))
         {
-            return hazmatText;
+            return hazmatText + "HAZARDOUS]";
         }
 
-        return hazmatText + " " + cargo;
+        return hazmatText + cargo + "]";
     }
 
     private static String emptyIfNull(String text)

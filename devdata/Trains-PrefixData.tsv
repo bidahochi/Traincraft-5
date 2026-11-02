@@ -199,6 +199,7 @@ item.tc:minecartP42	P42	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Di
 item.tc:minecartAlcoPA1	PA1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselPA1	AlcoPA1_
 item.tc:minecartAlcoPB1	PB1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselPB1	AlcoPB1_
 item.tc:minecartRF16	RF16	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRF16	RF-16_
+item.tc:minecartRF16B	RF16B	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRF16B	RF-16B_
 item.tc:minecartRS1	RS1	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS1	rs1_
 item.tc:minecartRS2	RS2	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS2	rs2_
 item.tc:minecartRS3	RS3	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS3	rs3_

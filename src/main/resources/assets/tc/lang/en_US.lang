@@ -49,11 +49,15 @@ tile.tc:assemblyTableIII.name=Assembly Table III
 tile.tc:trainDetector.name=Train Detector
 tile.tc:tcRail.name=Traincraft Rail
 tile.tc:tcRailGag.name=Traincraft Rail
+
 fluid.tc:fluid.diesel.name=Diesel Fuel
 fluid.tc:fluid.refinedfuel.name=Refined Fuel
+
 tile.tc:bridgePillar.name=Bridge Pillar
+
 tile.tc:switchStand.name=High Star Switch Stand
 tile.tc:MILWSwitchStand.name=MILW Switch Stand
+
 tile.tc:mtcTransmitterSpeed.name=MTC Speed Transmitter
 tile.tc:mtcTransmitterMTC.name=MTC Status Transmitter
 tile.tc:mtcATOStopTransmitter.name=MTC Stop Point Transmitter
@@ -62,6 +66,7 @@ tile.tc:mtcReceiverDestination.name=MTC Destination Receiver
 tile.tc:pdmInstructionBlock.name=W-MTC Wireless Radio
 tile.tc:betterDetector.name=Better Detector
 tile.tc:trainMonitor.name=Train Monitor
+
 tile.tc:Racor36D_1.name=Racor 36D Switch Stand (Regular Targets)
 tile.tc:Racor36D_2.name=Racor 36D Switch Stand (FNCC Targets)
 tile.tc:Racor36H.name=Racor 36H Switch Stand (Round Target)
@@ -77,6 +82,7 @@ tile.tc:owoSwitchStand.name=OWO Road Switch Stand
 tile.tc:autoSwtichStand.name=Auto Switch Stand
 tile.tc:circleSwitchStand.name=Circle Switch Stand
 tile.tc:owoYardSwitchStand.name=OWO Yard Switch Stand
+
 tile.tc:oreTC.snowgravel.name=Snowy Gravel
 
 tile.tc:MFPBWigWag.name=Wig Wag Crossing
@@ -247,7 +253,7 @@ achievement.tc:freight.desc=Ship by rail!
 achievement.tc:fineCopperWire=Fine wires
 achievement.tc:fineCopperWire.desc=Electrifying!
 achievement.tc:dieselEngine=Diesel engine
-achievement.tc:dieselEngine.desc=More horsepower!
+achievement.tc:dieselEngine.desc=The Revolution has begun!
 achievement.tc:stake=Stake
 achievement.tc:stake.desc=Couple up!
 achievement.tc:firebox=Firebox
@@ -786,10 +792,10 @@ item.tc:tcRail_WOOD_TYPE2_LargeSlopeDynamic.name=1x12 Spruce Wood Large Slope Tr
 item.tc:tcRail_WOOD_TYPE2_VeryLargeSlopeDynamic.name=1x18 Spruce Wood Very Large Slope Track (Dynamic)
 
 <!-- ## TC Tracks - RR Crossings ## -->
-item.tc:tcRailSmallRoadCrossing.name=RailRoad Crossing (Black Asphalt)
-item.tc:tcRailSmallRoadCrossing1.name=RailRoad Crossing (Clean Asphalt)
-item.tc:tcRailSmallRoadCrossing2.name=RailRoad Crossing (light Gray Asphalt)
-item.tc:tcRailSmallRoadCrossingDynamic.name=RailRoad Crossing (Dynamic)
+item.tc:tcRailSmallRoadCrossing.name=Railroad Crossing (Black Asphalt)
+item.tc:tcRailSmallRoadCrossing1.name=Railroad Crossing (Clean Asphalt)
+item.tc:tcRailSmallRoadCrossing2.name=Railroad Crossing (light Gray Asphalt)
+item.tc:tcRailSmallRoadCrossingDynamic.name=Railroad Crossing (Dynamic)
 
 <!-- ## TC Keybindings ## -->
 key.categories.traincraft=FoxTC (Traincraft)

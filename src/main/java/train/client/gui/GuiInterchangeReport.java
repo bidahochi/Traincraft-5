@@ -57,11 +57,11 @@ public class GuiInterchangeReport extends GuiScreen
     private static final int COL_NUMBER = 48;
     private static final int COL_CAR = 160;
     private static final int COL_LOAD_TYPE = 188;
-    private static final int COL_DESTINATION = 258;
-    private static final int COL_CUSTOMER = 311;
-    private static final int COL_CARGO = 485;
-    private static final int COL_HAZMAT = 508;
-    private static final int COL_DELETE = SHEET_WIDTH - 10;
+    private static final int COL_DESTINATION = 230;//258 not 205
+    private static final int COL_CUSTOMER = 300;//311 not 364
+    private static final int COL_CARGO = 474;//485
+    private static final int COL_HAZMAT = 500;//508
+    private static final int COL_DELETE = SHEET_WIDTH - 10;//sheet width -10
 
     // Clipboard palette. Constant names include the color family so hex values are understandable.
     private static final int BROWN_CLIPBOARD_BOARD = 0xff72533a;
