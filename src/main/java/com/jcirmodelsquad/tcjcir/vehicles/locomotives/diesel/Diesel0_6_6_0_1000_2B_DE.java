@@ -15,7 +15,7 @@ public class Diesel0_6_6_0_1000_2B_DE extends DieselTrain {
     @Override
     public SoundRecord getSoundRecord()
     {
-        return EnumSounds.Diesel0_6_6_0_1000_2_DE;
+        return EnumSounds.Diesel0_6_6_0_1000_2B_DE;
     }
     public Diesel0_6_6_0_1000_2B_DE(World world) {
         super(world, LiquidManager.dieselFilter());

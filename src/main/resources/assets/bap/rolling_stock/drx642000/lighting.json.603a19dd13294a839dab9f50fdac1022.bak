@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drx642000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight2beamBA1": {
+          "enabled": false
+        },
+        "backlight2beamBA2": {
+          "enabled": false
+        },
+        "backlight2beamBB1": {
+          "enabled": false
+        },
+        "backlight2beamBB2": {
+          "enabled": false
+        },
+        "backlight2beamUA1": {
+          "enabled": false
+        },
+        "backlight2beamUA2": {
+          "enabled": false
+        },
+        "backlight2beamUB1": {
+          "enabled": false
+        },
+        "backlight2beamUB2": {
+          "enabled": false
+        },
+        "big_backlight_bottom": {
+          "enabled": false
+        },
+        "big_backlight_top": {
+          "enabled": false
+        },
+        "big_headlight_bottom": {
+          "enabled": false
+        },
+        "big_headlight_top": {
+          "enabled": false
+        },
+        "commander_back": {
+          "enabled": false
+        },
+        "commander_f": {
+          "enabled": false
+        },
+        "gauges_back": {
+          "enabled": false
+        },
+        "gauges_front": {
+          "enabled": false
+        },
+        "headlight2beamBA1": {
+          "enabled": false
+        },
+        "headlight2beamBA2": {
+          "enabled": false
+        },
+        "headlight2beamBB1": {
+          "enabled": false
+        },
+        "headlight2beamBB2": {
+          "enabled": false
+        },
+        "headlight2beamUA1": {
+          "enabled": false
+        },
+        "headlight2beamUA2": {
+          "enabled": false
+        },
+        "headlight2beamUB1": {
+          "enabled": false
+        },
+        "headlight2beamUB2": {
+          "enabled": false
+        },
+        "markerlight_353_1": {
+          "enabled": false
+        },
+        "markerlight_353_2": {
+          "enabled": false
+        },
+        "markerlight_353_3": {
+          "enabled": false
+        },
+        "markerlight_353_back_2": {
+          "enabled": false
+        },
+        "markerlight_353_back_3": {
+          "enabled": false
+        },
+        "markerlight_545_1": {
+          "enabled": false
+        },
+        "markerlight_545_2": {
+          "enabled": false
+        },
+        "markerlight_545_3": {
+          "enabled": false
+        },
+        "markerlight_545_back_2": {
+          "enabled": false
+        },
+        "markerlight_545_back_3": {
+          "enabled": false
+        },
+        "markerlight_back_353_1": {
+          "enabled": false
+        },
+        "markerlight_back_545_1": {
+          "enabled": false
+        },
+        "numberboard_back_L_type_1": {
+          "enabled": false
+        },
+        "numberboard_back_L_type_2": {
+          "enabled": false
+        },
+        "numberboard_back_R_type_1": {
+          "enabled": false
+        },
+        "numberboard_back_R_type_2": {
+          "enabled": false
+        },
+        "numberboard_L_back_type_3": {
+          "enabled": false
+        },
+        "numberboard_L_type_1": {
+          "enabled": false
+        },
+        "numberboard_L_type_2": {
+          "enabled": false
+        },
+        "numberboard_L_type_3": {
+          "enabled": false
+        },
+        "numberboard_R_back_type_3": {
+          "enabled": false
+        },
+        "numberboard_R_type_1": {
+          "enabled": false
+        },
+        "numberboard_R_type_2": {
+          "enabled": false
+        },
+        "numberboard_R_type_3": {
+          "enabled": false
+        },
+        "prime1_back": {
+          "enabled": false
+        },
+        "prime1_f": {
+          "enabled": false
+        },
+        "prime2_back": {
+          "enabled": false
+        },
+        "prime2_f": {
+          "enabled": false
+        },
+        "prime3_back": {
+          "enabled": false
+        },
+        "prime3_f": {
+          "enabled": false
+        },
+        "prime4_back": {
+          "enabled": false
+        },
+        "prime4_f": {
+          "enabled": false
+        },
+        "small_backlight_bottom": {
+          "enabled": false
+        },
+        "small_backlight_top": {
+          "enabled": false
+        },
+        "small_headlight_bottom": {
+          "enabled": false
+        },
+        "small_headlight_top": {
+          "enabled": false
+        },
+        "speedo_back": {
+          "enabled": false
+        },
+        "speedo_front": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {}
+  }
+}

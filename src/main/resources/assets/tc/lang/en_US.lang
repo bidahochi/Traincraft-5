@@ -1283,6 +1283,8 @@ item.tc:minecartRF16.name=BLH RF-16
 item.tc:minecartRF16B.name=BLH RF-16B
 item.tc:minecart0_6_6_0_1000_2_DE.name=BLW 0-6-6-0 1000/2 DE
 item.tc:minecart0_6_6_0_1000_2B_DE.name=BLW 0-6-6-0 1000/2B DE
+item.tc:minecart0_6_6_0_1000_2_DE_68.name=BLW 0-6-6-0 1000/2 DE-6.8 (phase 1 DRX-6-4-2000)
+item.tc:minecartDRX642000.name=BLW DRX-6-4-2000
 
 --------------------------------------------------------
 

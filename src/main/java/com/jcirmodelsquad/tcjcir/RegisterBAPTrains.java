@@ -3882,7 +3882,7 @@ public class RegisterBAPTrains
                         .setStockId("rf-16b")
         );
 
-            // 0-6-6-0 1000/2 DE
+        // 0-6-6-0 1000/2 DE
         register.put(ItemIDs.minecart0_6_6_0_1000_2_DE.item,
                     new TrainRecord("0660_1000_2_DE", Diesel0_6_6_0_1000_2_DE.class, ItemIDs.minecart0_6_6_0_1000_2_DE.item)
                             .setTrainType(EnumTrainType.Diesel)
@@ -3916,6 +3916,40 @@ public class RegisterBAPTrains
                         .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
                         .setStockId("blw0-6-6-0_1000_2b_de")
+        );
+        // 0-6-6-0 1000/2 DE-6.8
+        register.put(ItemIDs.minecart0_6_6_0_1000_2_DE_68.item,
+                new TrainRecord("0660_1000_2_DE_68", Diesel0_6_6_0_1000_2_DE_68.class, ItemIDs.minecart0_6_6_0_1000_2_DE_68.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(2000)
+                        .setMaxSpeed(150)
+                        .setMass(4.5)
+                        .setFuelConsumption(10)
+                        .setHeatingTime(180)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Black", "Red", "Green"})
+                        .setGuiRenderScale(12)
+                        .setBogieLocoPosition(-3.69)
+                        .setStockId("blw0-6-6-0_1000_2_de_68")
+        );
+        // DRX6-4-2000
+        register.put(ItemIDs.minecartDRX642000.item,
+                new TrainRecord("DRX642000", DieselDRX642000.class, ItemIDs.minecartDRX642000.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(2000)
+                        .setMaxSpeed(105)
+                        .setMass(4.5)
+                        .setFuelConsumption(10)
+                        .setHeatingTime(180)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Black", "Red", "Green"})
+                        .setGuiRenderScale(12)
+                        .setBogieLocoPosition(-3.69)
+                        .setStockId("drx642000")
         );
 
 

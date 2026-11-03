@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:drx642000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight2beamBA1": {
+          "preset": "headlight"
+        },
+        "backlight2beamBA2": {
+          "preset": "headlight"
+        },
+        "backlight2beamBB1": {
+          "preset": "headlight"
+        },
+        "backlight2beamBB2": {
+          "preset": "headlight"
+        },
+        "backlight2beamUA1": {
+          "preset": "headlight"
+        },
+        "backlight2beamUA2": {
+          "preset": "headlight"
+        },
+        "backlight2beamUB1": {
+          "preset": "headlight"
+        },
+        "backlight2beamUB2": {
+          "preset": "headlight"
+        },
+        "big_backlight_bottom": {
+          "preset": "headlight"
+        },
+        "big_backlight_top": {
+          "preset": "headlight"
+        },
+        "big_headlight_bottom": {
+          "preset": "headlight"
+        },
+        "big_headlight_top": {
+          "preset": "headlight"
+        },
+        "commander_back": {
+          "preset": "commander"
+        },
+        "commander_f": {
+          "preset": "commander"
+        },
+        "gauges_back": {
+          "preset": "instrument"
+        },
+        "gauges_front": {
+          "preset": "instrument"
+        },
+        "headlight2beamBA1": {
+          "preset": "headlight"
+        },
+        "headlight2beamBA2": {
+          "preset": "headlight"
+        },
+        "headlight2beamBB1": {
+          "preset": "headlight"
+        },
+        "headlight2beamBB2": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA1": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA2": {
+          "preset": "headlight"
+        },
+        "headlight2beamUB1": {
+          "preset": "headlight"
+        },
+        "headlight2beamUB2": {
+          "preset": "headlight"
+        },
+        "markerlight_353_1": {
+          "preset": "marker_light"
+        },
+        "markerlight_353_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_353_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_353_back_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_353_back_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_545_1": {
+          "preset": "marker_light"
+        },
+        "markerlight_545_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_545_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_545_back_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_545_back_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_back_353_1": {
+          "preset": "marker_light"
+        },
+        "markerlight_back_545_1": {
+          "preset": "marker_light"
+        },
+        "numberboard_back_L_type_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_back_L_type_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_back_R_type_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_back_R_type_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_L_back_type_3": {
+          "preset": "numberboard"
+        },
+        "numberboard_L_type_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_L_type_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_L_type_3": {
+          "preset": "numberboard"
+        },
+        "numberboard_R_back_type_3": {
+          "preset": "numberboard"
+        },
+        "numberboard_R_type_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_R_type_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_R_type_3": {
+          "preset": "numberboard"
+        },
+        "prime1_back": {
+          "preset": "prime_1"
+        },
+        "prime1_f": {
+          "preset": "prime_1"
+        },
+        "prime2_back": {
+          "preset": "prime_2"
+        },
+        "prime2_f": {
+          "preset": "prime_2"
+        },
+        "prime3_back": {
+          "preset": "prime_3"
+        },
+        "prime3_f": {
+          "preset": "prime_3"
+        },
+        "prime4_back": {
+          "preset": "prime_4"
+        },
+        "prime4_f": {
+          "preset": "prime_4"
+        },
+        "small_backlight_bottom": {
+          "preset": "headlight"
+        },
+        "small_backlight_top": {
+          "preset": "headlight"
+        },
+        "small_headlight_bottom": {
+          "preset": "headlight"
+        },
+        "small_headlight_top": {
+          "preset": "headlight"
+        },
+        "speedo_back": {
+          "preset": "instrument"
+        },
+        "speedo_front": {
+          "preset": "instrument"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {}
+  }
+}

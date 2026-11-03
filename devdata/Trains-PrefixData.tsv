@@ -67,6 +67,7 @@ item.tc:minecartDRGWCaboose	DRGWCaboose	com.jcirmodelsquad.tcjcir.vehicles.rolli
 item.tc:minecartDUPX39200	DUPX39200	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.tanker.DUPX39200	dupx_39200_
 item.tc:minecart0_6_6_0_1000_2B_DE	0660_1000_2B_DE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel0_6_6_0_1000_2B_DE	0660_100_2B_DE_
 item.tc:minecart0_6_6_0_1000_2_DE	0660_1000_2_DE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel0_6_6_0_1000_2_DE	0660_100_2_DE_
+item.tc:minecart0_6_6_0_1000_2_DE_68	0660_1000_2_DE_68	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel0_6_6_0_1000_2_DE_68	0660_100_2_DE_68_
 item.tc:minecart4ED172T	4ED172T	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T	4ED-172T_
 item.tc:minecart4ED172T_C	4ED172T_C	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T_C	4ED-172T_C_
 item.tc:minecart4ED172T_E	4ED172T_E	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Diesel4ED172T_E	4ED-172T_E_
@@ -102,6 +103,7 @@ item.tc:minecartDR441500BPhase2	DR441500BPhase2	com.jcirmodelsquad.tcjcir.vehicl
 item.tc:minecartDR441500BShark	DR441500BShark	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDR441500BShark	DR441500BShark_
 item.tc:minecartDR441500Phase2	DR441500Phase2	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDR441500Phase2	DR441500Phase2_
 item.tc:minecartDR441500Shark	DR441500Shark	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDR441500Shark	DR441500Shark_
+item.tc:minecartDRX642000	DRX642000	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDRX642000	DRX642000_
 item.tc:minecartDS441000	DS441000	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDS441000	DS441000_
 item.tc:minecartDash818BE	Dash818BE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDash818BE	b18-8e_
 item.tc:minecartDash832BWH	Dash832BWH	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDash832BWH	b32-8wh_
