@@ -322,6 +322,7 @@ public class EnumSounds
 	public static final SoundRecord Diesel0_6_6_0_1000_2B_DE= new SoundRecord(Diesel0_6_6_0_1000_2B_DE.class," ", 1F, "Baldwin_8VO_Notch8", 0.45F, 58, "Baldwin_8VO_Idle", 0.45F, 62, false, "baldwin_brassbell_1", 22, new String[] {" ", "leslie_a200_1"});
 	public static final SoundRecord Diesel0_6_6_0_1000_2_DE_68= new SoundRecord(Diesel0_6_6_0_1000_2_DE_68.class," ", 1F, "Baldwin_8VO_Notch8", 0.45F, 58, "Baldwin_8VO_Idle", 0.45F, 62, false, "baldwin_brassbell_1", 22, new String[] {"wabco_e2_dual_1", "wabco_e2_dual_1", "wabco_e2_dual_1" });
 	public static final SoundRecord DieselDRX642000= new SoundRecord(Diesel0_6_6_0_1000_2_DE_68.class," ", 1F, "Baldwin_8VO_Notch8", 0.45F, 58, "Baldwin_8VO_Idle", 0.45F, 62, false, "baldwin_brassbell_1", 22, new String[] {"wabco_e2_dual_1", "wabco_e2_dual_1", "wabco_e2_dual_1" });
+	public static final SoundRecord DieselDT662000NA= new SoundRecord(Diesel0_6_6_0_1000_2_DE_68.class," ", 1F, "Baldwin_8VO_Notch8", 0.45F, 58, "Baldwin_8VO_Idle", 0.45F, 62, false, "baldwin_brassbell_1", 22, new String[] {"wabco_e2_dual_1"});
 
 	//FM//
 	public static final SoundRecord DieselH1044= new SoundRecord(DieselH1044.class, " ", 1F, "FM_38D_6_Notch8", 0.45F, 45, "FM_38D_6_Idle", 0.45F, 58, false, "alco_bronzebell_3", 18,  new String[] {"hancock_airwhistle_1", "wabco_e2_1", "wabco_e2_1", "wabco_e2_1", "wabco_e2_1", "wabco_e2_1", "nathan_m3h_1", "wabco_e2_1", "nathan_j3_1", "wabco_e2_1", "wabco_e2_1", "prime_990_4", "leslie_rs3l_4"});

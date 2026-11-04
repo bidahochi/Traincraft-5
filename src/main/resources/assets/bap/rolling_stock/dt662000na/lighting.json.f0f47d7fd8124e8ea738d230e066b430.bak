@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dt662000na",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight2beamBA1": {
+          "preset": "headlight"
+        },
+        "backlight2beamBA2": {
+          "preset": "headlight"
+        },
+        "backlight2beamBB1": {
+          "preset": "headlight"
+        },
+        "backlight2beamBB2": {
+          "preset": "headlight"
+        },
+        "backlight2beamUA1": {
+          "preset": "headlight"
+        },
+        "backlight2beamUA2": {
+          "preset": "headlight"
+        },
+        "backlight2beamUB1": {
+          "preset": "headlight"
+        },
+        "backlight2beamUB2": {
+          "preset": "headlight"
+        },
+        "big_backlight_top": {
+          "preset": "headlight"
+        },
+        "big_headlight_bottom": {
+          "preset": "headlight"
+        },
+        "big_headlight_top": {
+          "preset": "headlight"
+        },
+        "gauges_1": {
+          "preset": "instrument"
+        },
+        "gauges_2": {
+          "preset": "instrument"
+        },
+        "headlight2beamBA1": {
+          "preset": "headlight"
+        },
+        "headlight2beamBA2": {
+          "preset": "headlight"
+        },
+        "headlight2beamBB1": {
+          "preset": "headlight"
+        },
+        "headlight2beamBB2": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA1": {
+          "preset": "headlight"
+        },
+        "headlight2beamUA2": {
+          "preset": "headlight"
+        },
+        "markerlight_type2_1": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_4": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_5": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_6": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_7": {
+          "preset": "marker_light"
+        },
+        "markerlight_type2_8": {
+          "preset": "marker_light"
+        },
+        "numberboard_type1_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_type1_2": {
+          "preset": "numberboard"
+        },
+        "markerlight_type1_1": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_2": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_3": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_4": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_5": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_6": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_7": {
+          "preset": "marker_light"
+        },
+        "markerlight_type1_8": {
+          "preset": "marker_light"
+        },
+        "numberboard_side_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_side_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_type1_3": {
+          "preset": "numberboard"
+        },
+        "numberboard_type1_4": {
+          "preset": "numberboard"
+        },
+        "numberboard_type2_1": {
+          "preset": "numberboard"
+        },
+        "numberboard_type2_2": {
+          "preset": "numberboard"
+        },
+        "numberboard_type2_3": {
+          "preset": "numberboard"
+        },
+        "numberboard_type2_4": {
+          "preset": "numberboard"
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

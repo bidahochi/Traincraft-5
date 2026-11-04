@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dt662000na",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight2beamBA1": {
+          "enabled": false
+        },
+        "backlight2beamBA2": {
+          "enabled": false
+        },
+        "backlight2beamBB1": {
+          "enabled": false
+        },
+        "backlight2beamBB2": {
+          "enabled": false
+        },
+        "backlight2beamUA1": {
+          "enabled": false
+        },
+        "backlight2beamUA2": {
+          "enabled": false
+        },
+        "backlight2beamUB1": {
+          "enabled": false
+        },
+        "backlight2beamUB2": {
+          "enabled": false
+        },
+        "big_backlight_top": {
+          "enabled": false
+        },
+        "big_headlight_bottom": {
+          "enabled": false
+        },
+        "big_headlight_top": {
+          "enabled": false
+        },
+        "gauges_1": {
+          "enabled": false
+        },
+        "gauges_2": {
+          "enabled": false
+        },
+        "headlight2beamBA1": {
+          "enabled": false
+        },
+        "headlight2beamBA2": {
+          "enabled": false
+        },
+        "headlight2beamBB1": {
+          "enabled": false
+        },
+        "headlight2beamBB2": {
+          "enabled": false
+        },
+        "headlight2beamUA1": {
+          "enabled": false
+        },
+        "headlight2beamUA2": {
+          "enabled": false
+        },
+        "markerlight": {
+          "enabled": false
+        },
+        "markerlight_type_2": {
+          "enabled": false
+        },
+        "numberboard_type_1": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {}
+  }
+}

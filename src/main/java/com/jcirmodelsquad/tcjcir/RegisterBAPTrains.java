@@ -3948,8 +3948,25 @@ public class RegisterBAPTrains
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red", "Green"})
                         .setGuiRenderScale(12)
-                        .setBogieLocoPosition(-3.69)
+                        .setBogieLocoPosition(-3.6)
                         .setStockId("drx642000")
+        );
+        // DT-6-6-2000NA
+        register.put(ItemIDs.minecartDT662000NA.item,
+                new TrainRecord("DT662000NA", DieselDT662000NA.class, ItemIDs.minecartDT662000NA.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(2000)
+                        .setMaxSpeed(105)
+                        .setMass(4.5)
+                        .setFuelConsumption(10)
+                        .setHeatingTime(180)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Black"})
+                        .setGuiRenderScale(12)
+                        .setBogieLocoPosition(-3.69)
+                        .setStockId("dt662000na")
         );
 
 
