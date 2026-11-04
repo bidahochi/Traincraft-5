@@ -27,6 +27,7 @@ import train.common.api.LiquidTank;
 import train.common.api.Tender;
 import train.common.containers.*;
 import train.common.core.handlers.*;
+import train.common.core.network.PacketSleeperCar;
 import train.common.core.network.ServerLightActionQueue;
 import train.common.core.network.lockout.PacketLockoutBookData;
 import train.common.core.util.ReplacementStreamPlayer;
@@ -92,6 +93,7 @@ public class CommonProxy implements IGuiHandler {
 		registerEvent(chunkEvents);
 		registerEvent(playerSyncHandler);
         registerEvent(ServerLightActionQueue.INSTANCE);
+        registerEvent(SleeperCarSleep.INSTANCE);
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(Traincraft.instance, chunkEvents);
 
@@ -361,6 +363,11 @@ public class CommonProxy implements IGuiHandler {
 
 	/** Ignores a client-only action-bar request on the logical server. */
 	public void displayActionBarMessage(String message, int durationTicks)
+	{
+	}
+
+	/** Receives a bunk menu update on the client side. The dedicated server has no menu to update. */
+	public void applySleeperCarState(int carId, int requestId, PacketSleeperCar.Status status)
 	{
 	}
 

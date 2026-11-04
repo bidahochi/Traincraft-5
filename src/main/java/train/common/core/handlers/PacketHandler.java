@@ -142,6 +142,8 @@ public class PacketHandler
 		Traincraft.modChannel.registerMessage(PacketTrackPlacementSound.Handler.class, PacketTrackPlacementSound.class, 38, Side.CLIENT);
 		Traincraft.modChannel.registerMessage(PacketActionBarMessage.Handler.class, PacketActionBarMessage.class, 39, Side.CLIENT);
 		Traincraft.modChannel.registerMessage(PacketTrackAttachmentState.Handler.class, PacketTrackAttachmentState.class, 40, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketSleeperCar.RequestHandler.class, PacketSleeperCar.Request.class, 41, Side.SERVER);
+		Traincraft.modChannel.registerMessage(PacketSleeperCar.StateHandler.class, PacketSleeperCar.State.class, 42, Side.CLIENT);
 	}
 
 	private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

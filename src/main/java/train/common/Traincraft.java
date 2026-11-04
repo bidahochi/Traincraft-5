@@ -338,8 +338,11 @@ public static final SimpleNetworkWrapper gsfsrChannel = NetworkRegistry.INSTANCE
 		ItemHandler.parseNonemptyBannedItems(ConfigHandler.ROLLINGSTOCK_INVENTORY_NONEMPTY_BLACKLIST_RAW);
 	}
 
+	/** Releases transient train state when Forge stops the server. */
 	@EventHandler
-	public void serverStop(FMLServerStoppedEvent event) {
+	public void serverStop(FMLServerStoppedEvent event)
+	{
+		SleeperCarSleep.INSTANCE.clear();
 		proxy.killAllStreams();
 	}
 

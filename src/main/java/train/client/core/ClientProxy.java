@@ -47,6 +47,7 @@ import train.client.render.models.blocks.track.straight.ModelRoadCrossingAttachm
 import train.client.render.itemRender.*;
 import train.common.Traincraft;
 import train.common.core.handlers.ItemHandler;
+import train.common.core.network.PacketSleeperCar;
 import train.common.core.network.lockout.PacketLockoutBookData;
 import train.common.blocks.BlockAmericanStopper;
 import train.common.blocks.BlockStopper;
@@ -617,6 +618,22 @@ public class ClientProxy extends CommonProxy
 				ActionBarOverlay.show(message, durationTicks);
 			}
 		});
+	}
+
+	/** Applies a server result on the client thread if the bunk menu is still open. */
+	@Override
+	public void applySleeperCarState(int carId, int requestId, PacketSleeperCar.Status status)
+	{
+		Minecraft minecraft = Minecraft.getMinecraft();
+		Runnable updateSleeperMenu = () ->
+		{
+			if (minecraft.currentScreen instanceof GuiSleeperCar)
+			{
+				GuiSleeperCar sleeperMenu = (GuiSleeperCar) minecraft.currentScreen;
+				sleeperMenu.applyState(carId, requestId, status);
+			}
+		};
+		minecraft.func_152344_a(updateSleeperMenu);
 	}
 
 	@Override

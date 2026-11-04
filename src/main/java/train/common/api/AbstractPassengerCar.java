@@ -80,6 +80,12 @@ public abstract class AbstractPassengerCar extends EntityRollingStock implements
         return true;
     }
 
+    /** Reports whether a passenger can use the onboard sleep menu. */
+    public boolean hasSleepingBunk()
+    {
+        return false;
+    }
+
     @Override
     public boolean isStorageCart()
     {

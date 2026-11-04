@@ -12,6 +12,13 @@ public class PSCNW16_1_3Sleeper extends AbstractPassengerCar {
 
 
 
+	/** Enables the onboard sleep menu for this sleeper car. */
+	@Override
+	public boolean hasSleepingBunk()
+	{
+		return true;
+	}
+
 	@Override
 	public double getAdditionalYOffset()
 	{

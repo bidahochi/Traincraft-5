@@ -8,12 +8,15 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Vec3;
 import org.lwjgl.input.Keyboard;
 import train.client.gui.GuiMTCInfo;
+import train.client.gui.GuiSleeperCar;
 import train.common.Traincraft;
+import train.common.api.AbstractPassengerCar;
 import train.common.api.Locomotive;
 import train.common.api.SteamTrain;
 import train.common.core.handlers.ConfigHandler;
@@ -89,10 +92,22 @@ public class TCKeyHandler {
 			if (idle.isPressed()) {
 				sendKeyControlsPacket(6);
 			}
-			if (inventory.isPressed()) {
-				sendKeyControlsPacket(7);
-				if (Minecraft.getMinecraft().thePlayer.ridingEntity != null && Minecraft.getMinecraft().thePlayer.ridingEntity instanceof ExperimentalGeometryCar) {
-					Minecraft.getMinecraft().displayGuiScreen(new GuiGeometryCar(Minecraft.getMinecraft().thePlayer));
+			if (inventory.isPressed())
+			{
+				Minecraft minecraft = Minecraft.getMinecraft();
+				Entity riddenTransport = minecraft.thePlayer == null ? null : minecraft.thePlayer.ridingEntity;
+				if (riddenTransport instanceof AbstractPassengerCar && ((AbstractPassengerCar) riddenTransport).hasSleepingBunk())
+				{
+					AbstractPassengerCar sleeperCar = (AbstractPassengerCar) riddenTransport;
+					minecraft.displayGuiScreen(new GuiSleeperCar(sleeperCar));
+				}
+				else
+				{
+					sendKeyControlsPacket(7);
+					if (riddenTransport instanceof ExperimentalGeometryCar)
+					{
+						minecraft.displayGuiScreen(new GuiGeometryCar(minecraft.thePlayer));
+					}
 				}
 			}
 			if (horn.isPressed()) {

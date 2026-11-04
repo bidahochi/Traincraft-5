@@ -1622,3 +1622,10 @@ item.tc:minecartWorkdayHyrail.name=1980 Pine Workday Hi-rail Truck
 
 tc.boarding.filled_container=You're over-encumbered! Can't climb the steps with a packed %s.
 tc.boarding.unverified_container=Can't board with %s: its contents couldn't be verified.
+
+tc.sleeper.title=Sleeper Car
+tc.sleeper.sleep=Sleep
+tc.sleeper.wake=Wake Up
+tc.sleeper.sleeping=Waiting for morning...
+tc.sleeper.daytime=You can only sleep at night.
+tc.sleeper.unavailable=You must be aboard a sleeper car in the Overworld to sleep.
