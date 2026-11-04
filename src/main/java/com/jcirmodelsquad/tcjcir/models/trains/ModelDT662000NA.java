@@ -14,6 +14,7 @@ import com.jcirmodelsquad.tcjcir.models.trucks.ModelBLW_commonwealth_c;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tmt.LightSourceFaceDirection;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
@@ -790,6 +791,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[117].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Markerlight glow
 		bodyModel[117].setRotationPoint(-51.5F, -21.45F, 7.45F);
+		bodyModel[117].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[118].addShapeBox(0F, 0F, 0F, 4, 2, 2, 0F,-0.1F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F); // Box 2
 		bodyModel[118].setRotationPoint(-51.9F, -21.95F, -7.75F);
@@ -799,6 +801,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[120].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Markerlight glow
 		bodyModel[120].setRotationPoint(-51.5F, -21.45F, -7.75F);
+		bodyModel[120].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[121].addShapeBox(0F, 0F, 0F, 2, 1, 0, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 2 Numberboard type 1
 		bodyModel[121].setRotationPoint(-50.2F, -21.45F, -7.56F);
@@ -814,6 +817,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[125].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Markerlight glow
 		bodyModel[125].setRotationPoint(50.45F, -21.45F, 7.45F);
+		bodyModel[125].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[126].addShapeBox(0F, 0F, 0F, 4, 2, 2, 0F,-0.1F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, 0F, -0.2F, -0.2F, -0.1F, -0.2F, -0.2F); // Box 2
 		bodyModel[126].setRotationPoint(47.75F, -21.95F, -7.75F);
@@ -823,6 +827,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[128].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Markerlight glow
 		bodyModel[128].setRotationPoint(50.45F, -21.45F, -7.75F);
+		bodyModel[128].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[129].addShapeBox(0F, 0F, 0F, 2, 1, 0, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 2 Numberboard type 1
 		bodyModel[129].setRotationPoint(48.4F, -21.45F, -7.56F);
@@ -1253,6 +1258,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[267].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Box Glow
 		bodyModel[267].setRotationPoint(-52.25F, -17.75F, 6.2F);
+		bodyModel[267].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[268].addShapeBox(0F, 0F, 0F, 2, 1, 1, 0F,0F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, -0.25F, -0.5F, 0F, -0.25F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 2
 		bodyModel[268].setRotationPoint(-52.25F, -16.5F, 5F);
@@ -1268,6 +1274,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[272].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Box Glow
 		bodyModel[272].setRotationPoint(-52.25F, -17.75F, -6.5F);
+		bodyModel[272].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[273].addShapeBox(0F, 0F, 0F, 2, 2, 2, 0F,-0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F, -0.2F); // Box 2
 		bodyModel[273].setRotationPoint(50.75F, -18.25F, 4.5F);
@@ -1277,6 +1284,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[275].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Box Glow
 		bodyModel[275].setRotationPoint(51.25F, -17.75F, 6.2F);
+		bodyModel[275].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[276].addShapeBox(0F, 0F, 0F, 2, 1, 1, 0F,0F, 0F, 0F, -0.25F, 0F, 0F, -0.25F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, -0.25F, -0.5F, 0F, -0.25F, -0.5F, 0F, 0F, -0.5F, 0F); // Box 2
 		bodyModel[276].setRotationPoint(50.5F, -16.5F, 5F);
@@ -1292,6 +1300,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[280].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.7F, 0F, 0F, -0.7F); // Box Glow
 		bodyModel[280].setRotationPoint(51.25F, -17.75F, -6.5F);
+		bodyModel[280].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[281].addShapeBox(0F, 0F, 0F, 6, 2, 1, 0F,1F, 0F, 0F, 1F, 0F, 0F, 1F, 0F, -1F, 1F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, -1F, 0F, 0F, 0F, 0F, 0F, 0F); // box64
 		bodyModel[281].setRotationPoint(-3F, -20F, 11F);
