@@ -105,6 +105,7 @@ item.tc:minecartDR441500Phase2	DR441500Phase2	com.jcirmodelsquad.tcjcir.vehicles
 item.tc:minecartDR441500Shark	DR441500Shark	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDR441500Shark	DR441500Shark_
 item.tc:minecartDRX642000	DRX642000	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDRX642000	DRX642000_
 item.tc:minecartDS441000	DS441000	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDS441000	DS441000_
+item.tc:minecartDT662000	DT662000	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDT662000	DT662000_
 item.tc:minecartDT662000NA	DT662000NA	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDT662000NA	DT662000NA_
 item.tc:minecartDash818BE	Dash818BE	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDash818BE	b18-8e_
 item.tc:minecartDash832BWH	Dash832BWH	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselDash832BWH	b32-8wh_
@@ -208,6 +209,7 @@ item.tc:minecartRS2	RS2	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.Di
 item.tc:minecartRS3	RS3	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRS3	rs3_
 item.tc:minecartRSD15	RSD15	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRSD15	rsd15_
 item.tc:minecartRSFDL	RSFDL	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRSFDL	rsfdl_
+item.tc:minecartRT624	RT624	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselRT624	RT624_
 item.tc:minecartS12	S12	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselS12	S12_
 item.tc:minecartS2	S2	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselS2	alcos2_
 item.tc:minecartSB18B	SB18B	com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel.DieselSB18B	SB18B_

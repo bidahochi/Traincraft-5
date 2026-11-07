@@ -464,6 +464,7 @@ item.tc:partTypeA.name=AAR Type A Truck
 item.tc:partFB2.name=GE FB2 Truck
 item.tc:partFB3.name=GE FB3 Truck
 item.tc:partFlexicoil.name=EMD Flexicoil Truck
+item.tc:partCommonwealthCast.name=GSC Commonwealth Cast Truck
 
 item.tc:partTurboExhaust.name=Turbocharged Exhaust Stack
 item.tc:partAlternator.name=Alternator
@@ -1286,6 +1287,8 @@ item.tc:minecart0_6_6_0_1000_2B_DE.name=BLW 0-6-6-0 1000/2B DE
 item.tc:minecart0_6_6_0_1000_2_DE_68.name=BLW 0-6-6-0 1000/2 DE-6.8 (phase 1 DRX-6-4-2000)
 item.tc:minecartDRX642000.name=BLW DRX-6-4-2000
 item.tc:minecartDT662000NA.name=BLW DT-6-6-2000NA
+item.tc:minecartDT662000.name=BLW DT-6-6-2000
+item.tc:minecartRT624.name=BLH RT-624
 
 --------------------------------------------------------
 

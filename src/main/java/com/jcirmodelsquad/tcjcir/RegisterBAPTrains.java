@@ -3968,6 +3968,40 @@ public class RegisterBAPTrains
                         .setBogieLocoPosition(-3.69)
                         .setStockId("dt662000na")
         );
+        // DT-6-6-2000
+        register.put(ItemIDs.minecartDT662000.item,
+                new TrainRecord("DT662000", DieselDT662000.class, ItemIDs.minecartDT662000.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(2000)
+                        .setMaxSpeed(105)
+                        .setMass(4.5)
+                        .setFuelConsumption(10)
+                        .setHeatingTime(180)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32"})
+                        .setGuiRenderScale(12)
+                        .setBogieLocoPosition(-3.95)
+                        .setStockId("dt662000")
+        );
+        // RT-624
+        register.put(ItemIDs.minecartRT624.item,
+                new TrainRecord("RT624", DieselRT624.class, ItemIDs.minecartRT624.item)
+                        .setTrainType(EnumTrainType.Diesel)
+                        .setMHP(2400)
+                        .setMaxSpeed(105)
+                        .setMass(4.5)
+                        .setFuelConsumption(10)
+                        .setHeatingTime(180)
+                        .setAccelerationRate(0.7)
+                        .setBrakeRate(0.79)
+                        .setTankCapacity(15000)
+                        .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow"})
+                        .setGuiRenderScale(12)
+                        .setBogieLocoPosition(-3.95)
+                        .setStockId("rt624")
+        );
 
 
         //FM//

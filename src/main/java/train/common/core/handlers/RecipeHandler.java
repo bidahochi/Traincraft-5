@@ -640,7 +640,7 @@ public class RecipeHandler extends AbstractRecipeHandler
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partFB2.item,1), "M M", "SCS", "WSW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', itemSteel, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentGE.item));
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partFB3.item,1), "MMM", "SCS", "WWW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', itemSteel, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentGE.item));
 		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partFlexicoil.item,1), "MMM", "SCS", "WWW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', itemSteel, 'M', new ItemStack(ItemIDs.electmotor.item), 'C', new ItemStack(ItemIDs.partComponentEMD.item));
-
+		TrainCraftingManager.instance.addRecipe(new ItemStack(ItemIDs.partCommonwealthCast.item,1), "MMM", "SSS", "WWW", 'W', new ItemStack(ItemIDs.bogie.item), 'S', itemSteel, 'M', new ItemStack(ItemIDs.electmotor.item));
 
 
 		//commented out till someone fixes not being able to use more than one recipe for an item

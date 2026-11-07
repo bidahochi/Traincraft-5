@@ -103,6 +103,7 @@ public enum ItemIDs {
 	partFB2("ItemTrain", "partfb2", 3),
 	partFB3("ItemTrain", "partfb3", 3),
 	partFlexicoil("ItemTrain", "partflexicoil", 3),
+	partCommonwealthCast("ItemTrain", "partcommonwealthcast", 3),
 
 	partTurboExhaust("ItemTrain", "partTurboExhaust", 2),
 	partAlternator("ItemTrain", "item_alternator", 2),
@@ -612,6 +613,8 @@ public enum ItemIDs {
 	minecart0_6_6_0_1000_2_DE_68("ItemRollingStock", "0-6-6-0_1000_2_DE_68", DIESEL,5),
 	minecartDRX642000("ItemRollingStock", "DRX642000", DIESEL,5),
 	minecartDT662000NA("ItemRollingStock", "DT662000NA", DIESEL,4),
+	minecartDT662000("ItemRollingStock", "DT662000", DIESEL,4),
+	minecartRT624("ItemRollingStock", "RT624", DIESEL,4),
 
 	//Fairbanks Morse//
 	minecartH1044("ItemRollingStock", "h1044", DIESEL, 4),

@@ -28,7 +28,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 	public ModelDT662000NA() //Same as Filename
 	{
-		bodyModel = new ModelRendererTurbo[397];
+		bodyModel = new ModelRendererTurbo[399];
 
 		initbodyModel_1();
 
@@ -287,8 +287,8 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		bodyModel[244] = new ModelRendererTurbo(this, 80, 100, textureX, textureY,"headlight2beamBB2"); // Box 171 headlight front 2beam horizontal low
 		bodyModel[245] = new ModelRendererTurbo(this, 389, 143, textureX, textureY); // Box 35
 		bodyModel[246] = new ModelRendererTurbo(this, 389, 146, textureX, textureY); // Box 507
-		bodyModel[247] = new ModelRendererTurbo(this, 245, 90, textureX, textureY, "numberboard_side_1"); // Box 387 sied numberboard glow
-		bodyModel[248] = new ModelRendererTurbo(this, 341, 99, textureX, textureY, "numberboard_side_2"); // Box 387 sied numberboard glow
+		bodyModel[247] = new ModelRendererTurbo(this, 246, 91, textureX, textureY, "numberboard_R_front_type_3"); // Box 387 sied numberboard glow
+		bodyModel[248] = new ModelRendererTurbo(this, 342, 100, textureX, textureY, "numberboard_R_back_type_3"); // Box 387 sied numberboard glow
 		bodyModel[249] = new ModelRendererTurbo(this, 151, 91, textureX, textureY); // Box 2
 		bodyModel[250] = new ModelRendererTurbo(this, 153, 89, textureX, textureY, "numberboard_type2_1"); // Box 245 numberboard type 2
 		bodyModel[251] = new ModelRendererTurbo(this, 153, 113, textureX, textureY, "numberboard_type2_2"); // Box 562 Numberboard type 2
@@ -437,6 +437,8 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		bodyModel[394] = new ModelRendererTurbo(this, 73, 214, textureX, textureY,"cull"); // Box 401 cull
 		bodyModel[395] = new ModelRendererTurbo(this, 271, 201, textureX, textureY); // Box 190 ELECTRIC MU TYPE 1
 		bodyModel[396] = new ModelRendererTurbo(this, 69, 202, textureX, textureY); // Box 190 ELECTRIC MU TYPE 1
+		bodyModel[397] = new ModelRendererTurbo(this, 246, 96, textureX, textureY, "numberboard_L_front_type_3"); // Box 397
+		bodyModel[398] = new ModelRendererTurbo(this, 342, 105, textureX, textureY, "numberboard_L_back_type_3"); // Box 398
 
 		bodyModel[0].addBox(0F, 0F, 0F, 101, 3, 12, 0F); // Box 301
 		bodyModel[0].setRotationPoint(-50.5F, -1F, -6F);
@@ -1016,6 +1018,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		bodyModel[189].addShapeBox(0F, 0F, 0F, 5, 4, 2, 0F,0F, 0F, 0F, -2F, 0F, 0F, -2F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -2F, -2F, 0F, -2F, -2F, 0F, 0F, -2F, 0F); // Box 396 gauges
 		bodyModel[189].setRotationPoint(-4F, -17F, 3.75F);
 		bodyModel[189].rotateAngleY = -0.52359878F;
+		bodyModel[189].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[190].addBox(0F, 0F, 0F, 3, 4, 0, 0F); // Box 398 cs
 		bodyModel[190].setRotationPoint(-4F, -17F, 3.74F);
@@ -1079,6 +1082,7 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		bodyModel[209].addShapeBox(0F, 0F, 0F, 5, 4, 2, 0F,0F, 0F, 0F, -2F, 0F, 0F, -2F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -2F, -2F, 0F, -2F, -2F, 0F, 0F, -2F, 0F); // Box 387 gauges
 		bodyModel[209].setRotationPoint(0.35F, -17F, -3.99F);
 		bodyModel[209].rotateAngleY = -0.52359878F;
+		bodyModel[209].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[210].addBox(0F, 0F, 0F, 3, 4, 0, 0F); // Box 389
 		bodyModel[210].setRotationPoint(1.35F, -17F, -2.25F);
@@ -1194,13 +1198,12 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		bodyModel[246].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F); // Box 507
 		bodyModel[246].setRotationPoint(-7.5F, 4F, -11F);
 
-		bodyModel[247].addShapeBox(0F, 0F, 0F, 8, 4, 1, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 13.02F, 0F, 0F, 13.02F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 13.02F, 0F, -2F, 13.02F); // Box 387 sied numberboard glow
-		bodyModel[247].setRotationPoint(-25F, -19.5F, 7.01F);
-		bodyModel[247].rotateAngleY = -3.14159265F;
+		bodyModel[247].addShapeBox(0F, 0F, 0F, 8, 4, 0, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 0F, 0F, -2F, 0F); // Box 387 sied numberboard glow
+		bodyModel[247].setRotationPoint(-29F, -19.5F, 7.01F);
+		bodyModel[247].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
-		bodyModel[248].addShapeBox(0F, 0F, 0F, 8, 4, 1, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 13.02F, 0F, 0F, 13.02F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 13.02F, 0F, -2F, 13.02F); // Box 387 sied numberboard glow
-		bodyModel[248].setRotationPoint(29F, -19.5F, 7.01F);
-		bodyModel[248].rotateAngleY = -3.14159265F;
+		bodyModel[248].addShapeBox(0F, 0F, 0F, 8, 4, 0, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 0F, 0F, -2F, 0F); // Box 387 sied numberboard glow
+		bodyModel[248].setRotationPoint(25F, -19.5F, 7.01F);
 
 		bodyModel[249].addShapeBox(0F, 0F, 0F, 3, 2, 1, 0F,0F, -0.2F, 0F, -0.4F, -0.2F, 0F, -0.4F, -0.2F, -1F, 0F, -0.2F, 0F, 0F, -0.2F, 0F, -0.4F, -0.2F, 0F, -0.4F, -0.2F, -1F, 0F, -0.2F, 0F); // Box 2
 		bodyModel[249].setRotationPoint(47.85F, -21.95F, 7.55F);
@@ -1655,6 +1658,13 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 
 		bodyModel[396].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.25F, -0.5F, -0.25F, -0.25F, -0.5F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, -0.25F, -0.5F, -0.25F, -0.25F, -0.5F, -0.25F, -0.25F, 0F, -0.25F, -0.25F); // Box 190 ELECTRIC MU TYPE 1
 		bodyModel[396].setRotationPoint(-51F, -7F, 2.75F);
+
+		bodyModel[397].addShapeBox(0F, 0F, 0F, 8, 4, 0, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 0F, 0F, -2F, 0F); // Box 397
+		bodyModel[397].setRotationPoint(-29F, -19.5F, -7.01F);
+		bodyModel[397].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
+
+		bodyModel[398].addShapeBox(0F, 0F, 0F, 8, 4, 0, 0F,0F, 0F, 0F, -4F, 0F, 0F, -4F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -4F, -2F, 0F, -4F, -2F, 0F, 0F, -2F, 0F); // Box 398
+		bodyModel[398].setRotationPoint(25F, -19.5F, -7.01F);
 	}
 	ModelBLW_commonwealth_c bogie = new ModelBLW_commonwealth_c();
 

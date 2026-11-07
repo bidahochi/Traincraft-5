@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "stock": "bap:dt662000",
+  "lighting": {
+    "defaults": {
+      "fixtures": {
+        "backlight_high_A1": {
+          "enabled": false
+        },
+        "backlight_high_A2": {
+          "enabled": false
+        },
+        "backlight_high_B1": {
+          "enabled": false
+        },
+        "backlight_high_B2": {
+          "enabled": false
+        },
+        "backlight_high_large": {
+          "enabled": false
+        },
+        "backlight_low_A1": {
+          "enabled": false
+        },
+        "backlight_low_A2": {
+          "enabled": false
+        },
+        "backlight_low_B1": {
+          "enabled": false
+        },
+        "backlight_low_B2": {
+          "enabled": false
+        },
+        "backlight_low_large": {
+          "enabled": false
+        },
+        "backlight_mid_A1": {
+          "enabled": false
+        },
+        "backlight_mid_A2": {
+          "enabled": false
+        },
+        "backlight_mid_B1": {
+          "enabled": false
+        },
+        "backlight_mid_B2": {
+          "enabled": false
+        },
+        "backlight_mid_large": {
+          "enabled": false
+        },
+        "backlight_trona_big": {
+          "enabled": false
+        },
+        "backlight_trona_F1": {
+          "enabled": false
+        },
+        "backlight_trona_F2": {
+          "enabled": false
+        },
+        "gauges": {
+          "enabled": false
+        },
+        "headight_high_B1": {
+          "enabled": false
+        },
+        "headight_high_B2": {
+          "enabled": false
+        },
+        "headlight_high_A1": {
+          "enabled": false
+        },
+        "headlight_high_A2": {
+          "enabled": false
+        },
+        "headlight_high_large": {
+          "enabled": false
+        },
+        "headlight_low_A1": {
+          "enabled": false
+        },
+        "headlight_low_A2": {
+          "enabled": false
+        },
+        "headlight_low_B1": {
+          "enabled": false
+        },
+        "headlight_low_B2": {
+          "enabled": false
+        },
+        "headlight_low_large": {
+          "enabled": false
+        },
+        "headlight_mid_A1": {
+          "enabled": false
+        },
+        "headlight_mid_A2": {
+          "enabled": false
+        },
+        "headlight_mid_B1": {
+          "enabled": false
+        },
+        "headlight_mid_B2": {
+          "enabled": false
+        },
+        "headlight_mid_large": {
+          "enabled": false
+        },
+        "headlight_trona_big": {
+          "enabled": false
+        },
+        "headlight_trona_F1": {
+          "enabled": false
+        },
+        "headlight_trona_F2": {
+          "enabled": false
+        },
+        "markerlight_type1_1": {
+          "enabled": false
+        },
+        "markerlight_type1_2": {
+          "enabled": false
+        },
+        "markerlight_type1_3": {
+          "enabled": false
+        },
+        "markerlight_type1_4": {
+          "enabled": false
+        },
+        "markerlight_type1_5": {
+          "enabled": false
+        },
+        "markerlight_type1_6": {
+          "enabled": false
+        },
+        "markerlight_type1_7": {
+          "enabled": false
+        },
+        "markerlight_type1_8": {
+          "enabled": false
+        },
+        "markerlight_type2_1": {
+          "enabled": false
+        },
+        "markerlight_type2_2": {
+          "enabled": false
+        },
+        "markerlight_type2_3": {
+          "enabled": false
+        },
+        "markerlight_type2_4": {
+          "enabled": false
+        },
+        "markerlight_type2_5": {
+          "enabled": false
+        },
+        "markerlight_type2_6": {
+          "enabled": false
+        },
+        "markerlight_type2_7": {
+          "enabled": false
+        },
+        "markerlight_type2_8": {
+          "enabled": false
+        },
+        "markerlight_type3_1": {
+          "enabled": false
+        },
+        "markerlight_type3_2": {
+          "enabled": false
+        },
+        "markerlight_type3_3": {
+          "enabled": false
+        },
+        "markerlight_type3_4": {
+          "enabled": false
+        },
+        "markerlight_type3_5": {
+          "enabled": false
+        },
+        "markerlight_type3_6": {
+          "enabled": false
+        },
+        "markerlight_type3_7": {
+          "enabled": false
+        },
+        "markerlight_type3_8": {
+          "enabled": false
+        },
+        "markerlight_type4_back_1": {
+          "enabled": false
+        },
+        "markerlight_type4_back_2": {
+          "enabled": false
+        },
+        "markerlight_type4_front_1": {
+          "enabled": false
+        },
+        "markerlight_type4_front_2": {
+          "enabled": false
+        },
+        "numberboard_type1_1": {
+          "enabled": false
+        },
+        "numberboard_type1_2": {
+          "enabled": false
+        },
+        "numberboard_type1_3": {
+          "enabled": false
+        },
+        "numberboard_type1_4": {
+          "enabled": false
+        },
+        "numberboard_type2_1": {
+          "enabled": false
+        },
+        "numberboard_type2_2": {
+          "enabled": false
+        },
+        "numberboard_type2_3": {
+          "enabled": false
+        },
+        "numberboard_type2_4": {
+          "enabled": false
+        },
+        "numberboard_type3_back_L": {
+          "enabled": false
+        },
+        "numberboard_type3_back_R": {
+          "enabled": false
+        },
+        "numberboard_type3_front_L": {
+          "enabled": false
+        },
+        "numberboard_type3_front_R": {
+          "enabled": false
+        },
+        "numberboard_type4_back_L": {
+          "enabled": false
+        },
+        "numberboard_type4_back_R": {
+          "enabled": false
+        },
+        "numberboard_type4_front_L": {
+          "enabled": false
+        },
+        "numberboard_type4_front_R": {
+          "enabled": false
+        }
+      }
+    }
+  },
+  "skins": {
+    "bap:black": {},
+    "bap:red": {},
+    "bap:green": {},
+    "bap:brown": {},
+    "bap:blue": {},
+    "bap:purple": {},
+    "bap:cyan": {},
+    "bap:lightgrey": {},
+    "bap:lime": {},
+    "bap:yellow": {},
+    "bap:lightblue": {},
+    "bap:magenta": {},
+    "bap:orange": {},
+    "bap:white": {},
+    "bap:skin16": {},
+    "bap:skin17": {},
+    "bap:skin18": {},
+    "bap:skin19": {},
+    "bap:skin20": {},
+    "bap:skin21": {},
+    "bap:skin22": {},
+    "bap:skin23": {},
+    "bap:skin24": {},
+    "bap:skin25": {},
+    "bap:skin26": {},
+    "bap:skin27": {},
+    "bap:skin28": {},
+    "bap:skin29": {},
+    "bap:skin30": {},
+    "bap:skin31": {},
+    "bap:skin32": {}
+  }
+}

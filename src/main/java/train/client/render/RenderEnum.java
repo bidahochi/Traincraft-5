@@ -2056,6 +2056,18 @@ public enum RenderEnum implements ITrainRenderRecord, ISubTrainRenderRecord
 			add(new double[]{0.29D, 1.46D, -0.23D});
 		}
 	},"", null, 0, false),
+	DT662000( DieselDT662000.class,  new ModelDT662000(), "DT662000_", true,new float[] {-1.95F, 0.15F, 0F},  new float[] { 0F, 180F, 180F },  new float[] { 1F, 1.0F, 1F }, "smoke", 3,  new ArrayList<double[]>() {
+		{
+			add(new double[]{3.02D, 1.49D, -0.21D});
+			add(new double[]{0.89D, 1.49D, 0.21D});
+		}
+	},"", null, 0, false),
+	RT624( DieselRT624.class,  new ModelRT624(), "RT624_", true,new float[] {-1.95F, 0.15F, 0F},  new float[] { 0F, 180F, 180F },  new float[] { 1F, 1.0F, 1F }, "smoke", 3,  new ArrayList<double[]>() {
+		{
+			add(new double[]{3.02D, 1.49D, -0.21D});
+			add(new double[]{0.89D, 1.49D, 0.21D});
+		}
+	},"", null, 0, false),
 
 	/**Fairbanks Morse**/
 	H1044( DieselH1044.class,  new ModelH1044(), "FM_H10-44_", true,new float[] {-1.1F, 0.15F, 0F},  new float[] { 0F, 180F, 180F }, null, "smoke", 4,  new ArrayList<double[]>() {
