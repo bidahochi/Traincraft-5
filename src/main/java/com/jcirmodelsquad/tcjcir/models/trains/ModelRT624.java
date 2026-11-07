@@ -2751,66 +2751,66 @@ public class ModelRT624 extends ModelConverter //Same as Filename
 		if (GetColor(entity) == 1234) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_silver_roller.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		}else if (GetColor(entity) == 12345) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_roller.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		}else if (GetColor(entity) == 8) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_fric_cutout.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		}else if (GetColor(entity) == 5 || GetColor(entity) == 6 || GetColor(entity) == 7 || GetColor(entity) == 9 || GetColor(entity) == 10 || GetColor(entity) == 11) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_fric.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		}else if (GetColor(entity) == 123456) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_silver_fric.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_fric_bulge.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.93F, -0.005F, 0F);
+			GL11.glTranslatef(1.93F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.86F, 0.0F, 0);
+			GL11.glTranslated(3.86F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 

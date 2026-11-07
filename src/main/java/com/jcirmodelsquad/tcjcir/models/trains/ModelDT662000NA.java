@@ -1675,33 +1675,33 @@ public class ModelDT662000NA extends ModelConverter //Same as Filename
 		if (GetColor(entity) == 123456) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_roller.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.81F, -0.005F, 0F);
+			GL11.glTranslatef(1.81F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.62F, 0.0F, 0);
+			GL11.glTranslated(3.62F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		}else if (GetColor(entity) == 12345) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_silver_fric.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.81F, -0.005F, 0F);
+			GL11.glTranslatef(1.81F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.62F, 0.0F, 0);
+			GL11.glTranslated(3.62F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
 		} else {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_black_fric.png"));
 			GL11.glPushMatrix();
-			GL11.glTranslatef(-1.81F, -0.005F, 0F);
+			GL11.glTranslatef(1.81F, -0.005F, 0F);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 
 			GL11.glRotatef(180, 0, 1, 0);
-			GL11.glTranslated(-3.62F, 0.0F, 0);
+			GL11.glTranslated(3.62F, 0.0F, 0);
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
