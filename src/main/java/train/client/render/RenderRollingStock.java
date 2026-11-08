@@ -61,7 +61,7 @@ public class RenderRollingStock extends Render {
                 cart.modelInstance = cart.getRenderSpec().getModel();
             }
             LightEffectRenderBatch.prepareRollingStockOcclusion(
-                cart.worldObj, cart.worldObj.getTotalWorldTime() + time);
+                cart.worldObj, ClientRollingStockLighting.animationTime(cart.worldObj.getTotalWorldTime(), time));
             if (LightEffectRenderBatch.rollingStockOcclusionRequired())
             {
                 LightEffectRenderBatch.captureWorldView();
