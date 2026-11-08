@@ -92,7 +92,7 @@ public class ModelHighrailVan extends ModelConverter //Same as Filename
 		bodyModel[55] = new ModelRendererTurbo(this, 177, 9, textureX, textureY); // Box 113
 		bodyModel[56] = new ModelRendererTurbo(this, 97, 9, textureX, textureY); // Box 114
 		bodyModel[57] = new ModelRendererTurbo(this, 177, 9, textureX, textureY); // Box 115
-		bodyModel[58] = new ModelRendererTurbo(this, 241, 9, textureX, textureY, "lamp"); // Box 162 light
+		bodyModel[58] = new ModelRendererTurbo(this, 241, 9, textureX, textureY, "commander"); // Box 162 light
 		bodyModel[59] = new ModelRendererTurbo(this, 249, 9, textureX, textureY); // Box 165
 		bodyModel[60] = new ModelRendererTurbo(this, 305, 25, textureX, textureY); // Box 71
 		bodyModel[61] = new ModelRendererTurbo(this, 105, 33, textureX, textureY); // Box 72

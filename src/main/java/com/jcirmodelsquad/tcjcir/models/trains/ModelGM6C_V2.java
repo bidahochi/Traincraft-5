@@ -162,7 +162,7 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[119] = new ModelRendererTurbo(this, 243, 10, textureX, textureY); // Box 190
 		bodyModel[120] = new ModelRendererTurbo(this, 245, 6, textureX, textureY); // Box 191
 		bodyModel[121] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "rear_marker"); // Box 71 markerlight rear
-		bodyModel[122] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "lamp"); // Box 1208 makrerlight rear
+		bodyModel[122] = new ModelRendererTurbo(this, 435, 20, textureX, textureY, "rear_marker"); // Box 1208 makrerlight rear
 		bodyModel[123] = new ModelRendererTurbo(this, 216, 182, textureX, textureY); // Box 196
 		bodyModel[124] = new ModelRendererTurbo(this, 229, 111, textureX, textureY); // Box 197
 		bodyModel[125] = new ModelRendererTurbo(this, 254, 186, textureX, textureY); // Box 198
@@ -235,7 +235,7 @@ public class ModelGM6C_V2 extends ModelConverter //Same as Filename
 		bodyModel[192] = new ModelRendererTurbo(this, 26, 125, textureX, textureY); // Box 419
 		bodyModel[193] = new ModelRendererTurbo(this, 49, 126, textureX, textureY); // Box 420
 		bodyModel[194] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "front_marker"); // Box 71 markerlight front
-		bodyModel[195] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "lamp"); // Box 1208 makrerlight front
+		bodyModel[195] = new ModelRendererTurbo(this, 101, 98, textureX, textureY, "front_marker"); // Box 1208 makrerlight front
 		bodyModel[196] = new ModelRendererTurbo(this, 353, 144, textureX, textureY); // Box 562
 		bodyModel[197] = new ModelRendererTurbo(this, 353, 149, textureX, textureY); // Box 563
 		bodyModel[198] = new ModelRendererTurbo(this, 180, 64, textureX, textureY); // Box 332 h6 horn

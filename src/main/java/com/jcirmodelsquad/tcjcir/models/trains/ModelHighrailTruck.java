@@ -102,7 +102,7 @@ public class ModelHighrailTruck extends ModelConverter //Same as Filename
 		bodyModel[66] = new ModelRendererTurbo(this, 441, 33, textureX, textureY); // Box 113
 		bodyModel[67] = new ModelRendererTurbo(this, 169, 25, textureX, textureY); // Box 114
 		bodyModel[68] = new ModelRendererTurbo(this, 345, 33, textureX, textureY); // Box 115
-		bodyModel[69] = new ModelRendererTurbo(this, 3, 45, textureX, textureY, "lamp"); // Box 162 light
+		bodyModel[69] = new ModelRendererTurbo(this, 3, 45, textureX, textureY, "commander"); // Box 162 light
 		bodyModel[70] = new ModelRendererTurbo(this, 3, 39, textureX, textureY); // Box 165
 
 		bodyModel[0].addBox(0F, 0F, 0F, 14, 3, 16, 0F); // Box 1

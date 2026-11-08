@@ -89,8 +89,8 @@ public class ModelSW1 extends ModelConverter //Same as Filename
 		bodyModel[45] = new ModelRendererTurbo(this, 332, 8, textureX, textureY); // Box 351
 		bodyModel[46] = new ModelRendererTurbo(this, 329, 8, textureX, textureY); // Box 350
 		bodyModel[47] = new ModelRendererTurbo(this, 332, 14, textureX, textureY, "cull"); // Box 1100 cull
-		bodyModel[48] = new ModelRendererTurbo(this, 280, 31, textureX, textureY, "lamp"); // Box 78 glow
-		bodyModel[49] = new ModelRendererTurbo(this, 281, 24, textureX, textureY); // Box 71
+		bodyModel[48] = new ModelRendererTurbo(this, 280, 31, textureX, textureY, "cab_light"); // Box 78 glow
+		bodyModel[49] = new ModelRendererTurbo(this, 281, 24, textureX, textureY, "cab_speedoe"); // Box 71
 		bodyModel[50] = new ModelRendererTurbo(this, 33, 82, textureX, textureY); // Box 268
 		bodyModel[51] = new ModelRendererTurbo(this, 33, 80, textureX, textureY); // Box 267
 		bodyModel[52] = new ModelRendererTurbo(this, 38, 82, textureX, textureY); // Box 266
