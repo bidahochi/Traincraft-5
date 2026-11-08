@@ -88,7 +88,7 @@ public class ItemBlockTrackBuffer extends ItemBlock implements ITrackAttachmentI
 		}
 		if (player == null || player.canPlayerEdit(cellX, cellY, cellZ, selectedSide, stack) == false)
 		{
-			return false;
+			return true;
 		}
 
 		TileTCRail owner = TrackAttachmentOperations.resolveRenderOwner(world, cellX, cellY, cellZ);
@@ -97,12 +97,17 @@ public class ItemBlockTrackBuffer extends ItemBlock implements ITrackAttachmentI
 			return false;
 		}
 		TrackAttachment attachment = createTrackAttachment(owner, cellX, cellY, cellZ, hitX, hitZ);
-		if (attachment == null)
+		if (attachment == null || owner.canAddAttachment(attachment) == false)
 		{
 			return true;
 		}
 		if (world.isRemote == false)
 		{
+			if (TrackAttachmentOperations.canInstallAttachment(world, cellX, cellY, cellZ,
+					player, selectedSide) == false)
+			{
+				return true;
+			}
 			boolean installed = owner.addAttachment(attachment);
 			if (installed && player.capabilities.isCreativeMode == false)
 			{

@@ -9,6 +9,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.BlockSnapshot;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
 import train.common.library.track.path.TrackPathGeometry;
 import train.common.library.track.path.TrackPathSample;
 import train.common.tile.TileTCRail;
@@ -43,6 +46,31 @@ public final class TrackAttachmentOperations
 
 	private TrackAttachmentOperations()
 	{
+	}
+
+	/**
+	 * Runs the native placement protection hook before changing a track's attachment data. Tile-only changes do not
+	 * create automatic placement snapshots. Crucible/Cauldron bridge this Forge event to Bukkit's BlockPlaceEvent,
+	 * allowing WorldGuard and other protection listeners to cancel installation, including in creative mode.
+	 *
+	 * @param world server world containing the selected track
+	 * @param cellX attachment mounting X coordinate, not the render/storage parent's coordinate
+	 * @param cellY attachment mounting Y coordinate
+	 * @param cellZ attachment mounting Z coordinate
+	 * @param player player attempting installation
+	 * @param selectedSide selected block face
+	 * @return whether the server-side placement event permits installation
+	 */
+	public static boolean canInstallAttachment(World world, int cellX, int cellY, int cellZ,
+			EntityPlayer player, int selectedSide)
+	{
+		if (world == null || world.isRemote || player == null)
+		{
+			return false;
+		}
+		BlockSnapshot snapshot = BlockSnapshot.getBlockSnapshot(world, cellX, cellY, cellZ);
+		return ForgeEventFactory.onPlayerBlockPlace(player, snapshot,
+				ForgeDirection.getOrientation(selectedSide)).isCanceled() == false;
 	}
 
 	/**

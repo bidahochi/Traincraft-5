@@ -66,21 +66,29 @@ public final class ItemRoadCrossingAttachment extends ItemPart implements ITrack
 		}
 		if (player == null || player.canPlayerEdit(cellX, cellY, cellZ, selectedSide, stack) == false)
 		{
-			return false;
+			return true;
 		}
 		TileTCRail owner = TrackAttachmentOperations.resolveRenderOwner(world, cellX, cellY, cellZ);
 		TrackAttachment attachment = createAttachment(owner, cellX, cellY, cellZ);
-		if (attachment == null)
+		if (attachment == null || owner.canAddAttachment(attachment) == false)
 		{
 			return true;
 		}
-		if (world.isRemote == false && owner.addAttachment(attachment))
+		if (world.isRemote == false)
 		{
-			if (player.capabilities.isCreativeMode == false)
+			if (TrackAttachmentOperations.canInstallAttachment(world, cellX, cellY, cellZ,
+					player, selectedSide) == false)
 			{
-				stack.stackSize--;
+				return true;
 			}
-			player.swingItem();
+			if (owner.addAttachment(attachment))
+			{
+				if (player.capabilities.isCreativeMode == false)
+				{
+					stack.stackSize--;
+				}
+				player.swingItem();
+			}
 		}
 		return true;
 	}

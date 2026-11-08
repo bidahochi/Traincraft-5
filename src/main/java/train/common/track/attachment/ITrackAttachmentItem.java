@@ -24,7 +24,9 @@ public interface ITrackAttachmentItem
 			int cellX, int cellY, int cellZ, int selectedSide, float hitX, float hitZ);
 
 	/**
-	 * Handles installation after a rail block has already consumed the interaction.
+	 * Handles installation after a rail block has already consumed the interaction. Implementations must check
+	 * {@link TrackAttachmentOperations#canInstallAttachment} on the server at the mounting cell before mutation.
+	 * Rejected protection checks consume the interaction to prevent fallback standalone placement.
 	 *
 	 * @param stack held attachment item
 	 * @param player player performing the interaction
