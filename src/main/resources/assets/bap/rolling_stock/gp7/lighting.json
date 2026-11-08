@@ -321,6 +321,20 @@
     "bap:skin58": {},
     "bap:skin61": {},
     "bap:skin62": {},
-    "bap:skin63": {}
+    "bap:skin63": {},
+    "bap:skin64": {
+      "lighting": {
+        "fixtures": {
+          "gf2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "gr2": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    }
   }
 }

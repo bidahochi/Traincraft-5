@@ -177,6 +177,20 @@
     "bap:skin21": {},
     "bap:skin22": {},
     "bap:purple": {},
-    "bap:skin23": {}
+    "bap:skin23": {},
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "lamp_gyra4": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          },
+          "lamp_gyra4r": {
+            "color": "#FF2020",
+            "controlCircuit": "emergency"
+          }
+        }
+      }
+    }
   }
 }

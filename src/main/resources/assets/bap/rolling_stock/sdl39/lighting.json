@@ -12,6 +12,9 @@
         },
         "marker_two_body_263": {
           "preset": "marker_light"
+        },
+        "markerlight": {
+          "preset": "marker_light"
         }
       }
     }

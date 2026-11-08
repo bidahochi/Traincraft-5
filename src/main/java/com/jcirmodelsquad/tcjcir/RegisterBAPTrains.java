@@ -1077,7 +1077,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.80)
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
-                        .setColors(new String[] {"White", "Green", "Black", "Skin26", "Skin19", "LightGrey", "Skin20", "Skin21", "Lime", "Purple", "Blue", "Skin25", "Skin16", "Skin17", "Skin18", "Skin59", "Grey", "Orange", "Pink", "Skin35", "Skin36", "Skin37", "Skin38", "Skin22", "Brown", "Skin23", "LightBlue", "Skin24", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin44", "Skin45", "Red", "Magenta", "Skin46", "Skin47", "Skin48", "Skin49", "Skin50", "Skin51", "Skin52", "Skin53", "Skin54", "Skin55", "Skin56", "Skin57", "Skin58", "Skin60", "Skin61", "Skin62", "Skin63"})
+                        .setColors(new String[] {"White", "Green", "Black", "Skin26", "Skin19", "LightGrey", "Skin20", "Skin21", "Lime", "Purple", "Blue", "Skin25", "Skin16", "Skin17", "Skin18", "Skin59", "Grey", "Orange", "Pink", "Skin35", "Skin36", "Skin37", "Skin38", "Skin22", "Brown", "Skin23", "LightBlue", "Skin24", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin44", "Skin45", "Red", "Magenta", "Skin46", "Skin47", "Skin48", "Skin49", "Skin50", "Skin51", "Skin52", "Skin53", "Skin54", "Skin55", "Skin56", "Skin57", "Skin58", "Skin60", "Skin61", "Skin62", "Skin63", "Skin64"})
                         .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
@@ -1522,7 +1522,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.75)
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
-                        .setColors(new String[] {"Red", "Black", "Orange", "Skin17", "Cyan", "LightGrey", "Skin18", "Yellow", "Magenta", "Skin19", "Skin20", "Pink", "Skin21", "Skin22", "Purple", "Skin23"})
+                        .setColors(new String[] {"Red", "Black", "Orange", "Skin17", "Cyan", "LightGrey", "Skin18", "Yellow", "Magenta", "Skin19", "Skin20", "Pink", "Skin21", "Skin22", "Purple", "Skin23", "Grey"})
                         .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.05)
         );
@@ -3327,7 +3327,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
-                        .setColors(new String[] {"Orange", "Blue", "Green", "LightGrey", "Skin17", "Skin18", "Cyan", "LightBlue", "Purple", "Skin19", "White"})
+                        .setColors(new String[] {"Orange", "Blue", "Green", "LightGrey", "Skin17", "Skin18", "Cyan", "LightBlue", "Purple", "Skin19", "White", "Pink"})
                         .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );

@@ -355,6 +355,10 @@ public class RecipeHandler extends AbstractRecipeHandler
 			GameRegistry.addRecipe(new ItemStack(CORE_3x5_45DEGREE_SWITCH.item,1), "SS ","SS ","S  ", 'S', straight1X.item);
 			GameRegistry.addRecipe(new ItemStack(CORE_4x8_45DEGREE_SWITCH.item,1), "MM ","SS ","M  ", 'S', straight1X.item, 'M', straight3X.item);
 
+			//45 degree ladder switch
+			TrackItemIDs CORE_DIAGONAL_45DEGREE_4X3_SWITCH = tracks.get(EnumCoreTrack.CORE_DIAGONAL_45DEGREE_4X3_SWITCH).get("").getItem();
+			GameRegistry.addRecipe(new ItemStack(CORE_DIAGONAL_45DEGREE_4X3_SWITCH.item,1), "  S"," M ","S  ", 'S', straight1X.item, 'M', straight3X.item);
+
 			//crossover switch regular
 			TrackItemIDs CORE_10x2_CROSSOVER_SWITCH = tracks.get(EnumCoreTrack.CORE_10x2_CROSSOVER_SWITCH).get("").getItem();
 			GameRegistry.addRecipe(new ItemStack(CORE_10x2_CROSSOVER_SWITCH.item,1), "MM ","MM ","M  ",'M', straight3X.item);

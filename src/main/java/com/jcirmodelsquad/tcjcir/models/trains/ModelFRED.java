@@ -29,8 +29,8 @@ public class ModelFRED extends ModelConverter //Same as Filename
 	{
 		bodyModel[0] = new ModelRendererTurbo(this, 1, 1, textureX, textureY); // Box 1
 		bodyModel[1] = new ModelRendererTurbo(this, 0, 12, textureX, textureY); // Box 2
-		bodyModel[2] = new ModelRendererTurbo(this, 11, 1, textureX, textureY, "lamp"); // Box 189 glow
-		bodyModel[3] = new ModelRendererTurbo(this, 10, 10, textureX, textureY, "lamp"); // Box 4 lamp
+		bodyModel[2] = new ModelRendererTurbo(this, 11, 1, textureX, textureY, "bottom_one"); // Box 189 glow
+		bodyModel[3] = new ModelRendererTurbo(this, 10, 10, textureX, textureY, "top_one"); // Box 4 lamp
 		bodyModel[4] = new ModelRendererTurbo(this, 7, 1, textureX, textureY); // Box 5
 		bodyModel[5] = new ModelRendererTurbo(this, 1, 6, textureX, textureY); // Box 6
 

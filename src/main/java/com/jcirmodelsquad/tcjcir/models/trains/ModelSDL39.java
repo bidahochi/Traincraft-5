@@ -302,9 +302,9 @@ public class ModelSDL39 extends ModelConverter //Same as Filename
 		bodyModel[259] = new ModelRendererTurbo(this, 179, 23, textureX, textureY); // Box 345
 		bodyModel[260] = new ModelRendererTurbo(this, 111, 113, textureX, textureY); // Box 1203
 		bodyModel[261] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "marker_two_body_261"); // Box 71 markerlight twO
-		bodyModel[262] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[262] = new ModelRendererTurbo(this, 1, 40, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[263] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "marker_two_body_263"); // Box 71 markerlight twO
-		bodyModel[264] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[264] = new ModelRendererTurbo(this, 454, 89, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[265] = new ModelRendererTurbo(this, 18, 41, textureX, textureY); // Box 1251
 		bodyModel[266] = new ModelRendererTurbo(this, 152, 25, textureX, textureY); // Box 446
 		bodyModel[267] = new ModelRendererTurbo(this, 449, 30, textureX, textureY, "cull"); // Box 196 winterization hatch cull

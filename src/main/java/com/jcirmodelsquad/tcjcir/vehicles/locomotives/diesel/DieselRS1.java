@@ -31,6 +31,7 @@ public class DieselRS1 extends DieselTrain {
         InsertTexture(8, "Glontch");
         InsertTexture(9, "AGW", LockoutGroup.AGW);
         InsertTexture(10, "CYDZ");
+        InsertTexture(11, "ARR");
 
     }
 

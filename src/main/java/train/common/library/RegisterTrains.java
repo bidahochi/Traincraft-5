@@ -522,14 +522,14 @@ public class RegisterTrains
 
             put(ItemIDs.minecartFreightWagon_DB.item,
                     new TrainRecord("Freight Wagon DB", EntityFreightWagenDB.class, ItemIDs.minecartFreightWagon_DB.item, "freight", 4,
-                            new String[] {"Red", "Green", "Yellow", "Orange", "Pink"},
+                            new String[] {"Red", "Green", "Yellow", "Orange", "Pink", "Brown"},
                             18).setCargoCapacity(STYLE_PROFILE_6x9)
                             .setStockId("freightwagen_db"));
 
 
             put(ItemIDs.minecartFlatCartRail_DB.item,
                     new TrainRecord("Freight Flat Cart Rails DB", EntityFlatCarRails_DB.class, ItemIDs.minecartFlatCartRail_DB.item, "freight", 5,
-                            new String[] {"Red", "Green", "Cyan", "Yellow"},
+                            new String[] {"Red", "Green", "Cyan", "Yellow", "Brown"},
                             18).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("flatcarrails_db"));
 
@@ -543,7 +543,7 @@ public class RegisterTrains
 
             put(ItemIDs.minecartFlatCartLogs_DB.item,
                     new TrainRecord("Freight Flat Cart Logs DB", EntityFlatCarLogs_DB.class, ItemIDs.minecartFlatCartLogs_DB.item, "freight", 4,
-                            new String[]{"Red", "Green", "Black", "Blue", "Brown", "Cyan", "LightBlue", "LightGrey", "Lime", "Magenta", "Orange", "Pink", "Purple", "White", "Yellow"},
+                            new String[]{"Red", "Green", "Black", "Blue", "Brown", "Cyan", "LightBlue", "LightGrey", "Lime", "Magenta", "Orange", "Pink", "Purple", "White", "Yellow", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"},
                             18).setCargoCapacity(45)
                             .setStockId("flatcarlogs_db"));
 
@@ -569,7 +569,7 @@ public class RegisterTrains
 
             put(ItemIDs.minecartFreightGondola_DB.item,
                     new TrainRecord("Freight Gondola DB", EntityFreightGondola_DB.class, ItemIDs.minecartFreightGondola_DB.item, "freight", 3.5,
-                            new String[]{"Red", "Green", "Black", "Brown", "Grey", "LightGrey", "Lime", "Orange", "Pink", "White", "Yellow"},
+                            new String[]{"Red", "Green", "Black", "Brown", "Grey", "LightGrey", "Lime", "Orange", "Pink", "White", "Yellow", "Blue", "LightBlue", "Magenta", "Purple"},
                             18).setCargoCapacity(45).setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
                             .setStockId("freightgondola_db"));
 

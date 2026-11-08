@@ -82,7 +82,7 @@ public class DieselGP7 extends DieselTrain {
         InsertTexture(59, "C&O (Early)");
         InsertTexture(60, "C&O 5704 (Early)");
         InsertTexture(61, "Coyote & Fort Woods (Bida Fictional)");
-        InsertTexture(62, "");
+        InsertTexture(62, "CB&Q");
     }
 
     @Override
@@ -95,8 +95,7 @@ public class DieselGP7 extends DieselTrain {
     public void updateRiderPosition() { TraincraftUtil.updateRider(this, 2.55, 0.15, -0.35); }
 
     @Override
-    public float getOptimalDistance(EntityMinecart cart) { return 1.1F;
-    }
+    public float getOptimalDistance(EntityMinecart cart) { return 1.1F; }
 
     @Override
     public String transportYear() {
@@ -107,6 +106,5 @@ public class DieselGP7 extends DieselTrain {
     public String getInventoryName() {
         return "EMD GP7";
     }
-
 
 }

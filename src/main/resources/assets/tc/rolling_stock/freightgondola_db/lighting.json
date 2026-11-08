@@ -17,6 +17,10 @@
     "tc:orange": {},
     "tc:pink": {},
     "tc:white": {},
-    "tc:yellow": {}
+    "tc:yellow": {},
+    "tc:blue": {},
+    "tc:lightblue": {},
+    "tc:magenta": {},
+    "tc:purple": {}
   }
 }
