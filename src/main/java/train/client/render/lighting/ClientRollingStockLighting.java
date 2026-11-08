@@ -105,9 +105,19 @@ public final class ClientRollingStockLighting
         ACTIVE.set(
             new Context(
                 stock,
-                stock.worldObj.getTotalWorldTime() + partialTicks,
+                animationTime(stock.worldObj.getTotalWorldTime(), partialTicks),
                 partialTicks,
                 texture));
+    }
+
+    /**
+     * Combines world age and frame interpolation for both fixture and occlusion sampling.
+     * Promote before addition: long + float can round old worlds to multi-second steps
+     * before the result reaches the double-valued animation samplers.
+     */
+    public static double animationTime(long worldTicks, float partialTicks)
+    {
+        return (double) worldTicks + partialTicks;
     }
 
     /** Clears the lighting scope associated with the current render thread. */
