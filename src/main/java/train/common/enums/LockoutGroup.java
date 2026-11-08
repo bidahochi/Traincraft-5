@@ -56,6 +56,9 @@ public enum LockoutGroup implements ILockoutGroup
 
     //Dominik
     DPNC("620377d9-34d7-4abb-bed0-5b064915db6b"), //Des Plaines Navigation Company
+
+    //PlayLifeStyle
+    SHINY("89f5f60a-3dfb-4ab4-8383-021e1d590b54") //Shiny rails
     ;
 
     /**

@@ -416,7 +416,7 @@ public class RegisterTrains
 
             put(ItemIDs.minecartLongCoveredHopper.item,
                     new TrainRecord("Freight Long Covered Hopper", EntityFreightLongCoveredHopper.class, ItemIDs.minecartLongCoveredHopper.item, "freight", 6,
-                            new String[]{"LightGrey", "Grey","Pink", "White", "Green", "Orange", "Lime", "Cyan"},
+                            new String[]{"LightGrey", "Grey","Pink", "White", "Green", "Orange", "Lime", "Cyan", "Yellow"},
                             18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("longcoveredhopper"));
 

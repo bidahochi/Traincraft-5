@@ -29,6 +29,9 @@ public class EntityFreightLongCoveredHopper extends AbstractStandardFixedFreight
 	public void setupTextureDescription()
 	{
 		InsertTexture(4, "Clearwater Lakes", LockoutGroup.CWL);
+		InsertTexture(6, "Honex Lines");
+		InsertTexture(7, "ANE");
+		InsertTexture(8, "Siny Rails", LockoutGroup.SHINY);
 	}
 
 	@Override
