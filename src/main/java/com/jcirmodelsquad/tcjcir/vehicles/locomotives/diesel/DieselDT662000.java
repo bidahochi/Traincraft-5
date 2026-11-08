@@ -50,6 +50,7 @@ public class DieselDT662000 extends DieselTrain {
         InsertTexture(28, "ATSF (dynamics)");
         InsertTexture(29, "ATSF (dynamics, late)");
         InsertTexture(30, "ATSF (ex BLW 2000)");
+        InsertTexture(31, "AGW");
     }
 
     @Override

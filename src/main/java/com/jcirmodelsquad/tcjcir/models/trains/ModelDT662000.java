@@ -2803,7 +2803,7 @@ public class ModelDT662000 extends ModelConverter //Same as Filename
 			bogie.render(entity, f, f1, f2, f3, f4, f5);
 			GL11.glPopMatrix();
 
-		}else if (GetColor(entity) == 16 || GetColor(entity) == 17) {
+		}else if (GetColor(entity) == 16 || GetColor(entity) == 17 || GetColor(entity) == 33) {
 			Tessellator.bindTexture(new ResourceLocation(Info.resourceLocation, "textures/trains/newBogies/blw_commonwealth_c_silver_fric.png"));
 			GL11.glPushMatrix();
 			GL11.glTranslatef(1.93F, -0.005F, 0F);
