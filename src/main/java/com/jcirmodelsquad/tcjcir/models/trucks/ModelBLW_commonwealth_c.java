@@ -639,16 +639,16 @@ public class ModelBLW_commonwealth_c extends ModelConverter //Same as Filename
 		bodyModel[138].addShapeBox(0F, 0F, 0F, 1, 4, 1, 0F,-0.5F, 0F, -3F, 0F, 0F, -3F, 0F, -2F, 2F, -0.5F, -2F, 2F, -0.5F, 0F, 0.5F, 0F, 0F, 0.5F, 0F, 0F, 0F, -0.5F, 0F, 0F); // Box 138
 		bodyModel[138].setRotationPoint(14F, 3F, 4F);
 
-		bodyModel[139].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, 0F, 2F, 0F, 0F, 0F, 2F, 0F, 0F, 2F, 0F, -2F, 0F, 0F, 2F, 0F, 0F); // Box 139
+		bodyModel[139].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -0.01F, 2F, 0F, -0.01F, 0F, 2F, 0F, 0F, 2F, 0F, -2F, 0F, -0.01F, 2F, 0F, -0.01F); // Box 139
 		bodyModel[139].setRotationPoint(-5F, 3F, 4F);
 
-		bodyModel[140].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,2F, 0F, 0F, -2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 2F, 0F, 0F, -2F, 0F, 0F, 0F, 2F, 0F, 0F, 2F, 0F); // Box 140
+		bodyModel[140].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,2F, 0F, -0.01F, -2F, 0F, -0.01F, 0F, 0F, 0F, 0F, 0F, 0F, 2F, 0F, -0.01F, -2F, 0F, -0.01F, 0F, 2F, 0F, 0F, 2F, 0F); // Box 140
 		bodyModel[140].setRotationPoint(-5F, 3F, -7F);
 
-		bodyModel[141].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, 2F, 0F, 0F, -2F, 0F, 0F, 0F, 2F, 0F, 0F, 2F, 0F, 2F, 0F, 0F, -2F, 0F, 0F); // Box 141
+		bodyModel[141].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,0F, 0F, 0F, 0F, 0F, 0F, 2F, 0F, -0.01F, -2F, 0F, -0.01F, 0F, 2F, 0F, 0F, 2F, 0F, 2F, 0F, -0.01F, -2F, 0F, -0.01F); // Box 141
 		bodyModel[141].setRotationPoint(4F, 3F, 4F);
 
-		bodyModel[142].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,-2F, 0F, 0F, 2F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, 0F, 2F, 0F, 0F, 0F, 2F, 0F, 0F, 2F, 0F); // Box 142
+		bodyModel[142].addShapeBox(0F, 0F, 0F, 2, 3, 3, 0F,-2F, 0F, -0.01F, 2F, 0F, -0.01F, 0F, 0F, 0F, 0F, 0F, 0F, -2F, 0F, -0.01F, 2F, 0F, -0.01F, 0F, 2F, 0F, 0F, 2F, 0F); // Box 142
 		bodyModel[142].setRotationPoint(4F, 3F, -7F);
 
 		bodyModel[143].addBox(0F, 0F, 0F, 7, 1, 6, 0F); // Box 143
