@@ -193,10 +193,10 @@ public class RecipeHandler extends AbstractRecipeHandler
 		GameRegistry.addRecipe(new ItemStack(TrackItemIDs.tcRailSmallRoadCrossing2.item, 8), "III", "IBI", "III", 'I', Items.iron_ingot, 'B', new ItemStack(Blocks.stained_hardened_clay, 1, 8));
 
 		//buffers
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.stopper.block, 1),
+		addDictRecipe(new ItemStack(BlockIDs.stopper.block, 1),
 				"PPP", "I I", 'P', Blocks.planks, 'I', Items.iron_ingot);
-		GameRegistry.addRecipe(new ItemStack(BlockIDs.americanstopper.block, 1),
-				"III", "I I", 'I', Items.iron_ingot);
+		addDictRecipe(new ItemStack(BlockIDs.americanstopper.block, 1),
+				"SSS", "I I", 'I', Items.iron_ingot, 'S', itemSteel);
 
 		//paintbrush
 		GameRegistry.addRecipe(new ItemStack(ItemIDs.paintbrushThing.item,1),"GB ","RIS"," ST", Character.valueOf('G'), new ItemStack(Items.dye,1,2), Character.valueOf('B'), new ItemStack(Items.dye,1,4), Character.valueOf('R'), new ItemStack(Items.dye,1,1), Character.valueOf('I'), new ItemStack(Items.iron_ingot), Character.valueOf('S'), new ItemStack(Items.string), Character.valueOf('T'), new ItemStack(Items.stick));
