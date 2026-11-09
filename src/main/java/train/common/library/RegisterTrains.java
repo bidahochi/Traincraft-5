@@ -38,21 +38,24 @@ public class RegisterTrains
             put(ItemIDs.minecartPassengerBlue.item,
                     new TrainRecord("Passenger Blue", EntityPassengerBlue.class, ItemIDs.minecartPassengerBlue.item, EnumTrainType.Passenger, 1,
                             new String[]{"Blue", "Red", "Green", "White", "Black", "Cyan", "Orange", "Grey", "LightGrey", "LightBlue"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger"));
 
 
             put(ItemIDs.minecartPassengerBlue.item,
                     new TrainRecord("Passenger Blue", EntityPassengerBlue.class, ItemIDs.minecartPassengerBlue.item, EnumTrainType.Passenger, 1,
                             new String[]{"Blue", "Red", "Green", "White", "Black", "Cyan", "Orange", "Grey", "LightGrey", "LightBlue"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger")
             );
 
             put(ItemIDs.minecartPassenger2.item,
                     new TrainRecord("Passenger Small Black", EntityPassenger2.class, ItemIDs.minecartPassenger2.item, EnumTrainType.Passenger, 0.5,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger3")
             );
 
@@ -60,7 +63,8 @@ public class RegisterTrains
             put(ItemIDs.minecartPassenger5.item,
                     new TrainRecord("Passenger Green Long", EntityPassenger5.class, ItemIDs.minecartPassenger5.item, EnumTrainType.Passenger, 1,
                             new String[]{"Green", "Yellow"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger5")
             );
 
@@ -68,7 +72,8 @@ public class RegisterTrains
             put(ItemIDs.minecartPassenger7.item,
                     new TrainRecord("Passenger Short Green", EntityPassenger7.class, ItemIDs.minecartPassenger7.item, EnumTrainType.Passenger, 1,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger7")
             );
 
@@ -76,14 +81,16 @@ public class RegisterTrains
             put(ItemIDs.minecartPassenger8_1class_DB.item,
                     new TrainRecord("Passenger 1Class DB", EntityPassenger_1class_DB.class, ItemIDs.minecartPassenger8_1class_DB.item, EnumTrainType.Passenger, 1.5,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
             );
             //passenger_1class_DB("Passenger 1Class DB", EntityPassenger_1class_DB.class, ItemIDs.minecartPassenger8_1class_DB.item, "passenger", 0, 0, 1.5, 0, 0, 0, 0, 0, 0, null, 18, 0),
 
             put(ItemIDs.minecartPassenger9_2class_DB.item,
                     new TrainRecord("Passenger 2Class DB", EntityPassenger_2class_DB.class, ItemIDs.minecartPassenger9_2class_DB.item, EnumTrainType.Passenger, 1.5,
                             new String[]{"Green", "Cyan"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
             );
 
             //passenger_2class_DB("Passenger 2Class DB", EntityPassenger_2class_DB.class, ItemIDs.minecartPassenger9_2class_DB.item, "passenger", 0, 0, 1.5, 0, 0, 0, 0, 0, 0, TraincraftUtil.getBytesFromColors(new String[]{"Green", "Cyan"}));, 18, 0),
@@ -91,7 +98,8 @@ public class RegisterTrains
             put(ItemIDs.minecartPassengerHighSpeedCarZeroED.item,
                     new TrainRecord("Passenger High Speed Zero ED", EntityPassengerHighSpeedCarZeroED.class, ItemIDs.minecartPassengerHighSpeedCarZeroED.item, EnumTrainType.Passenger, 2,
                             new String[]{"White", "LightGrey", "Grey"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passengerhighspeedcarzeroed")
             );
             //passengerHighSpeedZeroED("Passenger High Speed Zero ED", EntityPassengerHighSpeedCarZeroED.class, ItemIDs.minecartPassengerHighSpeedCarZeroED.item, "passenger", 0, 0, 2, 0, 0, 0, 0, 0, 0, TraincraftUtil.getBytesFromColors(new String[]{"White", "LightGrey", "Grey"}));, 18, 0),
@@ -100,14 +108,23 @@ public class RegisterTrains
             put(ItemIDs.minecartNYTram.item,
                     new TrainRecord("Loco Electric Tram NY", EntityLocoElectricTramNY.class, ItemIDs.minecartNYTram.item, EnumTrainType.Electric, 1,
                             new String[] {"Grey", "White"},
-                            18).setMHP(2428).setMaxSpeed(160).setFuelConsumption(6).setHeatingTime(170).setAccelerationRate(0.7).setBrakeRate(0.965).setBogieLocoPosition(-3)
+                            // Legacy GUI scale: 18
+                            0)
+                            .setMHP(2428)
+                            .setMaxSpeed(160)
+                            .setFuelConsumption(6)
+                            .setHeatingTime(170)
+                            .setAccelerationRate(0.7)
+                            .setBrakeRate(0.965)
+                            .setBogieLocoPosition(-3)
                             .setStockId("locotramny")
             );
 
             put(ItemIDs.minecartPassengerTramNY.item,
                     new TrainRecord("Passenger Tram NY", EntityPassengerTramNY.class, ItemIDs.minecartPassengerTramNY.item, EnumTrainType.Passenger, 1,
                             new String[] {"Grey", "White"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("locotramny_passenger")
             );
             //passengerTramNY("Passenger Tram NY", EntityPassengerTramNY.class, ItemIDs.minecartPassengerTramNY.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0, TraincraftUtil.getBytesFromColors(new String[] {"Grey", "White"}));, 18, 0),
@@ -115,7 +132,8 @@ public class RegisterTrains
             put(ItemIDs.minecartPassengerAdler.item,
                     new TrainRecord("Passenger Adler", EntityPassengerAdler.class, ItemIDs.minecartPassengerAdler.item, EnumTrainType.Passenger, 0.5,
                             new String[] {"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passengeradler")
             );
             //passengerAdler("Passenger Adler", EntityPassengerAdler.class, ItemIDs.minecartPassengerAdler.item, "passenger", 0, 0, 0.5, 0, 0, 0, 0, 0, 0, null, 18, 0),
@@ -123,14 +141,16 @@ public class RegisterTrains
             put(ItemIDs.minecartPassengerDBOriental.item,
                     new TrainRecord("Passenger DB oriental", EntityPassengerDBOriental.class, ItemIDs.minecartPassengerDBOriental.item, EnumTrainType.Passenger, 1,
                             new String[] {"Yellow", "Blue", "White"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
             );
             //passengerDBOriental("Passenger DB oriental", EntityPassengerDBOriental.class, ItemIDs.minecartPassengerDBOriental.item, "passenger", 0, 0, 1, 0, 0, 0, 0, 0, 0, TraincraftUtil.getBytesFromColors(new String[]{"Yellow", "Blue", "White"}));, 18, 0),
 
             put(ItemIDs.minecartICE1_1stClass.item,
                     new TrainRecord("Passenger ICE 1st Class", EntityPassengerICE_1class.class, ItemIDs.minecartICE1_1stClass.item, EnumTrainType.Passenger, 1.5,
                             new String[]{"White", "Red"},
-                            10)
+                            // Legacy GUI scale: 10
+                            0)
                             .setStockId("ice1_1st_class")
             );
 
@@ -138,7 +158,8 @@ public class RegisterTrains
             put(ItemIDs.minecartICE1_2ndClass.item,
                     new TrainRecord("Passenger ICE 2nd Class", EntityPassengerICE_2class.class, ItemIDs.minecartICE1_2ndClass.item, EnumTrainType.Passenger, 1.5,
                             new String[]{"White", "Red"},
-                            10)
+                            // Legacy GUI scale: 10
+                            0)
                             .setStockId("ice1_2nd_class")
             );
 
@@ -146,7 +167,8 @@ public class RegisterTrains
             put(ItemIDs.minecartICE1_Restaurant.item,
                     new TrainRecord("ICE Restaurant", EntityPassengerICE_Restaurant.class, ItemIDs.minecartICE1_Restaurant.item, EnumTrainType.Passenger, 1.5,
                             new String[]{"White", "Red"},
-                            10)
+                            // Legacy GUI scale: 10
+                            0)
                             .setStockId("ice1_restaurant")
             );
 
@@ -154,7 +176,8 @@ public class RegisterTrains
             put(ItemIDs.minecartGS4_Passenger.item,
                     new TrainRecord("Passenger GS4", EntityPassengerGS4.class, ItemIDs.minecartGS4_Passenger.item, EnumTrainType.Passenger, 1,
                             new String[]{"Orange", "White", "Yellow", "Brown", "Green", "Lime", "Red", "Grey", "Green", "LightGrey", "Blue", "Black", "LightBlue", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25"},
-                            11)
+                            // Legacy GUI scale: 11
+                            0)
                             .setStockId("gs4_passenger")
             );
 
@@ -162,7 +185,8 @@ public class RegisterTrains
             put(ItemIDs.minecartGS4_Observatory.item,
                     new TrainRecord("Passenger GS4 Observatory", EntityPassengerGS4_Observatory.class, ItemIDs.minecartGS4_Observatory.item, EnumTrainType.Passenger, 1,
                             new String[]{"Orange", "White", "Yellow", "Brown", "Lime", "Red", "Grey", "Green", "LightGrey", "Black", "LightBlue", "Skin17", "Skin18", "Skin19"},
-                            11)
+                            // Legacy GUI scale: 11
+                            0)
                             .setStockId("gs4_tavern")
             );
 
@@ -170,7 +194,8 @@ public class RegisterTrains
             put(ItemIDs.minecartGS4_Tail.item,
                     new TrainRecord("Passenger GS4 Tail", EntityPassengerGS4_Tail.class, ItemIDs.minecartGS4_Tail.item, EnumTrainType.Passenger, 1,
                             new String[]{"Orange", "White", "Yellow", "Brown", "Lime", "Red", "Grey", "Green", "LightGrey", "Black", "LightBlue"},
-                            11)
+                            // Legacy GUI scale: 11
+                            0)
                             .setStockId("gs4_tail")
             );
 
@@ -178,7 +203,8 @@ public class RegisterTrains
             put(ItemIDs.minecartDenverRioGrandePassenger.item,
                     new TrainRecord("Passenger Denver Rio Grande", EntityPassengerDenverRioGrande.class, ItemIDs.minecartDenverRioGrandePassenger.item, EnumTrainType.Passenger, 1,
                             new String[]{"Yellow", "Red", "Green"},
-                            10)
+                            // Legacy GUI scale: 10
+                            0)
                             .setStockId("drg_passenger")
             );
 
@@ -186,7 +212,8 @@ public class RegisterTrains
             put(ItemIDs.minecartDenverRioGrandeCombo.item,
                     new TrainRecord("Passenger Denver Rio Grande Combo", EntityPassengerDenverRioGrandeCombo.class, ItemIDs.minecartDenverRioGrandeCombo.item, EnumTrainType.Passenger_Combine, 1,
                             new String[]{"Yellow", "Red", "Green"},
-                            10).setCargoCapacity(18)
+                            // Legacy GUI scale: 10
+                            0).setCargoCapacity(18)
                             .setStockId("drg_combo")
             );
 
@@ -194,49 +221,56 @@ public class RegisterTrains
             put(ItemIDs.minecartPassengerRheingold.item,
                     new TrainRecord("Passenger Rheingold", EntityPassengerRheingold.class, ItemIDs.minecartPassengerRheingold.item, EnumTrainType.Passenger, 1,
                             new String[]{"Blue", "Red", "Green", "LightBlue", "Magenta", "Lime", "Cyan"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("rheingold_passenger")
             );
 
             put(ItemIDs.minecartPassengerRheingoldDining1.item,
                     new TrainRecord("Rheingold Dining", EntityPassengerRheingoldDining1.class, ItemIDs.minecartPassengerRheingoldDining1.item, EnumTrainType.Passenger_Combine, 1.5,
                             new String[]{"Blue", "Red", "Green", "LightBlue", "Magenta", "Lime"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("rheingold_passenger_dining1")
             );
 
             put(ItemIDs.minecartPassengerRheingoldDining2.item,
                     new TrainRecord("Rheingold Dining Alternate", EntityPassengerRheingoldDining2.class, ItemIDs.minecartPassengerRheingoldDining2.item, EnumTrainType.Passenger_Combine, 1.5,
                             new String[]{"Blue", "Red", "Green", "LightBlue", "Magenta", "Lime"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("rheingold_passenger_dining2")
             );
 
             put(ItemIDs.minecartPassengerRheingoldPanorama.item,
                     new TrainRecord("Rheingold Panorama", EntityPassengerRheingoldPanorama.class, ItemIDs.minecartPassengerRheingoldPanorama.item, EnumTrainType.Passenger, 1,
                             new String[]{"Blue", "Red"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("rheingold_passenger_panorama")
             );
 
             put(ItemIDs.minecartPassengerMILW.item,
                     new TrainRecord("Passenger MILW", EntityPassengerMILW.class, ItemIDs.minecartPassengerMILW.item, EnumTrainType.Passenger, 1,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("milw_passenger")
             );
 
             put(ItemIDs.minecartPassengerMILWTail.item,
                     new TrainRecord("Passenger MILW Tail", EntityPassengerMILWTail.class, ItemIDs.minecartPassengerMILWTail.item, EnumTrainType.Passenger, 1,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("milw_passenger_tail")
             );
 
             put(ItemIDs.minecartPassengerBamboo.item,
                     new TrainRecord("Bamboo Flatcar Passenger", EntityPassengerBamboo.class, ItemIDs.minecartPassengerBamboo.item, EnumTrainType.Passenger, 0.1,
                             new String[] {"Red", "Blue", "Black", "Yellow", "Magenta", "Cyan", "Pink", "LightGrey", "Green", "White", "LightBlue", "Lime", "Brown", "Purple", "Orange", "Grey"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("passenger_bamboo")
             );
             /**
@@ -246,14 +280,16 @@ public class RegisterTrains
             put(ItemIDs.minecartCaboose.item,
                     new TrainRecord("Caboose Red", EntityCaboose.class, ItemIDs.minecartCaboose.item, EnumTrainType.Caboose, 0.5,
                             new String[] {"Red"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("caboose")
             );
 
             put(ItemIDs.minecartCaboose3.item,
                     new TrainRecord("Caboose Black", EntityCaboose3.class, ItemIDs.minecartCaboose3.item, EnumTrainType.Caboose, 0.5,
                             new String[] {"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("caboose3")
             );
 
@@ -263,118 +299,138 @@ public class RegisterTrains
             put(ItemIDs.minecartGWRBrakeVan.item,
                     new TrainRecord("GWR Toad Brake Van", EntityGWRBrakeVan.class, ItemIDs.minecartGWRBrakeVan.item, "work", 0.7,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("gwrbrakevan")
             );
 
             put(ItemIDs.minecartStockCar.item,
                     new TrainRecord("Stock Cart", EntityStockCar.class, ItemIDs.minecartStockCar.item, "stock car", 2,
                             new String[]{"Blue", "Red", "Yellow", "White"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("stockcar")
             );
             put(ItemIDs.minecartDRWGStockCar.item,
                     new TrainRecord("DRWG Stock Cart", EntityStockCarDRWG.class, ItemIDs.minecartDRWGStockCar.item, "stock car", 2,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("drwgstockcar")
             );
             put(ItemIDs.minecartWork.item,
                     new TrainRecord("Work Cart Yellow", EntityWorkCart.class, ItemIDs.minecartWork.item, "work", 0.7,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("workcart")
             );
             put(ItemIDs.minecartFlatCart.item,
                     new TrainRecord("Flat Cart", EntityFlatCart.class, ItemIDs.minecartFlatCart.item, EnumTrainType.Flatcars, 0.2,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("flatcart")
             );
             put(ItemIDs.minecartCabooseWork.item,
                     new TrainRecord("Work Caboose", EntityCabooseWorkCart.class, ItemIDs.minecartCabooseWork.item, "work", 0.6,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("workcaboose")
             );
             put(ItemIDs.minecartCabooseLogging.item,
                     new TrainRecord("Caboose Logging", EntityCabooseLogging.class, ItemIDs.minecartCabooseLogging.item, "work", 0.2,
                             new String[]{"Red", "Cyan", "Grey"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("cablogging")
             );
             put(ItemIDs.minecartCabooseLoggingPRR.item,
                     new TrainRecord("PRR Caboose Logging", EntityCabooseLoggingPRR.class, ItemIDs.minecartCabooseLoggingPRR.item, "work", 0.2,
                             new String[]{"Red", "Blue", "Green", "Orange"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("prrcaboose")
             );
             put(ItemIDs.minecartMailWagon_DB.item,
                     new TrainRecord("Mail Wagon DB", EntityMailWagen_DB.class, ItemIDs.minecartMailWagon_DB.item, "work", 1,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("mailwagen_db")
             );
             put(ItemIDs.minecartJukeBoxCart.item,
                     new TrainRecord("JukeBox Cart", EntityJukeBoxCart.class, ItemIDs.minecartJukeBoxCart.item, "special", 0.2,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("jukebox")
             );
             put(ItemIDs.minecartFlatCartSU.item,
                     new TrainRecord("Flat Cart SU", EntityFlatCartSU.class, ItemIDs.minecartFlatCartSU.item, EnumTrainType.Flatcars, 0.2,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("flatcarsu")
             );
             put(ItemIDs.minecartFlatCartUS.item,
                     new TrainRecord("Flat Cart US", EntityFlatCartUS.class, ItemIDs.minecartFlatCartUS.item, EnumTrainType.Flatcars, 0.4,
                             new String[]{"Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("flatcartus")
             );
             put(ItemIDs.minecartBuilder.item,
                     new TrainRecord("Tracks Builder", EntityTracksBuilder.class, ItemIDs.minecartBuilder.item, "special", 0,
                             new String[]{"Black"},
-                            14)
+                            // Legacy GUI scale: 14
+                            0)
                             .setStockId("builder2")
             );
             put(ItemIDs.minecartFlatCart_DB.item,
                     new TrainRecord("Flat Cart DB", EntityFlatCar_DB.class, ItemIDs.minecartFlatCart_DB.item, "flat", 0.2,
                             new String[]{"Red", "Green"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("flatcar_db")
             );
             put(ItemIDs.minecartLocoDD35B.item,
                     new TrainRecord("DD35 B Unit", EntityBUnitDD35.class, ItemIDs.minecartLocoDD35B.item, "b-unit", 8,
                             new String[]{"Orange", "Black"},
-                            18)
+                            // Legacy GUI scale: 18
+                            0)
                             .setStockId("dd35b")
             );
             put(ItemIDs.minecartPropagandaUs.item,
                     new TrainRecord("Propaganda USA", EntityPropagandaUS.class, ItemIDs.minecartPropagandaUs.item, "decorative", 0.1,
                             new String[]{"Blue", "White", "Red", "Green", "Orange", "Lime"},
-                            14)
+                            // Legacy GUI scale: 14
+                            0)
             );
             put(ItemIDs.minecartPropagandaUSSR.item,
                     new TrainRecord("Propaganda USSR", EntityPropagandaUSSR.class, ItemIDs.minecartPropagandaUSSR.item, "decorative", 0.1,
                             new String[]{"Blue", "White", "Red"},
-                            14)
+                            // Legacy GUI scale: 14
+                            0)
             );
             put(ItemIDs.minecartPropagandaJapan.item,
                     new TrainRecord("Propaganda Japan", EntityPropagandaJapan.class, ItemIDs.minecartPropagandaJapan.item, "decorative", 0.1,
                             new String[]{"Red", "White", "Yellow"},
-                            14)
+                            // Legacy GUI scale: 14
+                            0)
             );
             put(ItemIDs.minecartPropagandaBritish.item,
                     new TrainRecord("Propaganda Britain", EntityPropagandaBritain.class, ItemIDs.minecartPropagandaBritish.item, "decorative", 0.1,
                             new String[]{"Blue", "White", "Yellow"},
-                            14)
+                            // Legacy GUI scale: 14
+                            0)
             );
             put(ItemIDs.minecartFreightCart2.item,
                     new TrainRecord("Freight Cart Red", EntityFreightCart2.class, ItemIDs.minecartFreightCart2.item, EnumTrainType.Boxcar, 3,
                             new String[]{"Red", "White", "Orange"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("freightcart2")
             );
 
@@ -382,63 +438,76 @@ public class RegisterTrains
             put(ItemIDs.minecartChest.item,
                     new TrainRecord("Freight Cart Yellow", EntityFreightCart.class, ItemIDs.minecartChest.item, EnumTrainType.Boxcar, 3,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(STYLE_PROFILE_4x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("freightcart")
             );
 
             put(ItemIDs.minecartWood.item,
                     new TrainRecord("Freight Flat Cart Log", EntityFreightWood.class, ItemIDs.minecartWood.item, "freight", 3,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(27)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27)
                             .setStockId("wood_full"));
 
 
             put(ItemIDs.minecartGrain.item,
                     new TrainRecord("Freight Hopper Green", EntityFreightGrain.class, ItemIDs.minecartGrain.item, "freight", 4,
                             new String[]{"Green", "White"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("hopper"));
 
 
             put(ItemIDs.minecartKClassRailBox.item,
                     new TrainRecord("Freight K Class Rail Box", EntityFreightKClassRailBox.class, ItemIDs.minecartKClassRailBox.item, "freight", 4,
                             new String[]{"Yellow", "Orange"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("kclassrailbox"));
 
 
             put(ItemIDs.minecartShortCoveredHopper.item,
                     new TrainRecord("Freight Short Covered Hopper", EntityFreightShortCoveredHopper.class, ItemIDs.minecartShortCoveredHopper.item, EnumTrainType.CoveredHopper, 4,
                             new String[]{"Grey", "Orange", "LightBlue", "Lime", "Yellow", "Blue", "Cyan", "Skin16"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("shortcoveredhopper"));
 
 
             put(ItemIDs.minecartLongCoveredHopper.item,
                     new TrainRecord("Freight Long Covered Hopper", EntityFreightLongCoveredHopper.class, ItemIDs.minecartLongCoveredHopper.item, "freight", 6,
                             new String[]{"LightGrey", "Grey","Pink", "White", "Green", "Orange", "Lime", "Cyan", "Yellow"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("longcoveredhopper"));
 
 
             put(ItemIDs.minecartOpenWagon.item,
                     new TrainRecord("Freight Open Wagon", EntityFreightOpenWagon.class, ItemIDs.minecartOpenWagon.item, "freight", 2,
                             new String[]{"Red", "Brown", "Pink"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_4x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
                             .setStockId("openwagon"));//"train_hopper" for open wagon => weird
 
 
             put(ItemIDs.minecartFreightHopperUS.item,
                     new TrainRecord("Freight Hopper US", EntityFreightHopperUS.class, ItemIDs.minecartFreightHopperUS.item, "freight", 4,
                             new String[]{"Brown", "Grey", "LightGrey", "Blue", "Red", "Yellow", "Black", "LightBlue", "Purple", "Green", "Magenta", "Orange","Skin17"},
-                            18).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: blocks"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: blocks"})
                             .setStockId("freighthopperus"));
 
 
             put(ItemIDs.minecartFreight100TonHopper.item,
                     new TrainRecord("Freight 100 Ton Hopper", EntityFreight100TonHopper.class, ItemIDs.minecartFreight100TonHopper.item, "freight", 4,
                             new String[]{"Red", "Black", "Blue", "Grey", "LightGrey", "Brown"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: blocks"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_6x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: blocks"})
                             .setStockId("freight_100tonhopper"));
 
 
@@ -446,231 +515,281 @@ public class RegisterTrains
             put(ItemIDs.minecartFlatCartWoodUS.item,
                     new TrainRecord("Freight Flat Cart Wood US", EntityFlatCartWoodUS.class, ItemIDs.minecartFlatCartWoodUS.item, "freight", 3,
                             new String[]{"Red", "White"},
-                            18).setCargoCapacity(27)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27)
                             .setStockId("flatcartwoodus"));
 
 
             put(ItemIDs.minecartBulkheadFlatCart.item,
                     new TrainRecord("Freight Bulkhead Flat Cart", EntityBulkheadFlatCart.class, ItemIDs.minecartBulkheadFlatCart.item, "freight", 3,
                             new String[]{"Brown", "Yellow", "Green"},
-                            18).setCargoCapacity(27)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27)
                             .setStockId("bulkheadflat"));
 
 
             put(ItemIDs.minecartFreightCartUS.item,
                     new TrainRecord("Freight Cart US", EntityFreightCartUS.class, ItemIDs.minecartFreightCartUS.item, "freight", 3.5,
                             new String[]{"Brown", "Yellow", "Black", "Blue", "Cyan", "Green", "Grey", "LightBlue", "LightGrey", "Lime", "Magenta", "Orange", "Pink", "Purple", "Red", "White"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_4x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
                             .setStockId("freightcartus"));
 
 
             put(ItemIDs.minecartBoxCartUS.item,
                     new TrainRecord("Freight Box Cart US", EntityBoxCartUS.class, ItemIDs.minecartBoxCartUS.item, "freight", 2,
                             new String[]{"Brown", "Red", "Blue", "Black", "Yellow", "Magenta", "Cyan", "Pink", "LightGrey", "Green", "White", "LightBlue", "Lime", "Purple", "Orange", "Grey", "Skin16", "Skin17", "Skin18"},
-                            18).setCargoCapacity(45)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(45)
                             .setStockId("boxcartus"));
 
 
             put(ItemIDs.minecartBoxCartPRR.item,
                     new TrainRecord("Freight Box Cart PRR", EntityBoxCartPRR.class, ItemIDs.minecartBoxCartPRR.item, "freight", 2,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(45)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(45)
                             .setStockId("prr_x31a"));
 
 
             put(ItemIDs.minecartFreightCartSmall.item,
                     new TrainRecord("Freight Cart Small", EntityFreightCartSmall.class, ItemIDs.minecartFreightCartSmall.item, "freight", 1,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(STYLE_PROFILE_4x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("freightcartsmall"));
 
 
             put(ItemIDs.minecartMineTrain.item,
                     new TrainRecord("Freight Minecart Yellow", EntityFreightMinetrain.class, ItemIDs.minecartMineTrain.item, "freight", 0.5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(18).setAdditionalTooltip(new String[]{"Cargo: opaque blocks"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(18).setAdditionalTooltip(new String[]{"Cargo: opaque blocks"})
                             .setStockId("minetrain"));
 
 
             put(ItemIDs.minecartFreightGTNG.item,
                     new TrainRecord("Freight GTNG Ore Wagon", EntityFreightGTNG.class, ItemIDs.minecartFreightGTNG.item, "freight", 0.5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(18).setAdditionalTooltip(new String[]{"Cargo: opaque blocks"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(18).setAdditionalTooltip(new String[]{"Cargo: opaque blocks"})
                             .setStockId("gtngorewagon"));
 
 
             put(ItemIDs.minecartFreightWood2.item,
                     new TrainRecord("Freight Flat Logs", EntityFreightWood2.class, ItemIDs.minecartFreightWood2.item, "freight", 3,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(18)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(18)
                             .setStockId("flatcartwood2"));
 
 
             put(ItemIDs.minecartFreightClosed.item,
                     new TrainRecord("Freight Cart Closed RedBrown", EntityFreightClosed.class, ItemIDs.minecartFreightClosed.item, "freight", 2.5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(STYLE_PROFILE_4x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("freightclosed"));
 
 
             put(ItemIDs.minecartFreightOpen2.item,
                     new TrainRecord("Freight Open RedBrown", EntityFreightOpen2.class, ItemIDs.minecartFreightOpen2.item, "freight", 5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(21)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(21)
                             .setStockId("freightopen2"));
 
 
             put(ItemIDs.minecartFreightWagon_DB.item,
                     new TrainRecord("Freight Wagon DB", EntityFreightWagenDB.class, ItemIDs.minecartFreightWagon_DB.item, "freight", 4,
                             new String[] {"Red", "Green", "Yellow", "Orange", "Pink", "Brown"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9)
                             .setStockId("freightwagen_db"));
 
 
             put(ItemIDs.minecartFlatCartRail_DB.item,
                     new TrainRecord("Freight Flat Cart Rails DB", EntityFlatCarRails_DB.class, ItemIDs.minecartFlatCartRail_DB.item, "freight", 5,
                             new String[] {"Red", "Green", "Cyan", "Yellow", "Brown"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9)
                             .setStockId("flatcarrails_db"));
 
 
             put(ItemIDs.minecartASTFAutorack.item,
                     new TrainRecord("Freight ASTF Autorack", EntityFreightASTFAutorack.class, ItemIDs.minecartASTFAutorack.item, "freight", 5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any | Stack limit 1"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_4x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: any | Stack limit 1"})
                             .setStockId("astf_autorack"));
 
 
             put(ItemIDs.minecartFlatCartLogs_DB.item,
                     new TrainRecord("Freight Flat Cart Logs DB", EntityFlatCarLogs_DB.class, ItemIDs.minecartFlatCartLogs_DB.item, "freight", 4,
                             new String[]{"Red", "Green", "Black", "Blue", "Brown", "Cyan", "LightBlue", "LightGrey", "Lime", "Magenta", "Orange", "Pink", "Purple", "White", "Yellow", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"},
-                            18).setCargoCapacity(45)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(45)
                             .setStockId("flatcarlogs_db"));
 
 
             put(ItemIDs.minecartSlateWagon.item,
                     new TrainRecord("Freight Slate Wagon", EntityFreightSlateWagon.class, ItemIDs.minecartSlateWagon.item, "freight", 0.5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(38).setAdditionalTooltip(new String[]{"Cargo: only stone and ores"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(38)
+                            .setAdditionalTooltip(new String[]{"Cargo: only stone and ores"})
                             .setStockId("freightslatewagon"));
 
 
             put(ItemIDs.minecartIceWagon.item,
                     new TrainRecord("Freight Ice Wagon", EntityFreightIceWagon.class, ItemIDs.minecartIceWagon.item, "freight", 0.5,
                             new String[]{ "Black" },
-                            18).setCargoCapacity(38)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(38)
                             .setStockId("icewagon"));
 
             put(ItemIDs.minecartGS4_Baggage.item,
                     new TrainRecord("Freight Cart GS4 Baggage", EntityFreightGS4_Baggage.class, ItemIDs.minecartGS4_Baggage.item, "freight", 1,
                             new String[]{"Orange", "White", "Yellow", "Brown", "Lime", "Red", "Grey", "Green", "LightGrey", "Black", "LightBlue", "Skin17", "Skin18", "Skin19"},
-                            11).setCargoCapacity(45).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 11
+                            0).setCargoCapacity(45).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("gs4_baggage"));
 
             put(ItemIDs.minecartFreightGondola_DB.item,
                     new TrainRecord("Freight Gondola DB", EntityFreightGondola_DB.class, ItemIDs.minecartFreightGondola_DB.item, "freight", 3.5,
                             new String[]{"Red", "Green", "Black", "Brown", "Grey", "LightGrey", "Lime", "Orange", "Pink", "White", "Yellow", "Blue", "LightBlue", "Magenta", "Purple"},
-                            18).setCargoCapacity(45).setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(45)
+                            .setAdditionalTooltip(new String[]{"Cargo: blocks, vanilla items"})
                             .setStockId("freightgondola_db"));
 
             put(ItemIDs.minecartFreightCenterBeam_Empty.item,
                     new TrainRecord("Freight Center Beam Empty", EntityFreightCenterbeam_Empty.class, ItemIDs.minecartFreightCenterBeam_Empty.item, "freight", 0.5,
                             new String[]{"Grey", "LightGrey"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("freight_centerbeam_empty"));
             put(ItemIDs.minecartFreightCenterBeam_Wood_1.item,
                     new TrainRecord("Freight Center Beam Wood1", EntityFreightCenterbeam_Wood_1.class, ItemIDs.minecartFreightCenterBeam_Wood_1.item, "freight", 3,
                             new String[]{"Brown", "Blue", "White"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9)
                             .setStockId("freight_centerbeam_wood_1"));
             put(ItemIDs.minecartFreightCenterBeam_Wood_2.item,
                     new TrainRecord("Freight Center Beam Wood2", EntityFreightCenterbeam_Wood_2.class, ItemIDs.minecartFreightCenterBeam_Wood_2.item, "freight", 3,
                             new String[]{"Brown", "Blue", "White"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9)
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9)
                             .setStockId("freight_centerbeam_wood_2"));
 
             put(ItemIDs.minecartFreightWellcar.item,
                     new TrainRecord("Freight Well Car", EntityFreightWellcar.class, ItemIDs.minecartFreightWellcar.item, "freight", 3,
                             new String[]{"Blue", "Red", "Green", "Black", "Grey", "Cyan", "Brown", "Lime", "LightBlue", "LightGrey", "Magenta", "Orange", "Pink", "Purple", "White", "Yellow"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("wellcar"));
             put(ItemIDs.minecartFreightTrailer.item,
                     new TrainRecord("Freight Trailer", EntityFreightTrailer.class, ItemIDs.minecartFreightTrailer.item, "freight", 3,
                             new String[]{"Blue", "Yellow", "LightBlue", "Red", "Grey", "LightGrey", "Magenta", "Orange", "Pink", "Purple", "Lime", "White", "Green"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("freighttrailer"));
 
             put(ItemIDs.minecartDenverRioGrandeBaggage.item,
                     new TrainRecord("Denver Rio Grande Baggage", EntityFreightDenverRioGrande.class, ItemIDs.minecartDenverRioGrandeBaggage.item, "freight", 0.5,
                             new String[]{"Yellow", "Red", "Green"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("drg_baggage"));
             put(ItemIDs.minecartBaggageMILW.item,
                     new TrainRecord("MILW Baggage", EntityFreightBaggageMILW.class, ItemIDs.minecartBaggageMILW.item, "freight", 0.5,
                             new String[]{"Black"},
-                            18).setCargoCapacity(STYLE_PROFILE_6x9).setAdditionalTooltip(new String[]{"Cargo: any"}));
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_6x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: any"}));
             put(ItemIDs.minecartHeavyweightMailcar.item,
                     new TrainRecord("Heavyweight Freight Car", EntityFreightHeavyweight.class, ItemIDs.minecartHeavyweightMailcar.item, "freight", 0.5,
                             new String[]{"Black"},
-                            18).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("heavyweight_mailcar"));
 
             put(ItemIDs.minecartFreightBamboo.item,
                     new TrainRecord("Bamboo Flatcar Freight", EntityFreightBamboo.class, ItemIDs.minecartFreightBamboo.item, "freight", 0.1,
                             new String[]{"Red", "Blue", "Black", "Yellow", "Magenta", "Cyan", "Pink", "LightGrey", "Green", "White", "LightBlue", "Lime", "Brown", "Purple", "Orange", "Grey"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("bamboo_freight"));
             put(ItemIDs.minecartFreightGermanPost.item,
                     new TrainRecord("Freight German Post", EntityFreightGermanPost.class, ItemIDs.minecartFreightGermanPost.item, "freight", 0.1,
                             new String[]{"Yellow", "Red", "Blue"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: non-blocks"})
+                            // Legacy GUI scale: 18
+                            0)
+                            .setCargoCapacity(STYLE_PROFILE_4x9)
+                            .setAdditionalTooltip(new String[]{"Cargo: non-blocks"})
                             .setStockId("german_post"));
 
             put(ItemIDs.minecartFreightDepressedFlatbed.item,
                     new TrainRecord("Freight Depressed Flatcar", EntityFreightDepressedFlatbed.class, ItemIDs.minecartFreightDepressedFlatbed.item, "freight", 0.1,
                             new String[]{"LightGrey", "Blue", "Yellow"},
-                            8).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 8
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("depressed_flatbed"));
             put(ItemIDs.minecartFreightL.item,
                     new TrainRecord("Freight Car L", EntityFreightCartL.class, ItemIDs.minecartFreightL.item, "freight", 3,
                             new String[]{"Red", "Blue"},
-                            18).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(27).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("freightcarl"));
             put(ItemIDs.minecartHeavyweightFreight.item,
                     new TrainRecord("Freight Heavyweight Baggage", EntityFreightHeavyweightBaggage.class, ItemIDs.minecartHeavyweightFreight.item, "freight", 3,
                             new String[]{"Red", "Grey"},
-                            18).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
+                            // Legacy GUI scale: 18
+                            0).setCargoCapacity(STYLE_PROFILE_4x9).setAdditionalTooltip(new String[]{"Cargo: any"})
                             .setStockId("heavyweightboxcar"));
 
             put(ItemIDs.minecartTankWagon_DB.item,
                     new TrainRecord("Tank Wagon DB", EntityTankWagon_DB.class, ItemIDs.minecartTankWagon_DB.item, EnumTrainType.Tankcar, 6,
                             new String[]{"Blue", "Green"},
-                            18).setTankCapacity(50000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(50000)
                             .setStockId("tankwagon_db"));
             put(ItemIDs.minecartTankWagonThreeDome.item,
                     new TrainRecord("Tank Wagon Three Dome", EntityTankWagonThreeDome.class, ItemIDs.minecartTankWagonThreeDome.item, EnumTrainType.Tankcar, 7.5,
                             new String[]{"Green", "White"},
-                            18).setTankCapacity(90000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(90000)
                             .setStockId("tanker_three_dome"));
             put(ItemIDs.minecartTankWagonUS.item,
                     new TrainRecord("Tank Wagon US", EntityTankWagonUS.class, ItemIDs.minecartTankWagonUS.item, EnumTrainType.Tankcar, 6,
                             new String[]{"Black", "Grey", "Yellow", "White", "LightGrey", "Green", "Blue", "Lime", "Orange", "Cyan", "Pink", "Purple", "LightBlue", "Magenta","Red","Brown"},
-                            18).setTankCapacity(70000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(70000)
                             .setStockId("tankwagonus"));
             put(ItemIDs.minecartTankWagon2.item,
                     new TrainRecord("Tank Wagon Grey", EntityTankWagon2.class, ItemIDs.minecartTankWagon2.item, EnumTrainType.Tankcar, 3,
                             new String[]{"Blue", "White", "Orange", "Black"},
-                            18).setTankCapacity(40000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(40000)
                             .setStockId("tankwagon2"));
             put(ItemIDs.minecartWatertransp.item,
                     new TrainRecord("Tank Lava", EntityTankLava.class, ItemIDs.minecartWatertransp.item, EnumTrainType.Tankcar, 5,
                             new String[]{"Empty", "Full"},
-                            18).setTankCapacity(30000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(30000)
                             .setStockId("lavacar"));
             put(ItemIDs.minecartTankWagon.item,
                     new TrainRecord("Tank Wagon Yellow", EntityTankWagon.class, ItemIDs.minecartTankWagon.item, EnumTrainType.Tankcar, 6,
                             new String[]{"Black"},
-                            18).setTankCapacity(40000)
+                            // Legacy GUI scale: 18
+                            0).setTankCapacity(40000)
                             .setStockId("tankwagon"));
 
             /**
@@ -681,7 +800,9 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.1)
                             .setColors(new String[]{"Black", "Red", "Blue", "Green", "Yellow"})
-                            .setGuiRenderScale(18)
+                            // Legacy GUI scale presets remain commented below.
+                            // Preview sizing now uses measured model bounds.
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(5000)
                             .setStockId("tender2"));
 
@@ -690,7 +811,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Grey", "LightGrey"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(14000)
                             .setStockId("heavytender"));
 
@@ -699,7 +820,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Orange", "White"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(18000)
                             .setStockId("gs4_tender"));
 
@@ -708,7 +829,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Green", "Blue", "Red", "Lime"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(15000)
                             .setStockId("gwr_tender"));
 
@@ -717,7 +838,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(15000));
 
             put(ItemIDs.minecarttenderBerk1225.item,
@@ -725,7 +846,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Black", "Grey", "LightGrey"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(15000)
                             .setStockId("berkshire_tender"));
 
@@ -734,7 +855,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.2)
                             .setColors(new String[]{"Black", "White", "Brown", "Blue", "Green", "Red", "Purple"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(8000)
                             .setStockId("4-4-0-loco_tender"));
 
@@ -743,7 +864,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.2)
                             .setColors(new String[]{"Blue", "Lime", "Black", "Green", "White"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(6000)
                             .setStockId("tendera4_uk"));
 
@@ -752,7 +873,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(20000)
                             .setStockId("tenderbr01_db"));
 
@@ -761,7 +882,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(20000)
                             .setStockId("coranationclasstender"));
 
@@ -770,7 +891,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(2)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(16000)
                             .setStockId("tenderer_ussr"));
 
@@ -779,7 +900,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.5)
                             .setColors(new String[]{"Black", "Red"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(14000)
                             .setStockId("c62_tender"));
 
@@ -788,7 +909,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(14000)
                             .setStockId("d51_tender"));
 
@@ -797,7 +918,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(0.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(4000));
 
             put(ItemIDs.minecartTenderC41.item,
@@ -805,7 +926,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(1.5)
                             .setColors(new String[]{"Black", "Grey"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(16000)
                             .setStockId("c41tender"));
 
@@ -814,7 +935,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(1.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(16000)
                             .setStockId("southern1102tender"));
 
@@ -823,7 +944,7 @@ public class RegisterTrains
                             .setTrainType(EnumTrainType.Tender)
                             .setMass(1.5)
                             .setColors(new String[]{"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setTankCapacity(16000)
                             .setStockId("milw_tender"));
 
@@ -843,7 +964,7 @@ public class RegisterTrains
                             .setBrakeRate(0.96)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Red","Green","Yellow","Black","Blue","Cyan"})
-                            .setGuiRenderScale(17)
+                            // .setGuiRenderScale(17)
                             .setBogieLocoPosition(-1.6)
                             .setStockId("locokof_db")
             );
@@ -860,7 +981,7 @@ public class RegisterTrains
                             .setBrakeRate(0.966)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Yellow", "White", "Blue", "Orange", "LightBlue"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.5)
                             .setStockId("cd742")
             );
@@ -877,7 +998,7 @@ public class RegisterTrains
                             .setBrakeRate(0.96)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.2)
                             .setStockId("chme3")
             );
@@ -894,7 +1015,7 @@ public class RegisterTrains
                             .setBrakeRate(0.96)
                             .setTankCapacity(20000)
                             .setColors(new String[] {"Red","Blue","Black","Yellow","Magenta","Cyan","Pink","LightGrey","Green","White","LightBlue","Lime","Brown","Purple","Orange","Grey","Skin16","Skin17","Skin18","Skin19","Skin20","Skin21"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.4)
                             .setStockId("gp7")
             );
@@ -911,7 +1032,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(20000)
                             .setColors(new String[] {"Red","Yellow","Black","Green","Orange","Magenta","Blue","Pink"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.3)
                             .setStockId("locosd40")
             );
@@ -928,7 +1049,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(20000)
                             .setColors(new String[] {"Orange","Yellow","Red","Blue","Magenta","Black","Pink","Green"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.3)
                             .setStockId("locosd70")
             );
@@ -945,7 +1066,7 @@ public class RegisterTrains
                             .setBrakeRate(0.94)
                             .setTankCapacity(8000)
                             .setColors(new String[] {"Blue","Green","Red","Black","Cyan"})
-                            .setGuiRenderScale(14)
+                            // .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.58)
                             .setStockId("shunter")
             );
@@ -962,7 +1083,7 @@ public class RegisterTrains
                             .setBrakeRate(0.96)
                             .setTankCapacity(8000)
                             .setColors(new String[] {"Red","Green","Yellow","Cyan","LightBlue"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.3)
                             .setStockId("locov60_db")
             );
@@ -979,7 +1100,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(6400)
                             .setColors(new String[] {"Pink", "Green", "Red"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-5.5)
                             .setStockId("class66")
             );
@@ -996,7 +1117,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(6400)
                             .setColors(new String[] {"Blue", "Cyan"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-5)
                             .setStockId("deltic")
             );
@@ -1013,7 +1134,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(6850)
                             .setColors(new String[] {"Orange", "Black", "Pink"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-4.75)
                             .setStockId("dd35a")
             );
@@ -1030,7 +1151,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(6850)
                             .setColors(new String[] {"Black", "Cyan"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-2.75)
                             .setStockId("loco_44tonswitcher")
             );
@@ -1047,7 +1168,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(3000)
                             .setColors(new String[] {"Red", "Blue", "Black", "Yellow", "Magenta", "Cyan", "Pink", "LightGrey", "Green", "White", "LightBlue", "Lime", "Brown", "Purple", "Orange", "Grey"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-2)
                             .setStockId("loco_bamboo")
             );
@@ -1064,7 +1185,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(3000)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-3)
                             .setStockId("wls40")
             );
@@ -1081,7 +1202,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(15000)
                             .setColors(new String[] {"Grey", "Blue", "Black"})
-                            .setGuiRenderScale(12)
+                            // .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.9)
                             .setAdditionalTooltip(new String[] {"Fictional loco from Factorio"})
                             .setStockId("fol_m1")
@@ -1099,7 +1220,7 @@ public class RegisterTrains
                             .setAccelerationRate(1.1)
                             .setBrakeRate(0.956)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(14)
+                            // .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2.3)
                             .setStockId("vl10")
             );
@@ -1115,7 +1236,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.9)
                             .setBrakeRate(0.946)
                             .setColors(new String[] {"Green","Red","Black","Grey","Blue","Cyan"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(0)
                             .setStockId("locobr_e69")
             );
@@ -1131,7 +1252,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.5)
                             .setBrakeRate(0.97)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-1)
                             .setStockId("locominetrain")
             );
@@ -1147,7 +1268,7 @@ public class RegisterTrains
                             .setAccelerationRate(1.4)
                             .setBrakeRate(0.98)
                             .setColors(new String[] {"White", "LightGrey", "Grey"})
-                            .setGuiRenderScale(13)
+                            // .setGuiRenderScale(13)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("locohighspeedzeroed")
             );
@@ -1163,7 +1284,7 @@ public class RegisterTrains
                             .setAccelerationRate(1.5)
                             .setBrakeRate(0.98)
                             .setColors(new String[] {"White", "Red"})
-                            .setGuiRenderScale(13)
+                            // .setGuiRenderScale(13)
                             .setBogieLocoPosition(-5)
                             .setStockId("ice1_engine")
             );
@@ -1179,7 +1300,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.5)
                             .setBrakeRate(0.965)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(14)
+                            // .setGuiRenderScale(14)
                             .setBogieLocoPosition(-2)
                             .setStockId("tram")
             );
@@ -1195,7 +1316,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.7)
                             .setBrakeRate(0.965)
                             .setColors(new String[] {"Red", "Blue", "Magenta", "Cyan", "Grey", "LightBlue", "LightGrey", "Orange", "Pink", "Purple", "White", "Yellow", "Black", "Brown", "Skin16", "Skin17"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-5)
                             .setStockId("br185_engine")
             );
@@ -1211,7 +1332,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.66)
                             .setBrakeRate(0.96)
                             .setColors(new String[] {"Blue","Red","Grey","Brown","Green","LightGrey","Lime","Pink","Purple","Cyan"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-3.8)
                             .setStockId("locoe10_db")
             );
@@ -1227,7 +1348,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.66)
                             .setBrakeRate(0.96)
                             .setColors(new String[] {"Red","Blue"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-3.6)
                             .setStockId("e103")
             );
@@ -1243,7 +1364,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.7)
                             .setBrakeRate(0.965)
                             .setColors(new String[] {"Black"}) // manually added because original color list was null
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-5)
                             .setStockId("class85")
             );
@@ -1259,7 +1380,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.7)
                             .setBrakeRate(0.965)
                             .setColors(new String[] {"Blue", "Yellow", "Red"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-4)
                             .setStockId("cd151")
             );
@@ -1275,7 +1396,7 @@ public class RegisterTrains
                             .setAccelerationRate(0.8)
                             .setBrakeRate(0.97)
                             .setColors(new String[] {"Green", "Purple", "Cyan", "Grey", "Blue"})
-                            .setGuiRenderScale(14)
+                            // .setGuiRenderScale(14)
                             .setBogieLocoPosition(-3)
                             .setStockId("bp4")
             );
@@ -1294,7 +1415,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Blue", "Lime", "Black", "Green", "White"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-5)
                             .setStockId("locoa4_uk")
             );
@@ -1312,7 +1433,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Green", "Red", "Lime"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-4.95)
                             .setStockId("hall_class_locomotive")
             );
@@ -1330,7 +1451,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black", "LightGrey"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-4.25)
                             .setStockId("berk1225_locomotive")
             );
@@ -1348,7 +1469,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-4.25)
                             .setStockId("berk765_locomotive")
             );
@@ -1366,7 +1487,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-3.25)
             );
 
@@ -1383,7 +1504,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Green", "Blue", "Lime"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-5.35)
                             .setStockId("king_class_locomotive")
             );
@@ -1401,7 +1522,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-4.5)
                             .setStockId("locomilw_classa")
             );
@@ -1419,7 +1540,7 @@ public class RegisterTrains
                             .setBrakeRate(0.98)
                             .setTankCapacity(3000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-1.7)
                             .setStockId("lococherepanov")
             );
@@ -1437,7 +1558,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(7000)
                             .setColors(new String[] {"Black", "Green"})
-                            .setGuiRenderScale(16)
+                            // .setGuiRenderScale(16)
                             .setBogieLocoPosition(-1.1)
                             .setStockId("locobr80_db")
             );
@@ -1455,7 +1576,7 @@ public class RegisterTrains
                             .setBrakeRate(0.95)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Red","White","Blue","Brown","Green","Black","Purple"})
-                            .setGuiRenderScale(16)
+                            // .setGuiRenderScale(16)
                             .setBogieLocoPosition(-2)
                             .setStockId("4-4-0-loco")
             );
@@ -1473,7 +1594,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Blue","Red","Green","Yellow","Black","LightBlue"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-1.7)
                             .setStockId("loco3")
             );
@@ -1491,7 +1612,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-1.1)
                             .setStockId("lssp7")
             );
@@ -1509,7 +1630,7 @@ public class RegisterTrains
                             .setBrakeRate(0.9)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-3)
                             .setStockId("heavysteam")
             );
@@ -1527,7 +1648,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black","Red"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-5.66)
                             .setStockId("c62_engine")
             );
@@ -1545,7 +1666,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black","Grey"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-5.66)
                             .setStockId("d51_short")
             );
@@ -1563,7 +1684,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black","Grey"})
-                            .setGuiRenderScale(7)
+                            // .setGuiRenderScale(7)
                             .setBogieLocoPosition(-5.66)
                             .setStockId("d51_long")
             );
@@ -1582,7 +1703,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.7)
                             .setStockId("locobr01_db")
             );
@@ -1600,7 +1721,7 @@ public class RegisterTrains
                             .setBrakeRate(0.97)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"}) // manually put in
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-6)
                             .setStockId("coranationclass")
             );
@@ -1618,7 +1739,7 @@ public class RegisterTrains
                             .setBrakeRate(0.95)
                             .setTankCapacity(8800)
                             .setColors(new String[] {"Orange","White"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-6)
                             .setStockId("gs4_engine")
             );
@@ -1636,7 +1757,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.7)
                             .setStockId("locoer_ussr")
             );
@@ -1654,7 +1775,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(4000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("lococ41")
             );
@@ -1672,7 +1793,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(4000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("lococ41_080")
             );
@@ -1690,7 +1811,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(4000)
                             .setColors(new String[] {"Black", "Grey"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("alcosc4")
             );
@@ -1708,7 +1829,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("southern1102")
             );
@@ -1726,7 +1847,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.5)
                             .setStockId("usatcus")
             );
@@ -1744,7 +1865,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(10000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-2.5)
                             .setStockId("usatcuk")
             );
@@ -1762,7 +1883,7 @@ public class RegisterTrains
                             .setBrakeRate(0.975)
                             .setTankCapacity(16000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(10)
+                            // .setGuiRenderScale(10)
                             .setBogieLocoPosition(-3.4)
                             .setStockId("lococ41t")
             );
@@ -1780,7 +1901,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(8000)
                             .setColors(new String[] {"Red", "Grey", "Yellow", "Brown", "Blue", "Green"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.35)
                             .setStockId("locoforney")
             );
@@ -1798,7 +1919,7 @@ public class RegisterTrains
                             .setBrakeRate(0.967)
                             .setTankCapacity(5000)
                             .setColors(new String[] {"Blue", "Black", "Brown", "Green", "Red", "White"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.2)
                             .setStockId("locomogul")
             );
@@ -1816,7 +1937,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(4000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1)
                             .setStockId("locoshay")
             );
@@ -1834,7 +1955,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(3000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-0.5)
                             .setStockId("vbshay")
             );
@@ -1852,7 +1973,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(4000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.5)
                             .setStockId("loco_climax")
             );
@@ -1870,7 +1991,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(8000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-3.5)
                             .setStockId("locopannier")
             );
@@ -1888,7 +2009,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(3750)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2)
                             .setStockId("0-4-0-loco-alice")
             );
@@ -1906,7 +2027,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(3750)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-2.5)
                             .setStockId("0-4-2-loco-glyn")
             );
@@ -1924,7 +2045,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(4250)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-3)
                             .setStockId("262t")
             );
@@ -1942,7 +2063,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(2500)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.1)
                             .setStockId("loco040vb")
             );
@@ -1960,7 +2081,7 @@ public class RegisterTrains
                             .setBrakeRate(0.968)
                             .setTankCapacity(3000)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(15)
+                            // .setGuiRenderScale(15)
                             .setBogieLocoPosition(-1.5)
                             .setStockId("locoadler")
             );
@@ -1978,7 +2099,7 @@ public class RegisterTrains
                             .setBrakeRate(0.965)
                             .setTankCapacity(6850)
                             .setColors(new String[] {"Black"})
-                            .setGuiRenderScale(18)
+                            // .setGuiRenderScale(18)
                             .setBogieLocoPosition(-4.75)
                             .setStockId("train_snowplow")
             );

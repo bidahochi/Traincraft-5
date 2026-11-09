@@ -77,7 +77,8 @@ public class RollingStockIconDevData {
 	}
 
 	public static GeneratedRollingStockIconRenderer.CaptureSettings loadOrDefault(ItemStack stack, ITrainRecord record, int color) {
-		GeneratedRollingStockIconRenderer.CaptureSettings defaults = GeneratedRollingStockIconRenderer.getDefaultSettings(record);
+        GeneratedRollingStockIconRenderer.CaptureSettings defaults =
+                GeneratedRollingStockIconRenderer.getDefaultSettings();
 		File file = getSettingsFile(record, color);
 		if (!file.isFile()) {
 			return defaults;

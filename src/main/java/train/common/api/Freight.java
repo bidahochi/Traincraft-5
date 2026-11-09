@@ -18,6 +18,9 @@ import train.common.core.handlers.ItemHandler;
  */
 public abstract class Freight extends EntityRollingStock implements IInventory
 {
+    /** Synchronized inventory-fill count read by dynamic freight models and temporary GUI previews. */
+    public static final int CARGO_AMOUNT_DATA_WATCHER_INDEX = 22;
+
 	public ItemStack cargoItems[];
 	protected double itemInsideCount = 0;
 	private int slotsFilled=0;
@@ -26,7 +29,7 @@ public abstract class Freight extends EntityRollingStock implements IInventory
 		super(world);
 		if (world != null)
 		{
-			dataWatcher.addObject(22, 0);
+			dataWatcher.addObject(CARGO_AMOUNT_DATA_WATCHER_INDEX, 0);
 		}
 	}
 
@@ -122,7 +125,7 @@ public abstract class Freight extends EntityRollingStock implements IInventory
 					slotsFilled++;
 				}
 			}
-			this.dataWatcher.updateObject(22, slotsFilled);
+			this.dataWatcher.updateObject(CARGO_AMOUNT_DATA_WATCHER_INDEX, slotsFilled);
 		}
 	}
 
@@ -183,7 +186,7 @@ public abstract class Freight extends EntityRollingStock implements IInventory
 		return ItemHandler.isBanned(itemstack) == false;
 	}
 	public int getAmmountOfCargo() {
-		return this.dataWatcher.getWatchableObjectInt(22);
+		return this.dataWatcher.getWatchableObjectInt(CARGO_AMOUNT_DATA_WATCHER_INDEX);
 	}
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
@@ -205,7 +208,7 @@ public abstract class Freight extends EntityRollingStock implements IInventory
 				slotsFilled++;
 			}
 		}
-		this.dataWatcher.updateObject(22, slotsFilled);
+		this.dataWatcher.updateObject(CARGO_AMOUNT_DATA_WATCHER_INDEX, slotsFilled);
 	}
 
 	@Override

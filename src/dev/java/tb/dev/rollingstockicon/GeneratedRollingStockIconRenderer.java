@@ -3,11 +3,15 @@ package tb.dev.rollingstockicon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL13;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import train.client.gui.RollingStockGuiPreview;
 import train.client.render.RenderRollingStock;
 import train.common.Traincraft;
 import train.common.api.AbstractTrains;
@@ -44,8 +48,8 @@ public class GeneratedRollingStockIconRenderer {
 	private static final int ICON_CROP_RIGHT = ICON_OVERSCAN + ICON_SIZE;
 	private static final int AUTO_FRAME_FRONT_PADDING = 6;
 	private static final int VISIBLE_ALPHA_THRESHOLD = 8;
-	// Fit buttons may need to enlarge very small stock from the stable default baseline.
-	private static final float MAX_AUTO_FIT_SCALE_UP = 4.0F;
+	// One visible capture pixel can require enlargement across the complete icon after presets are retired.
+	private static final float MAX_AUTO_FIT_SCALE_UP = ICON_SIZE;
 	private static final int AUTO_FIT_EDGE_RETRY_COUNT = 4;
 	private static final int AUTO_FIT_WORKING_EDGE_PADDING = 1;
 	private static final float AUTO_FIT_EDGE_SHRINK = 0.9F;
@@ -59,7 +63,8 @@ public class GeneratedRollingStockIconRenderer {
 	private static final int CAPTURE_SIZE = 512;
 	private static final int CAPTURE_VIEW_SIZE = 448;
 
-	// The default is intentionally based on the existing GUI render scale so stock keeps its old proportions.
+	// The capture baseline is independent of retired per-train GUI scale presets.
+	private static final float DEFAULT_BASE_ICON_SCALE = 8.0F;
 	private static final float DEFAULT_SCALE_MULTIPLIER = 2.0F;
 	private static final double CAPTURE_NEAR_PLANE = -1000.0D;
 	private static final double CAPTURE_FAR_PLANE = 1000.0D;
@@ -81,7 +86,7 @@ public class GeneratedRollingStockIconRenderer {
 	 * Identity and defaults
 	 *
 	 * The dev table needs stable names for JSON/PNG output and a predictable starting point for
-	 * new stock. Scale intentionally starts at twice the old GUI preview scale, then the first-load
+	 * new stock. Scale starts at twice the common capture baseline, then the first-load
 	 * auto-fit pass tightens it to the actual visible pixels.
 	 */
 	public static int getRenderColor(ItemStack stack, ITrainRecord record) {
@@ -93,10 +98,13 @@ public class GeneratedRollingStockIconRenderer {
 		return colors != null && colors.length > 0 ? colors[0] : -1;
 	}
 
-	public static CaptureSettings getDefaultSettings(ITrainRecord record) {
-		float scale = getBaseIconScale(record) * DEFAULT_SCALE_MULTIPLIER;
-		return new CaptureSettings(DEFAULT_ICON_YAW, DEFAULT_ICON_PITCH, scale, DEFAULT_ICON_SCREEN_X_OFFSET, DEFAULT_ICON_SCREEN_Y_OFFSET, DEFAULT_ICON_BOGIE_OFFSET_MULTIPLIER);
-	}
+	/** Returns a stable capture baseline before pixel-based auto-fit or saved manual tuning is applied. */
+    public static CaptureSettings getDefaultSettings()
+    {
+        float scale = DEFAULT_BASE_ICON_SCALE * DEFAULT_SCALE_MULTIPLIER;
+        return new CaptureSettings(DEFAULT_ICON_YAW, DEFAULT_ICON_PITCH, scale,
+                DEFAULT_ICON_SCREEN_X_OFFSET, DEFAULT_ICON_SCREEN_Y_OFFSET, DEFAULT_ICON_BOGIE_OFFSET_MULTIPLIER);
+    }
 
 	public static int getCargoOptionCount(ItemStack stack) {
 		if (stack == null) {
@@ -163,96 +171,139 @@ public class GeneratedRollingStockIconRenderer {
 		return captureIcon(record, color, settings, autoFrameFront, null);
 	}
 
-	private static CaptureResult captureIcon(ITrainRecord record, int color, CaptureSettings settings, boolean autoFrameFront, ItemStack stack) {
-		Minecraft minecraft = Minecraft.getMinecraft();
-		if (minecraft.theWorld == null || !OpenGlHelper.isFramebufferEnabled()) {
-			return null;
-		}
+    /**
+     * Captures only model geometry and restores the caller's render target and graphics state afterward.
+     * Invalid optional settings, missing renderers, and recoverable graphics failures return null.
+     * Runtime failures are reported with the stock identity; serious VM errors propagate after cleanup.
+     * The caller owns a successful result's framebuffer and must release it through CaptureResult.
+     */
+    private static CaptureResult captureIcon(ITrainRecord record, int color, CaptureSettings settings,
+            boolean autoFrameFront, ItemStack stack)
+    {
+        Minecraft minecraft = Minecraft.getMinecraft();
+        if (record == null || settings == null || minecraft.theWorld == null
+                || (OpenGlHelper.isFramebufferEnabled() == false))
+        {
+            return null;
+        }
+        if ((Float.isFinite(settings.scale) == false) || settings.scale <= 0
+                || (Float.isFinite(settings.yaw) == false) || (Float.isFinite(settings.pitch) == false)
+                || (Float.isFinite(settings.screenX) == false) || (Float.isFinite(settings.screenY) == false)
+                || (Float.isFinite(settings.modelOffset) == false))
+        {
+            return null;
+        }
+        AbstractTrains train = getTemporaryTrain(record);
+        if (train == null)
+        {
+            return null;
+        }
+        Render renderer = RenderManager.instance.getEntityRenderObject(train);
+        if (renderer == null)
+        {
+            return null;
+        }
+        if (color != -1)
+        {
+            train.setColor(color);
+        }
+        train.trainType = record.getTrainType();
+        train.trainName = getItemDisplayName(record.getItem());
+        prepareTrainForIconCapture(train);
+        applyCargoSelectionForIconCapture(train, stack, settings);
 
-		AbstractTrains train = getTemporaryTrain(record);
-		if (train == null) {
-			return null;
-		}
+        int previousFramebuffer = GL11.glGetInteger(EXTFramebufferObject.GL_FRAMEBUFFER_BINDING_EXT);
+        int previousRenderbuffer = GL11.glGetInteger(EXTFramebufferObject.GL_RENDERBUFFER_BINDING_EXT);
+        int previousActiveTexture = GL11.glGetInteger(GL13.GL_ACTIVE_TEXTURE);
+        int previousMatrixMode = GL11.glGetInteger(GL11.GL_MATRIX_MODE);
+        int previousModelviewDepth = GL11.glGetInteger(GL11.GL_MODELVIEW_STACK_DEPTH);
+        int previousProjectionDepth = GL11.glGetInteger(GL11.GL_PROJECTION_STACK_DEPTH);
+        float previousLightX = OpenGlHelper.lastBrightnessX;
+        float previousLightY = OpenGlHelper.lastBrightnessY;
+        Framebuffer framebuffer = null;
+        boolean retained = false;
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+        GL11.glPushClientAttrib(GL11.GL_CLIENT_PIXEL_STORE_BIT);
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glPushMatrix();
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glPushMatrix();
+        try
+        {
+            OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+            framebuffer = new Framebuffer(CAPTURE_SIZE, CAPTURE_SIZE, true);
+            framebuffer.setFramebufferColor(0, 0, 0, 0);
+            framebuffer.bindFramebuffer(true);
+            GL11.glViewport(0, 0, CAPTURE_SIZE, CAPTURE_SIZE);
+            GL11.glDisable(GL11.GL_SCISSOR_TEST);
+            GL11.glDisable(GL11.GL_STENCIL_TEST);
+            GL11.glDisable(GL11.GL_CULL_FACE);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GL11.glDepthFunc(GL11.GL_LEQUAL);
+            GL11.glDepthMask(true);
+            GL11.glColorMask(true, true, true, true);
+            GL11.glClearDepth(1.0);
+            GL11.glClearColor(0, 0, 0, 0);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glEnable(GL11.GL_ALPHA_TEST);
+            GL11.glAlphaFunc(GL11.GL_GREATER, CAPTURE_ALPHA_DISCARD_THRESHOLD);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
+            GL11.glPixelStorei(GL11.GL_PACK_ROW_LENGTH, 0);
+            GL11.glPixelStorei(GL11.GL_PACK_SKIP_ROWS, 0);
+            GL11.glPixelStorei(GL11.GL_PACK_SKIP_PIXELS, 0);
+            GL11.glColor4f(1, 1, 1, 1);
+            GL11.glMatrixMode(GL11.GL_PROJECTION);
+            GL11.glLoadIdentity();
+            GL11.glOrtho(0, CAPTURE_VIEW_SIZE, CAPTURE_VIEW_SIZE, 0, CAPTURE_NEAR_PLANE, CAPTURE_FAR_PLANE);
+            GL11.glMatrixMode(GL11.GL_MODELVIEW);
+            GL11.glLoadIdentity();
+            float centerViewX = CAPTURE_VIEW_SIZE * CAPTURE_CENTER_X;
+            float centerViewY = CAPTURE_VIEW_SIZE * CAPTURE_CENTER_Y;
+            GL11.glTranslatef(centerViewX, centerViewY, CAPTURE_MODEL_Z);
+            float scale = settings.scale;
+            GL11.glScalef(-scale, scale, scale);
+            GL11.glRotatef(FLIP_ICON_Z_ROTATION, 0, 0, 1);
+            GL11.glRotatef(settings.pitch, 1, 0, 0);
+            GL11.glRotatef(settings.yaw, 0, 1, 0);
+            RenderHelper.enableGUIStandardItemLighting();
+            RenderRollingStock.setRenderModeGUI(true);
+            RenderRollingStock.setRenderGUIFullBright(true);
+            double modelOffsetX = Math.abs(record.getBogieLocoPosition()) * settings.modelOffset;
+            renderer.doRender(train, modelOffsetX, 0, 0, 0, 0);
 
-		if (color != -1) {
-			train.setColor(color);
-		}
-		train.trainType = record.getTrainType();
-		train.trainName = getItemDisplayName(record.getItem());
-		prepareTrainForIconCapture(train);
-		applyCargoSelectionForIconCapture(train, stack, settings);
-
-		Framebuffer framebuffer = null;
-		boolean pushedState = false;
-		try {
-			framebuffer = new Framebuffer(CAPTURE_SIZE, CAPTURE_SIZE, true);
-			framebuffer.setFramebufferColor(0.0F, 0.0F, 0.0F, 0.0F);
-
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-			GL11.glMatrixMode(GL11.GL_PROJECTION);
-			GL11.glPushMatrix();
-			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			GL11.glPushMatrix();
-			pushedState = true;
-
-			framebuffer.bindFramebuffer(true);
-			GL11.glViewport(0, 0, CAPTURE_SIZE, CAPTURE_SIZE);
-			GL11.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-			GL11.glDisable(GL11.GL_SCISSOR_TEST);
-			GL11.glDisable(GL11.GL_CULL_FACE);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			GL11.glDepthMask(true);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glEnable(GL11.GL_ALPHA_TEST);
-			GL11.glAlphaFunc(GL11.GL_GREATER, CAPTURE_ALPHA_DISCARD_THRESHOLD);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glMatrixMode(GL11.GL_PROJECTION);
-			GL11.glLoadIdentity();
-			GL11.glOrtho(0.0D, CAPTURE_VIEW_SIZE, CAPTURE_VIEW_SIZE, 0.0D, CAPTURE_NEAR_PLANE, CAPTURE_FAR_PLANE);
-			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			GL11.glLoadIdentity();
-			GL11.glTranslatef(CAPTURE_VIEW_SIZE * CAPTURE_CENTER_X, CAPTURE_VIEW_SIZE * CAPTURE_CENTER_Y, CAPTURE_MODEL_Z);
-			float scale = settings.scale;
-			GL11.glScalef(-scale, scale, scale);
-			GL11.glRotatef(FLIP_ICON_Z_ROTATION, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(settings.pitch, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(settings.yaw, 0.0F, 1.0F, 0.0F);
-
-			RenderHelper.enableGUIStandardItemLighting();
-			RenderRollingStock.setRenderModeGUI(true);
-			RenderRollingStock.setRenderGUIFullBright(true);
-			RenderManager.instance.renderEntityWithPosYaw(train, Math.abs(record.getBogieLocoPosition()) * settings.modelOffset, 0.0D, 0.0D, 0.0F, 0.0F);
-			RenderRollingStock.setRenderModeGUI(false);
-			RenderRollingStock.setRenderGUIFullBright(false);
-			RenderHelper.disableStandardItemLighting();
-
-			BufferedImage baseImage = readFramebufferBaseImage(shouldAutoFrameFront(settings, autoFrameFront));
-			return CaptureResult.fromFramebuffer(framebuffer, applyScreenOffset(baseImage, settings.screenX, settings.screenY), baseImage);
-		} catch (Throwable throwable) {
-			if (framebuffer != null) {
-				framebuffer.deleteFramebuffer();
-			}
-			return null;
-		} finally {
-			RenderRollingStock.setRenderModeGUI(false);
-			RenderRollingStock.setRenderGUIFullBright(false);
-			RenderHelper.disableStandardItemLighting();
-			minecraft.getFramebuffer().bindFramebuffer(true);
-			GL11.glViewport(0, 0, minecraft.displayWidth, minecraft.displayHeight);
-			if (pushedState) {
-				GL11.glMatrixMode(GL11.GL_MODELVIEW);
-				GL11.glPopMatrix();
-				GL11.glMatrixMode(GL11.GL_PROJECTION);
-				GL11.glPopMatrix();
-				GL11.glMatrixMode(GL11.GL_MODELVIEW);
-				GL11.glPopAttrib();
-			}
-			resetGuiGlState();
-		}
-	}
+            BufferedImage baseImage = readFramebufferBaseImage(shouldAutoFrameFront(settings, autoFrameFront));
+            BufferedImage image = applyScreenOffset(baseImage, settings.screenX, settings.screenY);
+            CaptureResult result = CaptureResult.fromFramebuffer(framebuffer, image, baseImage);
+            retained = true;
+            return result;
+        }
+        catch (RuntimeException failure)
+        {
+            Traincraft.tcLog.warn("Icon capture failed for " + record.getInternalName()
+                    + "; keeping the previous capture settings.", failure);
+            return null;
+        }
+        finally
+        {
+            if (retained == false && framebuffer != null)
+            {
+                RollingStockGuiPreview.releaseFramebuffer(framebuffer);
+            }
+            RenderRollingStock.setRenderModeGUI(false);
+            RenderRollingStock.setRenderGUIFullBright(false);
+            OpenGlHelper.func_153171_g(OpenGlHelper.field_153198_e, previousFramebuffer);
+            OpenGlHelper.func_153176_h(OpenGlHelper.field_153199_f, previousRenderbuffer);
+            RollingStockGuiPreview.restoreMatrixStacks(
+                    previousModelviewDepth, previousProjectionDepth, previousMatrixMode);
+            GL11.glPopClientAttrib();
+            GL11.glPopAttrib();
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, previousLightX, previousLightY);
+            OpenGlHelper.setActiveTexture(previousActiveTexture);
+        }
+    }
 
 	private static AbstractTrains getTemporaryTrain(ITrainRecord record) {
 		Minecraft minecraft = Minecraft.getMinecraft();
@@ -291,15 +342,6 @@ public class GeneratedRollingStockIconRenderer {
 		}
 	}
 
-	private static void resetGuiGlState() {
-		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-	}
 
 	private static boolean shouldAutoFrameFront(CaptureSettings settings, boolean autoFrameFront) {
 		return autoFrameFront && settings != null && settings.screenX == 0.0F && settings.screenY == 0.0F;
@@ -341,37 +383,92 @@ public class GeneratedRollingStockIconRenderer {
 		return autoFitIcon(stack, settings, mode, padding, padding, allowScaleUp);
 	}
 
-	public static CaptureSettings autoFitIcon(ItemStack stack, CaptureSettings settings, AutoFitMode mode, int scalePadding, int positionPadding, boolean allowScaleUp) {
-		CaptureSettings measuredSettings = settings.copy();
-		measuredSettings.screenX = 0.0F;
-		measuredSettings.screenY = 0.0F;
+    /**
+     * Fits the requested icon region from an unclipped measurement, then applies its screen placement.
+     * Small models may grow from the common baseline; large models are measured at a smaller scale first.
+     * When enlargement is disabled, the resulting scale never exceeds the caller's original setting.
+     * Capture failure or absent visible pixels retains the caller's settings without changing saved JSON.
+     */
+    public static CaptureSettings autoFitIcon(ItemStack stack, CaptureSettings settings, AutoFitMode mode,
+            int scalePadding, int positionPadding, boolean allowScaleUp)
+    {
+        CaptureSettings measuredSettings = settings.copy();
+        measuredSettings.screenX = 0.0F;
+        measuredSettings.screenY = 0.0F;
+        CaptureResult result = captureUnclippedForAutoFit(stack, measuredSettings);
+        if (result == null)
+        {
+            return settings;
+        }
+        CaptureSettings fittedSettings = settings.copy();
+        try
+        {
+            BufferedImage measuredImage = result.baseImage != null ? result.baseImage : result.image;
+            Rectangle targetBounds = getAutoFitTargetBounds(measuredImage, mode);
+            if (targetBounds == null)
+            {
+                return settings;
+            }
+            int maxContentSize = Math.max(1, ICON_SIZE - Math.max(0, scalePadding) * 2);
+            float horizontalRatio = (float) maxContentSize / targetBounds.width;
+            float verticalRatio = (float) maxContentSize / targetBounds.height;
+            float fitRatio = Math.min(horizontalRatio, verticalRatio);
+            fitRatio = clamp(fitRatio, 0.01F, MAX_AUTO_FIT_SCALE_UP);
+            float fittedScale = Math.max(0.05F, measuredSettings.scale * fitRatio);
+            if (allowScaleUp == false)
+            {
+                if (fittedScale >= settings.scale)
+                {
+                    return settings;
+                }
+            }
+            fittedSettings.scale = fittedScale;
+        }
+        finally
+        {
+            result.deleteFramebuffer();
+        }
+        return autoPositionIcon(stack, fittedSettings, mode, positionPadding);
+    }
 
-		CaptureResult result = captureIcon(stack, measuredSettings, false);
-		if (result == null) {
-			return settings;
-		}
-
-		CaptureSettings fittedSettings = settings.copy();
-		try {
-			Rectangle targetBounds = getAutoFitTargetBounds(result.baseImage != null ? result.baseImage : result.image, mode);
-			if (targetBounds == null) {
-				return settings;
-			}
-
-			int maxContentSize = Math.max(1, ICON_SIZE - Math.max(0, scalePadding) * 2);
-			float fitRatio = Math.min((float) maxContentSize / targetBounds.width, (float) maxContentSize / targetBounds.height);
-			if (!allowScaleUp && fitRatio >= 1.0F) {
-				return settings;
-			}
-
-			fitRatio = clamp(fitRatio, 0.01F, allowScaleUp ? MAX_AUTO_FIT_SCALE_UP : 1.0F);
-			fittedSettings.scale = Math.max(0.05F, settings.scale * fitRatio);
-		} finally {
-			result.deleteFramebuffer();
-		}
-
-		return autoPositionIcon(stack, fittedSettings, mode, positionPadding);
-	}
+    /**
+     * Shrinks a capture until its complete model is visible before deriving an icon scale.
+     * Updates only the supplied settings copy's scale. The caller owns the returned framebuffer;
+     * rejected attempts are released here. Returns null when capture fails or no complete view is found.
+     */
+    private static CaptureResult captureUnclippedForAutoFit(ItemStack stack, CaptureSettings measuredSettings)
+    {
+        final int maximumAttempts = 8;
+        final float retryScaleMultiplier = 0.5F;
+        for (int attempt = 0; attempt < maximumAttempts; attempt++)
+        {
+            CaptureResult result = captureIcon(stack, measuredSettings, false);
+            if (result == null)
+            {
+                return null;
+            }
+            boolean retained = false;
+            try
+            {
+                BufferedImage image = result.baseImage != null ? result.baseImage : result.image;
+                Rectangle bounds = getVisibleBounds(image);
+                if (bounds != null && (touchesWorkingCanvasEdge(bounds, image) == false))
+                {
+                    retained = true;
+                    return result;
+                }
+            }
+            finally
+            {
+                if (retained == false)
+                {
+                    result.deleteFramebuffer();
+                }
+            }
+            measuredSettings.scale *= retryScaleMultiplier;
+        }
+        return null;
+    }
 
 	private static CaptureSettings autoPositionIcon(ItemStack stack, CaptureSettings settings, AutoFitMode mode, int padding) {
 		CaptureSettings measuredSettings = settings.copy();
@@ -456,9 +553,6 @@ public class GeneratedRollingStockIconRenderer {
 		RIGHT
 	}
 
-	public static float getBaseIconScale(ITrainRecord record) {
-		return record != null && record.getGuiRenderScale() > 0 ? record.getGuiRenderScale() : 8.0F;
-	}
 
 	private static String getItemDisplayName(Item item) {
 		return item == null ? "" : item.getUnlocalizedName();
@@ -659,10 +753,10 @@ public class GeneratedRollingStockIconRenderer {
 			return new CaptureResult(framebuffer, image, baseImage);
 		}
 
-		public void deleteFramebuffer() {
-			if (framebuffer != null) {
-				framebuffer.deleteFramebuffer();
-			}
-		}
+        /** Releases the owned capture target while preserving the caller's unrelated graphics bindings. */
+        public void deleteFramebuffer()
+        {
+            RollingStockGuiPreview.releaseFramebuffer(framebuffer);
+        }
 	}
 }

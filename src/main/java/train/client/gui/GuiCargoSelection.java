@@ -3,11 +3,9 @@ package train.client.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-import train.client.render.RenderRollingStock;
 import train.common.Traincraft;
 import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
@@ -27,7 +25,11 @@ import java.util.Collections;
  */
 @SuppressWarnings("unchecked")
 @SideOnly(Side.CLIENT)
-public class GuiCargoSelection extends GuiAbstractPaintbrush {
+public class GuiCargoSelection extends GuiAbstractPaintbrush
+{
+    private final RollingStockGuiPreview modelPreview =
+            new RollingStockGuiPreview(0, 400, RollingStockGuiPreview.CargoSizing.FULL_LOAD);
+    private final Rectangle previewBounds = new Rectangle();
     private float yaw = 0;
     private final ITrainRecord fakeTrain;
     private final AbstractTrains[] renderEntities = new AbstractTrains[RESULTS_PER_PAGE];
@@ -40,7 +42,7 @@ public class GuiCargoSelection extends GuiAbstractPaintbrush {
     /**
      * Used to vary the amount of cargo stored in a display entity to give illusion of loading animation.
      */
-    int renderIteration = 0;
+    private int renderIteration = 0;
 
     /**
      * @author 02skaplan
@@ -94,55 +96,61 @@ public class GuiCargoSelection extends GuiAbstractPaintbrush {
         }
     }
 
+    /**
+     * Draws auto-fitted cargo choices in their selection cells, preserving lower framing and light controls.
+     * Freight fill animation changes only the temporary preview entities; fitting reserves their full loads.
+     */
     @Override
-    public void drawInBackground() {
+    public void drawInBackground()
+    {
+        if (renderModels == false)
+        {
+            return;
+        }
         renderIteration++;
-        float offsetX = GUI_ANCHOR_X;
-        float offsetY = GUI_ANCHOR_Y + 12;
-        // Display the model with each texture.
-
-        // Trick the entity into thinking it is amount of cargo is changing.
-        // If the load is dynamic, it will cycle between the different states to show the loading animation.
-        if (renderIteration == 10) {
+        final int framesPerCargoStep = 10;
+        if (renderIteration == framesPerCargoStep)
+        {
             renderIteration = 0;
-            if (renderEntities[0] instanceof Freight) {
-                for (AbstractTrains renderEntity : renderEntities) {
-                    if (((Freight) renderEntity).getAmmountOfCargo() == ((Freight) renderEntity).getSizeInventory() - 1) {
-                        renderEntity.getDataWatcher().updateObject(22, 1);
-                    } else {
-                        renderEntity.getDataWatcher().updateObject(22, renderEntity.getDataWatcher().getWatchableObjectInt(22) + 1);
+            if (renderEntities[0] instanceof Freight)
+            {
+                for (AbstractTrains renderEntity : renderEntities)
+                {
+                    Freight freight = (Freight) renderEntity;
+                    int nextCargoAmount = freight.getAmmountOfCargo() + 1;
+                    if (freight.getAmmountOfCargo() == freight.getSizeInventory() - 1)
+                    {
+                        nextCargoAmount = 1;
                     }
+                    freight.getDataWatcher().updateObject(
+                            Freight.CARGO_AMOUNT_DATA_WATCHER_INDEX, nextCargoAmount);
                 }
             }
         }
-
-        if (renderModels) {
-            RenderRollingStock.setRenderModeGUI(true); // VERY IMPORTANT CALL! Forces renderer to render in full bright.
-            RenderRollingStock.setRenderGUIFullBright(disableLighting);
-            float bogieOffset = (float) Math.abs(fakeTrain.getBogieLocoPosition()) * 0.5f;
-            for (int i = 0; i < optionsOnCurrentPage; i++) {
-                GL11.glColor4f(1, 1, 1, 1);
-                GL11.glPushMatrix();
-                GL11.glTranslated(offsetX + 50, offsetY + 50, 400);
-                GL11.glScalef(-fakeTrain.getGuiRenderScale(), fakeTrain.getGuiRenderScale(), fakeTrain.getGuiRenderScale());
-                GL11.glRotatef(180, 0, 0, 1);
-                GL11.glRotatef(yaw, 0, 1, 0);
-                RenderManager.instance.renderEntityWithPosYaw(renderEntities[i], bogieOffset, 0, 0, 0, 0);
-                GL11.glPopMatrix();
-
-                // Handle rotation of entity(s) in GUI.
-                offsetX += 95;
-                if (offsetX > GUI_ANCHOR_X + 292) {
-                    offsetX = GUI_ANCHOR_X;
-                    offsetY += 92;
-                }
-            }
-            if (doRotation)
-                yaw += 0.5F;
-            RenderRollingStock.setRenderModeGUI(false); // VERY IMPORTANT CALL! Forces renderer to render in full bright.
-            RenderRollingStock.setRenderGUIFullBright(false);
+        final int previewColumns = 4;
+        final float legacyOriginOffsetPixels = 50.0F;
+        for (int index = 0; index < optionsOnCurrentPage; index++)
+        {
+            GuiButtonPaintbrushMenu selectionButton = (GuiButtonPaintbrushMenu) buttonList.get(index + 3);
+            previewBounds.setBounds(selectionButton.xPosition, selectionButton.yPosition,
+                    selectionButton.width, selectionButton.height);
+            int previewRow = index / previewColumns;
+            float preferredCenterGuiY = selectionButton.yPosition + legacyOriginOffsetPixels + previewRow;
+            modelPreview.render(renderEntities[index], fakeTrain, previewBounds,
+                    yaw, 0, preferredCenterGuiY, disableLighting);
         }
+        if (doRotation)
+        {
+            yaw += 0.5F;
+        }
+    }
 
+    /** Releases the cargo menu's target and cached fits before the parent GUI closes. */
+    @Override
+    public void onGuiClosed()
+    {
+        modelPreview.close();
+        super.onGuiClosed();
     }
 
     @Override

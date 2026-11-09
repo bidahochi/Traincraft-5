@@ -6,13 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import train.client.render.RenderRollingStock;
 import train.common.Traincraft;
 import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
@@ -30,7 +28,8 @@ import java.util.Collections;
  */
 @SuppressWarnings("unchecked")
 @SideOnly(Side.CLIENT)
-public class GuiPaintbrushMenu extends GuiScreen {
+public class GuiPaintbrushMenu extends GuiScreen
+{
     private final EntityPlayer editingPlayer;
     private final EntityRollingStock rollingStock;
     private float roll = 0.0f;
@@ -69,7 +68,10 @@ public class GuiPaintbrushMenu extends GuiScreen {
     private GuiButtonPaintbrushMenu renderModelsButton;
     private GuiButtonPaintbrushCargoController loadCargoButton;
     private boolean renderModels;
-    private final boolean disableLighting = true;
+    /** Owns this menu's preview measurements and releases its graphics target when the menu closes. */
+    private final RollingStockGuiPreview modelPreview =
+            new RollingStockGuiPreview(0, 400, RollingStockGuiPreview.CargoSizing.CURRENT_LOAD);
+    private final Rectangle previewBounds = new Rectangle();
     private int optionsOnCurrentPage;
     private final int totalOptions;
     private int currentPage = 0;
@@ -176,8 +178,10 @@ public class GuiPaintbrushMenu extends GuiScreen {
     ResourceLocation rightMenuTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_menu_right.png");
     ResourceLocation leftMenuTexture = new ResourceLocation(Info.resourceLocation, Info.guiPrefix + "gui_paintbrush_menu_left.png");
 
+    /** Draws the livery choices, their fitted model previews, selection controls, and tooltips. */
     @Override
-    public void drawScreen(int mouseX, int mouseY, float par3) {
+    public void drawScreen(int mouseX, int mouseY, float par3)
+    {
         RenderHelper.disableStandardItemLighting();
         // Draw background.
         mc.renderEngine.bindTexture(rightMenuTexture);
@@ -193,15 +197,11 @@ public class GuiPaintbrushMenu extends GuiScreen {
         }
 
         int loopRenderColor;
-        if (renderModels) {
-            // Rolling stock pieces with more than one bogie need offset based on bogie position to render properly.
-            float bogieOffset = (float) Math.abs(fakeTrain.getBogieLocoPosition()) * 0.5f;
-            float offsetX = GUI_ANCHOR_X;
-            float offsetY = GUI_ANCHOR_Y + 12;
+        if (renderModels)
+        {
             // Display the model with each texture.
-            RenderRollingStock.setRenderModeGUI(true); // VERY IMPORTANT CALL! Forces renderer to render in full bright.
-            RenderRollingStock.setRenderGUIFullBright(disableLighting);
-            for (int i = 0; i < optionsOnCurrentPage; i++) {
+            for (int i = 0; i < optionsOnCurrentPage; i++)
+            {
                 loopRenderColor = fakeTrain.getColors()[i + RESULTS_PER_PAGE * currentPage];
                 renderEntity.setColor(loopRenderColor);
                 // Set the button to active or inactive depending on whether the texture is active.
@@ -211,22 +211,12 @@ public class GuiPaintbrushMenu extends GuiScreen {
                 // This button status must be updated every tick since server would be ahead of client when running updateButtons().
                 this.overlayConfigButton.showButton = rollingStock.acceptsOverlayTextures() && !rollingStock.getOverlayTextureContainer().getAcceptedOverlaysForTexture(rollingStock.acceptedColors.indexOf(rollingStock.getColor())).isEmpty();
                 this.overlayConfigButton.visible = this.overlayConfigButton.showButton;
-                GL11.glColor4f(1, 1, 1, 1);
-                GL11.glPushMatrix();
-                GL11.glTranslated(offsetX + 50, offsetY + 50, 400);
-                GL11.glScalef(-fakeTrain.getGuiRenderScale(), fakeTrain.getGuiRenderScale(), fakeTrain.getGuiRenderScale());
-                GL11.glRotatef(180, 0, 0, 1);
-                GL11.glRotatef(yaw, 0, 1, 0);
-                RenderManager.instance.renderEntityWithPosYaw(renderEntity, bogieOffset, 0, 0, 0, 0);
-                GL11.glPopMatrix();
-
-                offsetX += 95;
-                if (offsetX > GUI_ANCHOR_X + 292) {
-                    offsetX = GUI_ANCHOR_X;
-                    offsetY += 92;
-                }
+                GuiButtonPaintbrushMenu selectionButton = (GuiButtonPaintbrushMenu) buttonList.get(i + 3);
+                previewBounds.setBounds(selectionButton.xPosition, selectionButton.yPosition,
+                        selectionButton.width, selectionButton.height);
+                float centerGuiY = selectionButton.yPosition + selectionButton.height * 0.5F;
+                modelPreview.render(renderEntity, fakeTrain, previewBounds, yaw, 0, centerGuiY, true);
             }
-            RenderRollingStock.setRenderModeGUI(false);
 
             // Handle rotation of entity(s) in GUI.
             if (doAnimation) {
@@ -379,8 +369,11 @@ public class GuiPaintbrushMenu extends GuiScreen {
     }
 
 
+    /** Releases the menu-owned preview target and cached measurements before completing GUI cleanup. */
     @Override
-    public void onGuiClosed() {
+    public void onGuiClosed()
+    {
+        modelPreview.close();
         super.onGuiClosed();
     }
 

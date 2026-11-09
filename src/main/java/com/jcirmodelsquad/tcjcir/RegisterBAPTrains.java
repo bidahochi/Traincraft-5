@@ -62,7 +62,9 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(15)
+                        // Legacy GUI scale presets remain commented below.
+                        // Preview sizing now uses measured model bounds.
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.0)
         );
 
@@ -80,7 +82,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(6000)
                         .setColors(new String[] {"Black", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.3)
                         .setStockId("vbshay2")
         );
@@ -99,7 +101,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.4)
         );
 
@@ -110,7 +112,7 @@ public class RegisterBAPTrains
                         .setMass(2)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("skookumtender")
         );
 
@@ -128,7 +130,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(4000)
                         .setColors(new String[] {"Black", "Grey", "White"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.8)
                         .setStockId("3truckshay")
         );
@@ -140,7 +142,7 @@ public class RegisterBAPTrains
                         .setMass(2)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Black", "Grey", "White"})
-                        .setGuiRenderScale(22)
+                        // .setGuiRenderScale(22)
                         .setStockId("3truckshay_tender")
         );
 
@@ -158,7 +160,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(9000)
                         .setColors(new String[] {"Black", "Grey", "LightGrey", "Cyan"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.8)
                         .setStockId("50ton_climax_b")
         );
@@ -177,7 +179,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(9000)
                         .setColors(new String[] {"Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.7)
         );
 
@@ -196,7 +198,7 @@ public class RegisterBAPTrains
                         .setTankCapacity(4000)
                         .setSecondaryCapacity(1000)
                         .setColors(new String[] {"Grey", "LightGrey", "Green"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-1.8)
         );
 
@@ -209,7 +211,7 @@ public class RegisterBAPTrains
                         .setMass(2)
                         .setTankCapacity(29000)
                         .setColors(new String[] {"Grey"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("vanderback")
         );
 
@@ -222,7 +224,7 @@ public class RegisterBAPTrains
                         .setMass(2.1)
                         .setTankCapacity(34000)
                         .setColors(new String[] {"LightGrey", "Grey", "Green"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setAdditionalTooltip(new String[] {" this started life a shitpost but i liked it too much"})
                         .setStockId("squanderback")
         );
@@ -241,7 +243,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Orange"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-1.3)
                         .setAdditionalTooltip(new String[] {"Place facing forward"})
                         .setStockId("boothkelly_no2a")
@@ -261,7 +263,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Orange"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.2)
                         .setAdditionalTooltip(new String[] {"Place facing backward"})
                         .setStockId("boothkelly_no2b")
@@ -281,7 +283,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.4)
                         .setStockId("wcp_bucking_bull")
         );
@@ -293,7 +295,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("wcp_baler")
         );
 
@@ -311,7 +313,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.2)
                         .setStockId("wcp_macky_three")
         );
@@ -330,7 +332,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(17000)
                         .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.4)
                         .setStockId("alco_2-10-2st")
         );
@@ -349,7 +351,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Purple", "Cyan", "Skin22"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.6)
                         .setStockId("mk60-71")
         );
@@ -361,7 +363,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(38000)
                         .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18", "Yellow", "Purple", "Pink", "Skin19", "Skin20", "Skin21", "Skin22"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("wp_10k")
         );
 
@@ -372,7 +374,7 @@ public class RegisterBAPTrains
                         .setMass(4)
                         .setTankCapacity(57000)
                         .setColors(new String[] {"Black", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("wp_deserettender")
         );
 
@@ -390,7 +392,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Cyan", "Skin25", "Skin23", "Skin24", "Skin26", "Skin27"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.20)
         );
 
@@ -401,7 +403,7 @@ public class RegisterBAPTrains
                         .setMass(4)
                         .setTankCapacity(34000)
                         .setColors(new String[] {"Skin19","Skin21", "Skin20", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("hcs_9kgal")
         );
 
@@ -412,7 +414,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(41000)
                         .setColors(new String[] {"Cyan", "Skin16", "Skin17"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("hottub_tender")
         );
 
@@ -430,7 +432,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.975)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.0)
                         .setStockId("lococ11")
         );
@@ -449,7 +451,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(14.99999)
                         .setTankCapacity(8000)
                         .setColors(new String[]{"Black", "Orange", "Blue", "Grey", "Red", "Yellow", "White", "Brown", "LightGrey", "Pink"})
-                        .setGuiRenderScale(17)
+                        // .setGuiRenderScale(17)
                         .setBogieLocoPosition(-1.3)
         );
 
@@ -460,7 +462,7 @@ public class RegisterBAPTrains
                         .setMass(0.1)
                         .setTankCapacity(12000)
                         .setColors(new String[]{"Black", "Orange", "Blue", "Grey", "Red", "Yellow", "White", "Brown", "LightGrey", "Pink"})
-                        .setGuiRenderScale(17)
+                        // .setGuiRenderScale(17)
         );
 
         // NP_L9
@@ -477,7 +479,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.725)
                         .setTankCapacity(3000)
                         .setColors(new String[] {"Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.7)
         );
 
@@ -488,7 +490,7 @@ public class RegisterBAPTrains
                         .setMass(3.5)
                         .setTankCapacity(26000)
                         .setColors(new String[] {"Grey", "Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("np_11c_n_12c_tender")
         );
 
@@ -499,7 +501,7 @@ public class RegisterBAPTrains
                         .setMass(3.75)
                         .setTankCapacity(31000)
                         .setColors(new String[] {"Grey", "Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
         );
 
         // Alco460
@@ -516,7 +518,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(3000)
                         .setColors(new String[] {"Black", "Skin16", "Red", "Yellow", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.8)
                         .setStockId("4-6-0")
         );
@@ -528,7 +530,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(26000)
                         .setColors(new String[] {"Black", "Skin16", "Red", "Yellow", "Skin17"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("4-6-0_tender")
         );
 
@@ -546,7 +548,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.975)
                         .setTankCapacity(4000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.4)
                         .setStockId("peloco")
         );
@@ -558,7 +560,7 @@ public class RegisterBAPTrains
                         .setMass(1.5)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("petender")
         );
 
@@ -569,7 +571,7 @@ public class RegisterBAPTrains
                         .setMass(1.5)
                         .setTankCapacity(83000)
                         .setColors(new String[] {"LightGrey", "Yellow", "Orange", "White"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setStockId("pm_n_tender")
         );
 
@@ -587,7 +589,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.6)
                         .setTankCapacity(6000)
                         .setColors(new String[] {"LightGrey", "Yellow", "Grey", "Orange", "White"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("pm_n_locomotive")
         );
@@ -606,7 +608,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Black", "Green", "Purple"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-1.2)
                         .setStockId("alco0_6_0t")
         );
@@ -625,7 +627,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Green"})
-                        .setGuiRenderScale(17)
+                        // .setGuiRenderScale(17)
                         .setBogieLocoPosition(-1.0)
                         .setStockId("brank")
         );
@@ -644,7 +646,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(3000)
                         .setColors(new String[] {"Black", "Green", "Lime", "Grey", "Yellow", "Red"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.65)
                         .setStockId("lima2_8_0")
         );
@@ -656,7 +658,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(26000)
                         .setColors(new String[] {"Black", "Green", "Yellow", "Red"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setStockId("lima_tender2_8_0")
         );
     }
@@ -678,7 +680,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Cyan", "Skin31", "Skin17", "Magenta", "Skin16", "Red", "Black", "Yellow", "Grey", "Orange", "White", "Pink", "Blue", "Purple", "LightBlue", "Lime", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin32", "Skin33", "Skin34"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -695,7 +697,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Cyan", "Skin31", "Skin17", "Black", "Yellow", "Grey", "Orange", "LightBlue", "Lime", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin34"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.4)
         );
 
@@ -712,7 +714,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Black", "Skin17", "Magenta", "Yellow", "Grey", "Orange", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Red", "Pink", "LightGrey", "White", "Skin34", "Skin35", "Skin36", "Skin37","Skin38", "Lime", "Green", "Skin39"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -729,7 +731,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Black", "Skin17", "Magenta", "Yellow", "Grey", "Orange", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Red", "LightGrey", "Skin34", "Skin36", "Skin37","Skin38", "Lime", "Green", "Skin39"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.4)
         );
 
@@ -746,7 +748,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Green", "Cyan", "Skin20", "Brown", "Black", "Yellow", "Grey", "Orange", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -763,7 +765,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Cyan", "Skin20", "Yellow", "Grey", "Orange", "Skin16"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.4)
         );
 
@@ -780,7 +782,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Black", "LightGrey", "Skin16", "Orange", "Skin17", "Cyan", "Purple"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.70)
         );
 
@@ -797,7 +799,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Blue"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.70)
         );
 
@@ -814,7 +816,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Yellow", "Skin29", "Red", "Green", "Brown", "Skin16", "Skin17", "Orange", "Skin18", "Skin19", "Skin20", "Skin21", "Black", "Magenta", "Purple", "LightBlue", "Skin27", "Skin33", "Skin34", "Skin38"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
                         .setStockId("cf7_angle")
         );
@@ -832,7 +834,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Blue", "Yellow", "Skin18", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
                         .setStockId("cf7_round")
         );
@@ -850,7 +852,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Pink", "Cyan", "Skin19", "White", "LightBlue", "Skin20", "Skin24", "Lime", "Skin17", "Skin16"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -867,7 +869,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Yellow", "Skin16", "Green", "White", "Skin17", "Cyan"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -884,7 +886,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"White", "Cyan", "Skin16", "Skin17", "Skin18", "Skin19", "Green", "Skin20", "Grey", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Brown", "Skin26", "Purple", "Lime", "LightGrey", "Pink", "Skin27", "Skin28", "Yellow"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -901,7 +903,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Cyan"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -918,7 +920,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Lime"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.5)
                         .setStockId("cf7_highhood")
         );
@@ -936,7 +938,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Grey", "Red", "Yellow"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.5)
         );
 
@@ -953,7 +955,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Magenta", "Cyan", "Skin43", "Green", "Lime", "Brown", "Black", "Orange", "Blue", "LightBlue", "Yellow", "Grey", "LightGrey", "Purple", "Red", "Pink", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin42", "Skin37" ,"Skin41", "Skin38", "Skin39", "Skin40"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
                         .setStockId("emde7a")
         );
@@ -971,7 +973,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Magenta", "Orange", "Yellow", "Grey", "LightGrey", "Purple", "Red", "Pink", "Skin27", "Skin37", "Black", "Skin28", "Skin29"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.77)
                         .setStockId("emde7b")
         );
@@ -989,7 +991,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.69)
                         .setTankCapacity(11000)
                         .setColors(new String[] {"Orange", "Purple", "Cyan", "Blue", "Brown", "Red", "Pink", "Skin21", "Yellow", "Lime", "Grey", "LightGrey", "White", "Green", "LightBlue", "Black", "Magenta", "Skin17", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
                         .setStockId("emde8a")
         );
@@ -1007,7 +1009,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.69)
                         .setTankCapacity(11000)
                         .setColors(new String[] {"Orange", "Blue", "Red", "Grey", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.77)
                         .setStockId("emde8b")
         );
@@ -1025,7 +1027,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.69)
                         .setTankCapacity(11000)
                         .setColors(new String[] {"LightGrey", "Grey", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.75)
                         .setStockId("emde9a")
         );
@@ -1043,7 +1045,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.69)
                         .setTankCapacity(11000)
                         .setColors(new String[] {"LightGrey", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6875)
                         .setStockId("emde9b")
         );
@@ -1061,7 +1063,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.69)
                         .setTankCapacity(11000)
                         .setColors(new String[] {"Cyan", "Brown", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
         );
 
@@ -1078,7 +1080,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"White", "Green", "Black", "Skin26", "Skin19", "LightGrey", "Skin20", "Skin21", "Lime", "Purple", "Blue", "Skin25", "Skin16", "Skin17", "Skin18", "Skin59", "Grey", "Orange", "Pink", "Skin35", "Skin36", "Skin37", "Skin38", "Skin22", "Brown", "Skin23", "LightBlue", "Skin24", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin44", "Skin45", "Red", "Magenta", "Skin46", "Skin47", "Skin48", "Skin49", "Skin50", "Skin51", "Skin52", "Skin53", "Skin54", "Skin55", "Skin56", "Skin57", "Skin58", "Skin60", "Skin61", "Skin62", "Skin63", "Skin64"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1095,7 +1097,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Blue", "LightGrey", "White"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1112,7 +1114,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Red", "Blue", "LightGrey", "White", "Skin16", "Grey", "Green", "Cyan", "Skin17"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1129,7 +1131,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Yellow", "Blue", "Skin16", "LightGrey", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1146,7 +1148,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Cyan","LightGrey", "Skin16", "Green"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1163,7 +1165,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Green", "Black", "Skin21", "Orange", "Skin25", "White", "Skin18", "Skin16", "Skin17", "LightGrey", "Skin19", "Skin20", "Pink", "Magenta", "Skin35", "Skin36", "Skin37", "LightBlue", "Skin23", "Brown", "Skin26", "Skin31", "Skin28", "Skin29", "Skin30", "Skin33", "Skin34", "Skin38", "Yellow", "Blue", "Skin39", "Skin40", "Purple", "Lime", "Skin41", "Skin42", "Skin43", "Skin44", "Skin45", "Skin46", "Skin47", "Skin48", "Skin49", "Skin50", "Red", "Skin51", "Skin52", "Skin53", "Skin22", "Skin24", "Skin27", "Skin54", "Skin55", "Skin32", "Skin56"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1180,7 +1182,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Yellow", "Black", "Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1197,7 +1199,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Blue", "LightBlue", "Black", "Orange", "White", "Yellow", "Cyan"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(1.4)
                         .setAdditionalTooltip(new String[] {"Uses the heritage GP40 Model"})
         );
@@ -1215,7 +1217,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new  String[] {"Yellow", "LightGrey", "LightBlue", "Skin26", "Skin16", "Blue", "Skin17", "Skin21", "Skin18", "Skin19", "Skin20", "Skin22"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -1232,7 +1234,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new  String[] {"Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -1249,7 +1251,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Black", "Green", "Blue", "Pink", "Skin16", "Skin17", "Purple", "Skin18", "Skin19", "LightGrey", "Skin20", "Skin21"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1266,7 +1268,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"LightGrey","Orange","Yellow","Skin25","Red","Skin24","Black","Blue","Green","Skin21","Skin22","LightBlue","Skin23","Skin17","Skin18","Skin19","Skin20"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1283,7 +1285,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Orange", "Black", "Blue", "Skin23", "Skin24", "LightBlue", "Grey", "Skin17", "Yellow", "Green", "Skin18", "Skin16", "Purple", "Pink", "Red", "Skin19", "LightGrey", "Skin20", "Skin21", "Skin22", "Magenta", "Lime", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1300,7 +1302,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new  String[] {"Red", "Skin19", "Black", "Magenta", "Skin16", "Grey", "Skin17", "LightBlue", "LightGrey", "Skin18", "Pink", "Yellow", "Purple", "Lime", "Cyan", "Skin20", "Skin21", "White", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Green", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin37", "Brown", "Skin36", "Skin38", "Skin39", "Skin40", "Skin41", "Skin42"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1317,7 +1319,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.2)
         );
 
@@ -1334,7 +1336,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(16000)
                         .setColors(new  String[] {"White", "Blue"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.25)
         );
 
@@ -1351,7 +1353,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"LightGrey", "Cyan", "Grey", "Skin18", "Skin26", "Skin21", "Skin22", "Skin23", "Skin24", "Magenta", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Red", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin38", "Skin39", "Skin40", "Skin41"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1368,7 +1370,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Yellow", "Green", "Skin16", "Black", "Skin17", "Skin19", "Skin20", "Orange", "Skin25", "Skin29", "Skin30", "Skin31", "Blue", "LightBlue"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -1385,7 +1387,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Green", "Grey", "Blue", "Skin38", "Skin39"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1402,7 +1404,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Green", "Skin16", "Skin18", "Skin19", "LightBlue"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1419,7 +1421,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Green"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
                         .setStockId("gp39t")
         );
@@ -1437,7 +1439,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Green"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
                         .setStockId("gp39tb")
         );
@@ -1455,7 +1457,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Pink", "Red", "Skin20", "Grey", "Orange", "Skin21", "Skin22", "Green", "Magenta", "Skin19", "Skin23", "Skin24", "Skin25", "Skin28", "Skin30", "Skin32", "Skin33", "Skin34", "Cyan", "Skin35", "Lime", "Skin36", "Skin37", "Skin38", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1472,7 +1474,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Skin31", "Skin16", "Skin17", "Skin27", "Lime", "White", "Skin18", "LightGrey", "Black", "Skin26", "Skin29", "Grey", "Blue", "LightBlue", "Skin32", "Skin42"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1489,7 +1491,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(16000)
                         .setColors(new  String[] {"Blue", "White"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.25)
         );
 
@@ -1506,7 +1508,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Blue", "LightGrey", "Purple"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -1523,7 +1525,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Red", "Black", "Orange", "Skin17", "Cyan", "LightGrey", "Skin18", "Yellow", "Magenta", "Skin19", "Skin20", "Pink", "Skin21", "Skin22", "Purple", "Skin23", "Grey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.05)
         );
 
@@ -1540,7 +1542,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"White", "LightGrey", "LightBlue", "Blue", "Skin16", "Cyan", "Skin17", "Black", "Skin18", "Grey", "Skin20", "Skin21", "Skin19"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1557,7 +1559,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Orange", "LightGrey", "Brown", "Skin18", "Skin19", "Skin20", "Cyan", "Purple"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1574,7 +1576,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(7000)
                         .setColors(new String[] {"Orange", "Pink", "Magenta", "Red", "Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -1591,7 +1593,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Blue", "LightGrey", "Skin16", "Red", "Skin17", "Cyan", "Black", "Skin18", "Skin20", "Skin21", "Skin22", "Grey", "Skin23", "Skin41", "Skin42", "Skin43", "Skin19", "Skin24"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1608,7 +1610,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Magenta", "Green", "White", "Skin18", "Yellow", "Orange", "Skin20", "Purple", "Skin21", "LightBlue", "Red", "Pink", "Black", "Skin22", "Skin23", "Skin16", "Skin17", "Skin19", "Brown", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin38", "Lime", "Grey", "Skin39", "Skin40", "Skin41", "Skin42"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1625,7 +1627,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(14000)
                         .setColors(new String[] {"Black", "Grey", "Red", "Skin17", "Yellow", "Magenta", "Blue", "LightGrey", "LightBlue", "Skin16", "Skin18", "Green", "White", "Cyan", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
                         .setStockId("sd40t")
         );
@@ -1643,7 +1645,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.8)
                         .setStockId("sd40dash2b")
         );
@@ -1661,7 +1663,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Grey", "LightGrey", "Skin16", "Skin17"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1678,7 +1680,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(14000)
                         .setColors(new String[] {"Blue", "Skin16", "Black", "Skin17", "Orange", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1695,7 +1697,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(14000)
                         .setColors(new String[] {"Green", "Skin16", "Skin17", "Grey", "LightGrey", "Skin18", "Purple", "Blue", "Orange", "Skin19"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1712,7 +1714,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"LightBlue", "White", "LightGrey", "Grey", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.95)
         );
 
@@ -1729,7 +1731,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Blue", "Yellow", "Orange"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1746,7 +1748,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Blue","Skin16","Green","Pink","Grey","Black","Skin17","Skin18","Orange","Skin19","Yellow","Skin20","Red","Skin21","Skin22","Skin23","Skin24","Skin25","Skin26","LightGrey","Skin27","Skin28", "Skin29", "Skin30", "Purple", "Skin31", "Skin32"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1763,7 +1765,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Blue", "Yellow", "Red", "White"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.8)
                         .setStockId("sd45dash2b")
         );
@@ -1781,7 +1783,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(14000)
                         .setColors(new String[] {"Red", "Grey", "Blue", "Green", "Skin16", "Purple", "Pink"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -1798,7 +1800,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Orange", "Yellow", "LightGrey", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.95)
         );
 
@@ -1815,7 +1817,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.58)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"LightBlue", "Green", "Blue", "Yellow", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
         );
 
@@ -1832,7 +1834,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(23000)
                         .setColors(new String[] {"Purple", "Pink", "Blue", "LightBlue", "Brown", "Black", "White", "LightGrey", "Green", "Cyan", "Skin16", "Grey", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.725)
         );
 
@@ -1849,7 +1851,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(23000)
                         .setColors(new String[] {"Blue", "Skin16", "Red", "Yellow", "Brown", "LightBlue", "LightGrey", "Purple", "Green", "Lime", "Skin18", "Skin19", "Skin20", "White", "Skin17"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.725)
         );
 
@@ -1866,7 +1868,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Black", "LightGrey", "Blue", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -1883,7 +1885,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new String[]{"Blue", "Grey", "Skin16", "Skin17", "LightGrey", "Cyan"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.25)
         );
 
@@ -1900,7 +1902,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"LightGrey", "Grey", "Blue", "LightBlue", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Black", "Skin27", "Skin28", "Skin29"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -1917,7 +1919,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Skin16", "Purple", "Grey", "Yellow", "Green", "Orange", "White", "Blue", "Lime", "Black", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -1934,7 +1936,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.890)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Orange", "Green", "Skin22", "LightBlue", "Skin16", "Black", "Skin17", "Pink", "Purple", "Skin18", "Skin19", "Lime", "Skin20", "Skin21", "Skin23", "Skin24", "Skin25", "Skin26", "Cyan", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Red", "Magenta"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -1951,7 +1953,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[]{"Red", "LightGrey", "Skin17", "Skin18", "Skin19", "Skin20" })
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.0)
         );
 
@@ -1968,7 +1970,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"LightGrey", "Grey", "Green", "Cyan", "Blue", "Magenta", "Black", "Skin16"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -1985,7 +1987,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[]{"Yellow", "LightGrey", "Cyan", "Skin16", "Skin17", "Skin18", "Purple", "Orange", "Pink"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.0)
         );
 
@@ -2002,7 +2004,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Brown", "LightBlue", "White", "LightGrey", "Magenta", "Skin16", "Skin17", "Purple", "Skin18", "Blue", "Orange", "Skin19", "Pink"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2019,7 +2021,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Green", "LightGrey", "Purple", "Yellow", "Skin16", "Skin19", "Skin20", "Magenta", "Skin21", "Skin22", "Brown"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2036,7 +2038,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Lime", "Green", "Black", "Grey", "Yellow", "Pink", "Orange", "Blue", "Purple", "Magenta", "Brown", "LightGrey", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2053,7 +2055,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightBlue", "LightGrey", "Grey", "Purple", "Black", "Magenta", "Pink", "Cyan", "Skin18", "Orange", "Skin16", "Blue", "Skin17", "Green", "Skin24", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Red", "Lime", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin38"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2070,7 +2072,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Cyan", "Skin16"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2087,7 +2089,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.65)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Blue", "LightGrey", "Cyan"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2104,7 +2106,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Orange", "Skin16", "White"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.3)
                         .setStockId("mp15dcw-9")
         );
@@ -2122,7 +2124,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Grey", "Orange", "Purple", "Cyan", "Magenta", "LightGrey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2139,7 +2141,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Grey", "Orange", "Purple", "Cyan", "Magenta", "LightGrey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -2156,7 +2158,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(9000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.2)
                         .setStockId("atsfbeep")
         );
@@ -2176,7 +2178,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(7000)
                         .setColors(new String[]{"Yellow", "Pink", "LightGrey", "Skin16", "Black", "Skin17", "Skin18", "Magenta", "Purple", "Skin19", "Red", "Skin20", "Skin21", "Skin22", "Brown", "Skin23"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.0)
                         .setStockId("44_ton")
         );
@@ -2194,7 +2196,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.6)
                         .setTankCapacity(4000)
                         .setColors(new String[] {"Blue", "White", "Black", "Green"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.5)
                         .setStockId("boxcab")
         );
@@ -2212,7 +2214,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(4000)
                         .setColors(new String[]{"Brown", "Pink", "Cyan", "Orange", "Green"})
-                        .setGuiRenderScale(20)
+                        // .setGuiRenderScale(20)
                         .setBogieLocoPosition(-1)
                         .setStockId("25ton")
         );
@@ -2230,7 +2232,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Orange","Skin16", "Red", "Skin17", "LightGrey", "Pink", "Magenta", "Purple", "Lime", "Yellow", "Grey", "Skin18", "Skin19", "Black", "Skin20", "Skin22", "Brown", "LightBlue", "Blue", "Skin23", "Skin24", "Skin25", "Skin26"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
                         .setAdditionalTooltip(new String[] {"SOON TO BE REMOVED"})
         );
@@ -2248,7 +2250,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Lime", "Skin27"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -2265,7 +2267,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Brown", "White", "Orange", "Grey", "Lime"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -2282,7 +2284,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Brown", "Cyan", "White", "LightGrey", "Skin16", "Skin17", "Skin18", "Lime", "Skin19", "Skin22", "Skin23", "Skin24", "Skin25", "Skin21", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Grey", "Orange", "Black"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -2299,7 +2301,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.86)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Pink", "LightGrey", "Purple"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2316,7 +2318,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Yellow", "Grey", "LightBlue", "LightGrey", "Skin17", "Skin21", "Skin22", "Blue", "Skin25", "Magenta", "Black", "Pink", "Green", "Skin18", "Skin20", "Skin24", "Skin26", "Skin27", "Skin28", "Orange", "Skin19", "Skin29", "Skin30", "Red", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin23", "Skin38", "Skin39", "Skin40", "Skin41"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2333,7 +2335,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.86)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Cyan", "Skin16", "Skin17", "White", "Skin18", "LightBlue", "Skin19", "Yellow", "Skin20", "Blue", "Purple", "Pink"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2350,7 +2352,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.86)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"LightGrey", "Grey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2367,7 +2369,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.86)
                         .setTankCapacity(25000)
                         .setColors(new String[] {"LightGrey", "Brown", "Skin16", "Blue", "Yellow", "LightBlue", "Orange", "Cyan", "Red"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2384,7 +2386,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Black", "LightGrey", "Skin18", "Blue", "Orange", "Pink", "Green", "Skin16", "Red", "Skin17", "Skin19", "Skin20", "Skin21", "Brown"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.3)
         );
 
@@ -2401,7 +2403,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Brown", "LightGrey", "Purple", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2418,7 +2420,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Purple", "Blue", "Grey", "LightGrey", "Skin19", "Skin20", "Skin21", "Skin22", "LightBlue", "Green", "Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2435,7 +2437,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"LightBlue", "Skin17", "LightGrey", "Blue", "Skin24"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.3)
         );
 
@@ -2452,7 +2454,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Green", "LightGrey", "Cyan", "Skin16", "Grey", "Skin17", "Skin18", "Lime", "Orange", "Skin19", "Skin20", "Yellow", "Skin21", "Skin22", "Skin23", "Skin24" })
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.3)
         );
 
@@ -2469,7 +2471,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Yellow", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.3)
         );
 
@@ -2486,7 +2488,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.84)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Grey", "Blue", "Red", "Yellow", "Orange", "Cyan"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.75)
         );
 
@@ -2503,7 +2505,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Yellow", "Red", "LightGrey", "Skin16", "Skin17", "Black", "Skin18"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-4.35)
         );
 
@@ -2520,7 +2522,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Cyan", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-4.35)
         );
 
@@ -2537,7 +2539,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Grey", "Green", "Skin17", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -2554,7 +2556,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Blue", "Green", "Skin17", "Skin20", "Skin21", "Skin22"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -2571,7 +2573,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"LightGrey", "Skin20", "Skin21", "Skin22", "Skin23"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.6)
         );
 
@@ -2588,7 +2590,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Grey", "Skin17", "Cyan", "Skin16", "White", "Magenta", "Purple", "Skin20", "Pink", "LightBlue", "Black", "LightGrey", "Brown", "Skin18", "Blue", "Yellow", "Skin19", "Skin21", "Green", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin29", "Orange", "Skin27", "Skin28", "Skin32", "Skin33", "Skin35", "Skin36", "Skin37"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2605,7 +2607,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.92)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2622,7 +2624,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Grey", "Skin17", "LightGrey", "Cyan", "Green", "Skin18", "Blue", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2639,7 +2641,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Grey", "Red", "Skin17", "LightGrey", "Skin18", "LightBlue", "Pink", "Skin16", "Cyan"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2656,7 +2658,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Cyan", "Magenta", "LightGrey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2673,7 +2675,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Green", "Skin16", "Cyan", "LightGrey", "Blue", "Magenta"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2690,7 +2692,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Black", "Skin34", "Skin31", "Blue", "Skin38", "Skin36", "Skin35", "Skin37", "Skin42" })
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2707,7 +2709,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Black", "Skin30", "Skin31", "Skin40", "Skin38", "Skin41", "Skin36", "Skin39", "Lime", "Skin16"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2724,7 +2726,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.96)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Blue", "LightBlue", "Cyan", "Purple", "Green", "Orange", "Pink", "Red", "Magenta", "Yellow", "White"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -2741,7 +2743,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Cyan"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
                         .setStockId("b18-8e")
         );
@@ -2759,7 +2761,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Grey", "LightGrey", "Blue", "Orange", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("b32-8wh")
         );
@@ -2777,7 +2779,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"LightBlue", "Grey", "Skin19", "Black", "Blue", "Skin17", "Cyan", "LightGrey", "Skin16", "Brown", "Orange", "Skin18", "Skin20"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("c39-8")
         );
@@ -2795,7 +2797,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Cyan", "Skin18", "Skin19", "Black", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("c39-8e")
         );
@@ -2813,7 +2815,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Grey", "Orange", "Skin16", "Skin17", "LightGrey", "Cyan", "Skin18", "Brown", "Skin19"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("b39-8")
         );
@@ -2831,7 +2833,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Grey", "Blue", "Yellow", "Orange", "LightBlue", "Pink", "Purple", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("b40-8")
         );
@@ -2849,7 +2851,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.3)
                         .setStockId("dash8_40b_b")
         );
@@ -2867,7 +2869,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "Orange", "LightGrey", "Skin16", "Pink", "Skin17"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("b40-8w")
         );
@@ -2885,7 +2887,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.88)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Yellow", "Grey", "LightBlue", "Skin24", "Skin22", "Skin25", "Blue", "Skin16", "LightGrey", "Skin17", "Purple", "Skin23", "Skin26"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4)
                         .setStockId("c40-8")
         );
@@ -2903,7 +2905,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Red", "LightGrey", "Pink", "Orange", "Skin16", "Green", "Skin17", "Lime"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("c41-8")
         );
@@ -2921,7 +2923,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"White"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("dash9_40c")
         );
@@ -2939,7 +2941,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Black", "Skin16", "LightGrey", "Grey", "Orange", "Magenta", "Skin17", "Pink", "Green", "White", "Skin27", "Skin18", "Red", "Skin19", "LightBlue", "Skin28"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("dash9_44cw")
         );
@@ -2957,7 +2959,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"LightBlue", "Blue", "Skin16", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -2974,7 +2976,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Green", "Cyan", "Skin16", "LightBlue", "Grey", "Blue"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -2991,7 +2993,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"Cyan", "Orange", "Skin17", "Red", "Yellow", "Blue", "LightGrey", "Grey", "Black", "Skin18", "Skin19", "Pink", "Purple", "Lime", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -3008,7 +3010,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(21000)
                         .setColors(new String[] {"LightGrey","LightBlue", "Green", "Black", "Cyan", "Brown", "Blue", "White", "Lime", "Orange", "Red", "Skin16", "Skin22", "Skin18", "Skin19", "Skin20", "Skin21", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin35", "Skin36", "Skin37", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin32", "Skin33", "Skin34", "Skin23", "Skin24" })
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
                         .setStockId("es44_h")
         );
@@ -3026,7 +3028,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.84)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Blue", "Red", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.5)
                         .setStockId("p32dc")
         );
@@ -3044,7 +3046,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.84)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"LightGrey", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.5)
                         .setStockId("p40dc")
         );
@@ -3062,7 +3064,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.84)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Cyan", "Skin16", "Blue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.5)
                         .setStockId("p42dc")
         );
@@ -3082,7 +3084,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Pink", "Cyan", "Orange", "Black", "LightGrey", "Skin16", "Skin17", "Green", "Grey", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.85)
                         .setStockId("4ed-172t")
         );
@@ -3100,7 +3102,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Purple", "LightGrey", "Orange"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.85)
                         .setStockId("4ed-172t_e")
         );
@@ -3118,7 +3120,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Lime", "LightGrey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.85)
                         .setStockId("4ed-172t_g")
         );
@@ -3136,7 +3138,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.89)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Yellow", "LightGrey", "Purple"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.85)
                         .setStockId("4ed-172t_c")
         );
@@ -3156,7 +3158,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Pink", "Skin24", "Cyan", "Blue", "Purple", "Magenta", "Yellow", "Orange", "Skin23", "White", "Grey", "Brown", "LightGrey", "Green", "Lime", "LightBlue", "Skin16", "Skin17", "Skin18", "Skin19", "Skin22", "Skin20", "Skin21", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.15)
                         .setStockId("alcopa1")
         );
@@ -3174,7 +3176,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Skin24", "Magenta", "Yellow", "Orange", "LightGrey", "Skin19", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.1)
                         .setStockId("alcopb1")
         );
@@ -3192,7 +3194,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Green", "Magenta", "Yellow", "Orange", "Lime", "White", "Purple", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3209,7 +3211,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Green", "Magenta", "Yellow", "Orange", "Lime", "White"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.825)
         );
 
@@ -3226,7 +3228,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Grey", "Yellow", "Blue", "Black", "Orange", "Green", "Purple", "Lime", "LightGrey", "White", "Magenta", "Skin17", "Skin18"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3243,7 +3245,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Grey", "Yellow", "Black", "Orange", "Green", "LightGrey", "White", "Magenta"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.825)
         );
 
@@ -3260,7 +3262,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Blue", "Cyan", "Green", "Red", "LightBlue", "Purple", "Brown", "Lime", "White", "Yellow", "Black", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3277,7 +3279,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Blue", "Green", "Red", "Purple", "Brown", "Lime", "White", "Yellow"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.825)
         );
 
@@ -3294,7 +3296,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Cyan", "LightGrey", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3311,7 +3313,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Cyan", "LightGrey", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.825)
         );
 
@@ -3328,7 +3330,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Orange", "Blue", "Green", "LightGrey", "Skin17", "Skin18", "Cyan", "LightBlue", "Purple", "Skin19", "White", "Pink"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3345,7 +3347,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Blue", "LightGrey", "LightBlue", "White", "Magenta", "Brown", "Skin19", "Skin23", "Black", "Yellow", "Grey", "Red", "Pink"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3362,7 +3364,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"LightBlue", "LightGrey", "Yellow", "Magenta", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3379,7 +3381,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"LightGrey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3396,7 +3398,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Purple", "Magenta", "Brown", "Red", "Pink", "Green", "Cyan"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.4)
         );
 
@@ -3413,7 +3415,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Green", "Yellow", "Blue", "LightGrey", "Skin18", "Skin19"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3430,7 +3432,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(17000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.5)
         );
 
@@ -3447,7 +3449,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(18000)
                         .setColors(new String[]{"Yellow", "Red", "Black", "Pink", "Brown", "Magenta", "Skin17", "LightGrey", "Skin16", "Skin18", "Skin19", "Cyan", "Green", "Purple", "Skin20"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.8)
         );
 
@@ -3464,7 +3466,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(18000)
                         .setColors(new String[]{"Black", "Yellow", "Skin16", "Green"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.8)
         );
 
@@ -3481,7 +3483,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.87)
                         .setTankCapacity(16000)
                         .setColors(new String[]{"Brown"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4.0)
         );
 
@@ -3498,7 +3500,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Yellow", "Cyan", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-4.25)
                         .setStockId("c855")
         );
@@ -3516,7 +3518,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Yellow", "Cyan", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-4.25)
         );
 
@@ -3533,7 +3535,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.95)
                         .setTankCapacity(6000)
                         .setColors(new String[] {"Yellow", "Orange", "Black", "Red", "Cyan", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
         );
 
@@ -3550,7 +3552,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.965)
                         .setTankCapacity(6000)
                         .setColors(new String[] {"Black", "Grey", "Green", "Orange", "Pink", "White", "Blue", "LightGrey", "Magenta", "Red", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2)
                         .setStockId("alcos2")
         );
@@ -3568,7 +3570,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.91)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Blue","Cyan", "Grey", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.7)
         );
 
@@ -3585,7 +3587,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Lime", "Pink", "Cyan", "Grey", "Purple"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.8)
         );
 
@@ -3602,7 +3604,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new  String[] {"Lime", "Pink", "Cyan"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.8)
         );
 
@@ -3619,7 +3621,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Skin17", "LightGrey", "Cyan", "Purple", "Brown"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3636,7 +3638,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3653,7 +3655,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"LightGrey", "Cyan", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3670,7 +3672,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Green", "Skin16", "Blue", "Grey", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3687,7 +3689,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Black", "Grey", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3704,7 +3706,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Red", "Skin16", "LightGrey", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3721,7 +3723,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(12000)
                         .setColors(new String[] {"Green", "Brown", "LightGrey", "Skin17"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -3740,7 +3742,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(6000)
                         .setColors(new String[]{"Green", "Pink", "Blue", "LightBlue", "Skin16"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.2)
         );
 
@@ -3757,7 +3759,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Yellow", "Green", "Grey", "Black", "Orange","Skin20"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.2)
         );
 
@@ -3774,7 +3776,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"Blue", "LightGrey", "Brown", "Skin16", "White", "Cyan", "Skin18", "Black", "Orange"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-2.2)
         );
 
@@ -3791,7 +3793,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Blue", "Cyan", "Black", "LightGrey", "Yellow", "Red", "White", "Grey", "Magenta", "Purple", "Skin16"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3808,7 +3810,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Blue", "Cyan", "Black", "LightGrey", "Red", "White", "Grey", "Magenta", "Purple"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.675)
         );
 
@@ -3825,7 +3827,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Orange", "Blue", "Cyan", "LightBlue", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
         );
 
@@ -3842,7 +3844,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Red", "Orange", "Blue", "Cyan", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.675)
         );
 
@@ -3859,7 +3861,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Green", "Yellow", "LightGrey", "Blue", "Cyan", "LightBlue", "Grey", "Black", "Orange", "Magenta", "Red"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.845)
                         .setStockId("rf-16")
         );
@@ -3877,7 +3879,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Green", "Blue", "Cyan", "Grey", "Black", "Orange", "Magenta", "Red", "Purple"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.675)
                         .setStockId("rf-16b")
         );
@@ -3895,7 +3897,7 @@ public class RegisterBAPTrains
                             .setBrakeRate(0.79)
                             .setTankCapacity(15000)
                             .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan"})
-                            .setGuiRenderScale(12)
+                            // .setGuiRenderScale(12)
                             .setBogieLocoPosition(-3.65)
                             .setStockId("blw0-6-6-0_1000_2_de")
             );
@@ -3913,7 +3915,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.65)
                         .setStockId("blw0-6-6-0_1000_2b_de")
         );
@@ -3930,7 +3932,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red", "Green"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.69)
                         .setStockId("blw0-6-6-0_1000_2_de_68")
         );
@@ -3947,7 +3949,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red", "Green"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.6)
                         .setStockId("drx642000")
         );
@@ -3964,7 +3966,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.69)
                         .setStockId("dt662000na")
         );
@@ -3981,7 +3983,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.95)
                         .setStockId("dt662000")
         );
@@ -3998,7 +4000,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(15000)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.95)
                         .setStockId("rt624")
         );
@@ -4019,7 +4021,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(10000)
                         .setColors(new String[]{"Green", "Yellow", "Black", "Red", "Blue", "Grey", "LightBlue", "Orange", "White", "Lime", "LightGrey", "Skin16", "Skin17"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.2)
                         .setStockId("fm_h10-44")
         );
@@ -4037,7 +4039,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Blue", "Yellow", "LightGrey", "Green", "Lime", "Black", "Grey", "Orange", "Brown", "Red", "Pink", "Magenta", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.35)
                         .setStockId("fm_h16-66")
         );
@@ -4055,7 +4057,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Red", "Black", "Brown", "Yellow", "Grey", "LightGrey", "Lime"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.75)
                         .setStockId("fm_h24-66")
         );
@@ -4073,7 +4075,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Blue", "Green"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.75)
                         .setStockId("fm_h24-66_l")
         );
@@ -4091,7 +4093,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.93)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"Magenta", "Grey", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.75)
                         .setStockId("fm_h24-66_c")
         );
@@ -4111,7 +4113,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(14000)
                         .setColors(new String[]{"Yellow", "Orange", "Grey", "LightGrey", "Skin16", "Blue"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.1)
                         .setStockId("3gs21b")
         );
@@ -4129,7 +4131,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(10000)
                         .setColors(new String[] {"Yellow"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.2)
                         .setAdditionalTooltip(new String[] {"Fictional locomotive from GTA-V"})
         );
@@ -4147,7 +4149,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.965)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Grey", "Blue", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.8)
                         .setAdditionalTooltip(new String[] {"Fictional B unit for the Fictional loco from Factorio"})
                         .setStockId("fol_m1b")
@@ -4166,7 +4168,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Grey", "LightGrey", "Black", "Red"})
-                        .setGuiRenderScale(13)
+                        // .setGuiRenderScale(13)
                         .setBogieLocoPosition(-3.3)
                         .setStockId("km_ml4000")
         );
@@ -4184,7 +4186,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9555)
                         .setTankCapacity(10000)
                         .setColors(new  String[] {"Lime", "Purple", "LightGrey", "Pink", "Blue"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setBogieLocoPosition(-2.9)
         );
 
@@ -4201,7 +4203,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(18000)
                         .setColors(new String[]{"Red", "LightGrey", "White", "Purple"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.8)
         );
 
@@ -4214,7 +4216,7 @@ public class RegisterBAPTrains
                         .setMass(7)
                         .setTankCapacity(18000)
                         .setColors(new String[] {"White", "Skin16", "Magenta", "Blue", "Yellow", "Green"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("sma")
         );
 
@@ -4225,7 +4227,7 @@ public class RegisterBAPTrains
                         .setMass(7)
                         .setTankCapacity(15000)
                         .setColors(new String[]{"Skin19"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
         );
 
         // SMSC1
@@ -4235,7 +4237,7 @@ public class RegisterBAPTrains
                         .setMass(8)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Cyan"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setAdditionalTooltip(new String[] {"It'le pull your socks off, if it wasnt busy having frame sag"})
         );
 
@@ -4251,7 +4253,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.89)
                         .setBrakeRate(0.91)
                         .setColors(new String[] {"Blue", "Cyan", "Skin16", "LightGrey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
 
@@ -4262,7 +4264,7 @@ public class RegisterBAPTrains
                         .setMass(7)
                         .setTankCapacity(20000)
                         .setColors(new String[] {"Cyan", "Green", "LightGrey", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Pink", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
         );
 
         // RotaryPlow
@@ -4277,7 +4279,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.70)
                         .setBrakeRate(0.75)
                         .setColors(new String[] {"Black", "Skin16"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-1.95)
         );
     }
@@ -4299,7 +4301,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(12500)
                         .setColors(new String[] {"Orange", "Yellow", "Red", "Green", "Black", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.4375)
         );
 
@@ -4316,7 +4318,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.75)
                         .setTankCapacity(12500)
                         .setColors(new String[] {"Orange", "Red", "Black", "Pink"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.3125)
         );
 
@@ -4333,7 +4335,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.85)
                         .setTankCapacity(12500)
                         .setColors(new String[] {"Orange", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3.4375)
         );
 
@@ -4350,7 +4352,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.79)
                         .setTankCapacity(12500)
                         .setColors(new String[] {"White", "LightGrey", "LightBlue", "Black", "Skin17", "Cyan", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-3.45)
         );
 
@@ -4366,7 +4368,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.7)
                         .setColors(new String[] {"Lime", "Green", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setBogieLocoPosition(-4)
         );
 
@@ -4382,7 +4384,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.9)
                         .setBrakeRate(0.946)
                         .setColors(new String[] {"LightGrey", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2)
                         .setStockId("aem-7")
         );
@@ -4399,7 +4401,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.89)
                         .setBrakeRate(0.91)
                         .setColors(new String[] {"Grey", "Skin16", "Green", "Pink", "LightGrey", "Purple", "Yellow"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-3.1)
         );
     }
@@ -4414,7 +4416,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Red", "Black", "White", "LightGrey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("roundedhopper")
@@ -4426,7 +4428,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "Cyan", "LightGrey", "Red", "Brown", "White", "Pink", "Skin16", "Orange", "Skin20", "Skin17", "Skin18", "Skin19", "Skin21", "Green", "Skin22"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("ribbed_hopper")
@@ -4438,7 +4440,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "Cyan", "Black", "Skin16", "Skin17", "LightGrey", "Blue", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("5201")
@@ -4450,7 +4452,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(4)
                         .setColors(new String[]{"Grey", "LightGrey", "White", "Brown", "Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("6260")
@@ -4462,7 +4464,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(2.5)
                         .setColors(new String[]{"Cyan", "Green", "Black", "LightGrey", "Blue", "Skin16", "Skin17", "Purple", "Magenta", "Pink", "Yellow", "Red", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("fncc2375")
@@ -4474,7 +4476,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(2)
                         .setColors(new String[]{"LightGrey","Yellow","Grey","Brown","Magenta", "Skin16", "Skin17"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("gatx_2800_pdh")
@@ -4486,7 +4488,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(2.5)
                         .setColors(new String[]{"LightGrey", "Black", "Magenta", "Skin16", "Grey", "Red", "Orange", "Skin17", "Skin18", "Blue", "Skin19", "Skin20", "Brown"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acf_2980")
@@ -4498,7 +4500,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "Skin18", "Grey", "LightGrey", "Skin16", "Skin17", "Brown", "White", "Skin19", "Blue", "Orange", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Purple"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acf_4650")
@@ -4510,7 +4512,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"LightGrey", "White", "Skin17", "Skin18", "Skin16", "Skin20", "Grey", "Skin19", "LightBlue", "Skin21", "Yellow", "Skin22", "Orange", "Magenta", "Green", "Lime", "Purple", "Skin23", "Cyan", "Brown", "Pink", "Skin24", "Skin25", "Skin28", "Skin27", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Black", "Skin34", "Blue", "Skin35", "Skin36", "Skin37", "Skin38", "Skin39", "Skin40", "Skin41", "Skin42", "Skin43", "Skin44"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("ps2cd_4750")
@@ -4522,7 +4524,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Grey", "Skin17", "LightGrey", "Skin18", "Skin21", "Skin19", "Green", "Orange", "Yellow", "Skin20", "Pink", "Magenta", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("gatx_airslide")
@@ -4534,7 +4536,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "Yellow", "Skin17", "Pink", "Skin18", "Brown", "Skin19", "Orange", "Black", "LightGrey", "Skin20", "Skin21", "Skin22", "Skin23"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acf_3500")
@@ -4546,7 +4548,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CoveredHopper)
                         .setMass(3)
                         .setColors(new String[]{"LightGrey", "Green", "White", "Skin16", "Skin17", "Skin18", "Grey"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acf_3960")
@@ -4560,7 +4562,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CenterbeamFlat)
                         .setMass(3)
                         .setColors(new String[] {"Black", "Yellow", "Green", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setStockId("60ftcb")
         );
@@ -4571,7 +4573,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CenterbeamFlat)
                         .setMass(3)
                         .setColors(new String[] {"Orange", "Cyan", "Black", "Green", "Lime", "Red", "Purple", "LightBlue", "Pink", "Blue", "Yellow"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setStockId("66ftcb")
         );
@@ -4582,7 +4584,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CenterbeamFlat)
                         .setMass(3.5)
                         .setColors(new String[] {"Pink", "Cyan", "Green", "Orange", "Yellow", "Red", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setStockId("73ftcb")
         );
@@ -4593,7 +4595,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.BulkheadFlat)
                         .setMass(3)
                         .setColors(new String[] {"Blue", "Skin16", "Green", "Black", "Skin17", "Brown", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
                         .setStockId("gsi_60bulk")
@@ -4605,7 +4607,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Flatcars)
                         .setMass(2.5)
                         .setColors(new String[] {"LightBlue", "Orange", "Yellow", "Skin17", "Brown", "Green", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
                         .setStockId("gsc_60flat")
@@ -4617,7 +4619,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.CenterbeamFlat)
                         .setMass(3)
                         .setColors(new String[] {"Green", "Yellow", "Red", "Black", "Cyan", "Skin16", "Skin17", "Purple", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setStockId("thrall63centerbeam")
         );
@@ -4628,7 +4630,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.BulkheadFlat)
                         .setMass(2.5)
                         .setColors(new String[] {"Cyan", "Green", "Yellow", "Skin16", "Skin17", "Lime", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Stuff."})
         );
@@ -4639,7 +4641,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Flatcars)
                         .setMass(2.5)
                         .setColors(new String[] {"Yellow", "Brown", "Green", "Lime", "Black", "White", "Grey", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
                         .setStockId("gsc_53flat")
@@ -4651,7 +4653,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.BulkheadFlat)
                         .setMass(2.5)
                         .setColors(new String[] {"Orange", "Red", "Black", "Grey", "Blue", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
                         .setStockId("gsc_53_66flat")
@@ -4663,7 +4665,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.BulkheadFlat)
                         .setMass(2.5)
                         .setColors(new String[] {"Brown", "Green", "Red", "Purple", "Black", "Lime", "White", "Grey", "Yellow", "Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Bulkhead Items."})
                         .setStockId("gsc_53_86flat")
@@ -4675,7 +4677,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Flatcars)
                         .setMass(2.5)
                         .setColors(new String[] {"Brown", "Grey","Magenta", "LightGrey", "Black", "Green", "Lime", "Orange", "Purple", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(18)
                         .setAdditionalTooltip(new String[] {"Cargo: whatever flatcars carry i guess"})
                         .setStockId("mapa_35flat")
@@ -4689,7 +4691,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Brown", "Red", "LightBlue", "Green", "Cyan", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Yellow", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Magenta", "Skin26", "Skin27", "Skin28", "Orange"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4700,7 +4702,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(3)
                         .setColors(new String[] {"White", "Lime", "Red", "Yellow", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Brown", "Cyan", "Skin21", "Skin22", "Skin23"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4711,7 +4713,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(3.25)
                         .setColors(new String[] {"Blue", "Orange", "Cyan", "White"})
-                        .setGuiRenderScale(13)
+                        // .setGuiRenderScale(13)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4722,7 +4724,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.HighcubeBoxcar)
                         .setMass(3.75)
                         .setColors(new String[] {"Cyan", "Lime", "Green", "Brown", "White", "Pink", "Purple", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Yellow", "Skin25"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("verticube60")
@@ -4734,7 +4736,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Red", "Brown", "Yellow", "Green", "Blue", "Purple", "Orange", "Lime"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("milw40")
@@ -4746,7 +4748,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.HighcubeBoxcar)
                         .setMass(3)
                         .setColors(new String[] {"Brown", "Green", "Cyan", "Orange", "Grey", "Red", "Lime", "LightGrey", "Pink", "Purple", "Blue", "Black", "White", "Magenta", "Skin16", "Skin17","Skin18"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(40)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4757,7 +4759,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.HighcubeBoxcar)
                         .setMass(4)
                         .setColors(new String[] {"Yellow", "Red", "Pink", "Blue", "Skin16", "Skin17", "Lime", "White", "Cyan", "Green", "Purple", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("hicube60")
@@ -4769,7 +4771,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.RefrigeratedBoxcar)
                         .setMass(4)
                         .setColors(new String[] {"White", "LightGrey", "Grey", "Orange", "Green", "Red", "Black", "Cyan", "Skin16", "Skin17"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("reefer_64")
@@ -4781,7 +4783,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(3)
                         .setColors(new String[] {"Cyan", "Green", "Black", "Skin18", "Skin19", "Brown", "Pink", "Skin16", "Blue", "Skin23", "Skin22", "Skin21", "Yellow", "White", "Skin17", "Magenta", "Skin24", "Skin25", "Skin26"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("fncc50foot")
@@ -4793,7 +4795,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"LightGrey", "Red"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4804,7 +4806,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.RefrigeratedBoxcar)
                         .setMass(3)
                         .setColors(new String[] {"Grey", "LightGrey", "Cyan", "White", "Yellow", "Skin16", "Orange", "Skin17", "Skin18", "Green", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Cold Stuff lol"})
         );
@@ -4815,7 +4817,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.RefrigeratedBoxcar)
                         .setMass(3)
                         .setColors(new String[] {"LightGrey", "Grey", "White", "Orange", "Skin19", "Yellow", "Red", "Skin20", "Skin21"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Cold Stuff lol"})
                         .setStockId("r-70-15")
@@ -4827,7 +4829,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.RefrigeratedBoxcar)
                         .setMass(2.75)
                         .setColors(new String[] {"Grey", "LightGrey", "Orange"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: meet and HUH!?"})
         );
@@ -4838,7 +4840,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.HighcubeBoxcar)
                         .setMass(3.75)
                         .setColors(new String[] {"Brown", "Skin16", "Pink", "Blue", "Red", "Skin17", "Yellow", "Magenta", "Cyan", "Skin18", "Skin19", "LightGrey", "Skin20", "Skin21", "Skin22"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("pcf_6033")
@@ -4850,7 +4852,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4)
                         .setColors(new String[] {"Red", "Brown", "Skin16", "Skin17", "Skin29", "Green", "Cyan", "Skin22", "Skin18", "Skin19", "Skin20", "Skin21", "Yellow", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4861,7 +4863,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4)
                         .setColors(new String[] {"Green", "Blue", "Red", "Pink", "Grey", "Magenta", "Lime", "Orange", "Brown", "White", "Yellow", "Black", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4872,7 +4874,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4)
                         .setColors(new String[] {"Blue", "Brown", "Skin16", "Grey", "Green", "LightGrey", "Skin17"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("pcf_b_100_40")
@@ -4884,7 +4886,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4)
                         .setColors(new String[] {"Yellow", "Red", "Blue", "Black", "Orange", "Pink", "LightBlue", "White", "Magenta", "Cyan", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acfrailbox")
@@ -4896,7 +4898,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4)
                         .setColors(new String[] {"Green", "Lime", "White", "Brown", "Red", "Blue", "Grey", "Orange", "Yellow","Skin16"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("acfrailboxcushioned")
@@ -4908,7 +4910,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(4.5)
                         .setColors(new String[] {"LightBlue", "Green", "Orange", "Red", "Skin16", "Pink", "Cyan", "Blue", "Yellow", "Brown", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Purple", "Magenta", "Skin22", "Skin23", "Skin24", "LightGrey", "Black", "Skin25", "White", "Skin26", "Skin27", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("evans_5100")
@@ -4920,7 +4922,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Brown", "Magenta", "Red", "Yellow", "Green"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("1912_wood_boxcar")
@@ -4932,7 +4934,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Red", "Green", "Lime", "Brown", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -4943,7 +4945,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Red", "Magenta", "Brown", "Orange", "Green", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("sp_b_50")
@@ -4955,7 +4957,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Boxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Red","Skin17","Skin18","Skin19","Skin20","Skin21","Skin22","Skin23","Skin24","Skin25","Skin33","Skin26","Skin27","Skin28","Skin29","Skin30","Skin31","Skin34","Skin32","Skin35"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Whatever a boxcar can hold."})
                         .setStockId("sp_b_50_28")
@@ -4967,7 +4969,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.RefrigeratedBoxcar)
                         .setMass(2.5)
                         .setColors(new String[] {"Orange", "Red", "Brown", "Yellow", "Purple", "Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Cold Things you Dumbass."})
         );
@@ -4980,7 +4982,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2.75)
                         .setColors(new String[] {"LightGrey", "Black", "Orange", "Brown", "Skin16", "Grey", "Pink", "LightBlue", "Yellow"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setStockId("versa_longi")
         );
@@ -4991,7 +4993,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2.75)
                         .setColors(new String[] {"LightBlue", "Grey", "LightGrey", "Black"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(36)
                         .setStockId("versa_trans")
         );
@@ -5002,7 +5004,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Gondola)
                         .setMass(3)
                         .setColors(new String[] {"Red", "Black", "Orange", "Green", "Grey", "Skin16", "Skin18", "Blue", "Lime", "Skin17", "Brown", "Pink", "LightGrey", "Skin19", "Yellow"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("millgondola")
@@ -5014,7 +5016,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(3)
                         .setColors(new String[] {"Brown", "Blue", "Green", "Orange", "Red", "White", "Cyan", "Skin18", "Skin19", "Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
                         .setStockId("woodchiphopper")
         );
@@ -5025,7 +5027,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(3)
                         .setColors(new String[] {"LightGrey", "Cyan", "Skin16", "Skin17", "Black", "Lime", "Blue", "Yellow", "Skin23", "Skin18", "Green", "Skin20", "Skin21", "Skin24", "Skin25", "Skin27", "Skin26"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
         );
 
@@ -5035,7 +5037,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2)
                         .setColors(new String[] {"Brown", "Red", "Orange", "Pink", "Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setCargoCapacity(27)
                         .setStockId("orejenny")
         );
@@ -5046,7 +5048,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Black", "Yellow", "Magenta", "Blue", "LightGrey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
         );
 
@@ -5056,7 +5058,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Gondola)
                         .setMass(2.75)
                         .setColors(new String[] {"Red", "Black", "Grey", "Brown", "Skin16"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Gonstuff"})
                         .setStockId("acf_41-6_gon")
@@ -5068,7 +5070,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(4)
                         .setColors(new String[] {"Black", "Blue", "Brown", "Cyan", "Green", "Grey", "Pink", "Yellow", "Red", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Coal n shid"})
                         .setStockId("bsc_3483")
@@ -5080,7 +5082,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(4)
                         .setColors(new String[] {"Black", "Green", "Orange", "Yellow", "Grey", "Magenta", "Pink", "Purple", "Skin16", "Skin17"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Coal n shid"})
                         .setStockId("bethgon")
@@ -5092,7 +5094,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Gondola)
                         .setMass(3.5)
                         .setColors(new String[] {"Red", "Green", "Brown", "Blue", "Grey", "Skin16", "Skin17", "Purple", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("gsco_67_millgon")
@@ -5104,7 +5106,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Gondola)
                         .setMass(3.0)
                         .setColors(new String[] {"Green", "Lime", "Red", "Skin16", "Black", "Grey", "Purple", "Brown", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(45)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("gsco_52_millgon")
@@ -5116,7 +5118,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2)
                         .setColors(new String[] {"Black", "Purple", "Skin16"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
         );
 
@@ -5126,7 +5128,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.OpenTopHopper)
                         .setMass(2)
                         .setColors(new String[] {"Black", "Magenta", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(27)
         );
 
@@ -5136,7 +5138,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Gondola)
                         .setMass(3.0)
                         .setColors(new String[] {"Brown", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
         );
@@ -5150,7 +5152,7 @@ public class RegisterBAPTrains
                         .setMass(2.25)
                         .setTankCapacity(41000)
                         .setColors(new String[] {"Black", "LightGrey", "Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("dot11k")
         );
 
@@ -5161,7 +5163,7 @@ public class RegisterBAPTrains
                         .setMass(3)
                         .setTankCapacity(78000)
                         .setColors(new String[] {"Grey", "Black", "White", "Green", "LightGrey"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         // DOT11129080
@@ -5171,7 +5173,7 @@ public class RegisterBAPTrains
                         .setMass(3.25)
                         .setTankCapacity(110000)
                         .setColors(new String[] {"Black", "Orange", "LightGrey", "White", "Grey", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
         );
 
         // DOT11117600
@@ -5181,7 +5183,7 @@ public class RegisterBAPTrains
                         .setMass(2.5)
                         .setTankCapacity(67000)
                         .setColors(new String[] {"White", "Black", "Blue", "LightGrey", "Grey", "Yellow", "Brown", "Purple", "Skin16", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("17600galtank")
         );
 
@@ -5192,7 +5194,7 @@ public class RegisterBAPTrains
                         .setMass(3.25)
                         .setTankCapacity(116000)
                         .setColors(new String[] {"Black", "Grey", "Green", "Red", "Yellow", "Pink", "Skin16", "Skin17", "LightBlue", "Skin18"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setStockId("natx_30600")
         );
 
@@ -5203,7 +5205,7 @@ public class RegisterBAPTrains
                         .setMass(2)
                         .setTankCapacity(38000)
                         .setColors(new String[] {"Black", "Skin16", "Skin17", "LightBlue", "Grey", "Skin18", "Skin19"})
-                        .setGuiRenderScale(15)
+                        // .setGuiRenderScale(15)
                         .setStockId("gatc_10000_gal")
         );
 
@@ -5214,7 +5216,7 @@ public class RegisterBAPTrains
                         .setMass(5)
                         .setTankCapacity(148000)
                         .setColors(new String[] {"Grey", "White", "Green", "Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("dupx_39200")
         );
 
@@ -5225,7 +5227,7 @@ public class RegisterBAPTrains
                         .setMass(1.5)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         //Freight - Various//
@@ -5236,7 +5238,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.LogFlat)
                         .setMass(1)
                         .setColors(new String[]{"Black","Grey", "LightGrey"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setCargoCapacity(18)
                         .setStockId("skeletonlogcar")
         );
@@ -5247,7 +5249,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Flatcars)
                         .setMass(0.7)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setCargoCapacity(18)
                         .setAdditionalTooltip(new String[] {"Cargo: Any."})
                         .setStockId("earlyflatcar")
@@ -5259,7 +5261,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Autorack)
                         .setMass(4.75)
                         .setColors(new String[]{"Yellow", "Orange", "LightGrey", "Blue", "Black", "Brown", "Pink"})
-                        .setGuiRenderScale(8)
+                        // .setGuiRenderScale(8)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any"})
         );
@@ -5270,7 +5272,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Flatcars)
                         .setMass(3.25)
                         .setColors(new String[]{"Yellow", "Blue", "Purple"})
-                        .setGuiRenderScale(8)
+                        // .setGuiRenderScale(8)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Cargo: Any"})
         );
@@ -5281,7 +5283,7 @@ public class RegisterBAPTrains
                         .setTrainType("Livestock Car")
                         .setMass(3.75)
                         .setColors(new String[]{"White", "Brown"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("cswr_stampederack")
         );
 
@@ -5291,7 +5293,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Wellcar)
                         .setMass(3)
                         .setColors(new String[] {"Yellow", "Blue", "Brown", "Green", "Pink", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(54)
                         .setAdditionalTooltip(new String[] {"Will carry containers (for REAL) Eventually!"})
                         .setStockId("40ft_husky")
@@ -5303,7 +5305,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Other)
                         .setMass(2)
                         .setColors(new String[] {"Brown", "Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setCargoCapacity(9)
                         .setStockId("molteningotpig")
         );
@@ -5314,7 +5316,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Other)
                         .setMass(2.5)
                         .setColors(new String[] {"Brown", "Black"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(9)
                         .setAdditionalTooltip(new String[] {"Cargo: steel and metal ig."})
                         .setStockId("steelslab15")
@@ -5326,7 +5328,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Other)
                         .setMass(3)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setCargoCapacity(36)
                         .setAdditionalTooltip(new String[] {"Cargo: Steel Coils & Likewise"})
         );
@@ -5348,7 +5350,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.8)
                         .setBrakeRate(0.985)
                         .setColors(new String[] {"White", "Blue", "Red", "Green", "Lime"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setBogieLocoPosition(-2.7)
                         .setStockId("pch120commute")
         );
@@ -5359,7 +5361,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(2)
                         .setColors(new String[] {"White", "Blue", "Red", "Green", "Lime", "Purple", "Pink", "Yellow"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
                         .setStockId("pch120car")
         );
 
@@ -5375,7 +5377,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.9)
                         .setBrakeRate(0.995)
                         .setColors(new String[] {"White"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-3.7)
                         .setStockId("pch130commute2")
         );
@@ -5386,7 +5388,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(2)
                         .setColors(new String[] {"White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("pch130coach")
         );
 
@@ -5403,7 +5405,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.985)
                         .setTankCapacity(7000)
                         .setColors(new String[]{"LightBlue", "Blue", "Lime", "Red"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-2.6)
                         .setAdditionalTooltip(new String[] {"Powered by Mekanism Hydrogen"})
                         .setStockId("pch100h")
@@ -5415,7 +5417,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(2)
                         .setColors(new String[]{"LightBlue", "Blue", "Lime", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("pch100hcoach")
         );
 
@@ -5425,7 +5427,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(2)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
         );
 
         // aipkitExplorer2
@@ -5434,7 +5436,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(2)
                         .setColors(new String[]{"White", "Grey","Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("aipkit_explorerii")
         );
 
@@ -5446,7 +5448,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Yellow", "Blue", "Cyan", "Orange"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_rpo")
         );
@@ -5457,7 +5459,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(2)
                         .setColors(new String[]{"Yellow", "Blue", "Orange"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_85_baggage")
         );
@@ -5468,7 +5470,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger_Combine)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Yellow", "Orange", "LightGrey", "Grey", "White", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_baggage-coach")
         );
@@ -5479,7 +5481,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "LightBlue", "Yellow", "Orange", "Cyan", "Grey", "LightGrey", "Purple", "Green", "Lime", "White", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_52seat")
         );
 
@@ -5489,7 +5491,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Orange", "Blue", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_center_diner_2")
         );
 
@@ -5499,7 +5501,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "Brown", "Orange", "LightBlue", "Grey", "Yellow", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_5-6-5_sleeper")
         );
 
@@ -5509,7 +5511,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Orange"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_drgw_lightweight_5-6-5_sleeper")
         );
 
@@ -5519,7 +5521,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "Yellow", "Orange", "LightBlue", "Purple", "LightGrey", "Grey", "White", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_lunchcounter_lounge")
         );
 
@@ -5529,7 +5531,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Orange", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_30seatparlor")
         );
 
@@ -5539,7 +5541,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Magenta", "Green", "Lime", "Grey", "Purple", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("drgw_rpo_620_series")
         );
@@ -5550,7 +5552,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Green", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("drgw_rpo_630_series")
         );
@@ -5561,7 +5563,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Magenta", "Green", "Lime", "Brown", "Yellow", "Black", "Grey", "LightGrey", "White", "Orange", "Purple"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("drgw_baggage_700_series")
         );
@@ -5572,7 +5574,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Green", "Lime", "Black", "Brown", "Yellow", "Grey", "Magenta", "LightGrey", "White"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("drgw_baggage_740_series")
         );
@@ -5583,7 +5585,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "Blue", "Black", "Yellow", "Grey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setStockId("drgw_coach_1000_series")
         );
 
@@ -5593,7 +5595,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Orange", "Black", "Grey", "LightGrey", "White", "Brown", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setStockId("drgw_coach_1005_series")
         );
 
@@ -5603,7 +5605,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "Black", "Grey", "LightGrey", "White", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setStockId("pullman69chaircar")
         );
         // PSRPOPM
@@ -5612,7 +5614,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Blue", "Yellow"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_rpo_pm")
         );
@@ -5623,7 +5625,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Blue", "Yellow", "Green", "Red", "Magenta", "Orange"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_73_baggage")
         );
@@ -5634,7 +5636,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "LightBlue", "LightGrey", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_54seatcoach_lounge")
         );
 
@@ -5644,7 +5646,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_54seatcoach_lounge_1950")
         );
 
@@ -5654,7 +5656,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_center_diner")
         );
 
@@ -5664,7 +5666,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Purple", "Orange", "Red", "Magenta", "Pink", "Green", "Lime", "Brown", "Black", "LightGrey", "Grey", "White", "Skin16", "Yellow"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_58seatcoach_observation")
         );
 
@@ -5674,7 +5676,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Magenta", "Brown", "Green", "Blue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_bmcombine")
         );
@@ -5685,7 +5687,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Magenta", "LightGrey", "Grey", "Brown", "Red", "Pink", "Green", "Lime", "Yellow", "Blue", "Cyan", "LightBlue", "Purple", "White", "Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_bm56seatcoach")
         );
 
@@ -5695,7 +5697,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Magenta", "Brown", "Green", "Blue", "Cyan", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_bmdiner_lounge")
         );
 
@@ -5705,7 +5707,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Orange", "Yellow", "Green", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("acf_lightweight_gnrpo30")
         );
@@ -5716,7 +5718,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Orange", "Yellow", "Brown", "LightBlue", "Green", "LightGrey", "Black", "White", "Cyan", "Blue", "Lime", "Grey", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("acf_lightweight_gn60seatcoach")
         );
 
@@ -5726,7 +5728,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Orange", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("acf_lightweight_gndiner_observation")
         );
@@ -5737,7 +5739,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Orange", "Green", "Blue", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("acf_lightweight_gn28seatcoach_dinette")
         );
 
@@ -5747,7 +5749,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Orange", "Green", "Blue", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("acf_lightweight_1dr_177seatparlor_observation")
         );
@@ -5758,7 +5760,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Orange", "Green", "Yellow", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_gnrpo30")
         );
@@ -5769,7 +5771,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "Brown", "Black", "White", "Grey", "LightBlue", "Yellow", "Magenta", "Red", "Pink", "Blue", "LightGrey", "Purple", "Cyan", "Orange", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_84seatcoach")
         );
 
@@ -5779,7 +5781,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "LightGrey", "Grey", "Brown", "Red", "Black", "White", "Yellow"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_92seatcoach")
         );
 
@@ -5789,7 +5791,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Yellow", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_nhgrillcar")
         );
 
@@ -5799,7 +5801,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_nhlounge5107")
         );
 
@@ -5809,7 +5811,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "LightGrey", "Lime", "Grey", "Yellow"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ob_lightweight_baggage_52seatdividedcoach")
         );
@@ -5820,7 +5822,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Grey", "Yellow", "Lime", "Black", "Blue", "Orange", "Brown", "LightGrey", "Red", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_76seatdividedcoach")
         );
 
@@ -5830,7 +5832,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "White", "Pink"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_lv82_92seatcoach")
         );
 
@@ -5840,7 +5842,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Green", "Lime", "Grey", "Cyan", "LightGrey", "Blue"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("ob_lightweight_rpo15")
         );
@@ -5851,7 +5853,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Brown", "Green", "Pink", "Lime", "Grey", "Blue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_24seatcoach_dinette")
         );
 
@@ -5861,7 +5863,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "Blue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ob_lightweight_bar52seatcoach_dinette")
         );
 
@@ -5871,7 +5873,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Skin19", "Green", "Lime", "Skin20", "White", "Brown", "Skin21", "Grey", "LightGrey", "Skin22", "Skin16", "Skin17", "Skin18", "Purple", "Orange", "Red", "Blue", "Skin23", "Cyan", "LightBlue", "Pink", "Magenta"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw56seatcoach")
         );
 
@@ -5881,7 +5883,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw48seatcoach_lounge")
         );
 
@@ -5891,7 +5893,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw20seatcoach_lounge")
         );
 
@@ -5901,7 +5903,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw36seatcoach_dinette")
         );
 
@@ -5911,7 +5913,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw56seatcoachdiner")
         );
 
@@ -5921,7 +5923,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw48seatcoachdiner")
         );
 
@@ -5931,7 +5933,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Blue", "White", "Grey", "LightBlue", "Cyan", "LightGrey", "Brown", "Orange", "Red", "Pink", "Magenta", "Purple", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw1dr_22seatparlor")
         );
 
@@ -5941,7 +5943,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw16_1_3sleeper")
         );
 
@@ -5951,7 +5953,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw12seatparlor_observation")
         );
 
@@ -5961,7 +5963,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Yellow", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_cnwrpo15")
         );
@@ -5972,7 +5974,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Yellow", "Green", "Orange", "Red", "Grey", "LightGrey", "White", "Magenta", "Brown", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_cnwrpo60")
         );
@@ -5983,7 +5985,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey", "LightGrey", "White", "Magenta"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_cnwbaggage_lc_lounge")
         );
@@ -5994,7 +5996,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_cnwrpo15_baggage_lc_lounge")
         );
@@ -6005,7 +6007,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Black", "Green", "Lime", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_cnwbaggage_lc_diner")
         );
@@ -6016,7 +6018,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw20seatcoach_lounge_1959")
         );
 
@@ -6026,7 +6028,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnwcommuterlounge")
         );
 
@@ -6036,7 +6038,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Green", "Black", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cnw27seatparlor_observation")
         );
 
@@ -6046,7 +6048,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "Grey", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_rdg56seatcoach_lounge")
         );
 
@@ -6056,7 +6058,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_rdgdiner_lounge")
         );
 
@@ -6066,7 +6068,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "Grey", "LightGrey", "LightBlue", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_rdg56seatcoach_observation")
         );
 
@@ -6076,7 +6078,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "LightGrey", "Blue", "White", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_crip_lightweight_52seatcoach")
         );
 
@@ -6086,7 +6088,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Orange", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_nyc_lightweight_52seatcoach")
         );
 
@@ -6096,7 +6098,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Brown", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_cbq_lightweight_52seatcoach")
         );
 
@@ -6106,7 +6108,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "LightGrey", "White", "Brown", "Green", "Lime", "Orange", "Blue", "Black", "Magenta", "Yellow", "Red", "Pink", "Cyan", "LightBlue", "Purple", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_dome46seatcoach")
         );
 
@@ -6116,7 +6118,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cbqdome50seatcoach")
         );
 
@@ -6126,7 +6128,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Grey", "LightGrey", "White", "Red", "Yellow", "Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("budd_lightweight_prewar_baggage")
         );
@@ -6137,7 +6139,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Yellow", "Orange", "Green", "Pink", "Blue", "Lime", "Purple", "Brown", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_atsf52seatcoach")
         );
 
@@ -6147,7 +6149,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_atsf48seatcoach")
         );
 
@@ -6157,7 +6159,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_atsf50seatcoach_observation")
         );
 
@@ -6167,7 +6169,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Lime", "Brown", "Blue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_atsf34seatparlor_observation")
         );
 
@@ -6177,7 +6179,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Orange", "Cyan", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_atsf58seatcoach_observation")
         );
 
@@ -6187,7 +6189,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Grey", "LightGrey", "Blue", "Orange"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_atsf50seatcoach_observation")
         );
 
@@ -6197,7 +6199,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(5)
                         .setColors(new String[]{"Green", "Lime", "LightGrey", "Grey", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20","Skin21","Skin22"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("acf_sp_72_c_1")
         );
 
@@ -6207,7 +6209,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Yellow", "Red", "Orange", "Brown", "Green", "Blue", "Lime", "Grey", "LightGrey", "Black", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("acf_lightweight_uprpo60")
         );
@@ -6218,7 +6220,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "LightBlue", "Grey", "LightGrey", "White", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_dome54seatcoach")
         );
 
@@ -6228,7 +6230,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Orange", "Cyan", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_ceirpo15_baggage_lc_lounge")
         );
@@ -6239,7 +6241,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Orange", "Cyan", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(18)
                         .setStockId("ps_lightweight_ceirpo15_baggage_38seatcoach")
         );
@@ -6250,7 +6252,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Orange", "Cyan", "LightBlue", "Purple", "Yellow", "Pink", "Grey", "Green", "LightGrey", "Black", "Lime", "Brown", "Magenta", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cei60seatcoach")
         );
 
@@ -6260,7 +6262,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Cyan", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_ceidiner")
         );
 
@@ -6270,7 +6272,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Orange", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_cei1dr_28seatparlor_observation")
         );
 
@@ -6280,7 +6282,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Green", "Lime", "Yellow", "Grey", "LightGrey", "Black", "Red"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("ob_heavyweight_nh5570_5589baggage")
         );
@@ -6291,7 +6293,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Grey", "LightGrey", "Red", "Pink", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cn68seatcoach_observation")
         );
 
@@ -6301,7 +6303,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Grey", "LightGrey", "Red", "Pink", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cncoach")
         );
 
@@ -6311,7 +6313,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Grey", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cndiner_lounge")
         );
 
@@ -6321,7 +6323,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Grey", "LightGrey", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cn39seatparlor_observation")
         );
 
@@ -6331,7 +6333,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("budd_lightweight_cn59seatcoach_observation")
         );
 
@@ -6341,7 +6343,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Green", "Yellow", "LightBlue", "Black", "Lime", "Orange", "Red", "Pink", "Grey", "LightGrey", "Brown", "White", "Blue", "Cyan", "Purple", "Magenta", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
                         .setStockId("nsc_lightweight_cnbaggage")
         );
@@ -6352,7 +6354,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(2)
                         .setColors(new String[]{"Grey", "LightGrey", "White", "Black", "Brown", "Magenta"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_soubaggage")
         );
@@ -6363,7 +6365,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Grey", "LightGrey", "White", "Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("ps_lightweight_soupo30")
         );
@@ -6374,7 +6376,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Blue", "Black", "White", "Grey", "LightGrey", "Magenta", "LightBlue", "Cyan", "Lime", "Orange", "Green", "Red"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("preco_lightweight_pendulumcoach")
         );
 
@@ -6384,7 +6386,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("ps_lightweight_fnccbaggage_dinette")
         );
 
@@ -6394,7 +6396,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Green", "Red", "Grey", "Magenta", "LightGrey", "White", "Blue", "Lime", "Cyan", "Brown", "Pink", "Yellow", "Purple", "Black", "Orange", "LightBlue", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30", "Skin31", "Skin32", "Skin33", "Skin34", "Skin35", "Skin36", "Skin37", "Skin38", "Skin39"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("nyc_lightweight_prewar56seatcoach")
         );
 
@@ -6404,7 +6406,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White", "Skin16", "Skin17", "Skin18", "Skin19", "Skin20", "Skin21", "Skin22", "Skin23", "Skin24", "Skin25", "Skin26", "Skin27", "Skin28", "Skin29", "Skin30"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(27)
         );
 
@@ -6414,7 +6416,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setCargoCapacity(18)
                         .setStockId("milw1935baggage_dinette")
         );
@@ -6425,7 +6427,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
-                        .setGuiRenderScale(12)
+                        // .setGuiRenderScale(12)
                         .setStockId("milw1935tap_dinette")
         );
 
@@ -6435,7 +6437,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("milw1935_48seatcoach")
         );
 
@@ -6445,7 +6447,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("milw1935_22seatparlor")
         );
 
@@ -6455,7 +6457,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("milw1935_21seatparlor_observation")
         );
 
@@ -6465,7 +6467,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("milw1935_44seatcoach_observation")
         );
 
@@ -6475,7 +6477,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("milw1935dorm_56seatcoach")
         );
 
@@ -6485,7 +6487,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("acf_ln_kcs60seatdividedcoach")
         );
 
@@ -6495,7 +6497,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("lncoach2551series")
         );
 
@@ -6505,7 +6507,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(1.5)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setCargoCapacity(27)
                         .setStockId("mon_lightweight_rpo30")
         );
@@ -6516,7 +6518,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey", "Pink", "Lime", "Yellow", "LightBlue"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("mon_lightweightcoach")
         );
 
@@ -6526,7 +6528,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[]{"Black", "Red", "Green", "Brown", "Blue", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setStockId("mon_lightweightdeluxecoach")
         );
 
@@ -6538,7 +6540,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[] {"Red", "White", "LightGrey", "Grey", "Blue", "LightBlue", "Green", "Skin16", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         // amfleet2
@@ -6547,7 +6549,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[] {"Grey" ,"LightGrey", "Red", "Blue",  "LightBlue", "Skin16", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         // amfleetcab
@@ -6556,7 +6558,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[] {"Red", "Grey", "LightGrey", "LightBlue", "White", "Skin16", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         // amcafe
@@ -6565,7 +6567,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[] {"Cyan", "Red", "White", "Grey", "Blue", "LightBlue", "LightGrey", "Skin16", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         // amcafe2
@@ -6574,7 +6576,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(3)
                         .setColors(new String[] {"Grey", "LightGrey", "Red", "Blue", "Skin16", "Skin17", "Skin18", "Skin19"})
-                        .setGuiRenderScale(14)
+                        // .setGuiRenderScale(14)
         );
 
         //Passenger - Polar Express//
@@ -6585,7 +6587,7 @@ public class RegisterBAPTrains
                         .setTrainType("festive passenger")
                         .setMass(6)
                         .setColors(new String[]{"Blue", "Cyan", "Green", "Lime", "Skin16", "Purple"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
         );
 
         // PEobserve
@@ -6594,7 +6596,7 @@ public class RegisterBAPTrains
                         .setTrainType("festive passenger")
                         .setMass(6)
                         .setColors(new String[]{"Blue", "Cyan"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
         );
 
         //Caboose//
@@ -6605,7 +6607,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Green", "Lime", "Cyan", "White", "Purple", "Skin16"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
 
         // HBC1C
@@ -6614,7 +6616,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Purple", "Magenta", "Skin18", "Skin19"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
 
         // HBC1B
@@ -6623,7 +6625,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Blue", "Pink", "Purple", "Green", "Skin17", "Skin18"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
 
         // DRGWCaboose
@@ -6632,7 +6634,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"LightGrey", "Grey", "Brown", "Green", "Lime", "Yellow", "Cyan", "Black", "White", "Magenta", "Red", "Orange", "Pink", "Skin16", "Purple"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("drgw_01400")
         );
 
@@ -6642,7 +6644,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Orange", "Red", "Green", "Blue"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
 
         // ICCBaywindowWP
@@ -6651,7 +6653,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Brown", "Red", "Skin16", "Green", "Cyan", "Skin17", "Orange", "Skin18", "Skin19", "Skin20", "Skin21"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("iccbaywindow")
         );
 
@@ -6661,7 +6663,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Yellow", "Red", "Cyan", "Skin17", "Skin18", "Purple", "Skin19"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setStockId("icc_ca11")
         );
 
@@ -6671,7 +6673,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Brown", "Yellow", "Green"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
 
         // CDCScaboose
@@ -6680,7 +6682,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Caboose)
                         .setMass(2)
                         .setColors(new String[] {"Red", "Pink", "Orange", "Brown", "Grey", "Green"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
         );
     }
 
@@ -6700,7 +6702,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black", "Red", "Green"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.5)
                         .setStockId("w_a11")
         );
@@ -6717,7 +6719,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.55)
                         .setStockId("w_a55")
         );
@@ -6734,7 +6736,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.55)
                         .setStockId("w_a55_combine")
         );
@@ -6753,7 +6755,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(8000)
                         .setColors(new String[] {"LightGrey", "Grey"})
-                        .setGuiRenderScale(16)
+                        // .setGuiRenderScale(16)
                         .setBogieLocoPosition(-1.1)
         );
 
@@ -6763,7 +6765,7 @@ public class RegisterBAPTrains
                         .setTrainType("misc")
                         .setMass(1.5)
                         .setColors(new String[]{"LightBlue", "Red", "Black", "Blue", "Cyan", "Green", "Grey", "Brown", "LightGrey", "Lime", "Magenta", "Orange", "Pink", "Purple", "Yellow", "White"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setAdditionalTooltip(new String[] {"Who is not pushing ze Cart!?"})
         );
 
@@ -6779,7 +6781,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(6)
                         .setBrakeRate(30)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(-1)
                         .setAdditionalTooltip(new String[] {"You don't want to mess with the Universe's Best"})
         );
@@ -6797,7 +6799,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(1000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(2.7)
         );
 
@@ -6814,7 +6816,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.9)
                         .setTankCapacity(7000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2)
                         .setAdditionalTooltip(new String[] {"hhhgregg, Panasonic Blu-ray nintey-nine dollars, thirty-two inch LCD TV two-nintey nine, LG fourty-two inch HD TV only four eighty-nine, everything on sale during chirstmas in"})
         );
@@ -6834,7 +6836,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.7)
                         .setTankCapacity(13)
                         .setColors(new String[] {"Blue", "Purple", "Red", "Skin16", "Skin17"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("class_74")
@@ -6851,7 +6853,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.5)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setBogieLocoPosition(-3.15)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("2-bil")
@@ -6863,7 +6865,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("2-bil_tail")
         );
@@ -6879,7 +6881,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.5)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setBogieLocoPosition(-3.6)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("4-cor")
@@ -6891,7 +6893,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1.6)
                         .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("4-cor_trailer_composite")
         );
@@ -6902,7 +6904,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1.6)
                         .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("4-cor_trailer_second")
         );
@@ -6913,7 +6915,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1.7)
                         .setColors(new String[] {"Black", "Red", "Green", "Purple", "LightGrey", "Grey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("4-buf")
         );
@@ -6924,7 +6926,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1.8)
                         .setColors(new String[] {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGrey", "Grey"})
-                        .setGuiRenderScale(11)
+                        // .setGuiRenderScale(11)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("4-cor_tail")
         );
@@ -6936,7 +6938,7 @@ public class RegisterBAPTrains
                         .setMass(4.3)
                         .setTankCapacity(16000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("ns_3700_tender")
         );
@@ -6955,7 +6957,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.975)
                         .setTankCapacity(4000)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-2.6)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("ns_3700_class")
@@ -6973,7 +6975,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
         );
@@ -6990,7 +6992,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.9)
                         .setColors(new String[] {"Grey", "Black", "Skin16"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("cq_310_po")
@@ -7002,7 +7004,7 @@ public class RegisterBAPTrains
                         .setTrainType(EnumTrainType.Passenger)
                         .setMass(1)
                         .setColors(new String[] {"Grey", "Black", "Skin16"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
                         .setStockId("cq_310_pa")
         );
@@ -7019,7 +7021,7 @@ public class RegisterBAPTrains
                         .setAccelerationRate(0.7)
                         .setBrakeRate(0.875)
                         .setColors(new String[] {"Black", "White"})
-                        .setGuiRenderScale(10)
+                        // .setGuiRenderScale(10)
                         .setBogieLocoPosition(-3)
                         .setAdditionalTooltip(new String[] {"Not BAP, but gets to be included"})
         );
@@ -7030,7 +7032,7 @@ public class RegisterBAPTrains
                         .setTrainType("geometry car")
                         .setMass(2)
                         .setColors(new String[] {"Grey", "LightGrey"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setAdditionalTooltip(new String[] {"Checks the railroad for things up to standard"})
                         .setStockId("geometrycar")
         );
@@ -7041,7 +7043,7 @@ public class RegisterBAPTrains
                         .setTrainType("misc")
                         .setMass(0.2)
                         .setColors(new String[] {"Black"})
-                        .setGuiRenderScale(0)
+                        // .setGuiRenderScale(0)
                         .setCargoCapacity(1)
                         .setAdditionalTooltip(new String[] {"the least used item in the mod"})
         );
@@ -7052,7 +7054,7 @@ public class RegisterBAPTrains
                         .setTrainType("freight")
                         .setMass(5)
                         .setColors(new String[]{"Grey","skin16"})
-                        .setGuiRenderScale(0)
+                        // .setGuiRenderScale(0)
                         .setCargoCapacity(9)
         );
 
@@ -7071,7 +7073,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(1000)
                         .setColors(new String[] {"Yellow", "White", "Grey", "Orange", "Green", "Red"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(2.7)
                         .setStockId("highrailvan")
         );
@@ -7089,7 +7091,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(1000)
                         .setColors(new String[] {"Yellow", "White", "LightGrey"})
-                        .setGuiRenderScale(18)
+                        // .setGuiRenderScale(18)
                         .setBogieLocoPosition(2.7)
                         .setStockId("highrail")
         );
@@ -7107,7 +7109,7 @@ public class RegisterBAPTrains
                         .setBrakeRate(0.8)
                         .setTankCapacity(2000)
                         .setColors(new String[] {"LightGrey", "Grey", "Cyan", "Yellow", "Skin17", "Orange", "Skin18", "Red"})
-                        .setGuiRenderScale(20)
+                        // .setGuiRenderScale(20)
                         .setBogieLocoPosition(-2.0)
                         .setStockId("workday_hyrail")
         );

@@ -186,7 +186,7 @@ public class GuiRollingStockIconGenerator extends GuiContainer {
 		int color = GeneratedRollingStockIconRenderer.getRenderColor(stack, record);
 		if (button.id == CARGO_MINUS_BUTTON || button.id == CARGO_PLUS_BUTTON) {
 			if (settings == null) {
-				settings = getAutoFitDefaultSettings(stack, record);
+				settings = getAutoFitDefaultSettings(stack);
 			}
 			adjustCargoSelection(stack, button.id == CARGO_PLUS_BUTTON ? 1 : -1);
 			return;
@@ -194,7 +194,7 @@ public class GuiRollingStockIconGenerator extends GuiContainer {
 
 		if (button.id == BUTTON_LOAD) {
 			if (!RollingStockIconDevData.hasSettings(record, color)) {
-				settings = getAutoFitDefaultSettings(stack, record);
+				settings = getAutoFitDefaultSettings(stack);
 				refreshGeneratedPreview(stack, record, color);
 				syncValueFields();
 				status = "Loaded auto-fit defaults.";
@@ -208,14 +208,14 @@ public class GuiRollingStockIconGenerator extends GuiContainer {
 			return;
 		}
 		if (button.id == BUTTON_RESET) {
-			settings = getAutoFitDefaultSettings(stack, record);
+			settings = getAutoFitDefaultSettings(stack);
 			refreshPreview(stack);
 			syncValueFields();
 			status = "Auto-fit defaults restored.";
 			return;
 		}
 		if (settings == null) {
-			settings = getAutoFitDefaultSettings(stack, record);
+			settings = getAutoFitDefaultSettings(stack);
 			syncValueFields();
 			status = "Loaded auto-fit defaults.";
 			return;
@@ -449,21 +449,22 @@ public class GuiRollingStockIconGenerator extends GuiContainer {
 		 * repeated clicks stable and avoids compounding tiny differences from previous captures.
 		 */
 		GeneratedRollingStockIconRenderer.AutoFitMode mode = getAutoFitMode(buttonId);
-		ITrainRecord record = Traincraft.traincraftRegistry.getCurrentTrain(stack.getItem());
-		GeneratedRollingStockIconRenderer.CaptureSettings referenceSettings = getAutoFitReferenceSettings(record);
+		GeneratedRollingStockIconRenderer.CaptureSettings referenceSettings = getAutoFitReferenceSettings();
 		settings = GeneratedRollingStockIconRenderer.autoFitIcon(stack, referenceSettings, mode, getAutoFitScalePadding(mode), getAutoFitPositionPadding(mode), true);
 		refreshPreview(stack);
 		syncValueFields();
 		status = "Auto fit: " + getAutoFitLabel(mode);
 	}
 
-	private GeneratedRollingStockIconRenderer.CaptureSettings getAutoFitReferenceSettings(ITrainRecord record) {
-		GeneratedRollingStockIconRenderer.CaptureSettings referenceSettings = settings.copy();
-		referenceSettings.scale = GeneratedRollingStockIconRenderer.getDefaultSettings(record).scale;
-		referenceSettings.screenX = 0.0F;
-		referenceSettings.screenY = 0.0F;
-		return referenceSettings;
-	}
+    /** Starts each fit from the common scale while retaining the selected orientation and cargo. */
+    private GeneratedRollingStockIconRenderer.CaptureSettings getAutoFitReferenceSettings()
+    {
+        GeneratedRollingStockIconRenderer.CaptureSettings referenceSettings = settings.copy();
+        referenceSettings.scale = GeneratedRollingStockIconRenderer.getDefaultSettings().scale;
+        referenceSettings.screenX = 0.0F;
+        referenceSettings.screenY = 0.0F;
+        return referenceSettings;
+    }
 
 	private int getAutoFitScalePadding(GeneratedRollingStockIconRenderer.AutoFitMode mode) {
 		return mode == GeneratedRollingStockIconRenderer.AutoFitMode.FULL ? DEFAULT_AUTO_FIT_PADDING : SIDE_AUTO_FIT_SCALE_PADDING;
@@ -725,20 +726,22 @@ public class GuiRollingStockIconGenerator extends GuiContainer {
 		currentKey = key;
 		settings = RollingStockIconDevData.hasSettings(record, color)
 				? RollingStockIconDevData.loadOrDefault(stack, record, color)
-				: getAutoFitDefaultSettings(stack, record);
+				: getAutoFitDefaultSettings(stack);
 		refreshGeneratedPreview(stack, record, color);
 		syncValueFields();
 		status = RollingStockIconDevData.hasSettings(record, color) ? "Loaded saved JSON." : "Loaded auto-fit defaults.";
 	}
 
-	private GeneratedRollingStockIconRenderer.CaptureSettings getAutoFitDefaultSettings(ItemStack stack, ITrainRecord record) {
-		return GeneratedRollingStockIconRenderer.autoFitIcon(
-				stack,
-				GeneratedRollingStockIconRenderer.getDefaultSettings(record),
-				GeneratedRollingStockIconRenderer.AutoFitMode.FULL,
-				DEFAULT_AUTO_FIT_PADDING,
-				true);
-	}
+    /** Fits the complete model when the selected stock has no saved capture settings. */
+    private GeneratedRollingStockIconRenderer.CaptureSettings getAutoFitDefaultSettings(ItemStack stack)
+    {
+        return GeneratedRollingStockIconRenderer.autoFitIcon(
+                stack,
+                GeneratedRollingStockIconRenderer.getDefaultSettings(),
+                GeneratedRollingStockIconRenderer.AutoFitMode.FULL,
+                DEFAULT_AUTO_FIT_PADDING,
+                true);
+    }
 
 	private ItemStack getRollingStockStack() {
 		ItemStack stack = tile.getStackInSlot(0);
