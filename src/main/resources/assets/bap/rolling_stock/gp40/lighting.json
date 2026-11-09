@@ -48,6 +48,18 @@
         },
         "lamp_cab_up": {
           "preset": "headlight"
+        },
+        "ditch1b": {
+          "preset": "ditch_light"
+        },
+        "ditch1a": {
+          "preset": "ditch_light"
+        },
+        "ditch2b": {
+          "preset": "ditch_light"
+        },
+        "ditch2a": {
+          "preset": "ditch_light"
         }
       }
     }
