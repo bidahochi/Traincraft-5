@@ -264,8 +264,31 @@ public class TrainRecord implements ITrainRecord
     public Class getEntityClass() { return this.entityClass; }
     public TrainRecord setEntityClass(Class entity) { this.entityClass = entity; return this; }
 
-    public int getGuiRenderScale() { return this.guiRenderScale; }
-    public TrainRecord setGuiRenderScale(int scale) { this.guiRenderScale = scale; return this; }
+    /**
+     * Returns the legacy fixed GUI scale retained for compatibility.
+     *
+     * @deprecated Rolling-stock GUI previews now size models automatically from visible bounds.
+     */
+    @Override
+    @Deprecated
+    public int getGuiRenderScale()
+    {
+        return this.guiRenderScale;
+    }
+
+    /**
+     * Stores the legacy GUI scale for existing registration callers.
+     *
+     * @param scale legacy fixed scale; auto-sized previews ignore this value
+     * @return this record for registration chaining
+     * @deprecated Rolling-stock GUI previews now size models automatically from visible bounds.
+     */
+    @Deprecated
+    public TrainRecord setGuiRenderScale(int scale)
+    {
+        this.guiRenderScale = scale;
+        return this;
+    }
 
     public String[] getAdditionalTooltip() { return this.additionalTooltip; }
 

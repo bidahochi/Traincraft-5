@@ -39,7 +39,13 @@ public interface ITrainRecord
 
     Class getEntityClass();
 
-    int getGuiRenderScale();
+    /**
+     * Returns the legacy fixed GUI scale retained for compatibility.
+     *
+     * @deprecated Rolling-stock GUI previews now size models automatically from visible bounds.
+     */
+    @Deprecated
+    public int getGuiRenderScale();
 
     String[] getAdditionalTooltip();
 
