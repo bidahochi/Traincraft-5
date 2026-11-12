@@ -3,7 +3,30 @@
   "stock": "tc:br185_engine",
   "lighting": {
     "defaults": {
-      "fixtures": {}
+      "fixtures": {
+        "lamprear": {
+          "preset": "headlight",
+          "color": "#FFF4B4",
+          "controlCircuit": "headlight"
+        },
+        "lampfrontnose": {
+          "preset": "headlight",
+          "controlCircuit": "headlight"
+        },
+        "lampfront": {
+          "preset": "headlight",
+          "controlCircuit": "headlight"
+        },
+        "emerg": {
+          "preset": "headlight",
+          "controlCircuit": "emergency",
+          "color": "#FF2020"
+        },
+        "lamprearnose": {
+          "preset": "headlight",
+          "controlCircuit": "headlight"
+        }
+      }
     }
   },
   "skins": {

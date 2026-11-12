@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tmt.LightSourceFaceDirection;
 import tmt.ModelBase;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
@@ -180,16 +181,16 @@ public class BR185_EngineModel extends ModelBase
 		br185_enginemodelModel[151] = new ModelRendererTurbo(this, 161, 169, textureX, textureY); // Box 190
 		br185_enginemodelModel[152] = new ModelRendererTurbo(this, 33, 193, textureX, textureY); // Box 191
 		br185_enginemodelModel[153] = new ModelRendererTurbo(this, 1, 161, textureX, textureY); // Box 192
-		br185_enginemodelModel[154] = new ModelRendererTurbo(this, 105, 65, textureX, textureY); // Box 171
-		br185_enginemodelModel[155] = new ModelRendererTurbo(this, 217, 65, textureX, textureY, "lamp"); // Box 174
-		br185_enginemodelModel[156] = new ModelRendererTurbo(this, 153, 73, textureX, textureY); // Box 175
-		br185_enginemodelModel[157] = new ModelRendererTurbo(this, 169, 73, textureX, textureY, "lamp"); // Box 176
-		br185_enginemodelModel[158] = new ModelRendererTurbo(this, 177, 73, textureX, textureY); // Box 177
-		br185_enginemodelModel[159] = new ModelRendererTurbo(this, 81, 81, textureX, textureY, "lamp"); // Box 178
-		br185_enginemodelModel[160] = new ModelRendererTurbo(this, 113, 81, textureX, textureY); // Box 179
-		br185_enginemodelModel[161] = new ModelRendererTurbo(this, 129, 81, textureX, textureY, "lamp"); // Box 180
-		br185_enginemodelModel[162] = new ModelRendererTurbo(this, 137, 81, textureX, textureY); // Box 181
-		br185_enginemodelModel[163] = new ModelRendererTurbo(this, 193, 81, textureX, textureY, "lamp"); // Box 182
+		br185_enginemodelModel[154] = new ModelRendererTurbo(this, 105, 65, textureX, textureY, "emerg"); // Box 171
+		br185_enginemodelModel[155] = new ModelRendererTurbo(this, 217, 65, textureX, textureY, "lamprear"); // Box 174
+		br185_enginemodelModel[156] = new ModelRendererTurbo(this, 153, 73, textureX, textureY, "emerg"); // Box 175
+		br185_enginemodelModel[157] = new ModelRendererTurbo(this, 169, 73, textureX, textureY, "lamprear"); // Box 176
+		br185_enginemodelModel[158] = new ModelRendererTurbo(this, 177, 73, textureX, textureY, "lamprearnose"); // Box 177
+		br185_enginemodelModel[159] = new ModelRendererTurbo(this, 81, 81, textureX, textureY, "lampfrontnose"); // Box 178
+		br185_enginemodelModel[160] = new ModelRendererTurbo(this, 113, 81, textureX, textureY, "emerg"); // Box 179
+		br185_enginemodelModel[161] = new ModelRendererTurbo(this, 129, 81, textureX, textureY, "lampfront"); // Box 180
+		br185_enginemodelModel[162] = new ModelRendererTurbo(this, 137, 81, textureX, textureY, "emerg"); // Box 181
+		br185_enginemodelModel[163] = new ModelRendererTurbo(this, 193, 81, textureX, textureY, "lampfront"); // Box 182
 		br185_enginemodelModel[164] = new ModelRendererTurbo(this, 225, 137, textureX, textureY); // Box 178
 		br185_enginemodelModel[165] = new ModelRendererTurbo(this, 232, 162, textureX, textureY); // Box 179
 		br185_enginemodelModel[166] = new ModelRendererTurbo(this, 232, 171, textureX, textureY); // Box 180
@@ -662,18 +663,23 @@ public class BR185_EngineModel extends ModelBase
 
 		br185_enginemodelModel[154].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 171
 		br185_enginemodelModel[154].setRotationPoint(38F, -2.5F, -7F);
+		br185_enginemodelModel[154].setLightSourceFace(LightSourceFaceDirection.POSITIVE_X);
 
 		br185_enginemodelModel[155].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 174
 		br185_enginemodelModel[155].setRotationPoint(38F, -2.5F, -9F);
+		br185_enginemodelModel[155].setLightSourceFace(LightSourceFaceDirection.POSITIVE_X);
 
 		br185_enginemodelModel[156].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 175
 		br185_enginemodelModel[156].setRotationPoint(38F, -2.5F, 6F);
+		br185_enginemodelModel[156].setLightSourceFace(LightSourceFaceDirection.POSITIVE_X);
 
 		br185_enginemodelModel[157].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 176
 		br185_enginemodelModel[157].setRotationPoint(38F, -2.5F, 8F);
+		br185_enginemodelModel[157].setLightSourceFace(LightSourceFaceDirection.POSITIVE_X);
 
 		br185_enginemodelModel[158].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 177
 		br185_enginemodelModel[158].setRotationPoint(36.5F, -8.5F, -0.5F);
+		br185_enginemodelModel[158].setLightSourceFace(LightSourceFaceDirection.POSITIVE_X);
 
 		br185_enginemodelModel[159].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F); // Box 178
 		br185_enginemodelModel[159].setRotationPoint(-51.5F, -8.5F, -0.5F);
