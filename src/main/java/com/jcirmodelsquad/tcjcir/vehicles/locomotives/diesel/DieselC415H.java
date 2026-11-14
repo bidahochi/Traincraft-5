@@ -33,7 +33,6 @@ public class DieselC415H extends DieselTrain {
     {
         return "US";
     }
-    
 
     @Override
     public void updateRiderPosition() {
@@ -78,8 +77,8 @@ public class DieselC415H extends DieselTrain {
         return "ALCo C415 High Visibility";
     }
 
-    
-
-
-
+    @Override
+    public String transportYear() {
+        return "1966-1968";
+    }
 }

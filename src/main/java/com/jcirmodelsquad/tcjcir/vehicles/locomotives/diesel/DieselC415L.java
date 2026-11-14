@@ -26,7 +26,6 @@ public class DieselC415L extends DieselTrain {
     {
         return "US";
     }
-    
 
     @Override
     public void updateRiderPosition() {
@@ -62,13 +61,6 @@ public class DieselC415L extends DieselTrain {
         }
     }
 
-
-    
-
-    
-
-
-
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.2F;
     }
@@ -78,9 +70,8 @@ public class DieselC415L extends DieselTrain {
         return "ALCo C415 Low Clearance";
     }
 
-    
-
-
-
-
+    @Override
+    public String transportYear() {
+        return "1966-1968";
+    }
 }

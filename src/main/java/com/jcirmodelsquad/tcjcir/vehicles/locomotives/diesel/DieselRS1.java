@@ -41,31 +41,14 @@ public class DieselRS1 extends DieselTrain {
         return "US";
     }
 
-
     @Override
     public void updateRiderPosition() { TraincraftUtil.updateRider(this, 0.4, 0.35, -0.35); }
-    
-
-    
-
-    
-
-    
 
     @Override
-    public float getOptimalDistance(EntityMinecart cart) { return 1.3F;
-    }
-
-    
+    public float getOptimalDistance(EntityMinecart cart) { return 1.3F; }
 
     @Override
     public String getInventoryName() {
         return "ALCo RS-1";
     }
-
-    
-
-
-
-
 }

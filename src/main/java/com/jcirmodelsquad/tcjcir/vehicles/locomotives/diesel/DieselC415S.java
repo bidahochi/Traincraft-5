@@ -32,7 +32,6 @@ public class DieselC415S extends DieselTrain {
         return "US";
     }
 
-
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -67,13 +66,6 @@ public class DieselC415S extends DieselTrain {
         }
     }
 
-
-    
-
-    
-
-
-
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.2F;
     }
@@ -83,9 +75,8 @@ public class DieselC415S extends DieselTrain {
         return "ALCo C415";
     }
 
-
-    
-
-
-
+    @Override
+    public String transportYear() {
+        return "1966-1968";
+    }
 }

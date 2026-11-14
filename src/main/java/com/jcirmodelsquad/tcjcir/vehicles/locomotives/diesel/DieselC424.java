@@ -42,7 +42,6 @@ public class DieselC424 extends DieselTrain {
         return "US";
     }
 
-
     @Override
     public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3, 0.2, -0.35); }
 
@@ -52,9 +51,8 @@ public class DieselC424 extends DieselTrain {
     @Override
     public String getInventoryName() { return "ALCo C424"; }
 
-    
-    
-
-
-
+    @Override
+    public String transportYear() {
+        return "1963-1967";
+    }
 }

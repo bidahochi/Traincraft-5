@@ -29,7 +29,6 @@ public class DieselC855b extends DieselTrain {
         return "US";
     }
 
-
     @Override
     public void updateRiderPosition() {
         if (riddenByEntity == null) {return;}
@@ -63,13 +62,6 @@ public class DieselC855b extends DieselTrain {
             riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
         }
     }
-    
-
-
-
-
-
-
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.9F;
@@ -80,7 +72,8 @@ public class DieselC855b extends DieselTrain {
         return "ALCo C855b";
     }
 
-
-
-
+    @Override
+    public String transportYear() {
+        return "1964";
+    }
 }

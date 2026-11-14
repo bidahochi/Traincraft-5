@@ -31,16 +31,8 @@ public class DieselC425 extends DieselTrain {
         return "US";
     }
 
-
     @Override
     public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3, 0.2, -0.35); }
-    
-
-    
-
-
-
-
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.3F;
@@ -51,9 +43,8 @@ public class DieselC425 extends DieselTrain {
         return "ALCo C425";
     }
 
-
-
-
-
-
+    @Override
+    public String transportYear() {
+        return "1964-1966";
+    }
 }
