@@ -149,7 +149,8 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		//endregion Start/Stop Engine
 
 		//region Drop Fire
-		if (loco instanceof SteamTrain) {
+		if (SteamTrain.isCoalFiredSteam(loco))
+		{
 			this.buttonList.add(this.buttonLock = new GuiButton(9, var1 + 108, var2 - 22, 67, 12, "Drop Fire"));
 		}
 		//endregion Drop Fire

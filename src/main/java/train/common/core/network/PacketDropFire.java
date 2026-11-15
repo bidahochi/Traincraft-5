@@ -44,7 +44,7 @@ public class PacketDropFire implements IMessage {
 
             EntityPlayerMP player = context.getServerHandler().playerEntity;
             EntityRollingStock stock = RollingStockSeatManager.getRidingStock(player);
-            if ((stock instanceof SteamTrain) == false
+            if (SteamTrain.isCoalFiredSteam(stock) == false
                     || stock.canOperateControls(player) == false
                     || stock.getEntityId() != message.entityID)
             {

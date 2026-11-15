@@ -70,8 +70,11 @@ public class InventoryTankEngine extends Container {
 						return null;
 					}
 				}
-				else if (LiquidManager.getInstance().isContainer(itemstack1) && loco instanceof SteamTrain) {
-					if (!mergeItemStack(itemstack1, 1, 2, false)) {
+				else if (LiquidManager.getInstance().isContainer(itemstack1) && SteamTrain.isCoalFiredSteam(loco))
+				{
+					boolean movedContainer = mergeItemStack(itemstack1, 1, 2, false);
+					if (movedContainer == false)
+					{
 						return null;
 					}
 				}

@@ -39,6 +39,7 @@ import train.client.MovingTrainSound;
 import train.client.core.handlers.TCKeyHandler;
 import train.client.core.handlers.SafeKeyboard;
 import train.common.Traincraft;
+import train.common.api.control.SteamFiringType;
 import train.common.api.locomotive.AbstractBoilerLocomotive;
 import train.common.core.HandleMaxAttachedCarts;
 import train.common.core.handlers.ConfigHandler;
@@ -2084,11 +2085,13 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     public boolean trainIsWMTCSupported() {
         boolean support = false;
         int whichOneToCheck = 0;
-        if (this instanceof SteamTrain)
-        { whichOneToCheck = 2;
+        if (SteamTrain.hasStockDefaultFiringType(this, SteamFiringType.COAL))
+        {
+            whichOneToCheck = 2;
         }
-        if ((this instanceof SteamTrain) == false)
-        { whichOneToCheck = 1;
+        else
+        {
+            whichOneToCheck = 1;
         }
         if (this.getInventory()[whichOneToCheck] != null) {
             // System.out.println(this.getInventory()[whichOneToCheck].getItem().getClass().getName());
@@ -2104,11 +2107,13 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     public Boolean trainIsATOSupported() {
         boolean support = false;
         int whichOneToCheck = 0;
-        if (this instanceof SteamTrain)
-        { whichOneToCheck = 3;
+        if (SteamTrain.hasStockDefaultFiringType(this, SteamFiringType.COAL))
+        {
+            whichOneToCheck = 3;
         }
-        if ((this instanceof SteamTrain) == false)
-        { whichOneToCheck = 2;
+        else
+        {
+            whichOneToCheck = 2;
         }
         if (this.getInventory()[whichOneToCheck] != null) {
             // System.out.println(this.getInventory()[whichOneToCheck].getItem().getClass().getName());

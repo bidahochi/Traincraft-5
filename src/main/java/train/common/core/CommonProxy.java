@@ -27,6 +27,7 @@ import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
 import train.common.api.Freight;
 import train.common.api.LiquidTank;
+import train.common.api.SteamTrain;
 import train.common.api.Tender;
 import train.common.containers.*;
 import train.common.core.handlers.*;
@@ -273,10 +274,11 @@ public class CommonProxy implements IGuiHandler {
 			if (riddenByEntity == null) {
 				return null;
 			}
-			if (entity instanceof train.common.api.locomotive.AbstractLiquidFiredSteamEngine) {
+			if (SteamTrain.isOilFiredSteam(entity))
+			{
 				return new InventoryLiquidFiredLocomotive(
 						riddenByEntity.inventory,
-						(train.common.api.locomotive.AbstractLiquidFiredSteamEngine) entity
+						(SteamTrain) entity
 				);
 			}
 			return new InventoryLoco(riddenByEntity.inventory, (EntityRollingStock) entity);

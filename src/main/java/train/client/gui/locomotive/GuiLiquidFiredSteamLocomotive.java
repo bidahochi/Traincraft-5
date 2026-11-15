@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import train.client.gui.AbstractGuiLocomotive;
 import train.common.api.LiquidManager;
-import train.common.api.locomotive.AbstractLiquidFiredSteamEngine;
+import train.common.api.SteamTrain;
 import train.common.inventory.InventoryLiquidFiredLocomotive;
 import train.common.library.Info;
 
@@ -21,11 +21,11 @@ public class GuiLiquidFiredSteamLocomotive extends AbstractGuiLocomotive {
     private static final ResourceLocation FUEL_OVERLAY =
             new ResourceLocation(Info.modID, "textures/gui/fuel_overlay.png");
 
-    private final AbstractLiquidFiredSteamEngine liquidSteam;
+    private final SteamTrain liquidSteam;
 
     public GuiLiquidFiredSteamLocomotive(
             InventoryPlayer inventoryplayer,
-            AbstractLiquidFiredSteamEngine locomotive
+            SteamTrain locomotive
     )
     {
         super(new InventoryLiquidFiredLocomotive(inventoryplayer, locomotive), locomotive);

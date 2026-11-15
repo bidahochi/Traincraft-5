@@ -59,11 +59,6 @@ public class RollingStockItemCache
             return ((DieselTrain) abstractTrains).getTankCapacity();
         }
 
-        if (abstractTrains instanceof SteamTrain)
-        {
-            return ((SteamTrain) abstractTrains).getTankCapacity();
-        }
-
         return 0;
     }
 

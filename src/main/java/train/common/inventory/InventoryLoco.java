@@ -28,7 +28,8 @@ public class InventoryLoco extends AbstractTrainContainer {
 		int i = 1;
 
 		addSlotToContainer(specialSlots.new SlotFuel((IInventory) entityminecart, 0, 8, 53));
-		if (entityminecart instanceof SteamTrain) {
+		if (SteamTrain.isCoalFiredSteam(entityminecart))
+		{
 			addSlotToContainer(specialSlots.new SlotLiquid((IInventory) entityminecart, 1, 32, 53));
 			i = 2;
 		}
@@ -50,7 +51,8 @@ public class InventoryLoco extends AbstractTrainContainer {
 	@Override
 	public boolean canInteractWith(EntityPlayer var1)
 	{
-		return loco.isDead == false && loco.isActiveDriver(var1) && loco.isProtectedControlAuthorized(var1);
+		return SteamTrain.isOilFiredSteam(loco) == false && loco.isDead == false
+				&& loco.isActiveDriver(var1) && loco.isProtectedControlAuthorized(var1);
 	}
 
 	@Override
@@ -69,8 +71,11 @@ public class InventoryLoco extends AbstractTrainContainer {
 						return null;
 					}
 				}
-				else if (LiquidManager.getInstance().isContainer(itemstack1) && loco instanceof SteamTrain) {
-					if (!mergeItemStack(itemstack1, 1, 2, false)) {
+				else if (LiquidManager.getInstance().isContainer(itemstack1) && SteamTrain.isCoalFiredSteam(loco))
+				{
+					boolean movedContainer = mergeItemStack(itemstack1, 1, 2, false);
+					if (movedContainer == false)
+					{
 						return null;
 					}
 				}

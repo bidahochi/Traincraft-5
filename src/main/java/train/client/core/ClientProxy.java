@@ -60,6 +60,7 @@ import train.common.appearance.RollingStockAppearanceResolver;
 import train.common.api.AbstractTrains;
 import train.common.api.EntityBogie;
 import train.common.api.EntityRollingStock;
+import train.common.api.SteamTrain;
 import train.common.core.CommonProxy;
 import train.common.core.Traincraft_EventSounds;
 import train.common.core.handlers.ConfigHandler;
@@ -435,10 +436,11 @@ public class ClientProxy extends CommonProxy
 			if (riddenByEntity == null) {
 				return null;
 			}
-			if (entity instanceof train.common.api.locomotive.AbstractLiquidFiredSteamEngine) {
+			if (SteamTrain.isOilFiredSteam(entity))
+			{
 				return new GuiLiquidFiredSteamLocomotive(
 						riddenByEntity.inventory,
-						(train.common.api.locomotive.AbstractLiquidFiredSteamEngine) entity
+						(SteamTrain) entity
 				);
 			}
 			return new GuiLoco2(riddenByEntity.inventory, entity);

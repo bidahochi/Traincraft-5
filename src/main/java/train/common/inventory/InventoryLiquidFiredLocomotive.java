@@ -5,21 +5,26 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import train.common.api.locomotive.AbstractLiquidFiredSteamEngine;
+import train.common.api.SteamTrain;
 import train.common.slots.SpecialSlots;
 import train.common.slots.StandardRollingStockSlot;
 
 public class InventoryLiquidFiredLocomotive extends AbstractTrainContainer
 {
-    private static final int LOCOMOTIVE_SLOT_COUNT = 5;
-
-    private final AbstractLiquidFiredSteamEngine locomotive;
+    private final SteamTrain locomotive;
+    private final int locomotiveSlotCount;
 
     public InventoryLiquidFiredLocomotive(
             InventoryPlayer playerInventory,
-            AbstractLiquidFiredSteamEngine locomotive
-    ) {
+            SteamTrain locomotive
+    )
+    {
+        if (SteamTrain.isOilFiredSteam(locomotive) == false)
+        {
+            throw new IllegalArgumentException("Liquid service requires an oil-fired steam locomotive");
+        }
         this.locomotive = locomotive;
+        this.locomotiveSlotCount = locomotive.getSizeInventory();
 
         SpecialSlots specialSlots = SpecialSlots.getInstance();
 
@@ -30,17 +35,29 @@ public class InventoryLiquidFiredLocomotive extends AbstractTrainContainer
                 (IInventory) locomotive, 1, 8, 53, locomotive
         ));
 
-        addSlotToContainer(new StandardRollingStockSlot((IInventory) locomotive, 2, 80, 54));
-        addSlotToContainer(new StandardRollingStockSlot((IInventory) locomotive, 3, 98, 54));
-        addSlotToContainer(new StandardRollingStockSlot((IInventory) locomotive, 4, 116, 54));
+        int firstCargoRowY = locomotive.numCargoSlots1 == 0 && locomotive.numCargoSlots2 == 0 ? 54 : 18;
+        int nextSlot = addCargoRow(2, locomotive.numCargoSlots, firstCargoRowY);
+        nextSlot = addCargoRow(nextSlot, locomotive.numCargoSlots1, 36);
+        addCargoRow(nextSlot, locomotive.numCargoSlots2, 54);
 
         addPlayerInventory(playerInventory);
+    }
+
+    /** Adds one row of locomotive cargo and returns the next free inventory slot. */
+    private int addCargoRow(int firstSlot, int slotCount, int rowY)
+    {
+        for (int column = 0; column < slotCount; column++)
+        {
+            addSlotToContainer(new StandardRollingStockSlot(locomotive, firstSlot + column, 80 + column * 18, rowY));
+        }
+        return firstSlot + slotCount;
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer player)
     {
-        return locomotive.isDead == false && locomotive.isActiveDriver(player) && locomotive.isProtectedControlAuthorized(player);
+        return SteamTrain.isOilFiredSteam(locomotive) && locomotive.isDead == false
+                && locomotive.isActiveDriver(player) && locomotive.isProtectedControlAuthorized(player);
     }
 
     @Override
@@ -54,8 +71,10 @@ public class InventoryLiquidFiredLocomotive extends AbstractTrainContainer
         ItemStack stack = slot.getStack();
         ItemStack original = stack.copy();
 
-        if (slotIndex < LOCOMOTIVE_SLOT_COUNT) {
-            if (!mergeItemStack(stack, LOCOMOTIVE_SLOT_COUNT, inventorySlots.size(), true)) {
+        if (slotIndex < locomotiveSlotCount)
+        {
+            if (mergeItemStack(stack, locomotiveSlotCount, inventorySlots.size(), true) == false)
+            {
                 return null;
             }
         }
@@ -69,7 +88,8 @@ public class InventoryLiquidFiredLocomotive extends AbstractTrainContainer
                 return null;
             }
         }
-        else if (!mergeItemStack(stack, 2, LOCOMOTIVE_SLOT_COUNT, false)) {
+        else if (mergeItemStack(stack, 2, locomotiveSlotCount, false) == false)
+        {
             return null;
         }
 

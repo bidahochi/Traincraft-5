@@ -1,5 +1,5 @@
 /**
- * A track that detects all instance of SteamTrain
+ * Detects steam locomotives regardless of firing type.
  * 
  * @author Spitfire4466
  */
@@ -17,8 +17,10 @@ public class BlockDetectorSteamLocomotiveTrack extends BlockDetectorTrack implem
 		return Tracks.DETECTOR_STEAM_LOCOMOTIVES;
 	}
 	@Override
-	public void onMinecartPass(EntityMinecart cart) {
-		if (cart instanceof SteamTrain) {
+	public void onMinecartPass(EntityMinecart cart)
+	{
+		if (cart instanceof SteamTrain)
+		{
 			setTrackPowering();
 		}
 	}
