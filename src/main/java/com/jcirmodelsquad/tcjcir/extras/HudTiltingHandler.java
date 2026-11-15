@@ -1,5 +1,8 @@
 package com.jcirmodelsquad.tcjcir.extras;
 
+import train.common.seats.RollingStockSeatManager;
+import net.minecraft.entity.Entity;
+
 import com.jcirmodelsquad.tcjcir.features.TiltingHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
@@ -18,22 +21,31 @@ import java.text.DecimalFormat;
 public class HudTiltingHandler extends GuiScreen {
     private Minecraft game;
     @SubscribeEvent
-    public void onGameRender(RenderGameOverlayEvent.Text event){
-        if (game != null && game.thePlayer != null && game.thePlayer.ridingEntity != null && game.thePlayer.ridingEntity instanceof EntityRollingStock && Minecraft.isGuiEnabled()) {
-            try {
-                if (game.thePlayer.ridingEntity.getClass().getField("tiltingHandler") != null) {
-                    Object handlerField = game.thePlayer.ridingEntity.getClass().getField("tiltingHandler").get(game.thePlayer.ridingEntity);
+    public void onGameRender(RenderGameOverlayEvent.Text event)
+    {
+        Entity ridingStock = game == null ? null : RollingStockSeatManager.getRidingStock(game.thePlayer);
+        if (game != null && game.thePlayer != null && ridingStock != null && ridingStock instanceof EntityRollingStock && Minecraft.isGuiEnabled())
+        {
+            try
+            {
+                if (ridingStock.getClass().getField("tiltingHandler") != null)
+                {
+                    Object handlerField = ridingStock.getClass().getField("tiltingHandler").get(ridingStock);
                     if (handlerField instanceof TiltingHandler) {
                         renderSkillHUD(event, (TiltingHandler)handlerField);
                     }
 
 
                 }
-            } catch (NoSuchFieldException | IllegalAccessException e) {
+            }
+            catch (NoSuchFieldException | IllegalAccessException e)
+            {
                 //Train does not have a tilt hadnler
             }
 
-        } else {
+        }
+        else
+        {
             this.game = this.mc = Minecraft.getMinecraft();
             this.fontRendererObj = this.game.fontRenderer;
         }

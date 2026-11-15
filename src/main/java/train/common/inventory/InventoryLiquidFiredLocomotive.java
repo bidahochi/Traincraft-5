@@ -38,8 +38,9 @@ public class InventoryLiquidFiredLocomotive extends AbstractTrainContainer
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer player) {
-        return !locomotive.isDead;
+    public boolean canInteractWith(EntityPlayer player)
+    {
+        return locomotive.isDead == false && locomotive.isActiveDriver(player) && locomotive.isProtectedControlAuthorized(player);
     }
 
     @Override

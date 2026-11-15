@@ -1,5 +1,7 @@
 package train.common.api;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -51,9 +53,14 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 		furnaceCookTime = 0;
 	}
 
+
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + getAdditionalYOffset(), posZ);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("passenger_1", 0.0F, (float) getAdditionalYOffset(), 0.0F, SeatRole.PASSENGER)
+		};
 	}
 
 	@Override
@@ -330,19 +337,18 @@ public abstract class AbstractWorkCart extends EntityRollingStock implements IIn
 	}
 
 	@Override
-	public boolean interactFirst(EntityPlayer entityplayer) {
+	public boolean interactFirst(EntityPlayer entityplayer)
+	{
 		if ((super.interactFirst(entityplayer))) {
 			return false;
 		}
-		if (!worldObj.isRemote) {
+		if (worldObj.isRemote == false)
+		{
 			ItemStack itemstack = entityplayer.inventory.getCurrentItem();
 			if(lockThisCart(itemstack, entityplayer))
             {return true;
             }
-			if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-				return true;
-			}
-			boardPlayer(entityplayer);
+			return mountPassenger(entityplayer);
 		}
 		return true;
 	}

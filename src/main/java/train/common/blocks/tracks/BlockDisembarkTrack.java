@@ -3,14 +3,12 @@
  */
 package train.common.blocks.tracks;
 
-import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.StampedeRack;
 import mods.railcraft.api.tracks.ITrackEmitter;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityMinecart;
+import train.common.api.EntityRollingStock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-import train.common.entity.rollingStock.EntityStockCar;
-import train.common.entity.rollingStock.EntityStockCarDRWG;
 import train.common.library.Tracks;
 
 import java.io.DataInputStream;
@@ -25,15 +23,23 @@ public class BlockDisembarkTrack extends TrackBaseTraincraft implements ITrackEm
 		return Tracks.DISEMBARK_TRACK;
 	}
 	@Override
-	public void onMinecartPass(EntityMinecart cart) {
-		if (cart instanceof EntityStockCar || cart instanceof EntityStockCarDRWG || cart instanceof StampedeRack) {
-			if (cart.riddenByEntity == null)
-				return;
-			cart.riddenByEntity.mountEntity(cart);
-			cart.riddenByEntity.ridingEntity = null;
+	public void onMinecartPass(EntityMinecart cart)
+	{
+		if (getWorld().isRemote || (cart instanceof EntityRollingStock) == false)
+		{
+			return;
+		}
+		EntityRollingStock stock = (EntityRollingStock) cart;
+		if (stock.getSeatLayoutForRuntime().hasLivestockSeats() == false)
+		{
+			return;
+		}
+		if (stock.unloadPassengers(false))
+		{
 			setTrackPowering();
 		}
 	}
+
 	@Override
 	public void updateEntity() {
 		if (getWorld().isRemote) {

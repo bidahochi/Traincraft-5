@@ -1,8 +1,6 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives;
 
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.AbstractControlCar;
 import train.common.library.sounds.SoundRecord;
@@ -54,22 +52,6 @@ public class S1BL extends AbstractControlCar
 
     
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-            if(lockThisCart(itemstack, entityplayer))return true;
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            boardPlayer(entityplayer);
-        }
-        return true;
-    }
 
     @Override
     public boolean canBeRidden() {

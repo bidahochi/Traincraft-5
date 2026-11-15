@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
 import train.common.api.locomotive.AbstractLiquidFiredSteamEngine;
-import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
@@ -25,7 +27,13 @@ public class SteamP01a extends AbstractLiquidFiredSteamEngine {
 	}
 
 	@Override
-	public void updateRiderPosition() { TraincraftUtil.updateRider(this, -0.9, 0.1, -0.4); }
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -1.6719F, 0.1F, 0.3844F, SeatRole.DRIVER)
+		};
+	}
 
 	@Override
 	public String getInventoryName() {

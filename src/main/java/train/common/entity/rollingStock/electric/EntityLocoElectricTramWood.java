@@ -1,5 +1,8 @@
 package train.common.entity.rollingStock.electric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -22,8 +25,12 @@ public class EntityLocoElectricTramWood extends ElectricTrain {
 
 
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.10F, posZ);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.8F, 0.1F, -0.0045F, SeatRole.DRIVER)
+		};
 	}
 
 

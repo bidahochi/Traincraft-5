@@ -132,7 +132,8 @@ public class TileTransmitterSpeed extends TileEntity implements IPeripheral {
     }
     @Override
 
-    public void updateEntity() {
+    public void updateEntity()
+    {
 
         if (worldObj == null) {
             return;
@@ -162,7 +163,8 @@ public class TileTransmitterSpeed extends TileEntity implements IPeripheral {
 
 
 
-        if (isActivated) {
+        if (isActivated)
+        {
             List<Object> list = this.worldObj.getEntitiesWithinAABBExcludingEntity(null, this.getRenderBoundingBox());
             if (list.size() == 0 ) {
                 hadSentPacket = false;
@@ -170,19 +172,23 @@ public class TileTransmitterSpeed extends TileEntity implements IPeripheral {
                 trainNumber = 0;
                 //Reset everything.
             }
-            if (list.size() > 0) {
-                for (Object entity : list) {
+            if (list.size() > 0)
+            {
+                for (Object entity : list)
+                {
 
-                    if (entity instanceof Locomotive) {
+                    if (entity instanceof Locomotive)
+                    {
 
                         Locomotive loco = (Locomotive) entity;
                         loco.enforceSpeedLimits = enforceSpeedLimits;
                         if (loco.mtcOverridePressed) { return;}
 
-                        if (loco.mtcStatus == 0  && !hadSentMTCPacket) {
+                        if (loco.mtcStatus == 0  && hadSentMTCPacket == false)
+                        {
                             loco.mtcStatus = 1;
                             //Change MTC Status
-                            Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(loco.getEntityId(),  1, 1)  , new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, loco.posX, loco.posY, loco.posZ, 150.0D));
+                            Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(loco,  1, 1)  , new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, loco.posX, loco.posY, loco.posZ, 150.0D));
                             hadSentMTCPacket = true;
                         }
 

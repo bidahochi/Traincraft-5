@@ -1,17 +1,17 @@
 package train.common.entity.rollingStock.passenger;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.client.render.models.ModelGS4Passenger;
 import train.client.render.register.TrainRenderRecord;
 import train.common.Traincraft;
-import train.common.api.EntityRollingStock;
-import train.common.api.IPassenger;
+import train.common.api.AbstractPassengerCar;
 import train.common.library.Info;
 
-public class EntityPassengerGS4 extends EntityRollingStock implements IPassenger {
+public class EntityPassengerGS4 extends AbstractPassengerCar
+{
 
 	public EntityPassengerGS4(World world) {
 		super(world);
@@ -26,12 +26,7 @@ public class EntityPassengerGS4 extends EntityRollingStock implements IPassenger
 		InsertTexture(21, "GS4-liner (PH6)");
 	}
 
-		@Override
-	public void updateRiderPosition() {
-		if(riddenByEntity!=null) {
-			riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.17, posZ);
-		}
-	}
+
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
@@ -54,4 +49,21 @@ public class EntityPassengerGS4 extends EntityRollingStock implements IPassenger
 				new float[] { 0F, 180F, 180F },
 				new float[]{0.8f,1f,0.8f}));
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("passenger_1", -0.17f, 0.26f, 0.3f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_2", 0.28f, 0.26f, -0.3f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_3", -0.63f, 0.26f, -0.3f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_4", 0.72f, 0.26f, 0.3f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_5", -1.08f, 0.26f, 0.3f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_6", 1.18f, 0.26f, -0.3f, SeatRole.PASSENGER)
+		};
+	}
+
 }

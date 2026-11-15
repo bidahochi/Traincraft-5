@@ -1,5 +1,7 @@
 package train.common.entity.rollingStock.steam;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
@@ -21,27 +23,6 @@ public class EntityLocoSteamBerk765 extends SteamTrain {
 		
 	}
 
-	
-
-
-
-	@Override
-	public void updateRiderPosition() {
-		TraincraftUtil.updateRider(this, -1.125, 0.375);
-	}
-
-
-
-	
-
-	
-@Override
-	public String getInventoryName() {
-		return "Berkshire 1225";
-	}
-
-	
-
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
 		return 1.375F;
@@ -53,4 +34,17 @@ public class EntityLocoSteamBerk765 extends SteamTrain {
 		return "US";
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -3.2812F, 0.3f, 0.35f, SeatRole.DRIVER),
+			new SeatDefinition("crew_1", -3.2812F, 0.3f, -0.35f, SeatRole.CREW)
+		};
+	}
+
 }

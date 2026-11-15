@@ -19,6 +19,10 @@ import train.common.core.network.*;
 import train.common.library.Info;
 
 public abstract class AbstractGuiLocomotive extends GuiContainer {
+	private static final int SEAT_NAVIGATION_X = 78;
+	private static final int SEAT_NAVIGATION_Y = -21;
+	private static final int SEAT_NAVIGATION_WIDTH = 24;
+	private static final int SEAT_NAVIGATION_HEIGHT = 20;
 
 
 	private String texture = Info.guiPrefix + "customButton.png";
@@ -40,9 +44,34 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
         this.lightControls = RollingStockLightControlPanel.forStockAtlas(locomotive, locomotive);
     }
 
+	/** Creates the compact seat button in the reserved space beside the locomotive controls. */
+	public GuiButton createSeatNavigationButton(int buttonId)
+	{
+		int left = (width - xSize) / 2;
+		int top = (height - ySize) / 2;
+		return new GuiButton(buttonId, left + SEAT_NAVIGATION_X, top + SEAT_NAVIGATION_Y,
+				SEAT_NAVIGATION_WIDTH, SEAT_NAVIGATION_HEIGHT,
+				StatCollector.translateToLocal("seat.selection.button.seat"));
+	}
+
+    /** Sends the inverse of the synchronized named-circuit state; the server remains authoritative. */
+    private void sendChannel(byte control, RollingStockLightChannel channel)
+    {
+        boolean enabled = loco.isLightChannelEnabled(channel) == false;
+        Traincraft.rollingStockLightsChannel.sendToServer(
+            new PacketRollingStockLightState(
+                loco.getEntityId(), control, (byte)(enabled ? 1 : 0)));
+    }
+
+    /** Returns the display state derived from the synchronized watcher, not client prediction. */
+    private String channelLabel(RollingStockLightChannel channel)
+    {
+        return loco.isLightChannelEnabled(channel) ? "On" : "Off";
+    }
 
 	@Override
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		buttonList.clear();
 		//region ParkingBrake
@@ -93,7 +122,7 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		int var2 = (this.height - ySize) / 2;
 		GuiButton lockButton = TransportLockGuiHandler.createLockButton(
 				loco,
-				(EntityPlayer)loco.riddenByEntity,
+				mc.thePlayer,
 				var1,
 				var2,
 				108,
@@ -134,11 +163,17 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		loco.guiTCTextFieldTrainNote.setText(loco.getTrainNote());
 		//endregion guiTCTextFieldTrainNote
         lightControls.init(buttonList, var1, var2 + RollingStockLightControlPanel.GUI_Y);
-    }
+	}
 
 	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
+        if (loco.isActiveDriver(mc.thePlayer) == false || loco.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.thePlayer.closeScreen();
+            return;
+        }
+
         if (lightControls.actionPerformed(guibutton))
         {
             return;
@@ -164,12 +199,13 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
                 }
 			break;
 			case 3:
-				TransportLockGuiHandler.handleLockButton(this, guibutton, (EntityPlayer)loco.riddenByEntity, loco, isShiftKeyDown());
+				TransportLockGuiHandler.handleLockButton(this, guibutton, mc.thePlayer, loco, isShiftKeyDown());
 			break;
 			case 4:
 				if (loco.isLocoTurnedOn())
 				{
-					if(loco.getSpeed() <= 1){
+					if(loco.getSpeed() <= 1)
+					{
 						Traincraft.ignitionChannel.sendToServer(new PacketSetLocoTurnedOn(false));
 						loco.isLocoTurnedOn = false;
 						guibutton.displayString = "Start Engine";
@@ -181,8 +217,10 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 						loco.parkingBrake = true;
 						loco.isBraking = true;
 						this.initGui();
-					}else{
-						((EntityPlayer)loco.riddenByEntity).addChatMessage(new ChatComponentText("Stop before turning it Off!"));
+					}
+					else
+					{
+						mc.thePlayer.addChatMessage(new ChatComponentText("Stop before turning it Off!"));
 					}
 				}
 				else {
@@ -192,8 +230,10 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 				}
 			break;
 			case 5:
-				if (loco.isLocoTurnedOn()) {
-					if(loco.getSpeed() <= 1){
+				if (loco.isLocoTurnedOn())
+				{
+					if(loco.getSpeed() <= 1)
+					{
 						Traincraft.ignitionChannel.sendToServer(new PacketSetLocoTurnedOn(false));
 						loco.isLocoTurnedOn = false;
 						guibutton.displayString = "Start Engine";
@@ -205,8 +245,10 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 						loco.parkingBrake = true;
 						loco.isBraking = true;
 						this.initGui();
-					}else{
-						((EntityPlayer)loco.riddenByEntity).addChatMessage(new ChatComponentText("Stop before turning it Off!"));
+					}
+					else
+					{
+						mc.thePlayer.addChatMessage(new ChatComponentText("Stop before turning it Off!"));
 					}
 				}
 				else {
@@ -223,19 +265,22 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	}
 
 	@Override
-	protected void drawCreativeTabHoveringText(String str, int t, int g) {
+	protected void drawCreativeTabHoveringText(String str, int t, int g)
+	{
 
 		//int liqui = (dieselInventory.getLiquidAmount() * 50) / dieselInventory.getTankCapacity();
 		String state = "";
-		if (loco.getTrainLockedFromPacket()) {
-			if (loco.getTransportOwner().equalsIgnoreCase(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+		if (loco.getTrainLockedFromPacket())
+		{
+			if (loco.getTransportOwner().equalsIgnoreCase(mc.thePlayer.getDisplayName()))
             {
 				state = "Locked";
             }
 			else
-            { if (loco.isPlayerTrusted(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
-                {
-				if (loco.isPlayerTrustedToBreak(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+			{
+				if (loco.isPlayerTrusted(mc.thePlayer.getDisplayName()))
+				{
+				if (loco.isPlayerTrustedToBreak(mc.thePlayer.getDisplayName()))
                     {
 					state = "Trusted Access+";
                     }
@@ -243,9 +288,11 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
                     {
 					state = "Trusted Access";
 		}
-                }
-            }
-		} else {
+				}
+			}
+		}
+		else
+		{
 			state = "Unlocked";
 		}
 
@@ -346,7 +393,14 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	}
 
 	@Override
-	public void updateScreen() {
+	public void updateScreen()
+	{
+        if (loco.isActiveDriver(mc.thePlayer) == false || loco.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.thePlayer.closeScreen();
+            return;
+        }
+
 		super.updateScreen();
         lightControls.update();
 		if (loco.guiTCTextFieldTrainNote.isFocused()) {
@@ -355,7 +409,14 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 	}
 
 	@Override
-	protected void keyTyped(char par1, int par2) {
+	protected void keyTyped(char par1, int par2)
+	{
+        if (loco.isActiveDriver(mc.thePlayer) == false || loco.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.thePlayer.closeScreen();
+            return;
+        }
+
 
 
 		if (loco.guiTCTextFieldTrainNote.isFocused()) {
@@ -368,7 +429,7 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 			super.keyTyped(par1, par2);
 		}
 	}
-    }
+	}
 
 	@Override
 	protected void mouseClicked(int par1, int par2, int par3) {

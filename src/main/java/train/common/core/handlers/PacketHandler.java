@@ -47,7 +47,8 @@ import java.util.List;
 
 public class PacketHandler
 {
-	public static void init(){
+	public static void init()
+	{
 		Traincraft.tcLog.info("Initializing Packets");
 		Traincraft.modChannel = NetworkRegistry.INSTANCE.newSimpleChannel(Info.channel);
 		Traincraft.keyChannel = NetworkRegistry.INSTANCE.newSimpleChannel(Info.keyChannel);
@@ -119,7 +120,7 @@ public class PacketHandler
 		Traincraft.mtcBlockChannel.registerMessage(HANDLERS[1], PacketUpdateStopPointTransmitter.class, 201, Side.SERVER);
 		Traincraft.mtcChannel.registerMessage(HANDLERS[2], PacketSpeedLimit.class, 202, Side.CLIENT);
 		Traincraft.mtcChannel.registerMessage(HANDLERS[3], PacketStopPoint.class, 203, Side.CLIENT);
-		Traincraft.mtcChannel.registerMessage(HANDLERS[4], PacketMTCStatus.class, 204, Side.CLIENT);
+		Traincraft.mtcChannel.registerMessage(PacketMTCStatus.Handler.class, PacketMTCStatus.class, 204, Side.CLIENT);
 		Traincraft.mtcChannel.registerMessage(HANDLERS[5], PacketATO.class, 205, Side.CLIENT);
 		Traincraft.mtcChannel.registerMessage(HANDLERS[8], PacketInterfaceAction.class, 209, Side.SERVER);
 		Traincraft.geometryCarChannel.registerMessage(HANDLERS[6], UpdateGeometryCar.class, 206, Side.SERVER);
@@ -144,6 +145,8 @@ public class PacketHandler
 		Traincraft.modChannel.registerMessage(PacketTrackAttachmentState.Handler.class, PacketTrackAttachmentState.class, 40, Side.CLIENT);
 		Traincraft.modChannel.registerMessage(PacketSleeperCar.RequestHandler.class, PacketSleeperCar.Request.class, 41, Side.SERVER);
 		Traincraft.modChannel.registerMessage(PacketSleeperCar.StateHandler.class, PacketSleeperCar.State.class, 42, Side.CLIENT);
+		Traincraft.modChannel.registerMessage(PacketSeatSelection.Handler.class, PacketSeatSelection.class, 43, Side.SERVER);
+		Traincraft.modChannel.registerMessage(PacketSeatSelection.Handler.class, PacketSeatSelection.class, 43, Side.CLIENT);
 	}
 
 	private static final IMessageHandler[] HANDLERS = new IMessageHandler[]{

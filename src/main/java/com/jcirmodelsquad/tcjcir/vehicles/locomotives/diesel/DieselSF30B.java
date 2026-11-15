@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 
@@ -38,7 +40,13 @@ public class DieselSF30B extends DieselTrain {
     }
 
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3.3, 0.25, -0.35); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 1.775F, 0.25F, 0.6031F, SeatRole.DRIVER)
+        };
+    }
 
     @Override
     public float getOptimalDistance(EntityMinecart cart) { return 1.315F;

@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.diesel;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 
 import train.common.library.sounds.SoundRecord;
@@ -38,7 +40,13 @@ public class DieselFP7A extends DieselTrain {
     }
 
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 2.5, 0.19, -0.35); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 1.1406F, 0.19F, 0.3656F, SeatRole.DRIVER)
+        };
+    }
 
 
     

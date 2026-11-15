@@ -13,6 +13,9 @@ import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.world.ChunkEvent;
 import train.common.api.AbstractTrains;
 import train.common.api.Locomotive;
+import train.common.api.EntityRollingStock;
+import train.common.seats.RollingStockSeatManager;
+import train.common.entity.EntityPassengerSeat;
 import train.common.entity.ai.EntityAIFearHorn;
 import train.common.entity.rollingStock.EntityJukeBoxCart;
 
@@ -61,14 +64,24 @@ public class WorldEvents{
 
 	@SubscribeEvent
 	@SuppressWarnings("unused")
-	public void playerQuitEvent(PlayerEvent.PlayerLoggedOutEvent event){
-		if (event.player.ridingEntity instanceof AbstractTrains){
-			if (event.player.ridingEntity instanceof Locomotive) {
-				((Locomotive) event.player.ridingEntity).isBraking=true;
-				((Locomotive) event.player.ridingEntity).parkingBrake=true;
-			}
-			event.player.dismountEntity(event.player.ridingEntity);
-			event.player.ridingEntity = null;
+	public void playerQuitEvent(PlayerEvent.PlayerLoggedOutEvent event)
+	{
+		EntityRollingStock stock = RollingStockSeatManager.getRidingStock(event.player);
+		if (stock != null && stock.isActiveDriver(event.player))
+		{
+			stock.clearTransientControlInput();
+			stock.isBraking = true;
+			stock.parkingBrake = true;
+		}
+		if (event.player.ridingEntity instanceof EntityPassengerSeat)
+		{
+			EntityPassengerSeat seat = (EntityPassengerSeat) event.player.ridingEntity;
+			event.player.mountEntity(null);
+			seat.setDead();
+		}
+		else if (event.player.ridingEntity instanceof AbstractTrains)
+		{
+			event.player.mountEntity(null);
 		}
 	}
 

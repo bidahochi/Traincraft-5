@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 
 import train.common.library.sounds.SoundRecord;
@@ -22,7 +24,13 @@ public class SteamShay3Truck extends SteamTrain {
 	}
 
 	@Override
-	public void updateRiderPosition() { TraincraftUtil.updateRider(this, +0.1, 0.0, -0.35); }
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.775F, 0F, 0.3462F, SeatRole.DRIVER)
+		};
+	}
 
 	/*@Override
 	public void updateRiderPosition() {

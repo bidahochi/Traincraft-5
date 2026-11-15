@@ -1,11 +1,12 @@
 package train.common.api;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
 import static train.common.library.EnumSounds.fallback;
 
 import com.google.gson.JsonObject;
 import com.jcirmodelsquad.tcjcir.extras.PeachyUtil;
 import com.jcirmodelsquad.tcjcir.extras.packets.RemoteControlKeyPacket;
-import com.jcirmodelsquad.tcjcir.features.autotrain.AutoTrain2;
 import com.jcirmodelsquad.tcjcir.features.autotrain.IAT2Compatible;
 import com.jcirmodelsquad.tcjcir.features.signal.dynamic.LocoTransceiver;
 import com.jcirmodelsquad.tcjcir.features.signal.dynamic.Message;
@@ -21,7 +22,6 @@ import java.util.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -161,6 +161,12 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     private String locoState = "";
 
 
+    @Override
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[] { new SeatDefinition("driver", 0.0F, 0.0F, 0.0F, SeatRole.DRIVER) };
+    }
+
     public Locomotive(World world)
     {
         super(world);
@@ -207,17 +213,16 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
     }
 
     @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
+    public boolean interactFirst(EntityPlayer entityplayer)
+    {
         playerEntity = entityplayer;
         if ((super.interactFirst(entityplayer))) {
             return false;
         }
-        if (!worldObj.isRemote) {
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            boardPlayer(entityplayer);
-        }
+		if (worldObj.isRemote == false)
+		{
+			return mountPassenger(entityplayer);
+		}
         return true;
     }
 
@@ -620,96 +625,113 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         this.canBeAdjusted = canBeAdj;
     }
 
-    /**
-     * Applies an authenticated control packet and updates matching GUI/control state.
-     *
-     * @param key rolling-stock control key identifier received from the validated packet
-     */
-    @Override
-    public void keyHandlerFromPacket(int key)
+    /** Applies an authenticated control packet from the player who sent it. */
+    public void keyHandlerFromPacket(int key, EntityPlayer sender)
     {
-        if (this.getTrainLockedFromPacket())
+        if (canOperateControls(sender) == false)
         {
-            // Allow a player to operate locomotive if they are the owner if they are trusted.
-            if (this.riddenByEntity instanceof EntityPlayer
-                    && ((EntityPlayer) this.riddenByEntity).getDisplayName()
-                    .equalsIgnoreCase(this.getTransportOwner()) == false
-                    && this.isPlayerTrusted(
-                        ((EntityPlayer) riddenByEntity).getDisplayName()) == false) {
-                return;
-            }
+            return;
         }
         pressKey(key);
-        if (key == HORN_KEY) {
-            triggerHornResponse();
-            if (ConfigHandler.SOUNDS) {
-                soundHorn();
-            }
-        }
-        if (key == FORWARD_PRESS_KEY) {
-            forwardPressed = true;
-        }
-        if (key == REVERSE_PRESS_KEY) {
-            backwardPressed = true;
-        }
-        if (key == BRAKE_PRESS_KEY) {
-            brakePressed = true;
-        }
-        if (key == FORWARD_RELEASE_KEY) {
-            forwardPressed = false;
-        }
-        if (key == REVERSE_RELEASE_KEY) {
-            backwardPressed = false;
-        }
-        if (key == BRAKE_RELEASE_KEY) {
-            brakePressed = false;
-        }
-        if (key == AUTOMATIC_TRAIN_OPERATION_KEY) {
-            if (mtcStatus != 0 && this.mtcType != 1) {
-                if (this instanceof IAT2Compatible) {
-                    AutoTrain2 autoTrain2 = ((IAT2Compatible)this).getDriver();
-                    autoTrain2.start();
-                } else {
-                    setMTCStatus(1, mtcType, atoStatus == 0 ? 1 : 0);
-                }
-            }
-        }
-
-        if (key == MTC_OVERRIDE_KEY) {
-
-            if (mtcOverridePressed) {
-                mtcOverridePressed = false;
-            } else {
-                mtcOverridePressed = true;
-                this.mtcStatus = 0;
-                this.speedLimit = 0;
-                this.nextSpeedLimit = 0;
-                this.trainLevel = 0;
-                disconnectFromServer();
-            }
-
-
-        }
-        if (key == OVERSPEED_OVERRIDE_KEY) {
-            if (mtcStatus != 0) {
-                if (overspeedOveridePressed) {
-                    overspeedOveridePressed = false;
-                } else {
-                    overspeedOveridePressed = true;
-                }
-            }
-        }
-
-        /*if (key == 48){
-            soundBell();
-        }*/
-
-        if (key == BELL_TOGGLE_KEY)
+        switch (key)
         {
-            bellPressed =bellPressed == false;
-            if (bellPressed) {
-                soundBell3();
-            }
+            case HORN_KEY:
+                triggerHornResponse();
+                if (ConfigHandler.SOUNDS)
+                {
+                    soundHorn();
+                }
+                return;
+            case FORWARD_PRESS_KEY:
+                forwardPressed = true;
+                return;
+            case REVERSE_PRESS_KEY:
+                backwardPressed = true;
+                return;
+            case BRAKE_PRESS_KEY:
+                brakePressed = true;
+                return;
+            case FORWARD_RELEASE_KEY:
+                forwardPressed = false;
+                return;
+            case REVERSE_RELEASE_KEY:
+                backwardPressed = false;
+                return;
+            case BRAKE_RELEASE_KEY:
+                brakePressed = false;
+                return;
+            case AUTOMATIC_TRAIN_OPERATION_KEY:
+                toggleAutomaticTrainOperation();
+                return;
+            case MTC_OVERRIDE_KEY:
+                toggleMtcOverride();
+                return;
+            case OVERSPEED_OVERRIDE_KEY:
+                toggleOverspeedOverride();
+                return;
+            case BELL_TOGGLE_KEY:
+                toggleBell();
+                return;
+            default:
+        }
+    }
+
+    @Override
+    public void clearTransientControlInput()
+    {
+        forwardPressed = false;
+        backwardPressed = false;
+        brakePressed = false;
+    }
+
+    private void toggleAutomaticTrainOperation()
+    {
+        if (this instanceof SteamTrain && ConfigHandler.ALLOW_ATO_ON_STEAMERS == false)
+        {
+            return;
+        }
+        if (mtcStatus == 0 || mtcType == 1)
+        {
+            return;
+        }
+        if (this instanceof IAT2Compatible)
+        {
+            ((IAT2Compatible) this).getDriver().start();
+            return;
+        }
+        setMTCStatus(1, mtcType, atoStatus == 0 ? 1 : 0);
+    }
+
+    private void toggleMtcOverride()
+    {
+        mtcOverridePressed = mtcOverridePressed == false;
+        if (mtcOverridePressed)
+        {
+            mtcStatus = 0;
+            speedLimit = 0;
+            nextSpeedLimit = 0;
+            trainLevel = 0;
+            disconnectFromServer();
+        }
+        setMTCStatus(mtcStatus, mtcType, atoStatus);
+    }
+
+    private void toggleOverspeedOverride()
+    {
+        if (mtcStatus == 0)
+        {
+            return;
+        }
+        overspeedOveridePressed = overspeedOveridePressed == false;
+        setMTCStatus(mtcStatus, mtcType, atoStatus);
+    }
+
+    private void toggleBell()
+    {
+        bellPressed = bellPressed == false;
+        if (bellPressed)
+        {
+            soundBell3();
         }
     }
 
@@ -800,6 +822,17 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         }
     }
 
+    private boolean syncClientKeyState(int keyCode, boolean wasPressed, int pressPacket, int releasePacket)
+    {
+        boolean isPressed = SafeKeyboard.isKeyDown(keyCode);
+        if (isPressed == wasPressed)
+        {
+            return wasPressed;
+        }
+        Traincraft.keyChannel.sendToServer(new PacketKeyPress(isPressed ? pressPacket : releasePacket));
+        return isPressed;
+    }
+
     @Override
     public void onUpdate()
     {
@@ -812,39 +845,15 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
 
         if (worldObj.isRemote && ticksExisted % 2 == 0 && !Minecraft.getMinecraft().ingameGUI.getChatGUI().getChatOpen())
         {
-            if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode())
-                    && !forwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_PRESS_KEY));
-                forwardPressed = true;
-            } else
-            { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode()) == false
-                    && forwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(FORWARD_RELEASE_KEY));
-                forwardPressed = false;
-            }
-            }
-            if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode())
-                    && !backwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_PRESS_KEY));
-                backwardPressed = true;
-            } else
-            { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode()) == false
-                    && backwardPressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(REVERSE_RELEASE_KEY));
-                backwardPressed = false;
-            }
-            }
-            if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode())
-                    && !brakePressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_PRESS_KEY));
-                brakePressed = true;
-            } else
-            { if (SafeKeyboard.isKeyDown(FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode()) == false
-                    && brakePressed) {
-                Traincraft.keyChannel.sendToServer(new PacketKeyPress(BRAKE_RELEASE_KEY));
-                brakePressed = false;
-            }
-            }
+            forwardPressed = syncClientKeyState(
+                    FMLClientHandler.instance().getClient().gameSettings.keyBindForward.getKeyCode(),
+                    forwardPressed, FORWARD_PRESS_KEY, FORWARD_RELEASE_KEY);
+            backwardPressed = syncClientKeyState(
+                    FMLClientHandler.instance().getClient().gameSettings.keyBindBack.getKeyCode(),
+                    backwardPressed, REVERSE_PRESS_KEY, REVERSE_RELEASE_KEY);
+            brakePressed = syncClientKeyState(
+                    FMLClientHandler.instance().getClient().gameSettings.keyBindJump.getKeyCode(),
+                    brakePressed, BRAKE_PRESS_KEY, BRAKE_RELEASE_KEY);
 
             Item currentItem = new Item();
             if (Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null) {
@@ -890,55 +899,41 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         // updateTicks=0;
         // }
         // }
-        if (!worldObj.isRemote) {
-            if (this.riddenByEntity instanceof EntityLivingBase) {
-                //EntityLivingBase entity = (EntityLivingBase) this.riddenByEntity;
-                if (forwardPressed || backwardPressed) {
-                    if (getFuel() > 0 && this.isLocoTurnedOn() && rand.nextInt(4) == 0 && !worldObj.isRemote) {
-                        if (this.getTrainLockedFromPacket() && !((EntityPlayer) this.riddenByEntity).getDisplayName().equalsIgnoreCase(this.getTransportOwner())
-                                && !isPlayerTrusted(((EntityPlayer) this.riddenByEntity).getDisplayName())) {
-                            return;
-                        }
-                        if (riddenByEntity instanceof EntityPlayer) {
-                            int dir = MathHelper
-                                    .floor_double((((EntityPlayer) riddenByEntity).rotationYaw * 4F) / 360F + 0.5D) & 3;
-                            if (dir == 2) {
-                                if (forwardPressed) {
-                                    motionZ -= 0.0075 * this.accelerate;
-                                } else {
-                                    motionZ += 0.0075 * this.accelerate;
-                                }
-                            } else
-                            { if (dir == 0) {
-                                if (forwardPressed) {
-                                    motionZ += 0.0075 * this.accelerate;
-                                } else {
-                                    motionZ -= 0.0075 * this.accelerate;
-                                }
-                            } else
-                                { if (dir == 1) {
-                                if (forwardPressed) {
-                                    motionX -= 0.0075 * this.accelerate;
-                                } else {
-                                    motionX += 0.0075 * this.accelerate;
-                                }
-                            } else {
-                                if (forwardPressed) {
-                                    motionX += 0.0075 * this.accelerate;
-                                } else {
-                                    motionX -= 0.0075 * this.accelerate;
-                                }
-                            }
-                        }
-                    }
+        if (worldObj.isRemote == false)
+        {
+            Entity activeDriver = getActiveDriver();
+            boolean driving = activeDriver instanceof EntityPlayer && (forwardPressed || backwardPressed)
+                    && isEmergencyBrakeApplied() == false;
+            if (driving && getFuel() > 0 && isLocoTurnedOn() && rand.nextInt(4) == 0)
+            {
+                EntityPlayer driver = (EntityPlayer) activeDriver;
+                int direction = MathHelper.floor_double((driver.rotationYaw * 4.0F) / 360.0F + 0.5D) & 3;
+                double acceleration = 0.0075D * this.accelerate;
+                if (backwardPressed)
+                {
+                    acceleration = -acceleration;
                 }
-                    }
-                } else
-                { if (brakePressed) {
-                    motionX *= brake;
-                    motionZ *= brake;
+                switch (direction)
+                {
+                    case 0:
+                        motionZ += acceleration;
+                        break;
+                    case 1:
+                        motionX -= acceleration;
+                        break;
+                    case 2:
+                        motionZ -= acceleration;
+                        break;
+                    case 3:
+                    default:
+                        motionX += acceleration;
+                        break;
                 }
             }
+            if (brakePressed || isEmergencyBrakeApplied())
+            {
+                motionX *= brake;
+                motionZ *= brake;
             }
 
             if (updateTicks % 20 == 0)
@@ -974,9 +969,11 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
         if (whistleDelay > 0) {
             whistleDelay--;
         }
-        if (this.riddenByEntity instanceof EntityPlayer) {
-            this.lastRider = ((EntityPlayer) this.riddenByEntity).getDisplayName();
-            this.lastEntityRider = (this.riddenByEntity);
+        Entity activeDriver = getActiveDriver();
+        if (activeDriver instanceof EntityPlayer)
+        {
+            this.lastRider = ((EntityPlayer) activeDriver).getDisplayName();
+            this.lastEntityRider = activeDriver;
         }
 
        /* if (!this.worldObj.isRemote && this.getParkingBrakeDW() && !getState().equals("broken")) {
@@ -1794,17 +1791,14 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
                 new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, posX, posY, posZ, 150.0D));
     }
 
-    public void setMTCStatus(int status, int type, int atoStatus) {
+    public void setMTCStatus(int status, int type, int atoStatus)
+    {
         this.mtcStatus = status;
         this.mtcType = type;
         this.atoStatus = atoStatus;
-        Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(getEntityId(), status, type),
+        Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(this, status, type),
                 new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId,
                         posX, posY, posZ, 150.0D));
-        if (atoStatus != 0) {
-            Traincraft.mtcChannel.sendToAllAround(new PacketATO(getEntityId(), 1), new NetworkRegistry.TargetPoint(
-                    worldObj.provider.dimensionId, posX, posY, posZ, 150.0D));
-        }
     }
 
     public void setStationStop(Vec3 stationStop) {
@@ -1823,12 +1817,18 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
 
 
 
-    public void accel(Integer desiredSpeed) {
-        if (this.worldObj != null) {
+    public void accel(Integer desiredSpeed)
+    {
+        Entity driver = getActiveDriver();
+        if (this.worldObj != null)
+        {
 
-            if (this.getSpeed() != desiredSpeed) {
-                if ((int) this.getSpeed() <= this.speedLimit) {
-                    if (this.riddenByEntity == null || this.mtcType == 3) {
+            if (this.getSpeed() != desiredSpeed)
+            {
+                if ((int) this.getSpeed() <= this.speedLimit)
+                {
+                    if ((driver instanceof EntityPlayer) == false || this.mtcType == 3)
+                    {
 
                         double rotation = this.serverRealRotation;
                         if (rotation == 90.0) {
@@ -1858,9 +1858,11 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
                         }
 
 
-                    } else {
+                    }
+                    else
+                    {
                         int dir = MathHelper
-                                .floor_double((((EntityPlayer) riddenByEntity).rotationYaw * 4F) / 360F + 0.5D) & 3;
+                                .floor_double((driver.rotationYaw * 4F) / 360F + 0.5D) & 3;
                         if (dir == 2) {
 
                             this.motionZ -= 0.0020 * this.accelerate;
@@ -1887,8 +1889,8 @@ public abstract class Locomotive extends EntityRollingStock implements IInventor
                 }
 
             }
-        }
-    }
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,8 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import com.jcirmodelsquad.tcjcir.features.autotrain.AutoTrain2Handler;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,38 +36,12 @@ public class PCH100H extends HydrogenTrain{
 
 
     @Override
-    public void updateRiderPosition() {
-        if (riddenByEntity == null) {return;}
-        double pitchRads = this.anglePitchClient * Math.PI / 180.0D;
-        double distance = 2.75;
-        double yOffset = 0.2;
-        float rotationCos1 = (float) Math.cos(Math.toRadians(this.renderYaw + 90));
-        float rotationSin1 = (float) Math.sin(Math.toRadians((this.renderYaw + 90)));
-        if(side.isServer()){
-            rotationCos1 = (float) Math.cos(Math.toRadians(this.serverRealRotation + 90));
-            rotationSin1 = (float) Math.sin(Math.toRadians((this.serverRealRotation + 90)));
-            anglePitchClient = serverRealPitch*60;
-        }
-        float pitch = (float) (posY + ((Math.tan(pitchRads) * distance) + getMountedYOffset())
-                + riddenByEntity.getYOffset() + yOffset);
-        float pitch1 = (float) (posY + getMountedYOffset() + riddenByEntity.getYOffset() + yOffset);
-        double bogieX1 = (this.posX + (rotationCos1 * distance));
-        double bogieZ1 = (this.posZ + (rotationSin1* distance));
-
-        if(anglePitchClient>20 && rotationCos1 == 1){
-            bogieX1-=pitchRads*2;
-            pitch-=pitchRads*1.2;
-        }
-        if(anglePitchClient>20 && rotationSin1 == 1){
-            bogieZ1-=pitchRads*2 + 1;
-            pitch-=pitchRads*1.2;
-        }
-        if (pitchRads == 0.0) {
-            riddenByEntity.setPosition(bogieX1, pitch1, bogieZ1);
-        }
-        if (pitchRads > -1.01 && pitchRads < 1.01) {
-            riddenByEntity.setPosition(bogieX1, pitch, bogieZ1);
-        }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 1.4797F, 0.2F, 0F, SeatRole.DRIVER)
+        };
     }
     /*@Override
     public void updateRiderPosition() {
@@ -106,22 +83,6 @@ public class PCH100H extends HydrogenTrain{
 
     }
 
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
-        playerEntity = entityplayer;
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-        if (!worldObj.isRemote) {
-            ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-            if(lockThisCart(itemstack, entityplayer))return true;
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            boardPlayer(entityplayer);
-        }
-        return true;
-    }
 
     @Override
     public boolean canBeRidden() {
@@ -144,9 +105,11 @@ public class PCH100H extends HydrogenTrain{
     }
 
     @Override
-    public void pressKey(int i) {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+    public void pressKey(int i)
+    {
+        if (i == 7 && getActiveDriver() instanceof EntityPlayer)
+        {
+            ((EntityPlayer) getActiveDriver()).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
         }
     }
 

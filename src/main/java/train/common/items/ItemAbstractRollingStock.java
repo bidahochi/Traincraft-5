@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import mods.railcraft.api.carts.IMinecart;
 import mods.railcraft.api.core.items.IMinecartItem;
 import net.minecraft.block.BlockRailBase;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
@@ -827,6 +828,19 @@ public abstract class ItemAbstractRollingStock extends ItemMinecart implements I
                     {
                         sendLocalChatMessage(player,"To paint, use the " + StatCollector.translateToLocal("item.tc:paintbrushThing.name"));
                     }
+                }
+                if (isEntityPlusBogie(rollingStock, trainRecord) == false)
+                {
+                    Block railBlock = world.getBlock(railX, railY, railZ);
+                    if (BlockRailBase.func_150051_a(railBlock))
+                    {
+                        int railShape = ((BlockRailBase) railBlock).getBasicRailMetadata(
+                                world, rollingStock, railX, railY, railZ);
+                        float placingFacing = player == null ? rollingStock.rotationYaw : player.rotationYaw - 90.0F;
+                        rollingStock.rotationYaw = EntityRollingStock.getVanillaRailFacing(railShape, placingFacing);
+                    }
+                    rollingStock.prevRotationYaw = rollingStock.rotationYaw;
+                    rollingStock.serverRealRotation = rollingStock.rotationYaw;
                 }
                 rollingStock.markPlacedNow();
                 world.spawnEntityInWorld(rollingStock);

@@ -1,11 +1,13 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 
 import train.common.library.sounds.SoundRecord;
@@ -28,7 +30,13 @@ public class SteamSkook extends SteamTrain {
     }*/
 
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, -1.1, 0.2, -0.35); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", -2.0312F, 0.2F, 0.3575F, SeatRole.DRIVER)
+        };
+    }
 
     /*@Override
     public void updateRiderPosition() {

@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
 import train.common.api.SteamTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 
 import train.common.library.sounds.SoundRecord;
@@ -21,7 +23,13 @@ public class SteamClimaxNew extends SteamTrain {
 	}
 
 	@Override
-	public void updateRiderPosition() { TraincraftUtil.updateRider(this, 0.0, 0.25, -0.35); }
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.3844F, 0.25F, 0.35F, SeatRole.DRIVER)
+		};
+	}
 
 	@Override
 	public String getInventoryName() {

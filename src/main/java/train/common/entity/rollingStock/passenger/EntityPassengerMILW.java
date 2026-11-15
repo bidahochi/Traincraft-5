@@ -1,5 +1,7 @@
 package train.common.entity.rollingStock.passenger;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,10 +21,6 @@ public class EntityPassengerMILW extends AbstractPassengerCar {
 		super(world);
 	}
 
-	@Override
-	public void updateRiderPosition() {
-		TraincraftUtil.updateRider(this, 0.7, 0);
-	}
 
 
 	@Override
@@ -36,8 +34,22 @@ public class EntityPassengerMILW extends AbstractPassengerCar {
 		Traincraft.traincraftRegistry.RegisterRollingStockModel(new TrainRenderRecord(Info.modID,
 				EntityPassengerMILW.class, new ModelMILWPassenger(),
 				"milw_passenger",
-				new float[] { 0.2F, 0F, 0F },
+				new float[] { -0.1687F, 0F, 0F },
 				new float[] { 0F, 180F, 180F },
 				new float[] {0.9f,0.9f,0.9f}));
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("passenger_1", 0f, 0.1f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_2", 1.7f, 0.1f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_3", -1.7f, 0.1f, 0f, SeatRole.PASSENGER)
+		};
+	}
+
 }

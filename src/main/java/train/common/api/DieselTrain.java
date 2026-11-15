@@ -96,9 +96,11 @@ public abstract class DieselTrain extends Locomotive implements IFluidHandler {
 	}
 
 	@Override
-	public final void pressKey(int i) {
-		if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-			((EntityPlayer) riddenByEntity).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
+	public final void pressKey(int i)
+	{
+		if (i == 7 && getActiveDriver() instanceof EntityPlayer)
+		{
+			((EntityPlayer) getActiveDriver()).openGui(Traincraft.instance, GuiIDs.LOCO, worldObj, (int) this.posX, (int) this.posY, (int) this.posZ);
 		}
 	}
 

@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import com.jcirmodelsquad.tcjcir.models.detailkits.ModelRotaryPlowCoupler;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.AbstractRotarySnowPlow;
-import train.common.core.util.TraincraftUtil;
 import train.common.entity.CargoManager;
 import train.common.entity.CargoSpecification;
 import train.common.enums.LockoutGroup;
@@ -31,7 +33,13 @@ public class RotaryPlow1 extends AbstractRotarySnowPlow {
     }
 
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 1.9, 0.45, -0.25); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 0.9264F, 0.45F, 0.2762F, SeatRole.DRIVER)
+        };
+    }
 
     @Override
     public String transportYear() {

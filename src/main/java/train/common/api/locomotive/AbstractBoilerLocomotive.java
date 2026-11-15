@@ -111,8 +111,9 @@ public abstract class AbstractBoilerLocomotive extends Locomotive implements IFl
     @Override
     public void pressKey(int i)
     {
-        if (i == 7 && riddenByEntity != null && riddenByEntity instanceof EntityPlayer) {
-            ((EntityPlayer) riddenByEntity).openGui(
+        if (i == 7 && getActiveDriver() instanceof EntityPlayer)
+        {
+            ((EntityPlayer) getActiveDriver()).openGui(
                     Traincraft.instance,
                     GuiIDs.LOCO,
                     worldObj,

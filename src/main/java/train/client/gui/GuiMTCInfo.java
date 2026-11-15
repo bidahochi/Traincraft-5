@@ -33,7 +33,14 @@ public class GuiMTCInfo extends GuiScreen {
     }
 
     @Override
-    public void initGui() {
+    public void initGui()
+    {
+        if (theLocomotive == null || theLocomotive.isActiveDriver(mc.thePlayer) == false
+                || theLocomotive.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.displayGuiScreen(null);
+            return;
+        }
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiTop = (this.height - this.ySize) / 2;
         trainLevel = new GuiTCTextField(fontRendererObj, this.width/2 -5, this.height/2 - 1, 15,15);
@@ -73,7 +80,14 @@ public class GuiMTCInfo extends GuiScreen {
         }
     }
     @Override
-    public void updateScreen() {
+    public void updateScreen()
+    {
+        if (theLocomotive == null || theLocomotive.isActiveDriver(mc.thePlayer) == false
+                || theLocomotive.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.displayGuiScreen(null);
+            return;
+        }
         super.updateScreen();
         if (trainLevel.isFocused()) {
             trainLevel.updateCursorCounter();
@@ -89,7 +103,14 @@ public class GuiMTCInfo extends GuiScreen {
 
     }
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2)
+    {
+        if (theLocomotive == null || theLocomotive.isActiveDriver(mc.thePlayer) == false
+                || theLocomotive.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.displayGuiScreen(null);
+            return;
+        }
 
         if (trainLevel.isFocused()  && par2 == Keyboard.KEY_1 || par2 == Keyboard.KEY_2 || par2 == Keyboard.KEY_3 || par2 == Keyboard.KEY_4 || par2 == Keyboard.KEY_5 || par2 == Keyboard.KEY_6 ||par2 == Keyboard.KEY_7 || par2 == Keyboard.KEY_8 || par2 == Keyboard.KEY_9 || par2 == Keyboard.KEY_0  || par2 == Keyboard.KEY_BACK) {
             trainLevel.textboxKeyTyped(par1, par2);
@@ -101,10 +122,15 @@ public class GuiMTCInfo extends GuiScreen {
             destination.textboxKeyTyped(par1, par2);
         }
 
-        if (par2 == 1) {
-            if (!destination.isFocused() || !trainID.isFocused() || !trainLevel.isFocused()) {
+        if (par2 == 1)
+        {
+            if (destination.isFocused() == false || trainID.isFocused() == false || trainLevel.isFocused() == false)
+            {
                 mc.thePlayer.closeScreen();
-                theLocomotive.trainLevel = Integer.parseInt(trainLevel.getText());
+                if (isInteger(trainLevel.getText()))
+                {
+                    theLocomotive.trainLevel = Integer.parseInt(trainLevel.getText());
+                }
                 if (!trainLevel.getText().equals("")) {
                     //Traincraft.mtlChannel.sendToServer(new PacketMTCLevelUpdate(theLocomotive.getEntityId(), Integer.parseInt(trainLevel.getText())));
                 }

@@ -5,6 +5,8 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import train.common.api.AbstractControlCar;
 import train.common.api.EntityRollingStock;
 
 public class PacketParkingBrake implements IMessage {
@@ -33,16 +35,38 @@ public class PacketParkingBrake implements IMessage {
     public static class Handler implements IMessageHandler<PacketParkingBrake, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketParkingBrake message, MessageContext context) {
+        public IMessage onMessage(PacketParkingBrake message, MessageContext context)
+        {
 			
-			Entity TrainEntity = context.getServerHandler().playerEntity.worldObj.getEntityByID(message.entityID);
-
-			if (TrainEntity instanceof EntityRollingStock)
-			{
-				((EntityRollingStock) TrainEntity).setParkingBrakeFromPacket(message.ParkingBrake);
-				((EntityRollingStock) TrainEntity).isBraking = message.ParkingBrake;
-
-			}
+            EntityPlayer player = context.getServerHandler().playerEntity;
+            Entity entity = player.worldObj.getEntityByID(message.entityID);
+            if ((entity instanceof EntityRollingStock) == false || entity.isDead)
+            {
+                return null;
+            }
+            EntityRollingStock stock = (EntityRollingStock) entity;
+            if (stock.isProtectedControlAuthorized(player) == false)
+            {
+                return null;
+            }
+            if (stock.isActiveDriver(player) == false)
+            {
+                if ((player.ridingEntity instanceof AbstractControlCar) == false)
+                {
+                    return null;
+                }
+                AbstractControlCar controlCar = (AbstractControlCar) player.ridingEntity;
+                if (controlCar.isDead || controlCar.riddenByEntity != player
+                        || controlCar.isProtectedControlAuthorized(player) == false
+                        || controlCar.connectedLocomotive != stock
+                        || controlCar.cartLinked1 == null || controlCar.cartLinked1.trainHandler == null
+                        || controlCar.cartLinked1.trainHandler.getTrains().contains(stock) == false)
+                {
+                    return null;
+                }
+            }
+            stock.setParkingBrakeFromPacket(message.ParkingBrake);
+            stock.isBraking = message.ParkingBrake;
 
             return null;
         }

@@ -1,5 +1,8 @@
 package train.client.gui;
 
+import train.common.seats.RollingStockSeatManager;
+import net.minecraft.entity.Entity;
+
 import com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric.PCH130Commute2;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -16,12 +19,17 @@ public class HUDAipkit extends GuiScreen {
     private boolean inLoco;
 
     @SubscribeEvent
-    public void onGameRender(RenderGameOverlayEvent.Text event){
+    public void onGameRender(RenderGameOverlayEvent.Text event)
+    {
+        Entity ridingStock = game == null ? null : RollingStockSeatManager.getRidingStock(game.thePlayer);
 
-        if (game != null && game.thePlayer != null && game.thePlayer.ridingEntity != null && game.thePlayer.ridingEntity instanceof PCH130Commute2 && Minecraft.isGuiEnabled()) {
+        if (game != null && game.thePlayer != null && ridingStock != null && ridingStock instanceof PCH130Commute2 && Minecraft.isGuiEnabled())
+        {
             inLoco = true;
-            renderSkillHUD(event, (Locomotive) game.thePlayer.ridingEntity);
-        } else {
+            renderSkillHUD(event, (Locomotive) ridingStock);
+        }
+        else
+        {
             inLoco = false;
             this.game = this.mc = Minecraft.getMinecraft();
             this.fontRendererObj = this.game.fontRenderer;

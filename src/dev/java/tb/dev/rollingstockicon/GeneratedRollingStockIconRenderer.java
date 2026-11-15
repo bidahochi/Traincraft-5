@@ -371,7 +371,6 @@ public class GeneratedRollingStockIconRenderer {
 			EntityRollingStock rollingStock = (EntityRollingStock) train;
 			rollingStock.rotationYawClientReal = 0.0F;
 			rollingStock.anglePitchClient = 0.0D;
-			rollingStock.oldClientYaw = 0.0F;
 		}
 	}
 

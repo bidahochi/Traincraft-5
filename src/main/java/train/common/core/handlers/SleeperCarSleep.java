@@ -85,16 +85,15 @@ public final class SleeperCarSleep
             return;
         }
 
-        Entity riddenTransport = player.ridingEntity;
+        Entity requestedCar = world.getEntityByID(carId);
         if (session != null || player.isPlayerSleeping() || world.provider.dimensionId != OVERWORLD_DIMENSION_ID
-                || (riddenTransport instanceof AbstractPassengerCar) == false
-                || riddenTransport.getEntityId() != carId)
+                || (requestedCar instanceof AbstractPassengerCar) == false)
         {
             sendState(player, carId, requestId, Status.UNAVAILABLE);
             return;
         }
-        AbstractPassengerCar sleeperCar = (AbstractPassengerCar) riddenTransport;
-        if (sleeperCar.hasSleepingBunk() == false || isRidingInWorld(player, sleeperCar, world) == false)
+        AbstractPassengerCar sleeperCar = (AbstractPassengerCar) requestedCar;
+        if (isRidingInWorld(player, sleeperCar, world) == false)
         {
             sendState(player, carId, requestId, Status.UNAVAILABLE);
             return;
@@ -112,8 +111,12 @@ public final class SleeperCarSleep
     /** Checks that both sides of the mount relationship still point to live entities in this world. */
     private static boolean isRidingInWorld(EntityPlayerMP player, AbstractPassengerCar sleeperCar, World world)
     {
-        return player.isEntityAlive() && player.worldObj == world && player.ridingEntity == sleeperCar
-                && sleeperCar.isDead == false && sleeperCar.worldObj == world && sleeperCar.riddenByEntity == player
+        Entity mount = player.ridingEntity;
+        return player.isEntityAlive() && player.worldObj == world
+                && mount != null && mount.isDead == false && mount.worldObj == world && mount.riddenByEntity == player
+                && world.getEntityByID(mount.getEntityId()) == mount
+                && (mount == sleeperCar || sleeperCar.isPassengerOfThis(player))
+                && sleeperCar.isDead == false && sleeperCar.worldObj == world && sleeperCar.hasSleepingBunk()
                 && world.getEntityByID(sleeperCar.getEntityId()) == sleeperCar;
     }
 

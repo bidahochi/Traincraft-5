@@ -1,4 +1,7 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
+
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
 //package train.common.entity.rollingStock;
 
 import net.minecraft.entity.item.EntityMinecart;
@@ -18,9 +21,12 @@ public class Thanos extends ElectricTrain {
     }
 
     @Override
-    public void updateRiderPosition() {
-        if(riddenByEntity==null){return;}
-        riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.10F, posZ);
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", -0.5812F, 0.1F, 0.1847F, SeatRole.DRIVER)
+        };
     }
 
 

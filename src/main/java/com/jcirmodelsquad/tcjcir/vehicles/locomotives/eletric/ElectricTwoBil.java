@@ -1,9 +1,11 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 
@@ -34,7 +36,13 @@ public class ElectricTwoBil extends ElectricTrain {
 
     
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3.98, 0.0, 0.41); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 2.33F, 0F, -0.41F, SeatRole.DRIVER)
+        };
+    }
 
 
     

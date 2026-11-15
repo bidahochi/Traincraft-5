@@ -31,8 +31,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -56,6 +54,16 @@ import train.common.core.network.PacketParkingBrake;
 import train.common.core.network.PacketRollingStockRotation;
 import train.common.core.util.TraincraftUtil;
 import train.common.entity.rollingStock.EntityTracksBuilder;
+import train.common.entity.EntityPassengerSeat;
+import train.common.seats.RollingStockSeatController;
+import train.common.seats.RollingStockSeatLayout;
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatSection;
+import train.common.seats.SeatFunction;
+import train.common.seats.SeatRole;
+import train.common.seats.RollingStockSeatManager;
+import train.common.seats.RollingStockSeatPositioner;
+import train.common.seats.RollingStockSeatStateSync;
 import train.common.items.*;
 import train.common.library.BlockIDs;
 import train.common.library.GuiIDs;
@@ -79,6 +87,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 {
 	private static final String NBT_REAL_WORLD_PLACED_AT = "RealWorldPlacedAt";
 	private static final String REAL_TIME_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	private final RollingStockSeatManager seatManager = new RollingStockSeatManager(this);
+	private final RollingStockSeatPositioner seatPositioner = new RollingStockSeatPositioner(this);
+	private final RollingStockSeatStateSync seatStateSync = new RollingStockSeatStateSync(this, seatManager);
+	private final RollingStockSeatController seatController = new RollingStockSeatController(
+			this, seatManager, seatPositioner, seatStateSync);
+	private RollingStockSeatLayout seatLayoutCache;
+	private int seatLayoutColor;
 
 	public byte specialRenderMode = 0;
 	public int fuelTrain;
@@ -136,13 +151,14 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	public float rotationYawClientReal;
 	public double anglePitchClient;
 	public float serverRealRotation;
-	private float previousServerRealRotation;
 	public boolean isServerInReverse = false;
 	public boolean isClientInReverse = false;
-	public boolean serverInReverseSignPositive = false;
 	public float serverRealPitch;
 	private double rollingPitch;
-	public float oldClientYaw = 0;//used in rendering class
+	private float previousClientBodyYaw;
+	private float clientBodyYaw;
+	private float previousClientBodyPitch;
+	private float clientBodyPitch;
 	@SideOnly(Side.CLIENT)
 	private double rollingVelocityX;
 	@SideOnly(Side.CLIENT)
@@ -327,7 +343,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	 * @param additionalData The packet data stream
 	 */
 	@Override
-	public void readSpawnData(ByteBuf additionalData) {
+	public void readSpawnData(ByteBuf additionalData)
+	{
 		isBraking = additionalData.readBoolean();
 		setTrainLockedFromPacket(additionalData.readBoolean());
 		if (additionalData.readBoolean()) {
@@ -343,6 +360,14 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			getOverlayTextureContainer().importFromConfigTag(ByteBufUtils.readTag(additionalData));
 		}
 		importTrustedListFromNBT(ByteBufUtils.readTag(additionalData));
+		seatManager.setClientControlState(additionalData.readInt(), additionalData.readInt(),
+				ByteBufUtils.readUTF8String(additionalData), additionalData.readBoolean());
+		rotationYaw = additionalData.readFloat();
+		prevRotationYaw = rotationYaw;
+		rotationYawClient = rotationYaw;
+		rotationYawClientReal = additionalData.readFloat();
+		previousClientBodyYaw = clientBodyYaw = rotationYawClientReal;
+		previousClientBodyPitch = clientBodyPitch = (float) anglePitchClient;
 	}
 
 	/**
@@ -352,7 +377,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	 * @param buffer The packet data stream
 	 */
 	@Override
-	public void writeSpawnData(ByteBuf buffer) {
+	public void writeSpawnData(ByteBuf buffer)
+	{
 		buffer.writeBoolean(isBraking);
 		buffer.writeBoolean(getTrainLockedFromPacket());
 		buffer.writeBoolean(getCargoManager() != null);
@@ -367,6 +393,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		NBTTagCompound lockTag = new NBTTagCompound();
 		exportTrustedListToNBT(lockTag);
 		ByteBufUtils.writeTag(buffer, lockTag);
+		buffer.writeInt(seatManager.getDirectSeatIndex());
+		buffer.writeInt(seatManager.getActiveControlSeatIndex());
+		ByteBufUtils.writeUTF8String(buffer, seatManager.getActiveControlStationId());
+		buffer.writeBoolean(seatManager.isEmergencyBrakeApplied());
+		buffer.writeFloat(rotationYaw);
+		buffer.writeFloat(serverRealRotation);
 	}
 
 	public String getTrainName() {
@@ -418,12 +450,329 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		mountedOffset = offset;
 	}
 
+	/** Positions use forward, up, left offsets from the body center and mounted height. */
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[] { new SeatDefinition("passenger", 0.0F, 0.0F, 0.0F, SeatRole.PASSENGER) };
+	}
+
+	/**
+	 * Optional section pose relative to the straight body, on both logical sides.
+	 * Stock owns pose calculation/synchronization; null uses the ordinary body transform.
+	 */
+	public SeatSection getSeatSection(String sectionId)
+	{
+		return null;
+	}
+
+	public final SeatDefinition getSeatDefinition(int seatIndex)
+	{
+		return getSeatLayoutForRuntime().getDefinition(seatIndex);
+	}
+
+	/** Re-evaluates Java skin-specific definitions only when the skin changes. */
+	public final RollingStockSeatLayout getSeatLayoutForRuntime()
+	{
+		int color = getColor();
+		if (seatLayoutCache != null && seatLayoutColor == color)
+		{
+			return seatLayoutCache;
+		}
+		RollingStockSeatLayout layout = new RollingStockSeatLayout(getSeatDefinitions());
+		for (int index = 0; index < layout.getSeatCount(); index++)
+		{
+			SeatDefinition seat = layout.getDefinition(index);
+			if ("body".equals(seat.getSectionId()) == false && getSeatSection(seat.getSectionId()) == null)
+			{
+				Traincraft.tcLog.warn("[Seats] " + getClass().getSimpleName() + " seat " + seat.getSeatId()
+						+ " references unavailable section " + seat.getSectionId() + "; using body position");
+			}
+		}
+		RollingStockSeatLayout previous = seatLayoutCache;
+		seatLayoutCache = layout;
+		seatLayoutColor = color;
+		if (previous != null && previous.hasSameSeats(layout) == false && worldObj != null && worldObj.isRemote == false)
+		{
+			seatManager.remapPassengers(previous, layout);
+			clearTransientControlInput();
+			seatStateSync.synchronizeIfChanged();
+		}
+		return layout;
+	}
+
+	@Override
+	public void setColor(int color)
+	{
+		super.setColor(color);
+		if (seatLayoutCache != null)
+		{
+			getSeatLayoutForRuntime();
+		}
+	}
+
+	/** Returns whether a stable seat is currently occupied. */
+	public final boolean isSeatOccupied(int seatIndex)
+	{
+		return seatManager.isOccupied(seatIndex);
+	}
+
+	/** Returns the entity occupying a stable seat, if any. */
+	public final Entity getSeatOccupant(int seatIndex)
+	{
+		return seatManager.getOccupant(seatIndex);
+	}
+
+	/** Returns an onboard entity's stable seat index, or {@code -1}. */
+	public final int getSeatIndexForPassenger(Entity entity)
+	{
+		return seatManager.getSeatIndex(entity);
+	}
+
+	/** Returns the number of authored seats. */
+	public final int getSeatCount()
+	{
+		return getSeatLayoutForRuntime().getSeatCount();
+	}
+
+	/** Returns a defensive copy of one body-frame seat position for GUI layout. */
+	public final float[] getSeatOffset(int seatIndex)
+	{
+		if (seatIndex < 0 || seatIndex >= getSeatCount())
+		{
+			return null;
+		}
+		return getSeatLayoutForRuntime().getOffset(seatIndex);
+	}
+
+	/** Returns the number of currently occupied direct and auxiliary seats. */
+	public final int getPassengerCount()
+	{
+		return seatManager.getPassengerCount();
+	}
+
+	/**
+	 * Sneak-use opens deliberate seat selection; ordinary use boards the free seat
+	 * nearest the player's click ray.
+	 */
+	public final boolean mountPassenger(EntityPlayer player)
+	{
+		return seatController.mountPassenger(player);
+	}
+
+	/** Boards the free seat nearest the player's eye ray without opening the picker. */
+	public final boolean mountNearestPassenger(EntityPlayer player)
+	{
+		return seatController.mountNearestPassenger(player);
+	}
+
+	/** Moves an onboard player to the nearest currently free seat. */
+	public final boolean movePassengerToNearestSeat(EntityPlayer player)
+	{
+		return seatController.movePassengerToNearestSeat(player);
+	}
+
+	/** Server-authoritative exact-seat boarding entry point used by the GUI packet. */
+	public final boolean mountPassengerAt(Entity rider, int seatIndex)
+	{
+		return seatController.mountPassengerAt(rider, seatIndex);
+	}
+
+	public final boolean mountLivestock(Entity rider)
+	{
+		return seatController.mountLivestock(rider);
+	}
+
+	public final boolean isLivestockUnloading()
+	{
+		return seatManager.isLivestockUnloading();
+	}
+
+	public final void setLivestockBoardingEnabled(EntityPlayer player, boolean enabled)
+	{
+		seatController.setLivestockBoardingEnabled(player, enabled);
+	}
+
+	public final boolean unloadPassengers(boolean animalsOnly)
+	{
+		boolean unloaded = seatManager.unloadPassengers(animalsOnly);
+		seatStateSync.synchronizeIfChanged();
+		return unloaded;
+	}
+
+	/** Returns whether this occupant may use lock-protected recovery actions. */
+	public final boolean isProtectedControlAuthorized(EntityPlayer player)
+	{
+		return seatController.isProtectedControlAuthorized(player);
+	}
+
+	/** Returns whether this stock keeps vanilla boarding open while locked. */
+	public final boolean canSeatPassengerBoardWhileLocked()
+	{
+		return canBeRiddenWhileLocked(this);
+	}
+
+	/** Returns the stable seat index occupied by the direct rider. */
+	public final int getDirectSeatIndex()
+	{
+		return seatManager.getDirectSeatIndex();
+	}
+
+	/** Applies the complete transient control state received by a client. */
+	public final void setSeatControlStateFromPacket(int directSeat, int activeSeat, String activeStation,
+			boolean emergencyBrake)
+	{
+		if (worldObj.isRemote)
+		{
+			seatManager.setClientControlState(directSeat, activeSeat, activeStation, emergencyBrake);
+		}
+	}
+
+	/** Returns the active driver's stable seat index, or {@code -1}. */
+	public final int getActiveControlSeatIndex()
+	{
+		return seatManager.getActiveControlSeatIndex();
+	}
+
+	/** Returns the latched cab retained while no driver is active. */
+	public final String getActiveControlStationId()
+	{
+		return seatManager.getActiveControlStationId();
+	}
+
+	/** Returns whether emergency braking remains latched. */
+	public final boolean isEmergencyBrakeApplied()
+	{
+		return seatManager.isEmergencyBrakeApplied();
+	}
+
+	/** Returns whether this entity is the one server-authoritative active driver. */
+	public final boolean isActiveDriver(Entity entity)
+	{
+		return entity != null && entity == getActiveDriver();
+	}
+
+	/** Requires both the active driver's seat and permission to operate locked controls. */
+	public final boolean canOperateControls(EntityPlayer player)
+	{
+		return isActiveDriver(player) && isProtectedControlAuthorized(player);
+	}
+
+	/** Returns the active driver's display name without exposing mount implementation. */
+	public final String getActiveDriverName()
+	{
+		Entity activeDriver = getActiveDriver();
+		return activeDriver == null ? "" : activeDriver.getCommandSenderName();
+	}
+
+	/** Returns the active control-seat occupant when that seat still has drive authority. */
+	public final Entity getActiveDriver()
+	{
+		int activeSeatIndex = seatManager.getActiveControlSeatIndex();
+		if (activeSeatIndex < 0 || activeSeatIndex >= getSeatCount())
+		{
+			return null;
+		}
+		SeatDefinition definition = getSeatDefinition(activeSeatIndex);
+		if (definition == null || definition.hasFunction(SeatFunction.DRIVE) == false)
+		{
+			return null;
+		}
+		return seatManager.getOccupant(activeSeatIndex);
+	}
+
+	/** Returns whether a seat may accept a rider under the current control state. */
+	public final boolean isSeatAvailable(int seatIndex)
+	{
+		return seatController.isSeatAvailable(seatIndex);
+	}
+
+	/** Moves an existing occupant to a free seat, including while the stock moves. */
+	public final boolean movePassengerToSeat(EntityPlayer player, int targetSeatIndex)
+	{
+		return seatController.movePassengerToSeat(player, targetSeatIndex);
+	}
+
+	/** Hands controls to another driver, or takes them from the occupant's own drive seat. */
+	public final boolean transferControls(EntityPlayer requester, int targetSeatIndex)
+	{
+		return seatController.transferControls(requester, targetSeatIndex);
+	}
+
+	/** Applies the emergency latch from any cab-associated occupied seat. */
+	public final boolean applyEmergencyBrake(EntityPlayer player)
+	{
+		return seatController.applyEmergencyBrake(player);
+	}
+
+	/** Resets the emergency latch only at a stop and with control authority. */
+	public final boolean resetEmergencyBrake(EntityPlayer player)
+	{
+		return seatController.resetEmergencyBrake(player);
+	}
+
+	/** Lets authorized backup cab crew secure an uncontrolled train below 10 km/h. */
+	public final boolean applyParkingBrakeFromSeat(EntityPlayer player)
+	{
+		return seatController.applyParkingBrakeFromSeat(player);
+	}
+
+	/** Accepts a tracked seat only when its index belongs to this layout. */
+	public final boolean attachPassengerSeat(EntityPassengerSeat passengerSeat)
+	{
+		return seatManager.attachProxy(passengerSeat);
+	}
+
+	/** Removes a seat only if it is still the entity registered at that index. */
+	public final void detachPassengerSeat(EntityPassengerSeat passengerSeat)
+	{
+		seatManager.detachProxy(passengerSeat);
+	}
+
+	/** Positions one auxiliary mount from its stable body-frame offset. */
+	public final void updatePassengerSeatPosition(EntityPassengerSeat passengerSeat)
+	{
+		seatPositioner.positionPassengerSeat(passengerSeat);
+	}
+
+	@Override
+	public void updateRiderPosition()
+	{
+		if (riddenByEntity != null)
+		{
+			seatPositioner.positionDirectRider(riddenByEntity, seatManager.getDirectSeatIndex());
+		}
+	}
+
+	/** Computes a defensive world-position result for cold boarding selection. */
+	public final double[] getSeatWorldPosition(int seatIndex)
+	{
+		return seatPositioner.getSeatWorldPosition(seatIndex);
+	}
+
+	/** Returns whether an entity is directly or indirectly riding this stock. */
+	public final boolean isPassengerOfThis(Entity entity)
+	{
+		return seatManager.containsPassenger(entity);
+	}
+
 	public void setYFromServer(double posYServer) {
 		this.posYFromServer = posYServer;
 	}
 
+	public float getClientBodyYaw(float partialTick)
+	{
+		return previousClientBodyYaw
+				+ MathHelper.wrapAngleTo180_float(clientBodyYaw - previousClientBodyYaw) * partialTick;
+	}
+
+	public float getClientBodyPitch(float partialTick)
+	{
+		return previousClientBodyPitch + (clientBodyPitch - previousClientBodyPitch) * partialTick;
+	}
+
 	@Override
 	protected void entityInit() {
+		dataWatcher.addObject(RollingStockSeatManager.LIVESTOCK_UNLOADING_WATCHER, (byte) 0);
 		dataWatcher.addObject(16, (byte) 0);
 		dataWatcher.addObject(17, 0);
 		dataWatcher.addObject(18, 1);
@@ -663,7 +1012,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 
 	@Override
-	public void setDead() {
+	public void setDead()
+	{
+		seatManager.clearProxies();
 		super.setDead();
 		this.unLink();
 		if (trainHandler != null) {
@@ -708,6 +1059,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	}
 
 	public void pressKey(int i) {}
+
+	/** Clears held controls when direct authority changes or disappears. */
+	public void clearTransientControlInput()
+	{
+	}
 
 	/**
 	 * gets packet from server and distribute for GUI handles motion
@@ -839,6 +1195,23 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	{
         tickStockResponses();
 		handleParkingBrake();
+		if (worldObj.isRemote == false && seatManager.isLivestockUnloading())
+		{
+			unloadPassengers(true);
+		}
+		if (worldObj.isRemote == false && seatManager.getActiveControlSeatIndex() >= 0
+				&& getActiveDriver() == null)
+		{
+			seatManager.clearActiveControlSeat();
+			clearTransientControlInput();
+			seatStateSync.synchronizeIfChanged();
+		}
+		if (worldObj.isRemote == false && riddenByEntity == null
+				&& seatManager.getDirectSeatIndex() >= 0)
+		{
+			seatManager.setDirectSeatIndex(-1);
+			seatStateSync.synchronizeIfChanged();
+		}
 		// Commenting out as the primary method in the try statement is never once used and is forcing exceptions constantly
 		//try {
 		//	Method theTransMethod = this.getClass().getDeclaredMethod("getBogieLocation");
@@ -917,9 +1290,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			}
 		}
 
-		if (riddenByEntity instanceof EntityPlayer){
-			((EntityPlayer) riddenByEntity).addPotionEffect(new PotionEffect(Potion.resistance.id, 20, 5, true));
-		}
+		seatManager.protectPassengers();
 
 		if (getRollingAmplitude() > 0) {
 			setRollingAmplitude(getRollingAmplitude() - 1);
@@ -928,7 +1299,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			setDamage(getDamage() - 1);
 		}
 
-		isBraking = false;
+		isBraking = seatManager.isEmergencyBrakeApplied();
 
 		if (worldObj.isRemote && Traincraft.proxy.getCurrentScreen() == null && riddenByEntity instanceof EntityLivingBase) {
 			EntityLivingBase entity = (EntityLivingBase) riddenByEntity;
@@ -987,6 +1358,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 		if (worldObj.isRemote) {
 			clientTicks++;
+			// Seats and rendering share one rotation snapshot per tick.
+			previousClientBodyYaw = clientBodyYaw;
+			previousClientBodyPitch = clientBodyPitch;
+			clientBodyYaw = rotationYawClientReal;
+			clientBodyPitch = (float) anglePitchClient;
 			//rotationYaw = (float) rotationYawClient;
 			if (rollingturnProgress > 0) {
 				rotationYaw = (float) rotationYawClient;
@@ -1049,8 +1425,10 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		int floor_posY = MathHelper.floor_double(posY);
 		int floor_posZ = MathHelper.floor_double(posZ);
 		//System.out.println(this.serverRealRotation);
-		if (needsBogieUpdate) {
-			if (bogieLoco != null) {
+		if (needsBogieUpdate)
+		{
+			if (bogieLoco != null)
+			{
 				float rotationCos1 = (float) Math.cos(Math.toRadians(serverRealRotation));
 				float rotationSin1 = (float) Math.sin(Math.toRadians((serverRealRotation)));
 				if (!firstLoad) {
@@ -1060,6 +1438,13 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				double bogieX1 = (this.posX + (rotationCos1 * Math.abs(bogieShift)));
 				double bogieZ1 = (this.posZ + (rotationSin1 * Math.abs(bogieShift)));
 				this.bogieLoco.setPosition(bogieX1, bogieLoco.posY, bogieZ1);
+				/*
+				 * A fresh placement stores the direction used to seed the bogie. Resolve
+				 * that once into the legacy body-yaw convention before stationary yaw
+				 * becomes immutable. Loaded stock seeds at bodyYaw + 90, so this same
+				 * calculation preserves its saved body facing exactly.
+				 */
+				serverRealRotation = getBogieBodyYaw();
 				/*
 				 * double rads = this.serverRealRotation *
 				 * 3.141592653589793D / 180.0D; double pitchRads =
@@ -1131,55 +1516,42 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		updateTicks++;
 		d6 = prevPosX - posX;
 		d7 = prevPosZ - posZ;
+		boolean movedHorizontally = d6 * d6 + d7 * d7 > 0.0001D;
 		prevRotationYaw = rotationYaw;
 		//System.out.println("before "+rotationYaw +" "+prevRotationYaw);
 		//this.rotationPitch = 0.0F;
 		//System.out.println(Math.sqrt(d6*d6+d7*d7));
-		if (d6 * d6 + d7 * d7 > 0.0001D) {
-			this.rotationYaw = (float) (Math.atan2(d7, d6) * 180.0D / Math.PI);
-			if (this.isClientInReverse) {
-				this.rotationYaw += 180.0F;
-			}
-		}
+		float motionYaw = movedHorizontally
+				? (float) (Math.atan2(d7, d6) * 180.0D / Math.PI)
+				: rotationYaw;
 
 		//double var49 = MathHelper.wrapAngleTo180_float(this.rotationYaw - this.prevRotationYaw);
 
-		float anglePitch=0;
-		if (bogieLoco != null) {
-
-			serverRealRotation = MathHelper.wrapAngleTo180_float((float) Math.toDegrees(Math.atan2((float) (bogieLoco.posZ - this.posZ), (float) (bogieLoco.posX - this.posX))) - 90F);
-
-			anglePitch = (float) Math.atan(((bogieLoco.posY - posY)) /
-					MathHelper.sqrt_double(((bogieLoco.posX - posX) * (bogieLoco.posX - posX)) +
-							((bogieLoco.posZ - posZ) * (bogieLoco.posZ - posZ))));//1.043749988079071
-			serverRealPitch = anglePitch +(float)
-					((bogieLoco.posZ - posZ) * (bogieLoco.posZ - posZ));//1.043749988079071
+		if (movedHorizontally)
+		{
+			// Vanilla rails already supplied their axis; displacement can include a sideways rail snap.
+			float stableRenderYaw = canUseRail() && BlockRailBase.func_150051_a(l)
+					? rotationYaw : retainAxisFacing(motionYaw, rotationYaw);
+			rotationYaw = stableRenderYaw;
+			if (bogieLoco != null)
+			{
+				serverRealRotation = retainAxisFacing(getBogieBodyYaw(), serverRealRotation);
+			}
+			isServerInReverse = Math.abs(MathHelper.wrapAngleTo180_float(motionYaw - stableRenderYaw)) > 90.0F;
 		}
-		else {
-			float rotation = rotationYaw;
 
-			float delta = MathHelper.wrapAngleTo180_float(this.rotationYaw - this.previousServerRealRotation); //Math.abs(this.rotationYaw - this.previousServerRealRotation);
+		float anglePitch=0;
+		if (bogieLoco != null)
+		{
 
-			this.previousServerRealRotation = this.rotationYaw;
-
-			if (delta < -179.0F || delta > 179.0F) // if (delta > 170.0F || delta < 190.0F) {
-            {
-
-				this.rotationYaw += 180.0F;
-				this.isServerInReverse = !this.isServerInReverse;
-			}
-			previousServerRealRotation = rotation;
-			if (this.isServerInReverse) {
-				if (serverInReverseSignPositive) {
-					rotation += 180.0f;
-				}
-				else {
-					rotation -= 180.0f;
-				}
-			}
-
-			serverRealRotation = rotation;
-
+			anglePitch = (float) RollingStockSeatPositioner.bogiePitchRadians(
+					bogieLoco.posX - posX, bogieLoco.posY - posY, bogieLoco.posZ - posZ);
+			serverRealPitch = anglePitch;
+		}
+		else
+		{
+			// Rendering and seats must share one facing, including before the first movement.
+			serverRealRotation = rotationYaw;
 			double zDist = posZ - prevPosZ;
 			double xDist = posX - prevPosX;
 			float tempPitch = rollingServerPitch;
@@ -1283,6 +1655,44 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 	private boolean flag;
 	private boolean flag1;
+
+	/**
+	 * Chooses the direction of an undirected rail tangent nearest the entity's
+	 * existing facing. Reversing velocity therefore cannot exchange front and rear.
+	 */
+	static float retainAxisFacing(float tangentYaw, float previousFacing)
+	{
+		float forward = MathHelper.wrapAngleTo180_float(tangentYaw);
+		float backward = MathHelper.wrapAngleTo180_float(tangentYaw + 180.0F);
+		float forwardDelta = Math.abs(MathHelper.wrapAngleTo180_float(forward - previousFacing));
+		float backwardDelta = Math.abs(MathHelper.wrapAngleTo180_float(backward - previousFacing));
+		return backwardDelta < forwardDelta ? backward : forward;
+	}
+
+	/**
+	 * Aligns a facing to vanilla rail geometry without using travel direction.
+	 * Shape indices use Minecraft's rail metadata; unsupported shapes retain the prior facing.
+	 */
+	public static float getVanillaRailFacing(int railShape, float previousFacing)
+	{
+		if (railShape < 0 || railShape >= matrix.length)
+		{
+			return previousFacing;
+		}
+		int[][] endpoints = matrix[railShape];
+		double railX = endpoints[1][0] - endpoints[0][0];
+		double railZ = endpoints[1][2] - endpoints[0][2];
+		float railYaw = (float) Math.toDegrees(Math.atan2(railZ, railX));
+		return retainAxisFacing(railYaw, previousFacing);
+	}
+
+	/** Returns the directed body yaw established by the attached locomotive bogie. */
+	private float getBogieBodyYaw()
+	{
+		return MathHelper.wrapAngleTo180_float((float) Math.toDegrees(Math.atan2(
+				(float) (bogieLoco.posZ - posZ), (float) (bogieLoco.posX - posX))) - 90.0F);
+	}
+
 	/**
 	 * Updates rail-specific motion for the block beneath this rolling stock.
 	 *
@@ -1327,7 +1737,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 			 posY = (floor_posY + 1);
 			 }
 
-			 adjustSlopeVelocities(i1);
+			// Keep front/rear attached to the rail axis even while stationary or being pushed sideways.
+			rotationYaw = getVanillaRailFacing(i1, rotationYaw);
+			adjustSlopeVelocities(i1);
 
 
 			 int ai[][] = matrix[i1];
@@ -1996,7 +2408,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound)
+	{
 		super.writeEntityToNBT(nbttagcompound);
 		nbttagcompound.setDouble("speedLimiter", this.speedLimiter);
 		nbttagcompound.setFloat("serverRealRotation", this.serverRealRotation);
@@ -2007,6 +2420,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		nbttagcompound.setFloat("rotation", this.rotation);
 		nbttagcompound.setBoolean("brake", isBraking);
 		nbttagcompound.setBoolean("parkingBrake", parkingBrake);
+		nbttagcompound.setBoolean("emergencyBrake", seatManager.isEmergencyBrakeApplied());
+		nbttagcompound.setBoolean("LivestockUnloading", seatManager.isLivestockUnloading());
 
 		if (realWorldPlacedAt > 0L)
 		{
@@ -2018,7 +2433,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound)
+	{
 		super.readEntityFromNBT(nbttagcompound);
 		this.speedLimiter = nbttagcompound.getDouble("speedLimiter");
 		this.serverRealRotation = nbttagcompound.getFloat("serverRealRotation");
@@ -2033,6 +2449,9 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		this.rotation = nbttagcompound.getFloat("rotation");
 		this.isBraking = nbttagcompound.getBoolean("brake");
 		parkingBrake = nbttagcompound.getBoolean("parkingBrake");
+		seatManager.setEmergencyBrakeApplied(nbttagcompound.getBoolean("emergencyBrake"));
+		seatManager.setLivestockUnloading(nbttagcompound.getBoolean("LivestockUnloading"));
+		seatStateSync.recordCurrentState();
 		realWorldPlacedAt = nbttagcompound.hasKey(NBT_REAL_WORLD_PLACED_AT)
 				? parseRealWorldTimestamp(nbttagcompound.getString(NBT_REAL_WORLD_PLACED_AT))
 				: 0L;
@@ -2058,23 +2477,29 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 		{
 			return;
 		}
-		if (player.ridingEntity != this)
+		if (player.ridingEntity != this && canBoardWithInventory(player) == false)
 		{
-			BoardingRestriction restriction = ItemHandler.findBoardingRestriction(player.inventory);
-			if (restriction != null)
-			{
-				String messageKey = "tc.boarding.filled_container";
-				if (restriction.verdict == NbtContentsRule.Result.UNVERIFIED)
-				{
-					messageKey = "tc.boarding.unverified_container";
-				}
-				ChatComponentTranslation boardingMessage = new ChatComponentTranslation(
-						messageKey, restriction.stack.getDisplayName());
-				ActionBarMessenger.display(player, EnumChatFormatting.YELLOW + boardingMessage.getUnformattedText());
-				return;
-			}
+			return;
 		}
 		player.mountEntity(this);
+	}
+
+	/** Applies the same carried-container restriction to direct mounts and proxy seats. */
+	public final boolean canBoardWithInventory(EntityPlayer player)
+	{
+		BoardingRestriction restriction = ItemHandler.findBoardingRestriction(player.inventory);
+		if (restriction == null)
+		{
+			return true;
+		}
+		String messageKey = "tc.boarding.filled_container";
+		if (restriction.verdict == NbtContentsRule.Result.UNVERIFIED)
+		{
+			messageKey = "tc.boarding.unverified_container";
+		}
+		ChatComponentTranslation boardingMessage = new ChatComponentTranslation(messageKey, restriction.stack.getDisplayName());
+		ActionBarMessenger.display(player, EnumChatFormatting.YELLOW + boardingMessage.getUnformattedText());
+		return false;
 	}
 
 	@Override
@@ -2308,10 +2733,12 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	 * other. Args: entity
 	 */
 	@Override
-	public void applyEntityCollision(Entity par1Entity) {
+	public void applyEntityCollision(Entity par1Entity)
+	{
 		//System.out.println(par1Entity +" " +this.bogieLoco +" "+this.bogieUtility[0]);
 		//if(par1Entity instanceof EntityPlayer)return;
-		if (this.bogieLoco == null || par1Entity == this)
+		if (this.bogieLoco == null || par1Entity == this || par1Entity instanceof EntityPassengerSeat
+				|| isPassengerOfThis(par1Entity))
 		{
 			return;
 		}

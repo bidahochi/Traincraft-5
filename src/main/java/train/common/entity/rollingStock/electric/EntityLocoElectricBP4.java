@@ -1,9 +1,11 @@
 package train.common.entity.rollingStock.electric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 import train.common.overlaytexture.EnumOverlayFonts;
@@ -37,8 +39,12 @@ public class EntityLocoElectricBP4 extends ElectricTrain {
 
 
 	@Override
-	public void updateRiderPosition() {
-		TraincraftUtil.updateRider(this, 3.0, 0.15);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", 1.5375F, 0.15F, 0F, SeatRole.DRIVER)
+		};
 	}
 
 	

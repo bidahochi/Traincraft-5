@@ -1,5 +1,8 @@
 package train.client.gui;
 
+import train.common.seats.RollingStockSeatManager;
+import net.minecraft.entity.Entity;
+
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -28,10 +31,15 @@ public class HUDMTC extends GuiScreen {
 
 //test15
 	@SubscribeEvent
-	public void onGameRender(RenderGameOverlayEvent.Text event){
-		if (game != null && game.thePlayer != null && game.thePlayer.ridingEntity != null && game.thePlayer.ridingEntity instanceof Locomotive /*&& Minecraft.isGuiEnabled() && game.currentScreen == null*/) {
-			renderSkillHUD(event, (Locomotive) game.thePlayer.ridingEntity);
-		} else {
+	public void onGameRender(RenderGameOverlayEvent.Text event)
+	{
+        Entity ridingStock = game == null ? null : RollingStockSeatManager.getRidingStock(game.thePlayer);
+		if (game != null && game.thePlayer != null && ridingStock != null && ridingStock instanceof Locomotive /*&& Minecraft.isGuiEnabled() && game.currentScreen == null*/)
+		{
+			renderSkillHUD(event, (Locomotive) ridingStock);
+		}
+		else
+		{
 			this.game = this.mc = Minecraft.getMinecraft();
 			this.fontRendererObj = this.game.fontRenderer;
 		}

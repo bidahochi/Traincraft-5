@@ -7,10 +7,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import train.common.api.EntityRollingStock;
-import train.common.api.IPassenger;
+import train.common.api.AbstractPassengerCar;
 
-public class AipkitExplorer2 extends EntityRollingStock implements IPassenger {
+public class AipkitExplorer2 extends AbstractPassengerCar
+{
     public TiltingHandler tiltingHandler = new TiltingHandler(7);
 
     public AipkitExplorer2(World world) {
@@ -18,23 +18,16 @@ public class AipkitExplorer2 extends EntityRollingStock implements IPassenger {
     }
 
     @Override
-    public void updateRiderPosition() {
-        if(riddenByEntity!=null) {
-            riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.2, posZ);
-        }
+    protected double getAdditionalYOffset()
+    {
+        return 0.2D;
     }
 
     @Override
-    public void setDead() {
-        super.setDead();
-        isDead = true;
-    }
-
-    @Override
-    public boolean interactFirst(EntityPlayer entityplayer) {
+    public boolean interactFirst(EntityPlayer entityplayer)
+    {
         playerEntity = entityplayer;
         if (worldObj.isRemote) {
-            double rotation = this.serverRealRotation;
             ItemStack itemstack = entityplayer.inventory.getCurrentItem();
             if (itemstack != null) {
                 if (itemstack.getItem() == Items.stick) {
@@ -64,22 +57,7 @@ public class AipkitExplorer2 extends EntityRollingStock implements IPassenger {
             }
         }
 
-        if ((super.interactFirst(entityplayer))) {
-            return false;
-        }
-
-
-
-        if (!worldObj.isRemote) {
-            ItemStack itemstack = entityplayer.inventory.getCurrentItem();
-
-            if(lockThisCart(itemstack, entityplayer))return true;
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer) {
-                return true;
-            }
-            boardPlayer(entityplayer);
-        }
-        return true;
+        return super.interactFirst(entityplayer);
     }
     @Override
     public void onUpdate() {
@@ -87,21 +65,6 @@ public class AipkitExplorer2 extends EntityRollingStock implements IPassenger {
         if (worldObj.isRemote) {
             tiltingHandler.handleTilting(this);
         }
-    }
-
-    @Override
-    public boolean canBeRidden() {
-        return true;
-    }
-
-    @Override
-    public boolean isStorageCart() {
-        return false;
-    }
-
-    @Override
-    public boolean isPoweredCart() {
-        return false;
     }
 
     @Override

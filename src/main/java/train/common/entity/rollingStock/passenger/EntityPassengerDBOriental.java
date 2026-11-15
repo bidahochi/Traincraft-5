@@ -7,6 +7,8 @@
 
 package train.common.entity.rollingStock.passenger;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,10 +27,6 @@ public class EntityPassengerDBOriental extends AbstractPassengerCar {
 		super(world);
 	}
 
-	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.2, posZ);
-	}
 
 	@Override
 	public float getOptimalDistance(EntityMinecart cart) {
@@ -45,4 +43,18 @@ public class EntityPassengerDBOriental extends AbstractPassengerCar {
 				new float[] { 180F, 0F, 0F },
 				new float[] { -1F, -1F, 1F }));
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("passenger_1", 0f, 0.5f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_2", -1f, 0.5f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_3", 1f, 0.5f, 0f, SeatRole.PASSENGER)
+		};
+	}
+
 }

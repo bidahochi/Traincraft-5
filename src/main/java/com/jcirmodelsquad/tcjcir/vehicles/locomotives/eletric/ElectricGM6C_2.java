@@ -1,5 +1,8 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import com.jcirmodelsquad.tcjcir.models.pantos.Modelpanto_gm6c_down;
 import com.jcirmodelsquad.tcjcir.models.pantos.Modelpanto_gm6c_downup;
 import com.jcirmodelsquad.tcjcir.models.pantos.Modelpanto_gm6c_up;
@@ -7,7 +10,6 @@ import com.jcirmodelsquad.tcjcir.models.pantos.Modelpanto_gm6c_updown;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.entity.CargoManager;
 import train.common.entity.CargoSpecification;
 import train.common.enums.LockoutGroup;
@@ -45,7 +47,13 @@ public class ElectricGM6C_2 extends ElectricTrain {
     }
 
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3.8, -0.10, -0.35); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 2.0844F, -0.1F, 0.35F, SeatRole.DRIVER)
+        };
+    }
 
     @Override
     public String getInventoryName() {

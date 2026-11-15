@@ -1,5 +1,8 @@
 package train.client.core;
 
+import train.common.seats.RollingStockSeatManager;
+import train.common.api.Locomotive;
+
 import com.jcirmodelsquad.tcjcir.features.WigglyWobblyHandler;
 import com.jcirmodelsquad.tcjcir.features.containers.GuiFortyFootContainer;
 import com.jcirmodelsquad.tcjcir.features.containers.TileFortyFootContainer;
@@ -36,6 +39,7 @@ import train.client.render.lighting.ClientRollingStockAppearanceLoader;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import train.client.core.handlers.RecipeBookHandler;
 import train.client.core.handlers.TCKeyHandler;
+import train.client.core.handlers.SeatGuiNavigationHandler;
 import train.client.core.helpers.JLayerHook;
 import train.client.gui.*;
 import train.client.gui.locomotive.GuiLiquidFiredSteamLocomotive;
@@ -61,6 +65,7 @@ import train.common.core.Traincraft_EventSounds;
 import train.common.core.handlers.ConfigHandler;
 import train.common.entity.digger.EntityRotativeDigger;
 import train.common.entity.digger.EntityRotativeWheel;
+import train.common.entity.EntityPassengerSeat;
 import train.common.entity.rollingStock.EntityJukeBoxCart;
 import train.common.entity.zeppelin.EntityZeppelinOneBalloon;
 import train.common.entity.zeppelin.EntityZeppelinTwoBalloons;
@@ -128,7 +133,8 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public void registerEvents(FMLPreInitializationEvent event) {
+	public void registerEvents(FMLPreInitializationEvent event)
+	{
 		super.registerEvents(event);
 		LightingReloadCommand.init();
 		RollingStockAppearanceResolver.setClientProvider(
@@ -155,6 +161,7 @@ public class ClientProxy extends CommonProxy
 		registerEvent(huDloco);
 		registerEvent(new HUDAipkit());
 		registerEvent(wiggle);
+		registerEvent(new SeatGuiNavigationHandler());
 	}
 
 	@Override
@@ -176,6 +183,7 @@ public class ClientProxy extends CommonProxy
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityRollingStock.class, new RenderRollingStock());
+		RenderingRegistry.registerEntityRenderingHandler(EntityPassengerSeat.class, new RenderPassengerSeat());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZeppelinTwoBalloons.class, new RenderZeppelins());
 		RenderingRegistry.registerEntityRenderingHandler(EntityZeppelinOneBalloon.class, new RenderZeppelins());
 		RenderingRegistry.registerEntityRenderingHandler(EntityRotativeDigger.class, new RenderRotativeDigger());
@@ -370,12 +378,24 @@ public class ClientProxy extends CommonProxy
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		EntityPlayer riddenByEntity = null;
 		Entity entity = player.ridingEntity;
-		if (player.ridingEntity != null) {
-			riddenByEntity = (EntityPlayer) entity.riddenByEntity;
+		EntityRollingStock stock = RollingStockSeatManager.getRidingStock(player);
+		if (stock != null)
+		{
+			entity = stock;
+		}
+		if ((ID == GuiIDs.LOCO || ID == GuiIDs.LOCO_TANKENGINE)
+				&& ((stock instanceof Locomotive) == false || stock.isActiveDriver(player) == false || stock.isProtectedControlAuthorized(player) == false))
+		{
+			return null;
+		}
+		if (player.ridingEntity != null)
+		{
+			riddenByEntity = player;
 		}
 
 		Entity entity1 = null;
@@ -395,7 +415,8 @@ public class ClientProxy extends CommonProxy
 			}
 		}
 
-		switch (ID) {
+		switch (ID)
+		{
 		case (GuiIDs.CRAFTER_TIER_I):
 			return te != null && te instanceof TileCrafterTierI ? new GuiCrafterTier(player.inventory, (TileCrafterTierI) te) : null;
 		case (GuiIDs.CRAFTER_TIER_II):
@@ -436,7 +457,8 @@ public class ClientProxy extends CommonProxy
 		case (GuiIDs.DIGGER):
 			return riddenByEntity != null ? new GuiRotativeDigger(riddenByEntity.inventory, entity) : null;
 		case (GuiIDs.MTC_INFO):
-			return riddenByEntity != null && Loader.isModLoaded("ComputerCraft") ? new GuiMTCInfo(player) : null;
+			return entity instanceof Locomotive && stock.isActiveDriver(player) && stock.isProtectedControlAuthorized(player)
+                    && Loader.isModLoaded("ComputerCraft") ? new GuiMTCInfo(entity) : null;
 
 			//Stationary entities while player is not riding.
 		case (GuiIDs.FREIGHT):
@@ -490,6 +512,57 @@ public class ClientProxy extends CommonProxy
 	public int addArmor(String armor) {
 		return RenderingRegistry.addNewArmourRendererPrefix(armor);
 	}
+
+	@Override
+	public void openSeatSelection(int rollingStockEntityId)
+	{
+		if (Minecraft.getMinecraft().theWorld == null)
+		{
+			return;
+		}
+		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(rollingStockEntityId);
+		if (entity instanceof EntityRollingStock)
+		{
+			Minecraft.getMinecraft().displayGuiScreen(new GuiSeatSelection((EntityRollingStock) entity));
+		}
+	}
+
+	@Override
+	public void syncSeatControlState(int rollingStockEntityId, int directSeatIndex, int activeSeatIndex,
+			String activeStation, boolean emergencyBrake)
+	{
+		if (Minecraft.getMinecraft().theWorld == null)
+		{
+			return;
+		}
+		Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(rollingStockEntityId);
+		if (entity instanceof EntityRollingStock)
+		{
+			((EntityRollingStock) entity).setSeatControlStateFromPacket(directSeatIndex, activeSeatIndex,
+					activeStation, emergencyBrake);
+		}
+	}
+
+    @Override
+    public void syncMtcState(int entityId, int status, int type, int atoStatus,
+            boolean mtcOverride, boolean overspeedOverride)
+    {
+        if (Minecraft.getMinecraft().theWorld == null)
+        {
+            return;
+        }
+        Entity entity = Minecraft.getMinecraft().theWorld.getEntityByID(entityId);
+        if ((entity instanceof Locomotive) == false)
+        {
+            return;
+        }
+        Locomotive locomotive = (Locomotive) entity;
+        locomotive.mtcStatus = status;
+        locomotive.mtcType = type;
+        locomotive.atoStatus = atoStatus;
+        locomotive.mtcOverridePressed = mtcOverride;
+        locomotive.overspeedOveridePressed = overspeedOverride;
+    }
 
 	@Override
 	public GuiScreen getCurrentScreen() {
@@ -696,37 +769,29 @@ public class ClientProxy extends CommonProxy
 			DelegatingRenderPlayer.registerRenderer();
 			DelegatingRenderPlayer.registerDelegate(new DelegatingRenderPlayer.Delegate()
 			{
-				AbstractTrains trains;
-
 				@Override
 				public boolean doRender(net.minecraft.client.entity.AbstractClientPlayer player, double x, double y, double z, float f0, float f1)
 				{
-					if (player.ridingEntity instanceof AbstractTrains)
+					AbstractTrains trains = player.ridingEntity instanceof AbstractTrains
+							? (AbstractTrains) player.ridingEntity : RollingStockSeatManager.getRidingStock(player);
+					if (trains == null)
 					{
-						trains = (AbstractTrains) player.ridingEntity;
-						if(trains != null)
-						{
-							GL11.glPushMatrix();
-							float scale = trains.getPlayerScale();
-							scale = player.height * scale / player.height;
-							GL11.glTranslated(x, (y + .35), z);
-							GL11.glScalef(scale, scale, scale);
-							GL11.glTranslated(-x, -(y + .35), -z);
-							if (player != Minecraft.getMinecraft().thePlayer)
-							{
-								//GL11.glTranslated(0, 0.87f, 0); //rough approx. but gets the job done for everything in range 0.5-1
-								GL11.glTranslated(0, 1 - (trains.getPlayerScale() - trains.getPlayerModelOffset(false)), 0);
-							}
-							else
-							{
-								//GL11.glTranslated(0, 0, 0); //rough approx. but gets the job done for everything in range 0.5-1
-								GL11.glTranslated(0, ((1 - trains.getPlayerScale()) * -1) + trains.getPlayerModelOffset(true) , 0);
-							}
-
-							return true;
-						}
+						return false;
 					}
-					return false;
+					GL11.glPushMatrix();
+					float scale = trains.getPlayerScale();
+					GL11.glTranslated(x, (y + .35), z);
+					GL11.glScalef(scale, scale, scale);
+					GL11.glTranslated(-x, -(y + .35), -z);
+					if (player != Minecraft.getMinecraft().thePlayer)
+					{
+						GL11.glTranslated(0, 1 - (scale - trains.getPlayerModelOffset(false)), 0);
+					}
+					else
+					{
+						GL11.glTranslated(0, ((1 - scale) * -1) + trains.getPlayerModelOffset(true), 0);
+					}
+					return true;
 				}
 			});
 		}

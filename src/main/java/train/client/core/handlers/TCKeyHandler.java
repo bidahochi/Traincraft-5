@@ -1,5 +1,7 @@
 package train.client.core.handlers;
 
+import train.common.seats.RollingStockSeatManager;
+
 import com.jcirmodelsquad.tcjcir.features.geometry.GuiGeometryCar;
 import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.ExperimentalGeometryCar;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -17,6 +19,9 @@ import train.client.gui.GuiMTCInfo;
 import train.client.gui.GuiSleeperCar;
 import train.common.Traincraft;
 import train.common.api.AbstractPassengerCar;
+import train.common.api.AbstractControlCar;
+import train.common.api.EntityRollingStock;
+import train.common.api.AbstractWorkCart;
 import train.common.api.Locomotive;
 import train.common.api.SteamTrain;
 import train.common.core.handlers.ConfigHandler;
@@ -81,8 +86,10 @@ public class TCKeyHandler {
 	}
 
 	@SubscribeEvent
-	public void onKeyInput(InputEvent.KeyInputEvent event) {
-		if (!Minecraft.getMinecraft().ingameGUI.getChatGUI().getChatOpen()) {
+	public void onKeyInput(InputEvent.KeyInputEvent event)
+	{
+		if (Minecraft.getMinecraft().ingameGUI.getChatGUI().getChatOpen() == false)
+		{
 			if (up.getIsKeyPressed()) {
 				sendKeyControlsPacket(0);
 			}
@@ -96,17 +103,30 @@ public class TCKeyHandler {
 			{
 				Minecraft minecraft = Minecraft.getMinecraft();
 				Entity riddenTransport = minecraft.thePlayer == null ? null : minecraft.thePlayer.ridingEntity;
-				if (riddenTransport instanceof AbstractPassengerCar && ((AbstractPassengerCar) riddenTransport).hasSleepingBunk())
+				EntityRollingStock rollingStock = RollingStockSeatManager.getRidingStock(minecraft.thePlayer);
+				if (rollingStock instanceof AbstractPassengerCar && ((AbstractPassengerCar) rollingStock).hasSleepingBunk())
 				{
-					AbstractPassengerCar sleeperCar = (AbstractPassengerCar) riddenTransport;
-					minecraft.displayGuiScreen(new GuiSleeperCar(sleeperCar));
+					minecraft.displayGuiScreen(new GuiSleeperCar((AbstractPassengerCar) rollingStock));
+				}
+				else if (riddenTransport instanceof ExperimentalGeometryCar)
+				{
+					sendKeyControlsPacket(7);
+					minecraft.displayGuiScreen(new GuiGeometryCar(minecraft.thePlayer));
 				}
 				else
 				{
-					sendKeyControlsPacket(7);
-					if (riddenTransport instanceof ExperimentalGeometryCar)
+					boolean directWorkCart = rollingStock instanceof AbstractWorkCart
+							&& Minecraft.getMinecraft().thePlayer.ridingEntity == rollingStock;
+					boolean directControlCar = rollingStock instanceof AbstractControlCar
+							&& Minecraft.getMinecraft().thePlayer.ridingEntity == rollingStock;
+					if (rollingStock != null && rollingStock.isActiveDriver(Minecraft.getMinecraft().thePlayer) == false
+							&& directWorkCart == false && directControlCar == false)
 					{
-						minecraft.displayGuiScreen(new GuiGeometryCar(minecraft.thePlayer));
+						SeatGuiNavigationHandler.openSeatSelection(null);
+					}
+					else
+					{
+						sendKeyControlsPacket(7);
 					}
 				}
 			}
@@ -173,62 +193,34 @@ public class TCKeyHandler {
 				sendKeyControlsPacket(9);
 			}
 
-				if (MTCScreen.isPressed() && !FMLClientHandler.instance().isGUIOpen(GuiMTCInfo.class)) {
-					if (Minecraft.getMinecraft().thePlayer.ridingEntity != null) {
-						Minecraft.getMinecraft().displayGuiScreen(new GuiMTCInfo(Minecraft.getMinecraft().thePlayer.ridingEntity));
-					}
-				}
-				if (toggleATO.isPressed() && Minecraft.getMinecraft().thePlayer.ridingEntity instanceof Locomotive) {
-					sendKeyControlsPacket(16);
-					Locomotive train = (Locomotive) Minecraft.getMinecraft().thePlayer.ridingEntity;
-					if (train.mtcStatus != 0 && train.mtcType == 2) {
-						if (train instanceof SteamTrain && !ConfigHandler.ALLOW_ATO_ON_STEAMERS) {
-							((EntityPlayer) train.riddenByEntity).addChatMessage(new ChatComponentText("Automatic Train Operation cannot be used with steam trains"));
-						} else {
-							if (train.atoStatus == 1) {
-								train.atoStatus = 0;
-							} else {
-								train.atoStatus = 1;
-							}
-						}
 
-					} else {
-						((EntityPlayer) train.riddenByEntity).addChatMessage(new ChatComponentText("Automatic Train Operation can only be activated when you are using W-MTC"));
-					}
+                EntityRollingStock stock = RollingStockSeatManager.getRidingStock(Minecraft.getMinecraft().thePlayer);
+                boolean openMtc = MTCScreen.isPressed();
+                boolean toggleAto = toggleATO.isPressed();
+                boolean overrideMtc = mtcOverride.isPressed();
+                boolean overrideOverspeed = overspeedOverride.isPressed();
+                if (stock instanceof Locomotive && stock.isActiveDriver(Minecraft.getMinecraft().thePlayer)
+                        && stock.isProtectedControlAuthorized(Minecraft.getMinecraft().thePlayer))
+                {
+                    if (openMtc && FMLClientHandler.instance().isGUIOpen(GuiMTCInfo.class) == false)
+                    {
+                        Minecraft.getMinecraft().displayGuiScreen(new GuiMTCInfo(stock));
+                    }
+                    if (toggleAto)
+                    {
+                        sendKeyControlsPacket(16);
+                    }
+                    if (overrideMtc)
+                    {
+                        sendKeyControlsPacket(17);
+                    }
+                    if (overrideOverspeed)
+                    {
+                        sendKeyControlsPacket(18);
+                    }
+                }
 
-				}
-
-
-				if (mtcOverride.isPressed() && Minecraft.getMinecraft().thePlayer.ridingEntity instanceof Locomotive) {
-					Locomotive train = (Locomotive) Minecraft.getMinecraft().thePlayer.ridingEntity;
-
-
-					if (train.mtcOverridePressed) {
-						train.mtcOverridePressed = false;
-						((EntityPlayer) train.riddenByEntity).addChatMessage(new ChatComponentText("MTC has been enabled and will re-activate when the system receives new data"));
-					} else {
-						train.mtcOverridePressed = true;
-						((EntityPlayer) train.riddenByEntity).addChatMessage(new ChatComponentText("MTC has been disabled and will not receive speed changes or transmit MTC data"));
-						train.mtcStatus = 0;
-						train.speedLimit = 0;
-						train.nextSpeedLimit = 0;
-						train.speedChange3 = Vec3.createVectorHelper(0,0,0);
-						train.stopPoint3 = Vec3.createVectorHelper(0,0,0);
-
-						train.trainLevel = 0;
-
-					}
-					sendKeyControlsPacket(17);
-				}
-				if (overspeedOverride.isPressed() && Minecraft.getMinecraft().thePlayer.ridingEntity instanceof Locomotive) {
-					Locomotive train = (Locomotive) Minecraft.getMinecraft().thePlayer.ridingEntity;
-					sendKeyControlsPacket(18);
-					if (train.mtcStatus == 1 | train.mtcStatus == 2) {
-						train.overspeedOveridePressed = !train.overspeedOveridePressed;
-					}
-				}
-
-			}
+		}
 
 
 

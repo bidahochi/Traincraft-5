@@ -39,7 +39,8 @@ public class GuiTankEngine extends GuiContainer {
 	}
 
 	@Override
-	public void initGui() {
+	public void initGui()
+	{
 		super.initGui();
 		buttonList.clear();
 		if (!loco.parkingBrake) {
@@ -80,7 +81,7 @@ public class GuiTankEngine extends GuiContainer {
 		int var2 = (this.height - ySize) / 2;
 		GuiButton lockButton = TransportLockGuiHandler.createLockButton(
 				loco,
-				(EntityPlayer)loco.riddenByEntity,
+				mc.thePlayer,
 				var1,
 				var2,
 				124,
@@ -95,8 +96,26 @@ public class GuiTankEngine extends GuiContainer {
 	}
 
 	@Override
+    public void updateScreen()
+	{
+        if (loco.isActiveDriver(mc.thePlayer) == false || loco.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.thePlayer.closeScreen();
+            return;
+        }
+
+        super.updateScreen();
+	}
+
+	@Override
 	protected void actionPerformed(GuiButton guibutton)
 	{
+        if (loco.isActiveDriver(mc.thePlayer) == false || loco.isProtectedControlAuthorized(mc.thePlayer) == false)
+        {
+            mc.thePlayer.closeScreen();
+            return;
+        }
+
 		switch (guibutton.id)
 		{
 			case 2:
@@ -114,26 +133,39 @@ public class GuiTankEngine extends GuiContainer {
 				}
 			break;
 			case 3:
-				TransportLockGuiHandler.handleLockButton(this, guibutton, (EntityPlayer) loco.riddenByEntity, loco, isShiftKeyDown());
+				TransportLockGuiHandler.handleLockButton(this, guibutton, mc.thePlayer, loco, isShiftKeyDown());
 			break;
 		}
 	}
 
 	@Override
-	protected void drawCreativeTabHoveringText(String str, int t, int g) {
+	protected void drawCreativeTabHoveringText(String str, int t, int g)
+	{
 
 		//int liqui = (dieselInventory.getLiquidAmount() * 50) / dieselInventory.getTankCapacity();
 		String state = "";
-		if (loco.getTrainLockedFromPacket()) {
-			if (loco.getTransportOwner().equalsIgnoreCase(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+		if (loco.getTrainLockedFromPacket())
+		{
+			if (loco.getTransportOwner().equalsIgnoreCase(mc.thePlayer.getDisplayName()))
+			{
 				state = "Locked";
-			else if (loco.isPlayerTrusted(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
-				if (loco.isPlayerTrustedToBreak(((EntityPlayer) loco.riddenByEntity).getDisplayName()))
+			}
+			else if (loco.isPlayerTrusted(mc.thePlayer.getDisplayName()))
+			{
+				if (loco.isPlayerTrustedToBreak(mc.thePlayer.getDisplayName()))
+				{
 					state = "Trusted Access+";
+				}
 				else
+				{
 					state = "Trusted Access";
-		} else
+				}
+			}
+		}
+		else
+		{
 			state = "Unlocked";
+		}
 
 		int textWidth = fontRendererObj.getStringWidth("the GUI, change speed, destroy it.");
 		int startX = 90;

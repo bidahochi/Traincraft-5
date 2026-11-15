@@ -1,5 +1,8 @@
 package train.common.entity.rollingStock.electric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
@@ -18,8 +21,12 @@ public class EntityLocoElectricMinetrain extends ElectricTrain {
 	}
 
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.10F, posZ);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.5812F, 0.1F, 0.1847F, SeatRole.DRIVER)
+		};
 	}
 
 	

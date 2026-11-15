@@ -1,9 +1,10 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.enums.LockoutGroup;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
@@ -30,8 +31,19 @@ public class ElectricClass74 extends ElectricTrain {
         return "UK";
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 2.65, 0.08, 0.25); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("front_driver", 1.65F, 0.08f, -0.25F, SeatRole.DRIVER, "front_cab"),
+			new SeatDefinition("rear_driver", -1.65F, 0.08f, 0.25F, SeatRole.DRIVER, "rear_cab")
+		};
+    }
 
 
 

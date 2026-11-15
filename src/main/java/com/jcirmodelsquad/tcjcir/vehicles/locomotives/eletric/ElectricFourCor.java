@@ -1,10 +1,12 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import com.jcirmodelsquad.tcjcir.models.passengerparts.ModelFourCorHeadboard;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.entity.CargoManager;
 import train.common.entity.CargoSpecification;
 import train.common.library.EnumSounds;
@@ -38,7 +40,13 @@ public class ElectricFourCor extends ElectricTrain {
 
     
     @Override
-    public void updateRiderPosition() { TraincraftUtil.updateRider(this, 4.26, 0.0, 0.46); }
+    protected SeatDefinition[] getSeatDefinitions()
+    {
+        return new SeatDefinition[]
+        {
+            new SeatDefinition("driver", 2.46F, 0F, -0.46F, SeatRole.DRIVER)
+        };
+    }
 
 
     

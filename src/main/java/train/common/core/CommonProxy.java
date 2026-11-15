@@ -1,5 +1,8 @@
 package train.common.core;
 
+import train.common.seats.RollingStockSeatManager;
+import train.common.api.Locomotive;
+
 import com.jcirmodelsquad.tcjcir.features.containers.ContainerStorage;
 import com.jcirmodelsquad.tcjcir.features.containers.TileFortyFootContainer;
 import com.jcirmodelsquad.tcjcir.features.signal.vbc.TileVBCController;
@@ -217,13 +220,25 @@ public class CommonProxy implements IGuiHandler {
 		}
 	}
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+	{
 		TileEntity te = world.getTileEntity(x, y, z);
 		EntityPlayer riddenByEntity = null;
 		Entity entity = player.ridingEntity;
+		EntityRollingStock stock = RollingStockSeatManager.getRidingStock(player);
+		if (stock != null)
+		{
+			entity = stock;
+		}
+		if ((ID == GuiIDs.LOCO || ID == GuiIDs.LOCO_TANKENGINE)
+				&& ((stock instanceof Locomotive) == false || stock.isActiveDriver(player) == false || stock.isProtectedControlAuthorized(player) == false))
+		{
+			return null;
+		}
 
-		if (player.ridingEntity != null) {
-			riddenByEntity = (EntityPlayer) entity.riddenByEntity;
+		if (player.ridingEntity != null)
+		{
+			riddenByEntity = player;
 		}
 
 		Entity entity1 = null;
@@ -305,6 +320,22 @@ public class CommonProxy implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		return null;
 	}
+
+	/** Client hook for presenting the seat picker; intentionally inert on servers. */
+	public void openSeatSelection(int rollingStockEntityId)
+	{
+	}
+
+	/** Client hook for applying synchronized seat-control state. */
+	public void syncSeatControlState(int rollingStockEntityId, int directSeatIndex, int activeSeatIndex,
+			String activeStation, boolean emergencyBrake)
+	{
+	}
+
+    public void syncMtcState(int entityId, int status, int type, int atoStatus,
+            boolean mtcOverride, boolean overspeedOverride)
+    {
+    }
 
 	public static Entity getEntity(World world, int entityId) {
 		if ((world != null) && (world instanceof WorldServer)) {

@@ -1,5 +1,7 @@
 package train.common.entity.rollingStock.diesel;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -20,10 +22,6 @@ public class EntityLocoDieselClass66 extends DieselTrain {
 		super(world, LiquidManager.dieselFilter());
 	}
 
-	@Override
-	public void updateRiderPosition() {
-		TraincraftUtil.updateRider(this,  5.6, 0.1);
-	}
 
 	
 	@Override
@@ -37,4 +35,17 @@ public class EntityLocoDieselClass66 extends DieselTrain {
 	public float getOptimalDistance(EntityMinecart cart) {
 		return (1F);
 	}
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("front_driver", 5.5656F, 0.51f, 0.15F, SeatRole.DRIVER, "front_cab"),
+			new SeatDefinition("rear_driver", -0.0344F, 0.51f, -0.2F, SeatRole.DRIVER, "rear_cab")
+		};
+	}
+
 }

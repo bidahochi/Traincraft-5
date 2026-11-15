@@ -30,6 +30,25 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
     private static final int REVERSE_RELEASE_KEY = 14;
     private static final int BRAKE_RELEASE_KEY = 15;
 
+    @Override
+    public boolean interactFirst(EntityPlayer player)
+    {
+        if (super.interactFirst(player))
+        {
+            return true;
+        }
+        if (worldObj.isRemote)
+        {
+            return true;
+        }
+        if (riddenByEntity instanceof EntityPlayer && riddenByEntity != player)
+        {
+            return true;
+        }
+        boardPlayer(player);
+        return true;
+    }
+
     public Locomotive connectedLocomotive;
     public int whistleDelay;
 
@@ -134,6 +153,7 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
         {
             //Server side stuff.
 
+            connectedLocomotive = null;
             if (cartLinked1 != null) {
                 if ((cartLinked1).trainHandler != null && (cartLinked1).trainHandler.getTrains().size() != 0) {
                     for (int j1 = 0; j1 < (cartLinked1).trainHandler.getTrains().size(); j1++) {
@@ -153,7 +173,8 @@ public abstract class AbstractControlCar extends EntityRollingStock implements I
             }
 
 
-        } else
+        }
+        else
             {
             //Client side stuff.
         }

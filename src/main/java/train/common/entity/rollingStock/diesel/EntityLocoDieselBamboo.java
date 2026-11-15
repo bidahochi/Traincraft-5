@@ -1,11 +1,13 @@
 package train.common.entity.rollingStock.diesel;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import train.common.api.DieselTrain;
 import train.common.api.LiquidManager;
-import train.common.core.util.TraincraftUtil;
 
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
@@ -25,8 +27,12 @@ public class EntityLocoDieselBamboo extends DieselTrain {
 	
 
 	@Override
-	public void updateRiderPosition() {
-		TraincraftUtil.updateRider(this, 1.3, 0);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", 0.3F, 0F, 0F, SeatRole.DRIVER)
+		};
 	}
 
 	@Override

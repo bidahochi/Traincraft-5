@@ -59,23 +59,27 @@ public class PacketRollingStockRotation implements IMessage {
 	public static class Handler implements IMessageHandler<PacketRollingStockRotation, IMessage> {
 
 		@Override
-		public IMessage onMessage(PacketRollingStockRotation message, MessageContext context) {
-
+		public IMessage onMessage(PacketRollingStockRotation message, MessageContext context)
+		{
 			Minecraft mc = Minecraft.getMinecraft();
-			if(mc.theWorld != null){
-				Entity entity = mc.theWorld.getEntityByID(message.entityID);
-				if (entity instanceof EntityRollingStock) {
-
-					EntityRollingStock rollingStock = (EntityRollingStock) entity;
-					rollingStock.rotationYawClient = message.rotationYawServer;
-					rollingStock.rotationYawClientReal = message.realRotation;
-					rollingStock.anglePitchClient = message.anglePitch;
-					rollingStock.isClientInReverse = message.isInReverse;
-					rollingStock.setYFromServer(Float.intBitsToFloat(message.posY));
+			mc.func_152344_a(() ->
+			{
+				if (mc.theWorld == null)
+				{
+					return;
 				}
-
-			}
-
+				Entity entity = mc.theWorld.getEntityByID(message.entityID);
+				if ((entity instanceof EntityRollingStock) == false)
+				{
+					return;
+				}
+				EntityRollingStock rollingStock = (EntityRollingStock) entity;
+				rollingStock.rotationYawClient = message.rotationYawServer;
+				rollingStock.rotationYawClientReal = message.realRotation;
+				rollingStock.anglePitchClient = message.anglePitch;
+				rollingStock.isClientInReverse = message.isInReverse;
+				rollingStock.setYFromServer(Float.intBitsToFloat(message.posY));
+			});
 			return null;
 		}
 	}

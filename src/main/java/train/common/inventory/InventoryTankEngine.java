@@ -93,7 +93,8 @@ public class InventoryTankEngine extends Container {
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
-		return !loco.isDead;
+	public boolean canInteractWith(EntityPlayer var1)
+	{
+		return loco.isDead == false && loco.isActiveDriver(var1) && loco.isProtectedControlAuthorized(var1);
 	}
 }

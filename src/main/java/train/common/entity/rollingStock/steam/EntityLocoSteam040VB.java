@@ -1,5 +1,8 @@
 package train.common.entity.rollingStock.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
@@ -26,8 +29,12 @@ public class EntityLocoSteam040VB extends SteamTrain {
 	@Override
 	public boolean shouldRiderSit(){return false;}
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.65, posZ);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.6188F, 0.65F, 0F, SeatRole.DRIVER)
+		};
 	}
 
 

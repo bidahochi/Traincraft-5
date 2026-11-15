@@ -1,5 +1,8 @@
 package train.common.entity.rollingStock.diesel;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -23,8 +26,12 @@ public class EntityLocoDieselChME3 extends DieselTrain
 
 
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + 0.35F, posZ);
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -0.5F, 0.35F, 0F, SeatRole.DRIVER)
+		};
 	}
 
 

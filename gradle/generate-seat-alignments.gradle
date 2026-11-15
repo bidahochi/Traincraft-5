@@ -1,0 +1,270 @@
+// Discover secondary-bogie stock, measure its authored model center, and package seat origins.
+// This runs only at build time; it neither loads client classes nor changes model placement.
+def javaSources = fileTree('src/main/java') { include '**/*.java' }
+def inputFile = file("$buildDir/seat-alignment-inputs.tsv")
+def resourceDirectory = file("$buildDir/generated/seat-alignment-resources")
+def alignmentFile = new File(resourceDirectory, 'assets/tc/seat-alignments.properties')
+
+def withoutComments = { String source ->
+    source.replaceAll('(?s)/\\*.*?\\*/', '').replaceAll('//[^\\r\\n]*', '')
+}
+def parseVector = { String source, List defaults ->
+    if (source == 'null')
+    {
+        return defaults
+    }
+    source.substring(source.indexOf('{') + 1, source.indexOf('}')).split(',').collect {
+        Double.parseDouble(it.trim().replaceAll('[fFdD]$', ''))
+    }
+}
+
+task prepareSeatAlignmentInputs {
+    inputs.files javaSources
+    inputs.file file('gradle/generate-seat-alignments.gradle')
+    outputs.file inputFile
+    doLast {
+        Map sources = [:]
+        Map qualifiedNames = [:].withDefault { [] }
+        Map registrations = [:]
+        Map renders = [:]
+        javaSources.files.sort().each { sourceFile ->
+            String source = withoutComments(sourceFile.getText('UTF-8'))
+            def packageName = source =~ /\bpackage\s+([\w.]+)\s*;/
+            if (packageName.find() == false)
+            {
+                return
+            }
+            String simpleName = sourceFile.name.replace('.java', '')
+            String qualifiedName = packageName.group(1) + '.' + simpleName
+            sources[qualifiedName] = source
+            qualifiedNames[simpleName].add(qualifiedName)
+        }
+        // Resolve names in the declaring source, so duplicate model names cannot select the wrong file.
+        def resolveClass = { String reference, String owner, String source ->
+            if (sources.containsKey(reference))
+            {
+                return reference
+            }
+            List candidates = qualifiedNames[reference]
+            String ownerPackage = owner.substring(0, owner.lastIndexOf('.'))
+            List imports = (source =~ /\bimport\s+([\w.*]+)\s*;/).collect { it[1] }
+            List matches = candidates.findAll { candidate ->
+                String candidatePackage = candidate.substring(0, candidate.lastIndexOf('.'))
+                (candidatePackage == ownerPackage || imports.contains(candidate)
+                        || imports.contains(candidatePackage + '.*'))
+            }
+            if (matches.size() == 1)
+            {
+                return matches[0]
+            }
+            throw new GradleException("Cannot resolve class $reference in $owner unambiguously")
+        }
+        sources.each { name, source ->
+            if (name.contains('Register'))
+            {
+                def records = source =~ /(?s)new TrainRecord\(\s*"[^"]+"\s*,\s*([\w.]+)\.class[^;]+;/
+                records.each { record ->
+                    def bogie = record[0] =~ /\.setBogieLocoPosition\(\s*([-+\d.]+)[fFdD]?\s*\)/
+                    if (bogie.find() && Double.parseDouble(bogie.group(1)) != 0D)
+                    {
+                        String entity = resolveClass(record[1], name, source)
+                        registrations[entity] = Double.parseDouble(bogie.group(1))
+                    }
+                }
+            }
+            // Render registrations have optional boolean flags around the texture name.
+            String vector = '(new float\\[\\]\\s*\\{[^}]+\\}|null)'
+            String optionalFlag = '(?:(?:true|false)\\s*,\\s*)?'
+            String renderPattern = ('(?s)([\\w.]+)\\.class,\\s*new ([\\w.]+)\\(\\),\\s*'
+                    + optionalFlag + '"[^"]*"\\s*,\\s*' + optionalFlag
+                    + vector + '\\s*,\\s*' + vector + '\\s*,\\s*' + vector)
+            def records = source =~ renderPattern
+            records.each { record ->
+                String entity = resolveClass(record[1], name, source)
+                String model = resolveClass(record[2], name, source)
+                renders[entity] = [model: model, offset: parseVector(record[3], [0D, 0D, 0D]),
+                        rotation: parseVector(record[4], [0D, 0D, 0D]), scale: parseVector(record[5], [1D, 1D, 1D])]
+            }
+        }
+        List rows = []
+        registrations.sort().each { entity, bogie ->
+            Map render = renders[entity]
+            if (render == null)
+            {
+                throw new GradleException("Cannot resolve the existing render registration for secondary-bogie stock $entity")
+            }
+            // TSV columns: entity, model, bogie distance, offset XYZ, rotation XYZ, scale XYZ.
+            rows.add(([entity, render.model, bogie]
+                    + render.offset + render.rotation + render.scale).join('\t'))
+        }
+        inputFile.parentFile.mkdirs()
+        inputFile.setText(rows.join('\n') + '\n', 'UTF-8')
+        logger.lifecycle("Preparing seat alignment for ${rows.size()} secondary-bogie stock classes")
+    }
+}
+
+def rotatePoint = { List point, int axis, double angle ->
+    int first = (axis + 1) % 3
+    int second = (axis + 2) % 3
+    double cosine = Math.cos(angle)
+    double sine = Math.sin(angle)
+    double firstValue = point[first] * cosine - point[second] * sine
+    point[second] = point[first] * sine + point[second] * cosine
+    point[first] = firstValue
+}
+def parseArguments = { String source ->
+    source.split(',').collect { value ->
+        String literal = value.trim()
+        if (literal.startsWith('ModelRendererTurbo.MR_'))
+        {
+            String direction = literal.substring('ModelRendererTurbo.MR_'.length())
+            return ['FRONT': 0D, 'BACK': 1D, 'LEFT': 2D, 'RIGHT': 3D, 'TOP': 4D, 'BOTTOM': 5D][direction]
+        }
+        Double.parseDouble(literal.replaceAll('[fFdD]$', ''))
+    }
+}
+// Use authored corners, not TMT's expanded thin boxes, to match Fanto's authoring convention.
+def measureModelCenter = { File modelFile, List rotation, List scale ->
+    String source = withoutComments(modelFile.getText('UTF-8'))
+    Map parts = [:].withDefault { [corners: [], pivot: [0D, 0D, 0D], angles: [0D, 0D, 0D]] }
+    List cornerSides = [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0],
+                        [0, 0, 1], [1, 0, 1], [1, 1, 1], [0, 1, 1]]
+    // addShapeBox supplies corner adjustments in a different order from addBox.
+    List shapeCornerOrder = [0, 1, 5, 4, 3, 2, 6, 7]
+    Map argumentCounts = [addBox: [6, 7], addShapeBox: [31], addTrapezoid: [9], addFlexTrapezoid: [14]]
+    def boxes = source =~ /(\w+(?:\[\d+\])?)\.(addBox|addShapeBox|addTrapezoid|addFlexTrapezoid)\(([^;]+)\);/
+    boxes.each { match ->
+        List values = parseArguments(match[3])
+        String method = match[2]
+        boolean shaped = method == 'addShapeBox'
+        boolean trapezoid = method.endsWith('Trapezoid')
+        if (argumentCounts[method].contains(values.size()) == false)
+        {
+            throw new GradleException("Unsupported model arguments in ${modelFile.name}: ${match[0]}")
+        }
+        double expansion = values.size() > 6 ? values[6] : 0D
+        List corners = cornerSides.collect { side ->
+            (0..2).collect { axis -> values[axis] + side[axis] * values[axis + 3] + (side[axis] == 0 ? -expansion : expansion) }
+        }
+        if (shaped)
+        {
+            corners.eachWithIndex { point, index ->
+                (0..2).each { axis ->
+                    double adjustment = values[7 + shapeCornerOrder[index] * 3 + axis]
+                    point[axis] += cornerSides[index][axis] == 0 ? -adjustment : adjustment
+                }
+            }
+        }
+        if (trapezoid)
+        {
+            // A simple trapezoid uses one scale; a flex trapezoid supplies six edge scales.
+            List bottomScales = method == 'addTrapezoid' ? [values[7]] * 4 : values[7..10]
+            List frontScales = method == 'addTrapezoid' ? [0D, 0D] : values[11..12]
+            int direction = values.last().intValue()
+            // TMT direction constants: FRONT=0, BACK=1, TOP=4, BOTTOM=5.
+            if (direction == 0 || direction == 1)
+            {
+                [1, 5].each { corners[it][1] -= frontScales[0] }
+                [2, 6].each { corners[it][1] += frontScales[1] }
+                (direction == 0 ? [0, 1, 2, 3] : [4, 5, 6, 7]).each { index ->
+                    corners[index][0] += cornerSides[index][0] == 0 ? -bottomScales[3] : bottomScales[2]
+                    corners[index][1] += cornerSides[index][1] == 0 ? -bottomScales[0] : bottomScales[1]
+                }
+            }
+            else if (direction == 4 || direction == 5)
+            {
+                [1, 2].each { corners[it][2] -= frontScales[0] }
+                [5, 6].each { corners[it][2] += frontScales[1] }
+                (direction == 4 ? [0, 1, 4, 5] : [2, 3, 6, 7]).each { index ->
+                    corners[index][0] += cornerSides[index][0] == 0 ? -bottomScales[0] : bottomScales[1]
+                    corners[index][2] += cornerSides[index][2] == 0 ? -bottomScales[2] : bottomScales[3]
+                }
+            }
+            else
+            {
+                throw new GradleException("Unsupported trapezoid direction in ${modelFile.name}")
+            }
+        }
+        parts[match[1]].corners.addAll(corners)
+    }
+    (source =~ /(\w+(?:\[\d+\])?)\.(?:setRotationPoint|setPosition)\(([^;]+)\);/).each { match ->
+        parts[match[1]].pivot = parseArguments(match[2])
+    }
+    (source =~ /(\w+(?:\[\d+\])?)\.rotateAngle([XYZ])\s*=\s*([-+\d.eEfFdD]+)\s*;/).each { match ->
+        parts[match[1]].angles['XYZ'.indexOf(match[2])] = parseArguments(match[3])[0]
+    }
+    (source =~ /setRotation\((\w+(?:\[\d+\])?)\s*,\s*([-+\d.eEfFdD,\s]+)\);/).each { match ->
+        parts[match[1]].angles = parseArguments(match[2])
+    }
+    List shift = [0D, 0D, 0D]
+    (source =~ /\btranslateAll\(([^;]+)\);/).each { match ->
+        List translation = parseArguments(match[1])
+        (0..2).each { axis -> shift[axis] += translation[axis] }
+    }
+    String remaining = source.replaceAll(/\w+(?:\[\d+\])?\.(?:addBox|addShapeBox|addTrapezoid|addFlexTrapezoid)\([^;]+\);/, '')
+    if (parts.isEmpty() || (remaining =~ /\.add\w+\s*\(/).find())
+    {
+        throw new GradleException("Unsupported model geometry in ${modelFile.name}")
+    }
+    List forward = []
+    List lateral = []
+    parts.values().each { part ->
+        part.corners.each { corner ->
+            List point = new ArrayList(corner)
+            // Part angles are radians (Y/X/Z); render angles are degrees (Z/Y/X).
+            [1, 0, 2].each { axis -> rotatePoint(point, axis, part.angles[axis]) }
+            (0..2).each { axis -> point[axis] = (point[axis] + part.pivot[axis] + shift[axis]) / 16D * scale[axis] }
+            [2, 1, 0].each { axis -> rotatePoint(point, axis, Math.toRadians(rotation[axis])) }
+            forward.add(-point[0])
+            lateral.add(-point[2])
+        }
+    }
+    [forward, lateral].collect { coordinates ->
+        if (coordinates.isEmpty())
+        {
+            throw new GradleException("No authored corners in ${modelFile.name}")
+        }
+        coordinates.sort()
+        // Trim the outer 1% and match the established four-decimal authoring precision.
+        int low = (int) (coordinates.size() * 0.01D)
+        int high = (int) (coordinates.size() * 0.99D) - 1
+        BigDecimal.valueOf((coordinates[low] + coordinates[high]) / 2D)
+                .setScale(4, java.math.RoundingMode.HALF_EVEN).doubleValue()
+    }
+}
+
+task generateSeatAlignments(dependsOn: prepareSeatAlignmentInputs) {
+    inputs.file inputFile
+    inputs.files javaSources
+    inputs.file file('gradle/generate-seat-alignments.gradle')
+    outputs.file alignmentFile
+    doLast {
+        Map centers = [:]
+        List output = []
+        inputFile.eachLine('UTF-8') { row ->
+            List columns = row.split('\t') as List
+            List offset = columns[3..5].collect { Double.parseDouble(it) }
+            List rotation = columns[6..8].collect { Double.parseDouble(it) }
+            List scale = columns[9..11].collect { Double.parseDouble(it) }
+            String entityClass = columns[0]
+            String modelClass = columns[1]
+            String key = modelClass + rotation + scale
+            if (centers.containsKey(key) == false)
+            {
+                File modelFile = file('src/main/java/' + modelClass.replace('.', '/') + '.java')
+                centers[key] = measureModelCenter(modelFile, rotation, scale)
+            }
+            List center = centers[key]
+            double forwardOrigin = center[0] - offset[0]
+            double leftOrigin = offset[2] - center[1]
+            output.add(entityClass + '=' + forwardOrigin + ',' + leftOrigin)
+        }
+        alignmentFile.parentFile.mkdirs()
+        alignmentFile.setText('# Generated seat-coordinate origins; model placement is unchanged.\n' + output.join('\n') + '\n', 'UTF-8')
+        logger.lifecycle("Generated seat alignments for ${output.size()} secondary-bogie stock classes")
+    }
+}
+
+sourceSets.main.resources.srcDir resourceDirectory
+processResources.dependsOn generateSeatAlignments
+compileJava.dependsOn generateSeatAlignments

@@ -68,16 +68,20 @@ public class TileInfoTransmitterMTC extends TileEntity implements IPeripheral, S
 
     }
 
-    public void updateEntity() {
+    public void updateEntity()
+    {
         if (worldObj == null) {
             return;
         }
 
         if (worldObj.isRemote) {return;}
         List list = this.worldObj.getEntitiesWithinAABBExcludingEntity(null, this.getRenderBoundingBox());
-        if (list != null && list.size() > 0) {
-            for (Object obj : list) {
-                if (obj instanceof Locomotive) {
+        if (list != null && list.size() > 0)
+        {
+            for (Object obj : list)
+            {
+                if (obj instanceof Locomotive)
+                {
 
                     Locomotive daTrain = (Locomotive) obj;
                     if (daTrain.mtcOverridePressed) { return;}
@@ -87,9 +91,10 @@ public class TileInfoTransmitterMTC extends TileEntity implements IPeripheral, S
 
                  //   }
 
-				 if (activated) {
+				 if (activated)
+				 {
                     //ExampleMod.msChannel.sendToAll(new PacketMTC(daTrain.getEntityId(), MTCInfo, 2));
-                    Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(daTrain.getEntityId(), MTCInfo, 0) , new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, daTrain.posX, daTrain.posY, daTrain.posZ, 150.0D));
+                    Traincraft.mtcChannel.sendToAllAround(new PacketMTCStatus(daTrain, MTCInfo, 0) , new NetworkRegistry.TargetPoint(this.worldObj.provider.dimensionId, daTrain.posX, daTrain.posY, daTrain.posZ, 150.0D));
 
                     daTrain.mtcStatus =  MTCInfo;
                     daTrain.currentSignalBlock = this.signalBlock;
@@ -110,7 +115,7 @@ public class TileInfoTransmitterMTC extends TileEntity implements IPeripheral, S
                     }
 
 
-                  }
+				 }
                 }
             }
         }

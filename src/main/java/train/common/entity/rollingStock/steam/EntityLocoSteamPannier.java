@@ -1,5 +1,8 @@
 package train.common.entity.rollingStock.steam;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.LiquidManager;
@@ -27,8 +30,12 @@ public class EntityLocoSteamPannier extends SteamTrain {
 	@Override
 	public boolean shouldRiderSit(){return false;}
 	@Override
-	public void updateRiderPosition() {
-		riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset()+0.3F, posZ);// default
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", -1.5094F, 0.3F, -0.0003F, SeatRole.DRIVER)
+		};
 	}@Override
 	public String getInventoryName() {
 		return "0-6-0 Pannier";

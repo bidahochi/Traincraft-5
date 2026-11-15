@@ -1,10 +1,13 @@
 package train.client.gui;
 
+import train.common.seats.RollingStockSeatManager;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import train.common.Traincraft;
+import train.client.core.handlers.SeatGuiNavigationHandler;
 import train.common.api.AbstractPassengerCar;
 import train.common.core.network.PacketSleeperCar;
 
@@ -37,6 +40,7 @@ public final class GuiSleeperCar extends GuiScreen
     @Override
     public void initGui()
     {
+        buttonList.clear();
         int buttonWidth = 120;
         int buttonLeft = (width - buttonWidth) / 2;
         int buttonTop = height / 2 + 8;
@@ -44,12 +48,19 @@ public final class GuiSleeperCar extends GuiScreen
         sleepButton = new GuiButton(0, buttonLeft, buttonTop, buttonWidth, 20, buttonLabel);
         sleepButton.enabled = state != ScreenState.REQUESTED;
         buttonList.add(sleepButton);
+        buttonList.add(new GuiButton(1, buttonLeft, buttonTop + 24, buttonWidth, 20,
+                I18n.format("seat.selection.button.seats")));
     }
 
     /** Requests sleep or closes the approved sleep screen to wake up. */
     @Override
     protected void actionPerformed(GuiButton button)
     {
+        if (button.id == 1)
+        {
+            SeatGuiNavigationHandler.openSeatSelection(this);
+            return;
+        }
         if (state == ScreenState.SLEEPING)
         {
             mc.displayGuiScreen(null);
@@ -104,7 +115,7 @@ public final class GuiSleeperCar extends GuiScreen
     {
         EntityPlayer player = mc.thePlayer;
         if (player == null || player.isEntityAlive() == false || mc.theWorld != car.worldObj
-                || player.ridingEntity != car || car.isDead)
+                || RollingStockSeatManager.getRidingStock(player) != car || car.isDead || car.hasSleepingBunk() == false)
         {
             mc.displayGuiScreen(null);
         }

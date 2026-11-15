@@ -1,9 +1,11 @@
 package com.jcirmodelsquad.tcjcir.vehicles.locomotives.eletric;
 
+import train.common.seats.SeatDefinition;
+import train.common.seats.SeatRole;
+
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.world.World;
 import train.common.api.ElectricTrain;
-import train.common.core.util.TraincraftUtil;
 import train.common.library.EnumSounds;
 import train.common.library.sounds.SoundRecord;
 import train.common.overlaytexture.EnumOverlayFonts;
@@ -30,7 +32,13 @@ public class ElectricPCC extends ElectricTrain {
 
 
 	@Override
-	public void updateRiderPosition() { TraincraftUtil.updateRider(this, 3.65, -0.2, 0.25); }
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("driver", 2.1547F, -0.2F, -0.2562F, SeatRole.DRIVER)
+		};
+	}
 
 
 	@Override

@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import train.common.Traincraft;
 import train.common.api.EntityBogie;
 import train.common.core.EntityIds;
+import train.common.entity.EntityPassengerSeat;
 import train.common.entity.digger.EntityRotativeDigger;
 import train.common.entity.zeppelin.EntityZeppelinOneBalloon;
 import train.common.entity.zeppelin.EntityZeppelinTwoBalloons;
@@ -34,6 +35,10 @@ public class EntityHandler
 		Traincraft.traincraftRegistry
 				.RegisterRollingStockEntities(new RegisterBAPTrains().getRegister()
 						, Traincraft.instance, "bap");
+
+		int passengerSeatEntityId = Traincraft.traincraftRegistry.incrementTrainID();
+		EntityRegistry.registerModEntity(EntityPassengerSeat.class, "passengerSeat", passengerSeatEntityId,
+				Traincraft.instance, 512, 20, false);
 
 		//for(EnumTrains trains : EnumTrains.values())
 		//{

@@ -17,9 +17,6 @@ import train.common.api.AbstractTrains;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
 import train.common.entity.EntityLasersLines;
-import train.common.entity.rollingStock.EntityStockCar;
-import train.common.entity.rollingStock.EntityStockCarDRWG;
-import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.StampedeRack;
 
 import java.util.List;
 import java.util.Random;
@@ -313,7 +310,7 @@ public class CollisionHandler {
 	 * @return
 	 */
 	public boolean unAutorizedMob(Entity entity, Entity entityOne) {
-		return (!(entityOne instanceof EntityStockCar) && !(entityOne instanceof EntityStockCarDRWG) && !(entityOne instanceof StampedeRack))
+		return ((entityOne instanceof EntityRollingStock) == false || ((EntityRollingStock) entityOne).getSeatLayoutForRuntime().hasLivestockSeats() == false)
 				&& ((entity instanceof EntitySlime) || (entity instanceof EntityCreeper)
 						|| (entity instanceof EntityEnderman) || (entity instanceof EntityIronGolem)
 						|| (entity instanceof EntityGiantZombie) || (entity instanceof EntitySkeleton)
@@ -323,24 +320,13 @@ public class CollisionHandler {
 						|| (entity instanceof EntitySheep) || (entity instanceof EntityChicken));
 	}
 
-	public void applyRideEntity(Entity entity, Entity entityOne) {
-
-		if (worldObj.isRemote) {
+	public void applyRideEntity(Entity entity, Entity entityOne)
+	{
+		if (worldObj.isRemote || (entityOne instanceof EntityRollingStock) == false)
+		{
 			return;
 		}
-		if (entity == entityOne.riddenByEntity) {
-			return;
-		}
-		if (!((AbstractTrains) entityOne).canBeRidden()) {
-			return;
-		}
-		if (!(entityOne instanceof EntityStockCar) && !(entityOne instanceof EntityStockCarDRWG) && !(entityOne instanceof StampedeRack)) {
-			return;
-		}
-		if ((entity instanceof EntityLiving) && ((AbstractTrains) entityOne).canBeRidden() && entityOne.riddenByEntity == null && entity.ridingEntity == null) {
-			entity.mountEntity(entityOne);
-		}
-
+		((EntityRollingStock) entityOne).mountLivestock(entity);
 	}
 
 	/* Creatures are shot away when a cart/loco hits them */

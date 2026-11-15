@@ -1,5 +1,7 @@
 package train.common.api;
 
+import train.common.seats.SeatRole;
+import train.common.seats.SeatDefinition;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,6 +29,15 @@ public abstract class AbstractPassengerCombineCar extends AbstractStandardFreigh
         return 0D;
     }
 
+	@Override
+	protected SeatDefinition[] getSeatDefinitions()
+	{
+		return new SeatDefinition[]
+		{
+			new SeatDefinition("passenger_1", 0.0F, (float) getAdditionalYOffset(), 0.0F, SeatRole.PASSENGER)
+		};
+	}
+
     /** Returns the distance that the RollingStockCar Entity
      *  should be from the other RollingStockCar Entity being coupled to
      */
@@ -35,14 +46,6 @@ public abstract class AbstractPassengerCombineCar extends AbstractStandardFreigh
         return 0F;
     }
 
-    @Override
-    public void updateRiderPosition()
-    {
-        if(riddenByEntity != null)
-        {
-            riddenByEntity.setPosition(posX, posY + getMountedYOffset() + riddenByEntity.getYOffset() + getAdditionalYOffset(), posZ);
-        }
-    }
 
     @Override
     public boolean interactFirst(EntityPlayer entityplayer)
@@ -60,16 +63,9 @@ public abstract class AbstractPassengerCombineCar extends AbstractStandardFreigh
                 return true;
             }
 
-            if (riddenByEntity != null && (riddenByEntity instanceof EntityPlayer) && riddenByEntity != entityplayer)
+            if (worldObj.isRemote == false && entityplayer.isSneaking() == false && (itemstack == null || itemstack.getItem() != ItemIDs.stake.item && itemstack.getItem() != ItemIDs.padlock.item))
             {
-                return true;
-            }
-
-            if (entityplayer.isSneaking() == false
-                && (itemstack == null
-                    || (itemstack.getItem() != ItemIDs.stake.item && itemstack.getItem() != ItemIDs.padlock.item)))
-            {
-                boardPlayer(entityplayer);
+				return mountPassenger(entityplayer);
             }
         }
 

@@ -1,5 +1,8 @@
 package train.client.gui;
 
+import train.common.seats.RollingStockSeatManager;
+import net.minecraft.entity.Entity;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -28,16 +31,21 @@ public class HUDLoco2 extends GuiScreen {
 
 
     @SubscribeEvent
-    public void onGameRender(RenderGameOverlayEvent.Text event){
+    public void onGameRender(RenderGameOverlayEvent.Text event)
+    {
+        Entity ridingStock = game == null ? null : RollingStockSeatManager.getRidingStock(game.thePlayer);
 
-    if (game != null && game.thePlayer != null && game.thePlayer.ridingEntity != null && game.thePlayer.ridingEntity instanceof Locomotive && Minecraft.isGuiEnabled()) {
+    if (game != null && game.thePlayer != null && ridingStock != null && ridingStock instanceof Locomotive && Minecraft.isGuiEnabled())
+    {
             inLoco = true;
-            renderSkillHUD(event, (Locomotive) game.thePlayer.ridingEntity);
-        } else {
+            renderSkillHUD(event, (Locomotive) ridingStock);
+    }
+    else
+    {
         inLoco = false;
         this.game = this.mc = Minecraft.getMinecraft();
             this.fontRendererObj = this.game.fontRenderer;
-        }
+    }
     }
 
     @SubscribeEvent(priority= EventPriority.NORMAL)

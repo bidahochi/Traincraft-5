@@ -3,17 +3,14 @@
  */
 package train.common.blocks.tracks;
 
-import com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.StampedeRack;
 import mods.railcraft.api.tracks.ITrackEmitter;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityMinecart;
+import train.common.api.EntityRollingStock;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
-import train.common.entity.rollingStock.EntityStockCar;
-import train.common.entity.rollingStock.EntityStockCarDRWG;
 import train.common.library.Tracks;
 
 import java.io.DataInputStream;
@@ -29,25 +26,27 @@ public class BlockAnimalBoardingTrack extends TrackBaseTraincraft implements ITr
 		return Tracks.ANIMAL_BOARDING_TRACK;
 	}
 	@Override
-	public void onMinecartPass(EntityMinecart cart) {
-		if (cart instanceof EntityStockCar || cart instanceof EntityStockCarDRWG || cart instanceof StampedeRack) {
-			if (cart.riddenByEntity != null)
-				return;
-			AxisAlignedBB box = null;
-			box = cart.boundingBox.expand(4, 4, 4);
-			List list = this.getWorld().getEntitiesWithinAABBExcludingEntity(cart, box);
-			if (list != null && list.size() > 0) {
-
-				for (int j1 = 0; j1 < list.size(); j1++) {
-					Entity entity = (Entity) list.get(j1);
-					if ((entity instanceof EntityAnimal)) {
-						entity.mountEntity(cart);
-						setTrackPowering();
-					}
-				}
+	public void onMinecartPass(EntityMinecart cart)
+	{
+		if (getWorld().isRemote || (cart instanceof EntityRollingStock) == false)
+		{
+			return;
+		}
+		EntityRollingStock stock = (EntityRollingStock) cart;
+		if (stock.isLivestockUnloading() || stock.getSeatLayoutForRuntime().hasLivestockSeats() == false)
+		{
+			return;
+		}
+		List animals = getWorld().getEntitiesWithinAABB(EntityAnimal.class, cart.boundingBox.expand(4, 4, 4));
+		for (Object animal : animals)
+		{
+			if (stock.mountLivestock((Entity) animal))
+			{
+				setTrackPowering();
 			}
 		}
 	}
+
 	@Override
 	public void updateEntity() {
 		if (getWorld().isRemote) {//not sure

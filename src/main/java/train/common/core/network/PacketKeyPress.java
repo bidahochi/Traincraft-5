@@ -5,8 +5,10 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import train.common.api.EntityRollingStock;
 import train.common.api.Locomotive;
+import train.common.seats.RollingStockSeatManager;
 import train.common.entity.digger.EntityRotativeDigger;
 import train.common.entity.zeppelin.AbstractZeppelin;
 
@@ -52,38 +54,42 @@ public class PacketKeyPress implements IMessage {
 	public static class Handler implements IMessageHandler<PacketKeyPress, IMessage> {
 
 		@Override
-		public IMessage onMessage(PacketKeyPress message, MessageContext context) {
+		public IMessage onMessage(PacketKeyPress message, MessageContext context)
+		{
 
-			Entity ridingEntity = context.getServerHandler().playerEntity.ridingEntity;
-
-			/* "instanceof" is null-safe, but we check to avoid four unnecessary instanceof checks for when the value is null anyways. */
-			if (ridingEntity != null) {
-
-				if (ridingEntity instanceof Locomotive) {
-
-					((Locomotive) ridingEntity).keyHandlerFromPacket(message.key);
-				}
-				else if (ridingEntity instanceof EntityRollingStock) {
-
-					((EntityRollingStock) ridingEntity).keyHandlerFromPacket(message.key);
-				}
-				else if (ridingEntity instanceof AbstractZeppelin) {
-
-					((AbstractZeppelin) ridingEntity).pressKey(message.key);
-				}
-				else if (ridingEntity instanceof EntityRotativeDigger) {
-
-					((EntityRotativeDigger) ridingEntity).pressKey(message.key);
-				}
+			EntityPlayerMP sender = context.getServerHandler().playerEntity;
+			Entity ridingEntity = sender.ridingEntity;
+			if (ridingEntity == null)
+			{
+				return null;
 			}
 
-			/*if (message.key == 404){
-				CommonProxy.debug = CommonProxy.debug;
-				if (Minecraft.getMinecraft().theWorld != null) {
-					System.out.println(Minecraft.getMinecraft().theWorld.isRemote);
-				}
-			}*/
+			EntityRollingStock stock = RollingStockSeatManager.getRidingStock(sender);
+			if (stock instanceof Locomotive)
+			{
+				((Locomotive) stock).keyHandlerFromPacket(message.key, sender);
+				return null;
+			}
+			if (ridingEntity instanceof EntityRollingStock)
+			{
+
+				((EntityRollingStock) ridingEntity).keyHandlerFromPacket(message.key);
+				return null;
+			}
+			if (ridingEntity instanceof AbstractZeppelin)
+			{
+
+				((AbstractZeppelin) ridingEntity).pressKey(message.key);
+				return null;
+			}
+			if (ridingEntity instanceof EntityRotativeDigger)
+			{
+
+				((EntityRotativeDigger) ridingEntity).pressKey(message.key);
+			}
+
 			return null;
 		}
+
 	}
 }

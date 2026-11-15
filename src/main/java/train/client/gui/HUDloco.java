@@ -1,5 +1,8 @@
 package train.client.gui;
 
+import train.common.seats.RollingStockSeatManager;
+import net.minecraft.entity.Entity;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -19,10 +22,14 @@ public class HUDloco extends GuiScreen {
 	private int windowWidth, windowHeight;
 
 	@SubscribeEvent
-	public void onGameRender(RenderGameOverlayEvent.Text event) {
-		if (game != null && game.thePlayer != null && Minecraft.isGuiEnabled() && game.currentScreen == null) {
-			if (game.thePlayer.ridingEntity != null && game.thePlayer.ridingEntity instanceof Locomotive) {
-				renderSkillHUD(event, (Locomotive) game.thePlayer.ridingEntity);
+	public void onGameRender(RenderGameOverlayEvent.Text event)
+	{
+        Entity ridingStock = game == null ? null : RollingStockSeatManager.getRidingStock(game.thePlayer);
+		if (game != null && game.thePlayer != null && Minecraft.isGuiEnabled() && game.currentScreen == null)
+		{
+			if (ridingStock != null && ridingStock instanceof Locomotive)
+			{
+				renderSkillHUD(event, (Locomotive) ridingStock);
 			}
 			if (game.thePlayer.inventory.getCurrentItem() != null && game.thePlayer.inventory.getCurrentItem().getItem() instanceof ItemRemoteController) {
 				ItemRemoteController currentItem = (ItemRemoteController) Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem();
@@ -31,10 +38,13 @@ public class HUDloco extends GuiScreen {
 				}
 			}
 
-			if (game.thePlayer.ridingEntity instanceof AbstractControlCar && game.theWorld.getEntityByID(game.thePlayer.ridingEntity.getDataWatcher().getWatchableObjectInt(29)) != null) {
-				renderSkillHUD(event, (Locomotive) game.theWorld.getEntityByID(game.thePlayer.ridingEntity.getDataWatcher().getWatchableObjectInt(29)));
+			if (ridingStock instanceof AbstractControlCar && game.theWorld.getEntityByID(ridingStock.getDataWatcher().getWatchableObjectInt(29)) != null)
+			{
+				renderSkillHUD(event, (Locomotive) game.theWorld.getEntityByID(ridingStock.getDataWatcher().getWatchableObjectInt(29)));
 			}
-		} else {
+		}
+		else
+		{
 			this.game = this.mc = Minecraft.getMinecraft();
 			this.fontRendererObj = this.game.fontRenderer;
 		}
