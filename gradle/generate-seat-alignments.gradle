@@ -1,9 +1,8 @@
-// Discover secondary-bogie stock, measure its authored model center, and package seat origins.
-// This runs only at build time; it neither loads client classes nor changes model placement.
+// Refresh the included seat origins during builds; commit updates alongside model changes.
+// The resource also supports IDE launches that bypass Gradle.
 def javaSources = fileTree('src/main/java') { include '**/*.java' }
 def inputFile = file("$buildDir/seat-alignment-inputs.tsv")
-def resourceDirectory = file("$buildDir/generated/seat-alignment-resources")
-def alignmentFile = new File(resourceDirectory, 'assets/tc/seat-alignments.properties')
+def alignmentFile = file('src/main/resources/assets/tc/seat-alignments.properties')
 
 def withoutComments = { String source ->
     source.replaceAll('(?s)/\\*.*?\\*/', '').replaceAll('//[^\\r\\n]*', '')
@@ -265,6 +264,5 @@ task generateSeatAlignments(dependsOn: prepareSeatAlignmentInputs) {
     }
 }
 
-sourceSets.main.resources.srcDir resourceDirectory
 processResources.dependsOn generateSeatAlignments
 compileJava.dependsOn generateSeatAlignments

@@ -41,7 +41,7 @@ public final class SeatHorizontalAlignment
 		{
 			if (stream == null)
 			{
-				LOGGER.error("[Seats] Generated alignment data is missing; run generateSeatAlignments before packaging");
+				LOGGER.error("[Seats] Missing assets/tc/seat-alignments.properties; check the packaged resources");
 				return alignments;
 			}
 			Properties properties = new Properties();
