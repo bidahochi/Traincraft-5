@@ -676,7 +676,7 @@ public enum RenderEnum implements ITrainRenderRecord, ISubTrainRenderRecord
 			add(new double[]{-0.3D, -0.4D, 0.2D});
 		}
 	}, "", null, 0, false),
-	FRED(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.FRED.class, new ModelFRED(),"fred", false, new float[]{0F, 0.05F, 0F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
+	FRED(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.FRED.class, new ModelFRED(),"fred_", true, new float[]{0F, 0.05F, 0F}, new float[] { 0F, 180F, 180F }, null, "", 0, null, "", null, 0, false),
 
 	//LogcarNP(com.jcirmodelsquad.tcjcir.vehicles.rollingstock.LogcarNP.class, new ModelLogcarNP(), "logcarNP_", true,new float[]{0F,0,0F,}, new float[] {0F,0F,180F,}, null, "",0, null, "", null, 0, false),
 	testControlCar(TestControlCar.class, new ModelPassengerHighSpeedCarZeroED(), "passengerHighSpeedCarZeroED_", true, new float[] { 0.0F, -0.47F, 0.0F }, null, null, "", 0, null, "", null, 0, false),
@@ -1128,7 +1128,7 @@ public enum RenderEnum implements ITrainRenderRecord, ISubTrainRenderRecord
 			add(new double[]{0.475D, 1.3D, 0.0D});//rear
 		}
 	}, "", null, 0, false),
-	BUnitGP7b(BUnitGP7b.class, new ModelGP7b(), "gp7b_", true, new float[]{0,-0.05f,0}, new float[] { 0F, 180F, 180F }, new float[]{1f,1f,1f}, "", 0, null, "", null, 0, false),
+	//BUnitGP7b(BUnitGP7b.class, new ModelGP7b(), "gp7b_", true, new float[]{0,-0.05f,0}, new float[] { 0F, 180F, 180F }, new float[]{1f,1f,1f}, "", 0, null, "", null, 0, false),
 	GP7u( DieselGP7u.class,  new ModelGP7U_ATSF(), "gp7u_atsf_", true,new float[] {-1.5F, 0.155F, 0F},  new float[] { 0F, 180F, 180F }, null, "smoke", 5,  new ArrayList<double[]>() {
 		{
 			add(new double[]{1.225D, 1.3D, 0.0D});//front

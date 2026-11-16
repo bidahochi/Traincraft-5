@@ -5,8 +5,9 @@
     "defaults": {
       "fixtures": {
         "bottom_one": {
-          "preset": "instrument",
-          "color": "#FF2020"
+          "color": "#FF2020",
+          "enabled": false,
+          "effect": "illuminated_surface"
         },
         "top_one": {
           "preset": "instrument"
@@ -15,6 +16,28 @@
     }
   },
   "skins": {
-    "bap:black": {}
+    "bap:black": {},
+    "bap:yellow": {
+      "lighting": {
+        "fixtures": {
+          "bottom_one": {
+            "preset": "instrument",
+            "enabled": true
+          }
+        }
+      }
+    },
+    "bap:grey": {
+      "lighting": {
+        "fixtures": {
+          "bottom_one": {},
+          "top_one": {
+            "preset": "commander",
+            "color": "#FF2020",
+            "enabled": true
+          }
+        }
+      }
+    }
   }
 }

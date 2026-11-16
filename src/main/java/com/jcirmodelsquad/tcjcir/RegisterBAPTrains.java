@@ -7042,7 +7042,7 @@ public class RegisterBAPTrains
                 new TrainRecord("FRED", com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.FRED.class, ItemIDs.minecartFRED.item)
                         .setTrainType("misc")
                         .setMass(0.2)
-                        .setColors(new String[] {"Black"})
+                        .setColors(new String[] {"Yellow", "Grey"})
                         // .setGuiRenderScale(0)
                         .setCargoCapacity(1)
                         .setAdditionalTooltip(new String[] {"the least used item in the mod"})

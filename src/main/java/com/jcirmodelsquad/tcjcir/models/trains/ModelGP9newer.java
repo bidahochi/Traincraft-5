@@ -17,6 +17,7 @@ import com.jcirmodelsquad.tcjcir.models.trucks.ModelTypeBnew;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tmt.LightSourceFaceDirection;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
@@ -2315,15 +2316,19 @@ public class ModelGP9newer extends ModelConverter //Same as Filename
 
 		bodyModel[534].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F); // Box 559 markerlight
 		bodyModel[534].setRotationPoint(-32F, -18F, -6.51F);
+		bodyModel[534].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[535].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F); // Box 560 markerlight
 		bodyModel[535].setRotationPoint(-32F, -11F, -6.51F);
+		bodyModel[535].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[536].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F); // Box 559 markerlight
 		bodyModel[536].setRotationPoint(-32F, -18F, 6.51F);
+		bodyModel[536].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[537].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F); // Box 560 markerlight
 		bodyModel[537].setRotationPoint(-32F, -11F, 6.51F);
+		bodyModel[537].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[538].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F); // Box 559 markerlight
 		bodyModel[538].setRotationPoint(32F, -18F, -6.51F);

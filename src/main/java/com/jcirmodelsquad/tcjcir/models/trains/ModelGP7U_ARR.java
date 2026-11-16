@@ -304,7 +304,7 @@ public class ModelGP7U_ARR extends ModelConverter //Same as Filename
 		bodyModel[257] = new ModelRendererTurbo(this, 354, 14, textureX, textureY); // Box 355
 		bodyModel[258] = new ModelRendererTurbo(this, 354, 11, textureX, textureY); // Box 356
 		bodyModel[259] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "marker_two_body_259"); // Box 71 markerlight twO
-		bodyModel[260] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[260] = new ModelRendererTurbo(this, 94, 119, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[261] = new ModelRendererTurbo(this, 88, 117, textureX, textureY); // Box 221
 		bodyModel[262] = new ModelRendererTurbo(this, 100, 119, textureX, textureY); // Box 222
 		bodyModel[263] = new ModelRendererTurbo(this, 207, 159, textureX, textureY); // Box 363
@@ -333,7 +333,7 @@ public class ModelGP7U_ARR extends ModelConverter //Same as Filename
 		bodyModel[286] = new ModelRendererTurbo(this, 320, 28, textureX, textureY, "lamp"); // Box 337 headlight highbeam
 		bodyModel[287] = new ModelRendererTurbo(this, 323, 29, textureX, textureY); // Box 336
 		bodyModel[288] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "marker_two_body_288"); // Box 71 markerlight twO
-		bodyModel[289] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "lamp"); // Box 1208 makrerlight twO
+		bodyModel[289] = new ModelRendererTurbo(this, 359, 114, textureX, textureY, "markerlight"); // Box 1208 makrerlight twO
 		bodyModel[290] = new ModelRendererTurbo(this, 354, 38, textureX, textureY); // Box 522
 		bodyModel[291] = new ModelRendererTurbo(this, 208, 149, textureX, textureY); // Box 393
 		bodyModel[292] = new ModelRendererTurbo(this, 332, 19, textureX, textureY); // Box 543

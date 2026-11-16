@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tmt.LightSourceFaceDirection;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
@@ -843,10 +844,12 @@ public class ModelSD9new extends ModelConverter //Same as Filename
 		bodyModel[96].setRotationPoint(17.5F, -19.25F, -7F);
 
 		bodyModel[97].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, -0.25F, -0.25F, -0.35F, -0.25F, 0.25F, -0.1F, -0.25F, -0.15F, 0F, -0.25F, 0.25F, 0F, 0.25F, -0.25F, -0.35F, 0.25F, 0.25F, -0.1F, 0.25F, -0.15F, 0F, 0.25F, 0.25F); // Box 322 sd9 markerlight
-		bodyModel[97].setRotationPoint(38.75F, -17.25F, 5.51F);
+		bodyModel[97].setRotationPoint(38.75F, -17.25F, 5.51F);//engineer rear
+		bodyModel[97].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[98].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,0F, -0.25F, 0.25F, -0.1F, -0.25F, -0.15F, -0.35F, -0.25F, 0.25F, 0F, -0.25F, -0.25F, 0F, 0.25F, 0.25F, -0.1F, 0.25F, -0.15F, -0.35F, 0.25F, 0.25F, 0F, 0.25F, -0.25F); // Box 324 sd9 markerlight
-		bodyModel[98].setRotationPoint(38.75F, -17.25F, -6.51F);
+		bodyModel[98].setRotationPoint(38.75F, -17.25F, -6.51F);//fireman rear
+		bodyModel[98].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[99].addBox(0F, 0F, 0F, 13, 4, 22, 0F); // Box 344 cab floor
 		bodyModel[99].setRotationPoint(-29F, -4F, -11F);
@@ -1231,13 +1234,15 @@ public class ModelSD9new extends ModelConverter //Same as Filename
 		bodyModel[222].setRotationPoint(-39.5F, -18F, 4.25F);
 
 		bodyModel[223].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,-0.35F, -0.25F, 0.25F, 0F, -0.25F, -0.25F, 0F, -0.25F, 0.25F, -0.1F, -0.25F, -0.15F, -0.35F, 0.25F, 0.25F, 0F, 0.25F, -0.25F, 0F, 0.25F, 0.25F, -0.1F, 0.25F, -0.15F); // Box 301 sd9 markerlight
-		bodyModel[223].setRotationPoint(-39.5F, -17.75F, 4.76F);
+		bodyModel[223].setRotationPoint(-39.5F, -17.75F, 4.76F);//engineer front
+		bodyModel[223].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[224].addShapeBox(0F, 0F, 0F, 1, 2, 2, 0F,0F, -0.25F, -0.75F, 0F, -0.25F, -0.25F, 0F, -0.25F, 0F, -0.25F, -0.25F, 0.25F, 0F, -0.25F, -0.75F, 0F, -0.25F, -0.25F, 0F, -0.25F, 0F, -0.25F, -0.25F, 0.25F); // Box 302 marker box
 		bodyModel[224].setRotationPoint(-39.5F, -18F, -6.25F);
 
 		bodyModel[225].addShapeBox(0F, 0F, 0F, 1, 1, 1, 0F,-0.1F, -0.25F, -0.15F, 0F, -0.25F, 0.25F, 0F, -0.25F, -0.25F, -0.35F, -0.25F, 0.25F, -0.1F, 0.25F, -0.15F, 0F, 0.25F, 0.25F, 0F, 0.25F, -0.25F, -0.35F, 0.25F, 0.25F); // Box 303 sd9 markerlight
-		bodyModel[225].setRotationPoint(-39.5F, -17.75F, -5.76F);
+		bodyModel[225].setRotationPoint(-39.5F, -17.75F, -5.76F);//fireman front
+		bodyModel[225].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[226].addShapeBox(0F, 0F, 0F, 2, 4, 2, 0F,0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, -0.5F, 0F, 0F, -0.5F, 0F, 0F, 0F, 0F, 0F); // Box 304 up/cs gyra housing front
 		bodyModel[226].setRotationPoint(-42.5F, -21.5F, -1F);
