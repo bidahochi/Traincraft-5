@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import train.client.core.handlers.SeatGuiNavigationHandler;
 import train.client.gui.specialbuttons.TransportLockGuiHandler;
 import train.common.Traincraft;
 import train.common.api.LiquidManager;
@@ -93,6 +94,7 @@ public class GuiTankEngine extends GuiContainer {
 			this.buttonList.add(lockButton);
 			this.buttonLock = lockButton;
 		}
+		SeatGuiNavigationHandler.addSeatNavigationButton(this, buttonList);
 	}
 
 	@Override

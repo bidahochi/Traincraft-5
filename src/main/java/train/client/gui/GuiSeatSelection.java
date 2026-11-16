@@ -7,13 +7,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.StatCollector;
+import org.lwjgl.input.Keyboard;
+import train.client.core.handlers.SeatGuiNavigationHandler.ReturnTarget;
 import train.common.Traincraft;
 import train.common.api.EntityRollingStock;
 import train.common.seats.RollingStockSeatLayout;
 import train.common.seats.SeatDefinition;
 import train.common.seats.SeatFunction;
 import train.common.seats.SeatRole;
-import train.client.core.handlers.SeatGuiNavigationHandler.ReturnTarget;
 import train.client.gui.SeatSelectionButtons.SeatButton;
 import train.client.gui.SeatSelectionButtons.WideButton;
 import train.common.core.network.PacketSeatSelection;
@@ -436,6 +437,16 @@ public final class GuiSeatSelection extends GuiScreen
 	private static String format(String key, Object... arguments)
 	{
 		return StatCollector.translateToLocalFormatted(key, arguments);
+	}
+
+	@Override
+	protected void keyTyped(char typedChar, int keyCode)
+	{
+		if (keyCode != Keyboard.KEY_NONE && keyCode == mc.gameSettings.keyBindInventory.getKeyCode())
+		{
+			keyCode = Keyboard.KEY_ESCAPE;
+		}
+		super.keyTyped(typedChar, keyCode);
 	}
 
 	@Override

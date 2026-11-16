@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import train.client.core.handlers.SeatGuiNavigationHandler;
 import train.client.gui.specialbuttons.TransportLockGuiHandler;
 import train.common.Traincraft;
 import train.common.api.*;
@@ -164,6 +165,7 @@ public abstract class AbstractGuiLocomotive extends GuiContainer {
 		loco.guiTCTextFieldTrainNote.setText(loco.getTrainNote());
 		//endregion guiTCTextFieldTrainNote
         lightControls.init(buttonList, var1, var2 + RollingStockLightControlPanel.GUI_Y);
+		SeatGuiNavigationHandler.addSeatNavigationButton(this, buttonList);
 	}
 
 	@Override

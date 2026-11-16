@@ -12,6 +12,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import train.client.core.handlers.SeatGuiNavigationHandler;
 import train.client.gui.specialbuttons.TransportLockGuiHandler;
 import train.common.Traincraft;
 import train.common.api.*;
@@ -116,6 +117,7 @@ public class GuiControlCar extends GuiContainer
         controlCar.guiTCTextFieldTrainNote.setText(controlCar.getTrainNote());
         //endregion guiTCTextFieldTrainNote
         lightControls.init(buttonList, var1, var2 + RollingStockLightControlPanel.GUI_Y);
+        SeatGuiNavigationHandler.addSeatNavigationButton(this, buttonList);
     }
 
     @Override

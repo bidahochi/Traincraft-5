@@ -3,12 +3,12 @@ package train.client.core.handlers;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import train.common.Traincraft;
@@ -18,7 +18,6 @@ import train.client.gui.GuiSleeperCar;
 import train.common.api.AbstractPassengerCar;
 import train.common.api.EntityRollingStock;
 import train.common.core.network.PacketSeatSelection;
-import train.common.seats.RollingStockSeatManager;
 import static train.common.seats.RollingStockSeatManager.getRidingStock;
 
 @SideOnly(Side.CLIENT)
@@ -30,15 +29,30 @@ public final class SeatGuiNavigationHandler
 	@SuppressWarnings("unchecked")
 	public void onGuiInitialized(GuiScreenEvent.InitGuiEvent.Post event)
 	{
-		if ((event.gui instanceof GuiContainer) == false || getRidingStock(Minecraft.getMinecraft().thePlayer) == null)
+		if (event.gui instanceof GuiContainer)
+		{
+			addSeatNavigationButton((GuiContainer) event.gui, event.buttonList);
+		}
+	}
+
+	public static void addSeatNavigationButton(GuiContainer screen, List<GuiButton> buttons)
+	{
+		if (getRidingStock(Minecraft.getMinecraft().thePlayer) == null)
 		{
 			return;
 		}
-		GuiButton seatsButton = event.gui instanceof AbstractGuiLocomotive
-				? ((AbstractGuiLocomotive) event.gui).createSeatNavigationButton(SEATS_BUTTON_ID)
-				: new GuiButton(SEATS_BUTTON_ID, event.gui.width - 58, 6, 52, 20,
+		for (GuiButton button : buttons)
+		{
+			if (button.id == SEATS_BUTTON_ID)
+			{
+				return;
+			}
+		}
+		GuiButton seatsButton = screen instanceof AbstractGuiLocomotive
+				? ((AbstractGuiLocomotive) screen).createSeatNavigationButton(SEATS_BUTTON_ID)
+				: new GuiButton(SEATS_BUTTON_ID, screen.width - 58, 6, 52, 20,
 						StatCollector.translateToLocal("seat.selection.button.seats"));
-		event.buttonList.add(seatsButton);
+		buttons.add(seatsButton);
 	}
 
 	@SubscribeEvent

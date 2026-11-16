@@ -6,8 +6,10 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import org.lwjgl.input.Keyboard;
 import train.common.Traincraft;
 import train.client.core.handlers.SeatGuiNavigationHandler;
+import train.client.core.handlers.TCKeyHandler;
 import train.common.api.AbstractPassengerCar;
 import train.common.core.network.PacketSleeperCar;
 
@@ -50,6 +52,16 @@ public final class GuiSleeperCar extends GuiScreen
         buttonList.add(sleepButton);
         buttonList.add(new GuiButton(1, buttonLeft, buttonTop + 24, buttonWidth, 20,
                 I18n.format("seat.selection.button.seats")));
+    }
+
+    @Override
+    protected void keyTyped(char typedChar, int keyCode)
+    {
+        if (keyCode != Keyboard.KEY_NONE && keyCode == TCKeyHandler.inventory.getKeyCode())
+        {
+            keyCode = Keyboard.KEY_ESCAPE;
+        }
+        super.keyTyped(typedChar, keyCode);
     }
 
     /** Requests sleep or closes the approved sleep screen to wake up. */
