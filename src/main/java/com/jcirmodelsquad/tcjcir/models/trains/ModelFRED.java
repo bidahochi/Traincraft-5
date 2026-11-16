@@ -1,7 +1,6 @@
 //JC cant tell me what to make and what not to make
-
+//so true past me! so true!
 package com.jcirmodelsquad.tcjcir.models.trains; //Path where the model is located
-
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -10,8 +9,8 @@ import tmt.ModelRendererTurbo;
 
 public class ModelFRED extends ModelConverter //Same as Filename
 {
-	int textureX = 512;
-	int textureY = 512;
+	int textureX = 32;
+	int textureY = 32;
 
 	public ModelFRED() //Same as Filename
 	{
@@ -20,7 +19,6 @@ public class ModelFRED extends ModelConverter //Same as Filename
 		initbodyModel_1();
 
 		translateAll(0F, 0F, 0F);
-
 
 		flipAll();
 	}
@@ -52,7 +50,7 @@ public class ModelFRED extends ModelConverter //Same as Filename
 		bodyModel[5].addBox(0F, 0F, 0F, 0, 1, 2, 0F); // Box 6
 		bodyModel[5].setRotationPoint(0F, 2F, -1F);
 	}
-	@Override
+	@Override//wow we still doin this?
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		for(int i = 0; i < 6; i++) {

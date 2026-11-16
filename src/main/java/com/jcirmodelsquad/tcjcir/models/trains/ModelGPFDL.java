@@ -16,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import tmt.LightSourceFaceDirection;
 import tmt.ModelConverter;
 import tmt.ModelRendererTurbo;
 import tmt.Tessellator;
@@ -1435,9 +1436,11 @@ public class ModelGPFDL extends ModelConverter//Same as Filename
 
 		bodyModel[326].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F); // Box 559 markerlight
 		bodyModel[326].setRotationPoint(-32F, -18F, -6.51F);
+		bodyModel[326].setLightSourceFace(LightSourceFaceDirection.NEGATIVE_Z);
 
 		bodyModel[327].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F); // Box 559 markerlight
 		bodyModel[327].setRotationPoint(-32F, -18F, 6.51F);
+		bodyModel[327].setLightSourceFace(LightSourceFaceDirection.POSITIVE_Z);
 
 		bodyModel[328].addShapeBox(0F, 0F, 0F, 1, 1, 0, 0F,0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F, 0F, 0F, 0.25F, 0F, 0F, -0.25F); // Box 559 markerlight
 		bodyModel[328].setRotationPoint(32F, -18F, -6.51F);

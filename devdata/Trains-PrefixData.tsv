@@ -479,7 +479,7 @@ item.tc:minecartFMCWoodchip	FMCWoodchip	com.jcirmodelsquad.tcjcir.vehicles.rolli
 item.tc:minecartFNCC2375Hopper	FNCC2375Hopper	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.FNCC2375Hopper	FNCC2375_
 item.tc:minecartFNCC50Foot	FNCC50FootBoxcar	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.FNCC50Foot	FNCC50Foot_
 item.tc:minecartFNCC60FootBulk	FNCC60FootBulk	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.FNCC60FootBulk	FNCC60FootBulk_
-item.tc:minecartFRED	FRED	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.FRED	fred
+item.tc:minecartFRED	FRED	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.misc.FRED	fred_
 item.tc:minecart40highcube	40highcube	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.Freight40highcube	40highcube_
 item.tc:minecart60centerbeam	60centerbeam	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.Freight60centerbeam	60ftcb_
 item.tc:minecart66centerbeam	66centerbeam	com.jcirmodelsquad.tcjcir.vehicles.rollingstock.freight.Freight66centerbeam	66ftcb_
