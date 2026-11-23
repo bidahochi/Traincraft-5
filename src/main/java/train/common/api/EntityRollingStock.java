@@ -147,6 +147,8 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	private double rollingY;
 	private double rollingZ;
 	private float rollingServerPitch;
+	private float rollingServerPitchTarget;
+	private boolean seatPitchOnLevelTrack;
 	public double rotationYawClient;
 	public float rotationYawClientReal;
 	public double anglePitchClient;
@@ -1546,51 +1548,27 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			anglePitch = (float) RollingStockSeatPositioner.bogiePitchRadians(
 					bogieLoco.posX - posX, bogieLoco.posY - posY, bogieLoco.posZ - posZ);
-			serverRealPitch = anglePitch;
 		}
 		else
 		{
 			// Rendering and seats must share one facing, including before the first movement.
 			serverRealRotation = rotationYaw;
-			double zDist = posZ - prevPosZ;
-			double xDist = posX - prevPosX;
-			float tempPitch = rollingServerPitch;
-			float tempPitch2 = tempPitch;
-			if (Math.abs(zDist) > 0.02) {
-				double rads = Math.atan((posY - prevPosY) / zDist);
-				tempPitch = (float) ((Math.atan((posY - prevPosY) / zDist)) * degrees);
+			if (canUseRail() && BlockRailBase.func_150051_a(l))
+			{
+				anglePitch = rollingServerPitch;
+				rollingServerPitchTarget = anglePitch;
 			}
 			else
-            { if (Math.abs(xDist) > 0.02) {
-				tempPitch = (float) (( Math.atan((posY - prevPosY) / xDist)) * degrees);
-				//pitch=tempPitch;
+			{
+				rollingServerPitchTarget = RollingStockSeatPositioner.motionPitchRadians(
+						seatPitchOnLevelTrack, posX - prevPosX, posY - prevPosY, posZ - prevPosZ,
+						serverRealRotation + 180.0F, rollingServerPitchTarget);
+				anglePitch = RollingStockSeatPositioner.smoothPitchRadians(
+						rollingServerPitch, rollingServerPitchTarget);
 			}
-            }
-
-			//if (Math.abs(tempPitch) > 16) {
-				//tempPitch=Math.copySign(16, tempPitch);
-			//}
-			if (tempPitch2 < tempPitch && Math.abs(tempPitch2 - tempPitch) > 3) {
-				tempPitch2 += 3;
-			}
-			else
-            { if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 3) {
-				tempPitch2 -= 3;
-			}
-			else
-                { if (tempPitch2 < tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
-				tempPitch2 += 0.5;
-			}
-			else
-                    { if (tempPitch2 > tempPitch && Math.abs(tempPitch2 - tempPitch) > 0.5) {
-				tempPitch2 -= 0.5;
-			}
-                    }
-                }
-			}
-			anglePitch = -tempPitch2;
-			rollingServerPitch = tempPitch2;
+			rollingServerPitch = anglePitch;
 		}
+		serverRealPitch = anglePitch;
 		//System.out.println(updateTicks);
 		if (updateTicks % 2 == 0) {
 			shouldServerSetPosYOnClient = true;
@@ -1703,6 +1681,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 	 */
 	private void updateOnTrack(int floor_posX, int floor_posY, int floor_posZ, Block block)
 	{
+		seatPitchOnLevelTrack = false;
 		if (canUseRail() && BlockRailBase.func_150051_a(block))
 		{
 
@@ -1739,6 +1718,11 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 
 			// Keep front/rear attached to the rail axis even while stationary or being pushed sideways.
 			rotationYaw = getVanillaRailFacing(i1, rotationYaw);
+			int[][] railEndpoints = matrix[i1];
+			rollingServerPitch = RollingStockSeatPositioner.vanillaRailPitchRadians(
+					railEndpoints[1][0] - railEndpoints[0][0],
+					2.0D * (railEndpoints[1][1] - railEndpoints[0][1]),
+					railEndpoints[1][2] - railEndpoints[0][2], rotationYaw + 180.0F);
 			adjustSlopeVelocities(i1);
 
 
@@ -1934,6 +1918,7 @@ public class EntityRollingStock extends AbstractTrains implements ILinkableCart
 				return;
 			}
 
+			seatPitchOnLevelTrack = tileRail.getType() != null && TCRailTypes.isSlopeTrack(tileRail) == false;
 			handleTrainDetector(tileRail);
 
 			if (ItemTCRail.isTCTurnTrack(tileRail))

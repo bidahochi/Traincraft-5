@@ -51,9 +51,9 @@ public class EntityPassengerDBOriental extends AbstractPassengerCar {
 	{
 		return new SeatDefinition[]
 		{
-			new SeatDefinition("passenger_1", 0f, 0.5f, 0f, SeatRole.PASSENGER),
-			new SeatDefinition("passenger_2", -1f, 0.5f, 0f, SeatRole.PASSENGER),
-			new SeatDefinition("passenger_3", 1f, 0.5f, 0f, SeatRole.PASSENGER)
+			new SeatDefinition("passenger_1", 0f, 0.2f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_2", -1f, 0.2f, 0f, SeatRole.PASSENGER),
+			new SeatDefinition("passenger_3", 1f, 0.2f, 0f, SeatRole.PASSENGER)
 		};
 	}
 

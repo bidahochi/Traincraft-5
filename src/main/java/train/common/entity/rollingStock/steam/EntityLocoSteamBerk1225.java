@@ -63,8 +63,8 @@ public class EntityLocoSteamBerk1225 extends SteamTrain {
 	{
 		return new SeatDefinition[]
 		{
-			new SeatDefinition("driver", 4.3938F, 0.3f, 0.35F, SeatRole.DRIVER),
-			new SeatDefinition("crew_1", 4.3938F, 0.3f, -0.35F, SeatRole.CREW)
+			new SeatDefinition("driver", 2.3F, 0.017F, 0.35F, SeatRole.DRIVER),
+			new SeatDefinition("crew_1", 2.3F, 0.017F, -0.35F, SeatRole.CREW)
 		};
 	}
 

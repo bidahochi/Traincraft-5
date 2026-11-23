@@ -184,6 +184,55 @@ public final class RollingStockSeatPositioner
 		return horizontalDistance == 0.0D ? 0.0D : Math.atan(deltaY / horizontalDistance);
 	}
 
+	/**
+	 * Measures rise along body-forward travel in radians, retaining the last target at a stop.
+	 * Reversing travel reverses both rise and forward distance, preserving body pitch.
+	 * Known level track overrides vertical settling steps when leaving a slope.
+	 */
+	public static float motionPitchRadians(boolean levelTrack, double deltaX, double deltaY, double deltaZ,
+			float forwardYawDegrees, float previousTargetRadians)
+	{
+		if (levelTrack)
+		{
+			return 0.0F;
+		}
+		double yawRadians = Math.toRadians(forwardYawDegrees);
+		double forwardDistance = deltaX * Math.cos(yawRadians) + deltaZ * Math.sin(yawRadians);
+		if (Math.abs(forwardDistance) <= 0.0001D)
+		{
+			return previousTargetRadians;
+		}
+		return (float) Math.atan(deltaY / forwardDistance);
+	}
+
+	/** Approaches the measured target even at a stop, snapping the final small difference exactly. */
+	public static float smoothPitchRadians(float previousPitchRadians, float targetPitchRadians)
+	{
+		float difference = targetPitchRadians - previousPitchRadians;
+		float maximumStep = Math.abs(difference) > 0.05F ? 0.05F : (0.5F / 60.0F);
+		return Math.abs(difference) <= maximumStep
+				? targetPitchRadians : previousPitchRadians + Math.copySign(maximumStep, difference);
+	}
+
+	/**
+	 * Converts a vanilla rail tangent to the body's directed pitch in legacy radians.
+	 * Vanilla rendering uses atan of normalized rise times 73 degrees; divide by the
+	 * packet's factor of 60 so seats receive the same angle without movement-height steps.
+	 */
+	public static float vanillaRailPitchRadians(double railX, double railY, double railZ,
+			float forwardYawDegrees)
+	{
+		double yawRadians = Math.toRadians(forwardYawDegrees);
+		double forwardDistance = railX * Math.cos(yawRadians) + railZ * Math.sin(yawRadians);
+		double tangentLength = Math.sqrt(railX * railX + railY * railY + railZ * railZ);
+		if (Math.abs(forwardDistance) <= 0.0001D || tangentLength == 0.0D)
+		{
+			return 0.0F;
+		}
+		double forwardRise = Math.copySign(1.0D, forwardDistance) * railY / tangentLength;
+		return (float) (Math.atan(forwardRise) * 73.0D / 60.0D);
+	}
+
 	/** Shared transform for both sides, before world origin and rider height are added. */
 	static void writeRelativeSeatPosition(RollingStockSeatLayout layout, int seatIndex, SeatSection section, double bogiePosition,
 			float bodyYaw, float bodyPitch, SeatHorizontalAlignment alignment, double[] position)

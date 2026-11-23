@@ -170,9 +170,6 @@ public class RenderRollingStock extends Render {
 			// NOTE: func_150049_b_ = isRailBlockAt
 			if (cart.worldObj!=null && (BlockRailBase.func_150049_b_(cart.worldObj, i, j, k) || BlockRailBase.func_150049_b_(cart.worldObj, i, j-1, k) ))
 			{
-				if(cart.isClientInReverse){
-					pitch = -pitch;
-				}
 				GL11.glRotatef(180.0F - yaw, 0.0F, 1.0F, 0.0F);
 				cart.setRenderYaw(yaw);
 				cart.setRenderPitch(pitch);
@@ -196,20 +193,7 @@ public class RenderRollingStock extends Render {
 		{
 			if(renderYVect != null)
 			{
-				pitch = bodyPitch / 60.0F;
-				if(bodyYaw>-5 && bodyYaw<5)
-				{
-					pitch=-pitch;
-				}
-				if(!cart.isClientInReverse && (bodyYaw>85 && bodyYaw<95 ))
-				{
-					pitch=-pitch;
-				}
-				if(cart.isClientInReverse && (bodyYaw<-265 && bodyYaw>-275 ))
-				{
-					pitch=-pitch;
-				}
-				GL11.glRotatef(pitch, 0.0F, 0.0F, 1.0F);
+				GL11.glRotatef(-bodyPitch, 0.0F, 0.0F, 1.0F);
 			}
 			else{
 				GL11.glRotatef(-pitch, 0.0F, 0.0F, 1.0F);
