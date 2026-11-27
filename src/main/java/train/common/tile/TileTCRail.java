@@ -898,6 +898,12 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 
 		String tempType = nbt.getString("type");
 		if (tempType != null) {
+			if ("TRUE_SMALL_STRAIGHT".equals(tempType) || "TRUE_MEDIUM_LEFT_TURN".equals(tempType)
+					|| "TRUE_MEDIUM_RIGHT_TURN".equals(tempType))
+			{
+				// Older true-embedded switches saved route labels without their embedded family.
+				tempType = "TRUE_EMBEDDED_" + tempType.substring("TRUE_".length());
+			}
 			type = tempType;
 		} else {
 			type = EnumTracks.SMALL_STRAIGHT.getLabel();
@@ -1129,6 +1135,10 @@ public class TileTCRail extends TileEntity implements ITileTCRail {
 		ITrackDefinition currentRoute = routeRail.getTrackType();
 		TrackPlacementType placementType = currentRoute != null
 				? currentRoute.getPlacementType() : TrackPlacementType.SURFACE;
+		if (placementType == TrackPlacementType.REPLACE_TARGET)
+		{
+			surfaceLabel = "EMBEDDED_" + surfaceLabel;
+		}
 		String placedLabel = TrackHostPlacementTransaction.getPlacedTrackLabel(
 				surfaceLabel, placementType);
 		routeRail.setType(placedLabel);

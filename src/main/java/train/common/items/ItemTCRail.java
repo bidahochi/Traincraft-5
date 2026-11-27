@@ -174,17 +174,15 @@ public class ItemTCRail extends ItemPart {
 	}
 
 	public static boolean isTCStraightTrack(TileTCRail tile) {
-		if(tile==null || tile.getType()==null){return false;}
-		return
-				//(tile.getType().equals(EnumTracks.MEDIUM_LEFT_SWITCH.getLabel()) && !tile.getSwitchState())
-				//|| (tile.getType().equals(EnumTracks.MEDIUM_RIGHT_SWITCH.getLabel()) && !tile.getSwitchState())
-				//|| (tile.getType().equals(EnumTracks.LARGE_LEFT_SWITCH.getLabel()) && !tile.getSwitchState())
-				//|| (tile.getType().equals(EnumTracks.LARGE_RIGHT_SWITCH.getLabel()) && !tile.getSwitchState())
-				//|| (tile.getType().equals(EnumTracks.MEDIUM_RIGHT_PARALLEL_SWITCH.getLabel()) && !tile.getSwitchState())
-				//|| (tile.getType().equals(EnumTracks.MEDIUM_LEFT_PARALLEL_SWITCH.getLabel()) && !tile.getSwitchState())
-				EnumCoreTrack.CORE_SMALL_STRAIGHT.equals(EnumTracks.GetTrackByLabel(tile.getType()).getCoreTrack())
-				|| (tile.getType().contains("STRAIGHT") && TCRailTypes.isDiagonalTrack(tile) == false && TCRailTypes.isSwitchTrack(tile) == false)
-				;
+		if (tile == null || tile.getType() == null) {
+			return false;
+		}
+		ITrackDefinition track = EnumTracks.GetTrackByLabel(tile.getType());
+		if (track == null) {
+			return false;
+		}
+		return track.getCoreTrack() == EnumCoreTrack.CORE_SMALL_STRAIGHT
+				|| (tile.getType().contains("STRAIGHT") && TCRailTypes.isDiagonalTrack(tile) == false && TCRailTypes.isSwitchTrack(tile) == false);
 	}
 
 	public ItemTCRail(EnumTracks t) {
